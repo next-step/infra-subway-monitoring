@@ -1,9 +1,28 @@
 <configuration>
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <!-- 로그 위치 -->
+<!--    <property name="LOG_DIR" value="${user.home}/log" />-->
+    <property name="LOG_DIR" value="log/" />
+    <property name="LOG_PATH_NAME" value="${LOG_DIR}/attostack-access.log" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}.%d{yyyyMMdd}</fileNamePattern>
+            <maxHistory>1</maxHistory> <!-- 보관기간(개월) -->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%t{yyyy-MM-dd HH:mm:ss}\t%a\t%r\t%s\t%i{Referer}\t%i{User-Agent}\t%D\t%I</pattern>
+            <!--            <pattern>%fullRequest%n%fullResponse</pattern>-->
+        </encoder>
+    </appender>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%fullRequest%n%n%fullResponse</pattern>
         </encoder>
     </appender>
 
-    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
 </configuration>
