@@ -73,10 +73,8 @@ public class LineController {
     public String findLockLeft() throws InterruptedException {
 
         synchronized (left) {
+            Thread.currentThread().setName("deadlock-test-1");
             Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
         }
         return "ok";
     }
@@ -84,10 +82,8 @@ public class LineController {
     @GetMapping("/lock-right")
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
+            Thread.currentThread().setName("deadlock-test-2");
             Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
         }
         return "ok";
     }
