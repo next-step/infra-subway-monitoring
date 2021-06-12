@@ -43,8 +43,13 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+> 현재 주제에 집중하기 위해서 배스천 인스턴스를 없애고 바로 퍼블릭 인스턴스로 접속해서 진행 했습니다. 
+- file : /home/ubuntu/infra-subway-monitoring/log/file.log
+- json : /home/ubuntu/infra-subway-monitoring/log/json.log
+- 접속 로그 : /home/ubuntu/infra-subway-monitoring/log/attostack-access.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sarguments-dashboard
 
 ---
 
