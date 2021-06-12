@@ -3,7 +3,7 @@
 
     <!-- 로그 위치 -->
 <!--    <property name="LOG_DIR" value="${user.home}/log" />-->
-    <property name="LOG_DIR" value="log/" />
+    <property name="LOG_DIR" value="/home/ubuntu/log/" />
     <property name="LOG_PATH_NAME" value="${LOG_DIR}/attostack-access.log" />
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
