@@ -41,4 +41,8 @@ frontend/node_modules
 fronted/.prttierrc.js
 fronted/.eslintrc.js
 
+# docker #
 docker/db/mysql/data
+
+# log #
+/log
