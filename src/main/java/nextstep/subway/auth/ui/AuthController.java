@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
-    private static final String LOGIN_MESSAGE_FORMAT = "[ %s ] 님이 로그인 했습니다.";
-
-    private static final Logger CONSOLE_LOGGER = LoggerFactory.getLogger(LogName.CONSOLE.getLogName());
-    private static final Logger FILE_LOGGER = LoggerFactory.getLogger(LogName.FILE.getLogName());
+    private static final String LOGIN_MESSAGE_FORMAT = "[ {} ] 님이 로그인 했습니다.";
+    private static final Logger CONSOLE_LOGGER = LoggerFactory.getLogger(LogName.CONSOLE.logName());
+    private static final Logger FILE_LOGGER = LoggerFactory.getLogger(LogName.FILE.logName());
 
     private AuthService authService;
 
@@ -27,17 +26,13 @@ public class AuthController {
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         TokenResponse token = authService.login(request);
-        logInfo(formatLoginMessage(request));
+        log(request);
         return ResponseEntity.ok().body(token);
     }
 
-    private void logInfo(String logMessage) {
-        CONSOLE_LOGGER.info(logMessage);
-        FILE_LOGGER.info(logMessage);
-    }
-
-    private String formatLoginMessage(TokenRequest request) {
-        return String.format(LOGIN_MESSAGE_FORMAT, request.getEmail());
+    private void log(TokenRequest request) {
+        CONSOLE_LOGGER.info(LOGIN_MESSAGE_FORMAT, request.getEmail());
+        FILE_LOGGER.info(LOGIN_MESSAGE_FORMAT, request.getEmail());
     }
 
 }

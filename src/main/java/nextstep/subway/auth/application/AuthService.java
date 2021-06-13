@@ -17,12 +17,6 @@ import java.util.function.Supplier;
 @Service
 @Transactional
 public class AuthService {
-    private static final String MISSING_EMAIL_MESSAGE_FORMAT = "존재하지 않는 이메일 [ %s ]이 입력 되었습니다.";
-    private static final String MISSING_CREDENTIALS_MESSAGE = "올바르지 않은 인증 자격증명이 들어왔습니다.";
-
-    private static final Logger CONSOLE_LOGGER = LoggerFactory.getLogger(LogName.CONSOLE.getLogName());
-    private static final Logger FILE_LOGGER = LoggerFactory.getLogger(LogName.FILE.getLogName());
-
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
 
@@ -32,39 +26,19 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> authorizationException(request.getEmail()));
+        Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
         member.checkPassword(request.getPassword());
         String token = jwtTokenProvider.createToken(request.getEmail());
         return new TokenResponse(token);
     }
 
-    private AuthorizationException authorizationException(String email) {
-        logErrors(formatMissingEmailMessage(email));
-        return new AuthorizationException();
-    }
-
-    private String formatMissingEmailMessage(String email) {
-        return String.format(MISSING_EMAIL_MESSAGE_FORMAT, email);
-    }
-
     public LoginMember findMemberByToken(String credentials) {
-        validateToken(credentials);
+        if (!jwtTokenProvider.validateToken(credentials)) {
+            throw new AuthorizationException();
+        }
         String email = jwtTokenProvider.getPayload(credentials);
         Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
-    }
-
-    private void validateToken(String credentials) {
-        if (!jwtTokenProvider.validateToken(credentials)) {
-            logErrors(MISSING_CREDENTIALS_MESSAGE);
-            throw new AuthorizationException();
-        }
-    }
-
-    private void logErrors(String logMessage) {
-        CONSOLE_LOGGER.error(logMessage);
-        FILE_LOGGER.error(logMessage);
     }
 
 }

@@ -1,7 +1,6 @@
 package nextstep.subway.favorite.application;
 
 import nextstep.subway.auth.domain.LoginMember;
-import nextstep.subway.common.LogName;
 import nextstep.subway.favorite.domain.Favorite;
 import nextstep.subway.favorite.domain.FavoriteRepository;
 import nextstep.subway.favorite.domain.HasNotPermissionException;
@@ -10,8 +9,6 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -23,12 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
-
-    public static final String INVALID_PERMISSION_ID_MESSAGE_FORMAT = "삭제 권한이 없는 id가 입력되었습니다.";
-
-    private static final Logger CONSOLE_LOGGER = LoggerFactory.getLogger(LogName.CONSOLE.getLogName());
-    private static final Logger FILE_LOGGER = LoggerFactory.getLogger(LogName.FILE.getLogName());
-
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
 
@@ -47,17 +38,16 @@ public class FavoriteService {
         Map<Long, Station> stations = extractStations(favorites);
 
         return favorites.stream()
-            .map(it -> FavoriteResponse.of(
-                it,
-                StationResponse.of(stations.get(it.getSourceStationId())),
-                StationResponse.of(stations.get(it.getTargetStationId()))))
-            .collect(Collectors.toList());
+                .map(it -> FavoriteResponse.of(
+                        it,
+                        StationResponse.of(stations.get(it.getSourceStationId())),
+                        StationResponse.of(stations.get(it.getTargetStationId()))))
+                .collect(Collectors.toList());
     }
 
     public void deleteFavorite(LoginMember loginMember, Long id) {
         Favorite favorite = favoriteRepository.findById(id).orElseThrow(RuntimeException::new);
         if (!favorite.isCreatedBy(loginMember.getId())) {
-            logError(formatInvalidPermissionIdMessage(loginMember));
             throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
         }
         favoriteRepository.deleteById(id);
@@ -66,7 +56,7 @@ public class FavoriteService {
     private Map<Long, Station> extractStations(List<Favorite> favorites) {
         Set<Long> stationIds = extractStationIds(favorites);
         return stationRepository.findAllById(stationIds).stream()
-            .collect(Collectors.toMap(Station::getId, Function.identity()));
+                .collect(Collectors.toMap(Station::getId, Function.identity()));
     }
 
     private Set<Long> extractStationIds(List<Favorite> favorites) {
@@ -77,14 +67,4 @@ public class FavoriteService {
         }
         return stationIds;
     }
-
-    private String formatInvalidPermissionIdMessage(LoginMember loginMember) {
-        return String.format(INVALID_PERMISSION_ID_MESSAGE_FORMAT, loginMember.getId());
-    }
-
-    private void logError(String logMessage) {
-        CONSOLE_LOGGER.error(logMessage);
-        FILE_LOGGER.error(logMessage);
-    }
-
 }

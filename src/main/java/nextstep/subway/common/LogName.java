@@ -3,7 +3,8 @@ package nextstep.subway.common;
 public enum LogName {
 
     CONSOLE("console"),
-    FILE("file");
+    FILE("file"),
+    JSON("json");
 
     private final String logName;
 
@@ -11,7 +12,7 @@ public enum LogName {
         this.logName = logName;
     }
 
-    public String getLogName() {
+    public String logName() {
         return logName;
     }
 }
