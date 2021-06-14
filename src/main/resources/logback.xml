@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <!-- setting -->
+    <springProfile name="local">
+        <property resource="logback-local.properties"/>
+    </springProfile>
+    <springProfile name="prod">
+        <property resource="logback-prod.properties"/>
+    </springProfile>
+
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="logback-console.xml" />
+
+    <!-- local -->
+    <springProfile name="local">
+        <include resource="logback-file.xml" />
+        <include resource="logback-json-file.xml" />
+
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+
+        <logger name="file" level="info">
+            <appender-ref ref="FILE" />
+        </logger>
+
+        <logger name="json" level="info">
+            <appender-ref ref="JSON" />
+        </logger>
+    </springProfile>
+
+    <!-- test -->
+    <springProfile name="test">
+        <root level="debug">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+
+    <!-- prod -->
+    <springProfile name="prod">
+        <include resource="logback-file.xml" />
+        <include resource="logback-json-file.xml" />
+
+        <root level="info">
+            <appender-ref ref="FILE" />
+        </root>
+
+        <logger name="json" level="info">
+            <appender-ref ref="JSON" />
+        </logger>
+    </springProfile>
+
+</configuration>
