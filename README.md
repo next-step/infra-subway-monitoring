@@ -40,12 +40,16 @@ npm run dev
 ## 미션
 
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
-
-### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
+  
+### 1단계 - 인프라 운영하기   
+1. 각 서버내 로깅 경로를 알려주세요   
+- error : `/home/ubuntu/logs/prod/error.log`    
+- file : `/home/ubuntu/logs/prod/prod.log`    
+- json : `/home/ubuntu/logs/prod/json.log`   
+- spring : `/home/ubuntu/logs/prod/spring.log`   
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+[https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=kwj1270-dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=kwj1270-dashboard) 
 ---
 
 ### 2단계 - 성능 테스트
