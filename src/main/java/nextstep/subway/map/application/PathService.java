@@ -1,20 +1,27 @@
 package nextstep.subway.map.application;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.stereotype.Service;
+
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SectionEdge;
 import nextstep.subway.map.domain.SubwayGraph;
 import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PathService {
+    private static final Logger jsonLog = LoggerFactory.getLogger("json");
+
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
+
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
         graph.addEdge(lines);
@@ -23,11 +30,16 @@ public class PathService {
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
+        MDC.put("source", source.getName());
+        MDC.put("target", target.getName());
+        jsonLog.info("Successfully searched path");
+        MDC.clear();
+
         return convertSubwayPath(path);
     }
 
     private SubwayPath convertSubwayPath(GraphPath graphPath) {
-        List<SectionEdge> edges = (List<SectionEdge>) graphPath.getEdgeList().stream().collect(Collectors.toList());
+        List<SectionEdge> edges = (List<SectionEdge>)graphPath.getEdgeList().stream().collect(Collectors.toList());
         List<Station> stations = graphPath.getVertexList();
         return new SubwayPath(edges, stations);
     }
