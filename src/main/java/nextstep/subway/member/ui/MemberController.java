@@ -1,17 +1,29 @@
 package nextstep.subway.member.ui;
 
+import java.net.URI;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 public class MemberController {
+
+    private final Logger consoleLog = LoggerFactory.getLogger("console");
+    private final Logger fileLog = LoggerFactory.getLogger("fileLog");
     private MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -21,6 +33,9 @@ public class MemberController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
+        consoleLog.info("{} has signed in", request.getEmail());
+        fileLog.info("{} has signed in", request.getEmail());
+
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
