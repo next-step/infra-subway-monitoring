@@ -4,9 +4,9 @@
     <springProperty name="home" source="logging.file.path"/>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <include resource="appender/console-appender.xml"/>
-    <include resource="appender/file-appender.xml"/>
-    <include resource="appender/json-appender.xml"/>
+    <include resource="console-appender.xml"/>
+    <include resource="file-appender.xml"/>
+    <include resource="json-appender.xml"/>
 
     <springProfile name="console-logging">
         <logger name="console" level="TRACE">
