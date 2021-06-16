@@ -42,9 +42,31 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
 
+**!** bastion 접속 : ssh -i enemfk777-ec2-key-pair.pem ubuntu@3.35.0.88 **!**
+
+1. 각 서버내 로깅 경로를 알려주세요
+* nginx server
+    * ip : 192.168.2.60
+    * 접속 : (bastion 서버에서) ssh nginx
+    * 로깅경로 :
+        * access.log : /var/log/nginx/access.log
+        * error.log : /var/log/nginx/error.log
+    
+* application server
+    * pub01
+        * ip : 192.168.2.48
+        * 접속 : (bastion 서버에서) ssh pub01
+        * 로깅경로 : /home/ubuntu/log/app.log
+  * pub02
+      * ip : 192.168.2.118
+      * 접속 : (bastion 서버에서) ssh pub02
+      * 로깅경로 : /home/ubuntu/log/app.log
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+* [DASHBOARD-enemfk777](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-enemfk777)
+
+
 
 ---
 
