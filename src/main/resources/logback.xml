@@ -16,7 +16,7 @@
     <appender-ref ref="file" />
   </logger>
 
-  <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+  <!--    logger name이 json일때 적용할 appender를 등록한다.-->
   <logger name="json" level="INFO" >
     <appender-ref ref="json" />
   </logger>
