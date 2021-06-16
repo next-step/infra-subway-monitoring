@@ -5,7 +5,7 @@
 <!--    spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <property name="LOG_HOME" value="/log/app/"/>
+    <property name="LOG_HOME" value="/home/ubuntu/log/"/>
 
     <!--  appender이름이 console인 consoleAppender를 선언  -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
