@@ -528,3 +528,246 @@ vus_max........................: 100     min=100 max=100
 ```
 이때부터 성공하지 못하네요 ㅠㅡㅠ
 ```
+
+#### Stress
+**접속 빈도가 높은 페이지**
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '2s', target: 100 }, // below normal load
+        { duration: '5s', target: 100 },
+        { duration: '2s', target: 200 }, // normal load
+        { duration: '5s', target: 200 },
+        { duration: '2s', target: 300 }, // around the breaking point
+        { duration: '5s', target: 300 },
+        { duration: '2s', target: 400 }, // beyond the breaking point
+        { duration: '5s', target: 400 },
+        { duration: '10s', target: 0 }, // scale down. Recovery stage.
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://kwj1270.ga';
+const USERNAME = 'kwj12705014@gmail.com';
+const PASSWORD = 'test1234!';
+const DATA = JSON.stringify({email: USERNAME, password: PASSWORD});
+const PARAMS = {headers: {'Content-Type': 'application/json',},};
+
+export default () => {
+    let loginRes = http.post(`${BASE_URL}/login/token`, DATA, PARAMS);
+
+    check(loginRes, {
+        'logged in successfully': (resp) => resp.status === 200,
+    });
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    sleep(1);
+};
+----------------------------------------------
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: login-stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 1m8s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 38s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m38.7s), 000/400 VUs, 8579 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  38s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 17158 ✗ 0
+     data_received..................: 7.9 MB  204 kB/s
+     data_sent......................: 4.6 MB  118 kB/s
+     http_req_blocked...............: avg=527.07µs min=1.39µs  med=3.43µs  max=433.44ms p(90)=5.81µs   p(95)=18.57µs
+     http_req_connecting............: avg=42.63µs  min=0s      med=0s      max=46.33ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=12.05ms  min=4.57ms  med=8.34ms  max=175.61ms p(90)=23.78ms  p(95)=35.24ms
+       { expected_response:true }...: avg=12.05ms  min=4.57ms  med=8.34ms  max=175.61ms p(90)=23.78ms  p(95)=35.24ms
+     http_req_failed................: 0.00%   ✓ 0     ✗ 17158
+     http_req_receiving.............: avg=244.61µs min=14.18µs med=49.02µs max=43.99ms  p(90)=288.91µs p(95)=791.19µs
+     http_req_sending...............: avg=255.05µs min=6.66µs  med=18.65µs max=37.63ms  p(90)=120.26µs p(95)=587.79µs
+     http_req_tls_handshaking.......: avg=282.4µs  min=0s      med=0s      max=155.35ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=11.55ms  min=4.51ms  med=8.19ms  max=175.23ms p(90)=22.43ms  p(95)=32.71ms
+     http_reqs......................: 17158   443.889739/s
+     iteration_duration.............: avg=1.02s    min=1.01s   med=1.01s   max=1.51s    p(90)=1.05s    p(95)=1.07s
+     iterations.....................: 8579    221.944869/s
+     vus............................: 22      min=22  max=400
+     vus_max........................: 400     min=400 max=400
+```
+**데이터를 갱신하는 페이지**
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '2s', target: 100 }, // below normal load
+        { duration: '5s', target: 100 },
+        { duration: '2s', target: 200 }, // normal load
+        { duration: '5s', target: 200 },
+        { duration: '2s', target: 300 }, // around the breaking point
+        { duration: '5s', target: 300 },
+        { duration: '2s', target: 400 }, // beyond the breaking point
+        { duration: '5s', target: 400 },
+        { duration: '10s', target: 0 }, // scale down. Recovery stage.
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://kwj1270.ga';
+const USERNAME = 'kwj12705014@gmail.com';
+const PASSWORD = 'test1234!';
+const AGE = 20;
+const LOGIN_DATA = JSON.stringify({email: USERNAME, password: PASSWORD,});
+const UPDATE_DATA = JSON.stringify({email: USERNAME, password: PASSWORD, age:AGE});
+const PARAMS = {headers: {'Content-Type': 'application/json',},};
+
+export default () => {
+    let updateRes = http.put(`${BASE_URL}/members/1`, UPDATE_DATA, PARAMS);
+
+    check(updateRes, {
+        'update successfully': (resp) => resp.status === 200,
+    });
+
+    let loginRes = http.post(`${BASE_URL}/login/token`, LOGIN_DATA, PARAMS);
+
+    check(loginRes, {
+        'logged in successfully': (resp) => resp.status === 200,
+    });
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    sleep(1);
+};
+----------------------------------------------
+
+/\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: update-stress.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 400 max VUs, 1m8s max duration (incl. graceful stop):
+* default: Up to 400 looping VUs for 38s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m39.0s), 000/400 VUs, 7886 complete and 0 interrupted iterations
+default ✗ [======================================] 000/400 VUs  38s
+
+     ✓ update successfully
+     ✓ logged in successfully
+     ✓ retrieved member
+
+checks.........................: 100.00% ✓ 23658 ✗ 0
+data_received..................: 9.1 MB  233 kB/s
+data_sent......................: 6.1 MB  155 kB/s
+http_req_blocked...............: avg=1.61ms   min=1.2µs   med=3.28µs  max=803.99ms p(90)=5.27µs   p(95)=12.7µs
+http_req_connecting............: avg=377.41µs min=0s      med=0s      max=417.83ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=36.16ms  min=4.48ms  med=10.33ms max=466.37ms p(90)=104.78ms p(95)=137.09ms
+{ expected_response:true }...: avg=36.16ms  min=4.48ms  med=10.33ms max=466.37ms p(90)=104.78ms p(95)=137.09ms
+http_req_failed................: 0.00%   ✓ 0     ✗ 23658
+http_req_receiving.............: avg=731.24µs min=12.87µs med=40.66µs max=240.52ms p(90)=414.9µs  p(95)=1.25ms
+http_req_sending...............: avg=1.31ms   min=7.59µs  med=18.24µs max=219.92ms p(90)=300.73µs p(95)=3.18ms
+http_req_tls_handshaking.......: avg=1.18ms   min=0s      med=0s      max=495.6ms  p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=34.11ms  min=4.41ms  med=9.97ms  max=336.36ms p(90)=99.82ms  p(95)=128.54ms
+http_reqs......................: 23658   607.252546/s
+iteration_duration.............: avg=1.11s    min=1.01s   med=1.03s   max=2.1s     p(90)=1.32s    p(95)=1.4s
+iterations.....................: 7886    202.417515/s
+vus............................: 17      min=17  max=400
+vus_max........................: 400     min=400 max=400
+```
+
+**데이터를 조회하는데 여러 데이터를 참조하는 페이지**
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+
+export let options = {
+    stages: [
+        { duration: '2s', target: 100 }, // below normal load
+        { duration: '5s', target: 100 },
+        { duration: '2s', target: 200 }, // normal load
+        { duration: '5s', target: 200 },
+        { duration: '2s', target: 300 }, // around the breaking point
+        { duration: '5s', target: 300 },
+        { duration: '2s', target: 400 }, // beyond the breaking point
+        { duration: '5s', target: 400 },
+        { duration: '10s', target: 0 }, // scale down. Recovery stage.
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://kwj1270.ga';
+
+export default function () {
+    const res = http.get(`${BASE_URL}/stations`);
+    check(res, {
+        'page load successfully': (resp) => resp.status === 200,
+    });
+
+
+    sleep(1);
+}
+
+----------------------------------------------
+
+running (0m41.9s), 000/400 VUs, 2843 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  38s
+
+     ✗ page load successfully
+      ↳  59% — ✓ 1693 / ✗ 1150
+
+checks.........................: 59.54% ✓ 1693  ✗ 1150
+data_received..................: 128 MB 3.1 MB/s
+data_sent......................: 989 kB 24 kB/s
+http_req_blocked...............: avg=10.61ms  min=0s       med=3.37ms   max=365.97ms p(90)=27.29ms  p(95)=53.84ms
+http_req_connecting............: avg=4.17ms   min=0s       med=327.42µs max=92.63ms  p(90)=11.78ms  p(95)=25.35ms
+   ✗ http_req_duration..............: avg=2.56s    min=0s       med=970.03ms max=14.35s   p(90)=7.14s    p(95)=8.94s
+{ expected_response:true }...: avg=4.3s     min=190.94ms med=3.65s    max=14.35s   p(90)=8.75s    p(95)=9.2s
+http_req_failed................: 40.45% ✓ 1150  ✗ 1693
+http_req_receiving.............: avg=10.29ms  min=0s       med=4.05ms   max=179.46ms p(90)=28.88ms  p(95)=40.82ms
+http_req_sending...............: avg=519.33µs min=0s       med=29.6µs   max=65.23ms  p(90)=218.52µs p(95)=1.14ms
+http_req_tls_handshaking.......: avg=7.93ms   min=0s       med=0s       max=154.18ms p(90)=21.67ms  p(95)=43.4ms
+http_req_waiting...............: avg=2.55s    min=0s       med=958.64ms max=14.34s   p(90)=7.1s     p(95)=8.91s
+http_reqs......................: 2843   67.782921/s
+iteration_duration.............: avg=3.58s    min=1s       med=1.97s    max=15.36s   p(90)=8.15s    p(95)=10s
+iterations.....................: 2843   67.782921/s
+vus............................: 53     min=50  max=400
+vus_max........................: 400    min=400 max=400
+```
