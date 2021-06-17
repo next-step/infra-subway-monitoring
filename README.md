@@ -58,6 +58,19 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+  - WebPageTest, PageSpeed 에서의 측정 결과를 바탕으로 하여  
+    Timing-based, Rule-based Metric으로 예산을 설정했습니다.
+
+    |항목|기준|
+    |---|---|
+    |페이지 로드 시간|3초 미만|
+    |Time to Interactive (TTI)|2초 미만|
+    |First Contentful Paint (FCP)|1.8초 미만|
+    |Large Contentful Paint (LCP)|2.5초 미만|
+    |Speed Index |3.4초 미만|
+    |Total Blocking Time(TBT)|50ms 이하|
+    |Cumulative Layout Shift(CLS)|0.1 미만|
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
