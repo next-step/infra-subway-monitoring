@@ -57,22 +57,47 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+    <details>
+    <summary>접기/펼치기</summary>
+    <div markdown="1">
+   
+    - WebPageTest, PageSpeed 에서의 측정 결과를 바탕으로 하여  
+      Desktop 환경에서 Timing-based, Rule-based Metric으로 예산을 설정했습니다.
+      ![webpagetest_result](https://user-images.githubusercontent.com/64854054/122420720-d9d4ac80-cfc6-11eb-82b8-c7947d0a6d21.png)
+      ![pagespeed_result](https://user-images.githubusercontent.com/64854054/122420399-a003a600-cfc6-11eb-97f1-cf8281a17ae2.png)
+  
+      |항목|기준|
+      |---|---|
+      |페이지 로드 시간|3초 미만|
+      |Time to Interactive (TTI)|2초 미만|
+      |First Contentful Paint (FCP)|1.8초 미만|
+      |Large Contentful Paint (LCP)|2.5초 미만|
+      |Speed Index |3.4초 미만|
+      |Total Blocking Time(TBT)|50ms 이하|
+      |Cumulative Layout Shift(CLS)|0.1 미만|
+    </div>
+    </details>
 
-  - WebPageTest, PageSpeed 에서의 측정 결과를 바탕으로 하여  
-    Timing-based, Rule-based Metric으로 예산을 설정했습니다.
-
-    |항목|기준|
-    |---|---|
-    |페이지 로드 시간|3초 미만|
-    |Time to Interactive (TTI)|2초 미만|
-    |First Contentful Paint (FCP)|1.8초 미만|
-    |Large Contentful Paint (LCP)|2.5초 미만|
-    |Speed Index |3.4초 미만|
-    |Total Blocking Time(TBT)|50ms 이하|
-    |Cumulative Layout Shift(CLS)|0.1 미만|
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+    <details>
+    <summary>접기/펼치기</summary>
+    <div markdown="2">
+   
+      - **gzip을 이용한 텍스트 압축 사용**
+        ![image](https://user-images.githubusercontent.com/64854054/122421840-a2b2cb00-cfc7-11eb-918a-d40aaa909619.png)
+
+      - **사용하지 않는 자바스크립트 줄이기**
+        ![image](https://user-images.githubusercontent.com/64854054/122422446-1d7be600-cfc8-11eb-877f-6463f3c37b3b.png)
+        
+      - **정적 리소스 캐싱**
+        ![image](https://user-images.githubusercontent.com/64854054/122422773-62a01800-cfc8-11eb-98cc-607417db1180.png)
+        
+    </div>
+    </details>
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
