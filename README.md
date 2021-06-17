@@ -54,11 +54,97 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+> 경쟁사 평균 대비 20% 빠름을 기준으로 잡았습니다.
 
+**시간**
+> 경쟁사 : 네이버지도, 카카오지도  
+
+* 페이지로드 : 3초 미만 
+* Time to Interactive : 3초 미만 (네이버:3.2 / 카카오 2.8)
+* First Contentful Paint : 0.6초 미만 (네이버 0.8 / 카카오 0.6) 
+* Largest Contentful Paint : 1.2초 미만 (네이버 2.6 / 카카오 0.7)
+* Speed Index : 2.1초 미만 (네이버 2.7초 / 카카오 2.5초)
+* Time Blocking Time : 0.4초 미만 (네이버 : 0.2 / 카카오 : 0.7)
+
+<img width="1094" alt="비교" src="https://user-images.githubusercontent.com/50267433/122315872-d81ed080-cf55-11eb-833e-c5fdbf8582a3.png">
+
+**리소스**
+> 경쟁사 : DuckDuckGo, 빙, 구글, 야후  
+
+* 이미지 최대 크기 : 180kb
+* 스크립트 최대 크기 : 611
+* 스크립트 최대 갯수 : 12
+* HTML, CSS 최대 크기 : 230kb
+* 웹 글꼴 최대 크기, 글꼴 최대 갯수, 동영상 최대 크기 : 우선 미정으로 했습니다   
+   
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+**개선 전**    
+<img width="1094" alt="개선전" src="https://user-images.githubusercontent.com/50267433/122316006-13210400-cf56-11eb-91ea-b24419fc8f70.png">
+   
 
+* 페이지로드 : 3초 미만
+* Time to Interactive : 15.7초 
+* First Contentful Paint : 15.0초 
+* Largest Contentful Paint : 15.6초 
+* Speed Index : 15초 
+* Time Blocking Time : 0.56초 
+
+<img width="1094" alt="compress transfer" src="https://user-images.githubusercontent.com/50267433/122316107-3cda2b00-cf56-11eb-97b2-c4cb608cafa5.png">  
+<img width="1094" alt="개선해야할점" src="https://user-images.githubusercontent.com/50267433/122316054-246a1080-cf56-11eb-9d5e-4bc7790548a3.png">  
+
+**개선 후**   
+<img width="1094" alt="개선완료" src="https://user-images.githubusercontent.com/50267433/122316157-511e2800-cf56-11eb-9f08-0e96e550d806.png">
+
+* 페이지로드 : 3초 미만
+* Time to Interactive : 1.4초
+* First Contentful Paint : 0.8초
+* Largest Contentful Paint : 1.4초
+* Speed Index : 2.4초
+* Time Blocking Time : 0.2초
+
+**gzip 압축**   
+[gzip참고 사이트](https://stackoverflow.com/questions/63788742/gzip-on-spring-server-or-nginx-reverse-proxy)   
+
+이전)    
+1. Apache 나 Nginx 등 Web서버에서 처리하기
+2. Tomcat 이나 Weblogic 등 어플리케이션 서버(Was)에서 처리하기
+3. Servlet Filter 를 등록하여 처리하기
+4. 정적인 파일을 미리 gzip 으로 압축하여 올리기
+   
+현재)   
+스프링부트 properties로 간단히 처리 가능   
+
+**리소스 지연 로딩**      
+[리소스 지연로딩 참고 사이트](https://web.dev/render-blocking-resources/?utm_source=lighthouse&utm_medium=unknown)      
+[리소스 지연로딩 참고 사이트2](https://web.dev/defer-non-critical-css/)   
+       
+**캐시 적용**       
+이 부분은 다음 미션에서 해야 할 것 같아서 설정하지 않았다가    
+다른 분들이 적용하시는 방법을 보고 새롭게 깨달아서 뒤늦게 추가했습니다.     
+       
+참고로 인터넷에 나온 캐시 방법은 2가지가 있기에 이 둘을 비교한 글을 올립니다.         
+정리 : `cache.cachecontrol.max-age` 사용하자       
+[spring-boot-cache.period VS cache.cachecontrol.max-age](https://pythonq.com/so/spring-boot/1901153)
+
+3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+> [참고 사이트](https://biz.chosun.com/site/data/html_dir/2020/07/09/2020070901297.html)   
+> 필자 : 구글지도 
+
+* 전제조건
+* 방법 :
+    * 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수    
+    * 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps    
+    * 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps   
+* 계산 결과 :
+    * 1일 사용자 수(DAU) : 180000명 (549만 / 30)
+    * 1명당 1일 평균 접속 수: 10 회
+    * 1일 총 접속 수 : 1800000 회
+    * 1일 평균 rps: 20rps  
+    * 최대 트래픽 / 평소 트래픽 : 10
+    * 1일 최대 rps: 200rps 
+    * Latency: 100ms
+    
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 #### Smoke
 **접속 빈도가 높은 페이지**
