@@ -122,11 +122,14 @@ npm run dev
 **캐시 적용**       
 이 부분은 다음 미션에서 해야 할 것 같아서 설정하지 않았다가    
 다른 분들이 적용하시는 방법을 보고 새롭게 깨달아서 뒤늦게 추가했습니다.     
-       
-참고로 인터넷에 나온 캐시 방법은 2가지가 있기에 이 둘을 비교한 글을 올립니다.         
-정리 : `cache.cachecontrol.max-age` 사용하자       
-[spring-boot-cache.period VS cache.cachecontrol.max-age](https://pythonq.com/so/spring-boot/1901153)
-
+           
+참고로 인터넷에 나온 캐시 방법은 2가지가 있기에 이 둘을 비교한 글을 올립니다.           
+[spring-boot-cache.period VS cache.cachecontrol.max-age](https://pythonq.com/so/spring-boot/1901153)   
+여기서도 `spring.resources.cache.cachecontrol.max-age :`를 사용하자고 말하는데         
+최근에 `spring.web.resources.cache.cachecontrol.max-age` 으로 바뀐 것 같네요.(따로 정리해봐야겠습니다.)           
+      
+* 정리 : `spring.web.resources.cache.cachecontrol.max-age` 사용하자       
+    
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 > [참고 사이트](https://biz.chosun.com/site/data/html_dir/2020/07/09/2020070901297.html)   
 > 필자 : 구글지도 
