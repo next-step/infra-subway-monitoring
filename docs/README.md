@@ -2,7 +2,15 @@
 ## 2단계 - 성능 테스트
 ### 요구사항
 - [ ] 웹 성능 테스트
-    - [ ] 웹 성능 예산을 작성
+    - [x] 웹 성능 예산을 작성
+        * Lighthouse 성능 감사에서 80 점 이상이어야한다.
+        * PageSpeed의 green 조건을 목표로 삼도록 한다.
+            * First Contentful Paint : 1.8초 이하
+            * Time to Interactive : 3.8초 이하
+            * Speed Index : 3.4초 이하
+            * Total Blocking Time : 200ms 이하
+            * Largest Contentful Paint : 2.5초 이하
+            * Cumulative Layout Shift : 0.1 이하
     - [ ] [WebPageTest](https://www.webpagetest.org/), [PageSpeed](https://developers.google.com/speed/pagespeed/insights/) 등 테스트해보고 개선이 필요한 부분을 파악
 - [ ] 부하 테스트
     - [ ] 테스트 전제조건 정리
