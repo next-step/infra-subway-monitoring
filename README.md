@@ -619,4 +619,136 @@ npm run dev
                 </div>
                 </details>
 
-   
+   - **Stress**
+       - **(공통) 부하 테스트 옵션**
+           ```js
+           export let options = {
+               stages: [
+                   { duration: '1m', target: 100 },
+                   { duration: '2m', target: 100 },
+                   { duration: '1m', target: 200 },
+                   { duration: '2m', target: 200 },
+                   { duration: '1m', target: 400 },
+                   { duration: '2m', target: 400 },
+                   { duration: '1m', target: 600 },
+                   { duration: '2m', target: 600 },
+                   { duration: '1m', target: 800 },
+                   { duration: '2m', target: 800 },
+                   { duration: '5m', target: 0 },
+               ],
+               thresholds: {
+                   http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+                   // 'logged in successfully': ['p(99)<1500'] // 로그인 시
+                   // 'update successfully': ['p(99)<1500'] // 회원 정보 수정 시
+                   // 'found path successfully': ['p(99)<1500'] // 경로 탐색 시
+               },
+           };        
+           ```
+
+       - 로그인
+           -   <details>
+               <summary>결과 (접기/펼치기)</summary>
+               <div markdown="1">
+               
+               ```
+               running (15m00.9s), 000/800 VUs, 275787 complete and 0 interrupted iterations
+               default ✓ [======================================] 000/800 VUs  15m0s
+                
+                     ✗ HTTP status OK
+                      ↳  98% — ✓ 271263 / ✗ 4524
+                     ✗ logged in successfully
+                      ↳  98% — ✓ 271263 / ✗ 4524
+                     ✓ retrieved member
+                
+                     checks.........................: 98.90% ✓ 813617 ✗ 9048
+                     data_received..................: 147 MB 163 kB/s
+                     data_sent......................: 123 MB 136 kB/s
+                     http_req_blocked...............: avg=17.75ms  min=2.9µs    med=5.18µs  max=593.2ms  p(90)=67.9ms   p(95)=116.6ms
+                     http_req_connecting............: avg=16.06ms  min=0s       med=0s      max=506.04ms p(90)=61.12ms  p(95)=107.06ms
+                   ✓ http_req_duration..............: avg=64.77ms  min=0s       med=31.79ms max=1.72s    p(90)=170.3ms  p(95)=221.41ms
+                       { expected_response:true }...: avg=64.86ms  min=2.69ms   med=31.91ms max=1.72s    p(90)=170.37ms p(95)=221.41ms
+                     http_req_failed................: 0.85%  ✓ 4696   ✗ 542354
+                     http_req_receiving.............: avg=726.38µs min=0s       med=34.12µs max=324.31ms p(90)=270.6µs  p(95)=883.85µs
+                     http_req_sending...............: avg=6.36ms   min=0s       med=19.2µs  max=741.47ms p(90)=18.21ms  p(95)=38.74ms
+                     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+                     http_req_waiting...............: avg=57.67ms  min=0s       med=29.02ms max=1.72s    p(90)=150.67ms p(95)=195.7ms
+                     http_reqs......................: 547050 607.246713/s
+                     iteration_duration.............: avg=1.17s    min=576.18µs med=1.08s   max=3.95s    p(90)=1.5s     p(95)=1.62s
+                     iterations.....................: 275787 306.134264/s
+                     vus............................: 2      min=1    max=800
+                     vus_max........................: 800    min=800  max=800
+               ``` 
+               </div>
+               </details>
+       - 회원 정보 수정
+           -   <details>
+               <summary>결과 (접기/펼치기)</summary>
+               <div markdown="1">
+
+               ```
+               running (15m00.7s), 000/800 VUs, 270948 complete and 0 interrupted iterations
+               default ✓ [======================================] 000/800 VUs  15m0s
+               
+                    ✗ HTTP status OK
+                     ↳  97% — ✓ 264451 / ✗ 6497
+                    ✗ logged in successfully
+                     ↳  97% — ✓ 264451 / ✗ 6497
+                    ✗ update successfully
+                     ↳  99% — ✓ 262890 / ✗ 1561
+               
+                    checks.........................: 98.19% ✓ 791792 ✗ 14555
+                    data_received..................: 119 MB 132 kB/s
+                    data_sent......................: 147 MB 163 kB/s
+                    http_req_blocked...............: avg=17.79ms  min=2.93µs   med=5.13µs  max=620.4ms  p(90)=68.38ms  p(95)=114.89ms
+                    http_req_connecting............: avg=16.34ms  min=0s       med=0s      max=564.84ms p(90)=63.32ms  p(95)=106.96ms
+                  ✓ http_req_duration..............: avg=78.52ms  min=0s       med=46.11ms max=1.5s     p(90)=193.53ms p(95)=245.51ms
+                      { expected_response:true }...: avg=78.62ms  min=2.72ms   med=46.03ms max=1.5s     p(90)=193.71ms p(95)=245.86ms
+                    http_req_failed................: 1.50%  ✓ 8058   ✗ 527341
+                    http_req_receiving.............: avg=721.89µs min=0s       med=31.48µs max=319.19ms p(90)=244.16µs p(95)=898.53µs
+                    http_req_sending...............: avg=6.19ms   min=0s       med=22.66µs max=486.04ms p(90)=20.06ms  p(95)=40.02ms
+                    http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+                    http_req_waiting...............: avg=71.6ms   min=0s       med=42.02ms max=1.5s     p(90)=174.54ms p(95)=221.97ms
+                    http_reqs......................: 535399 594.394719/s
+                    iteration_duration.............: avg=1.19s    min=594.92µs med=1.12s   max=3.05s    p(90)=1.53s    p(95)=1.65s
+                    iterations.....................: 270948 300.803812/s
+                    vus............................: 3      min=1    max=800
+                    vus_max........................: 800    min=800  max=800
+               ```
+               </div>
+               </details>
+       - 경로 탐색
+           -   <details>
+               <summary>결과 (접기/펼치기)</summary>
+               <div markdown="1">
+               
+               ```
+               running (15m00.6s), 000/800 VUs, 310553 complete and 0 interrupted iterations
+               default ✓ [======================================] 000/800 VUs  15m0s
+               
+                   ✗ HTTP status OK
+                   ↳  29% — ✓ 92204 / ✗ 218349
+                   ✗ logged in successfully
+                   ↳  29% — ✓ 92204 / ✗ 218349
+                   ✗ found path successfully
+                   ↳  85% — ✓ 78804 / ✗ 13400
+                   
+                   checks.........................: 36.90% ✓ 263212 ✗ 450098
+                   data_received..................: 172 MB 191 kB/s
+                   data_sent......................: 33 MB  37 kB/s
+                   http_req_blocked...............: avg=24.29ms  min=3.17µs   med=3.03ms   max=1.21s    p(90)=65.66ms  p(95)=114.86ms
+                   http_req_connecting............: avg=22.04ms  min=0s       med=2.59ms   max=968.57ms p(90)=61.22ms  p(95)=105.79ms
+                 ✗ http_req_duration..............: avg=341.13ms min=0s       med=6.56ms   max=7.6s     p(90)=1.27s    p(95)=1.48s
+                     { expected_response:true }...: avg=793.23ms min=2.7ms    med=693.22ms max=7.6s     p(90)=1.54s    p(95)=2.1s
+                   http_req_failed................: 57.54% ✓ 231749 ✗ 171008
+                   http_req_receiving.............: avg=1.4ms    min=0s       med=0s       max=629.94ms p(90)=167.31µs p(95)=1.9ms
+                   http_req_sending...............: avg=4.84ms   min=0s       med=41.25µs  max=1.14s    p(90)=8.17ms   p(95)=24.73ms
+                   http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+                   http_req_waiting...............: avg=334.89ms min=0s       med=429.43µs max=7.6s     p(90)=1.26s    p(95)=1.47s
+                   http_reqs......................: 402757 447.223832/s
+                   iteration_duration.............: avg=935.41ms min=841.01µs med=283.65ms max=10.3s    p(90)=3.02s    p(95)=3.67s
+                   iterations.....................: 310553 344.839948/s
+                   vus............................: 2      min=1    max=800
+                   vus_max........................: 800    min=800  max=800
+               ```
+               </div>
+               </details>
