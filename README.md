@@ -135,7 +135,7 @@ npm run dev
             <summary>테스트 스크립트 (접기/펼치기)</summary>
             <div markdown="1">
         
-            ~~~js        
+            ```js        
             import http from 'k6/http';
             import { check, group, sleep, fail } from 'k6';
             
@@ -183,7 +183,7 @@ npm run dev
             
                 sleep(1);
             };
-            ~~~
+            ```
             </div>
             </details>
           
@@ -459,3 +459,164 @@ npm run dev
             </details>
     </div>
     </details>
+   
+    - **Load**
+        - **(공통) 부하 테스트 옵션**
+            ```js
+            export let options = {
+                stages: [
+                    { duration: '5m', target: 60 }, // 1일 최대 RPS
+                    { duration: '10m', target: 60 },
+                    { duration: '5m', target: 0 }
+                ],
+                thresholds: {
+                    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+                    // 'logged in successfully': ['p(99)<1500'] // 로그인 시
+                    // 'update successfully': ['p(99)<1500'] // 회원 정보 수정 시
+                    // 'found path successfully': ['p(99)<1500'] // 경로 탐색 시
+                },
+            };        
+            ```
+            
+        - 로그인
+            -   <details>
+                <summary>결과 (접기/펼치기)</summary>
+                <div markdown="1">
+
+                ```
+                        /\      |‾‾| /‾‾/   /‾‾/
+                   /\  /  \     |  |/  /   /  /
+                  /  \/    \    |     (   /   ‾‾\
+                 /          \   |  |\  \ |  (‾)  |
+                / __________ \  |__| \__\ \_____/ .io
+                
+                execution: local
+                    script: load_login.js
+                    output: -
+                
+                scenarios: (100.00%) 1 scenario, 60 max VUs, 20m30s max duration (incl. graceful stop):
+                        * default: Up to 60 looping VUs for 20m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+                
+                
+                running (20m00.2s), 00/60 VUs, 53533 complete and 0 interrupted iterations
+                default ✓ [======================================] 00/60 VUs  20m0s
+                
+                     ✓ HTTP status OK
+                     ✓ logged in successfully
+                     ✓ retrieved member
+                
+                     checks.........................: 100.00% ✓ 160599 ✗ 0
+                     data_received..................: 29 MB   24 kB/s
+                     data_sent......................: 24 MB   20 kB/s
+                     http_req_blocked...............: avg=15µs    min=3.15µs  med=4.85µs  max=12.77ms p(90)=8.05µs  p(95)=15.63µs
+                     http_req_connecting............: avg=890ns   min=0s      med=0s      max=4.23ms  p(90)=0s      p(95)=0s
+                   ✓ http_req_duration..............: avg=5.38ms  min=2.81ms  med=4.9ms   max=68.65ms p(90)=7.21ms  p(95)=8.63ms
+                       { expected_response:true }...: avg=5.38ms  min=2.81ms  med=4.9ms   max=68.65ms p(90)=7.21ms  p(95)=8.63ms
+                     http_req_failed................: 0.00%   ✓ 0      ✗ 107066
+                     http_req_receiving.............: avg=90.59µs min=20.03µs med=45.08µs max=10.1ms  p(90)=108µs   p(95)=246.47µs
+                     http_req_sending...............: avg=46.6µs  min=8.81µs  med=17.84µs max=12.2ms  p(90)=44.79µs p(95)=106.59µs
+                     http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s      p(90)=0s      p(95)=0s
+                     http_req_waiting...............: avg=5.24ms  min=2.75ms  med=4.79ms  max=68.56ms p(90)=7ms     p(95)=8.39ms
+                     http_reqs......................: 107066  89.207475/s
+                     iteration_duration.............: avg=1.01s   min=1s      med=1.01s   max=1.07s   p(90)=1.01s   p(95)=1.01s
+                     iterations.....................: 53533   44.603737/s
+                     vus............................: 1       min=1    max=60
+                     vus_max........................: 60      min=60   max=60
+                ```
+                </div>
+                </details>
+        - 회원 정보 수정
+            -   <details>
+                <summary>결과 (접기/펼치기)</summary>
+                <div markdown="1">
+
+                ```
+                        /\      |‾‾| /‾‾/   /‾‾/
+                   /\  /  \     |  |/  /   /  /
+                  /  \/    \    |     (   /   ‾‾\
+                 /          \   |  |\  \ |  (‾)  |
+                / __________ \  |__| \__\ \_____/ .io
+                
+                execution: local
+                    script: load_mypage_edit.js
+                    output: -
+                
+                scenarios: (100.00%) 1 scenario, 60 max VUs, 20m30s max duration (incl. graceful stop):
+                        * default: Up to 60 looping VUs for 20m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+                
+                
+                running (20m00.2s), 00/60 VUs, 53350 complete and 0 interrupted iterations
+                default ✓ [======================================] 00/60 VUs  20m0s
+                
+                     ✓ HTTP status OK
+                     ✓ logged in successfully
+                     ✓ update successfully
+                
+                     checks.........................: 100.00% ✓ 160050 ✗ 0
+                     data_received..................: 24 MB   20 kB/s
+                     data_sent......................: 30 MB   25 kB/s
+                     http_req_blocked...............: avg=17.15µs min=2.95µs  med=4.82µs  max=21.63ms p(90)=8.03µs   p(95)=18.19µs
+                     http_req_connecting............: avg=897ns   min=0s      med=0s      max=4.82ms  p(90)=0s       p(95)=0s
+                   ✓ http_req_duration..............: avg=6.96ms  min=2.83ms  med=6.92ms  max=85.79ms p(90)=10.34ms  p(95)=11.91ms
+                       { expected_response:true }...: avg=6.96ms  min=2.83ms  med=6.92ms  max=85.79ms p(90)=10.34ms  p(95)=11.91ms
+                     http_req_failed................: 0.00%   ✓ 0      ✗ 106700
+                     http_req_receiving.............: avg=92.57µs min=13.06µs med=38.78µs max=19.77ms p(90)=108.15µs p(95)=263.31µs
+                     http_req_sending...............: avg=63.21µs min=10.48µs med=18.72µs max=49.3ms  p(90)=53.92µs  p(95)=169.3µs
+                     http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s      p(90)=0s       p(95)=0s
+                     http_req_waiting...............: avg=6.81ms  min=2.77ms  med=6.79ms  max=79.59ms p(90)=10.15ms  p(95)=11.66ms
+                     http_reqs......................: 106700  88.904457/s
+                     iteration_duration.............: avg=1.01s   min=1s      med=1.01s   max=1.11s   p(90)=1.02s    p(95)=1.02s
+                     iterations.....................: 53350   44.452228/s
+                     vus............................: 1       min=1    max=60
+                     vus_max........................: 60      min=60   max=60
+                ```
+                </div>
+                </details>
+        - 경로 탐색
+            -   <details>
+                <summary>결과 (접기/펼치기)</summary>
+                <div markdown="1">
+
+                ```
+                        /\      |‾‾| /‾‾/   /‾‾/
+                   /\  /  \     |  |/  /   /  /
+                  /  \/    \    |     (   /   ‾‾\
+                 /          \   |  |\  \ |  (‾)  |
+                / __________ \  |__| \__\ \_____/ .io
+                
+                execution: local
+                    script: load_paths.js
+                    output: -
+                
+                scenarios: (100.00%) 1 scenario, 60 max VUs, 20m30s max duration (incl. graceful stop):
+                        * default: Up to 60 looping VUs for 20m0s over 3 stages (gracefulRampDown: 30s, gracefulS                                                                                                                                         top: 30s)
+                                
+                running (20m00.4s), 00/60 VUs, 50241 complete and 0 interrupted iterations
+                default ✓ [======================================] 00/60 VUs  20m0s
+                
+                     ✓ HTTP status OK
+                     ✓ logged in successfully
+                     ✓ found path successfully
+                
+                     checks.........................: 100.00% ✓ 150723 ✗ 0
+                     data_received..................: 107 MB  89 kB/s
+                     data_sent......................: 15 MB   12 kB/s
+                     http_req_blocked...............: avg=11.11µs min=3.2µs  med=4.93µs  max=24.58ms  p(90)=7.72µs                                                                                                                                            p(95)=9.59µs
+                     http_req_connecting............: avg=748ns   min=0s     med=0s      max=3.61ms   p(90)=0s                                                                                                                                                p(95)=0s
+                   ✓ http_req_duration..............: avg=38.54ms min=2.88ms med=29.45ms max=341.47ms p(90)=97.43ms                                                                                                                                           p(95)=113.52ms
+                       { expected_response:true }...: avg=38.54ms min=2.88ms med=29.45ms max=341.47ms p(90)=97.43ms                                                                                                                                           p(95)=113.52ms
+                     http_req_failed................: 0.00%   ✓ 0      ✗ 100482
+                     http_req_receiving.............: avg=81.03µs min=22µs   med=55.15µs max=51.83ms  p(90)=109.92µs                                                                                                                                          p(95)=142.06µs
+                     http_req_sending...............: avg=34.79µs min=8.72µs med=17.43µs max=47.2ms   p(90)=36.19µs                                                                                                                                           p(95)=48.44µs
+                     http_req_tls_handshaking.......: avg=0s      min=0s     med=0s      max=0s       p(90)=0s                                                                                                                                                p(95)=0s
+                     http_req_waiting...............: avg=38.43ms min=2.82ms med=29.34ms max=341.41ms p(90)=97.31ms                                                                                                                                           p(95)=113.38ms
+                     http_reqs......................: 100482  83.705459/s
+                     iteration_duration.............: avg=1.07s   min=1.03s  med=1.07s   max=1.39s    p(90)=1.12s                                                                                                                                             p(95)=1.13s
+                     iterations.....................: 50241   41.852729/s
+                     vus............................: 1       min=1    max=60
+                     vus_max........................: 60      min=60   max=60
+                ```
+                </div>
+                </details>
+
+   
