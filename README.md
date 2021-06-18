@@ -73,7 +73,27 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+* ####아래 두 조건을 만족시키면 적당하다고 생각했습니다.
+    * Lighthouse 성능 감사에서 80 점 이상이다.
+    * PageSpeed의 green 조건을 달성했다.
+        * First Contentful Paint : 1.8초 이하
+        * Time to Interactive : 3.8초 이하
+        * Speed Index : 3.4초 이하
+        * Total Blocking Time : 200ms 이하
+        * Largest Contentful Paint : 2.5초 이하
+        * Cumulative Layout Shift : 0.1 이하
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+* ####PageSpeed에서 추천해준 content-encoding을 nginx에 설정해 두는게 좋을 것 같았습니다.
+    * nginx에 content-encoding 설정 후 지표
+        * First Contentful Paint : 1.1초 green
+        * Time to Interactive : 1.2초 green
+        * Speed Index : 1.4초 green
+        * Total Blocking Time : 60ms green
+        * Largest Contentful Paint : 1.2초 green
+        * Cumulative Layout Shift : 0.004 green
+
+* ####추가로 렌더링 차단 리소스를 줄이기 위해 index.html의 폰트를 로드하는 부분을 [비동기적으로 로드](https://web.dev/defer-non-critical-css/) 하는 방법이 있지만, 초기 진입시 폰트가 뒤늦게 적용되는 모습이 나타나 보류했습니다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
