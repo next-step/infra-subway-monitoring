@@ -125,10 +125,6 @@ npm run dev
   
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-    <details>
-    <summary>접기/펼치기</summary>
-    <div markdown="1">
-
     - **Smoke**
       - 로그인
         -   <details>
@@ -457,8 +453,6 @@ npm run dev
             ```
             </div>
             </details>
-    </div>
-    </details>
    
     - **Load**
         - **(공통) 부하 테스트 옵션**
