@@ -54,7 +54,9 @@
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
     <logger name="file" level="INFO" >
         <appender-ref ref="file" />
-        <appender-ref ref="json_file"/>
+    </logger>
+    <logger name="json_file" level="INFO" >
+        <appender-ref ref="json_file" />
     </logger>
 </configuration>
 
