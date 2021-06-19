@@ -1,3 +1,5 @@
+package log;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -9,21 +11,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j(topic = "file")
 @Profile("test")
 @ExtendWith(SpringExtension.class)
-public class LogTest {
-
-    private static final Logger logger = LoggerFactory.getLogger(LogTest.class);
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
-    private static final Logger jsonFileLogger = LoggerFactory.getLogger("json_file");
+public class FileLogTest {
 
     @Test
     public void test(){
-        logger.error("An ERROR Message 테스트");
-        fileLogger.info("file Log Messag 테스트");
-        jsonFileLogger.info("{}, {}",
-                kv("asdasda", "경기도 가평"),
-                kv("도착지", "서울역")
-        );
+        log.info("file log write test");
     }
 }
