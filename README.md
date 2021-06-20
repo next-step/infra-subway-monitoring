@@ -100,7 +100,8 @@ C. 성능 목표: 경쟁사 대비 최소 동등, 20% 이상의 성능
     - server.compression.enabled=true
     - server.compression.mime-types=text/html,text/css,application/javascript,application/json
 
-2. 렌더링 차단 리소스 제거 (로드 방식 변경, 아래 코드로 교체)
+2. 렌더링 차단 리소스 제거 (적용 후 TTI 5.9s -> 5.8s, SI 6.3s -> 5.5s, TBI 590ms -> 450ms 로 개선)
+  - 일부 css의 로드 방식 변경
   - <link href={HREF} rel="preload" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href={HREF}></noscript>
 ```
 
