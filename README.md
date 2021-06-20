@@ -56,7 +56,56 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+```text
+A. 예비 분석
+  1. 가장 중요한 페이지
+    - 메인페이지: 서비스의 진입점이므로, 이 페이지 로딩이 느리면 사용자가 이탈할 가능성이 높다.
+
+B. 경쟁사 분석
+  1. 현재 내 사이트 상태 (https://my-subway.r-e.kr)
+    - First Contentful Paint    : 14.7 s
+    - Time to Interactive       : 15.3 s
+    - Speed Index               : 14.7 s
+    - Total Blocking Time       : 550 ms
+    - Largest Contentful Paint  : 15.3 s
+    
+  2. 서울교통공사 사이버스테이션
+    - First Contentful Paint    : 7.0 s
+    - Time to Interactive       : 9.5 s
+    - Speed Index               : 11.5 s
+    - Total Blocking Time       : 1,470 ms
+    - Largest Contentful Paint  : 7.1 s
+    
+  3. 카카오맵
+    - First Contentful Paint    : 2.5 s
+    - Time to Interactive       : 5.3 s
+    - Speed Index               : 6.9 s
+    - Total Blocking Time       : 60 ms
+    - Largest Contentful Paint  : 5.5 s    
+
+C. 성능 목표: 경쟁사 대비 최소 동등, 20% 이상의 성능
+  - First Contentful Paint    : 2초 미만
+  - Time to Interactive       : 4초 미만
+  - Speed Index               : 5.5초 미만
+  - Total Blocking Time       : 0.05초 미만
+  - Largest Contentful Paint  : 4.5초 미만
+
+```
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+```text
+1. First Contentful Paint    : 14.7 s
+  - 텍스트 압축 기능 사용
+  - Spring boot properties 추가
+    - server.compression.enabled=true
+    - server.compression.mime-types=text/html,text/css,application/javascript,application/json
+
+2. Time to Interactive       : 15.3 s
+3. Speed Index               : 14.7 s
+4. Total Blocking Time       : 550 ms
+5. Largest Contentful Paint  : 15.3 s
+```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
