@@ -57,27 +57,40 @@ npm run dev
 - [X] Desktop TTI 2초 이하(결과 1.3s)
 - [X] Lighthouse 성능 감사에서 85점 이상(94점)
 - [X] Largest Contentful Paint: 1.502s
+- [X] Security Score: A
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - [X] GZIP 적용
 - [X] HTTP/2 적용
 - [X] JS Lazy loading
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요 
-
+3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 테스트 전제조건 정리
-    - [ ]  대상 시스템 범위
-    - [ ]  목푯값 설정 (latency, throughput, 부하 유지기간)
-    - [ ]  부하 테스트 시 저장될 데이터 건수 및 크기
+    - [X] 대상 시스템 범위: Subway API 서버(로그인, 경로, 패스, 라인 API)
+    - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [X] 부하 테스트 시 저장될 데이터 건수 및 크기: station 616개, line 22개
 
 - 각 시나리오에 맞춰 스크립트 작성
-    - [ ]  접속 빈도가 높은 페이지
-    - [ ]  데이터를 갱신하는 페이지
-    - [ ]  데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - [X]  접속 빈도가 높은 페이지
+        - 로그인, 경로, 패스, 라인 접속 API
+    - [X]  데이터를 갱신하는 페이지
+        - 즐겨 찾기 추가
+        - 노선 등록
+        - 구간 등록
+    - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+        - 경로 조회
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - Smoke 테스트 후 결과를 기록
-  
+
+    | Page | Pass / Fail | Duration Percentage | 
+    |:---- |: ----------- :|:------------------- |
+    | 로그인 |   Pass     | avg=21.07ms  min=12.57ms med=21.07ms  max=29.56ms  p(90)=27.86ms  p(95)=28.71ms |
+    | 노선조회 |   Pass    | avg=191.95ms min=191.95ms med=191.95ms max=191.95ms p(90)=191.95ms p(95)=191.95ms |
+    | 경로조회 |   Pass    | avg=47.61ms min=7.43ms  med=47.61ms max=87.79ms  p(90)=79.76ms  p(95)=83.77ms |
+    | 역 조회 |   Pass    | avg=85.53ms  min=85.53ms  med=85.53ms  max=85.53ms  p(90)=85.53ms  p(95)=85.53ms |
+    | 즐겨찾기 추가 | Pass   | avg=14.34ms  min=11.89ms  med=14.34ms  max=16.8ms   p(90)=16.31ms  p(95)=16.55ms |
+
 - Load 테스트 후 결과를 기록
   
 - Stress 테스트 후 결과를 기록
