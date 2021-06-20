@@ -95,16 +95,13 @@ C. 성능 목표: 경쟁사 대비 최소 동등, 20% 이상의 성능
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 ```text
-1. First Contentful Paint    : 14.7 s
-  - 텍스트 압축 기능 사용
+1. 텍스트 압축 기능 사용 (적용 후 FCP 14.7s -> 5.3s 로 개선)
   - Spring boot properties 추가
     - server.compression.enabled=true
     - server.compression.mime-types=text/html,text/css,application/javascript,application/json
 
-2. Time to Interactive       : 15.3 s
-3. Speed Index               : 14.7 s
-4. Total Blocking Time       : 550 ms
-5. Largest Contentful Paint  : 15.3 s
+2. 렌더링 차단 리소스 제거 (로드 방식 변경, 아래 코드로 교체)
+  - <link href={HREF} rel="preload" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href={HREF}></noscript>
 ```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
