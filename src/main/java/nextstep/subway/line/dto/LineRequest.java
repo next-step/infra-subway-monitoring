@@ -1,7 +1,9 @@
 package nextstep.subway.line.dto;
 
+import lombok.ToString;
 import nextstep.subway.line.domain.Line;
 
+@ToString
 public class LineRequest {
     private String name;
     private String color;

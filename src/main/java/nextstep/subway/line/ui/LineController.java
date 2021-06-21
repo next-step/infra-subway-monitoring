@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import lombok.extern.slf4j.Slf4j;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
+@Slf4j(topic = "json_file")
 @RestController
 @RequestMapping("/lines")
 public class LineController {
@@ -24,41 +26,53 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
+        log.info("노선 생성 요청 [{}]", lineRequest);
         LineResponse line = lineService.saveLine(lineRequest);
+        log.info("노선 생성 완료 [{}]", line);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
 
     @GetMapping
     public ResponseEntity<List<LineResponse>> findAllLines() {
+        log.info("전체 노선 조회");
         return ResponseEntity.ok(lineService.findLineResponses());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
+        log.info("id로 노선 찾기 [id={}]",id);
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
+        log.info("노선 업데이트 요청 [id={}/lineRequest={}]", id,lineUpdateRequest);
         lineService.updateLine(id, lineUpdateRequest);
+        log.info("노선 업데이트 완료 [id={}/lineRequest={}]");
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteLine(@PathVariable Long id) {
+        log.info("노선 삭제 요청 [id={}]");
         lineService.deleteLineById(id);
+        log.info("노선 삭제 완료");
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{lineId}/sections")
     public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
+        log.info("노선 추가 요청 [lineId={}/sectionRequest={}]", lineId, sectionRequest);
         lineService.addLineStation(lineId, sectionRequest);
+        log.info("노선 추가 완료 [lineid={}]", lineId);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{lineId}/sections")
     public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
+        log.info("노선 역 삭제 요청 [lineId={}/stationId={}]", lineId, stationId);
         lineService.removeLineStation(lineId, stationId);
+        log.info("노선 역 삭제 완료");
         return ResponseEntity.ok().build();
     }
 
