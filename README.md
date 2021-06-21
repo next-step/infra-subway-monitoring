@@ -133,133 +133,232 @@ C. 성능 목표: 경쟁사 대비 최소 동등한 성능 (카카오맵은 이�
 
 - 접속빈도가 높은 기능(비로그인, 메인 페이지)
 
-    ```javascript
-    import http from 'k6/http';
-    import { check, group, sleep, fail } from 'k6';
-    
-    export let options = {
-        vus: 100, // 1 user looping for 1 minute
-        duration: '10s',
-        
-        thresholds: {
-            http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
-        },
-    };
-    
-    const BASE_URL = 'https://my-subway.r-e.kr';
-    
-    export default function ()  {
-        let mainPages = http.get(`${BASE_URL}`);
-        sleep(1);
-    };
-    ```
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
 
-    ```text
-              /\      |‾‾| /‾‾/   /‾‾/
-         /\  /  \     |  |/  /   /  /
-        /  \/    \    |     (   /   ‾‾\
-       /          \   |  |\  \ |  (‾)  |
-      / __________ \  |__| \__\ \_____/ .io
+export let options = {
+    vus: 100, // 1 user looping for 1 minute
+    duration: '10s',
     
-      execution: local
-         script: main_page.js
-         output: -
-    
-      scenarios: (100.00%) 1 scenario, 100 max VUs, 40s max duration (incl. graceful stop):
-               * default: 100 looping VUs for 10s (gracefulStop: 30s)
-    
-    
-    running (10.5s), 000/100 VUs, 1000 complete and 0 interrupted iterations
-    default ✓ [======================================] 100 VUs  10s
-    
-         data_received..................: 2.0 MB 192 kB/s
-         data_sent......................: 149 kB 14 kB/s
-         http_req_blocked...............: avg=17.97ms  min=3.41µs  med=5.47µs  max=222.11ms p(90)=24ms     p(95)=189.55ms
-         http_req_connecting............: avg=2.32ms   min=0s      med=0s      max=38.1ms   p(90)=216.93µs p(95)=27.32ms
-       ✓ http_req_duration..............: avg=13.47ms  min=1.7ms   med=7.21ms  max=90.18ms  p(90)=37.56ms  p(95)=50.33ms
-           { expected_response:true }...: avg=13.47ms  min=1.7ms   med=7.21ms  max=90.18ms  p(90)=37.56ms  p(95)=50.33ms
-         http_req_failed................: 0.00%  ✓ 0     ✗ 1000
-         http_req_receiving.............: avg=190.37µs min=20.87µs med=39.64µs max=13.19ms  p(90)=188.75µs p(95)=472.32µs
-         http_req_sending...............: avg=1.11ms   min=9.23µs  med=16.46µs max=51.19ms  p(90)=1.7ms    p(95)=5.31ms
-         http_req_tls_handshaking.......: avg=15.13ms  min=0s      med=0s      max=192.88ms p(90)=8.14ms   p(95)=157.59ms
-         http_req_waiting...............: avg=12.17ms  min=1.64ms  med=6.61ms  max=68.16ms  p(90)=34.42ms  p(95)=46.27ms
-         http_reqs......................: 1000   95.521454/s
-         iteration_duration.............: avg=1.03s    min=1s      med=1s      max=1.3s     p(90)=1.08s    p(95)=1.23s
-         iterations.....................: 1000   95.521454/s
-         vus............................: 100    min=100 max=100
-         vus_max........................: 100    min=100 max=100
-    ```
+    thresholds: {
+        http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
+    },
+};
 
-- DB를 사용하는 기능 
+const BASE_URL = 'https://my-subway.r-e.kr';
 
-    ```javascript
-    import http from 'k6/http';
-    import { check, group, sleep, fail } from 'k6';
-    
-    export let options = {
-      vus: 100, // 1 user looping for 1 minute
-      duration: '10s',
-    
-      thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-      },
-    };
-    
-    const BASE_URL = 'https://my-subway.r-e.kr';
-    
-    export default function ()  {
-    
-      var params = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-    
-      let path = http.get(`${BASE_URL}/paths?source=1&target=21`, params);
-    
-      check(path, {
-        'logged in successfully': (path) => path.json('stations') !== '',
-      });
-    
-      sleep(1);
-    };
-    ```
+export default function ()  {
+    let mainPages = http.get(`${BASE_URL}`);
+    sleep(1);
+};
+```
 
-    ```text
-              /\      |‾‾| /‾‾/   /‾‾/
-         /\  /  \     |  |/  /   /  /
-        /  \/    \    |     (   /   ‾‾\
-       /          \   |  |\  \ |  (‾)  |
-      / __________ \  |__| \__\ \_____/ .io
-    
-      execution: local
-         script: find_path.js
-         output: -
-    
-      scenarios: (100.00%) 1 scenario, 100 max VUs, 40s max duration (incl. graceful stop):
-               * default: 100 looping VUs for 10s (gracefulStop: 30s)
-    
-    
-    running (11.0s), 000/100 VUs, 945 complete and 0 interrupted iterations
-    default ✓ [======================================] 100 VUs  10s
-    
-         ✓ logged in successfully
-    
-         checks.........................: 100.00% ✓ 945   ✗ 0
-         data_received..................: 1.5 MB  136 kB/s
-         data_sent......................: 196 kB  18 kB/s
-         http_req_blocked...............: avg=24.02ms  min=3.58µs  med=6.08µs  max=347.99ms p(90)=149.66ms p(95)=222.47ms
-         http_req_connecting............: avg=1.91ms   min=0s      med=0s      max=43.84ms  p(90)=7.56ms   p(95)=17.75ms
-       ✓ http_req_duration..............: avg=82.34ms  min=15.07ms med=59.3ms  max=352.59ms p(90)=166.48ms p(95)=237.94ms
-           { expected_response:true }...: avg=82.34ms  min=15.07ms med=59.3ms  max=352.59ms p(90)=166.48ms p(95)=237.94ms
-         http_req_failed................: 0.00%   ✓ 0     ✗ 945
-         http_req_receiving.............: avg=191.79µs min=27.17µs med=57.3µs  max=18.77ms  p(90)=148.59µs p(95)=300.5µs
-         http_req_sending...............: avg=1.3ms    min=11µs    med=18.82µs max=62.07ms  p(90)=2.31ms   p(95)=8.97ms
-         http_req_tls_handshaking.......: avg=22.07ms  min=0s      med=0s      max=315.05ms p(90)=127.48ms p(95)=204.26ms
-         http_req_waiting...............: avg=80.84ms  min=14.93ms med=58.88ms max=331.15ms p(90)=163.64ms p(95)=234.88ms
-         http_reqs......................: 945     85.798576/s
-         iteration_duration.............: avg=1.11s    min=1.01s   med=1.06s   max=1.64s    p(90)=1.3s     p(95)=1.45s
-         iterations.....................: 945     85.798576/s
-         vus............................: 2       min=2   max=100
-         vus_max........................: 100     min=100 max=100
-    ```
+```text
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: main_page.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 40s max duration (incl. graceful stop):
+           * default: 100 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.5s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  10s
+
+     data_received..................: 2.0 MB 192 kB/s
+     data_sent......................: 149 kB 14 kB/s
+     http_req_blocked...............: avg=17.97ms  min=3.41µs  med=5.47µs  max=222.11ms p(90)=24ms     p(95)=189.55ms
+     http_req_connecting............: avg=2.32ms   min=0s      med=0s      max=38.1ms   p(90)=216.93µs p(95)=27.32ms
+   ✓ http_req_duration..............: avg=13.47ms  min=1.7ms   med=7.21ms  max=90.18ms  p(90)=37.56ms  p(95)=50.33ms
+       { expected_response:true }...: avg=13.47ms  min=1.7ms   med=7.21ms  max=90.18ms  p(90)=37.56ms  p(95)=50.33ms
+     http_req_failed................: 0.00%  ✓ 0     ✗ 1000
+     http_req_receiving.............: avg=190.37µs min=20.87µs med=39.64µs max=13.19ms  p(90)=188.75µs p(95)=472.32µs
+     http_req_sending...............: avg=1.11ms   min=9.23µs  med=16.46µs max=51.19ms  p(90)=1.7ms    p(95)=5.31ms
+     http_req_tls_handshaking.......: avg=15.13ms  min=0s      med=0s      max=192.88ms p(90)=8.14ms   p(95)=157.59ms
+     http_req_waiting...............: avg=12.17ms  min=1.64ms  med=6.61ms  max=68.16ms  p(90)=34.42ms  p(95)=46.27ms
+     http_reqs......................: 1000   95.521454/s
+     iteration_duration.............: avg=1.03s    min=1s      med=1s      max=1.3s     p(90)=1.08s    p(95)=1.23s
+     iterations.....................: 1000   95.521454/s
+     vus............................: 100    min=100 max=100
+     vus_max........................: 100    min=100 max=100
+```
+
+- 데이터를 갱신하는 페이지
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 100, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://my-subway.r-e.kr';
+const USERNAME = 'a@a';
+const PASSWORD = '1';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+
+
+  let requestBody = {
+    email: "a@a",
+    password: "1234",
+    age: 25
+  };
+
+  let myObjects = http.put(`${BASE_URL}/members/me`, requestBody, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+};
+```
+
+```text
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: update_member.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 40s max duration (incl. graceful stop):
+           * default: 100 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (11.1s), 000/100 VUs, 885 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 1770  ✗ 0
+     data_received..................: 1.2 MB  105 kB/s
+     data_sent......................: 550 kB  50 kB/s
+     http_req_blocked...............: avg=8.18ms   min=3.3µs   med=5.13µs  max=229.74ms p(90)=15.44µs  p(95)=99.58ms
+     http_req_connecting............: avg=819.33µs min=0s      med=0s      max=41.7ms   p(90)=0s       p(95)=1.76ms
+   ✓ http_req_duration..............: avg=79.96ms  min=7.48ms  med=39.19ms max=619.72ms p(90)=210.49ms p(95)=295.12ms
+       { expected_response:true }...: avg=88.17ms  min=7.48ms  med=40.67ms max=619.72ms p(90)=263.68ms p(95)=329.53ms
+     http_req_failed................: 50.00%  ✓ 885   ✗ 885
+     http_req_receiving.............: avg=423.25µs min=25.47µs med=45.8µs  max=94.25ms  p(90)=273.38µs p(95)=521.52µs
+     http_req_sending...............: avg=281.92µs min=12.32µs med=20.32µs max=58.95ms  p(90)=161.92µs p(95)=530.55µs
+     http_req_tls_handshaking.......: avg=6.44ms   min=0s      med=0s      max=197.4ms  p(90)=0s       p(95)=85.51ms
+     http_req_waiting...............: avg=79.25ms  min=7.42ms  med=38.22ms max=619.25ms p(90)=207.49ms p(95)=295.04ms
+     http_reqs......................: 1770    160.060617/s
+     iteration_duration.............: avg=1.18s    min=1.01s   med=1.1s    max=1.77s    p(90)=1.68s    p(95)=1.74s
+     iterations.....................: 885     80.030309/s
+     vus............................: 10      min=10  max=100
+     vus_max........................: 100     min=100 max=100
+```
+
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지 
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 100, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://my-subway.r-e.kr';
+
+export default function ()  {
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let path = http.get(`${BASE_URL}/paths?source=1&target=21`, params);
+
+  check(path, {
+    'logged in successfully': (path) => path.json('stations') !== '',
+  });
+
+  sleep(1);
+};
+```
+
+```text
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: find_path.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 40s max duration (incl. graceful stop):
+           * default: 100 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (11.0s), 000/100 VUs, 945 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  10s
+
+     ✓ logged in successfully
+
+     checks.........................: 100.00% ✓ 945   ✗ 0
+     data_received..................: 1.5 MB  136 kB/s
+     data_sent......................: 196 kB  18 kB/s
+     http_req_blocked...............: avg=24.02ms  min=3.58µs  med=6.08µs  max=347.99ms p(90)=149.66ms p(95)=222.47ms
+     http_req_connecting............: avg=1.91ms   min=0s      med=0s      max=43.84ms  p(90)=7.56ms   p(95)=17.75ms
+   ✓ http_req_duration..............: avg=82.34ms  min=15.07ms med=59.3ms  max=352.59ms p(90)=166.48ms p(95)=237.94ms
+       { expected_response:true }...: avg=82.34ms  min=15.07ms med=59.3ms  max=352.59ms p(90)=166.48ms p(95)=237.94ms
+     http_req_failed................: 0.00%   ✓ 0     ✗ 945
+     http_req_receiving.............: avg=191.79µs min=27.17µs med=57.3µs  max=18.77ms  p(90)=148.59µs p(95)=300.5µs
+     http_req_sending...............: avg=1.3ms    min=11µs    med=18.82µs max=62.07ms  p(90)=2.31ms   p(95)=8.97ms
+     http_req_tls_handshaking.......: avg=22.07ms  min=0s      med=0s      max=315.05ms p(90)=127.48ms p(95)=204.26ms
+     http_req_waiting...............: avg=80.84ms  min=14.93ms med=58.88ms max=331.15ms p(90)=163.64ms p(95)=234.88ms
+     http_reqs......................: 945     85.798576/s
+     iteration_duration.............: avg=1.11s    min=1.01s   med=1.06s   max=1.64s    p(90)=1.3s     p(95)=1.45s
+     iterations.....................: 945     85.798576/s
+     vus............................: 2       min=2   max=100
+     vus_max........................: 100     min=100 max=100
+```
