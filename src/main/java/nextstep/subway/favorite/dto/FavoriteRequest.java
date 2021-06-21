@@ -19,4 +19,12 @@ public class FavoriteRequest {
     public Long getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "source=" + source +
+                ", target=" + target +
+                '}';
+    }
 }
