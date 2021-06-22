@@ -83,7 +83,7 @@ npm run dev
 
     c. Rule based Metric
     WebPageTest, pagespeed 등 웹 사이트에서 측정한 점수를 지표로 사용 
-|  | WebPageTest | subway|
+|  | WebPageTest-경쟁사 | subway|
 |:--:|:--:|:--:|
 | First Byte Time | A | A |
 | Keep-alive Enabled | A | A|
@@ -110,10 +110,12 @@ npm run dev
   - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
  
 - 계산 결과 :
-  - (지하철 하루 이용자가 719만명인데, 대략 10%가 우리 서비스를 이용 한다고 가정)
-  - 1일 사용자 수(DAU) : 70,000명 
+  - 지하철 하루 이용자가 719만명
+    - 2020년 1월 기준 네이버 지도 순 이용자 약 1,380명 / 카카오맵 순이용자 약 840만명. (http://www.koreanclick.com/insights/newsletter_view.html?code=topic&id=563&page=2&utm_source=board&utm_medium=board&utm_campaign=topic&utm_content=20200220)
+    - 우리 지하철 서비스는 pc/모바일 모두 지원한다고 가정.  500만명 사용자 가입 목표로 산정
+  - 1일 사용자 수(DAU) : 500,000 명 (가입 회원 중 10%가 사용한다고 가정..) 
   - 1명당 1일 평균 접속 수: 5 회
-  - 1일 총 접속 수 : 350,000 회
+  - 1일 총 접속 수 : 2,500,000 회
   - 1일 평균 rps: 20rps
   - 최대 트래픽 / 평소 트래픽 : 10
   - 1일 최대 rps: 200rps
