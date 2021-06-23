@@ -73,7 +73,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 </br>
 </br>
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비슨느 어떤 부분을 개선하면 좋을까요
+2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - gzip 압축 사용
 - 사용하지 않는 자바스크립트 줄이기
@@ -87,14 +87,16 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 - 테스트 전제조건
 	- 1일 예상 상용자 수 : 100,000
     	- 1개월 지하철 경로조회 앱 DAU / 30 
-        - 30,000,000  / 30
+        - 30,000,00  / 30
     - 1명당 1일 평균 접속수 : 4
     - 1일 총 접속 수 : 400,000
-    - 1일 평균 RPS : 4.62 rps
-    - 1일 최대 RPS : 115 rps
+    - 1일 평균 RPS : 4.6 rps
+    - 1일 최대 RPS : 46 rps
     	- 1일 평균 RPS * (최대 트래픽 / 평소트래픽)
-        - 최대트래픽 / 평소트래픽 : 25
-    - Latency : 100ms
+        - 최대트래픽 / 평소트래픽 : 10
+    - Latency 
+      - 100ms (홈페이지 조회)
+      - 300ms (경로 조회)
 - 시나리오
 	- 접속 빈도가 높은 페이지 : 메인페이지
     - 많은 리소스를 조합하여 결과를 보여주는 페이지 : 경로검색
@@ -102,9 +104,13 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 </br>
 </br>
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과
 
-#### Smoke 테스트
+
+4. Smoke, Load, Stress 테스트 스크립트와 결과
+---
+
+
+## Smoke 테스트
 
 최소한의 부하(VUser 1~2)로 구성하여 최소한의 부하를 주고 테스트 시나리오 및 시스템에 오류가 없는지 확인하는 테스트
       
@@ -121,7 +127,7 @@ export let options = {
     duration: '10s',
     
     thresholds: {
-        http_req_duration: ['p(99)<150'],
+        http_req_duration: ['p(99)<100'],
     },
  };
 
@@ -139,8 +145,6 @@ export default () => {
   - Smoke Test 홈화면 결과
 
 ```
- k6 run SmokeTest.js
-
           /\      |‾‾| /‾‾/   /‾‾/   
      /\  /  \     |  |/  /   /  /    
     /  \/    \    |     (   /   ‾‾\  
@@ -155,32 +159,33 @@ export default () => {
            * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
 
-running (10.5s), 0/1 VUs, 10 complete and 0 interrupted iterations
+running (11.0s), 0/1 VUs, 10 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  10s
 
      ✓ 홈화면 접속
 
      checks.........................: 100.00% ✓ 10  ✗ 0  
-     data_received..................: 20 kB   1.9 kB/s
-     data_sent......................: 1.5 kB  140 B/s
-     http_req_blocked...............: avg=30.83ms min=4µs    med=5µs     max=308.25ms p(90)=30.83ms p(95)=169.54ms
-     http_req_connecting............: avg=1.37ms  min=0s     med=0s      max=13.74ms  p(90)=1.37ms  p(95)=7.55ms  
-   ✓ http_req_duration..............: avg=15.37ms min=7.34ms med=13.47ms max=28.43ms  p(90)=21.02ms p(95)=24.73ms 
-       { expected_response:true }...: avg=15.37ms min=7.34ms med=13.47ms max=28.43ms  p(90)=21.02ms p(95)=24.73ms 
+     data_received..................: 20 kB   1.8 kB/s
+     data_sent......................: 1.5 kB  134 B/s
+     http_req_blocked...............: avg=81.37ms min=3µs    med=5µs    max=813.65ms p(90)=81.37ms  p(95)=447.51ms
+     http_req_connecting............: avg=970.9µs min=0s     med=0s     max=9.7ms    p(90)=970.89µs p(95)=5.33ms  
+   ✓ http_req_duration..............: avg=12.33ms min=8.11ms med=9.71ms max=21.92ms  p(90)=19.22ms  p(95)=20.57ms 
+       { expected_response:true }...: avg=12.33ms min=8.11ms med=9.71ms max=21.92ms  p(90)=19.22ms  p(95)=20.57ms 
      http_req_failed................: 0.00%   ✓ 0   ✗ 10 
-     http_req_receiving.............: avg=63.4µs  min=48µs   med=52µs    max=109µs    p(90)=108.1µs p(95)=108.55µs
-     http_req_sending...............: avg=30.1µs  min=18µs   med=24µs    max=80µs     p(90)=42.19µs p(95)=61.09µs 
-     http_req_tls_handshaking.......: avg=29.2ms  min=0s     med=0s      max=292.08ms p(90)=29.2ms  p(95)=160.64ms
-     http_req_waiting...............: avg=15.28ms min=7.26ms med=13.34ms max=28.35ms  p(90)=20.9ms  p(95)=24.62ms 
-     http_reqs......................: 10      0.953763/s
-     iteration_duration.............: avg=1.04s   min=1s     med=1.01s   max=1.32s    p(90)=1.05s   p(95)=1.19s   
-     iterations.....................: 10      0.953763/s
+     http_req_receiving.............: avg=125.5µs min=45µs   med=59.5µs max=559µs    p(90)=230.49µs p(95)=394.74µs
+     http_req_sending...............: avg=28.09µs min=14µs   med=23µs   max=89µs     p(90)=34.09µs  p(95)=61.54µs 
+     http_req_tls_handshaking.......: avg=32.16ms min=0s     med=0s     max=321.63ms p(90)=32.16ms  p(95)=176.9ms 
+     http_req_waiting...............: avg=12.18ms min=8.03ms med=9.62ms max=21.85ms  p(90)=19.13ms  p(95)=20.49ms 
+     http_reqs......................: 10      0.912109/s
+     iteration_duration.............: avg=1.09s   min=1s     med=1.01s  max=1.82s    p(90)=1.1s     p(95)=1.46s   
+     iterations.....................: 10      0.912109/s
      vus............................: 1       min=1 max=1
      vus_max........................: 1       min=1 max=1
 
 ```
 
   - Smoke Test 경로조회 스크립트
+
 ```javascript
 import http from "k6/http";
 import { check, group, sleep, fail } from 'k6';
@@ -194,29 +199,14 @@ export let options = {
     duration: '10s',
     
     thresholds: {
-        http_req_duration: ['p(99)<250'],
+        http_req_duration: ['p(99)<300'],
     },
  };
 
 export default () => {
 
-    const loginResponse = http.post(`${URL}/login/token`, {
-        email : EMAIL,
-        password : PASSWORD
-    })
-
-    check(loginResponse, {
-        '로그인 성공' : (res) => res.json('accessToken') !== ''
-    })
-
-    const authorizationHeader = {
-        headers : {
-            Authorization : `Bearer ${loginResponse.json('accessToken')}`
-        }
-    }
-
-    let sectionsResponse = http.get(`${URL}/paths?source=1&target=5`, authorizationHeader).json();
-    check(sectionsResponse, { '녹양역 -> 대방역 경로탐색 결과': (res) => res.stations.length != 0 });
+    let sectionsResponse = http.get(`${URL}/paths?source=1&target=5`).json();
+    check(sectionsResponse, { '녹양역 -> 대방역 경로탐색 결과': (res) => res.length !== 0});
     sleep(1);
 }
 ```
@@ -224,7 +214,7 @@ export default () => {
   - Smoke Test 경로조회 결과
 
 ```
-~ k6 run FindPath.js
+ ~ k6 run FindPath.js                        
 
           /\      |‾‾| /‾‾/   /‾‾/   
      /\  /  \     |  |/  /   /  /    
@@ -240,131 +230,220 @@ export default () => {
            * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
 
-running (10.6s), 0/1 VUs, 9 complete and 0 interrupted iterations
+running (10.4s), 0/1 VUs, 9 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  10s
 
-     ✓ 로그인 성공
      ✓ 녹양역 -> 대방역 경로탐색 결과
 
-     checks.........................: 100.00% ✓ 18  ✗ 0  
-     data_received..................: 39 kB   3.7 kB/s
-     data_sent......................: 3.9 kB  369 B/s
-     http_req_blocked...............: avg=16.99ms  min=2µs      med=5µs      max=305.83ms p(90)=6µs      p(95)=45.88ms 
-     http_req_connecting............: avg=795.61µs min=0s       med=0s       max=14.32ms  p(90)=0s       p(95)=2.14ms  
-   ✓ http_req_duration..............: avg=71.79ms  min=11.25ms  med=72.76ms  max=171.44ms p(90)=122.55ms p(95)=130.32ms
-       { expected_response:true }...: avg=124.26ms min=111.02ms med=121.73ms max=171.44ms p(90)=132.74ms p(95)=152.09ms
-     http_req_failed................: 50.00%  ✓ 9   ✗ 9  
-     http_req_receiving.............: avg=71.44µs  min=44µs     med=66.5µs   max=119µs    p(90)=92.5µs   p(95)=99.44µs 
-     http_req_sending...............: avg=28.55µs  min=10µs     med=29µs     max=81µs     p(90)=36µs     p(95)=42.74µs 
-     http_req_tls_handshaking.......: avg=16.04ms  min=0s       med=0s       max=288.8ms  p(90)=0s       p(95)=43.32ms 
-     http_req_waiting...............: avg=71.69ms  min=11.15ms  med=72.67ms  max=171.35ms p(90)=122.45ms p(95)=130.23ms
-     http_reqs......................: 18      1.69685/s
-     iteration_duration.............: avg=1.17s    min=1.12s    med=1.14s    max=1.49s    p(90)=1.22s    p(95)=1.36s   
-     iterations.....................: 9       0.848425/s
+     checks.........................: 100.00% ✓ 9   ✗ 0  
+     data_received..................: 35 kB   3.4 kB/s
+     data_sent......................: 1.6 kB  151 B/s
+     http_req_blocked...............: avg=38.03ms  min=4µs      med=5µs      max=342.28ms p(90)=68.46ms  p(95)=205.37ms
+     http_req_connecting............: avg=448µs    min=0s       med=0s       max=4.03ms   p(90)=806.4µs  p(95)=2.41ms  
+   ✓ http_req_duration..............: avg=118.04ms min=112.31ms med=116.9ms  max=123.58ms p(90)=123.33ms p(95)=123.45ms
+       { expected_response:true }...: avg=118.04ms min=112.31ms med=116.9ms  max=123.58ms p(90)=123.33ms p(95)=123.45ms
+     http_req_failed................: 0.00%   ✓ 0   ✗ 9  
+     http_req_receiving.............: avg=73.33µs  min=50µs     med=71µs     max=107µs    p(90)=103µs    p(95)=105µs   
+     http_req_sending...............: avg=34.55µs  min=17µs     med=24µs     max=132µs    p(90)=48µs     p(95)=89.99µs 
+     http_req_tls_handshaking.......: avg=37.36ms  min=0s       med=0s       max=336.27ms p(90)=67.25ms  p(95)=201.76ms
+     http_req_waiting...............: avg=117.93ms min=112.24ms med=116.81ms max=123.5ms  p(90)=123.14ms p(95)=123.32ms
+     http_reqs......................: 9       0.861855/s
+     iteration_duration.............: avg=1.15s    min=1.11s    med=1.12s    max=1.47s    p(90)=1.19s    p(95)=1.33s   
+     iterations.....................: 9       0.861855/s
      vus............................: 1       min=1 max=1
      vus_max........................: 1       min=1 max=1
 ```
 
 
 
+</br>
+</br>
 
-####  Load 테스트
+
+
+
+##  Load 테스트
 
 시스템에 평소 트래픽과 최대 트래픽이 유입되는 상황에서 성능이 어떻게 측정되는지 확인한다.
 
-- 홈화면
-
-홈화면의 경우 부하를 올려도 응답시간 저하가 발생하지 않고있다.
+```
+export let options = {
+    stages: [
+        { duration: '1m', target: 100 },
+        { duration: '2m', target: 100 }, 
+        { duration: '10s', target: 0 },
+     ],
+    thresholds: {
+        http_req_duration: ['p(99)<300'],
+    },
+ };
 
 ```
- k6 run SmokeTest.js
 
-          /\      |‾‾| /‾‾/   /‾‾/   
-     /\  /  \     |  |/  /   /  /    
-    /  \/    \    |     (   /   ‾‾\  
-   /          \   |  |\  \ |  (‾)  | 
-  / __________ \  |__| \__\ \_____/ .io
+- 홈화면
 
-  execution: local
-     script: SmokeTest.js
-     output: -
+홈화면의 경우 부하를 올려도 응답시간 저하가 발생하지 않고있다. 그리고 최대 트래픽으로 예상하는 46rps에서도 홈 화면은 트래픽을 잘 받아주고 있다.
 
-  scenarios: (100.00%) 1 scenario, 100 max VUs, 3m30s max duration (incl. graceful stop):
-           * default: Up to 100 looping VUs for 3m0s over 2 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+```
+export let options = {
+    stages: [
+        { duration: '1m', target: 10 }, 
+        { duration: '10s', target: 0 },
+     ],
+    thresholds: {
+        http_req_duration: ['p(99)<100'],
+    },
+ };
+```
 
 
-running (3m01.0s), 000/100 VUs, 7695 complete and 0 interrupted iterations
-default ✓ [======================================] 000/100 VUs  3m0s
+```
+running (1m10.2s), 00/10 VUs, 354 complete and 0 interrupted iterations
+default ✓ [======================================] 00/10 VUs  1m10s
 
      ✓ 홈화면 접속
 
-     checks.........................: 100.00% ✓ 7695  ✗ 0    
-     data_received..................: 12 MB   68 kB/s
-     data_sent......................: 884 kB  4.9 kB/s
-     http_req_blocked...............: avg=355.38µs min=1µs    med=4µs    max=312.36ms p(90)=7µs     p(95)=7µs    
-     http_req_connecting............: avg=94.22µs  min=0s     med=0s     max=46.77ms  p(90)=0s      p(95)=0s     
-   ✓ http_req_duration..............: avg=10.96ms  min=4.74ms med=9.3ms  max=87.59ms  p(90)=16.28ms p(95)=21.05ms
-       { expected_response:true }...: avg=10.96ms  min=4.74ms med=9.3ms  max=87.59ms  p(90)=16.28ms p(95)=21.05ms
-     http_req_failed................: 0.00%   ✓ 0     ✗ 7695 
-     http_req_receiving.............: avg=50.04µs  min=19µs   med=45µs   max=921µs    p(90)=70µs    p(95)=86µs   
-     http_req_sending...............: avg=20.29µs  min=7µs    med=18µs   max=745µs    p(90)=29µs    p(95)=36µs   
-     http_req_tls_handshaking.......: avg=255.52µs min=0s     med=0s     max=300.87ms p(90)=0s      p(95)=0s     
-     http_req_waiting...............: avg=10.89ms  min=4.67ms med=9.23ms max=87.51ms  p(90)=16.21ms p(95)=20.98ms
-     http_reqs......................: 7695    42.512804/s
-     iteration_duration.............: avg=1.01s    min=1s     med=1.01s  max=1.32s    p(90)=1.01s   p(95)=1.02s  
-     iterations.....................: 7695    42.512804/s
-     vus............................: 2       min=1   max=99 
+     checks.........................: 100.00% ✓ 354  ✗ 0   
+     data_received..................: 589 kB  8.4 kB/s
+     data_sent......................: 43 kB   608 B/s
+     http_req_blocked...............: avg=1.51ms   min=2µs    med=5µs     max=336.18ms p(90)=8µs     p(95)=8.34µs 
+     http_req_connecting............: avg=190.72µs min=0s     med=0s      max=16.13ms  p(90)=0s      p(95)=0s     
+   ✓ http_req_duration..............: avg=11.72ms  min=5.43ms med=10.77ms max=63.28ms  p(90)=17.13ms p(95)=19.74ms
+       { expected_response:true }...: avg=11.72ms  min=5.43ms med=10.77ms max=63.28ms  p(90)=17.13ms p(95)=19.74ms
+     http_req_failed................: 0.00%   ✓ 0    ✗ 354 
+     http_req_receiving.............: avg=56.92µs  min=23µs   med=52µs    max=110µs    p(90)=87µs    p(95)=93µs   
+     http_req_sending...............: avg=24.28µs  min=8µs    med=23µs    max=122µs    p(90)=35µs    p(95)=43.34µs
+     http_req_tls_handshaking.......: avg=1.28ms   min=0s     med=0s      max=321.11ms p(90)=0s      p(95)=0s     
+     http_req_waiting...............: avg=11.64ms  min=5.31ms med=10.71ms max=63.22ms  p(90)=17.06ms p(95)=19.65ms
+     http_reqs......................: 354     5.045105/s
+     iteration_duration.............: avg=1.01s    min=1s     med=1.01s   max=1.34s    p(90)=1.02s   p(95)=1.02s  
+     iterations.....................: 354     5.045105/s
+     vus............................: 1       min=1  max=10
+     vus_max........................: 10      min=10 max=10
+```
+
+```
+export let options = {
+    stages: [
+        { duration: '1m', target: 100 }, 
+        { duration: '10s', target: 0 },
+     ],
+    thresholds: {
+        http_req_duration: ['p(99)<100'],
+    },
+ };
+```
+
+```
+running (1m10.6s), 000/100 VUs, 3516 complete and 0 interrupted iterations
+default ✓ [======================================] 000/100 VUs  1m10s
+
+     ✓ 홈화면 접속
+
+     checks.........................: 100.00% ✓ 3516  ✗ 0    
+     data_received..................: 5.9 MB  83 kB/s
+     data_sent......................: 425 kB  6.0 kB/s
+     http_req_blocked...............: avg=787.56µs min=1µs    med=4µs    max=361.62ms p(90)=7µs     p(95)=10µs   
+     http_req_connecting............: avg=237.42µs min=0s     med=0s     max=107.32ms p(90)=0s      p(95)=0s     
+   ✓ http_req_duration..............: avg=9.48ms   min=4.56ms med=8.43ms max=89.24ms  p(90)=13.82ms p(95)=15.77ms
+       { expected_response:true }...: avg=9.48ms   min=4.56ms med=8.43ms max=89.24ms  p(90)=13.82ms p(95)=15.77ms
+     http_req_failed................: 0.00%   ✓ 0     ✗ 3516 
+     http_req_receiving.............: avg=46.32µs  min=16µs   med=41µs   max=380µs    p(90)=74µs    p(95)=88µs   
+     http_req_sending...............: avg=19.31µs  min=5µs    med=15µs   max=810µs    p(90)=31µs    p(95)=37.25µs
+     http_req_tls_handshaking.......: avg=543.04µs min=0s     med=0s     max=311.86ms p(90)=0s      p(95)=0s     
+     http_req_waiting...............: avg=9.42ms   min=4.5ms  med=8.37ms max=89.13ms  p(90)=13.76ms p(95)=15.71ms
+     http_reqs......................: 3516    49.80451/s
+     iteration_duration.............: avg=1.01s    min=1s     med=1s     max=1.37s    p(90)=1.01s   p(95)=1.02s  
+     iterations.....................: 3516    49.80451/s
+     vus............................: 8       min=2   max=99 
      vus_max........................: 100     min=100 max=100
 ```
+
 
 - 경로찾기
 
-부하를 올리면 smoke test와 다르게 경로찾기 조회에서 응답이 250ms 이상이 걸린다. 
+평소 트래픽으로 예측한 4.6rps에서도 응답속도가 저하되고 있는것을 확인할 수 있다. 평소 트래픽에서도 성능 저하가 발생하는것을 확인하고 ec2를 t2.micro에서 t2.medium,t2.large로 scale-out시켰을경우 평균트래픽에서 응답시간 지연이 없이 평소 트래픽을 잘 받아냈다. (부하테스트 완료후 t2.medium으로 다시 변경)
 
 ```
-~ k6 run FindPath.js
+export let options = {
+    rps : 46,
+    stages: [
+        { duration: '1m', target: 260 }, 
+        { duration: '10s', target: 0 },
+     ],
+    thresholds: {
+        http_req_duration: ['p(99)<300'],
+    },
+ };
+```
 
-          /\      |‾‾| /‾‾/   /‾‾/   
-     /\  /  \     |  |/  /   /  /    
-    /  \/    \    |     (   /   ‾‾\  
-   /          \   |  |\  \ |  (‾)  | 
-  / __________ \  |__| \__\ \_____/ .io
-
-  execution: local
-     script: FindPath.js
-     output: -
-
-  scenarios: (100.00%) 1 scenario, 100 max VUs, 2m30s max duration (incl. graceful stop):
-           * default: Up to 100 looping VUs for 2m0s over 1 stages (gracefulRampDown: 30s, gracefulStop: 30s)
-
-
-running (2m05.9s), 000/100 VUs, 2034 complete and 0 interrupted iterations
-default ✓ [======================================] 000/100 VUs  2m0s
-
-     ✓ 로그인 성공
+```
      ✓ 녹양역 -> 대방역 경로탐색 결과
 
-     checks.........................: 100.00% ✓ 4068  ✗ 0    
-     data_received..................: 8.2 MB  65 kB/s
-     data_sent......................: 839 kB  6.7 kB/s
-     http_req_blocked...............: avg=630.19µs min=1µs      med=3µs     max=307.53ms p(90)=6µs   p(95)=8µs  
-     http_req_connecting............: avg=159.7µs  min=0s       med=0s      max=16.25ms  p(90)=0s    p(95)=0s   
-   ✗ http_req_duration..............: avg=1.04s    min=4.18ms   med=77.19ms max=5.48s    p(90)=3.84s p(95)=4.52s
-       { expected_response:true }...: avg=2.08s    min=103.75ms med=1.81s   max=5.48s    p(90)=4.52s p(95)=5.05s
-     http_req_failed................: 50.00%  ✓ 2034  ✗ 2034 
-     http_req_receiving.............: avg=52.64µs  min=19µs     med=49µs    max=173µs    p(90)=73µs  p(95)=89µs 
-     http_req_sending...............: avg=22.24µs  min=7µs      med=19µs    max=341µs    p(90)=31µs  p(95)=43µs 
-     http_req_tls_handshaking.......: avg=464.77µs min=0s       med=0s      max=295.59ms p(90)=0s    p(95)=0s   
-     http_req_waiting...............: avg=1.04s    min=4.13ms   med=77.09ms max=5.48s    p(90)=3.84s p(95)=4.52s
-     http_reqs......................: 4068    32.303409/s
-     iteration_duration.............: avg=3.09s    min=1.11s    med=2.82s   max=6.49s    p(90)=5.53s p(95)=6.06s
-     iterations.....................: 2034    16.151704/s
-     vus............................: 20      min=1   max=99 
-     vus_max........................: 100     min=100 max=100
-
+     checks.........................: 100.00% ✓ 458   ✗ 0    
+     data_received..................: 2.6 MB  26 kB/s
+     data_sent......................: 204 kB  2.0 kB/s
+     http_req_blocked...............: avg=17.2ms  min=3µs    med=17.98ms max=345.31ms p(90)=29.61ms p(95)=34.75ms 
+     http_req_connecting............: avg=5.82ms  min=0s     med=4.77ms  max=160.24ms p(90)=9.69ms  p(95)=13.19ms 
+   ✗ http_req_duration..............: avg=26.07s  min=2.58ms med=30.01s  max=37.02s   p(90)=36.48s  p(95)=36.7s   
+       { expected_response:true }...: avg=25.47s  min=1.32s  med=29.69s  max=37.02s   p(90)=36.66s  p(95)=36.8s   
+     http_req_failed................: 43.54%  ✓ 209   ✗ 271  
+     http_req_receiving.............: avg=83.13µs min=0s     med=78µs    max=203µs    p(90)=119.1µs p(95)=134.04µs
+     http_req_sending...............: avg=58.93µs min=14µs   med=60µs    max=139µs    p(90)=96µs    p(95)=110µs   
+     http_req_tls_handshaking.......: avg=11.24ms min=0s     med=11.82ms max=307.1ms  p(90)=19.55ms p(95)=22.97ms 
+     http_req_waiting...............: avg=26.07s  min=2.53ms med=30.01s  max=37.02s   p(90)=36.48s  p(95)=36.7s   
+     http_reqs......................: 480     4.803331/s
+     iteration_duration.............: avg=26.78s  min=16.2ms med=31.02s  max=38.04s   p(90)=37.47s  p(95)=37.67s  
+     iterations.....................: 464     4.64322/s
+     vus............................: 8       min=5   max=260
+     vus_max........................: 260     min=260 max=260
 ```
 
-#### Stress 테스트
+평균 트래픽에서도 응답지연이 발생하였기 때문에 최대 트래픽으로 테스트하는게 크게 의미가 없다고 생각했지만 일단 최대 트래픽으로 부하테스트를 돌렸다.
+
+```
+export let options = {
+    rps : 46,
+    stages: [
+        { duration: '1m', target: 2660 }, 
+        { duration: '10s', target: 0 },
+     ],
+    thresholds: {
+        http_req_duration: ['p(99)<300'],
+    },
+ };
+```
+
+```
+   ✓ 녹양역 -> 대방역 경로탐색 결과
+
+     checks.........................: 100.00% ✓ 671    ✗ 0     
+     data_received..................: 21 MB   210 kB/s
+     data_sent......................: 2.3 MB  23 kB/s
+     http_req_blocked...............: avg=22.32ms min=0s      med=21.25ms max=306.97ms p(90)=31.34ms p(95)=35.43ms
+     http_req_connecting............: avg=7.21ms  min=2.58ms  med=5.8ms   max=1.17s    p(90)=11.84ms p(95)=14.36ms
+   ✗ http_req_duration..............: avg=4.87s   min=0s      med=6.01ms  max=37.26s   p(90)=30.01s  p(95)=30.03s 
+       { expected_response:true }...: avg=28.76s  min=6.45s   med=33.56s  max=37.26s   p(90)=36.08s  p(95)=36.75s 
+     http_req_failed................: 93.30%  ✓ 3792   ✗ 272   
+     http_req_receiving.............: avg=54.85µs min=0s      med=57µs    max=781µs    p(90)=96µs    p(95)=111µs  
+     http_req_sending...............: avg=55.47µs min=0s      med=53µs    max=176µs    p(90)=79µs    p(95)=95µs   
+     http_req_tls_handshaking.......: avg=15.6ms  min=0s      med=14.34ms max=300.15ms p(90)=22.35ms p(95)=25.73ms
+     http_req_waiting...............: avg=4.87s   min=0s      med=5.9ms   max=37.26s   p(90)=30.01s  p(95)=30.03s 
+     http_reqs......................: 4064    40.639582/s
+     iteration_duration.............: avg=1.42s   min=12.41µs med=31.91µs max=1m2s     p(90)=70.03µs p(95)=7.06s  
+     iterations.....................: 68356   683.552966/s
+     vus............................: 0       min=0    max=2659
+     vus_max........................: 2660    min=2660 max=2660
+```
+
+
+
+
+</br>
+</br>
+
+
+## Stress 테스트
 
 Stress테스트 옵션
 
