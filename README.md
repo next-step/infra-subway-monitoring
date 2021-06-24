@@ -68,9 +68,12 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
   Compress Transfer : A등급
   Cache Static Content : A등급
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-가장 큰 문제는 vendors.js와 main.js 가 가장 큰 문제라고 생각이 듭니다.
-압축을 우선으로 넣어야 할것 같고, NGINX에 캐시까지 적용을 해야할것 같습니다.
+2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요  
+가장 큰 문제는 vendors.js와 main.js 가 가장 큰 문제라고 생각이 듭니다.  
+NGINX 에 압축과 캐시를 추가하였고, javascript는 async로 load하도록 수정하였습니다.  
+   
+그 결과 원했던 WebPageTest에서 SecurityScore를 제외한 나머지는 모두 A등급으로 되었습니다.  
+그리고 PageSpeed Insights에서 Desktop은 토탈 93점 FCP : 0.7 초 TTI : 1.2초 Speed Index :1.3초를 달성했습니다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
