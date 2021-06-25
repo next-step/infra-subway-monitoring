@@ -8,6 +8,9 @@
   - [X] GET /left /right 데드락 코드 삭제
   ![ ](left.png)
   ![ ](right.png)
+  - [X] GET /tan 무한루프 코드 삭제
+  ![ ](tan1.png)
+  ![ ](tan2.png)
 - [ ] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 
