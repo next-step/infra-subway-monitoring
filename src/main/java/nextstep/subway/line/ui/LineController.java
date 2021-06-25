@@ -71,9 +71,7 @@ public class LineController {
     static final Object right = new Object();
     @GetMapping("/lock-left")
     public String findLockLeft() throws InterruptedException {
-
         synchronized (left) {
-            Thread.sleep(5000);
             synchronized (right) {
                 System.out.println("left");
             }
@@ -84,7 +82,6 @@ public class LineController {
     @GetMapping("/lock-right")
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
-            Thread.sleep(5000);
             synchronized (left) {
                 System.out.println("right");
             }
@@ -94,18 +91,18 @@ public class LineController {
 
     @GetMapping("/tan")
     public String generateStreams() {
-        double value = 0;
+        int value = 0;
         IntStream.of(100).parallel().map(extracted(value));
-        extracted(value);
         return "ok";
     }
 
-    private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
-        return null;
+    private IntUnaryOperator extracted(int value) {
+        return operand -> {
+            if (value >= 0) {
+                return (int) Math.tan(value);
+            }
+            return value;
+        };
     }
-
 
 }
