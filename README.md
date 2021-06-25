@@ -44,7 +44,16 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
+bbbnam-EC2-public1 : 3.36.90.29  
+  - /home/ubuntu/log/thread.dump   ->  thread.dump 분석 실습
+  - /home/ubuntu/infra-subway-monitoring/log/path.log  -> 최단경로 조회에 로그 설정
+  - /home/ubuntu/infra-subway-monitoring/log/member.log  -> 로그인, 회원가입 등에 로그 설정
+
+bbbnam-EC2-reverseproxy : 13.125.241.78 
+  - /var/log/nginx  -> Nginx log 설정 위치  
+  
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD_bbbnam
 
 ---
 
