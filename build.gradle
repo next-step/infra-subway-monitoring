@@ -18,6 +18,7 @@ dependencies {
 	// spring
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile('org.springframework.boot:spring-boot-starter-aop')
 
 	// handlebars
 	implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
@@ -36,6 +37,7 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
 	compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.2'
 }
 
