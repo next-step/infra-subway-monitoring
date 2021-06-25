@@ -39,6 +39,11 @@ dependencies {
 	implementation("mysql:mysql-connector-java")
 
 	compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.2'
+
+	// monitoring
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 }
 
 test {
