@@ -36,6 +36,7 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+	compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.2'
 }
 
 test {
