@@ -74,9 +74,7 @@ public class LineController {
 
         synchronized (left) {
             Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
+            System.out.println("left");
         }
         return "ok";
     }
@@ -85,9 +83,7 @@ public class LineController {
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
             Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
+            System.out.println("right");
         }
         return "ok";
     }
