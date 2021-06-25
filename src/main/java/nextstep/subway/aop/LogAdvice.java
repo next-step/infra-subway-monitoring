@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class LogAdvice {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
-    @Around("@annotation(MemberLog)")
+    @Around("@annotation(nextstep.subway.aop.ApiLog)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         fileLogger.info("{}, {}", joinPoint.getSignature().getName(), args[0]);

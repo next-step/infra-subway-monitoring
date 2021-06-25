@@ -1,5 +1,6 @@
 package nextstep.subway.map.application;
 
+import nextstep.subway.aop.ApiLog;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SectionEdge;
 import nextstep.subway.map.domain.SubwayGraph;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PathService {
+    @ApiLog
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);

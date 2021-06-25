@@ -1,6 +1,6 @@
 package nextstep.subway.member.application;
 
-import nextstep.subway.aop.MemberLog;
+import nextstep.subway.aop.ApiLog;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
@@ -17,13 +17,13 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    @MemberLog
+    @ApiLog
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
         return MemberResponse.of(member);
     }
 
-    @MemberLog
+    @ApiLog
     public MemberResponse findMember(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         return MemberResponse.of(member);
