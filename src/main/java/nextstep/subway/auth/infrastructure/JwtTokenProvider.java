@@ -45,7 +45,6 @@ public class JwtTokenProvider {
             return !claims.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             log.info("bad credentials", e);
-            fileLogger.info("bad credentials", e);
             return false;
         }
     }

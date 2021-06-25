@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MapController {
     private static final Logger log = LoggerFactory.getLogger(MapController.class);
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private MapService mapService;
 
     public MapController(MapService mapService) {
@@ -22,7 +21,6 @@ public class MapController {
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         log.info("paths request: source={}, target={}", source, target);
-        fileLogger.info("paths request: source={}, target={}", source, target);
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }
