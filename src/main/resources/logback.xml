@@ -3,6 +3,8 @@
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
+    <property name="HOME" value="/home/ubuntu/infra-subway-monitoring/" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--   해당 로깅의 패턴을 설정   -->
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
