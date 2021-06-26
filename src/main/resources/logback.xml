@@ -6,18 +6,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <include resource="console-appender.xml"/>
     <include resource="file-appender.xml"/>
-
-    <springProfile name="!prod">
-        <root level="TRACE">
-            <appender-ref ref="console"/>
-        </root>
-    </springProfile>
-
-    <springProfile name="prod">
-        <root level="INFO">
-            <appender-ref ref="file"/>
-        </root>
-    </springProfile>
+    <include resource="json-appender.xml"/>
 
     <!--    logger name이 console일때 적용할 appender를 등록한다.-->
     <logger name="console" level="TRACE">
@@ -27,6 +16,11 @@
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
     <logger name="file" level="INFO">
         <appender-ref ref="file"/>
+    </logger>
+
+    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
     </logger>
 
 </configuration>
