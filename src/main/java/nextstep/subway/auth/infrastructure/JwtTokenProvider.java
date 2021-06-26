@@ -19,7 +19,6 @@ public class JwtTokenProvider {
     @Value("${security.jwt.token.expire-length}")
     private long validityInMilliseconds;
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     public String createToken(String payload) {
         Claims claims = Jwts.claims().setSubject(payload);
