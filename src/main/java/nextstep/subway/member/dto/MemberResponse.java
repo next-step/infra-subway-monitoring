@@ -1,5 +1,7 @@
 package nextstep.subway.member.dto;
 
+import static nextstep.subway.common.MaskingUtils.*;
+
 import nextstep.subway.member.domain.Member;
 
 public class MemberResponse {
@@ -30,5 +32,13 @@ public class MemberResponse {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberResponse{" +
+            "id=" + id +
+            ", email='" + maskEmail(email) + '\'' +
+            '}';
     }
 }
