@@ -7,6 +7,7 @@ import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import nextstep.subway.map.dto.PathRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +26,10 @@ public class MapService {
         this.pathService = pathService;
     }
 
-    public PathResponse findPath(Long source, Long target) {
+    public PathResponse findPath(PathRequest pathRequest) {
         List<Line> lines = lineService.findLines();
-        Station sourceStation = stationService.findById(source);
-        Station targetStation = stationService.findById(target);
+        Station sourceStation = stationService.findById(pathRequest.getSource());
+        Station targetStation = stationService.findById(pathRequest.getTarget());
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
         return PathResponseAssembler.assemble(subwayPath);
