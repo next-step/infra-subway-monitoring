@@ -34,8 +34,7 @@ public class MapService {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
-        log.info("MapService.findPath - from({}: {}) -> to({}: {})", sourceStation.getId(), sourceStation.getName(),
-                targetStation.getId(), targetStation.getName());
+        log.info("MapService.findPath - from({}) -> to({})", sourceStation, targetStation);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
         return PathResponseAssembler.assemble(subwayPath);
