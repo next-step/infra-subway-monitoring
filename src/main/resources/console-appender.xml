@@ -7,7 +7,8 @@
         <withJansi>false</withJansi>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 <!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan([%thread]) %logger{50} - %msg%n</pattern>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan([%thread]) %logger{50} - %msg%n</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan([%thread]) %logger{20} - %msg%n </pattern>-->
         </encoder>
     </appender>
 </included>
