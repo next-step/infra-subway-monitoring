@@ -43,6 +43,13 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+   WEB : /home/ubuntu/infra-subway-deploy-main/logs  
+   WAS : /home/ubuntu/nginx/logs
+
+WEB : 
+WAS : 
+BASTION : 10.52.1.160
+URL : https://prodo-subway.r-e.kr/
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
