@@ -1,5 +1,7 @@
 package nextstep.subway.common;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +21,7 @@ public class LogAop {
     @Around("execution(* nextstep.subway.auth.application.AuthService.login(..))")
     public Object loginLogging(ProceedingJoinPoint joinPoint) throws Throwable {
         String inputParam = Arrays.toString(joinPoint.getArgs());
-        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[REQUEST]" + inputParam);
 
@@ -27,7 +29,7 @@ public class LogAop {
         Object result = joinPoint.proceed();
 
         //메소드 실행결과 로그
-        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[RESPONSE]" + result);
         return result;
@@ -37,10 +39,10 @@ public class LogAop {
     public Object signUpLogging(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String inputParam = Arrays.toString(joinPoint.getArgs());
-        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[REQUEST]" + inputParam);
-        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[REQUEST]" + inputParam);
 
@@ -48,38 +50,42 @@ public class LogAop {
         Object result = joinPoint.proceed();
 
         //메소드 실행결과 로그
-        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[RESPONSE]" + result);
-        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
+        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
                 + "[METHOD] " + joinPoint.getSignature().getName() + "/"
                 + "[RESPONSE]" + result);
         return result;
 
     }
 
-//    @Around("execution(* nextstep.subway.map.application.PathService.findPath(..))")
-//    public Object findPathLogging(ProceedingJoinPoint joinPoint) throws Throwable {
-//
-//        String inputParam = Arrays.toString(joinPoint.getArgs());
-//        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
-//                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
-//                + "[REQUEST]" + inputParam);
-//        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
-//                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
-//                + "[REQUEST]" + inputParam);
-//
-//        //메소드 실행
-//        Object result = joinPoint.proceed();
-//
-//        //메소드 실행결과 로그
-//        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
-//                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
-//                + "[RESPONSE]" + result);
-//        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() +"/"
-//                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
-//                + "[RESPONSE]" + result);
-//        return result;
-//
-//    }
+    @Around("execution(* nextstep.subway.map.application.MapService.findPath(..))")
+    public Object findPathLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        String inputParam = Arrays.toString(joinPoint.getArgs());
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
+                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
+                + "[REQUEST]" + inputParam);
+        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
+                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
+                + "[REQUEST]" + inputParam);
+
+        //메소드 실행
+        Object result = joinPoint.proceed();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        String output = gson.toJson(result);
+        //메소드 실행결과 로그
+        consoleLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
+                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
+                + "[RESPONSE]"
+                + "\n" + output);
+        fileLogger.info("[CLASS] " + joinPoint.getSignature().getDeclaringTypeName() + "/"
+                + "[METHOD] " + joinPoint.getSignature().getName() + "/"
+                + "[RESPONSE]" + result);
+
+        return result;
+
+    }
 }
