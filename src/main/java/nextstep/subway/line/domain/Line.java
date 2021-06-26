@@ -192,14 +192,4 @@ public class Line extends BaseEntity implements Serializable {
             .filter(it -> it.equalUpStation(stationId))
             .findFirst();
     }
-
-    @Override
-    public String toString() {
-        return "Line{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                ", sections=" + sections +
-                '}';
-    }
 }
