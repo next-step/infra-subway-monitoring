@@ -13,7 +13,7 @@
     </appender>
 
     <!--  appender 이름이 file 인 consoleAppender 를 선언  -->
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--로깅이 기록될 위치-->
         <file>${HOME}file.log</file>
         <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
