@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class LogAdvice {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger fileLogger = LoggerFactory.getLogger("api");
 
     @Around("@annotation(nextstep.subway.aop.ApiLog)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {

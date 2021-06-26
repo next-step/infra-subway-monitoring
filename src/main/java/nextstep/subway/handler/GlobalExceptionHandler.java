@@ -11,17 +11,17 @@ import nextstep.subway.auth.application.AuthorizationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger fileLogger = LoggerFactory.getLogger("error");
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity runtimeExceptionHandler(RuntimeException e) {
-        fileLogger.error("{}", e.getMessage());
+        fileLogger.error("{}, {}", e.getStackTrace(), e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @ExceptionHandler(AuthorizationException.class)
     public ResponseEntity authorizationExceptionHandler(Exception e) {
-        fileLogger.error("{}", e.getMessage());
+        fileLogger.error("{}, {}", e.getStackTrace(), e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }
