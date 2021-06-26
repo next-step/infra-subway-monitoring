@@ -14,18 +14,18 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @RestController
 @RequestMapping
 public class LogBackApiController {
-    private static final Logger log = LoggerFactory.getLogger("console");
+    private static final Logger consoleLogger = LoggerFactory.getLogger("console");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
-    private static final Logger json = LoggerFactory.getLogger("json");
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
 
 
     @GetMapping("/level")
     public String index() {
-        log.trace("A TRACE Message");
-        log.debug("A DEBUG Message");
-        log.info("An INFO Message : {}", LocalDateTime.now());
-        log.warn("A WARN Message");
-        log.error("An ERROR Message");
+        consoleLogger.trace("A TRACE Message");
+        consoleLogger.debug("A DEBUG Message");
+        consoleLogger.info("An INFO Message : {}", LocalDateTime.now());
+        consoleLogger.warn("A WARN Message");
+        consoleLogger.error("An ERROR Message");
 
 
         return "로그 레벨 확인 페이지입니다.";
@@ -33,14 +33,14 @@ public class LogBackApiController {
 
     @GetMapping("/file")
     public String logbackTest() {
-        log.info("콘솔 로깅 입니다.");
+        consoleLogger.info("콘솔 로깅 입니다.");
         fileLogger.info("파일 로깅 입니다.");
         return "file.log 로깅 파일을 확인해주세요.";
     }
 
     @GetMapping("/json")
     public String jsonTest() {
-        json.info("{}, {}, {}",
+        jsonLogger.info("{}, {}, {}",
                 kv("orderNo", 1L),
                 kv("memberNo", 2L),
                 kv("deviceId", 3L)

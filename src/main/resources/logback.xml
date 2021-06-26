@@ -6,25 +6,32 @@
     <include resource="console-appender.xml" />
     <include resource="json-appender.xml" />
 
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="file" />
+        </root>
+    </springProfile>
+
+    <springProfile name="!prod">
+        <root level="DEBUG">
+            <appender-ref ref="console" />
+        </root>
+    </springProfile>
+
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
     <logger name="file" level="INFO" >
         <appender-ref ref="file" />
     </logger>
 
-        <!--    logger name이 console일때 적용할 appender를 등록한다.-->
-        <logger name="console" level="TRACE" >
-            <appender-ref ref="console" />
-        </logger>
+    <!--    logger name이 console일때 적용할 appender를 등록한다.-->
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
 
-        <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-        <logger name="file" level="INFO" >
-            <appender-ref ref="file" />
-        </logger>
-
-        <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-        <logger name="json" level="INFO" >
-            <appender-ref ref="json" />
-        </logger>
+    <!--    logger name이 json일때 적용할 appender를 등록한다.-->
+    <logger name="json" level="INFO" >
+        <appender-ref ref="json" />
+    </logger>
 
 </configuration>
 
