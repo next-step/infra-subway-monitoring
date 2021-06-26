@@ -287,9 +287,14 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
+1. 각 서버내 로깅 경로를 알려주세요  
+(public) public-a: 3.34.146.156  
+(public) public-c: 52.78.232.237    
+둘 다 경로는 같습니다. 각각 file / json 파일이 있습니다.  
+/home/ubuntu/infra-subway-monitoring/build/libs/log/  
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+2. Cloudwatch 대시보드 URL을 알려주세요    
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-itdar
 
 ---
 
