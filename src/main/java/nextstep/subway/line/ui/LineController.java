@@ -67,28 +67,17 @@ public class LineController {
         return ResponseEntity.badRequest().build();
     }
 
-    static final Object left = new Object();
-    static final Object right = new Object();
     @GetMapping("/lock-left")
     public String findLockLeft() throws InterruptedException {
+		System.out.println("left");
 
-        synchronized (left) {
-            Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
-        }
         return "ok";
     }
 
     @GetMapping("/lock-right")
     public String findLockRight() throws InterruptedException {
-        synchronized (right) {
-            Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
-        }
+		System.out.println("right");
+
         return "ok";
     }
 
