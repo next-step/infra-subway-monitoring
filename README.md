@@ -56,3 +56,20 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+
+
+
+
+### 1단계 요구사항
+
+#### 로그 설정하기
+*[ ] Application Log 파일로 저장하기
+    * 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+*[ ] Nginx Access Log 설정하기
+
+<br>
+
+#### Cloudwatch로 모니터링
+*[ ] Cloudwatch로 로그 수집하기
+*[ ] Cloudwatch로 메트릭 수집하기
