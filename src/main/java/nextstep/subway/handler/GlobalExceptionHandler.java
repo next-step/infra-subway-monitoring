@@ -1,6 +1,7 @@
 package nextstep.subway.handler;
 
 import nextstep.subway.aop.SubwayLoggingAspect;
+import nextstep.subway.auth.application.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -58,6 +59,14 @@ public class GlobalExceptionHandler {
         fileLog.error("handleIllegalArgsException", e);
         jsonLog.error("handleIllegalArgsException", e);
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity handleAuthorizationException(AuthorizationException e) {
+        log.error("handleAuthorizationException", e);
+        fileLog.error("handleAuthorizationException", e);
+        jsonLog.error("handleAuthorizationException", e);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @ExceptionHandler(Exception.class)
