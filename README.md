@@ -68,7 +68,7 @@ npm run dev
 ### 작업 진행 순서
 * [x] 애플리케이션 진단하기 실습 및 문제가 되는 코드 수정
 * [ ] 로그 설정하기
-    * [ ] logback.xml 설정하기
+    * [x] logback.xml 설정하기
     * [ ] 회원가입, 로그인, 최단거리 조회등의 이벤트에 로깅 설정
     * [ ] Nginx Access Log 설정
 * [ ] Cloudwatch로 모니터링
