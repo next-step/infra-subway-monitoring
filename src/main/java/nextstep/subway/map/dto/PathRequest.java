@@ -1,13 +1,10 @@
-package nextstep.subway.favorite.dto;
+package nextstep.subway.map.dto;
 
-public class FavoriteRequest {
+public class PathRequest {
     private Long source;
     private Long target;
 
-    public FavoriteRequest() {
-    }
-
-    public FavoriteRequest(Long source, Long target) {
+    public PathRequest(Long source, Long target) {
         this.source = source;
         this.target = target;
     }
@@ -22,7 +19,7 @@ public class FavoriteRequest {
 
     @Override
     public String toString() {
-        return "FavoriteRequest{" +
+        return "PathRequest{" +
                 "source=" + source +
                 ", target=" + target +
                 '}';
