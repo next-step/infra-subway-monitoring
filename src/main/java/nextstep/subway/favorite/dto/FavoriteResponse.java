@@ -32,4 +32,12 @@ public class FavoriteResponse {
     public StationResponse getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        return "FavoriteResponse{" +
+                "source=" + source +
+                ", target=" + target +
+                '}';
+    }
 }

@@ -68,4 +68,13 @@ public class LineResponse {
     public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
+
+    @Override
+    public String toString() {
+        return "LineResponse{" +
+                "name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", stations=" + stations +
+                '}';
+    }
 }

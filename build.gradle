@@ -36,6 +36,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
 	implementation("io.micrometer:micrometer-registry-cloudwatch")
+	implementation 'org.projectlombok:lombok:1.18.18'
+
+	// aop
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile group: 'com.google.guava', name: 'guava', version: '18.0'
 
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
