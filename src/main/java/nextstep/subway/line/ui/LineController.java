@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,15 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @RestController
 @RequestMapping("/lines")
 public class LineController {
+    private static final Logger log = LoggerFactory.getLogger(LineController.class);
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger json = LoggerFactory.getLogger("json");
+
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -24,6 +32,7 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
+        fileLogger.info("save line : {}", lineRequest );
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
@@ -64,9 +73,12 @@ public class LineController {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity handleIllegalArgsException(DataIntegrityViolationException e) {
+        json.error("{}, {}, {}",
+                kv("errorCode", e.hashCode()),
+                kv("errorMassge", e.toString())
+        );
         return ResponseEntity.badRequest().build();
     }
-
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
@@ -106,6 +118,7 @@ public class LineController {
         }
         return null;
     }
+
 
 
 }
