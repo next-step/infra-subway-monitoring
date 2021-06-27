@@ -1,6 +1,9 @@
 package nextstep.subway.member.dto;
 
 import nextstep.subway.member.domain.Member;
+import nextstep.subway.util.MaskingUitls;
+
+import java.util.StringJoiner;
 
 public class MemberRequest {
     private String email;
@@ -30,5 +33,13 @@ public class MemberRequest {
 
     public Member toMember() {
         return new Member(email, password, age);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MemberRequest.class.getSimpleName() + "[", "]")
+            .add("email='" + MaskingUitls.maskEmail(email) + "'")
+            .add("age=" + age)
+            .toString();
     }
 }

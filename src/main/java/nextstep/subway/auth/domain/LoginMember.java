@@ -1,5 +1,7 @@
 package nextstep.subway.auth.domain;
 
+import java.util.StringJoiner;
+
 public class LoginMember {
     private Long id;
     private String email;
@@ -21,5 +23,14 @@ public class LoginMember {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", LoginMember.class.getSimpleName() + "[", "]")
+            .add("id=" + id)
+            .add("email='" + email + "'")
+            .add("age=" + age)
+            .toString();
     }
 }

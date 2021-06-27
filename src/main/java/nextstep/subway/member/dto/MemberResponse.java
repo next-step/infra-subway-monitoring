@@ -1,6 +1,9 @@
 package nextstep.subway.member.dto;
 
 import nextstep.subway.member.domain.Member;
+import nextstep.subway.util.MaskingUitls;
+
+import java.util.StringJoiner;
 
 public class MemberResponse {
     private Long id;
@@ -30,5 +33,14 @@ public class MemberResponse {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", MemberResponse.class.getSimpleName() + "[", "]")
+            .add("id=" + id)
+            .add("email='" + MaskingUitls.maskEmail(email) + "'")
+            .add("age=" + age)
+            .toString();
     }
 }
