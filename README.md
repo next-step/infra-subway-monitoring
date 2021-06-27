@@ -35,6 +35,7 @@ npm run dev
 ```
 ./gradlew clean build
 ```
+
 <br>
 
 ## 미션
@@ -42,9 +43,33 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
+
+### 로그 설정하기
+
+- [X] Application Log 파일로 저장하기
+  - 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+- [X] Nginx Access Log 설정하기
+
+
+### Cloudwatch로 모니터링
+
+- [X] Cloudwatch로 로그 수집하기
+  - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/etff-sys
+  - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/etff-error
+  - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/etff-access
+
+- [X] Cloudwatch로 메트릭 수집하기
+
 1. 각 서버내 로깅 경로를 알려주세요
 
+- 3.36.90.145 : public1 배포서버
+  - /home/ubuntu/infra-subway-monitor/logs
+- 13.124.202.83 : Nginx 서버
+  - /var/log/nginx/
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-etff
 
 ---
 
