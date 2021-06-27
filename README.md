@@ -42,11 +42,23 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요  
-   (public) public-a: 3.34.146.156  
-   (public) public-c: 52.78.232.237    
-   둘 다 경로는 같습니다. 각각 file / json 파일이 있습니다.  
-   /home/ubuntu/infra-subway-monitoring/build/libs/log/
+1. 각 서버내 로깅 경로를 알려주세요 <br>
+
+admin 에서 ssh 로 접근 가능합니다. (전체 오픈해두었습니다.)  
+(관리) admin: 13.209.73.178  
+<br>(서버1) server-1
+<br>(서버2) server-2
+<br>둘 다 경로는 같습니다. 각각 file / json 파일이 있습니다.
+<br>/home/ubuntu/infra-subway-monitoring/build/libs/log/
+
+(리버스프록시 도커 nginx) reverse-proxy
+<br>(docker nginx) access.log: /var/log/nginx/
+<br>(docker nginx) error.log: /var/log/nginx/
+<br>(docker nginx) cAdvisor: http://3.36.63.50:8080/  
+<br>
+(도커 DB) internal-1 <br>
+
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요    
    https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-itdar
