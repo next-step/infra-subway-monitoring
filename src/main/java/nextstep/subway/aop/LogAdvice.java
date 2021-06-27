@@ -7,22 +7,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 @Component
 @Aspect
 public class LogAdvice {
     private static final Logger fileLogger = LoggerFactory.getLogger("api");
+    private static final Logger pathLogger = LoggerFactory.getLogger("path");
 
-    @Around("@annotation(nextstep.subway.aop.ApiLog)")
-    public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-        fileLogger.info("{}", joinPoint.getSignature().toString());
-        Object[] args = joinPoint.getArgs();
-        for (Object arg : args) {
-            fileLogger.info("{}", arg.toString());
-        }
+    @Around("@annotation(nextstep.subway.aop.FileLogging)")
+    public Object fileLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+        fileLogger.info("{}, {}, {}", "RequestParam", joinPoint.getSignature().getName(), joinPoint.getArgs()[0]);
         Object proceed = joinPoint.proceed();
-        fileLogger.info("{}, {}", joinPoint.getSignature().getName(), proceed);
+        fileLogger.info("{}", proceed);
+        return proceed;
+    }
+
+    @Around("@annotation(nextstep.subway.aop.PathLogging)")
+    public Object pathLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+        pathLogger.info("{}, {}, {}", joinPoint.getSignature().getName(), joinPoint.getArgs()[1], joinPoint.getArgs()[2]);
+        Object proceed = joinPoint.proceed();
+        pathLogger.info("{}", proceed);
         return proceed;
     }
 }

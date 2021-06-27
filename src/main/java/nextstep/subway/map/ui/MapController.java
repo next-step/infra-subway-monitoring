@@ -1,6 +1,5 @@
 package nextstep.subway.map.ui;
 
-import nextstep.subway.aop.ApiLog;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,6 @@ public class MapController {
     }
 
     @GetMapping("/paths")
-    @ApiLog
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         return ResponseEntity.ok(mapService.findPath(source, target));
     }

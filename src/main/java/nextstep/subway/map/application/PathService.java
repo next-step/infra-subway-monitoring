@@ -1,21 +1,22 @@
 package nextstep.subway.map.application;
 
-import nextstep.subway.aop.ApiLog;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.springframework.stereotype.Service;
+
+import nextstep.subway.aop.PathLogging;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SectionEdge;
 import nextstep.subway.map.domain.SubwayGraph;
 import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PathService {
-    @ApiLog
+    @PathLogging
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
