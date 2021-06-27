@@ -54,9 +54,32 @@ npm run dev
 ---
 
 ### 2단계 - 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요  
+```
+네이버지도, 카카오지도를 기준으로 웹페이지테스트와 페이지스피드인사이트를 비교했습니다.
+
+- WebPageTest
+                        기존          목표성능예산
+Compress Transfer        F      ->      A     등급
+
+- Page Speed Insights score (데스크톱 기준)  
+                               기존           목표성능예산
+Page Speed Insights score:      67      ->      80      점 이상
+FCP(First Contentful Paint):    2.7     ->      0.6     sec 이하
+TTI(Time to Interactive):       2.8     ->      0.8     sec 이하
+Speed Index:                    3       ->      2.5     sec 이하
+TBT(Total Blocking Time):       50      ->      20      ms 이하
+LCP(Largest Contentful Paint):  2.8     ->      1       sec 이하
+CLS(Cumulative Layout Shift):   0.003   ->      0.001   sec 이하
+```
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+```
+다른 지표들은 거의 카카오와 네이버 지도를 상회하지만
+Largest Contentful Paint 의 First View 시간이 오래걸리니,
+ 
+gzip을 써서 압축한 내용을 response 받을 수 있게끔 개선하는게 좋을 것 같습니다.
+```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
