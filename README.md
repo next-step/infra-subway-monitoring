@@ -70,7 +70,11 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
    - https://bbbnam-public.kro.kr/js/vendors.js 와 https://bbbnam-public.kro.kr/js/main.js 가 다른 리소스에 비해 먼저 
    호출이 되고 있는데 이 두 파일이 응답시간의 대부분을 차지하고 있는 것 같습니다.
    텍스트 압축, 지연로딩, 캐시 설정을 사용하여 개선할 수 있을 것 같습니다.
-   기존 First Contentful Paint 15.0초, Speed Index 15.0초, Time to Interactive 15.7초 등 성능점수 32점
+   
+   - 텍스트 압축, 지연로딩, 캐시 설정을 통해
+   기존 compress Transfer : F등급, Cache static content : C 등급 , Largest Contentful Paint 4.7초 
+   변경후  compress Transfer : A등급, Cache static content : B 등급, Largest Contentful Paint 1.537초 
+   로 개선하였습니다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
