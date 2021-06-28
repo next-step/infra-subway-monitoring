@@ -43,8 +43,20 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+https://thread.honbabzone.com/
+
+1. 7271kim-proxy-ec2 ( 54.180.2.142 )
+- /home/ubuntu/nginx/logs
+
+2. 7271kim-thread-ec2 ( 3.36.85.114 )
+- /home/logs/nextstep.honbabzone_error.log
+- /home/logs/nextstep.honbabzone_info.log
+- /home/logs/nextstep.honbabzone_sql_error.log
+- /home/logs/nextstep.honbabzone_sql_info.log
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-7271kim
 
 ---
 
