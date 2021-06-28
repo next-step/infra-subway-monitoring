@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.function.IntUnaryOperator;
-import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("/lines")
@@ -70,48 +68,22 @@ public class LineController {
         return ResponseEntity.badRequest().build();
     }
 
-    static final Object left = new Object();
-    static final Object right = new Object();
     @GetMapping("/lock-left")
     @ElapsedTime
-    public String findLockLeft() throws InterruptedException {
-
-        synchronized (left) {
-            Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
-        }
+    public String findLockLeft() {
         return "ok";
     }
 
     @GetMapping("/lock-right")
     @ElapsedTime
-    public String findLockRight() throws InterruptedException {
-        synchronized (right) {
-            Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
-        }
+    public String findLockRight() {
         return "ok";
     }
 
     @GetMapping("/tan")
     @ElapsedTime
     public String generateStreams() {
-        double value = 0;
-        IntStream.of(100).parallel().map(extracted(value));
-        extracted(value);
         return "ok";
     }
-
-    private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
-        return null;
-    }
-
 
 }
