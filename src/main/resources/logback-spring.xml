@@ -4,7 +4,6 @@
     <include resource="console-appender.xml" />
 
     <springProfile name="prod">
-        <property name="home" value="/home/ubuntu/log/infra-subway-deploy" />
         <logger name="file" level="INFO" >
             <appender-ref ref="file" />
         </logger>
