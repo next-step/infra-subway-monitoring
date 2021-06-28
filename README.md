@@ -44,7 +44,12 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
+  - 앱 로그 : /home/ubuntu/app/infra-subway-monitoring/log.out
+  - nginx 로그 : /var/log/nginx/access.log
+  - 서비스 url : http://www.insup.kro.kr/
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+  - https://ap-northeast-2.console.aws.amazon.com/systems-manager/resource-groups/cloudwatch?region=ap-northeast-2&dashboard=DASHBOARD-jis1218
 
 ---
 
