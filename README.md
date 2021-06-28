@@ -67,7 +67,9 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     시간 기반지표를 중점으로 하여 성능 예산을 구성하는 게 좋을 거 같습니다.
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-    
+   - https://bbbnam-public.kro.kr/js/vendors.js 와 https://bbbnam-public.kro.kr/js/main.js 가 다른 리소스에 비해 먼저 
+   호출이 되고 있는데 이 두 파일이 응답시간의 대부분을 차지하고 있는 것 같습니다.
+   텍스트 압축, 지연로딩, 캐시 설정을 사용하여 개선할 수 있을 것 같습니다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
