@@ -43,21 +43,27 @@ npm run dev
 
 ### Step1. 요구사항
 #### 1. 로그 설정하기
-- [ ] Application Log 파일로 저장하기
+- [X] Application Log 파일로 저장하기
     + 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
-- [ ] Nginx Access Log 설정하기
+- [X] Nginx Access Log 설정하기
 
 #### 2. Cloudwatch로 모니터링
-- [ ] Cloudwatch로 로그 수집하기
-- [ ] Cloudwatch로 메트릭 수집하기
+- [X] Cloudwatch로 로그 수집하기
+- [X] Cloudwatch로 메트릭 수집하기
 
 
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- byunghakjang1230-EC2-public-2 : 13.125.246.89
+    - file log : /home/ubuntu/infra-subway-monitoring/log/subway/file_info.log
+    - json log : /home/ubuntu/infra-subway-monitoring/log/subway/json_error.log
+    - nginx log
+        + /var/log/nginx/access.log
+        + /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-byunghakjang1230
 ---
 
 ### 2단계 - 성능 테스트

@@ -6,6 +6,7 @@ import nextstep.subway.station.dto.StationResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LineResponse {
@@ -75,7 +76,9 @@ public class LineResponse {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
-                ", stations=" + stations +
+                ", stations.count=" + Optional.ofNullable(stations)
+                .map(List::size)
+                .orElse(0) +
                 '}';
     }
 }

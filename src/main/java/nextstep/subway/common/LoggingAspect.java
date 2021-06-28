@@ -1,5 +1,6 @@
 package nextstep.subway.common;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
 
@@ -8,6 +9,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import static nextstep.subway.common.util.SubwayLogger.*;
@@ -41,9 +43,21 @@ public class LoggingAspect {
                 join.getSignature().getName(),
                 System.currentTimeMillis() - start,
                 makeParamToString(join.getArgs()),
-                Optional.ofNullable(proceed)
-                        .map(Object::toString)
-                        .orElse(NO_RETURN));
+                makeLogResult(proceed));
+    }
+
+    private String makeLogResult(Object proceed) {
+        if (Objects.isNull(proceed)) {
+            return NO_RETURN;
+        }
+        return geResultToString(proceed);
+    }
+
+    private String geResultToString(Object proceed) {
+        if (proceed.getClass() == ResponseEntity.class) {
+            return ((ResponseEntity)proceed).getStatusCode().toString();
+        }
+        return proceed.toString();
     }
 
     private String makeParamToString(Object[] args) {
