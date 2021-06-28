@@ -17,6 +17,7 @@ public class AuthenticationPrincipalConfig implements WebMvcConfigurer {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void addArgumentResolvers(List argumentResolvers) {
         argumentResolvers.add(createAuthenticationPrincipalArgumentResolver());
     }

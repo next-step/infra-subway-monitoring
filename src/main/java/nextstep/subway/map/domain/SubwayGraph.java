@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SubwayGraph extends WeightedMultigraph<Station, SectionEdge> {
+    @SuppressWarnings("unchecked")
     public SubwayGraph(Class edgeClass) {
         super(edgeClass);
     }

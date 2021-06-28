@@ -7,8 +7,6 @@ import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +21,13 @@ public class PathService {
         graph.addEdge(lines);
 
         // 다익스트라 최단 경로 찾기
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
+        DijkstraShortestPath<Station, SectionEdge> dijkstraShortestPath = new DijkstraShortestPath<>(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
         return convertSubwayPath(path);
     }
 
-    private SubwayPath convertSubwayPath(GraphPath graphPath) {
+    private SubwayPath convertSubwayPath(GraphPath<Station, SectionEdge> graphPath) {
         List<SectionEdge> edges = (List<SectionEdge>) graphPath.getEdgeList().stream().collect(Collectors.toList());
         List<Station> stations = graphPath.getVertexList();
         return new SubwayPath(edges, stations);
