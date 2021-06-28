@@ -94,7 +94,32 @@ gzip을 써서 압축한 내용을 response 받을 수 있게끔 개선하는게
 ```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+```
+* 대상 시스템 범위
+리버스프록시 서버에 들어오는 요청에서부터 DB를 조회하여 반응해주는 일련의 과정
+ 
+* 목표
+속도는 최적화가 더 잘 되었을 것으로 판단된 네이버지도/카카오 지도를 비교했으나, 
+실사용 부하테스트는 지하철 관련 기능 한정으로 1위인 지하철종결자(어플리케이션) 을 참고했습니다.
+(DAU는 90~ 120만, MAU는 410만, https://platum.kr/archives/61943)
+  예상치
+1. 예상 1일 사용자 수 (DAU): 100만
+2. 피크 시간대의 예상 집중률: 5배 (500%) 
+  -> 평일기준 출근/퇴근/약속후귀가
+  -> 07~ 09, 17~ 19, 21~ 23시 (3회)
+3. 1명당 1일 평균 접속 혹은 요청 수 예상: 평일기준 1일 2회 (출퇴근)
+4. 예상 Throughput: 평균 23.1 rps~ 최대 115.5 rps 
+  Throughput
+  -> 2,000,000 = 1일 총 접속 수 = 1일 사용자 수 * 1명당 1일 평균 접속 수
+  -> 23.1 rps = 1일 평균 rps = 1일 총 접속 수 / 86400(초/일)
+  -> 115.5 rps = 1일 최대 rps = 1일 평균 rps * (최대 트래픽 / 평소 트래픽)
+  Latency: 50ms 이하
 
+* 시나리오
+접속빈도가 높은 대상: 경로 검색, 최초 메인페이지
+데이터를 갱신하는 페이지: 역, 노선, 구간
+데이터를 조회하는데 여러 페이지를 참조하는 페이지: 경로 검색
+```
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---------------------------------------------------
@@ -342,4 +367,91 @@ cloud.aws.region.static=ap-northeast-2
 management.metrics.export.cloudwatch.namespace=  # 해당 namespace로 Cloudwatch 메트릭을 조회 가능
 management.metrics.export.cloudwatch.batch-size=20
 management.endpoints.web.exposure.include=*
+```
+--------------------------
+# 🚀 2단계 - 성능 테스트
+## 요구사항
+* 웹 성능 테스트
+  * 웹 성능 예산을 작성
+  * WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
+* 부하 테스트
+  * 테스트 전제조건 정리
+    * 대상 시스템 범위
+    * 목푯값 설정 (latency, throughput, 부하 유지기간)
+    * 부하 테스트 시 저장될 데이터 건수 및 크기
+  * 각 시나리오에 맞춰 스크립트 작성
+    * 접속 빈도가 높은 페이지
+    * 데이터를 갱신하는 페이지
+    * 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  * Smoke, Load, Stress 테스트 후 결과를 기록
+## 힌트
+### k6 설치
+```
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+$ echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+$ sudo apt-get update
+$ sudo apt-get install k6
+```
+### Smoke Test
+```
+# smoke.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = '[Target URL]';
+const USERNAME = 'test id';
+const PASSWORD = 'test password';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+};
+```
+```
+export let options = {
+  stages: [
+    { duration: '1m', target: 500 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
+    { duration: '2m', target: 500 }, // stay at 100 users for 10 minutes
+    { duration: '10s', target: 0 }, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
 ```
