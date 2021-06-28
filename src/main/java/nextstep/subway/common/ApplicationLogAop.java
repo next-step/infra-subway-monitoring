@@ -20,17 +20,15 @@ public class ApplicationLogAop {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     @Around("execution(* nextstep.subway..ui.*Controller.*(..))" +
-            " && !@annotation(nextstep.subway.common.PrivacyNoLogging)")
+            " && !@annotation(nextstep.subway.common.PrivacyNoLogging)" +
+            " && !@annotation(nextstep.subway.common.BulkNoLogging)")
     public Object controllerLogging(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 전처리
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-                .currentRequestAttributes()).getRequest();
+        HttpServletRequest request = getRequest();
         String params = getRequestParams(request);
         long startAt = System.currentTimeMillis();
 
         Object result = joinPoint.proceed();
 
-        // 후처리
         long endAt = System.currentTimeMillis();
         fileLogger.info("{}({}), {}, {}, {}, {} ({}ms)", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), request.getRequestURI(), request.getMethod(), params,
@@ -39,24 +37,38 @@ public class ApplicationLogAop {
         return result;
     }
 
-    @Around("execution(* nextstep.subway.member.ui.MemberController.createMember(..))" +
-            " || execution(* nextstep.subway.auth.ui.AuthController.login(..))")
-    public Object createMemberLogging(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 전처리
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-                .currentRequestAttributes()).getRequest();
-        String params = getRequestParams(request);
+    @Around("@annotation(nextstep.subway.common.PrivacyNoLogging)")
+    public Object privacyLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+        HttpServletRequest request = getRequest();
         long startAt = System.currentTimeMillis();
 
         Object result = joinPoint.proceed();
 
-        // 후처리
         long endAt = System.currentTimeMillis();
         fileLogger.info("{}({}), {}, {}, {} ({}ms)", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), request.getRequestURI(), request.getMethod(),
                 result, endAt - startAt);
 
         return result;
+    }
+
+    @Around("@annotation(nextstep.subway.common.BulkNoLogging)")
+    public Object bulkLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+        HttpServletRequest request = getRequest();
+        long startAt = System.currentTimeMillis();
+
+        Object result = joinPoint.proceed();
+
+        long endAt = System.currentTimeMillis();
+        fileLogger.info("{}({}), {}, {}, {} ({}ms)", joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName(), request.getRequestURI(), request.getMethod(),
+                "bulk data", endAt - startAt);
+
+        return result;
+    }
+
+    private HttpServletRequest getRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
     }
 
 
@@ -67,12 +79,10 @@ public class ApplicationLogAop {
                 .collect(Collectors.joining(", "));
     }
 
-    // Get request values
     private String getRequestParams(HttpServletRequest request) {
         String params = "요청 파라미터 없음";
 
         Map<String, String[]> paramMap = request.getParameterMap();
-        System.out.println("paramMap" + paramMap.size());
         if (!paramMap.isEmpty()) {
             params = " [" + paramMapToString(paramMap) + "]";
         }
