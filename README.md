@@ -43,9 +43,26 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+   (public) 3.36.89.93 / 192-168-93-24 
+   log : /infra-subway-monitoring/log
+   nginx : /var/log/nginx/
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-leechungsun
 
+### 1단계 요구사항
+
+#### 로깅 설정하기
+-[ ] Application Log 파일로 저장하기
+    * 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+-[ ] Nginx Access Log 설정하기
+
+##### Cloudwatch로 모니터링
+-[ ] Cloudwatch로 로그 수집하기
+-[ ] Cloudwatch로 메트릭 수집하기
+
+#### 구현
+* build.gradle logback 추가
+* console-appender.xml, json-appender.xml, file-appender.xml 추가
 ---
 
 ### 2단계 - 성능 테스트

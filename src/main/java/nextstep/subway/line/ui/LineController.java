@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
+
+import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @RestController
 @RequestMapping("/lines")
@@ -66,7 +70,6 @@ public class LineController {
     public ResponseEntity handleIllegalArgsException(DataIntegrityViolationException e) {
         return ResponseEntity.badRequest().build();
     }
-
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
@@ -106,6 +109,7 @@ public class LineController {
         }
         return null;
     }
+
 
 
 }
