@@ -42,10 +42,14 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
-
-2. Cloudwatch 대시보드 URL을 알려주세요
-
+1. 각 서버내 로깅 경로를 알려주세요  
+    dohchoi91-EC2-monitor(3.34.50.208) : infra-subway-monitoring 배포서버
+    - application 로그 : /home/ubuntu/infra-subway-monitoring/log  
+    - Nginx 로그 : /var/log/nginx/*  
+    - 시스템 로그 : /var/log/syslog  
+    
+2. Cloudwatch 대시보드 URL을 알려주세요  
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-dohchoi91
 ---
 
 ### 2단계 - 성능 테스트
