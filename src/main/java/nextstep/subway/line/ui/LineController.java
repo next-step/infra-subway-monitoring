@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.common.annotation.ElapsedTime;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -23,12 +24,14 @@ public class LineController {
     }
 
     @PostMapping
+    @ElapsedTime
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
 
     @GetMapping
+    @ElapsedTime
     public ResponseEntity<List<LineResponse>> findAllLines() {
         return ResponseEntity.ok(lineService.findLineResponses());
     }
@@ -70,6 +73,7 @@ public class LineController {
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
+    @ElapsedTime
     public String findLockLeft() throws InterruptedException {
 
         synchronized (left) {
@@ -82,6 +86,7 @@ public class LineController {
     }
 
     @GetMapping("/lock-right")
+    @ElapsedTime
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
             Thread.sleep(5000);
@@ -93,6 +98,7 @@ public class LineController {
     }
 
     @GetMapping("/tan")
+    @ElapsedTime
     public String generateStreams() {
         double value = 0;
         IntStream.of(100).parallel().map(extracted(value));

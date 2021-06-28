@@ -1,5 +1,6 @@
 package nextstep.subway.station.ui;
 
+import nextstep.subway.common.annotation.ElapsedTime;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
@@ -20,12 +21,14 @@ public class StationController {
     }
 
     @PostMapping("/stations")
+    @ElapsedTime
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
         StationResponse station = stationService.saveStation(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
 
     @GetMapping(value = "/stations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ElapsedTime
     public ResponseEntity<List<StationResponse>> showStations() {
         return ResponseEntity.ok().body(stationService.findAllStations());
     }
