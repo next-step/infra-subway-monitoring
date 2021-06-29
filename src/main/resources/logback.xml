@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="console-appender.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="json-appender.xml" />
+    <property name="FILE_LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %X{id} %c{1} - %msg%n" />
+    <property name="home" value="log/" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${home}api-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${home}error-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!--    logger name이 console일때 적용할 appender를 등록한다.-->
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
+
+    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="file" level="info" >
+        <appender-ref ref="file" />
+    </logger>
+
+    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="error" level="ERROR" >
+        <appender-ref ref="error" />
+    </logger>
+
+</configuration>

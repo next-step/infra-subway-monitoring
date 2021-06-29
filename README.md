@@ -43,9 +43,11 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+   * 3.36.115.85 (https://lkimilhol-subway.p-e.kr/) - lkimilhol-EC2-external  
+        로그백을 이용한 애플리케이션 로깅: /home/ubuntu/infra-subway-monitoring/log
+        nginx 로그: /var/log/nginx
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-lkimilhol
 ---
 
 ### 2단계 - 성능 테스트
@@ -56,3 +58,16 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+
+## 1단계 요구사항
+
+* logback 설정 하기
+* 로직에 로그를 심기
+* 배포하여 로그가 파일로 제대로 남는지 체크
+* Nginx Log 도커 마운트
+* 클라우드 왓치 롤설정
+* 클라우드 왓치 로그 에어전트 설치
+* 로그 수집
+* EC2 메트릭 수집
+* 클라우드 메트릭스 대시보드 생성
