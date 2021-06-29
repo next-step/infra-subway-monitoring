@@ -33,19 +33,20 @@ public class AuthService {
         String token = jwtTokenProvider.createToken(request.getEmail());
 
         fileLogger.info("{}, {}",
-                kv("비밀번호 검증 성공, 토큰 발급 이메일: ", member.getEmail())
-        );
-
+                kv("비밀번호 검증 성공, 토큰 발급 이메일: ", member.getEmail()));
         return new TokenResponse(token);
     }
 
     public LoginMember findMemberByToken(String credentials) {
         if (!jwtTokenProvider.validateToken(credentials)) {
+            fileLogger.info("유효한 토큰이 아님");
             throw new AuthorizationException();
         }
 
         String email = jwtTokenProvider.getPayload(credentials);
         Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+        fileLogger.debug("{}, {}",
+                kv("토큰검증성공: ", member.getEmail()));
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
     }
 }

@@ -6,11 +6,11 @@
     <include resource="file-appender.xml" />
     <include resource="json-appender.xml" />
 
-    <logger name="console" level="TRACE" >
+    <logger name="console" level="DEBUG" >
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="file" level="INFO" >
+    <logger name="file" level="DEBUG" >
         <appender-ref ref="file" />
     </logger>
 

@@ -35,11 +35,19 @@ public class MemberService {
 
     public MemberResponse findMember(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
+        fileLogger.debug("{}, {}",
+                kv("회원 검색 성공 이메일:", member.getEmail()),
+                kv("나이: ", member.getAge()));
         return MemberResponse.of(member);
     }
 
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
+        fileLogger.debug("{}, {}",
+                kv("회원 수정 성공, 수정 전 이메일:", param.getEmail()),
+                kv("수정 전 나이: ", param.getAge()),
+                kv("수정 후 이메일:", member.getEmail()),
+                kv("수정 후 나이: ", member.getAge()));
         member.update(param.toMember());
     }
 
