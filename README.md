@@ -42,9 +42,14 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
 
+### 도메인 변경 : yzzzzun.p-e.kr
+
+1. 각 서버내 로깅 경로를 알려주세요
+   - Nginx : /var/log/nginx
+   - application log : ~/infra-subway-monitoring/log
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-yzzzzun
 
 ---
 
@@ -67,7 +72,7 @@ npm run dev
   - [x] 로그인 로깅
   - [x] 최단거리 조회 등 이벤트 로깅
   - [x] Logback 설정
-- [ ] Nginx Access Log 설정
-- [ ] Cloudwatch로 모니터링
-  - [ ] Cloudwatch 로그 수집
-  - [ ] Cloudwatch 메트릭 수집
+- [x] Nginx Access Log 설정
+- [x] Cloudwatch로 모니터링
+  - [x] Cloudwatch 로그 수집
+  - [x] Cloudwatch 메트릭 수집
