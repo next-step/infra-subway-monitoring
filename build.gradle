@@ -32,12 +32,26 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
+	testImplementation 'io.rest-assured:xml-path:4.2.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 }
 
 test {
 	useJUnitPlatform()
 }
+
+allprojects {
+	gradle.projectsEvaluated {
+		tasks.withType(JavaCompile) {
+			options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+		}
+	}
+}
+
