@@ -15,8 +15,6 @@ import java.util.List;
 
 @RestController
 public class FavoriteController {
-    private static final Logger log = LoggerFactory.getLogger("console");
-
     private FavoriteService favoriteService;
 
     public FavoriteController(FavoriteService favoriteService) {
