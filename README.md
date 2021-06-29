@@ -61,6 +61,7 @@ npm run dev
 
 ### Step1 - 로깅과 모니터링
 
+- [x] Logback 설정
 - [ ] Application Log 파일로 저장하기
   - [ ] 회원가입 로깅
   - [ ] 로그인 로깅
