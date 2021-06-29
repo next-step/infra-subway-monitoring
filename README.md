@@ -43,8 +43,18 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+    * 어플리케이션 로그: public, web(192.168.180.94) <br>
+      => /home/ubuntu/app/logs/infra-subway-monitoring/app.log
+      
+      <br>
+      
+    * NGINX 로그: Reverse proxy(192.168.180.46) <br>
+      => /var/log/nginx
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+    * https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-joojimin
+
 
 ---
 
