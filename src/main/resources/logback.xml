@@ -11,6 +11,10 @@
         <appender-ref ref="file" />
     </root>
 
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
+
     <logger name="file" level="INFO" >
         <appender-ref ref="file" />
     </logger>
