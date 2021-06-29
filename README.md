@@ -43,8 +43,8 @@ npm run dev
 
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 - [x] 로그 설정하기
-    - [x] 로그인, 회원가입, 최단경로 api 로깅
-    - [x] nginx access log 설정
+  - [x] 로그인, 회원가입, 최단경로 api 로깅
+  - [x] nginx access log 설정
 ```
 # nginx.conf
 
@@ -76,7 +76,9 @@ http {
     }
 }
 ```
-- [ ] Cloudwatch로 모니터링
+- [ ] Cloudwatch 로 모니터링
+  - [x] Cloudwatch 로 로그 수집하기
+  - [ ] Cloudwatch 로 메트릭 수집하기
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
