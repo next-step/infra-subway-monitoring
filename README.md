@@ -62,11 +62,11 @@ npm run dev
 ### Step1 - 로깅과 모니터링
 
 - [x] Logback 설정
-- [ ] Application Log 파일로 저장하기
-  - [ ] 회원가입 로깅
-  - [ ] 로그인 로깅
-  - [ ] 최단거리 조회 등 이벤트 로깅
-  - [ ] Logback 설정
+- [x] Application Log 파일로 저장하기
+  - [x] 회원가입 로깅
+  - [x] 로그인 로깅
+  - [x] 최단거리 조회 등 이벤트 로깅
+  - [x] Logback 설정
 - [ ] Nginx Access Log 설정
 - [ ] Cloudwatch로 모니터링
   - [ ] Cloudwatch 로그 수집
