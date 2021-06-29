@@ -78,12 +78,23 @@ http {
 ```
 - [ ] Cloudwatch 로 모니터링
   - [x] Cloudwatch 로 로그 수집하기
-  - [ ] Cloudwatch 로 메트릭 수집하기
+  - [x] Cloudwatch 로 메트릭 수집하기
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
+#### application
+* ip : 3.34.196.155
+* 로그 경로 : /home/ubuntu/app/infra-subway-monitoring/log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_was_sys_log)
+#### reverse-proxy
+* ip : 3.37.87.194
+* 로그 경로 
+  * /var/log/nginx/access.log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_reverse_proxy_access.log)
+  * /var/log/nginx/error.log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_reverse_proxy_error.log)
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-5minho;start=PT1H
 
 ---
 
