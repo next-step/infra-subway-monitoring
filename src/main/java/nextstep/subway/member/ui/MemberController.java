@@ -29,9 +29,10 @@ public class MemberController {
 
         log.info("========== 회원가입 ==========");
         log.info("Join Email : " + request.getEmail());
-        log.info("=============================");
 
         MemberResponse member = memberService.createMember(request);
+
+        log.info("생성된 Id :  " + member.getId());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
