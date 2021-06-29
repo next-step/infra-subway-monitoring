@@ -1,5 +1,7 @@
 package nextstep.subway.auth.ui;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +13,8 @@ import nextstep.subway.auth.dto.TokenResponse;
 
 @RestController
 public class AuthController {
-    private AuthService authService;
+    private final AuthService authService;
+    private static final Logger logger = LoggerFactory.getLogger("file");
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -20,6 +23,7 @@ public class AuthController {
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         TokenResponse token = authService.login(request);
+        logger.info("회원 로그인 요청: {}, {}", request, token);
         return ResponseEntity.ok().body(token);
     }
 }

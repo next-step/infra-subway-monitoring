@@ -16,20 +16,7 @@
         </encoder>
     </appender>
 
-    <appender name="path" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${home}path.log</file>
-        <encoder>
-            <Pattern>${FILE_LOG_PATTERN}</Pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${home}path-%d{yyyyMMdd}-%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>15MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-    </appender>
-
-    <appender name="api" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${home}api.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${home}api-%d{yyyyMMdd}-%i.log</fileNamePattern>
@@ -67,18 +54,13 @@
     </logger>
 
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="api" level="INFO" >
-        <appender-ref ref="api" />
+    <logger name="file" level="info" >
+        <appender-ref ref="file" />
     </logger>
 
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
     <logger name="error" level="ERROR" >
         <appender-ref ref="error" />
-    </logger>
-
-    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="path" level="INFO" >
-        <appender-ref ref="path" />
     </logger>
 
 </configuration>
