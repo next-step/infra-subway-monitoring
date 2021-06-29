@@ -7,7 +7,7 @@
     <include resource="json-appender.xml" />
 
     <springProfile name="prod">
-        <root level="INFO">
+        <root level="ERROR">
             <appender-ref ref="file" />
         </root>
     </springProfile>
@@ -19,7 +19,7 @@
     </springProfile>
 
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="file" level="INFO" >
+    <logger name="file" level="ERROR" >
         <appender-ref ref="file" />
     </logger>
 
@@ -29,19 +29,8 @@
     </logger>
 
     <!--    logger name이 json일때 적용할 appender를 등록한다.-->
-    <logger name="json" level="INFO" >
+    <logger name="json" level="ERROR" >
         <appender-ref ref="json" />
     </logger>
 
 </configuration>
-
-<!--&lt;!&ndash;<configuration>&ndash;&gt;-->
-<!--&lt;!&ndash;    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">&ndash;&gt;-->
-<!--&lt;!&ndash;        <encoder>&ndash;&gt;-->
-<!--&lt;!&ndash;            <pattern>%fullRequest%n%n%fullResponse</pattern>&ndash;&gt;-->
-<!--&lt;!&ndash;        </encoder>&ndash;&gt;-->
-<!--&lt;!&ndash;    </appender>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <appender-ref ref="STDOUT" />&ndash;&gt;-->
-<!--&lt;!&ndash;</configuration>&ndash;&gt;-->
-
