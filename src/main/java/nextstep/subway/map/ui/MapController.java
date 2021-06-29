@@ -25,7 +25,7 @@ public class MapController {
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         logger.info("최단거리 조회 요청 - upstation Id : {}, downstation Id : {}", source, target);
         PathResponse path = mapService.findPath(source, target);
-        logger.info("최단거리 조회 응답- distance : {}", path.getDistance());
+        logger.info("최단거리 조회 응답- distance : {}", path);
         return ResponseEntity.ok(path);
     }
 }
