@@ -43,9 +43,12 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- 인스턴스 ID : i-08a748d693195fb4c
+- app log   : /home/ubuntu/app/infra-subway-monitoring/build/libs/log
+- nginx log : /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+[CloudWatch](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=ini8262-cloudwatch)
 ---
 
 ### 2단계 - 성능 테스트
