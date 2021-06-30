@@ -3,6 +3,7 @@ package nextstep.subway.map.dto;
 import nextstep.subway.station.dto.StationResponse;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class PathResponse {
     private List<StationResponse> stations;
@@ -22,5 +23,13 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", PathResponse.class.getSimpleName() + "[", "]")
+            .add("stations=" + stations)
+            .add("distance=" + distance)
+            .toString();
     }
 }
