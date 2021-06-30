@@ -28,14 +28,9 @@ public class LogAspect {
 
 	@Around("onRequest()")
 	public Object logTo(ProceedingJoinPoint method) throws Throwable {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+		HttpServletRequest request = getRequest();
 		Object result = null;
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		String parameter = "";
-		if (!parameterMap.isEmpty()) {
-			parameter = " [" + parameterMap.entrySet().stream().map(entry -> entry.getKey() + " : " + entry.getValue()).collect(
-				Collectors.joining(", "));
-		}
+		String parameter = getParameterInformation(request.getParameterMap());
 
 		long startTime = System.currentTimeMillis();
 
@@ -44,24 +39,36 @@ public class LogAspect {
 		} catch (Exception e) {
 			printErrorLog(request, parameter, method, e);
 		} finally {
-			long endTime = System.currentTimeMillis();
-			printInfoLog(request, parameter, startTime, endTime, method);
+			printInfoLog(request, parameter, startTime, System.currentTimeMillis(), method);
 		}
 
 		return result;
 	}
 
+	private HttpServletRequest getRequest() {
+		return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+	}
+
+	private String getParameterInformation(Map<String, String[]> parameterMap) {
+		String parameter = "";
+		if (!parameterMap.isEmpty()) {
+			parameter = " [" + parameterMap.entrySet().stream().map(entry -> entry.getKey() + " : " + entry.getValue()).collect(
+				Collectors.joining(", "));
+		}
+		return parameter;
+	}
+
 	private void printInfoLog(HttpServletRequest request, String parameter, long startTime, long endTime, ProceedingJoinPoint method) {
-		log.debug("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
-		fileLogger.debug("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
-		consoleLogger.debug("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
-		jsonLogger.debug("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+		log.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+		fileLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+		consoleLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+		jsonLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
 	}
 
 	private void printErrorLog(HttpServletRequest request, String parameter, ProceedingJoinPoint method, Exception e) {
-		log.error("Request URI : {} & Request Parameter : {} & Error : {} at {} ({} ms)", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
-		fileLogger.error(e.getMessage());
-		consoleLogger.error(e.getMessage());
-		jsonLogger.error(e.getMessage());
+		log.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
+		fileLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
+		consoleLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
+		jsonLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
 	}
 }
