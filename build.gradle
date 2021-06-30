@@ -36,6 +36,14 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
+
+	implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+	implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+
 }
 
 test {
