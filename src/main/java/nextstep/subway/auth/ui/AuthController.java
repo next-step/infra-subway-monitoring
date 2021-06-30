@@ -1,5 +1,7 @@
 package nextstep.subway.auth.ui;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,7 @@ import nextstep.subway.auth.dto.TokenResponse;
 
 @RestController
 public class AuthController {
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
 
     private AuthService authService;
 
@@ -23,9 +25,9 @@ public class AuthController {
 
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
-        logger.info("로그인 요청 - email : {}", request.getEmail());
+        jsonLogger.info("{}", kv("email", request.getEmail()));
         TokenResponse token = authService.login(request);
-        logger.info("로그인 토큰 :{}", token.getAccessToken());
+        jsonLogger.info("{}", kv("로그인 토큰", token.getAccessToken()));
         return ResponseEntity.ok().body(token);
     }
 }

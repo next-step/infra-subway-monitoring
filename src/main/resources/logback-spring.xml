@@ -17,6 +17,7 @@
     <include resource="logback/appender/console-appender.xml" />
     <include resource="logback/appender/error-appender.xml" />
     <include resource="logback/appender/info-appender.xml" />
+    <include resource="logback/appender/json-appender.xml" />
     <include resource="logback/appender/sql-error-appender.xml" />
     <include resource="logback/appender/sql-info-appender.xml" />
     
@@ -35,6 +36,9 @@
     <logger name="jdbc" level="OFF"/>
     
     <springProfile name="local">
+        <logger name="json" level="INFO" >
+            <appender-ref ref="json" />
+        </logger>
         <logger name="org.springframework.jdbc" level="error" additivity="false">
             <appender-ref ref="ERROR_SQL_POLICY"/>
             <appender-ref ref="LOCAL_CONSOLE_POLICY"/>
@@ -50,7 +54,10 @@
     </springProfile>
     
      <springProfile name="prod">
-      <logger name="jdbc.sqltiming" level="info" additivity="false">
+        <logger name="json" level="INFO" >
+            <appender-ref ref="json" />
+        </logger>
+        <logger name="jdbc.sqltiming" level="info" additivity="false">
             <appender-ref ref="INFO_SQL_POLICY"/>
         </logger>
         <logger name="org.springframework.jdbc" level="error" additivity="false">
