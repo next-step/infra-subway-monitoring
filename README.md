@@ -42,9 +42,14 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
 
+### 도메인 변경 : yzzzzun.p-e.kr
+
+1. 각 서버내 로깅 경로를 알려주세요
+   - Nginx : /var/log/nginx
+   - application log : ~/infra-subway-monitoring/log
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-yzzzzun
 
 ---
 
@@ -56,3 +61,18 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+## 요구사항 정리
+
+### Step1 - 로깅과 모니터링
+
+- [x] Logback 설정
+- [x] Application Log 파일로 저장하기
+  - [x] 회원가입 로깅
+  - [x] 로그인 로깅
+  - [x] 최단거리 조회 등 이벤트 로깅
+  - [x] Logback 설정
+- [x] Nginx Access Log 설정
+- [x] Cloudwatch로 모니터링
+  - [x] Cloudwatch 로그 수집
+  - [x] Cloudwatch 메트릭 수집

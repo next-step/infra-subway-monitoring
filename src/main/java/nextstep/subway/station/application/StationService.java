@@ -1,47 +1,54 @@
 package nextstep.subway.station.application;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class StationService {
-    private StationRepository stationRepository;
+	private static final Logger LOGGER = LoggerFactory.getLogger("file");
+	private StationRepository stationRepository;
 
-    public StationService(StationRepository stationRepository) {
-        this.stationRepository = stationRepository;
-    }
+	public StationService(StationRepository stationRepository) {
+		this.stationRepository = stationRepository;
+	}
 
-    public StationResponse saveStation(StationRequest stationRequest) {
-        Station persistStation = stationRepository.save(stationRequest.toStation());
-        return StationResponse.of(persistStation);
-    }
+	public StationResponse saveStation(StationRequest stationRequest) {
+		Station persistStation = stationRepository.save(stationRequest.toStation());
 
-    @Transactional(readOnly = true)
-    public List<StationResponse> findAllStations() {
-        List<Station> stations = stationRepository.findAll();
+		LOGGER.info("station 추가됨 : {}", persistStation);
+		return StationResponse.of(persistStation);
+	}
 
-        return stations.stream()
-                .map(StationResponse::of)
-                .collect(Collectors.toList());
-    }
+	@Transactional(readOnly = true)
+	public List<StationResponse> findAllStations() {
+		List<Station> stations = stationRepository.findAll();
 
-    public void deleteStationById(Long id) {
-        stationRepository.deleteById(id);
-    }
+		return stations.stream()
+			.map(StationResponse::of)
+			.collect(Collectors.toList());
+	}
 
-    public Station findStationById(Long id) {
-        return stationRepository.findById(id).orElseThrow(RuntimeException::new);
-    }
+	public void deleteStationById(Long id) {
+		stationRepository.deleteById(id);
+		LOGGER.info("station 제거됨 : {}", id);
+	}
 
-    public Station findById(Long id) {
-        return stationRepository.findById(id).orElseThrow(RuntimeException::new);
-    }
+	public Station findStationById(Long id) {
+		return stationRepository.findById(id).orElseThrow(RuntimeException::new);
+	}
+
+	public Station findById(Long id) {
+		return stationRepository.findById(id).orElseThrow(RuntimeException::new);
+	}
 }
