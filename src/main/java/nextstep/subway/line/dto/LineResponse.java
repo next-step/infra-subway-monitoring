@@ -68,4 +68,22 @@ public class LineResponse {
     public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
+
+    @Override
+    public String toString() {
+        List<Long> stationIds = null;
+        if (stations != null) {
+            stationIds = stations.stream()
+                .map(StationResponse::getId)
+                .collect(Collectors.toList());
+        }
+        return "LineResponse{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", color='" + color + '\'' +
+            ", stationIds=" + stationIds +
+            ", createdDate=" + createdDate +
+            ", modifiedDate=" + modifiedDate +
+            '}';
+    }
 }

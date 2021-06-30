@@ -43,8 +43,23 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+  - jhh992000-ec2-public-web1 : webapp1(컨테이너) + nginx
+      * TLS 접속 주소 : https://jhh992000.ddns.net
+    * PUBLIC IP : 3.37.36.221
+    * PRIVATE IP : 192.168.100.109
+    * NGINX 로그 경로 (access) : /var/log/nginx/access.log
+    * NGINX 로그 경로 (error) : /var/log/nginx/error.log
+    * WEBAPP1 로그 경로 (info) : /data/logs/infra-subway/subway.log
+    * WEBAPP1 로그 경로 (error) : /data/logs/infra-subway/subway-error.log
+      
+  - jhh992000-ec2-public-web2 : webapp2(컨테이너)
+    * PUBLIC IP : 3.35.220.241
+    * PRIVATE IP : 192.168.100.157
+    * WEBAPP2 로그 경로 (info) : /data/logs/infra-subway/subway.log
+    * WEBAPP2 로그 경로 (error) : /data/logs/infra-subway/subway-error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-jhh992000
 
 ---
 

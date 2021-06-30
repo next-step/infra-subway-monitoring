@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+
+  <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${ACCESS_FILE}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${ACCESS_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>15MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <charset>utf8</charset>
+      <Pattern>%fullRequest%n%n%fullResponse</Pattern>
+    </encoder>
+  </appender>
+
+</included>
