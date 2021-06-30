@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="true">
+<configuration debug="false">
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="console-appender.xml" />
     <include resource="file-appender.xml" />
+    <include resource="json-appender.xml" />
 
-    <logger name="console" level="INFO" >
+    <logger name="console" level="DEBUG" >
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="file" level="INFO" >
+    <logger name="file" level="DEBUG" >
         <appender-ref ref="file" />
+    </logger>
+
+    <logger name="json" level="DEBUG" >
+        <appender-ref ref="json" />
     </logger>
 </configuration>
