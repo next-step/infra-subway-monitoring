@@ -1,0 +1,16 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="console-appender.xml" />
+
+    <springProfile name="prod">
+        <logger name="file" level="INFO" >
+            <appender-ref ref="file" />
+        </logger>
+    </springProfile>
+    <springProfile name="!prod">
+        <logger name="console" level="TRACE" >
+            <appender-ref ref="console" />
+        </logger>
+    </springProfile>
+</configuration>

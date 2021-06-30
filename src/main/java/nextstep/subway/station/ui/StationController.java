@@ -1,5 +1,6 @@
 package nextstep.subway.station.ui;
 
+import nextstep.subway.common.BulkNoLogging;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
@@ -25,6 +26,7 @@ public class StationController {
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
 
+    @BulkNoLogging
     @GetMapping(value = "/stations", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StationResponse>> showStations() {
         return ResponseEntity.ok().body(stationService.findAllStations());
