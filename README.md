@@ -90,8 +90,17 @@ npm run dev
     * 이미지의 명시적으로 사이즈를 지정하고 레이아웃이 자주 변경되는 횟수를 줄입니다.
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
     - [ ] 테스트 전제조건 정리
-        * 가상의 사용자를 300으로 지정 하면 Request Fail 오류가 발생하여 
-    200 으로 설정했고, 30초 정도 노선을 조회하고 경로 조회하는데에 소모된다 예상했습니다.
+        * 목푯값 설정
+          * 예상 1일 사용자 수(DAU) -> 네이버 노선도 : 250,000 명 ( 6개월 누적 방문자 : 40,600,000 )
+          * 피크 시간대의 집중률을 예상해봅니다. (최대 트래픽 / 평소 트래픽) 200,000 / 5,0000
+          * 1명당 1일 평균 접속 혹은 요청수를 예상 -> 2 ( 출/퇴근 혹은 외출/귀가) 
+          * 이를 바탕으로 Throughput을 계산
+            * Throughput : 1일 평균 rps ~ 1일 최대 rps
+            * 250,000(1일 사용자 수) x 2(1명당 1일 평균 접속 수) = 500,000(1일 총 접속 수)
+            * 500,000(1일 총 접속 수) / 86,400 (초/일) = 5.7(1일 평균 rps)
+            * 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 22.8(1일 최대 rps)
+          Latency : 일반적으로 50~100ms이하로 잡는 것이 좋습니다.
+          사용자가 검색하는 데이터의 양, 갱신하는 데이터의 양 등을 파악해둡니다.
     - [ ] 시나리오 스크립트 작성
         * 웹 어플리케이션의 목적에 맞게 노선을 조회하고 사용자의 경로조회가 가장
     빈도수가 높을 것이라 예상해 스크립트 작성은 로그인 -> 노선 조회 -> 경로 조회로 시나리오 스크림트를
@@ -194,9 +203,9 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '15s', target: 200 },
-        { duration: '30s', target: 200 },
-        { duration: '15s', target: 0 }
+        { duration: '30s', target: 600 },
+        { duration: '60s', target: 600 },
+        { duration: '30s', target: 0 }
     ],
 
     thresholds: {
@@ -278,7 +287,7 @@ export function 경로조회(loginRes, start, end){
 };
 
 ```
-![img_1.png](img_1.png)
+![img_3.png](img_3.png)
 
 * stress test
 ```java
@@ -287,16 +296,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '15s', target: 200 },
-        { duration: '30s', target: 200 },
+        { duration: '15s', target: 150 },
+        { duration: '30s', target: 150 },
         { duration: '15s', target: 0 },
-        { duration: '15s', target: 200 },
-        { duration: '30s', target: 200 },
-        { duration: '15s', target: 0 },
-        { duration: '15s', target: 200 },
-        { duration: '30s', target: 200 },
+        { duration: '30s', target: 600 },
+        { duration: '60s', target: 600 },
+        { duration: '30s', target: 0 },
+        { duration: '15s', target: 150 },
+        { duration: '30s', target: 150 },
         { duration: '15s', target: 0 }
-    ],
+        ],
 
     thresholds: {
         http_req_duration: ['p(99)<1500'],
@@ -377,4 +386,4 @@ export function 경로조회(loginRes, start, end){
 };
 
 ```
-![img_2.png](img_2.png)
+![img_5.png](img_5.png)
