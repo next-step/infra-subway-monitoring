@@ -42,6 +42,18 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
+- 요구 사항
+    - 로그 설정하기
+        - Application Log 파일로 저장하기
+            - 회원가입
+            - 로그인
+            - 최단거리 조회 
+            - 기타 등등 이벤트에 로깅을 설정
+        - Nginx Access Log 설정하기
+    - Cloudwatch로 모니터링
+        - Cloudwatch로 로그 수집하기
+        - Cloudwatch로 메트릭 수집하기
+    
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
