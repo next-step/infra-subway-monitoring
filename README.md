@@ -41,10 +41,60 @@ npm run dev
 
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 로그 설정하기
+  - [x] 로그인, 회원가입, 최단경로 api 로깅
+  - [x] nginx access log 설정
+```
+# nginx.conf
+
+events {}
+
+http {
+    log_format upstream_time '$remote_addr - $remote_user [$time_local] '
+                             '"$request" $status $body_bytes_sent '
+                             '"$http_referer" "$http_user_agent"'
+                             'rt=$request_time uct="$upstream_connect_time" uht="$upstream_header_time" urt="$upstream_response_time"';
+    
+    upstream app {
+        server 192.168.3.45:8080;
+    }
+    
+    # Redirect all traffic to HTTPS
+    server {
+        listen 80;
+        return 301 https://$host$request_uri;
+    }
+    
+    server {
+        access_log /var/log/nginx/access.log upstream_time;
+        listen 443 ssl;
+        ssl_certificate /etc/letsencrypt/live/nextstep.5minho.p-e.kr/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/nextstep.5minho.p-e.kr/privkey.pem;
+    
+        ...
+    }
+}
+```
+- [ ] Cloudwatch 로 모니터링
+  - [x] Cloudwatch 로 로그 수집하기
+  - [x] Cloudwatch 로 메트릭 수집하기
+
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
+#### application
+* ip : 3.34.196.155
+* 로그 경로 : /home/ubuntu/app/infra-subway-monitoring/log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_was_sys_log)
+#### reverse-proxy
+* ip : 3.37.87.194
+* 로그 경로 
+  * /var/log/nginx/access.log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_reverse_proxy_access.log)
+  * /var/log/nginx/error.log (https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/5minho_reverse_proxy_error.log)
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-5minho;start=PT1H
 
 ---
 
