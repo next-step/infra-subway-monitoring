@@ -175,6 +175,8 @@ export function 경로_조회하기(loginRes) {
 }
 ```
 
+![smoke-test.png](smoke-test.png)
+
  - load test
 
 ```
@@ -251,6 +253,7 @@ export function 경로_조회하기(loginRes) {
 }
 
 ```
+![load-test.png](load-test.png)
 
  - stress test
 
@@ -336,5 +339,8 @@ export function 경로_조회하기(loginRes) {
   check(favorites, { 'retrieved favorites': (obj) => obj.distance === 222 });
 }
 
-대략 180명 이상부터 실패 케이스 발생
+
 ```
+![stress-test.png](stress-test.png)
+
+- 대략 180명 이상부터 실패 케이스 발생
