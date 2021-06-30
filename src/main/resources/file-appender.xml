@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="home" value="log/" />
+    <springProfile name="local, test">
+        <property name="home" value="log/" />
+    </springProfile>
+    <springProfile name="prod">
+        <property name="home" value="/home/log/" />
+    </springProfile>
+
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${home}file.log</file>
+        <file>${home}logback_file.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${home}logback_file-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
