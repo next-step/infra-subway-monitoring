@@ -23,9 +23,8 @@ public class LoggingAspect {
 		Logger log = getLogger(pjp);
 		String description = extractLogDescription(pjp);
 		List<Argument> input = extractArguments(pjp);
-		log.info("[{}] Input {}", description, input);
 		Object output = pjp.proceed();
-		log.info("[{}] Output {}", description, output);
+		log.info("[{}] Input: {}, Output {}", description, input, output);
 		return output;
 	}
 
