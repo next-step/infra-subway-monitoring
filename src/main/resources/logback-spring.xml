@@ -1,0 +1,39 @@
+<configuration debug="false">
+
+  <!-- BOOT 기본 설정 -->
+  <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+  <!-- 운영환경 -->
+  <springProfile name="prod">
+    <property name="CONSOLE_FILTER_LEVEL" value="INFO"/>
+    <property name="INFO_FILE" value="/data/logs/infra-subway/subway.log"/>
+    <property name="ERROR_FILE" value="/data/logs/infra-subway/subway-error.log"/>
+    <include resource="logback-console-appender.xml" />
+    <include resource="logback-info-appender.xml"/>
+    <include resource="logback-error-appender.xml"/>
+    <logger name="org.hibernate" level="INFO">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql" level="INFO">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="nextstep.subway" level="INFO">
+      <appender-ref ref="CONSOLE" />
+      <appender-ref ref="INFO" />
+      <appender-ref ref="ERROR" />
+    </logger>
+  </springProfile>
+
+  <!-- 기타환경 -->
+  <springProfile name="!prod">
+    <property name="CONSOLE_FILTER_LEVEL" value="DEBUG"/>
+    <include resource="logback-console-appender.xml" />
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="nextstep.subway" level="DEBUG">
+      <appender-ref ref="CONSOLE" />
+    </logger>
+  </springProfile>
+
+</configuration>
