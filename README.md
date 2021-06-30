@@ -42,10 +42,29 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [X] 로그 설정하기
+- [X] Cloudwatch로 모니터링
+
 1. 각 서버내 로깅 경로를 알려주세요
+- nginx server
+    - ec2 name : oper912-reverse-proxy
+    - 접속 : (bastion 서버에서) ssh ubuntu@nginx
+    - 로깅 경로
+        - /var/log/nginx/access.log
+        - /var/log/nginx/error.log
 
+- application server
+    - ec2 name : oper912-was
+    - 접속 : (basion 서버에서) ssh ubuntu@was
+    - 로깅 경로 : /home/ubuntu/log/app.log
+    
+- bastion server 정보
+    - ec2 name : oper912-Bastion
+    - ip : 52.79.239.230
+    
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+- [DASHBOARD-oper912](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-oper912)
 ---
 
 ### 2단계 - 성능 테스트
