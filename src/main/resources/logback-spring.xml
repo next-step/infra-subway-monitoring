@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <springProfile name="local">
+        <property resource="logback/properties/logback-local.properties"/>
+    </springProfile>
+    <springProfile name="prod">
+        <property resource="logback/properties/logback-prod.properties"/>
+    </springProfile>
+   <springProfile name="test">
+        <property resource="logback/properties/logback-test.properties"/>
+    </springProfile>
+    
+    <property name="LOG_PATH" value="${log.config.path}"/>
+    <property name="LOG_NAME" value="${log.config.filename}"/>
+    <property name="LOG_PATTERN" value="[%d{HH:mm:ss.SSS}] [%thread] %-5level %logger{36} - %msg%n"/>
+    
+    <include resource="logback/appender/console-appender.xml" />
+    <include resource="logback/appender/error-appender.xml" />
+    <include resource="logback/appender/info-appender.xml" />
+    <include resource="logback/appender/sql-error-appender.xml" />
+    <include resource="logback/appender/sql-info-appender.xml" />
+    
+    <root level="INFO">
+        <springProfile name="local">
+            <appender-ref ref="LOCAL_CONSOLE_POLICY"/>
+            <appender-ref ref="INFO_DAILY_FILE_POLICY"/>
+            <appender-ref ref="ERROR_FILE_POLICY"/>
+        </springProfile>
+        <springProfile name="prod">
+            <appender-ref ref="INFO_DAILY_FILE_POLICY"/>
+            <appender-ref ref="ERROR_FILE_POLICY"/>
+        </springProfile>
+    </root>
+    
+    <logger name="jdbc" level="OFF"/>
+    
+    <springProfile name="local">
+        <logger name="org.springframework.jdbc" level="error" additivity="false">
+            <appender-ref ref="ERROR_SQL_POLICY"/>
+            <appender-ref ref="LOCAL_CONSOLE_POLICY"/>
+        </logger>
+        <logger name="jdbc.sqltiming" level="info" additivity="false">
+            <appender-ref ref="INFO_SQL_POLICY"/>
+            <appender-ref ref="LOCAL_CONSOLE_POLICY"/>
+        </logger>
+        <logger name="jdbc.resulttable" level="error" additivity="false">
+             <appender-ref ref="ERROR_SQL_POLICY"/>
+             <appender-ref ref="LOCAL_CONSOLE_POLICY"/>
+        </logger>
+    </springProfile>
+    
+     <springProfile name="prod">
+      <logger name="jdbc.sqltiming" level="info" additivity="false">
+            <appender-ref ref="INFO_SQL_POLICY"/>
+        </logger>
+        <logger name="org.springframework.jdbc" level="error" additivity="false">
+            <appender-ref ref="ERROR_SQL_POLICY"/>
+        </logger>
+        <logger name="jdbc.sqlonly" level="error" additivity="false">
+            <appender-ref ref="ERROR_SQL_POLICY"/>
+        </logger>
+    </springProfile>
+    
+</configuration>
