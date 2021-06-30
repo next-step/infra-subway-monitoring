@@ -20,8 +20,6 @@ import nextstep.subway.station.domain.Station;
 @Transactional
 public class MapService {
 
-    private static final Logger jsonLog = LoggerFactory.getLogger("json");
-
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -38,9 +36,6 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
-        PathResponse pathResponse = PathResponseAssembler.assemble(subwayPath);
-        jsonLog.info(JsonMapper.objectToJson(pathResponse));
-
-        return pathResponse;
+        return PathResponseAssembler.assemble(subwayPath);
     }
 }
