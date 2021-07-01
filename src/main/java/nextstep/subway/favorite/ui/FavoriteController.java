@@ -2,9 +2,13 @@ package nextstep.subway.favorite.ui;
 
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
+import nextstep.subway.auth.ui.AuthController;
 import nextstep.subway.favorite.application.FavoriteService;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +18,7 @@ import java.util.List;
 @RestController
 public class FavoriteController {
     private FavoriteService favoriteService;
+    private static final Logger logger = LoggerFactory.getLogger(FavoriteController.class);
 
     public FavoriteController(FavoriteService favoriteService) {
         this.favoriteService = favoriteService;
@@ -21,6 +26,7 @@ public class FavoriteController {
 
     @PostMapping("/favorites")
     public ResponseEntity createFavorite(@AuthenticationPrincipal LoginMember loginMember, @RequestBody FavoriteRequest request) {
+        logger.info("FavoriteController.createFavorite request : {}", request);
         favoriteService.createFavorite(loginMember, request);
         return ResponseEntity
                 .created(URI.create("/favorites/" + 1L))
@@ -30,11 +36,13 @@ public class FavoriteController {
     @GetMapping("/favorites")
     public ResponseEntity<List<FavoriteResponse>> getFavorites(@AuthenticationPrincipal LoginMember loginMember) {
         List<FavoriteResponse> favorites = favoriteService.findFavorites(loginMember);
+        logger.info("FavoriteController.getFavorites response : {}", favorites);
         return ResponseEntity.ok().body(favorites);
     }
 
     @DeleteMapping("/favorites/{id}")
     public ResponseEntity deleteFavorite(@AuthenticationPrincipal LoginMember loginMember, @PathVariable Long id) {
+        logger.info("FavoriteController.deleteFavorite request : {}", id);
         favoriteService.deleteFavorite(loginMember, id);
         return ResponseEntity.noContent().build();
     }
