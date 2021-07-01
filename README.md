@@ -56,7 +56,61 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+   우선 경쟁사 서비스를 비교했습니다. 
+
+   👉 네이버 지하철 노선도 : https://m.map.naver.com/subway/subwayLine.naver?region=1000
+
+   | **항목**                 | **value** |
+   | ------------------------ | --------- |
+   | First Contentful Paint   | 2.3s      |
+   | Time to Interactive      | 7.1s      |
+   | Speed Index              | 6.8s      |
+   | Total Blocking Time      | 560ms     |
+   | Largest Contentful Paint | 7.9s      |
+
+   👉카카오 맵 : https://m.map.kakao.com/
+
+   | **항목**                 | **value** |
+   | ------------------------ | --------- |
+   | First Contentful Paint   | 2.5s      |
+   | Time to Interactive      | 5.3s      |
+   | Speed Index              | 6.7s      |
+   | Total Blocking Time      | 140ms     |
+   | Largest Contentful Paint | 6.8s      |
+
+   👉 내 서비스 
+
+   | **항목**                 | **value** |
+   | ------------------------ | --------- |
+   | First Contentful Paint   | 15.3s     |
+   | Time to Interactive      | 15.9s     |
+   | Speed Index              | 15.3s     |
+   | Total Blocking Time      | 540ms     |
+   | Largest Contentful Paint | 15.9s     |
+
+   📄 예산 설정 경쟁사 서비스를 비교하여 가장 좋은 성능을 나타내는 서비스를 기준으로 +20%내의 시간 지표로 설정했습니다.
+
+   | **항목**                 | **value** |
+   | ------------------------ | --------- |
+   | First Contentful Paint   | 3s        |
+   | Time to Interactive      | 6s        |
+   | Speed Index              | 8s        |
+   | Total Blocking Time      | 168ms     |
+   | Largest Contentful Paint | 8s        |
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+   /js/vendor.js 와 /js/main.js 의 전송 크기가 커서 네트워크 자원을 압축하는게 가장 중요한 해결 방법인것 같습니다. 그에 따라 nginx.conf 에 gzip설정을 추가하고 nginx reload하여 아래와 같은 결과를 얻을 수 있었습니다.
+
+   | **항목**                 | **value** |
+   | ------------------------ | --------- |
+   | First Contentful Paint   | 6.5s      |
+   | Time to Interactive      | 7.1s      |
+   | Speed Index              | 7.2s      |
+   | Total Blocking Time      | 540ms     |
+   | Largest Contentful Paint | 7.1s      |
+
+   추가적인 방법으로 캐시 설정과 불필요한 자원을 지연로딩 하는 방법들도 있을것 같습니다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
