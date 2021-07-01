@@ -47,7 +47,7 @@ npm run dev
 * application log 경로: /home/ubuntu/logs/infra-subway-monitoring
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-mwkwon-service-monitoring
 ---
 
 ### 2단계 - 성능 테스트
@@ -73,6 +73,6 @@ npm run dev
     * [x] logback.xml 설정하기
     * [x] 회원가입, 로그인, 최단거리 조회등의 이벤트에 로깅 설정
     * [x] Nginx Access Log 설정
-* [ ] Cloudwatch로 모니터링
-    * [ ] Cloudwatch로 로그 수집하기
-    * [ ] Cloudwatch로 메트링 수집하기
+* [x] Cloudwatch로 모니터링
+    * [x] Cloudwatch로 로그 수집하기
+    * [x] Cloudwatch로 메트링 수집하기
