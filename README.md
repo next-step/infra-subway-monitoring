@@ -194,7 +194,7 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 //1일 평균 rps = 1.16
-//1일 최대 rps = 10.16
+//1일 최대 rps = 5.8
 export let options = {
  stages: [
     { duration: '30s', target: 35 },
