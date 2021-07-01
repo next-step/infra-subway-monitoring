@@ -18,7 +18,7 @@ import nextstep.subway.station.domain.Station;
 @Service
 @Transactional
 public class MapService {
-	private static final Logger LOGGER = LoggerFactory.getLogger("file");
+	private static final Logger LOGGER = LoggerFactory.getLogger("json");
 
 	private LineService lineService;
 	private StationService stationService;
