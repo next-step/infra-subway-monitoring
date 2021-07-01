@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-  vus: 300, // 1 user looping for 1 minute
+  vus: 250, // 1 user looping for 1 minute
   duration: '100s',
 
   thresholds: {
@@ -46,29 +46,42 @@ export default function ()  {
 };
 
 /*
-running (1m41.0s), 000/300 VUs, 28175 complete and 0 interrupted iterations
-default ✓ [======================================] 300 VUs  1m40s
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
 
-     ✗ logged in successfully
-      ↳  99% — ✓ 27983 / ✗ 192
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 250 max VUs, 2m10s max duration (incl. graceful stop):
+           * default: 250 looping VUs for 1m40s (gracefulStop: 30s)
+
+
+running (1m41.0s), 000/250 VUs, 24008 complete and 0 interrupted iterations
+default ↓ [======================================] 250 VUs  1m40s
+
+     ✓ logged in successfully
      ✓ retrieved member
 
-     checks.........................: 99.65% ✓ 55965      ✗ 192
-     data_received..................: 22 MB  213 kB/s
-     data_sent......................: 14 MB  141 kB/s
-     http_req_blocked...............: avg=3.76ms   min=0s     med=4.97µs  max=876.42ms p(90)=7.96µs   p(95)=28.71µs
-     http_req_connecting............: avg=596.12µs min=0s     med=0s      max=633.27ms p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=30.45ms  min=0s     med=15.09ms max=1.21s    p(90)=56.45ms  p(95)=80.48ms
-       { expected_response:true }...: avg=30.49ms  min=3.29ms med=15.11ms max=1.21s    p(90)=56.44ms  p(95)=80.43ms
-     http_req_failed................: 0.34%  ✓ 193        ✗ 55965
-     http_req_receiving.............: avg=393.11µs min=0s     med=40.96µs max=147.37ms p(90)=304.8µs  p(95)=1.07ms
-     http_req_sending...............: avg=652.86µs min=0s     med=17.36µs max=784.51ms p(90)=257.15µs p(95)=1.73ms
-     http_req_tls_handshaking.......: avg=2.94ms   min=0s     med=0s      max=824.33ms p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=29.4ms   min=0s     med=14.5ms  max=1.17s    p(90)=54.18ms  p(95)=76.19ms
-     http_reqs......................: 56158  555.985332/s
-     iteration_duration.............: avg=1.06s    min=2.25ms med=1.03s   max=3.03s    p(90)=1.11s    p(95)=1.15s
-     iterations.....................: 28175  278.943102/s
-     vus............................: 4      min=4        max=300
-     vus_max........................: 300    min=300      max=300
+     checks.........................: 100.00% ✓ 48016      ✗ 0
+     data_received..................: 18 MB   173 kB/s
+     data_sent......................: 12 MB   120 kB/s
+     http_req_blocked...............: avg=2.59ms   min=3.24µs  med=4.99µs  max=806.98ms p(90)=8.08µs   p(95)=27.25µs
+     http_req_connecting............: avg=161.46µs min=0s      med=0s      max=53.75ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=18.75ms  min=3.27ms  med=10ms    max=476.55ms p(90)=38.18ms  p(95)=60.49ms
+       { expected_response:true }...: avg=18.75ms  min=3.27ms  med=10ms    max=476.55ms p(90)=38.18ms  p(95)=60.49ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 48016
+     http_req_receiving.............: avg=320.44µs min=20.77µs med=41.84µs max=203.88ms p(90)=279.88µs p(95)=905.77µs
+     http_req_sending...............: avg=621.55µs min=9.16µs  med=17.58µs max=227.01ms p(90)=204.71µs p(95)=1.24ms
+     http_req_tls_handshaking.......: avg=2.17ms   min=0s      med=0s      max=731.53ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=17.81ms  min=3.2ms   med=9.62ms  max=390.3ms  p(90)=36.49ms  p(95)=57.7ms
+     http_reqs......................: 48016   475.398192/s
+     iteration_duration.............: avg=1.04s    min=1s      med=1.02s   max=1.98s    p(90)=1.07s    p(95)=1.13s
+     iterations.....................: 24008   237.699096/s
+     vus............................: 248     min=248      max=250
+     vus_max........................: 250     min=250      max=250
 
      */
