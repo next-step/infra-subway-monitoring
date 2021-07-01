@@ -14,7 +14,6 @@ import java.util.Arrays;
 @Component
 public class LogAopHandler {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
-    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
 
     @Around("@annotation(nextstep.subway.logback.LogInOutFileAop)")
     public Object annotationInOutFileLogging(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -23,17 +22,6 @@ public class LogAopHandler {
         Object result = joinPoint.proceed();
 
         afterInfo(joinPoint, result, fileLogger);
-
-        return result;
-    }
-
-    @Around("@annotation(nextstep.subway.logback.LogInOutJsonAop)")
-    public Object annotationInOutJsonLogging(ProceedingJoinPoint joinPoint) throws Throwable {
-        beforeInfo(joinPoint, jsonLogger);
-
-        Object result = joinPoint.proceed();
-
-        afterInfo(joinPoint, result, jsonLogger);
 
         return result;
     }
