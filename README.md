@@ -42,12 +42,20 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
-
+1. 각 서버내 로깅 경로를 알려주세요 
+   * 웹 서버
+        - 애플리케이션 로그 : /home/ubungu/subway-infra-monitoring/log 
+   * 프록시 서버 (웹 서버내의 Docker 통해 띄움)
+        - access 로그 : /var/log/nginx/access.log
+        - error 로그 : /var/log/nginx/error.log
+    
+   ``` 
+   📍 바스티온 서버 IP : 3.35.149.248
+   📍 웹 서버 IP : 3.34.50.96 (private : 192.168.77.45 )
+   ```
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+    * https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-applemango2021
 ---
-
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
