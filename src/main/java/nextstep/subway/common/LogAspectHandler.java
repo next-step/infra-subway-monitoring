@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class LogAspectHandler {
 
-    @Pointcut("@annotation(EnableControllerLog)")
+    @Pointcut("@annotation(nextstep.subway.common.EnableFileLog)")
     public void pointCut() {}
 
     @Before("pointCut()")
