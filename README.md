@@ -69,8 +69,23 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+ 
+- 허용 가능한 목표를 정한다 
+    - 아직 예산을 잡는 경험이 없어서 기준을 잡기가 애매하여 Lighthouse 성능 감사가 80 이상이어야 한다는 가정 하에 
+      PageSpeed에서 데스크톱 기준으로 분석 후에 Lighthouse Scoring Calculator 통해서 기준을 잡았습니다. 
+      Desktop, v8 기준이며 TBT, CLS 제외 Metric Score를 모두 65로 주었을떄 81점이 되길래 해당 Value를 기준으로 잡았습니다.
+        - FCP (First Contentful Paint) - 1400ms
+        - SI (Speed Index) - 2000ms
+        - LCP (Largest Contentful Paint) - 2000ms
+        - TTI (Time to Interactive) - 3800ms
+        - TBT (Total Blocking Time) - 60ms
+        - CLS (Cumulative Layout Shift) - 0.04
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 텍스트 압축 사용
+- 사용하지 않는 자바스크립트 줄이기
+- 렌더링 차단 리소스 제거하기
+- 효율적인 캐싱 정책을 사용하여 정적인 애셋 제공하기
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
