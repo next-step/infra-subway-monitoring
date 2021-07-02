@@ -74,9 +74,54 @@ URL : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-no
 그리고 각 항목별로 최소기준은 각 항목별 지표에서 중간 기준범위인 50~89 구간에서의 최소값인 50%이상의 성능을 내야한다고 생각하였습니다.
 각 항목의 수치는 Lighthouse Scoring Calculator에서 MetricScore값을 50으로 잡았을때의 기준값입니다.
 
+- 경쟁사 비교
+
+|내용|지하철서비스|카카오맵|서울메트로|네이버맵|
+|---|---|---|---|---|
+|Lighthouse Score|86|63|63|72|
+|FCP|0.7|0.6|1.6|0.6|
+|SI|1.8|2.9|2.3|2.6|
+|LCP|1.4|0.6|3.6|2.4|
+|TTI|1.4|3.0|2.1|3.1|
+|TBT|0.210|0.960|0.220|0.230|
+|CLS|0.004|0.017|0.014|0|
+
+다른 경쟁사와 PageSpeedInsights 테스트를 비교해 보았습니다.
+지금 현재 기준으로는 점수와 수치가 높은 편에 속하고 있습니다. 
+
+이부분관련하여 왜 이럴까 생각을 해보았는데 타사와 비교를 해보니 메인화면의 ui와 이미지등이 심플하게 구성되어있고 그로인하여 스크립트와 이미지등 다양한 리소스가 적어서 점수가 높은것으로 생각됩니다.
+이후에도 기능이 추가되거나 화면 ui가 개선되면서도 이러한 수치가 유지되도록 노력을 하면서 예산을 짜는것이 좋을듯합니다.
+
+이후 기능개선이 됨에따라 
+타사의 평균값기준으로 예산을 잡으면 될거같습니다.
+
+3사 평균값
+- FCP : 0.93
+- SI  : 2.6
+- LCP : 2.2
+- TTI : 2.7
+- TBT : 0.47
+- CLS : 0.10
+
+먼저 라이트 하우스 점수는 앞서 기준에 따라 80점으로 기준을 두고
+
+각 세부 항목에 대한 점수는 평균값을 통하여 예산을 구하되 소수점이하 자리는 올림을 통하여 정하였습니다
+그 이유는 사용자별 네트워크 상황에따라 성능이 안나올것을 감안하여 올림을 하였습니다.
+
+- FCP : 1
+- SI  : 3
+- LCP : 3
+- TTI : 3
+- TBT : 1
+- CLS : 0.5
+
+그렇게 최종적으로 구한 예산은 다음과 같습니다.
+
+
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - 컨텐츠 압축 사용
-- 사용하지 않는 리소스 줄이기
+- 사용하지 않는 자바스크립트 줄이기
 - 케싱 사용하기
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
@@ -435,39 +480,39 @@ URL : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-no
      /          \   |  |\  \ |  (‾)  |
     / __________ \  |__| \__\ \_____/ .io
     
-    execution: local
-    script: MultipleData_load.js
-    output: -
-    
+     execution: local
+     script: MultipleData_load.js
+     output: -
+
     scenarios: (100.00%) 1 scenario, 175 max VUs, 3m40s max duration (incl. graceful stop):
     * default: Up to 175 looping VUs for 3m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
     
     
-    running (3m16.3s), 000/175 VUs, 2900 complete and 0 interrupted iterations
+    running (3m10.7s), 000/175 VUs, 26980 complete and 0 interrupted iterations
     default ✓ [======================================] 000/175 VUs  3m10s
 
      ✓ find path in successfully
-     ✗ distance
-      ↳  0% — ✓ 0 / ✗ 2900
+     ✓ distance
 
-     checks.........................: 50.00% ✓ 2900  ✗ 2900 
-     data_received..................: 12 MB  64 kB/s
-     data_sent......................: 584 kB 3.0 kB/s
-     http_req_blocked...............: avg=319.02µs min=4.92µs   med=8.28µs   max=30.21ms p(90)=12.71µs  p(95)=4.28ms  
-     http_req_connecting............: avg=38.04µs  min=0s       med=0s       max=4.25ms  p(90)=0s       p(95)=464.78µs
-    ✗ http_req_duration..............: avg=8.68s    min=110.85ms med=10.36s   max=20.65s  p(90)=10.74s   p(95)=10.81s  
-    { expected_response:true }...: avg=8.68s    min=110.85ms med=10.36s   max=20.65s  p(90)=10.74s   p(95)=10.81s  
-    http_req_failed................: 0.00%  ✓ 0     ✗ 2900
-    http_req_receiving.............: avg=114.97µs min=34.52µs  med=103.46µs max=4.08ms  p(90)=155.91µs p(95)=174.66µs
-    http_req_sending...............: avg=30.52µs  min=13.33µs  med=26.27µs  max=1.4ms   p(90)=39.54µs  p(95)=62.08µs
-    http_req_tls_handshaking.......: avg=267.45µs min=0s       med=0s       max=29.09ms p(90)=0s       p(95)=3.68ms  
-    http_req_waiting...............: avg=8.68s    min=110.71ms med=10.36s   max=20.65s  p(90)=10.74s   p(95)=10.81s  
-    http_reqs......................: 2900   14.773574/s
-    iteration_duration.............: avg=9.68s    min=1.11s    med=11.36s   max=21.65s  p(90)=11.75s   p(95)=11.82s  
-    iterations.....................: 2900   14.773574/s
-    vus............................: 9      min=3   max=175
-    vus_max........................: 175    min=175 max=175
-    
+     checks.........................: 100.00% ✓ 53960 ✗ 0
+     data_received..................: 109 MB  573 kB/s
+     data_sent......................: 4.9 MB  26 kB/s
+     http_req_blocked...............: avg=45.41µs min=3.38µs  med=5.92µs  max=54.08ms  p(90)=8.79µs   p(95)=17.64µs
+     http_req_connecting............: avg=4.17µs  min=0s      med=0s      max=9.68ms   p(90)=0s       p(95)=0s
+    ✓ http_req_duration..............: avg=7.58ms  min=4.63ms  med=6.66ms  max=353.16ms p(90)=10.11ms  p(95)=12.29ms
+    { expected_response:true }...: avg=7.58ms  min=4.63ms  med=6.66ms  max=353.16ms p(90)=10.11ms  p(95)=12.29ms
+    http_req_failed................: 0.00%   ✓ 0     ✗ 26980
+    http_req_receiving.............: avg=102.5µs min=23.1µs  med=57.7µs  max=18.81ms  p(90)=137.43µs p(95)=267.9µs
+    http_req_sending...............: avg=53.16µs min=10.41µs med=18.24µs max=12.59ms  p(90)=50.57µs  p(95)=135.85µs
+    http_req_tls_handshaking.......: avg=28.84µs min=0s      med=0s      max=52.98ms  p(90)=0s       p(95)=0s
+    http_req_waiting...............: avg=7.43ms  min=4.55ms  med=6.52ms  max=352.91ms p(90)=9.9ms    p(95)=12.07ms
+    http_reqs......................: 26980   141.511952/s
+    iteration_duration.............: avg=1s      min=1s      med=1s      max=1.4s     p(90)=1.01s    p(95)=1.01s
+    iterations.....................: 26980   141.511952/s
+    vus............................: 12      min=3   max=175
+    vus_max........................: 175     min=175 max=175
+
+
 
 
 ---
@@ -484,37 +529,37 @@ URL : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-no
     / __________ \  |__| \__\ \_____/ .io
     
     execution: local
-    script: MultipleData_stress.js
-    output: -
+     script: MultipleData_stress.js
+     output: -
+
+    scenarios: (100.00%) 1 scenario, 900 max VUs, 12m40s max duration (incl. graceful stop):
+    * default: Up to 900 looping VUs for 12m10s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
     
-    scenarios: (100.00%) 1 scenario, 200 max VUs, 12m40s max duration (incl. graceful stop):
-    * default: Up to 200 looping VUs for 12m10s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
     
-    
-    running (12m18.2s), 000/200 VUs, 10626 complete and 0 interrupted iterations
-    default ✓ [======================================] 000/200 VUs  12m10s
+    running (12m10.8s), 000/900 VUs, 406803 complete and 0 interrupted iterations
+    default ✓ [======================================] 000/900 VUs  12m10s
 
      ✓ find path in successfully
-     ✗ distance
-      ↳  0% — ✓ 0 / ✗ 10626
+     ✓ distance
 
-     checks.........................: 50.00% ✓ 10626 ✗ 10626
-     data_received..................: 44 MB  59 kB/s
-     data_sent......................: 2.0 MB 2.7 kB/s
-     http_req_blocked...............: avg=107µs    min=4.34µs   med=8.19µs  max=31.75ms  p(90)=9.42µs   p(95)=14.07µs 
-     http_req_connecting............: avg=12.84µs  min=0s       med=0s      max=5.28ms   p(90)=0s       p(95)=0s      
-    ✗ http_req_duration..............: avg=7.11s    min=111.23ms med=6.18s   max=25.68s   p(90)=12.93s   p(95)=13.11s  
-    { expected_response:true }...: avg=7.11s    min=111.23ms med=6.18s   max=25.68s   p(90)=12.93s   p(95)=13.11s  
-    http_req_failed................: 0.00%  ✓ 0     ✗ 10626
-    http_req_receiving.............: avg=108.37µs min=32.47µs  med=91.29µs max=22.21ms  p(90)=142.89µs p(95)=162.24µs
-    http_req_sending...............: avg=28.04µs  min=11.98µs  med=26.21µs max=564.35µs p(90)=35.01µs  p(95)=39.44µs
-    http_req_tls_handshaking.......: avg=82.78µs  min=0s       med=0s      max=30.27ms  p(90)=0s       p(95)=0s      
-    http_req_waiting...............: avg=7.11s    min=111.08ms med=6.18s   max=25.68s   p(90)=12.93s   p(95)=13.11s  
-    http_reqs......................: 10626  14.39444/s
-    iteration_duration.............: avg=8.11s    min=1.11s    med=7.18s   max=26.68s   p(90)=13.93s   p(95)=14.11s  
-    iterations.....................: 10626  14.39444/s
-    vus............................: 7      min=1   max=200
-    vus_max........................: 200    min=200 max=200
+     checks.........................: 100.00% ✓ 813606 ✗ 0
+     data_received..................: 1.6 GB  2.2 MB/s
+     data_sent......................: 73 MB   100 kB/s
+     http_req_blocked...............: avg=313.29µs min=3.38µs  med=5.62µs  max=663.55ms p(90)=8.43µs   p(95)=28.5µs
+     http_req_connecting............: avg=35.93µs  min=0s      med=0s      max=402.99ms p(90)=0s       p(95)=0s
+    ✓ http_req_duration..............: avg=23.94ms  min=4.51ms  med=8.38ms  max=1.45s    p(90)=58.9ms   p(95)=104.63ms
+    { expected_response:true }...: avg=23.94ms  min=4.51ms  med=8.38ms  max=1.45s    p(90)=58.9ms   p(95)=104.63ms
+    http_req_failed................: 0.00%   ✓ 0      ✗ 406803
+    http_req_receiving.............: avg=392.46µs min=20.38µs med=44.45µs max=237.01ms p(90)=258.7µs  p(95)=706.3µs
+    http_req_sending...............: avg=1.3ms    min=10.03µs med=16.76µs max=942.78ms p(90)=385.32µs p(95)=2.53ms
+    http_req_tls_handshaking.......: avg=101.71µs min=0s      med=0s      max=464.82ms p(90)=0s       p(95)=0s
+    http_req_waiting...............: avg=22.24ms  min=4.43ms  med=8.1ms   max=1.24s    p(90)=53.95ms  p(95)=95.8ms
+    http_reqs......................: 406803  556.629287/s
+    iteration_duration.............: avg=1.02s    min=1s      med=1.01s   max=2.45s    p(90)=1.07s    p(95)=1.12s
+    iterations.....................: 406803  556.629287/s
+    vus............................: 39      min=5    max=900
+    vus_max........................: 900     min=900  max=900
+
 
 
 
