@@ -43,9 +43,12 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+    * web server(nginx) : /var/log/nginx -> chae-yh-cloudwatch-loggroup 으로 로그 수집 (private ip : 192.168.123.202)
+    * was(springboot) : /home/log -> chae-yh-cloudwatch-loggroup 으로 로그 수집 (private ip : 192.168.123.104)
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+    * https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=chae-yh-dashboard
+        * web server - was server 로 구성 / db 는 was server 내 docker 로 구성
+        * 각 서버 metric + was server 의 application metric(error count / blocked count) 으로 구성
 ---
 
 ### 2단계 - 성능 테스트
@@ -56,3 +59,18 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+***
+
+## 기능 요구 사항
+* 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+    * case 1 : /lines 로 호출 시 쿼리 내 SLEEP 삭제 [O]
+    * case 2 : 서로를 synchronize 로 동기화하여 데드락 거는 부분 삭제 [O]
+    * case 3 : while의 무한 루프 삭제 [O]
+* 로그 설정하기
+    * Application Log 파일로 저장하기
+        * 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정 [O] : AOP 활용하여 controller 에 접근하는 요청에 대한 로그 설정
+    * Nginx Access Log 설정하기 [O] : docker로 nginx 띄우고 로그 설정 및 Cloudwatch 에 로그 그룹 설정
+* Cloudwatch로 모니터링
+    * Cloudwatch로 로그 수집하기 [O] : chae-yh-cloudwatch-loggroup
+    * Cloudwatch로 메트릭 수집하기 [O] : 대시보드 구성 및 application metric 추가
