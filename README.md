@@ -55,6 +55,16 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+   - 주요 페이지 정량/시간/규칙 기반 산정
+   - 각 항목에 경쟁 사이트 점수 괄호로 표기(⇔ `subwayLine.naver`)
+     - Quantity based Metric
+       - 리소스 합계 최대 `1MB`(⇔ `773KB`)
+     - Timing based Metric
+       - FCP `1초`(⇔ `0.641s`)
+       - TTI `2초`(⇔ `1.003s`)
+       - LCP `3초`(⇔ `2.885s`)
+     - Rule based Metric
+       - Lighthouse `80점` 이상(⇔ `89점`)
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
