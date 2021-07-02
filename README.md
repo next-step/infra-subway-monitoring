@@ -154,3 +154,143 @@ D. 목푯값 설정 (1일 총 접속수 / 1일 평균 rps / 1일 최대 rps 계�
 
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+   > 전체 성능 테스트 시나리오 (조회, 갱신, 여러 데이터 참조 페이지 조회)
+   > 로그인 -> 내정보 확인 -> 내정보 수정 -> 경로 조회
+
+A. smoke 테스트 : script/smoke.js
+
+```javascript
+import http from "k6/http";
+import { check, group, sleep, fail } from "k6";
+
+export let options = {
+    vus: 1, // 1 user looping for 1 minute
+    duration: "10s",
+
+    thresholds: {
+        http_req_duration: ["p(99)<1500"] // 99% of requests must complete below 1.5s
+    }
+};
+
+const BASE_URL = 'https://oper912-infra-subway.p-e.kr';
+const USERNAME = 'test@gmail.com';
+const PASSWORD = 'password';
+
+export function requestLogin() {
+    var payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD
+    });
+
+    var params = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    return http.post(`${BASE_URL}/login/token`, payload, params);
+}
+
+export function requestMyInfo(loginRes) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json("accessToken")}`
+        }
+    };
+    return http.get(`${BASE_URL}/members/me`, authHeaders).json();
+}
+
+export function updateMyInfo(loginRes) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json("accessToken")}`,
+            "Content-Type": "application/json"
+        }
+    };
+    var payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+        age: 29
+    });
+
+    return http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
+}
+
+export function findPath(loginRes, source, target) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json("accessToken")}`
+        }
+    };
+    return http
+        .get(
+            `${BASE_URL}/paths/?source=` + source + `&target=` + target,
+            authHeaders
+        )
+        .json();
+}
+
+export default function() {
+    let loginRes = requestLogin();
+    check(loginRes, {
+        "logged in successfully": resp => resp.json("accessToken") !== ""
+    });
+
+    let myObjects = requestMyInfo(loginRes);
+    check(myObjects, { "retrieved member": obj => obj.id != 0 });
+
+    let updatedMyInfo = updateMyInfo(loginRes);
+    check(updateMyInfo, { "updated info": obj => obj.id != 0 });
+
+    let path = findPath(loginRes, 3, 7);
+    check(path, { "path stations check": obj => obj.stations.length != 0 });
+
+    sleep(1);
+}
+
+```
+
+```shell
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: ./smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (11.0s), 0/1 VUs, 9 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ updated info
+     ✓ path stations check
+
+    
+     checks.........................: 100.00% ✓ 36       ✗ 0  
+     data_received..................: 23 kB   2.1 kB/s
+     data_sent......................: 8.1 kB  729 B/s
+     http_req_blocked...............: avg=4.29ms   min=2µs      med=7µs      max=154.3ms  p(90)=9.99µs   p(95)=22.75µs 
+     http_req_connecting............: avg=114.86µs min=0s       med=0s       max=4.13ms   p(90)=0s       p(95)=0s      
+   ✓ http_req_duration..............: avg=51.55ms  min=10.05ms  med=13.62ms  max=237.03ms p(90)=160.28ms p(95)=185.76ms
+       { expected_response:true }...: avg=166.73ms min=125.09ms med=159.93ms max=237.03ms p(90)=217.08ms p(95)=227.05ms
+     http_req_failed................: 75.00%  ✓ 27       ✗ 9  
+     http_req_receiving.............: avg=108.61µs min=38µs     med=98.5µs   max=644µs    p(90)=120.5µs  p(95)=153µs   
+     http_req_sending...............: avg=38.05µs  min=12µs     med=36µs     max=107µs    p(90)=54µs     p(95)=63µs    
+     http_req_tls_handshaking.......: avg=3.96ms   min=0s       med=0s       max=142.81ms p(90)=0s       p(95)=0s      
+     http_req_waiting...............: avg=51.4ms   min=9.94ms   med=13.54ms  max=236.91ms p(90)=160.17ms p(95)=185.62ms
+     http_reqs......................: 36      3.258378/s
+     iteration_duration.............: avg=1.22s    min=1.16s    med=1.19s    max=1.45s    p(90)=1.29s    p(95)=1.37s   
+     iterations.....................: 9       0.814594/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+
+```
