@@ -2,6 +2,7 @@ package nextstep.subway.map.application;
 
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
+import nextstep.subway.map.domain.PathCache;
 import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
@@ -26,10 +27,17 @@ public class MapService {
     }
 
     public PathResponse findPath(Long source, Long target) {
+        SubwayPath subwayPath = PathCache.findPath(source, target);
+        if(subwayPath != null) {
+            return PathResponseAssembler.assemble(subwayPath);
+        }
+
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
-        SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
+        subwayPath = pathService.findPath(lines, sourceStation, targetStation);
+
+        PathCache.addCacheData(source, target, subwayPath);
 
         return PathResponseAssembler.assemble(subwayPath);
     }
