@@ -39,7 +39,7 @@ public class AuthService {
 
     public LoginMember findMemberByToken(String credentials) {
         if (!jwtTokenProvider.validateToken(credentials)) {
-            fileLogger.info("유효한 토큰이 아님");
+            fileLogger.error("유효한 토큰이 아님");
             throw new AuthorizationException();
         }
 
