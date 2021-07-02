@@ -1,6 +1,7 @@
 package nextstep.subway.aop;
 
-import nextstep.subway.annotation.SubwayLogging;
+import nextstep.subway.annotation.SubwayFileLogging;
+import nextstep.subway.annotation.SubwayJsonLogging;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,13 +19,22 @@ public class SubwayLoggingAspect {
     private static final Logger fileLog = LoggerFactory.getLogger("file-appender");
     private static final Logger jsonLog = LoggerFactory.getLogger("json-appender");
 
-    @AfterReturning(value = "@annotation(nextstep.subway.annotation.SubwayLogging) && @annotation(subwayLogging)", returning = "response")
-    public void writeLog(JoinPoint joinPoint, SubwayLogging subwayLogging, ResponseEntity response) {
-        log.info("{} request parameter: {}, response status: {}, response body: {}",
-                subwayLogging.description(), joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
-        fileLog.info("{} request parameter: {}, response status: {}, response body: {}",
-                subwayLogging.description(), joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
+    @AfterReturning(value = "@annotation(nextstep.subway.annotation.SubwayFileLogging) && @annotation(subwayFileLogging)", returning = "response")
+    public void writeFileLog(JoinPoint joinPoint, SubwayFileLogging subwayFileLogging, ResponseEntity response) {
+        writeCommandLog(joinPoint, response, subwayFileLogging.description());
         jsonLog.info("{} request parameter: {}, response status: {}, response body: {}",
-                subwayLogging.description(), joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
+                subwayFileLogging.description(), joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
+    }
+
+    @AfterReturning(value = "@annotation(nextstep.subway.annotation.SubwayFileLogging) && @annotation(subwayJsonLogging)", returning = "response")
+    public void writeFileLog(JoinPoint joinPoint, SubwayJsonLogging subwayJsonLogging, ResponseEntity response) {
+        writeCommandLog(joinPoint, response, subwayJsonLogging.description());
+        jsonLog.info("{} request parameter: {}, response status: {}, response body: {}",
+                subwayJsonLogging.description(), joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
+    }
+
+    private void writeCommandLog(JoinPoint joinPoint, ResponseEntity response, String description) {
+        log.info("{} request parameter: {}, response status: {}, response body: {}",
+                description, joinPoint.getArgs(), response.getStatusCode().value(), response.getBody());
     }
 }

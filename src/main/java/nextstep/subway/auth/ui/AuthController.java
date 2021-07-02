@@ -1,6 +1,6 @@
 package nextstep.subway.auth.ui;
 
-import nextstep.subway.annotation.SubwayLogging;
+import nextstep.subway.annotation.SubwayFileLogging;
 import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
@@ -18,7 +18,7 @@ public class AuthController {
     }
 
     @PostMapping("/login/token")
-    @SubwayLogging(description = "로그인(/login/token)")
+    @SubwayFileLogging(description = "로그인(/login/token)")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         TokenResponse token = authService.login(request);
         return ResponseEntity.ok().body(token);

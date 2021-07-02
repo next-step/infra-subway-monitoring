@@ -1,6 +1,7 @@
 package nextstep.subway.favorite.ui;
 
-import nextstep.subway.annotation.SubwayLogging;
+import nextstep.subway.annotation.SubwayFileLogging;
+import nextstep.subway.annotation.SubwayJsonLogging;
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.favorite.application.FavoriteService;
@@ -21,7 +22,7 @@ public class FavoriteController {
     }
 
     @PostMapping("/favorites")
-    @SubwayLogging(description = "즐겨찾기 생성(/favorites)")
+    @SubwayFileLogging(description = "즐겨찾기 생성(/favorites)")
     public ResponseEntity createFavorite(@AuthenticationPrincipal LoginMember loginMember, @RequestBody FavoriteRequest request) {
         favoriteService.createFavorite(loginMember, request);
         return ResponseEntity
@@ -30,14 +31,14 @@ public class FavoriteController {
     }
 
     @GetMapping("/favorites")
-    @SubwayLogging(description = "즐겨찾기 조회(/favorites)")
+    @SubwayJsonLogging(description = "즐겨찾기 조회(/favorites)")
     public ResponseEntity<List<FavoriteResponse>> getFavorites(@AuthenticationPrincipal LoginMember loginMember) {
         List<FavoriteResponse> favorites = favoriteService.findFavorites(loginMember);
         return ResponseEntity.ok().body(favorites);
     }
 
     @DeleteMapping("/favorites/{id}")
-    @SubwayLogging(description = "즐겨찾기 삭제(/favorites)")
+    @SubwayFileLogging(description = "즐겨찾기 삭제(/favorites)")
     public ResponseEntity deleteFavorite(@AuthenticationPrincipal LoginMember loginMember, @PathVariable Long id) {
         favoriteService.deleteFavorite(loginMember, id);
         return ResponseEntity.noContent().build();
