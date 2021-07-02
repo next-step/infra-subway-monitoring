@@ -131,7 +131,7 @@ A. 개선 가능 목록
 
 A. DAU 가정
 
-    - 지하철 하루 이용 객수 1000만명, 동일한 사람이 출퇴근 시간 이용한다고 가정하에 500만 중 30%정도 서비스를 이용한다고 가정
+    - 지하철 하루 이용 객수 1000만명, 동일한 사람이 출퇴근 시간 이용한다고 가정하에 500만 중 20%정도 서비스를 이용한다고 가정
 
 B. 1일 요청수 가정
 
@@ -145,12 +145,12 @@ C. 피크시간대 집중율 가정
 
 D. 목푯값 설정 (1일 총 접속수 / 1일 평균 rps / 1일 최대 rps 계산)
 
-    - DAU = 150만
+    - DAU = 100만
     - 피크시간대 집중율 = 2
     - 1일 요청수 = 4
-    - 1일 총 수접속수 = 1,500,000(DAU) X 4(1일 요청수) = 6,000,000
-    - 1일 평균 rps = 6,000,000(1일 총 접속수) / 86,400(초/일) = 69.45
-    - 1일 최대 rps = 69.45(1일 평균 rps) X 2(피크시간대 집중율) = 138.9
+    - 1일 총 수접속수 = 1,000,000(DAU) X 4(1일 요청수) = 4,000,000
+    - 1일 평균 rps = 4,000,000(1일 총 접속수) / 86,400(초/일) = 46.3
+    - 1일 최대 rps = 69.45(1일 평균 rps) X 2(피크시간대 집중율) = 92.6
 
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
@@ -161,136 +161,271 @@ D. 목푯값 설정 (1일 총 접속수 / 1일 평균 rps / 1일 최대 rps 계�
 A. smoke 테스트 : script/smoke.js
 
 ```javascript
-import http from "k6/http";
-import { check, group, sleep, fail } from "k6";
-
-export let options = {
-    vus: 1, // 1 user looping for 1 minute
-    duration: "10s",
-
-    thresholds: {
-        http_req_duration: ["p(99)<1500"] // 99% of requests must complete below 1.5s
+    import http from "k6/http";
+    import { check, group, sleep, fail } from "k6";
+    
+    export let options = {
+        vus: 1, // 1 user looping for 1 minute
+        duration: "10s",
+    
+        thresholds: {
+            http_req_duration: ["p(99)<1500"] // 99% of requests must complete below 1.5s
+        }
+    };
+    
+    const BASE_URL = 'https://oper912-infra-subway.p-e.kr';
+    const USERNAME = 'test@gmail.com';
+    const PASSWORD = 'password';
+    
+    export function requestLogin() {
+        var payload = JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD
+        });
+    
+        var params = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        return http.post(`${BASE_URL}/login/token`, payload, params);
     }
-};
-
-const BASE_URL = 'https://oper912-infra-subway.p-e.kr';
-const USERNAME = 'test@gmail.com';
-const PASSWORD = 'password';
-
-export function requestLogin() {
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD
-    });
-
-    var params = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    };
-    return http.post(`${BASE_URL}/login/token`, payload, params);
-}
-
-export function requestMyInfo(loginRes) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json("accessToken")}`
-        }
-    };
-    return http.get(`${BASE_URL}/members/me`, authHeaders).json();
-}
-
-export function updateMyInfo(loginRes) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json("accessToken")}`,
-            "Content-Type": "application/json"
-        }
-    };
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-        age: 29
-    });
-
-    return http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
-}
-
-export function findPath(loginRes, source, target) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json("accessToken")}`
-        }
-    };
-    return http
-        .get(
-            `${BASE_URL}/paths/?source=` + source + `&target=` + target,
-            authHeaders
-        )
-        .json();
-}
-
-export default function() {
-    let loginRes = requestLogin();
-    check(loginRes, {
-        "logged in successfully": resp => resp.json("accessToken") !== ""
-    });
-
-    let myObjects = requestMyInfo(loginRes);
-    check(myObjects, { "retrieved member": obj => obj.id != 0 });
-
-    let updatedMyInfo = updateMyInfo(loginRes);
-    check(updateMyInfo, { "updated info": obj => obj.id != 0 });
-
-    let path = findPath(loginRes, 3, 7);
-    check(path, { "path stations check": obj => obj.stations.length != 0 });
-
-    sleep(1);
-}
-
+    
+    export function requestMyInfo(loginRes) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`
+            }
+        };
+        return http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    }
+    
+    export function updateMyInfo(loginRes) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`,
+                "Content-Type": "application/json"
+            }
+        };
+        var payload = JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD,
+            age: 29
+        });
+    
+        return http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
+    }
+    
+    export function findPath(loginRes, source, target) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`
+            }
+        };
+        return http
+            .get(
+                `${BASE_URL}/paths/?source=` + source + `&target=` + target,
+                authHeaders
+            )
+            .json();
+    }
+    
+    export default function() {
+        let loginRes = requestLogin();
+        check(loginRes, {
+            "logged in successfully": resp => resp.json("accessToken") !== ""
+        });
+    
+        let myObjects = requestMyInfo(loginRes);
+        check(myObjects, { "retrieved member": obj => obj.id != 0 });
+    
+        let updatedMyInfo = updateMyInfo(loginRes);
+        check(updateMyInfo, { "updated info": obj => obj.id != 0 });
+    
+        let path = findPath(loginRes, 3, 7);
+        check(path, { "path stations check": obj => obj.stations.length != 0 });
+    
+        sleep(1);
+    }
 ```
 
 ```shell
-
-          /\      |‾‾| /‾‾/   /‾‾/   
-     /\  /  \     |  |/  /   /  /    
-    /  \/    \    |     (   /   ‾‾\  
-   /          \   |  |\  \ |  (‾)  | 
-  / __________ \  |__| \__\ \_____/ .io
-
-  execution: local
-     script: ./smoke.js
-     output: -
-
-  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
-           * default: 1 looping VUs for 10s (gracefulStop: 30s)
-
-
-running (11.0s), 0/1 VUs, 9 complete and 0 interrupted iterations
-default ✓ [======================================] 1 VUs  10s
-
-     ✓ logged in successfully
-     ✓ retrieved member
-     ✓ updated info
-     ✓ path stations check
-
     
-     checks.........................: 100.00% ✓ 36       ✗ 0  
-     data_received..................: 23 kB   2.1 kB/s
-     data_sent......................: 8.1 kB  729 B/s
-     http_req_blocked...............: avg=4.29ms   min=2µs      med=7µs      max=154.3ms  p(90)=9.99µs   p(95)=22.75µs 
-     http_req_connecting............: avg=114.86µs min=0s       med=0s       max=4.13ms   p(90)=0s       p(95)=0s      
-   ✓ http_req_duration..............: avg=51.55ms  min=10.05ms  med=13.62ms  max=237.03ms p(90)=160.28ms p(95)=185.76ms
-       { expected_response:true }...: avg=166.73ms min=125.09ms med=159.93ms max=237.03ms p(90)=217.08ms p(95)=227.05ms
-     http_req_failed................: 75.00%  ✓ 27       ✗ 9  
-     http_req_receiving.............: avg=108.61µs min=38µs     med=98.5µs   max=644µs    p(90)=120.5µs  p(95)=153µs   
-     http_req_sending...............: avg=38.05µs  min=12µs     med=36µs     max=107µs    p(90)=54µs     p(95)=63µs    
-     http_req_tls_handshaking.......: avg=3.96ms   min=0s       med=0s       max=142.81ms p(90)=0s       p(95)=0s      
-     http_req_waiting...............: avg=51.4ms   min=9.94ms   med=13.54ms  max=236.91ms p(90)=160.17ms p(95)=185.62ms
-     http_reqs......................: 36      3.258378/s
-     iteration_duration.............: avg=1.22s    min=1.16s    med=1.19s    max=1.45s    p(90)=1.29s    p(95)=1.37s   
-     iterations.....................: 9       0.814594/s
-     vus............................: 1       min=1      max=1
-     vus_max........................: 1       min=1      max=1
-
+              /\      |‾‾| /‾‾/   /‾‾/   
+         /\  /  \     |  |/  /   /  /    
+        /  \/    \    |     (   /   ‾‾\  
+       /          \   |  |\  \ |  (‾)  | 
+      / __________ \  |__| \__\ \_____/ .io
+    
+      execution: local
+         script: ./smoke.js
+         output: -
+    
+      scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+               * default: 1 looping VUs for 10s (gracefulStop: 30s)
+    
+    
+    running (11.0s), 0/1 VUs, 9 complete and 0 interrupted iterations
+    default ✓ [======================================] 1 VUs  10s
+    
+         ✓ logged in successfully
+         ✓ retrieved member
+         ✓ updated info
+         ✓ path stations check
+    
+        
+         checks.........................: 100.00% ✓ 36       ✗ 0  
+         data_received..................: 23 kB   2.1 kB/s
+         data_sent......................: 8.1 kB  729 B/s
+         http_req_blocked...............: avg=4.29ms   min=2µs      med=7µs      max=154.3ms  p(90)=9.99µs   p(95)=22.75µs 
+         http_req_connecting............: avg=114.86µs min=0s       med=0s       max=4.13ms   p(90)=0s       p(95)=0s      
+       ✓ http_req_duration..............: avg=51.55ms  min=10.05ms  med=13.62ms  max=237.03ms p(90)=160.28ms p(95)=185.76ms
+           { expected_response:true }...: avg=166.73ms min=125.09ms med=159.93ms max=237.03ms p(90)=217.08ms p(95)=227.05ms
+         http_req_failed................: 75.00%  ✓ 27       ✗ 9  
+         http_req_receiving.............: avg=108.61µs min=38µs     med=98.5µs   max=644µs    p(90)=120.5µs  p(95)=153µs   
+         http_req_sending...............: avg=38.05µs  min=12µs     med=36µs     max=107µs    p(90)=54µs     p(95)=63µs    
+         http_req_tls_handshaking.......: avg=3.96ms   min=0s       med=0s       max=142.81ms p(90)=0s       p(95)=0s      
+         http_req_waiting...............: avg=51.4ms   min=9.94ms   med=13.54ms  max=236.91ms p(90)=160.17ms p(95)=185.62ms
+         http_reqs......................: 36      3.258378/s
+         iteration_duration.............: avg=1.22s    min=1.16s    med=1.19s    max=1.45s    p(90)=1.29s    p(95)=1.37s   
+         iterations.....................: 9       0.814594/s
+         vus............................: 1       min=1      max=1
+         vus_max........................: 1       min=1      max=1
 ```
+
+B. load 테스트 : script/load.js
+
+```javascript
+    import http from "k6/http";
+    import { check, group, sleep, fail } from "k6";
+    
+    export let options = {
+        stages: [
+            { duration: "5m", target: 92 }, // 92명의 user가 5분간 ramp-up
+            { duration: "2m", target: 92 }, // 92명의 user가 2분간 머물러있음
+            { duration: "10s", target: 0 } // ramp-down to 0 users
+        ],
+        thresholds: {
+            http_req_duration: ["p(99)<1500"] // 99% of requests must complete below 1.5s
+        }
+    };
+    
+    const BASE_URL = 'https://oper912-infra-subway.p-e.kr';
+    const USERNAME = 'test2@gmail.com';
+    const PASSWORD = 'password';
+    
+    export function requestLogin() {
+        var payload = JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD
+        });
+    
+        var params = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        return http.post(`${BASE_URL}/login/token`, payload, params);
+    }
+    
+    export function requestMyInfo(loginRes) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`
+            }
+        };
+        return http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    }
+    
+    export function updateMyInfo(loginRes) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`,
+                "Content-Type": "application/json"
+            }
+        };
+        var payload = JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD,
+            age: 33
+        });
+    
+        return http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
+    }
+    
+    export function findPath(loginRes, source, target) {
+        let authHeaders = {
+            headers: {
+                Authorization: `Bearer ${loginRes.json("accessToken")}`
+            }
+        };
+        return http
+            .get(
+                `${BASE_URL}/paths/?source=` + source + `&target=` + target,
+                authHeaders
+            )
+            .json();
+    }
+    
+    export default function() {
+        let loginRes = requestLogin();
+        check(loginRes, {
+            "logged in successfully": resp => resp.json("accessToken") !== ""
+        });
+    
+        let myObjects = requestMyInfo(loginRes);
+        check(myObjects, { "retrieved member": obj => obj.id != 0 });
+    
+        let updatedMyInfo = updateMyInfo(loginRes);
+        check(updateMyInfo, { "updated info": obj => obj.id != 0 });
+    
+        let path = findPath(loginRes, 1, 2);
+        check(path, { "path stations check": obj => obj.stations.length != 0 });
+    
+        sleep(1);
+    }
+```
+
+```shell
+              /\      |‾‾| /‾‾/   /‾‾/   
+         /\  /  \     |  |/  /   /  /    
+        /  \/    \    |     (   /   ‾‾\  
+       /          \   |  |\  \ |  (‾)  | 
+      / __________ \  |__| \__\ \_____/ .io
+    
+      execution: local
+         script: ./load.js
+         output: -
+    
+      scenarios: (100.00%) 1 scenario, 92 max VUs, 7m40s max duration (incl. graceful stop):
+               * default: Up to 92 looping VUs for 7m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+    
+    
+    running (7m39.9s), 00/92 VUs, 729 complete and 44 interrupted iterations
+    default ✓ [======================================] 00/92 VUs  7m10s
+    
+         ✓ logged in successfully
+         ✓ retrieved member
+         ✓ updated info
+         ✓ path stations check
+    
+         checks.........................: 100.00% ✓ 3040     ✗ 0   
+         data_received..................: 3.5 MB  7.6 kB/s
+         data_sent......................: 696 kB  1.5 kB/s
+         http_req_blocked...............: avg=545µs    min=1µs      med=5µs    max=139.34ms p(90)=9µs    p(95)=11µs  
+         http_req_connecting............: avg=140.26µs min=0s       med=0s     max=5.74ms   p(90)=0s     p(95)=0s    
+       ✗ http_req_duration..............: avg=8.6s     min=7.57ms   med=7.9s   max=30.78s   p(90)=18.02s p(95)=20.53s
+           { expected_response:true }...: avg=14.15s   min=748.26ms med=14.27s max=30.78s   p(90)=22.65s p(95)=23.93s
+         http_req_failed................: 75.95%  ✓ 2309     ✗ 731 
+         http_req_receiving.............: avg=95.45µs  min=27µs     med=93µs   max=1.35ms   p(90)=148µs  p(95)=172µs 
+         http_req_sending...............: avg=37.1µs   min=12µs     med=35µs   max=912µs    p(90)=52µs   p(95)=65µs  
+         http_req_tls_handshaking.......: avg=394.83µs min=0s       med=0s     max=132.21ms p(90)=0s     p(95)=0s    
+         http_req_waiting...............: avg=8.6s     min=7.51ms   med=7.9s   max=30.78s   p(90)=18.02s p(95)=20.53s
+         http_reqs......................: 3040    6.610285/s
+         iteration_duration.............: avg=34.81s   min=1.8s     med=36.21s max=1m14s    p(90)=56.89s p(95)=58.42s
+         iterations.....................: 729     1.585164/s
+         vus............................: 3       min=1      max=92
+         vus_max........................: 92      min=92     max=92
+```
+
+C. stress 테스트 : script/stress.js
