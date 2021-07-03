@@ -37,9 +37,9 @@ public class LogAspect {
 		try {
 			result = method.proceed();
 		} catch (Exception e) {
-			printErrorLog(request, parameter, method, e);
+			printRequestErrorLog(request, parameter, method, e);
 		} finally {
-			printInfoLog(request, parameter, startTime, System.currentTimeMillis(), method);
+			printRequestLog(request, parameter, startTime, System.currentTimeMillis(), method);
 		}
 
 		return result;
@@ -58,17 +58,13 @@ public class LogAspect {
 		return parameter;
 	}
 
-	private void printInfoLog(HttpServletRequest request, String parameter, long startTime, long endTime, ProceedingJoinPoint method) {
-		log.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+	private void printRequestLog(HttpServletRequest request, String parameter, long startTime, long endTime, ProceedingJoinPoint method) {
 		fileLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
-		consoleLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
-		jsonLogger.info("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
+		consoleLogger.debug("Request URI : {} & Request Parameter : {} at {} ({} ms)", request.getRequestURI(), parameter, method.getSignature().getDeclaringTypeName(), endTime - startTime);
 	}
 
-	private void printErrorLog(HttpServletRequest request, String parameter, ProceedingJoinPoint method, Exception e) {
-		log.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
+	private void printRequestErrorLog(HttpServletRequest request, String parameter, ProceedingJoinPoint method, Exception e) {
 		fileLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
-		consoleLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
-		jsonLogger.error("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
+		consoleLogger.debug("Request URI : {} & Request Parameter : {} & Error : {} at {}", request.getRequestURI(), parameter, e.getMessage(), method.getSignature().getDeclaringTypeName());
 	}
 }
