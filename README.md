@@ -52,8 +52,41 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+* 경쟁 사이트 - 서울 교통 공사 사이버 스테이션(http://www.seoulmetro.co.kr/kr/cyberStation.do)
+* 경쟁 사이트 웹 성능 테스트 결과
+    * WebPage Test
+        * Security score: F
+        * First Byte Time: B
+        * Keep-Alive Enabled: A
+        * Compress Transfer: F
+        * Compress Image: A
+        * Cache Static Content: F
+    * PageSpeed Test
+        * 총점: 62점
+* nextstep(https://mwkwon-service.kro.kr/) 지하철 노선 웹 성능 테스트 결과
+    * WebPage Test
+        * Security score: F
+        * First Byte Time: A
+        * Keep-Alive Enabled: A
+        * Compress Transfer: F
+        * Compress Image: A
+        * Cache Static Content: C
+    * PageSpeed Test
+        * 총점: 67점
+* 웹 성능 예산
+    * Compress Transfer A
+    * Cache static Content A
+    * PageSpeed Test 총점 80점 이상
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+* Compress Transfer: gzip 압축을 통해 전달되는 데이터 용량을 줄여 성능을 개선 한다.(예상 절감치 1.44s)
+* 사용하지 않는 자바 스트립트 줄이기
+    * /js/vendors.js 지연 로딩
+    * /js/main.js 지연 로딩
+    * 정적 파일 캐싱을 통한 불필요한 요청을 줄인다.
+* 렌더링 차단 리소스 제거하기
+    * 중요한 js/css는 인라인으로 전달하고 중요하지 않은 모든 js/style는 지연 로딩하기
+* Security score: HTTP 헤더 보안성 확보
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
@@ -94,10 +127,10 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 * Smoke, Load, Stress 테스트 후 결과를 기록
 
 ### 작업 진행 순서
-* [ ] 웹 성능 예산 작성
+* [x] 웹 성능 예산 작성
     * 경쟁사 선정
     * 경재사 사이트 확인
     * 경쟁사와 비교하여 웹 성능 예산 책정 
-* [ ] 웹 성능 예산을 바탕으로 웹 성능 테스트 진행 및 개선 부분 찾기
+* [x] 웹 성능 예산을 바탕으로 웹 성능 테스트 진행 및 개선 부분 찾기
 * [ ] 부하 테스트 전제 조건 작성
 * [ ] Somke, Load, Stress 테스트 진
