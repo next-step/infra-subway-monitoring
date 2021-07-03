@@ -107,3 +107,317 @@ npm run dev
       - 1일 최대 rps: 20 * 100 / 10 = 200 rps
       - 사용자가 1분 내외로 사용한다고 가정.
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+* smoke test
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'http://3.36.73.166';
+const USERNAME = 'test@test.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+
+
+
+/\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: smoke.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+* default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.3s), 0/1 VUs, 6 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+checks.........................: 100.00% ✓ 12       ✗ 0
+data_received..................: 20 kB   2.0 kB/s
+data_sent......................: 4.2 kB  407 B/s
+http_req_blocked...............: avg=111.76ms min=3µs     med=5µs      max=2.01s    p(90)=10.7µs   p(95)=301.77ms
+http_req_connecting............: avg=111.75ms min=0s      med=0s       max=2.01s    p(90)=0s       p(95)=301.73ms
+   ✓ http_req_duration..............: avg=128.95ms min=17.28ms med=71.25ms  max=585.04ms p(90)=382.35ms p(95)=434.76ms
+{ expected_response:true }...: avg=128.95ms min=17.28ms med=71.25ms  max=585.04ms p(90)=382.35ms p(95)=434.76ms
+http_req_failed................: 0.00%   ✓ 0        ✗ 18
+http_req_receiving.............: avg=1.09ms   min=63µs    med=404.49µs max=4.51ms   p(90)=2.8ms    p(95)=4.16ms
+http_req_sending...............: avg=141.44µs min=17µs    med=31.5µs   max=2.02ms   p(90)=49.4µs   p(95)=356.89µs
+http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=127.71ms min=16.1ms  med=71.15ms  max=582.74ms p(90)=379.32ms p(95)=434.02ms
+http_reqs......................: 18      1.739444/s
+iteration_duration.............: avg=1.72s    min=1.13s   med=1.38s    max=3.49s    p(90)=2.64s    p(95)=3.07s
+iterations.....................: 6       0.579815/s
+vus............................: 1       min=1      max=1
+vus_max........................: 1       min=1      max=1
+```
+
+* load test
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: "30s", target: 120 }, // simulate ramp-up of traffic from 1 to 120 users over 30 seconds.
+    { duration: "1m", target: 220 }, // stay at 120 users for 1 minutes
+    { duration: "10s", target: 0 } // ramp-down to 0 users
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'],
+  }
+};
+
+const BASE_URL = 'http://3.36.73.166';
+const USERNAME = 'test@test.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  
+  경로조회(loginRes);
+  
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+
+/\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: load.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 220 max VUs, 2m10s max duration (incl. graceful stop):
+* default: Up to 220 looping VUs for 1m40s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (1m40.7s), 000/220 VUs, 8697 complete and 0 interrupted iterations
+default ✓ [======================================] 000/220 VUs  1m40s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+checks.........................: 100.00% ✓ 17394      ✗ 0
+data_received..................: 29 MB   292 kB/s
+data_sent......................: 6.1 MB  61 kB/s
+http_req_blocked...............: avg=221.5µs  min=1µs    med=5µs      max=452.58ms p(90)=8µs      p(95)=12µs
+http_req_connecting............: avg=214.37µs min=0s     med=0s       max=452.4ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=173.17ms min=9.22ms med=157.59ms max=1.25s    p(90)=343.38ms p(95)=387.23ms
+{ expected_response:true }...: avg=173.17ms min=9.22ms med=157.59ms max=1.25s    p(90)=343.38ms p(95)=387.23ms
+http_req_failed................: 0.00%   ✓ 0          ✗ 26091
+http_req_receiving.............: avg=556.26µs min=18µs   med=94µs     max=75.21ms  p(90)=1.42ms   p(95)=2.38ms
+http_req_sending...............: avg=35.35µs  min=7µs    med=30µs     max=1.09ms   p(90)=56µs     p(95)=75µs
+http_req_tls_handshaking.......: avg=0s       min=0s     med=0s       max=0s       p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=172.57ms min=8.78ms med=156.97ms max=1.25s    p(90)=342.56ms p(95)=386.4ms
+http_reqs......................: 26091   259.010937/s
+iteration_duration.............: avg=1.52s    min=1.07s  med=1.53s    max=3s       p(90)=1.99s    p(95)=2.07s
+iterations.....................: 8697    86.336979/s
+vus............................: 12      min=4        max=219
+vus_max........................: 220     min=220      max=220
+```
+
+* stress test
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '10s', target: 50 },
+    { duration: '20s', target: 50 },
+    { duration: '10s', target: 0 },
+    { duration: '20s', target: 230 },
+    { duration: '40s', target: 230 },
+    { duration: '20s', target: 0 },
+    { duration: '10s', target: 50 },
+    { duration: '20s', target: 50 },
+    { duration: '10s', target: 0 }
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'],
+  }
+};
+
+const BASE_URL = 'http://3.36.73.166:8080';
+const USERNAME = 'test@test.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  
+  경로조회(loginRes);
+  
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+
+/\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: stress.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 230 max VUs, 3m10s max duration (incl. graceful stop):
+* default: Up to 230 looping VUs for 2m40s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (2m40.9s), 000/230 VUs, 10379 complete and 0 interrupted iterations
+default ✓ [======================================] 000/230 VUs  2m40s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+checks.........................: 100.00% ✓ 20758      ✗ 0
+data_received..................: 35 MB   218 kB/s
+data_sent......................: 7.4 MB  46 kB/s
+http_req_blocked...............: avg=131.92µs min=1µs    med=5µs      max=178.41ms p(90)=9µs      p(95)=13µs
+http_req_connecting............: avg=124.46µs min=0s     med=0s       max=178.32ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=212.88ms min=8.49ms med=228.78ms max=1.65s    p(90)=408.78ms p(95)=445.19ms
+{ expected_response:true }...: avg=212.88ms min=8.49ms med=228.78ms max=1.65s    p(90)=408.78ms p(95)=445.19ms
+http_req_failed................: 0.00%   ✓ 0          ✗ 31137
+http_req_receiving.............: avg=402.19µs min=19µs   med=95µs     max=27.26ms  p(90)=794µs    p(95)=1.85ms
+http_req_sending...............: avg=36.9µs   min=7µs    med=30µs     max=1.66ms   p(90)=60µs     p(95)=79µs
+http_req_tls_handshaking.......: avg=0s       min=0s     med=0s       max=0s       p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=212.44ms min=8.28ms med=228.14ms max=1.65s    p(90)=408.07ms p(95)=444.13ms
+http_reqs......................: 31137   193.552069/s
+iteration_duration.............: avg=1.64s    min=1.07s  med=1.73s    max=3.4s     p(90)=2.15s    p(95)=2.34s
+iterations.....................: 10379   64.517356/s
+vus............................: 4       min=4        max=230
+vus_max........................: 230     min=230      max=230
+```
