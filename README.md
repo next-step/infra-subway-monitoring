@@ -102,11 +102,6 @@ npm run dev
    > * FCP 2초 미만
    > * Speed Index 2초 미만
    > * Largest Contentful Paint 2초 미만
-   > * First Byte Time grade A
-   > * Keep-alive Enabled grade A
-   > * Compress Transfer grade A
-   > * Compress Images grade A
-   > * Cache static content greade A
    
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
