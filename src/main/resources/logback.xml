@@ -6,13 +6,20 @@
     <include resource="file-appender.xml" />
     <include resource="json-appender.xml" />
 
-    <logger name="console" level="INFO" >
-        <appender-ref ref="console" />
-    </logger>
+    <springProfile name="local, test">
+        <logger name="console" level="INFO" >
+            <appender-ref ref="console" />
+        </logger>
+    </springProfile>
 
-    <logger name="file" level="INFO" >
-        <appender-ref ref="file" />
-    </logger>
+    <springProfile name="prod">
+        <logger name="file" level="INFO" >
+            <appender-ref ref="file" />
+        </logger>
+        <logger name="console" level="ERROR" >
+            <appender-ref ref="console" />
+        </logger>
+    </springProfile>
 
     <logger name="json" level="INFO" >
         <appender-ref ref="json" />
