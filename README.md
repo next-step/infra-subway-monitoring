@@ -2,7 +2,10 @@
 ## Step1. 로깅과 모니터링
 ### 작업 필요 목록
 - [ ] logback.xml 설정
-- [ ] 적절히 로그 남기기
+- [ ] 중요 로직에 요청과 응답에 로깅
+  - [ ] 로그인 로깅
+  - [ ] 회원 가입 로깅
+  - [ ] 경로 탐색 로깅
 - [ ] application.properties 설정
     - [ ] Local profile 설정
     - [ ] Test profile 설정
