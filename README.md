@@ -43,9 +43,11 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+* nginx access log 경로: /home/ubuntu/nginx/log
+* application log 경로: /home/ubuntu/logs/infra-subway-monitoring
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-mwkwon-service-monitoring
 ---
 
 ### 2단계 - 성능 테스트
@@ -56,3 +58,21 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+---
+
+### 1단계 - 로깅과 모니터링
+요구사항
+* 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+* 로그 설정하기
+* Cloudwatch로 모니터링
+
+### 작업 진행 순서
+* [x] 애플리케이션 진단하기 실습 및 문제가 되는 코드 수정
+* [x] 로그 설정하기
+    * [x] logback.xml 설정하기
+    * [x] 회원가입, 로그인, 최단거리 조회등의 이벤트에 로깅 설정
+    * [x] Nginx Access Log 설정
+* [x] Cloudwatch로 모니터링
+    * [x] Cloudwatch로 로그 수집하기
+    * [x] Cloudwatch로 메트링 수집하기

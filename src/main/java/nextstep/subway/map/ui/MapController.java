@@ -1,5 +1,7 @@
 package nextstep.subway.map.ui;
 
+import nextstep.subway.annotation.SubwayFileLogging;
+import nextstep.subway.annotation.SubwayJsonLogging;
 import nextstep.subway.map.application.MapService;
 import nextstep.subway.map.dto.PathResponse;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ public class MapController {
     }
 
     @GetMapping("/paths")
+    @SubwayJsonLogging(description = "최단 경로 조회(/paths)")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
