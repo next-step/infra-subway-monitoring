@@ -24,7 +24,7 @@ public class SubwayLogAspect {
 	private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
 	@Around("execution(* nextstep.subway..ui.*Controller.*(..))")
-	public void controllerLog(ProceedingJoinPoint joinPoint) throws Throwable {
+	public Object controllerLog(ProceedingJoinPoint joinPoint) throws Throwable {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		String paramString = paramMapToString(request.getParameterMap());
 		long start = System.currentTimeMillis();
@@ -36,13 +36,18 @@ public class SubwayLogAspect {
 		fileLogger.info("{} {} {} {} {} {} {} {}ms", request.getRemoteHost(), request.getRequestURI(),
 			request.getMethod(), joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(),
 			paramString, end - start);
+		return result;
 	}
 
 	private String paramMapToString(Map<String, String[]> paramMap) {
-		return paramMap.entrySet().stream()
-			.map(entry -> String.format("%s -> (%s)",
-				entry.getKey(), Joiner.on(",").join(entry.getValue())))
-			.collect(Collectors.joining(", "));
+		String param = "";
+		if(!paramMap.isEmpty()) {
+			param = paramMap.entrySet().stream()
+				.map(entry -> String.format("%s -> (%s)",
+					entry.getKey(), Joiner.on(",").join(entry.getValue())))
+				.collect(Collectors.joining(", "));
+		}
+		return param;
 	}
 
 }
