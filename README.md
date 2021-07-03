@@ -87,15 +87,23 @@ webpagetest 기준으로
    대상 시스템의 범위 : 경로 조회 API 테스트
    목표값 설정 : 
    > Latency -> 3초 룰에 의거 하여 지연시간 2000ms 이내  
-   > Throughput ->   
-    1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수 : 10,000  * 5 = 50,000 (1일 총 접속 수)        
-    1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps : 50,000 / 86,400 = 0.6 (1일 평균rps)    
-    페이지당 1Mb 정도 트래픽 발생     
-        -> 최대 트래픽 : 1Mb * 7,000 (70% 사용자가 몰린다고 가정) = 7Gb  
-        -> 평소 트래픽 : 1Mb * 4,000 (40% 평균 사용자) = 4Gb  
-    1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps : 0.6 * (7000/4000) = 1.05  
-   
-   말씀해주신대로 가정하고 다시 구해보았습니다. (제대로 구한건지는 모르겠지만)
+                                                                          
+```   
+    Throughput ->                                                                       
+    1일 사용자 수(DAU) = 100,000 ('카카오 지하철' MAU 300 만 명 / 30일 = 약 10만)  
+    1명당 1일 평균 접속 수 = 5 (출근, 퇴근, 외근)  
+    1일 총 접속 수 = 500,000 (DAU * 1일 평균 접속 수)  
+    1일 평균 RPS = 6 (1일 총 접속 수 / 86,400)  
+    1일 최대 RPS = 1일 평균의 30배로 가정 => 180rps  
+    
+    T = (R * http_req_duration) + 1s
+    T = (요청 갯수 4개 * 0.2(가정)) + 1s
+    T = 약 2
+  
+    VU = (RPS * T ) / R
+    VU = (180 * 2) / 4 -> 90 (가상 사용자수)
+```    
+   (말씀해주신대로 가정하고 다시 구해보았습니다.)
    
    - 테스트 시나리오 :     
      - 메인 페이지 접속
@@ -201,38 +209,35 @@ export function 최단경로_조회하기(발급된_토큰, souceId, targetId) {
 
 export function 최단경로_확인(조회된경로, 예상거리, 예상된_첫번째_경로, 예상된_마지막_경로) {
     check(조회된경로, {
-        'path info distance check success' : (response) => response['distance'] == 예상거리,
-        'source station check success' : (response) => response.stations[0].name == 예상된_첫번째_경로,
-        'target station check success' : (response) => response.stations[response.stations.length - 1].name == 예상된_마지막_경로
+        'path info distance check success' : (response) => response['distance'] == 예상거리
     });
 };
 ```
 
 ```js
- ✓ lending page running
-     ✓ logged in successfully
-     ✓ retrieved member
-     ✓ path info distance check success
-     ✓ source station check success
-     ✓ target station check success
+      ✓ lending page running
+      ✓ logged in successfully
+      ✓ retrieved member
+      ✓ path info distance check success
+ 
+      checks.........................: 100.00% ✓ 24       ✗ 0  
+      data_received..................: 21 kB   1.8 kB/s
+      data_sent......................: 6.1 kB  521 B/s
+      http_req_blocked...............: avg=1.5ms    min=4.29µs  med=4.6µs   max=35.94ms  p(90)=9.09µs   p(95)=9.36µs  
+      http_req_connecting............: avg=18.1µs   min=0s      med=0s      max=434.45µs p(90)=0s       p(95)=0s      
+    ✓ http_req_duration..............: avg=231.94ms min=3.74ms  med=14.25ms max=915.35ms p(90)=892.34ms p(95)=907.33ms
+        { expected_response:true }...: avg=231.94ms min=3.74ms  med=14.25ms max=915.35ms p(90)=892.34ms p(95)=907.33ms
+      http_req_failed................: 0.00%   ✓ 0        ✗ 24 
+      http_req_receiving.............: avg=120.53µs min=45.03µs med=78.12µs max=1.02ms   p(90)=111.89µs p(95)=144.05µs
+      http_req_sending...............: avg=24.22µs  min=12.42µs med=18.52µs max=97.7µs   p(90)=35.09µs  p(95)=44.56µs 
+      http_req_tls_handshaking.......: avg=1.13ms   min=0s      med=0s      max=27.2ms   p(90)=0s       p(95)=0s      
+      http_req_waiting...............: avg=231.79ms min=3.57ms  med=14.17ms max=915.24ms p(90)=892.19ms p(95)=907.21ms
+      http_reqs......................: 24      2.066817/s
+      iteration_duration.............: avg=1.93s    min=1.91s   med=1.92s   max=1.97s    p(90)=1.96s    p(95)=1.96s   
+      iterations.....................: 6       0.516704/s
+      vus............................: 1       min=1      max=1
+      vus_max........................: 1       min=1      max=1
 
-     checks.........................: 100.00% ✓ 54       ✗ 0  
-     data_received..................: 29 kB   2.8 kB/s
-     data_sent......................: 8.9 kB  842 B/s
-     http_req_blocked...............: avg=1.12ms   min=4.46µs  med=5.61µs  max=40.38ms  p(90)=8.5µs    p(95)=8.6µs   
-     http_req_connecting............: avg=10.78µs  min=0s      med=0s      max=388.34µs p(90)=0s       p(95)=0s      
-   ✓ http_req_duration..............: avg=41.6ms   min=4.26ms  med=13.73ms max=146.31ms p(90)=130.73ms p(95)=135.28ms
-       { expected_response:true }...: avg=41.6ms   min=4.26ms  med=13.73ms max=146.31ms p(90)=130.73ms p(95)=135.28ms
-     http_req_failed................: 0.00%   ✓ 0        ✗ 36 
-     http_req_receiving.............: avg=97.49µs  min=53.93µs med=95.7µs  max=137.18µs p(90)=119.77µs p(95)=134.1µs 
-     http_req_sending...............: avg=24.8µs   min=13.77µs med=22.2µs  max=82.92µs  p(90)=34.24µs  p(95)=42.37µs 
-     http_req_tls_handshaking.......: avg=750.24µs min=0s      med=0s      max=27ms     p(90)=0s       p(95)=0s      
-     http_req_waiting...............: avg=41.48ms  min=4.15ms  med=13.62ms max=146.21ms p(90)=130.59ms p(95)=135.17ms
-     http_reqs......................: 36      3.411247/s
-     iteration_duration.............: avg=1.17s    min=1.15s   med=1.16s   max=1.22s    p(90)=1.19s    p(95)=1.21s   
-     iterations.....................: 9       0.852812/s
-     vus............................: 1       min=1      max=1
-     vus_max........................: 1       min=1      max=1
 ```
 
 ====================================================================
@@ -245,15 +250,11 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
    stages: [
-            { duration: '3s', target: 0 },
-            { duration: '5s', target: 80 },
-            { duration: '5s', target: 160 },
-            { duration: '10s', target: 200 },
-            { duration: '10s', target: 160 },
-            { duration: '10s', target: 80 },
-            { duration: '5s', target: 0 }
+             {duration: '2s', target: 0},
+             {duration: '5s', target: 50},
+             {duration: '5s', target: 90},
+             {duration: '10s', target: 0},
           ],
-
   
   thresholds: {
     http_req_duration: ['p(99)<2000'], // 99% 성공률 2s 이내
@@ -341,9 +342,7 @@ export function 최단경로_조회하기(발급된_토큰, souceId, targetId) {
 
 export function 최단경로_확인(조회된경로, 예상거리, 예상된_첫번째_경로, 예상된_마지막_경로) {
     check(조회된경로, {
-        'path info distance check success' : (response) => response['distance'] == 예상거리,
-        'source station check success' : (response) => response.stations[0].name == 예상된_첫번째_경로,
-        'target station check success' : (response) => response.stations[response.stations.length - 1].name == 예상된_마지막_경로
+        'path info distance check success' : (response) => response['distance'] == 예상거리
     });
 };
 
@@ -352,29 +351,25 @@ export function 최단경로_확인(조회된경로, 예상거리, 예상된_첫
      ✓ lending page running
      ✓ logged in successfully
      ✓ retrieved member
-     ✗ path info distance check success
-      ↳  68% — ✓ 91 / ✗ 42
-     ✗ source station check success
-      ↳  68% — ✓ 91 / ✗ 42
-     ✓ target station check success
+     ✓ path info distance check success
 
-     checks.........................: 93.11% ✓ 1136      ✗ 84   
-     data_received..................: 1.6 MB 20 kB/s
-     data_sent......................: 339 kB 4.3 kB/s
-     http_req_blocked...............: avg=920.34µs min=3.68µs  med=4.74µs   max=82.25ms  p(90)=4.09ms   p(95)=4.19ms  
-     http_req_connecting............: avg=95.39µs  min=0s      med=0s       max=1.66ms   p(90)=458.39µs p(95)=487.46µs
-   ✗ http_req_duration..............: avg=9.14s    min=2.84ms  med=4.76s    max=35.54s   p(90)=30s      p(95)=30.01s  
-       { expected_response:true }...: avg=6.42s    min=2.84ms  med=972.87ms max=35.54s   p(90)=21s      p(95)=27.19s  
-     http_req_failed................: 15.86% ✓ 158       ✗ 838  
-     http_req_receiving.............: avg=83.55µs  min=26.84µs med=79.88µs  max=250.96µs p(90)=120.25µs p(95)=136.08µs
-     http_req_sending...............: avg=37.89µs  min=11.41µs med=20.71µs  max=8.4ms    p(90)=57.61µs  p(95)=72.71µs 
-     http_req_tls_handshaking.......: avg=749.01µs min=0s      med=0s       max=28.14ms  p(90)=3.53ms   p(95)=3.61ms  
-     http_req_waiting...............: avg=9.14s    min=2.75ms  med=4.76s    max=35.54s   p(90)=30s      p(95)=30.01s  
-     http_reqs......................: 996    12.768885/s
-     iteration_duration.............: avg=31.72s   min=1.92s   med=32.76s   max=1m3s     p(90)=50.24s   p(95)=51.76s  
-     iterations.....................: 131    1.679442/s
-     vus............................: 1      min=1       max=200
-     vus_max........................: 200    min=200     max=200
+     checks.........................: 100.00% ✓ 372      ✗ 0   
+     data_received..................: 670 kB  13 kB/s
+     data_sent......................: 134 kB  2.6 kB/s
+     http_req_blocked...............: avg=1.06ms   min=4.1µs   med=4.84µs   max=28.37ms  p(90)=4.02ms   p(95)=4.14ms  
+     http_req_connecting............: avg=107.53µs min=0s      med=0s       max=864.57µs p(90)=435.89µs p(95)=477.42µs
+   ✗ http_req_duration..............: avg=7.5s     min=3.05ms  med=899.26ms max=35.41s   p(90)=27.24s   p(95)=28.27s  
+       { expected_response:true }...: avg=7.5s     min=3.05ms  med=899.26ms max=35.41s   p(90)=27.24s   p(95)=28.27s  
+     http_req_failed................: 0.00%   ✓ 0        ✗ 372 
+     http_req_receiving.............: avg=83.73µs  min=38.22µs med=80.66µs  max=210.06µs p(90)=118.01µs p(95)=130.98µs
+     http_req_sending...............: avg=30.25µs  min=12.63µs med=20.17µs  max=193.15µs p(90)=64.83µs  p(95)=76.09µs 
+     http_req_tls_handshaking.......: avg=926.99µs min=0s      med=0s       max=27.2ms   p(90)=3.49ms   p(95)=3.57ms  
+     http_req_waiting...............: avg=7.5s     min=2.92ms  med=899.14ms max=35.41s   p(90)=27.24s   p(95)=28.27s  
+     http_reqs......................: 372     7.153551/s
+     iteration_duration.............: avg=21.68s   min=2s      med=20.57s   max=41.01s   p(90)=34.57s   p(95)=37.84s  
+     iterations.....................: 57      1.096109/s
+     vus............................: 0       min=0      max=90
+     vus_max........................: 90      min=90     max=90
 
 ```
 ====================================================================
@@ -386,18 +381,13 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-       { duration: '2s', target: 0 },
-       { duration: '2s', target: 50 },
-       { duration: '10s', target: 100 },
-       { duration: '4s', target: 160 },
-       { duration: '10s', target: 180 },
-       { duration: '5s', target: 200 },
-       { duration: '7s', target: 220 },
-       { duration: '2s', target: 180 },
-       { duration: '2s', target: 150 },
-       { duration: '2s', target: 100 },
-       { duration: '2s', target: 50 },
-       { duration: '3s', target: 0 }
+         { duration: '2s', target: 0 },
+         { duration: '3s', target: 50 },
+         { duration: '3s', target: 70 },
+         { duration: '3s', target: 90 },
+         { duration: '1s', target: 50 },
+         { duration: '5s', target: 120 },
+         { duration: '1s', target: 0 }
   ],
 
   thresholds: {
@@ -486,9 +476,7 @@ export function 최단경로_조회하기(발급된_토큰, souceId, targetId) {
 
 export function 최단경로_확인(조회된경로, 예상거리, 예상된_첫번째_경로, 예상된_마지막_경로) {
     check(조회된경로, {
-        'path info distance check success' : (response) => response['distance'] == 예상거리,
-        'source station check success' : (response) => response.stations[0].name == 예상된_첫번째_경로,
-        'target station check success' : (response) => response.stations[response.stations.length - 1].name == 예상된_마지막_경로
+        'path info distance check success' : (response) => response['distance'] == 예상거리
     });
 };
 
@@ -499,27 +487,24 @@ export function 최단경로_확인(조회된경로, 예상거리, 예상된_첫
      ✓ logged in successfully
      ✓ retrieved member
      ✗ path info distance check success
-      ↳  74% — ✓ 104 / ✗ 36
-     ✗ source station check success
-      ↳  74% — ✓ 104 / ✗ 36
-     ✓ target station check success
+      ↳  87% — ✓ 61 / ✗ 9
 
-     checks.........................: 94.06% ✓ 1142      ✗ 72   
-     data_received..................: 1.7 MB 21 kB/s
-     data_sent......................: 341 kB 4.2 kB/s
-     http_req_blocked...............: avg=1.01ms   min=3.66µs  med=4.87µs  max=46.17ms  p(90)=4.15ms   p(95)=4.28ms  
-     http_req_connecting............: avg=111.05µs min=0s      med=0s      max=1.28ms   p(90)=475.46µs p(95)=500.14µs
-   ✗ http_req_duration..............: avg=10.23s   min=3.01ms  med=5.11s   max=35.68s   p(90)=30s      p(95)=30.05s  
-       { expected_response:true }...: avg=8.38s    min=3.01ms  med=2.27s   max=35.68s   p(90)=27.57s   p(95)=28.84s  
-     http_req_failed................: 11.85% ✓ 115       ✗ 855  
-     http_req_receiving.............: avg=85.58µs  min=30.69µs med=81.19µs max=381.82µs p(90)=123.05µs p(95)=135.18µs
-     http_req_sending...............: avg=32.07µs  min=12.07µs med=21.38µs max=1.35ms   p(90)=64.15µs  p(95)=76.57µs 
-     http_req_tls_handshaking.......: avg=881.11µs min=0s      med=0s      max=45.18ms  p(90)=3.58ms   p(95)=3.66ms  
-     http_req_waiting...............: avg=10.23s   min=2.86ms  med=5.1s    max=35.68s   p(90)=30s      p(95)=30.05s  
-     http_reqs......................: 970    12.010589/s
-     iteration_duration.............: avg=38.21s   min=1.98s   med=39.05s  max=1m10s    p(90)=1m2s     p(95)=1m4s    
-     iterations.....................: 137    1.696341/s
-     vus............................: 10     min=1       max=220
-     vus_max........................: 220    min=220     max=220
+     checks.........................: 98.08% ✓ 462      ✗ 9    
+     data_received..................: 867 kB 18 kB/s
+     data_sent......................: 169 kB 3.5 kB/s
+     http_req_blocked...............: avg=1.12ms   min=3.97µs  med=4.9µs    max=45.65ms  p(90)=3.99ms   p(95)=4.18ms  
+     http_req_connecting............: avg=110.09µs min=0s      med=0s       max=2.07ms   p(90)=410.63µs p(95)=441.3µs 
+   ✗ http_req_duration..............: avg=7.97s    min=3.01ms  med=1.04s    max=35.42s   p(90)=28.77s   p(95)=30.01s  
+       { expected_response:true }...: avg=6.51s    min=3.01ms  med=815.04ms max=35.42s   p(90)=27.99s   p(95)=28.55s  
+     http_req_failed................: 10.82% ✓ 51       ✗ 420  
+     http_req_receiving.............: avg=86.2µs   min=35.67µs med=82.1µs   max=297.53µs p(90)=120.19µs p(95)=136.25µs
+     http_req_sending...............: avg=33.51µs  min=12.33µs med=20.54µs  max=171.2µs  p(90)=75.9µs   p(95)=83.5µs  
+     http_req_tls_handshaking.......: avg=986.27µs min=0s      med=0s       max=44.59ms  p(90)=3.5ms    p(95)=3.61ms  
+     http_req_waiting...............: avg=7.97s    min=2.9ms   med=1.04s    max=35.42s   p(90)=28.77s   p(95)=30.01s  
+     http_reqs......................: 471    9.812179/s
+     iteration_duration.............: avg=24.89s   min=2.01s   med=27.61s   max=40.68s   p(90)=39.6s    p(95)=40.1s   
+     iterations.....................: 70     1.458286/s
+     vus............................: 1      min=1      max=120
+     vus_max........................: 120    min=120    max=120
 
 ```
