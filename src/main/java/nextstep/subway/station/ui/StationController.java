@@ -18,29 +18,25 @@ import java.util.List;
 @RestController
 public class StationController {
     private StationService stationService;
-    private static final Logger logger = LoggerFactory.getLogger(StationController.class);
+
     public StationController(StationService stationService) {
         this.stationService = stationService;
     }
 
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
-        logger.info("StationController.createStation request : {}", stationRequest);
         StationResponse station = stationService.saveStation(stationRequest);
-        logger.info("StationController.createStation response : {}", station);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
 
     @GetMapping(value = "/stations", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StationResponse>> showStations() {
         List<StationResponse> stationResponses = stationService.findAllStations();
-        logger.info("StationController.showStations response : {}", stationResponses);
         return ResponseEntity.ok().body(stationResponses);
     }
 
     @DeleteMapping("/stations/{id}")
     public ResponseEntity deleteStation(@PathVariable Long id) {
-        logger.info("StationController.deleteStation id : {}", id);
         stationService.deleteStationById(id);
         return ResponseEntity.noContent().build();
     }

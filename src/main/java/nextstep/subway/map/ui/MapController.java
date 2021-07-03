@@ -22,9 +22,7 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        logger.info("MapController.findPath source : {}, target : {}", source, target);
         PathResponse pathResponse = mapService.findPath(source, target);
-        logger.info("MapController.findPath response : {}", pathResponse);
         return ResponseEntity.ok(pathResponse);
     }
 }

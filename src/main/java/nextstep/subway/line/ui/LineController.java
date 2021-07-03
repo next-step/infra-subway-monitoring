@@ -29,7 +29,6 @@ import nextstep.subway.line.dto.SectionRequest;
 @RequestMapping("/lines")
 public class LineController {
 	private final LineService lineService;
-	private static final Logger logger = LoggerFactory.getLogger(LineController.class);
 
 	public LineController(final LineService lineService) {
 		this.lineService = lineService;
@@ -37,51 +36,42 @@ public class LineController {
 
 	@PostMapping
 	public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-		logger.info("LineController.createLine request : {}", lineRequest);
 		LineResponse line = lineService.saveLine(lineRequest);
-		logger.info("LineController.createLine response : {}", line);
 		return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<LineResponse>> findAllLines() {
 		List<LineResponse> lineResponses = lineService.findLineResponses();
-		logger.info("LineController.findAllLines response : {}", lineResponses);
 		return ResponseEntity.ok(lineResponses);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
-		logger.info("LineController.findLineById request : {}", id);
 		LineResponse lineResponse = lineService.findLineResponseById(id);
-		logger.info("LineController.findLineById response : {}", lineResponse);
 		return ResponseEntity.ok(lineService.findLineResponseById(id));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
-		logger.info("LineController.updateLine request : {}", lineUpdateRequest);
 		lineService.updateLine(id, lineUpdateRequest);
 		return ResponseEntity.ok().build();
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity deleteLine(@PathVariable Long id) {
-		logger.info("LineController.deleteLine request : {}", id);
 		lineService.deleteLineById(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/{lineId}/sections")
 	public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
-		logger.info("LineController.addLineStation lineId : {}, request : {}", lineId, sectionRequest);
 		lineService.addLineStation(lineId, sectionRequest);
 		return ResponseEntity.ok().build();
 	}
 
 	@DeleteMapping("/{lineId}/sections")
 	public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
-		logger.info("LineController.removeLineStation lineId : {}, stationId : {}", lineId, stationId);
 		lineService.removeLineStation(lineId, stationId);
 		return ResponseEntity.ok().build();
 	}
