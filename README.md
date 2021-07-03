@@ -202,7 +202,12 @@ npm run dev
     - 시나리오 : 로그인을 요청한다.
         - 메인페이지 요청
         - 로그인 요청
+
     - [x] Smoke
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+            
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -279,7 +284,15 @@ npm run dev
              vus............................: 1       min=1       max=1
              vus_max........................: 1       min=1       max=1  source=console
         ```
+               
+        </div>
+        </details>
+                
     - [x] Load
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -363,7 +376,15 @@ npm run dev
              vus............................: 1       min=1        max=300
              vus_max........................: 300     min=300      max=300  source=console
         ```
-    - [ ] Stress
+
+        </div>
+        </details>
+        
+    - [x] Stress
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -447,12 +468,19 @@ npm run dev
         vus............................: 52      min=10       max=499
         vus_max........................: 500     min=500      max=500  source=console
         ```
+                
+        </div>
+        </details>
   
 - 데이터를 갱신하는 페이지
     - 시나리오 : 회원가입을 요청한다.
         - 메인페이지 요청
         - 회원 가입 요청
     - [x] Smoke
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+                
         ```javascript
         등록된 회원수 : 400 명
         ```
@@ -537,7 +565,14 @@ npm run dev
              vus............................: 1       min=1       max=1
              vus_max........................: 1       min=1       max=1  source=console
         ```
+        </div>
+        </details>
+        
     - [x] Load
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+            
         ```javascript
         등록된 회원수 : 24,306 명
         ```
@@ -629,7 +664,15 @@ npm run dev
              vus............................: 1       min=1        max=299
              vus_max........................: 300     min=300      max=300  source=console
         ```
+                
+        </div>
+        </details>
+                
     - [x] Stress
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+                
         ```javascript
         등록된 회원 수 : 29,204 명
         ```
@@ -721,6 +764,8 @@ npm run dev
              vus............................: 1       min=1        max=299
              vus_max........................: 300     min=300      max=300  source=console
         ```
+        </div>
+        </details>
   
 - 데이터를 조회하는데 여러 데이터를 참조하는 페이지
     - 시나리오 : 로그인 후 경로를 검색한다.
@@ -729,6 +774,10 @@ npm run dev
         - 나의 즐겨찾기 목록 조회 요청
         - 경로 검색 요청
     - [x] Smoke
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+            
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -840,7 +889,15 @@ npm run dev
              vus............................: 1       min=1       max=1
              vus_max........................: 1       min=1       max=1  source=console
         ```
+                
+        </div>
+        </details>
+                
     - [x] Load
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+                
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -962,7 +1019,15 @@ npm run dev
              vus_max........................: 300     min=300      max=300  source=console
         ERRO[0072] some thresholds have failed                  
         ```
+                                     
+        </div>
+        </details>
+    
     - [x] Stress
+        <details>
+        <summary>접기/펼치기 버튼</summary>
+        <div markdown="1">
+            
         ```javascript
         import http from 'k6/http';
         import { check, group, sleep, fail } from 'k6';
@@ -1056,3 +1121,6 @@ npm run dev
              vus_max........................: 500     min=500      max=500  source=console
         ERRO[0066] some thresholds have failed                  
         ```
+                
+        </div>
+        </details>
