@@ -93,17 +93,11 @@ public class LineController {
 
 	@GetMapping("/lock-left")
 	public String findLockLeft() throws InterruptedException {
-
-		System.out.println("left");
-
 		return "ok";
 	}
 
 	@GetMapping("/lock-right")
 	public String findLockRight() throws InterruptedException {
-
-		System.out.println("right");
-
 		return "ok";
 	}
 
