@@ -9,6 +9,8 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class FavoriteService {
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
 
     public FavoriteService(FavoriteRepository favoriteRepository, StationRepository stationRepository) {
         this.favoriteRepository = favoriteRepository;
@@ -31,6 +34,9 @@ public class FavoriteService {
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
         favoriteRepository.save(favorite);
+        jsonLogger.info("[createFavorite] userId: {} favoriteRequest : {}",
+                loginMember.getId(),
+                request.toString());
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
@@ -38,11 +44,11 @@ public class FavoriteService {
         Map<Long, Station> stations = extractStations(favorites);
 
         return favorites.stream()
-            .map(it -> FavoriteResponse.of(
-                it,
-                StationResponse.of(stations.get(it.getSourceStationId())),
-                StationResponse.of(stations.get(it.getTargetStationId()))))
-            .collect(Collectors.toList());
+                .map(it -> FavoriteResponse.of(
+                        it,
+                        StationResponse.of(stations.get(it.getSourceStationId())),
+                        StationResponse.of(stations.get(it.getTargetStationId()))))
+                .collect(Collectors.toList());
     }
 
     public void deleteFavorite(LoginMember loginMember, Long id) {
@@ -51,12 +57,15 @@ public class FavoriteService {
             throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
         }
         favoriteRepository.deleteById(id);
+        jsonLogger.info("[deleteFavorite] userId: {} favorateId : {}",
+                loginMember.getId(),
+                id);
     }
 
     private Map<Long, Station> extractStations(List<Favorite> favorites) {
         Set<Long> stationIds = extractStationIds(favorites);
         return stationRepository.findAllById(stationIds).stream()
-            .collect(Collectors.toMap(Station::getId, Function.identity()));
+                .collect(Collectors.toMap(Station::getId, Function.identity()));
     }
 
     private Set<Long> extractStationIds(List<Favorite> favorites) {
