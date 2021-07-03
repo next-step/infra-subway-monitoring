@@ -22,10 +22,10 @@ public class LoggingAspect {
     private static final String NO_PARAMETER = "No Parameter";
 
     @Around("execution(* nextstep.subway..ui.*Controller.*(..))")
-    public Object infoLogHandler(ProceedingJoinPoint join) throws Throwable {
+    public Object aroundControllerLogWithProcessingTimeHandler(ProceedingJoinPoint join) throws Throwable {
         long start = System.currentTimeMillis();
         Object proceed = join.proceed();
-        writeFileInfoLog(join, start, proceed);
+        writeInfoLogWithProcessingTimeToFile(join, start, proceed);
         return proceed;
     }
 
@@ -38,7 +38,7 @@ public class LoggingAspect {
                 makeParamToString(joinPoint.getArgs()));
     }
 
-    private void writeFileInfoLog(ProceedingJoinPoint join, long start, Object proceed) {
+    private void writeInfoLogWithProcessingTimeToFile(ProceedingJoinPoint join, long start, Object proceed) {
         fileInfo(join.getSignature().getDeclaringTypeName(),
                 join.getSignature().getName(),
                 System.currentTimeMillis() - start,
@@ -50,10 +50,10 @@ public class LoggingAspect {
         if (Objects.isNull(proceed)) {
             return NO_RETURN;
         }
-        return geResultToString(proceed);
+        return toStringOfResult(proceed);
     }
 
-    private String geResultToString(Object proceed) {
+    private String toStringOfResult(Object proceed) {
         if (proceed.getClass() == ResponseEntity.class) {
             return ((ResponseEntity)proceed).getStatusCode().toString();
         }
