@@ -280,19 +280,17 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '15s', target: 150 },
-        { duration: '30s', target: 150 },
-        { duration: '15s', target: 0 },
-        { duration: '30s', target: 600 },
-        { duration: '60s', target: 600 },
-        { duration: '30s', target: 0 },
-        { duration: '15s', target: 150 },
-        { duration: '30s', target: 150 },
-        { duration: '15s', target: 0 }
-        ],
+        { duration: '15s', target: 145 },
+        { duration: '30s', target: 145 },
+        { duration: '15s', target: 300 },
+        { duration: '30s', target: 300 },
+        { duration: '15s', target: 400 },
+        { duration: '30s', target: 400 },
+        { duration: '30s', target: 0 }
+    ],
 
     thresholds: {
-        http_req_duration: ['p(99)<1500'],
+        http_req_duration: ['p(95)<1000', 'p(99)<1500'],
     }
 };
 
@@ -301,73 +299,66 @@ const USERNAME = 'cndtjs0218@naver.com';
 const PASSWORD = '8513';
 
 export default function ()  {
- 
-  var payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
 
-  var params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+    var payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
 
-
-  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
+    var params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
 
 
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
-  let line = 라인조회(loginRes, 1);
+    check(loginRes, {
+        'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
 
-  구간조회(loginRes, 1);
-  경로조회(loginRes, 1, 5);
 
-  sleep(1);
+    let authHeaders = {
+        headers: {
+          Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+    라인조회(loginRes);
+    즐겨찾기조회(loginRes);
+    경로조회(loginRes);
+    sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
+export function 라인조회(loginRes) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/lines/1`, authHeaders).json();
 };
 
-export function 구간조회(loginRes, lineId){
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
+export function 즐겨찾기조회(loginRes){
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/favorites`, authHeaders).json();
 };
 
-export function 경로조회(loginRes, start, end){
-  var path = JSON.stringify({
-    source: start,
-    target: end,
-  });
-
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
+export function 경로조회(loginRes){
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/paths/?source=1&target=6`, authHeaders).json();
 };
 
 ```
-![img_5.png](img_5.png)
+![img_9.png](img_9.png)
