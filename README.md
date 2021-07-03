@@ -93,7 +93,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     * throughput: TPS
         * 1일 예상 사용자수(DAU): 100,000명
         * 1명당 평균 접속 수: 1일 2회
-        * 1명당 평균 요청 수: 8회(메인 페이지, 로그인, 즐겨 찾기, 경로 조회)
+        * 1명당 평균 요청 수: 8회(메인 페이지, 로그인, 회원 가입, 경로 조회)
         * 최대 트래픽: 100
         * 평소 트래픽: 20
         * 1일 총 접속 수: 200,000회
@@ -106,9 +106,10 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 * 시나리오 대상
     * 접속 빈도가 높은 기능
+        * main 페이지
         * 경로 찾기
         * 로그인 
-        * 즐겨 찾기
+        * 회원 가입
     * DB를 사용하는 기능
         * 경로 찾기
 
