@@ -117,7 +117,7 @@ export let options = {
   duration: '10s',
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<400'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -154,48 +154,41 @@ export default function ()  {
   let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
   check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
 
-  let line = 라인조회(loginRes, 1);
-
-  구간조회(loginRes, 1);
-  경로조회(loginRes, 1, 5);
-
-  sleep(1);
+    라인조회(loginRes);
+    즐겨찾기조회(loginRes);
+    경로조회(loginRes);
+    sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
+export function 라인조회(loginRes) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/lines/1`, authHeaders).json();
 };
 
-export function 구간조회(loginRes, lineId){
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
+export function 즐겨찾기조회(loginRes){
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/favorites`, authHeaders).json();
 };
 
-export function 경로조회(loginRes, start, end){
-  var path = JSON.stringify({
-    source: start,
-    target: end,
-  });
-
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
+export function 경로조회(loginRes){
+    let authHeaders = {
+        headers: {
+          Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/paths/?source=1&target=6`, authHeaders).json();
 };
 ```
 ---
-![img.png](img.png)
+![img_6.png](img_6.png)
 
 * load test
 ```java
@@ -204,13 +197,13 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '30s', target: 600 },
-        { duration: '60s', target: 600 },
-        { duration: '30s', target: 0 }
+        { duration: '10s', target: 145 },
+        { duration: '20s', target: 145 },
+        { duration: '10s', target: 0 }
     ],
 
     thresholds: {
-        http_req_duration: ['p(99)<1500'],
+        http_req_duration: ['p(99)<400'],
     }
 };
 
@@ -219,76 +212,66 @@ const USERNAME = 'cndtjs0218@naver.com';
 const PASSWORD = '8513';
 
 export default function ()  {
- 
-  var payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
+    var payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
 
-  var params = {
+    var params = {
     headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+        'Content-Type': 'application/json',
+        },
+    };
+    
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+    check(loginRes, {
+        'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
 
 
-  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-
-
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
-
-  let line = 라인조회(loginRes, 1);
-
-  구간조회(loginRes, 1);
-  경로조회(loginRes, 1, 5);
-
-  sleep(1);
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    라인조회(loginRes);
+    즐겨찾기조회(loginRes);
+    경로조회(loginRes);
+    sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
+export function 라인조회(loginRes) {
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/lines/1`, authHeaders).json();
 };
 
-export function 구간조회(loginRes, lineId){
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
+export function 즐겨찾기조회(loginRes){
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/favorites`, authHeaders).json();
 };
 
-export function 경로조회(loginRes, start, end){
-  var path = JSON.stringify({
-    source: start,
-    target: end,
-  });
-
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-  return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
+export function 경로조회(loginRes){
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+    return http.get(`${BASE_URL}/paths/?source=1&target=6`, authHeaders).json();
 };
 
 ```
-![img_3.png](img_3.png)
+![img_8.png](img_8.png)
 
 * stress test
 ```java
