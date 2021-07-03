@@ -127,6 +127,20 @@ npm run dev
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
+    ```
+    - 텍스트 압축 사용 (nginx gzip 압축 적용)
+    - 캐시 설정 (nginx cache 적용)
+    - 렌더링 차단 리소스 제거하기 (css body로 이동, js async 적용)
+    - 사용하지 않는 자바스크립트 줄이기
+
+    (위 3가지 적용후 측정한 테스트 값)
+        - First Contentful Paint : 14.8 -> 2.5
+        - Time to Interactive : 15.8 -> 5.5
+        - Speed Index : 14.8 -> 5.6
+        - Total Blocking Time : 960 -> 710
+        - Largest Contentful Paint : 15.9 -> 5.6
+    ```
+   
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
