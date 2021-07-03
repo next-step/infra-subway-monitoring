@@ -34,6 +34,9 @@
     <logger name="nextstep.subway" level="DEBUG">
       <appender-ref ref="CONSOLE" />
     </logger>
+    <logger name="org.hibernate.cache" level="DEBUG">
+      <appender-ref ref="CONSOLE" />
+    </logger>
   </springProfile>
 
 </configuration>

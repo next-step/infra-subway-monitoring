@@ -23,6 +23,9 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
 	implementation 'io.micrometer:micrometer-registry-cloudwatch'
 
+	//cache
+	implementation 'org.hibernate:hibernate-ehcache:5.5.3.Final'
+
 	// handlebars
 	implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
 
