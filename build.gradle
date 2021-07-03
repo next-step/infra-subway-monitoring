@@ -10,7 +10,7 @@ sourceCompatibility = '1.8'
 
 def env
 task configUsingEnvironmetVarible {
-	env = System.getenv('spring.profiles.active')
+	env = System.getenv('SPRING_PROFILES_ACTIVE')
 	println("Running environment:	" + env);
 }
 
