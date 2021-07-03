@@ -2,7 +2,7 @@ version: '3'
 services:
   infra-subway:
     image: hhjeong/infra-subway:latest
-    container_name: infra-subway
+    container_name: infra-subway1
     restart: always
     ports:
       - 8080:8080
