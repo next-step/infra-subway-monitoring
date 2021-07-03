@@ -89,6 +89,28 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 * Security score: HTTP 헤더 보안성 확보
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+* 목표값 설정
+    * throughput: TPS
+        * 1일 예상 사용자수(DAU): 100,000명
+        * 1명당 평균 접속 수: 1일 2회
+        * 1명당 평균 요청 수: 8회(메인 페이지, 로그인, 즐겨 찾기, 경로 조회)
+        * 최대 트래픽: 100
+        * 평소 트래픽: 20
+        * 1일 총 접속 수: 200,000회
+        * 1일 평균 rps: 2.4
+        * 1일 최대 rps: 12
+    * latency
+        * 90% 50ms 이하
+        * 95: 80ms 이하
+        * 99.9%: 100ms 이하
+
+* 시나리오 대상
+    * 접속 빈도가 높은 기능
+        * 경로 찾기
+        * 로그인 
+        * 즐겨 찾기
+    * DB를 사용하는 기능
+        * 경로 찾기
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -132,5 +154,5 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     * 경재사 사이트 확인
     * 경쟁사와 비교하여 웹 성능 예산 책정 
 * [x] 웹 성능 예산을 바탕으로 웹 성능 테스트 진행 및 개선 부분 찾기
-* [ ] 부하 테스트 전제 조건 작성
-* [ ] Somke, Load, Stress 테스트 진
+* [X] 부하 테스트 전제 조건 작성
+* [ ] Somke, Load, Stress 테스트 진행 및 결과 저장
