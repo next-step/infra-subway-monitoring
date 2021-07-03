@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="false">
-
+<configuration scan="true" debug="false">
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <include resource="console-appender.xml" />
-    <include resource="file-appender.xml" />
-    <include resource="json-appender.xml" />
+
+    <springProfile name="prod">
+        <include resource="logback-appender/file-prod-appender.xml" />
+        <include resource="logback-appender/json-prod-appender.xml" />
+    </springProfile>
+
+    <springProfile name="local">
+        <include resource="logback-appender/file-appender.xml" />
+        <include resource="logback-appender/json-appender.xml" />
+    </springProfile>
+
+    <springProfile name="test">
+        <include resource="logback-appender/file-appender.xml" />
+        <include resource="logback-appender/json-appender.xml" />
+    </springProfile>
+
+    <include resource="logback-appender/console-appender.xml" />
 
     <!--    logger name이 console일때 적용할 appender를 등록한다.-->
     <logger name="console" level="TRACE" >
