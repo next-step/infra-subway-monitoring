@@ -8,6 +8,12 @@ group = 'nextstep'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+def env
+task configUsingEnvironmetVarible {
+	env = System.getenv('spring.profiles.active')
+	println("Running environment:	" + env);
+}
+
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
@@ -42,6 +48,20 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+
+}
+
+task productionDependencies {
+	if(env != "prod") {
+		return;
+	}
+
+	dependencies{
+		implementation("org.springframework.boot:spring-boot-starter-actuator")
+		implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+		implementation("io.micrometer:micrometer-registry-cloudwatch")
+	}
 }
 
 test {
