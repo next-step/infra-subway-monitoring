@@ -114,7 +114,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
         * 경로 찾기
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+* performance-test/test-result/ 디렉토리에 결과 파일 넣어두었습니다. 
 ---
 
 ### 1단계 - 로깅과 모니터링
