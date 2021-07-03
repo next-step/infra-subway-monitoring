@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
-    private static final Logger logger = LoggerFactory.getLogger("file");
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private AuthService authService;
 
