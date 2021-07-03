@@ -1,17 +1,18 @@
 # 서비스 진단하기
 ## Step1. 로깅과 모니터링
 ### 작업 필요 목록
-- [ ] logback.xml 설정
-- [ ] 중요 로직에 요청과 응답에 로깅
-  - [ ] 로그인 로깅
-  - [ ] 회원 가입 로깅
-  - [ ] 경로 탐색 로깅
-- [ ] application.properties 설정
-    - [ ] Local profile 설정
-    - [ ] Test profile 설정
-    - [ ] Production profile 설정
-- [ ] Spring Actuator 설정
-    - [ ] prod 프로필인 경우만 dependency 적용
+- [x] logback.xml 설정
+- [x] build.gradle을 통한 특정 실행 환경에 대한 의존성 적용
+- [x] 중요 로직에 요청과 응답에 로깅
+  - [x] 로그인 로깅
+  - [x] 회원 가입 로깅
+  - [x] 경로 탐색 로깅
+- [x] application.properties 설정
+    - [x] Local profile 설정
+    - [x] Test profile 설정
+    - [x] Production profile 설정
+- [x] Spring Actuator 설정
+    - [x] prod 프로필인 경우만 dependency 적용
 
 ---
 ## 미션 수행 내용 제출
