@@ -120,12 +120,12 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 1, // 1 user looping for 1 minute
-    duration: '10s',
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
 
-    thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    },
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
 };
 
 const BASE_URL = 'https://prodo-subway.r-e.kr/';
@@ -134,74 +134,49 @@ const PASSWORD = '1234';
 
 export default function ()  {
 
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-    });
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
 
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-    check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
-    });
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
 
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
-    let line = 라인조회(loginRes, 1);
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
 
-    구간조회(loginRes, 1);
-    경로조회(loginRes, 1, 5);
 
-    sleep(1);
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  경로조회(loginRes);
+
+  sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
+export function 경로조회(loginRes){
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
 };
 
-export function 구간조회(loginRes, lineId){
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
-};
-
-export function 경로조회(loginRes, start, end){
-    var path = JSON.stringify({
-        source: start,
-        target: end,
-    });
-
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
-};
-
-/\      |‾‾| /‾‾/   /‾‾/
+     /\      |‾‾| /‾‾/   /‾‾/
 /\  /  \     |  |/  /   /  /
 /  \/    \    |     (   /   ‾‾\
    /          \   |  |\  \ |  (‾)  |
@@ -211,32 +186,30 @@ execution: local
 script: smoke.js
 output: -
 
-    scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
 * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
-WARN[0000] error getting terminal size                   error="The handle is invalid."
-
-running (10.7s), 0/1 VUs, 10 complete and 0 interrupted iterations
+running (11.1s), 0/1 VUs, 10 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  10s
 
      ✓ logged in successfully
      ✓ retrieved member
 
 checks.........................: 100.00% ✓ 20  ✗ 0
-data_received..................: 23 kB   2.1 kB/s
-data_sent......................: 13 kB   1.2 kB/s
-http_req_blocked...............: avg=3ms      min=0s      med=0s      max=150.05ms p(90)=0s       p(95)=0s
-http_req_connecting............: avg=152.28µs min=0s      med=0s      max=7.61ms   p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=11.07ms  min=5.51ms  med=12.57ms max=18.62ms  p(90)=15.63ms  p(95)=16.16ms
-{ expected_response:true }...: avg=14.9ms   min=13.17ms med=14.53ms max=18.62ms  p(90)=16.56ms  p(95)=16.84ms
-http_req_failed................: 60.00%  ✓ 30  ✗ 20
-http_req_receiving.............: avg=145.88µs min=0s      med=0s      max=1.07ms   p(90)=997.78µs p(95)=1ms
-http_req_sending...............: avg=0s       min=0s      med=0s      max=0s       p(90)=0s       p(95)=0s
-http_req_tls_handshaking.......: avg=2.56ms   min=0s      med=0s      max=128.19ms p(90)=0s       p(95)=0s
-http_req_waiting...............: avg=10.93ms  min=5ms     med=12.53ms max=18.62ms  p(90)=15.53ms  p(95)=15.69ms
-http_reqs......................: 50      4.659034/s
-iteration_duration.............: avg=1.07s    min=1.05s   med=1.05s   max=1.2s     p(90)=1.07s    p(95)=1.14s
-iterations.....................: 10      0.931807/s
+data_received..................: 42 kB   3.8 kB/s
+data_sent......................: 8.8 kB  789 B/s
+http_req_blocked...............: avg=4.56ms  min=0s      med=0s      max=137.02ms p(90)=0s       p(95)=0s
+http_req_connecting............: avg=172.8µs min=0s      med=0s      max=5.18ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=31.22ms min=15.68ms med=18.05ms max=60.41ms  p(90)=59.52ms  p(95)=59.91ms
+{ expected_response:true }...: avg=31.22ms min=15.68ms med=18.05ms max=60.41ms  p(90)=59.52ms  p(95)=59.91ms
+http_req_failed................: 0.00%   ✓ 0   ✗ 30
+http_req_receiving.............: avg=184.3µs min=0s      med=0s      max=997.8µs  p(90)=651.57µs p(95)=839µs
+http_req_sending...............: avg=16.89µs min=0s      med=0s      max=506.7µs  p(90)=0s       p(95)=0s
+http_req_tls_handshaking.......: avg=3.74ms  min=0s      med=0s      max=112.43ms p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=31.02ms min=15.61ms med=18.05ms max=60.41ms  p(90)=59.47ms  p(95)=59.91ms
+http_reqs......................: 30      2.703746/s
+iteration_duration.............: avg=1.1s    min=1.09s   med=1.09s   max=1.23s    p(90)=1.11s    p(95)=1.17s
+iterations.....................: 10      0.901249/s
 vus............................: 1       min=1 max=1
 vus_max........................: 1       min=1 max=1
 ```
@@ -248,15 +221,21 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    stages: [
-        { duration: '30s', target: 20 },
-        { duration: '1m', target: 20 },
-        { duration: '10s', target: 0 }
-    ],
+  stages: [
+    { duration: '15s', target: 20 },
+    { duration: '30s', target: 20 },
+    { duration: '15s', target: 0 },
+    { duration: '30s', target: 360 },
+    { duration: '60s', target: 360 },
+    { duration: '30s', target: 0 },
+    { duration: '15s', target: 20 },
+    { duration: '30s', target: 20 },
+    { duration: '15s', target: 0 }
+  ],
 
-    thresholds: {
-        http_req_duration: ['p(99)<1500'],
-    }
+  thresholds: {
+    http_req_duration: ['p(99)<1500'],
+  }
 };
 
 const BASE_URL = 'https://prodo-subway.r-e.kr/';
@@ -265,71 +244,46 @@ const PASSWORD = '1234';
 
 export default function ()  {
 
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-    });
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
 
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-    check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
-    });
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
 
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
-    let line = 라인조회(loginRes, 1);
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
 
-    구간조회(loginRes, 1);
-    경로조회(loginRes, 1, 5);
 
-    sleep(1);
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  경로조회(loginRes);
+
+  sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
-};
+export function 경로조회(loginRes){
 
-export function 구간조회(loginRes, lineId){
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
-};
-
-export function 경로조회(loginRes, start, end){
-    var path = JSON.stringify({
-        source: start,
-        target: end,
-    });
-
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
 };
 
 /\      |‾‾| /‾‾/   /‾‾/
@@ -342,32 +296,30 @@ execution: local
 script: load.js
 output: -
 
-    scenarios: (100.00%) 1 scenario, 20 max VUs, 2m10s max duration (incl. graceful stop):
+scenarios: (100.00%) 1 scenario, 20 max VUs, 2m10s max duration (incl. graceful stop):
 * default: Up to 20 looping VUs for 1m40s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-WARN[0000] error getting terminal size                   error="The handle is invalid."
-
-running (1m41.0s), 00/20 VUs, 1508 complete and 0 interrupted iterations
+running (1m40.8s), 00/20 VUs, 1475 complete and 0 interrupted iterations
 default ✓ [======================================] 00/20 VUs  1m40s
 
      ✓ logged in successfully
      ✓ retrieved member
 
-checks.........................: 100.00% ✓ 3016 ✗ 0
-data_received..................: 2.8 MB  28 kB/s
-data_sent......................: 1.9 MB  19 kB/s
-http_req_blocked...............: avg=74.07µs  min=0s     med=0s      max=129.71ms p(90)=0s       p(95)=0s
-http_req_connecting............: avg=16.12µs  min=0s     med=0s      max=9.43ms   p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=13.28ms  min=4.89ms med=12.37ms max=546.15ms p(90)=16.44ms  p(95)=17.65ms
-{ expected_response:true }...: avg=16.63ms  min=9.82ms med=14.67ms max=368.85ms p(90)=17.45ms  p(95)=18.91ms
-http_req_failed................: 60.00%  ✓ 4524 ✗ 3016
-http_req_receiving.............: avg=202.85µs min=0s     med=0s      max=330ms    p(90)=426.86µs p(95)=963.9µs
-http_req_sending...............: avg=7.06µs   min=0s     med=0s      max=1.01ms   p(90)=0s       p(95)=0s
-http_req_tls_handshaking.......: avg=54.02µs  min=0s     med=0s      max=106.85ms p(90)=0s       p(95)=0s
-http_req_waiting...............: avg=13.07ms  min=4.85ms med=12.25ms max=450ms    p(90)=16.32ms  p(95)=17.57ms
-http_reqs......................: 7540    74.672389/s
-iteration_duration.............: avg=1.07s    min=1.05s  med=1.05s   max=2.42s    p(90)=1.06s    p(95)=1.08s
-iterations.....................: 1508    14.934478/s
+checks.........................: 100.00% ✓ 2950 ✗ 0
+data_received..................: 5.6 MB  56 kB/s
+data_sent......................: 1.2 MB  12 kB/s
+http_req_blocked...............: avg=187.22µs min=0s      med=0s      max=268.83ms p(90)=0s       p(95)=0s
+http_req_connecting............: avg=33.05µs  min=0s      med=0s      max=10.14ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=31.3ms   min=11.32ms med=17.98ms max=109.59ms p(90)=60.13ms  p(95)=62.78ms
+{ expected_response:true }...: avg=31.3ms   min=11.32ms med=17.98ms max=109.59ms p(90)=60.13ms  p(95)=62.78ms
+http_req_failed................: 0.00%   ✓ 0    ✗ 4425
+http_req_receiving.............: avg=227.26µs min=0s      med=0s      max=1.32ms   p(90)=852.36µs p(95)=972.28µs
+http_req_sending...............: avg=7.17µs   min=0s      med=0s      max=1.14ms   p(90)=0s       p(95)=0s
+http_req_tls_handshaking.......: avg=150.81µs min=0s      med=0s      max=261.08ms p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=31.07ms  min=11.32ms med=17.78ms max=109.59ms p(90)=59.89ms  p(95)=62.67ms
+http_reqs......................: 4425    43.90129/s
+iteration_duration.............: avg=1.09s    min=1.08s   med=1.09s   max=1.36s    p(90)=1.1s     p(95)=1.11s
+iterations.....................: 1475    14.633763/s
 vus............................: 2       min=1  max=20
 vus_max........................: 20      min=20 max=20
 
@@ -378,21 +330,21 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    stages: [
-        { duration: '15s', target: 20 },
-        { duration: '30s', target: 20 },
-        { duration: '15s', target: 0 },
-        { duration: '30s', target: 360 },
-        { duration: '60s', target: 360 },
-        { duration: '30s', target: 0 },
-        { duration: '15s', target: 20 },
-        { duration: '30s', target: 20 },
-        { duration: '15s', target: 0 }
-    ],
+  stages: [
+    { duration: '15s', target: 20 },
+    { duration: '30s', target: 20 },
+    { duration: '15s', target: 0 },
+    { duration: '30s', target: 270 },
+    { duration: '60s', target: 270 },
+    { duration: '30s', target: 0 },
+    { duration: '15s', target: 20 },
+    { duration: '30s', target: 20 },
+    { duration: '15s', target: 0 }
+  ],
 
-    thresholds: {
-        http_req_duration: ['p(99)<1500'],
-    }
+  thresholds: {
+    http_req_duration: ['p(99)<1500'],
+  }
 };
 
 const BASE_URL = 'https://prodo-subway.r-e.kr/';
@@ -401,74 +353,49 @@ const PASSWORD = '1234';
 
 export default function ()  {
 
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-    });
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
 
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-    check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
-    });
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
 
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
-    let line = 라인조회(loginRes, 1);
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
 
-    구간조회(loginRes, 1);
-    경로조회(loginRes, 1, 5);
 
-    sleep(1);
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  경로조회(loginRes);
+
+  sleep(1);
 };
 
-export function 라인조회(loginRes, lineId) {
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId`, authHeaders).json();
+export function 경로조회(loginRes){
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
 };
 
-export function 구간조회(loginRes, lineId){
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/lines/lineId/sections`, authHeaders).json();
-};
-
-export function 경로조회(loginRes, start, end){
-    var path = JSON.stringify({
-        source: start,
-        target: end,
-    });
-
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    return http.get(`${BASE_URL}/paths`, path, authHeaders).json();
-};
-
-    /\      |‾‾| /‾‾/   /‾‾/
+/\      |‾‾| /‾‾/   /‾‾/
 /\  /  \     |  |/  /   /  /
 /  \/    \    |     (   /   ‾‾\
    /          \   |  |\  \ |  (‾)  |
@@ -478,33 +405,31 @@ execution: local
 script: stress.js
 output: -
 
-    scenarios: (100.00%) 1 scenario, 360 max VUs, 4m30s max duration (incl. graceful stop):
-* default: Up to 360 looping VUs for 4m0s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+scenarios: (100.00%) 1 scenario, 270 max VUs, 4m30s max duration (incl. graceful stop):
+* default: Up to 270 looping VUs for 4m0s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-WARN[0000] error getting terminal size                   error="The handle is invalid."
-
-running (4m00.3s), 000/360 VUs, 29252 complete and 0 interrupted iterations
-default ✓ [======================================] 000/360 VUs  4m0s
+running (4m01.0s), 000/270 VUs, 13426 complete and 0 interrupted iterations
+default ✓ [======================================] 000/270 VUs  4m0s
 
      ✓ logged in successfully
      ✓ retrieved member
 
-checks.........................: 100.00% ✓ 58504 ✗ 0
-data_received..................: 55 MB   230 kB/s
-data_sent......................: 37 MB   153 kB/s
-http_req_blocked...............: avg=83.15µs  min=0s     med=0s      max=161.05ms p(90)=0s      p(95)=0s
-http_req_connecting............: avg=26.05µs  min=0s     med=0s      max=67.72ms  p(90)=0s      p(95)=0s
-   ✓ http_req_duration..............: avg=34.79ms  min=4.81ms med=20.32ms max=1.04s    p(90)=77.32ms p(95)=99.23ms
-{ expected_response:true }...: avg=48.44ms  min=9.7ms  med=38.69ms max=1.04s    p(90)=92.36ms p(95)=117.48ms
-http_req_failed................: 60.00%  ✓ 87756 ✗ 58504
-http_req_receiving.............: avg=102.37µs min=0s     med=0s      max=33ms     p(90)=505.2µs p(95)=900.2µs
-http_req_sending...............: avg=20.48µs  min=0s     med=0s      max=36.99ms  p(90)=0s      p(95)=0s
-http_req_tls_handshaking.......: avg=53.7µs   min=0s     med=0s      max=118.4ms  p(90)=0s      p(95)=0s
-http_req_waiting...............: avg=34.66ms  min=4.81ms med=20.2ms  max=1.04s    p(90)=77.21ms p(95)=99.09ms
-http_reqs......................: 146260  608.775419/s
-iteration_duration.............: avg=1.17s    min=1.04s  med=1.17s   max=2.09s    p(90)=1.29s   p(95)=1.34s
-iterations.....................: 29252   121.755084/s
-vus............................: 1       min=1   max=360
-vus_max........................: 360     min=360 max=360
+checks.........................: 100.00% ✓ 26852 ✗ 0
+data_received..................: 52 MB   214 kB/s
+data_sent......................: 11 MB   47 kB/s
+http_req_blocked...............: avg=176.89µs min=0s      med=0s       max=167.37ms p(90)=0s       p(95)=0s
+http_req_connecting............: avg=47.59µs  min=0s      med=0s       max=26.01ms  p(90)=0s       p(95)=0s     
+   ✓ http_req_duration..............: avg=319.95ms min=10.59ms med=408.52ms max=1.87s    p(90)=542.32ms p(95)=579.08ms
+{ expected_response:true }...: avg=319.95ms min=10.59ms med=408.52ms max=1.87s    p(90)=542.32ms p(95)=579.08ms
+http_req_failed................: 0.00%   ✓ 0     ✗ 40278
+http_req_receiving.............: avg=190.48µs min=0s      med=0s       max=3.99ms   p(90)=755.03µs p(95)=925.31µs
+http_req_sending...............: avg=5.18µs   min=0s      med=0s       max=1.99ms   p(90)=0s       p(95)=0s
+http_req_tls_handshaking.......: avg=127.71µs min=0s      med=0s       max=141.58ms p(90)=0s       p(95)=0s
+http_req_waiting...............: avg=319.76ms min=10.31ms med=408.36ms max=1.87s    p(90)=542.01ms p(95)=578.73ms
+http_reqs......................: 40278   167.158527/s
+iteration_duration.............: avg=1.96s    min=1.08s   med=2.08s    max=3.98s    p(90)=2.52s    p(95)=2.88s
+iterations.....................: 13426   55.719509/s
+vus............................: 1       min=1   max=270
+vus_max........................: 270     min=270 max=270
 
 ```
