@@ -1,5 +1,6 @@
 package nextstep.subway.station.application;
 
+import nextstep.subway.map.domain.PathCache;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
@@ -21,6 +22,8 @@ public class StationService {
 
     public StationResponse saveStation(StationRequest stationRequest) {
         Station persistStation = stationRepository.save(stationRequest.toStation());
+
+        PathCache.resetCache();
         return StationResponse.of(persistStation);
     }
 
@@ -35,6 +38,7 @@ public class StationService {
 
     public void deleteStationById(Long id) {
         stationRepository.deleteById(id);
+        PathCache.resetCache();
     }
 
     public Station findStationById(Long id) {
