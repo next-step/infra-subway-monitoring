@@ -53,6 +53,37 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+   * 이커머스 C 사와 비교
+---
+### 성능지표 
+|   | 지하철노선도 | C사 |
+|---|:---:|---:|
+|First Contentful Paint|14.5초|  2.6 초  |
+|Time to Interactive|15.2초|  8.8 초  | 
+|Speed Index|14.5초|  6.4 초  |
+|Total Blocking Time|640 밀리초|  440 밀리초  |
+|Largest Contentful Paint|15.2초|  12.1 초  |
+|Cumulative Layout Shift|0.041|  0.161  |
+---
+|   | 지하철노선도 | C사 |
+|---|:---:|---:|
+| First Byte Time | A | A |
+| Keep-alive Enabled | A | A|
+| Compress Transfer | F |A|
+| Compress Images | A |B|
+| Cache static content | C | F|
+| Effective use of CDN | X | X
+---
+### 예산설정 (데스크탑 기준)
+#### Lighthouse 점수항목 90점이상으로 설정
+| 항목  | 수치 |
+|---|:---:|
+| First Contentful Paint | 910 ms |
+| Keep-alive Enabled | 1280 ms |
+| Compress Transfer | 1170 ms |
+| Time to Interactive | 2380 ms |
+| Total Blocking Time | 140 ms |
+| Effective use of CDN | 0.10 |
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
