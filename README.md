@@ -58,9 +58,62 @@ npm run dev
 ---
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+   A. 경쟁사 선정
+    * 후보군 :  카카오 지하철, 지하철 종결자, 네이버 지도
+
+   → 이 중에서 웹으로 접근이 가능한 `네이버 지도` 선택
+
+   B. 경쟁사 성능도 조사
+    * 대상 URL : https://m.map.naver.com/subway/subwayLine.naver?region=1000
+    * PageSpeed 결과
+
+      |항목|데스크탑 환경 결과|모바일 환경 결과|
+                    |:---------|-------|------|
+      |First Contentful Paint|0.5초|2.1초
+      |Speed Index|2.2초|5.6초
+      |Largest Contentful Paint|1.6초|8.0초
+      |Time to Interactive|1.5초|7.2초
+      |Total Blocking Time|30밀리초|520밀리초
+      |Cumulative Layout Shift|0.005|0.03
+      |총 점수(100점 만점)|90점|51점
+
+   C. 예산 설정
+    - 강의 시간에 다루었던 `Performance Budget Metrics`과 경쟁사의 결과값을 위주로 하여 예산을 잡았습니다
+        * Timing-based : 데스크탑 환경 기준 FCP 1초 이내
+        * Rule-based : Pagespeed 총점 80점 이상
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+    - 개선전 성능
+
+      |항목|데스크탑 환경 결과|모바일 환경 결과|
+                  |:---------|-------|------|
+      |First Contentful Paint|2.8초|15.4초
+      |Speed Index|2.8초|15.4초
+      |Largest Contentful Paint|2.9초|16.0초
+      |Time to Interactive|2.9초|16.0초
+      |Total Blocking Time|50밀리초|530밀리초
+      |Cumulative Layout Shift|0.004|0.041
+      |총 점수(100점 만점)|67점|32점
+    - 개선 방향
+        - 주요 자바스크립트 로딩 속도 변경 : vendor.js, main.js에 async 추가
+        - Gzip을 통한 텍스트 압축 : application.properties 설정 추가
+        - 정적 컨텐츠 캐시 : nginx.conf 설정 추가([참고](https://jojoldu.tistory.com/60))
+
+    - 개선후 성능
+
+      → 데스크탑뿐만 아니라, 모바일 환경에서의 FCP 속도가 상당히 개선됨
+
+      |항목|데스크탑 환경 결과|모바일 환경 결과|
+           |:---------|-------|------|
+      |First Contentful Paint|0.7초|2.5초
+      |Speed Index|1.6초|5.6초
+      |Largest Contentful Paint|1.3초|5.6초
+      |Time to Interactive|1.3초|5.7초
+      |Total Blocking Time|190밀리초|720밀리초
+      |Cumulative Layout Shift|0.004|0.041
+      |총 점수(100점 만점)|89점|51점
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
