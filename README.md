@@ -44,7 +44,7 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요 
    * 웹 서버
-        - 애플리케이션 로그 : /home/ubungu/subway-infra-monitoring/log 
+        - 애플리케이션 로그 : /home/ubuntu/subway-infra-monitoring/log 
    * 프록시 서버 (웹 서버내의 Docker 통해 띄움)
         - access 로그 : /var/log/nginx/access.log
         - error 로그 : /var/log/nginx/error.log
@@ -116,7 +116,7 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
     - 대상시스템 범위 : 웹 서버 중 아래 3개 페이지
         - 접속 빈도가 높은 페이지 : 메인화면
-        - 데이터를 갱신파는 페이지 : 역 등록 화면
+        - 데이터를 갱신하는 페이지 : 역 등록 화면
         - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 화면
     - 목표값 설정
         - 예상 1일 사용자 수(DAU) : 10만
@@ -131,3 +131,6 @@ npm run dev
             - 1일 최대 rps(1일 평균 rps x (최대 트래픽 / 평소 트래픽)) = 4.6*5 = 23
     
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+    - 메인 화면 경로 : /loadtest/main
+    - 로그인 화면 : /loadtest/login
+    - 경로검색 화면 : /loadtest/path
