@@ -2,19 +2,28 @@
 
 <configuration debug="false">
 
-    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <include resource="file-appender.xml"/>
     <include resource="console-appender.xml"/>
 
-    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="file" level="INFO">
-        <appender-ref ref="file"/>
-    </logger>
+    <springProfile name="local, test">
+        <logger name="console" level="TRACE" >
+            <appender-ref ref="console" />
+        </logger>
+    </springProfile>
 
-    <!--    logger name이 console일때 적용할 appender를 등록한다.-->
-    <logger name="console" level="TRACE">
-        <appender-ref ref="console"/>
-    </logger>
+    <springProfile name="prod">
+        <logger name="file" level="INFO" >
+            <appender-ref ref="file" />
+        </logger>
+        <logger name="console" level="ERROR" >
+            <appender-ref ref="console" />
+        </logger>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
 
 </configuration>
