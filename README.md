@@ -43,7 +43,16 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+    - fdevjc-EC2-rp (nginx)
+        - public ip : 52.78.185.113
+        - private ip : 192.168.24.4
+        - log (access) : /var/log/nginx/access.log
+        - log (error) : /var/log/nginx/error.log
+    - fdevjc-EC2-web
+        - public ip : 13.209.11.247
+        - private ip : 192.168.24.29
+        - log (access) : /var/log/nginx/access.log
+        - log (error) : /var/log/nginx/error.log 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 ---
