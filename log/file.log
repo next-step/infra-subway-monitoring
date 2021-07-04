@@ -1,0 +1,17 @@
+2021-07-02 10:45:42.314 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 10:50:39.334 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 10:51:27.906 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 10:51:44.578 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 10:51:52.878 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 10:53:19.175 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 11:00:37.677 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 11:03:39.890 Test worker INFO  file - 파일 로깅 입니다.
+2021-07-02 11:17:48.971 main ERROR file - Error 파일 로깅 입니다.
+2021-07-02 11:17:48.984 main INFO  file - Info 파일 로깅 입니다.
+2021-07-02 11:17:48.987 main WARN  file - Warn 파일 로깅 입니다.
+2021-07-02 11:44:29.825 main ERROR file - Error 파일 로깅 입니다.
+2021-07-02 11:44:29.830 main INFO  file - Info 파일 로깅 입니다.
+2021-07-02 11:44:29.833 main WARN  file - Warn 파일 로깅 입니다.
+2021-07-02 11:45:35.731 main ERROR file - Error 파일 로깅 입니다.
+2021-07-02 11:45:35.734 main INFO  file - Info 파일 로깅 입니다.
+2021-07-02 11:45:35.735 main WARN  file - Warn 파일 로깅 입니다.
