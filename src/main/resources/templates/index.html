@@ -17,17 +17,21 @@
     />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link
-      rel="stylesheet"
+      rel="preload"
       href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      as="style"
+      onload="this.rel='stylesheet'"
     />
     <link
-      rel="stylesheet"
+      rel="preload"
       href="//cdn.jsdelivr.net/npm/@mdi/font@5.0.45/css/materialdesignicons.min.css"
+      as="style"
+      onload="this.rel='stylesheet'"
     />
   </head>
   <body>
     <div id="app"></div>
-    <script src="/js/vendors.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/vendors.js" defer></script>
+    <script src="/js/main.js" defer></script>
   </body>
 </html>

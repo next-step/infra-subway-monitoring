@@ -1,6 +1,6 @@
 package nextstep.subway.map.ui;
 
-import nextstep.subway.common.EnableControllerLog;
+import nextstep.subway.common.EnableFileLog;
 import nextstep.subway.map.application.MapService;
 import nextstep.subway.map.dto.PathResponse;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @EnableControllerLog
+    @EnableFileLog
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         return ResponseEntity.ok(mapService.findPath(source, target));
