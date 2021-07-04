@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
