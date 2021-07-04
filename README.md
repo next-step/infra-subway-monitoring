@@ -51,10 +51,9 @@ npm run dev
     - fdevjc-EC2-web
         - public ip : 13.209.11.247
         - private ip : 192.168.24.29
-        - log (access) : /var/log/nginx/access.log
-        - log (error) : /var/log/nginx/error.log 
+        - log : /home/ubuntu/subway/log
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-fdevjc
 ---
 
 ### 2단계 - 성능 테스트
