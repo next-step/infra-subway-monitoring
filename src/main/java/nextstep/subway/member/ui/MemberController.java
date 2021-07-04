@@ -26,9 +26,8 @@ public class MemberController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
-        json.info("{}, {}, {}",
+        json.info("{}, {}",
                 kv("id", member.getId()),
-                kv("email", member.getEmail()),
                 kv("age", member.getAge())
         );
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
