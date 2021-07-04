@@ -22,8 +22,8 @@ public class MapController {
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(PathRequest request) {
         logger.info("경로 찾기 요청: {}", request);
-        ResponseEntity<PathResponse> response = ResponseEntity.ok(mapService.findPath(request));
+        PathResponse response = mapService.findPath(request);
         logger.info("경로 찾기 응답: {}", response);
-        return ResponseEntity.ok(mapService.findPath(request));
+        return ResponseEntity.ok(response);
     }
 }

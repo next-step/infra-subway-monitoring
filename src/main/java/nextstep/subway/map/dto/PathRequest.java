@@ -4,8 +4,9 @@ public class PathRequest {
     private Long source;
     private Long target;
 
-    private PathRequest() {
-
+    public PathRequest(Long source, Long target) {
+        this.source = source;
+        this.target = target;
     }
 
     public Long getSource() {
