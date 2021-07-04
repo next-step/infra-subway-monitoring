@@ -48,7 +48,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
 
-
+	// cashing
+	compile('org.springframework.boot:spring-boot-starter-cache')
 
 }
 
