@@ -3,6 +3,7 @@ package nextstep.subway.map.application;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
+import nextstep.subway.map.dto.PathRequest;
 import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
 import nextstep.subway.station.application.StationService;
@@ -25,10 +26,10 @@ public class MapService {
         this.pathService = pathService;
     }
 
-    public PathResponse findPath(Long source, Long target) {
+    public PathResponse findPath(PathRequest request) {
         List<Line> lines = lineService.findLines();
-        Station sourceStation = stationService.findById(source);
-        Station targetStation = stationService.findById(target);
+        Station sourceStation = stationService.findById(request.getSource());
+        Station targetStation = stationService.findById(request.getTarget());
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
         return PathResponseAssembler.assemble(subwayPath);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <property name="home" value="/home/ubuntu/workspace/log/" />
+
+    <springProfile name="local">
+        <property name="filename" value="infra-subway-monitoring" />
+    </springProfile>
+
+    <springProfile name="test">
+        <property name="filename" value="infra-subway-monitoring-test" />
+    </springProfile>
+
+    <springProfile name="prod">
+        <property name="filename" value="infra-subway-monitoring" />
+    </springProfile>
+
+    <appender name="file-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--로깅이 기록될 위치-->
+        <file>${home}${filename}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${home}${filename}-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+</included>
