@@ -68,11 +68,9 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - Effective use of CDN : `Y`
     
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요  
-    - `First Contentful Paint`
-    - `Speed Index`
-    - `Largest Contentful Paint`
-    - `Compress Transfer grade`
-    - `Effective use of CDN`
+    `First Contentful Paint`, `Speed Index`, `Largest Contentful Paint`  
+    `Compress Transfer grade`, `Effective use of CDN`  
+    **⇒ 자바스크립트 지연 로딩, 이미지 용량 압축, gzip을 이용한 텍스트 압축 사용, 정적 리소스 캐싱, CDN 사용 등을 통해 개선**
     
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
     - 대상 시스템 범위
@@ -96,6 +94,6 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요  
     ```text
-    시나리오 : 메인 → 로그인 → 내 정보 수정 → 경로조회
+    시나리오 : 메인 → 로그인 → 내 정보 조회 → 내 정보 수정 → 경로조회
     script 및 수행 결과는 script 디렉토리 참조 부탁드립니다.
     ```

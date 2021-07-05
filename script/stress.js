@@ -59,6 +59,7 @@ export function updateMyInfo(loginRes) {
   let params = {
     headers: {
       Authorization: `Bearer ${loginRes.json('accessToken')}`,
+      'Content-Type': 'application/json'
     },
   };
   return http.put(`${BASE_URL}/members/me`, payload, params).json();
@@ -75,16 +76,12 @@ export function findPath(loginRes, source, target) {
 };
 
 export default function() {
-  index();
+    index();
 
-  let loginRes = login();
-	check(loginRes, {"logged in successfully": resp => resp.json("accessToken") !== ""});
-  
-	check(getMyInfo(loginRes), { "retrieved member": obj => obj.id != 0 });
-	
-  check(updateMyInfo(loginRes), { "updated info": obj => obj.id != 0 });
-
-	check(findPath(loginRes, 2, 11), { "path check": obj => obj.stations.length != 0 });
-
-	sleep(1);
+    let loginRes = login();
+    check(loginRes, {"logged in successfully": resp => resp.json("accessToken") !== ""});
+    check(getMyInfo(loginRes), { "retrieved member": obj => obj.id != 0 });
+    check(updateMyInfo(loginRes), { "updated info": (r) => r.status == 200 });
+    check(findPath(loginRes, 2, 11), { "path check": obj => obj.stations.length != 0 });
+    sleep(1);
 }

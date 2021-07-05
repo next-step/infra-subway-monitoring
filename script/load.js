@@ -5,12 +5,13 @@ export let options = {
   stages: [
     { duration: '3m', target: 100 }, // 3분 동안 사용자 1명에서 100 명으로 증가하는 트래픽을 시뮬레이션합니다.
     { duration: '2m', target: 100 }, // 2분 동안 사용자 100 명 유지
-    { duration: '10s', target: 0 }, // 사용자 0 명으로 감소
+    { duration: '10s', target: 0 } // 사용자 0 명으로 감소
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
-  },
+    http_req_failed: ['rate<0.01'],
+    http_req_duration: ['p(99)<3125'], // 99% of requests must complete below 3.125s
+    'logged in successfully': ['p(99)<3125'], // 99% of requests must complete below 3.125s
+  }
 };
 
 const BASE_URL = 'http://3.34.50.208:8080';
@@ -53,9 +54,10 @@ export function updateMyInfo(loginRes) {
   let params = {
     headers: {
       Authorization: `Bearer ${loginRes.json('accessToken')}`,
+      'Content-Type': 'application/json'
     },
   };
-  return http.put(`${BASE_URL}/members/me`, payload, params).json();
+  return http.put(`${BASE_URL}/members/me`, payload, params);
 };
 
 export function findPath(loginRes, source, target) {
@@ -69,16 +71,13 @@ export function findPath(loginRes, source, target) {
 };
 
 export default function() {
-  index();
+    index();
+    let loginRes = login();
 
-  let loginRes = login();
-	check(loginRes, {"logged in successfully": resp => resp.json("accessToken") !== ""});
-  
-	check(getMyInfo(loginRes), { "retrieved member": obj => obj.id != 0 });
-	
-  check(updateMyInfo(loginRes), { "updated info": obj => obj.id != 0 });
+    check(loginRes, {"logged in successfully": resp => resp.json("accessToken") !== ""});
+    check(getMyInfo(loginRes), { "retrieved member": obj => obj.id != 0 });
+    check(updateMyInfo(loginRes), { "updated info": (r) => r.status == 200 });
+    check(findPath(loginRes, 2, 11), { "path check": obj => obj.stations.length != 0 });
 
-	check(findPath(loginRes, 2, 11), { "path check": obj => obj.stations.length != 0 });
-
-	sleep(1);
+    sleep(1);
 }
