@@ -1,0 +1,6 @@
+<ehcache>
+    <cache name="nextstep.subway.line.domain.Line"
+      maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"></cache>
+    <cache name="nextstep.subway.station.domain.Station"
+      maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"></cache>
+</ehcache>
