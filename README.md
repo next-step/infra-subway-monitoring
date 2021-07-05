@@ -152,7 +152,7 @@ npm run dev
 - 로그인 페이지 테스트 (login/token)
     - Smoke
       ![img.png](src/main/resources/images/k6_login_smoke.png)
-    - Load 
-      ![img.png](src/main/resources/images/k6_login_load.png)
+    - Load
+      ![img.png](img.png)
     - Stress
-      ![img.png](src/main/resources/images/k6_login_stress.png)  
+      ![img_1.png](img_1.png)
