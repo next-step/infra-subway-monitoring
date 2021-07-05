@@ -128,6 +128,7 @@ npm run dev
         - Throughput
             - 1일 평균 rps(1일 사용자 수 X 1명당 1일 평균 요청수 / 86400) = 10만 X 4번 / 86400 = 4.6
             - 1일 최대 rps(1일 평균 rps x (최대 트래픽 / 평소 트래픽)) = 4.6*5 = 23
+        - Latency : 100ms
     
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
     - 메인 화면 경로 : /loadtest/main

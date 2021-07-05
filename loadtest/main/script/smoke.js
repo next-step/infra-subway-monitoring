@@ -6,11 +6,11 @@ export let options = {
     duration: '10s',
 
     thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<100'], // 99% of requests must complete below 0.1s
     },
 };
 
-const BASE_URL = '192.168.77.45';
+const BASE_URL = 'https://applemango2021.kro.kr';
 
 export default function () {
     let myObjects = http.get(`${BASE_URL}`);
