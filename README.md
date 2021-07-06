@@ -79,9 +79,80 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+- 아래 비교 해본 경과 
+- First Contentful Paint(FCP) : 3초 이내
+- Largest Contentful Paint(LCP) : 3초 이내
+- Cumulative Layout Shift(CLS)  : 1초 이내
+- Speed Index : 3초 이내
+- Time to Interactive : 10초 이내
+- Total Bolcking Time : 500ms 이내
+```
+- 서브웨이
+- First Contentful Paint(FCP) : 14.9s (문제)
+- Largest Contentful Paint(LCP) : 15.6s (문제)
+- Cumulative Layout Shift(CLS) : 0.047 (좋음)
+- Speed Index : 14.9s (문제)
+- Time to Interactive : 15.6s (문제)
+- Total Blocking Time : 530ms (경고)
+```
+```
+- 당근마켓 
+- First Contentful Paint(FCP) : 1.3s (좋음)
+- Largest Contentful Paint(LCP) : 1.5s (좋음)
+- Cumulative Layout Shift(CLS) : 0 (좋음)
+- Speed Index : 3.6s (경고)
+- Time to Interactive : 7.7s (문제)
+- Total Blocking Time : 210ms (경고)
+```
+```
+- 인프런 
+- First Contentful Paint(FCP) : 1.4s (좋음)
+- Largest Contentful Paint(LCP) : 2.2s (좋음)
+- Cumulative Layout Shift(CLS) : 0.07 (좋음)
+- Speed Index : 21.6s (문제)
+- Time to Interactive : 43.3s (문제)
+- Total Blocking Time : 5.440ms (문제)
+```
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 텍스트 압축 사용
+    
+    ![img_3.png](src/main/resources/images/img_3.png) 
+- 사용하지 않는 자바스크립트 줄이기
+    ![img_2.png](src/main/resources/images/img_2.png)
+- 렌더링 차단 리소스 제거하기
+    ![img_1.png](src/main/resources/images/img_1.png)
+- 사용하지 않는 CSS 줄이기
+    ![img.png](src/main/resources/images/img.png)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- 예상 1일 사용자 수 (DAU) 
+    - 회원가입 : 100만명
+    - 100만명 / 30일 = 예상 3만명
+    - DAU : 30000
+- 피크 시간대의 집중률  
+    - 아침 시간 : 7 - 8시 사이
+    - 저녁 시간 : 6 - 7시 사이 
+- 1명당 1일 평균 요청수 : 5번
+- Throughput : 1일 평균 rps - 1일 최대 rps
+    - 1일 사용자 수(DAU) * 1명 당 1일 평균 요청 수 = 1일 총 접속 수 
+        - 1일 총 접속 수 : 30000 * 5 = 150000 (1일 총 접속 수)
+    - 1일 총 접속 수 / 86400(초/일) = 1일 평균 rps
+        - 150000 / 86400 = 약 1.73 (1일 평균 rps)
+    - 1일 평균 rps * (최대 트래픽 / 평소 트래픽) = 1일 최대 rps 
+        - 1.73 * (150000 / 30000) = 약 8.5rps (1일 최대 rps)
+  
+- 목표 값  
+~~~
+- 1일 총 접속 수 : 150000명
+- 1일 평균 rps : 1.7rps
+- 1일 최대 rps : 8.5rps
+~~~
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 로그인 페이지 테스트 (login/token)
+    - Smoke  - 1thread 1.97rps
+      ![img.png](src/main/resources/images/k6_login_smoke.png)
+    - Load   - 300thread 545rps
+      ![img.png](img.png)
+    - Stress - 500thread 876rps
+      ![img_1.png](img_1.png)
