@@ -1,5 +1,6 @@
 package nextstep.subway.map.dto;
 
+import nextstep.subway.common.JsonMapper;
 import nextstep.subway.station.dto.StationResponse;
 
 import java.util.List;
@@ -22,5 +23,10 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return JsonMapper.objectToJson(this);
     }
 }

@@ -1,0 +1,178 @@
+PS C:\Dev\k6> k6 run .\stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: .\stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 8m40s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 8m10s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (8m19.4s), 000/400 VUs, 12647 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  8m10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ updated info
+     ✓ path check
+
+     checks.........................: 100.00% ✓ 50588      ✗ 0
+     data_received..................: 38 MB   77 kB/s
+     data_sent......................: 14 MB   28 kB/s
+     http_req_blocked...............: avg=79.48µs  min=0s     med=0s      max=120.99ms p(90)=0s     p(95)=0s
+     http_req_connecting............: avg=72.58µs  min=0s     med=0s      max=120.99ms p(90)=0s     p(95)=0s
+   ✗ http_req_duration..............: avg=1.58s    min=2.17ms med=1.5s    max=10.09s   p(90)=3.32s  p(95)=3.58s
+       { expected_response:true }...: avg=1.52s    min=2.17ms med=1.38s   max=9.53s    p(90)=3.3s   p(95)=3.59s
+     http_req_failed................: 20.00%  ✓ 12647      ✗ 50588
+     http_req_receiving.............: avg=462.89µs min=0s     med=266.4µs max=299.2ms  p(90)=1.04ms p(95)=1.43ms
+     http_req_sending...............: avg=29.68µs  min=0s     med=0s      max=17.66ms  p(90)=0s     p(95)=192.25µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s      max=0s       p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=1.58s    min=1.78ms med=1.5s    max=10.09s   p(90)=3.32s  p(95)=3.58s
+     http_reqs......................: 63235   126.619522/s
+     iteration_duration.............: avg=8.92s    min=1.06s  med=8.22s   max=22.08s   p(90)=16.09s p(95)=16.36s
+     iterations.....................: 12647   25.323904/s
+     vus............................: 18      min=2        max=400
+     vus_max........................: 400     min=400      max=400
+
+ERRO[0501] some thresholds have failed
+
+
+PS C:\Dev\k6> k6 run .\stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: .\stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 8m30s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 8m0s over 8 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (8m00.6s), 000/400 VUs, 11635 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  8m0s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ updated info
+     ✓ path check
+
+     checks.........................: 100.00% ✓ 46540      ✗ 0
+     data_received..................: 35 MB   73 kB/s
+     data_sent......................: 13 MB   27 kB/s
+     http_req_blocked...............: avg=73.31µs  min=0s     med=0s      max=121.88ms p(90)=0s     p(95)=0s
+     http_req_connecting............: avg=66.26µs  min=0s     med=0s      max=121.88ms p(90)=0s     p(95)=0s
+   ✗ http_req_duration..............: avg=1.63s    min=1.85ms med=1.53s   max=10.87s   p(90)=3.18s  p(95)=3.42s
+       { expected_response:true }...: avg=1.57s    min=1.85ms med=1.43s   max=10.87s   p(90)=3.18s  p(95)=3.43s
+     http_req_failed................: 20.00%  ✓ 11635      ✗ 46540
+     http_req_receiving.............: avg=447.12µs min=0s     med=269.3µs max=39.56ms  p(90)=1.06ms p(95)=1.49ms
+     http_req_sending...............: avg=31.48µs  min=0s     med=0s      max=8.6ms    p(90)=0s     p(95)=328.22µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s      max=0s       p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=1.63s    min=1.85ms med=1.53s   max=10.87s   p(90)=3.18s  p(95)=3.42s
+     http_reqs......................: 58175   121.036174/s
+     iteration_duration.............: avg=9.17s    min=1.06s  med=8.92s   max=23.56s   p(90)=15.09s p(95)=15.96s
+     iterations.....................: 11635   24.207235/s
+     vus............................: 4       min=2        max=400
+     vus_max........................: 400     min=400      max=400
+
+ERRO[0483] some thresholds have failed
+
+
+PS C:\Dev\k6> k6 run .\stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: .\stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 300 max VUs, 6m30s max duration (incl. graceful stop):
+           * default: Up to 300 looping VUs for 6m0s over 6 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (6m00.3s), 000/300 VUs, 8605 complete and 0 interrupted iterations
+default ✓ [======================================] 000/300 VUs  6m0s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ updated info
+     ✓ path check
+
+     checks.........................: 100.00% ✓ 34420      ✗ 0
+     data_received..................: 26 MB   72 kB/s
+     data_sent......................: 9.6 MB  27 kB/s
+     http_req_blocked...............: avg=84.31µs min=0s    med=0s      max=105.32ms p(90)=0s     p(95)=0s
+     http_req_connecting............: avg=76.84µs min=0s    med=0s      max=105.32ms p(90)=0s     p(95)=0s
+   ✗ http_req_duration..............: avg=1.21s   min=0s    med=1.17s   max=6.93s    p(90)=2.45s  p(95)=2.62s
+       { expected_response:true }...: avg=1.16s   min=0s    med=1.09s   max=6.93s    p(90)=2.46s  p(95)=2.64s
+     http_req_failed................: 20.00%  ✓ 8605       ✗ 34420
+     http_req_receiving.............: avg=2.54ms  min=0s    med=534.8µs max=114.77ms p(90)=8.49ms p(95)=11.41ms
+     http_req_sending...............: avg=29.39µs min=0s    med=0s      max=14.96ms  p(90)=0s     p(95)=131.27µs
+     http_req_tls_handshaking.......: avg=0s      min=0s    med=0s      max=0s       p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=1.21s   min=0s    med=1.16s   max=6.93s    p(90)=2.45s  p(95)=2.62s
+     http_reqs......................: 43025   119.420456/s
+     iteration_duration.............: avg=7.09s   min=1.06s med=7.23s   max=19.31s   p(90)=11.58s p(95)=12.11s
+     iterations.....................: 8605    23.884091/s
+     vus............................: 3       min=2        max=300
+     vus_max........................: 300     min=300      max=300
+
+ERRO[0362] some thresholds have failed
+
+
+PS C:\Dev\k6> k6 run .\stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: .\stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 20m40s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 20m10s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (20m19.3s), 000/400 VUs, 29547 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  20m10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ updated info
+     ✓ path check
+
+     checks.........................: 100.00% ✓ 118188     ✗ 0
+     data_received..................: 89 MB   73 kB/s
+     data_sent......................: 33 MB   27 kB/s
+     http_req_blocked...............: avg=68.3µs  min=0s    med=0s      max=368.52ms p(90)=0s     p(95)=0s
+     http_req_connecting............: avg=60.59µs min=0s    med=0s      max=368.52ms p(90)=0s     p(95)=0s
+   ✗ http_req_duration..............: avg=1.69s   min=0s    med=1.63s   max=9.67s    p(90)=3.37s  p(95)=3.61s
+       { expected_response:true }...: avg=1.63s   min=0s    med=1.55s   max=9.67s    p(90)=3.37s  p(95)=3.63s
+     http_req_failed................: 20.00%  ✓ 29547      ✗ 118188
+     http_req_receiving.............: avg=2.36ms  min=0s    med=520.1µs max=387.09ms p(90)=8.14ms p(95)=11.02ms
+     http_req_sending...............: avg=30.65µs min=0s    med=0s      max=15.96ms  p(90)=0s     p(95)=98.5µs
+     http_req_tls_handshaking.......: avg=0s      min=0s    med=0s      max=0s       p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=1.69s   min=0s    med=1.63s   max=9.67s    p(90)=3.37s  p(95)=3.61s
+     http_reqs......................: 147735  121.165243/s
+     iteration_duration.............: avg=9.5s    min=1.06s med=8.4s    max=24.06s   p(90)=16.14s p(95)=16.41s
+     iterations.....................: 29547   24.233049/s
+     vus............................: 14      min=1        max=400
+     vus_max........................: 400     min=400      max=400
+
+ERRO[1222] some thresholds have failed
