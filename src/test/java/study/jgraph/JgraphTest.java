@@ -1,5 +1,6 @@
 package study.jgraph;
 
+import nextstep.subway.station.domain.Station;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.alg.shortestpath.KShortestPaths;
@@ -7,6 +8,7 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.WeightedMultigraph;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,5 +53,18 @@ public class JgraphTest {
                     assertThat(it.getVertexList()).startsWith(source);
                     assertThat(it.getVertexList()).endsWith(target);
                 });
+    }
+
+    @Test
+    void printListTEst() {
+        List<Station> stations = new ArrayList<>();
+        Station a = new Station("강남");
+        Station b = new Station("종로");
+        Station c = new Station("역삼");
+
+        stations.add(a);
+        stations.add(b);
+        stations.add(c);
+        System.out.println(stations);
     }
 }
