@@ -31,12 +31,4 @@ public class MemberRequest {
     public Member toMember() {
         return new Member(email, password, age);
     }
-
-    @Override
-    public String toString() {
-        return "MemberRequest{" +
-                "email='" + email + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }

@@ -2,7 +2,6 @@ package nextstep.subway.member.ui;
 
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
-import nextstep.subway.map.ui.MapController;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
@@ -25,9 +24,14 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
-        logger.info("회원 가입 요청: {}", request);
+        logger.info("회원 가입 요청: email={}, age={}"
+                , request.getEmail()
+                , request.getAge());
         MemberResponse member = memberService.createMember(request);
-        logger.info("회원 가입 응답: {}", member);
+        logger.info("회원 가입 응답: id={}, email={}, age={}"
+                , member.getId()
+                , member.getEmail()
+                , member.getAge());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 

@@ -13,11 +13,4 @@ public class TokenResponse {
     public String getAccessToken() {
         return accessToken;
     }
-
-    @Override
-    public String toString() {
-        return "TokenResponse{" +
-                "accessToken='" + accessToken + '\'' +
-                '}';
-    }
 }
