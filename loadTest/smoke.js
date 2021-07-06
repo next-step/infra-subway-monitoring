@@ -7,7 +7,7 @@ export default function() {
 
 export let options = {
     /* 2 Users during 30 seconds */
-    vus: 2,
+    vus: 10,
     duration: '30s',
     thresholds: {
         checks: ['rate > 0.95'], // 95% of requests must complete below 1.5s
