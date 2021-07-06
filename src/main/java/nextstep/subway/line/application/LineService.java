@@ -38,10 +38,12 @@ public class LineService {
             .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<Line> findLines() {
         return lineRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Line findLineById(Long id) {
         return lineRepository.findById(id).orElseThrow(RuntimeException::new);
     }
