@@ -150,9 +150,9 @@ npm run dev
 ~~~
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - 로그인 페이지 테스트 (login/token)
-    - Smoke
+    - Smoke  - 1thread 1.97rps
       ![img.png](src/main/resources/images/k6_login_smoke.png)
-    - Load
+    - Load   - 300thread 545rps
       ![img.png](img.png)
-    - Stress
+    - Stress - 500thread 876rps
       ![img_1.png](img_1.png)
