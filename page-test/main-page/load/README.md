@@ -8,7 +8,7 @@ import { check, group, sleep, fail } from 'k6';
 export let options = {
     stages: [
         {duration: '20s', target: 40},
-        {duration: '35s', target: 70},~~~~
+        {duration: '35s', target: 70},
         {duration: '5s', target: 0},
     ],
     thresholds: {
@@ -100,5 +100,3 @@ default ✗ [======================================] 00/70 VUs  1m0s
      vus_max........................: 70      min=70        max=70
 
 ```
-
-서비스가 원활한 상태 (응답 속도 100ms 이하) 를 유지하려면 vux 가 최대 70, rps 최대 1200 이하 정도여야 한다.

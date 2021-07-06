@@ -11,7 +11,9 @@ export let options = {
         {duration: '10s', target: 300},
         {duration: '10s', target: 400},
         {duration: '10s', target: 500},
-        {duration: '10s', target: 600}
+        {duration: '10s', target: 600},
+        {duration: '10s', target: 700},
+        {duration: '10s', target: 780},
     ],
     thresholds: {
         http_req_duration: ['p(99)<100'],
@@ -113,3 +115,4 @@ default ✗ [======================================] 000/780 VUs  1m20s
 
 ERRO[0082] some thresholds have failed
 ```
+내 정보 업데이트 페이지는 vux 750 정도 부터 실패하는 요청이 등장했다.
