@@ -24,9 +24,9 @@ public class AuthController {
 
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
-        logger.info("로그인 요청: {}", request);
+        logger.info("로그인 요청: email={}", request.getEmail());
         TokenResponse token = authService.login(request);
-        logger.info("로그인 응답: {}", token);
+        logger.info("로그인 응답: accessToken={}", token.getAccessToken());
         return ResponseEntity.ok().body(token);
     }
 }
