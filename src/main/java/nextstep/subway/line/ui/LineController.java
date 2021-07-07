@@ -96,9 +96,9 @@ public class LineController {
 
     @GetMapping("/tan")
     public String generateStreams() {
-        double value = 0;
+        /*double value = 0;
         IntStream.of(100).parallel().map(extracted(value));
-        extracted(value);
+        extracted(value);*/
         return "ok";
     }
 
