@@ -5,13 +5,18 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
+
 @RestController
 public class MemberController {
+    private static Logger logger = LoggerFactory.getLogger(MemberController.class);
+
     private MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -20,7 +25,9 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
+        logger.info("회원가입 요청 {}",request.toString());
         MemberResponse member = memberService.createMember(request);
+        logger.info("회원가입 응답 {}",member.toString());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
@@ -38,7 +45,9 @@ public class MemberController {
 
     @DeleteMapping("/members/{id}")
     public ResponseEntity<MemberResponse> deleteMember(@PathVariable Long id) {
+        logger.info("회원 삭제 요청 id: {}",id);
         memberService.deleteMember(id);
+        logger.info("회원 삭제 완료");
         return ResponseEntity.noContent().build();
     }
 
