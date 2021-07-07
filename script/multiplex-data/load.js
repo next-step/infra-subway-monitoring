@@ -29,30 +29,41 @@ export default function () {
 };
 
 /*
-running (2m10.0s), 000/250 VUs, 869 complete and 59 interrupted iterations
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load-multiplex.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 250 max VUs, 2m10s max duration (incl. graceful stop):
+           * default: 250 looping VUs for 1m40s (gracefulStop: 30s)
+
+
+running (1m42.0s), 000/250 VUs, 11112 complete and 0 interrupted iterations
 default ✓ [======================================] 250 VUs  1m40s
 
-     ✗ find path in successfully
-      ↳  29% — ✓ 256 / ✗ 617
+     ✓ find path in successfully
 
-     checks.........................: 29.32% ✓ 256      ✗ 617
-     data_received..................: 3.7 MB 28 kB/s
-     data_sent......................: 425 kB 3.3 kB/s
-     http_req_blocked...............: avg=91.35ms  min=0s    med=4.61ms   max=564.53ms p(90)=375.1ms  p(95)=525.96ms
-     http_req_connecting............: avg=5.5ms    min=0s    med=546.64µs max=38.52ms  p(90)=18.17ms  p(95)=31.11ms
-   ✗ http_req_duration..............: avg=31.96s   min=0s    med=31.65s   max=59.99s   p(90)=50.59s   p(95)=53.16s
-       { expected_response:true }...: avg=30.16s   min=1.16s med=37.85s   max=59.91s   p(90)=55.91s   p(95)=58.66s
-     http_req_failed................: 70.67% ✓ 617      ✗ 256
-     http_req_receiving.............: avg=138.97µs min=0s    med=80.02µs  max=13.94ms  p(90)=121.26µs p(95)=141.94µs
-     http_req_sending...............: avg=3.25ms   min=0s    med=63.43µs  max=111.67ms p(90)=10.61ms  p(95)=17.87ms
-     http_req_tls_handshaking.......: avg=80.89ms  min=0s    med=3.9ms    max=506.08ms p(90)=333.96ms p(95)=473.89ms
-     http_req_waiting...............: avg=31.95s   min=0s    med=31.65s   max=59.99s   p(90)=50.59s   p(95)=53.16s
-     http_reqs......................: 873    6.714687/s
-     iteration_duration.............: avg=33.03s   min=1s    med=32.62s   max=1m1s     p(90)=51.63s   p(95)=54.16s
-     iterations.....................: 869    6.683921/s
-     vus............................: 60     min=60     max=250
-     vus_max........................: 250    min=250    max=250
-
-ERRO[0131] some thresholds have failed
+     checks.........................: 100.00% ✓ 11112      ✗ 0
+     data_received..................: 35 MB   343 kB/s
+     data_sent......................: 2.0 MB  19 kB/s
+     http_req_blocked...............: avg=13.43ms  min=3.53µs  med=6.26µs  max=767.31ms p(90)=8.56µs  p(95)=19.39µs
+     http_req_connecting............: avg=650.15µs min=0s      med=0s      max=57.51ms  p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=1.25s    min=40.3ms  med=1.25s   max=3.81s    p(90)=1.39s   p(95)=1.46s
+       { expected_response:true }...: avg=1.25s    min=40.3ms  med=1.25s   max=3.81s    p(90)=1.39s   p(95)=1.46s
+     http_req_failed................: 0.00%   ✓ 0          ✗ 11112
+     http_req_receiving.............: avg=86.19µs  min=24.69µs med=59.72µs max=35.86ms  p(90)=93.29µs p(95)=123.5µs
+     http_req_sending...............: avg=607.47µs min=10.62µs med=19.62µs max=237.55ms p(90)=36.7µs  p(95)=58.45µs
+     http_req_tls_handshaking.......: avg=12.41ms  min=0s      med=0s      max=736.16ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=1.25s    min=40.23ms med=1.25s   max=3.8s     p(90)=1.39s   p(95)=1.46s
+     http_reqs......................: 11112   108.931744/s
+     iteration_duration.............: avg=2.27s    min=1.04s   med=2.25s   max=5.53s    p(90)=2.4s    p(95)=2.48s
+     iterations.....................: 11112   108.931744/s
+     vus............................: 2       min=2        max=250
+     vus_max........................: 250     min=250      max=250
 
 */
