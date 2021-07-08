@@ -44,8 +44,13 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+nginx : 15.165.74.244
+logPath : /home/ubuntu/nginx/logs
+WAS : 13.125.77.49
+logPath : /home/ubuntu/infra-subway-deploy-main/logs
 
+2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-reversalspring
 ---
 
 ### 2단계 - 성능 테스트
