@@ -122,3 +122,38 @@ npm run dev
    
    
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+   #### Login Test
+   * Smoke Test
+      * Test Result : rps 2.64, fail 0 %
+        ![smoke_login](./src/main/resources/static/images/smoke_login.png)
+
+   * Load Test
+      * Test Result : rps 247.24, fail 0 %
+        ![load_login](./src/main/resources/static/images/load_login.png)
+
+   * Stress Test
+      1. Test Result(Max 400) : rps 443.98, fail 0.01 %
+         ![stress_login_1](./src/main/resources/static/images/stress_login_max_400.png)
+
+      2. Test Result(Max 500) : rps 247.24, request fail 2.36 %, login fail 5%
+         ![stress_login_2](./src/main/resources/static/images/stress_login_max_500.png)
+
+   #### Path Test
+   * Smoke Test
+      * Test Result : rps 0.91, fail 0 %
+        ![smoke_path](./src/main/resources/static/images/smoke_path.png)
+
+   * Load Test
+      * Test Result : rps 13.31, fail 0 %
+        ![load_path](./src/main/resources/static/images/load_path.png)
+
+   * Stress Test
+      1. Test Result : rps 185.90, request fail 4.84 %, find path fail 13%
+         ![stress_path](./src/main/resources/static/images/stress_path.png)
+
+
+   ### Test 결과
+   * 로그인의 경우 Max User가 400 부터 요청 에러 발생 시작, 500으로 늘어나면서 로그인 실패 (5%)
+   * 경로 찾기의 경우 Max User가 260 부터 요청 에러 발생 시작, 300으로 늘어나면서 경로 찾기 실패 (13%)
+   * 로그인의 rps가 목표치에 충분히 도달하나, 경로 찾기의 경우 Load rps가 상대적으로 낮음. 개선 작업 필요  
