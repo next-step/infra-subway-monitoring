@@ -44,8 +44,9 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
    * public (3.35.221.168 , https://cupeanimus.r-e.kr/)
-      * front : /monitoring/infra-subway-mornitoring/frontend/web.log
+      * front : /home/ubuntu/logs/web.log
       * back(logback) :  /home/ubuntu/logs/subway.log
+      * back(logback) :  /home/ubuntu/logs/json.log
       * back(nohup) :  /home/ubuntu/logs/nohup.log
       * nginx : /var/log/nginx
 2. Cloudwatch 대시보드 URL을 알려주세요
