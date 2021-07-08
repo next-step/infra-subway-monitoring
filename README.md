@@ -55,8 +55,24 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+    항목 | 현재 | 목표 | 최종 | 배민
+    --- | --- | --- | --- | ---
+   First Contentful |  14.8s | 3s | ㅁ | 2.5
+   Speed Index |  14.8s | 10s | ㅁ | 8.6
+   Largest Contentful Paint |  15.4s | 5s | ㅁ | 4.2
+   Time to Interactive |  15.42 | 5s | ㅁ | 4.5 
+   Total Blocking Time |  0.55s | 0.5s | ㅁ | 0.28s 
+   Cumulative Layout Shift |  0.041s | 0.5s | ㅁ | 0.066 
+
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+ - gzip을 사용하여 데이터 압축 
+ - 사용하지 않는 자바스크립트 줄이기
+ - 렌더링 리소스 제거하기
+ - cache를 사용하여 초기 응답 시간 단축
+ - 사용하지 않는 css줄이기
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
