@@ -36,10 +36,8 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
-        log.info("SourceStation Name : {}",  sourceStation.getName());
-        log.info("TargetStation Name : {}",  targetStation.getName());
-        fileLogger.info("SourceStation Name : {}",  sourceStation.getName());
-        fileLogger.info("TargetStation Name : {}",  targetStation.getName());
+        log.info("SourceStation Name : {}, TargetStation Name : {}",  sourceStation.getName(), targetStation.getName());
+        fileLogger.info("SourceStation Name : {}, TargetStation Name : {}",  sourceStation.getName(), targetStation.getName());
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
