@@ -37,6 +37,11 @@ npm run dev
 ```
 <br>
 
+## 참고 
+- [WebPageTest](https://www.webpagetest.org/)
+- [PageSpeed](https://developers.google.com/speed/pagespeed/insights/)
+- [k6](https://k6.io/)
+
 ## 미션
 
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
