@@ -67,18 +67,20 @@ npm run dev
 
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-- 정량 기반 지표
-- 이미지 파일 최대 크기 : 3MB
-- 웹 글꼴 최대 크기 : 0.1MB
-- 웹 글꼴 최대 갯수 : 10개
-- 스크립트 최대 크기 : 1MB
-- 스크립트 갯수 : 2개
+###### 네이버 지하철 찾기 페이지를 기준으로 설정하였습니다.
 
-- 시간 지표
-- FCP : 6초
+##### 정량 기반 지표
+- 이미지 파일 최대 크기 : 5MB
+- 웹 글꼴 최대 크기 : 1MB
+- 웹 글꼴 최대 갯수 : 3개
+- 스크립트 최대 크기 : 1MB
+- 스크립트 갯수 : 10개
+
+##### 시간 지표
+- FCP : 3초
 - LCP : 6초
 
-- 규칙 기반 지표
+##### 규칙 기반 지표
 - WebPageTest
 - First Byte Time : A
 - Keep-alive Enabled : A
@@ -93,7 +95,9 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 - 대상 시스템 범위 : 지하철 역 관리
-- 동시사용자수 : 4만명, Latency : 50ms, throughput : 1000TPS
+- 최대 동시사용자수 : 3500명 -> 하루평균 지하철 수송 인원 500만명이라 가정(https://www.edaily.co.kr/news/read?newsId=02958566629111568&mediaCodeNo=257&OutLnkChk=Y)하였을 때 러시아워인 출퇴근 시간대의 이용객이 전체의 1/3이므로(http://www.job-post.co.kr/news/articleView.html?idxno=27248) 출근시간대에는 약 90만명이 지하철을 이용한다고 가정할 수 있다. 출근시간이 6~9시라고 가정을 하면 1시간 동안 평균 30만명이므로 최대 40만명이라고 잡을 수 있고 앱 이용시간을 30초로 잡았을 때 40만명/60분/2인 3500명 정도가 동시에 이용한다고 가정할 수 있다.
+- Latency : 50ms
+- throughput : 500TPS -> 3500명이 분산해서 사용하므로 TPS는 500로 잡았다.
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -106,7 +110,7 @@ import http from "k6/http";
 import { check, group, sleep, fail } from "k6";
 
 export let options = {
-  vus: 1, // 1 user looping for 1 minute
+  vus: 1, 
   duration: "10s",
 
   thresholds: {
@@ -168,7 +172,7 @@ export let options = {
   stages: [
     { duration: "5s", target: 100 },
     { duration: "20s", target: 100 },
-    { duration: "5s", target: 0 },
+    { duration: "5s", target: 20 },
   ],
 
   thresholds: {
@@ -188,7 +192,7 @@ export default function () {
 ```
 
 ```
-  execution: local
+    execution: local
      script: loadstations.js
      output: -
 
@@ -196,30 +200,30 @@ export default function () {
            * default: Up to 100 looping VUs for 30s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (0m32.5s), 000/100 VUs, 590 complete and 0 interrupted iterations
-default ↓ [======================================] 054/100 VUs  30s
+running (0m33.3s), 000/100 VUs, 566 complete and 0 interrupted iterations
+default ↓ [======================================] 061/100 VUs  30s
 
      ✓ get stations successfully
 
-     checks.........................: 100.00% ✓ 590       ✗ 0
-     data_received..................: 43 MB   1.3 MB/s
-     data_sent......................: 105 kB  3.2 kB/s
-     http_req_blocked...............: avg=2.41ms   min=4.07µs   med=5.89µs  max=114.94ms p(90)=5.75ms   p(95)=11.46ms
-     http_req_connecting............: avg=567.38µs min=0s       med=0s      max=42.56ms  p(90)=550.51µs p(95)=802.95µs
-   ✗ http_req_duration..............: avg=4.64s    min=164.18ms med=5.25s   max=10.42s   p(90)=5.54s    p(95)=5.64s
-       { expected_response:true }...: avg=4.64s    min=164.18ms med=5.25s   max=10.42s   p(90)=5.54s    p(95)=5.64s
-     http_req_failed................: 0.00%   ✓ 0         ✗ 590
-     http_req_receiving.............: avg=13.85ms  min=171.61µs med=9.89ms  max=91.78ms  p(90)=27.87ms  p(95)=39.64ms
-     http_req_sending...............: avg=215.45µs min=11.47µs  med=20.63µs max=48.23ms  p(90)=65.61µs  p(95)=81.01µs
-     http_req_tls_handshaking.......: avg=1.79ms   min=0s       med=0s      max=79.95ms  p(90)=4.46ms   p(95)=9.15ms
-     http_req_waiting...............: avg=4.63s    min=145.67ms med=5.23s   max=10.41s   p(90)=5.53s    p(95)=5.61s
-     http_reqs......................: 590     18.154633/s
-     iteration_duration.............: avg=4.64s    min=168.69ms med=5.25s   max=10.42s   p(90)=5.54s    p(95)=5.64s
-     iterations.....................: 590     18.154633/s
-     vus............................: 17      min=17      max=100
+     checks.........................: 100.00% ✓ 566       ✗ 0    
+     data_received..................: 41 MB   1.2 MB/s
+     data_sent......................: 103 kB  3.1 kB/s
+     http_req_blocked...............: avg=1.56ms   min=4.06µs   med=6.25µs max=37.02ms p(90)=5.61ms   p(95)=8.95ms  
+     http_req_connecting............: avg=212.86µs min=0s       med=0s     max=9.35ms  p(90)=697.26µs p(95)=948.76µs
+   ✗ http_req_duration..............: avg=4.94s    min=101.43ms med=5.71s  max=10.98s  p(90)=5.94s    p(95)=5.98s   
+       { expected_response:true }...: avg=4.94s    min=101.43ms med=5.71s  max=10.98s  p(90)=5.94s    p(95)=5.98s   
+     http_req_failed................: 0.00%   ✓ 0         ✗ 566  
+     http_req_receiving.............: avg=14.89ms  min=141.35µs med=11.2ms max=92.68ms p(90)=31.45ms  p(95)=38.91ms 
+     http_req_sending...............: avg=41.73µs  min=12.43µs  med=23.7µs max=2.62ms  p(90)=79.65µs  p(95)=103.74µs
+     http_req_tls_handshaking.......: avg=1.3ms    min=0s       med=0s     max=29.27ms p(90)=4.78ms   p(95)=7.06ms  
+     http_req_waiting...............: avg=4.92s    min=96.06ms  med=5.69s  max=10.97s  p(90)=5.92s    p(95)=5.97s   
+     http_reqs......................: 566     16.994446/s
+     iteration_duration.............: avg=4.94s    min=115.08ms med=5.71s  max=10.98s  p(90)=5.94s    p(95)=5.98s   
+     iterations.....................: 566     16.994446/s
+     vus............................: 11      min=11      max=100
      vus_max........................: 100     min=100     max=100
 
-ERRO[0034] some thresholds have failed
+ERRO[0034] some thresholds have failed 
 ```
 
 ##### Stress Test
@@ -230,13 +234,13 @@ import { check, group, sleep, fail } from "k6";
 
 export let options = {
   stages: [
-    { duration: "5s", target: 100 },
-    { duration: "10s", target: 100 },
-    { duration: "5s", target: 200 },
     { duration: "10s", target: 200 },
-    { duration: "5s", target: 300 },
-    { duration: "10s", target: 300 },
-    { duration: "5s", target: 0 },
+    { duration: "10s", target: 100 },
+    { duration: "15s", target: 300 },
+    { duration: "10s", target: 150 },
+    { duration: "5s", target: 100 },
+    { duration: "10s", target: 200 },
+    { duration: "5s", target: 100 },
   ],
   thresholds: {
     http_req_duration: ["p(99)<7500"],
@@ -261,28 +265,29 @@ export default function () {
   scenarios: (100.00%) 1 scenario, 300 max VUs, 1m20s max duration (incl. graceful stop):
            * default: Up to 300 looping VUs for 50s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-running (1m01.7s), 000/300 VUs, 5136 complete and 0 interrupted iterations
-default ✗ [======================================] 000/300 VUs  50s
+running (1m35.0s), 000/300 VUs, 19018 complete and 75 interrupted iterations
+default ✓ [======================================] 033/300 VUs  1m5s
 
      ✗ get stations successfully
-      ↳  19% — ✓ 1027 / ✗ 4109
+      ↳  1% — ✓ 301 / ✗ 18717
 
-     checks.........................: 19.99% ✓ 1027      ✗ 4109 
-     data_received..................: 78 MB  1.3 MB/s
-     data_sent......................: 1.5 MB 24 kB/s
-     http_req_blocked...............: avg=8.66ms   min=0s       med=0s       max=550.43ms p(90)=19.59ms p(95)=59.96ms 
-     http_req_connecting............: avg=33.15ms  min=0s       med=19.97ms  max=307.5ms  p(90)=82.86ms p(95)=116.87ms
-   ✗ http_req_duration..............: avg=2s       min=0s       med=0s       max=27.75s   p(90)=9.89s   p(95)=14.76s  
-       { expected_response:true }...: avg=10s      min=116.04ms med=9.91s    max=27.75s   p(90)=16.74s  p(95)=17.59s  
-     http_req_failed................: 80.00% ✓ 4109      ✗ 1027 
-     http_req_receiving.............: avg=4.22ms   min=0s       med=0s       max=456.24ms p(90)=11.71ms p(95)=24.05ms 
-     http_req_sending...............: avg=438.25µs min=0s       med=0s       max=183.27ms p(90)=61.31µs p(95)=149.08µs
-     http_req_tls_handshaking.......: avg=6.74ms   min=0s       med=0s       max=430.02ms p(90)=12.35ms p(95)=43.91ms 
-     http_req_waiting...............: avg=1.99s    min=0s       med=0s       max=27.74s   p(90)=9.86s   p(95)=14.76s  
-     http_reqs......................: 5136   83.289462/s
-     iteration_duration.............: avg=2.13s    min=1.19ms   med=182.99ms max=27.76s   p(90)=9.9s    p(95)=14.8s   
-     iterations.....................: 5136   83.289462/s
-     vus............................: 16     min=16      max=300
-     vus_max........................: 300    min=300     max=300
+     checks.........................: 1.58%  ✓ 301        ✗ 18717
+     data_received..................: 39 MB  414 kB/s
+     data_sent......................: 6.0 MB 64 kB/s
+     http_req_blocked...............: avg=5.68ms   min=0s       med=0s      max=315.8ms  p(90)=10.03ms p(95)=28.05ms 
+     http_req_connecting............: avg=10.9ms   min=0s       med=4ms     max=154.47ms p(90)=30.02ms p(95)=40.36ms 
+   ✗ http_req_duration..............: avg=729.89ms min=0s       med=0s      max=50.69s   p(90)=1.76ms  p(95)=5.99ms  
+       { expected_response:true }...: avg=16.18s   min=274.04ms med=6.25s   max=50.69s   p(90)=40.71s  p(95)=45.69s  
+     http_req_failed................: 98.41% ✓ 18717      ✗ 301  
+     http_req_receiving.............: avg=346.05µs min=0s       med=0s      max=102.77ms p(90)=87.79µs p(95)=236.28µs
+     http_req_sending...............: avg=285.81µs min=0s       med=0s      max=53.82ms  p(90)=70.13µs p(95)=163.21µs
+     http_req_tls_handshaking.......: avg=4.44ms   min=0s       med=0s      max=288.15ms p(90)=8.37ms  p(95)=23.46ms 
+     http_req_waiting...............: avg=729.25ms min=0s       med=0s      max=50.68s   p(90)=1.16ms  p(95)=2.09ms  
+     http_reqs......................: 19018  200.150926/s
+     iteration_duration.............: avg=752.08ms min=1.08ms   med=13.54ms max=50.69s   p(90)=60.17ms p(95)=109.42ms
+     iterations.....................: 19018  200.150926/s
+     vus............................: 33     min=20       max=300
+     vus_max........................: 300    min=300      max=300
 
-ERRO[0063] some thresholds have failed   
+ERRO[0097] some thresholds have failed  
+```
