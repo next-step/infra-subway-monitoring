@@ -4,6 +4,7 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
+import nextstep.subway.common.MaskingUtils;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class AuthService {
 
         String token = jwtTokenProvider.createToken(request.getEmail());
 
-        logger.info("Success Login Member : {}", request.getEmail());
+        logger.info("Success Login Member : {}", MaskingUtils.toMaskedEmail(request.getEmail()));
 
         return new TokenResponse(token);
     }
@@ -43,7 +44,7 @@ public class AuthService {
         String email = jwtTokenProvider.getPayload(credentials);
         Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
 
-        logger.info("Success Auth Member : {}", email);
+        logger.info("Success Auth Member : {}", MaskingUtils.toMaskedEmail(email));
 
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
     }

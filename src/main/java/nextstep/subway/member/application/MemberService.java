@@ -1,5 +1,6 @@
 package nextstep.subway.member.application;
 
+import nextstep.subway.common.MaskingUtils;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
@@ -23,7 +24,7 @@ public class MemberService {
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
 
-        logger.info("Success CreateMember Member : {}({})", member.getId(), member.getEmail());
+        logger.info("Success CreateMember Member : {}({})", member.getId(), MaskingUtils.toMaskedEmail(member.getEmail()));
 
         return MemberResponse.of(member);
     }
