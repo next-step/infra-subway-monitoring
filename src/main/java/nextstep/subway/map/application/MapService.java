@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @Transactional
 public class MapService {
-    private static Logger logger = LoggerFactory.getLogger(MapService.class);
+    private static Logger logger = LoggerFactory.getLogger("json");
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
