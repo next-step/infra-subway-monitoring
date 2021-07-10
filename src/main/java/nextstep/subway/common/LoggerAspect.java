@@ -14,11 +14,31 @@ public class LoggerAspect {
     private static final Logger jsonLogger = LoggerFactory.getLogger("json");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
+    /*@Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
+    public void getMappingPointCut() {
+    }*/
+
+    @Pointcut("@annotation(org.springframework.web.bind.annotation.PostMapping)")
+    public void postMappingPointCut() {
+    }
+
+    @Pointcut("@annotation(org.springframework.web.bind.annotation.PutMapping)")
+    public void putMappingPointCut() {
+    }
+
+    @Pointcut("@annotation(org.springframework.web.bind.annotation.DeleteMapping)")
+    public void DeleteMappingPointCut() {
+    }
+
     @Pointcut("execution(* nextstep.subway.*.ui.*Controller.*(..))")
     public void controllerPointCut() {
     }
 
-    @Around("controllerPointCut()")
+    @Pointcut("controllerPointCut() && (postMappingPointCut() || putMappingPointCut() || DeleteMappingPointCut())")
+    public void requestPointCut(){
+    }
+
+    @Around("requestPointCut()")
     public Object commonPrintLog(ProceedingJoinPoint pjp) throws Throwable {
         long startAt = System.currentTimeMillis();
         Object result = pjp.proceed();
