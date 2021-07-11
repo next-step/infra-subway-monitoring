@@ -87,5 +87,210 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 부분의 개선이 필요해 보임.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-   
+1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+Latency : 일반적으로 50~100ms이하로 잡는 것이 좋습니다.
+
+예상
+- 네이버지도 6개월간 사용자 수 통계 41M [링크](https://www.similarweb.com/website/map.naver.com/)
+- 하루 사용량 예상: 22만명 가량으로 예상
+- 사용자가 보통 2번씩 사용한다고 가정
+- 1일 총 접속수: 22만명 * 2 = 44만회
+- 440,000 / 86400 = 5.09rps
+- 1일 최대 rps: 5.09 * 200,000 / 50,000 = 20.36 rps
+- 사용자가 1분 내외로 사용한다고 가정.
+  
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+smoke.js
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://www.jeongminkyo.kro.kr';
+const USERNAME = 'test@email.com';
+const PASSWORD = 'test';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  경로조회(loginRes);
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+```
+![smoke](./src/main/resources/static/images/smoke_test.png)
+
+load.js
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+        { duration: '10s', target: 100 },
+        { duration: '20s', target: 200 },
+        { duration: '10s', target: 0 }
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://www.jeongminkyo.kro.kr';
+const USERNAME = 'test@email.com';
+const PASSWORD = 'test';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  경로조회(loginRes);
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+
+```
+
+![smoke](./src/main/resources/static/images/load_test.png)
+
+stress.js
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+        { duration: '5s', target: 100 },
+        { duration: '20s', target: 200 },
+        { duration: '5s', target: 300 },
+        { duration: '20s', target: 400 },
+        { duration: '5s', target: 0 },
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://www.jeongminkyo.kro.kr';
+const USERNAME = 'test@email.com';
+const PASSWORD = 'test';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  경로조회(loginRes);
+  sleep(1);
+};
+
+export function 경로조회(loginRes){
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  return http.get(`${BASE_URL}/paths/?source=1&target=2`, authHeaders).json();
+};
+```
+![smoke](./src/main/resources/static/images/stress_test.png)
