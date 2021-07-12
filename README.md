@@ -184,4 +184,4 @@ npm run dev
         * 접속 빈도가 높은 페이지 [O]
         * 데이터를 갱신하는 페이지 [O]
         * 데이터를 조회하는데 여러 데이터를 참조하는 페이지 [O]
-    * Smoke, Load, Stress 테스트 후 결과를 기록 
+    * Smoke, Load, Stress 테스트 후 결과를 기록 [O]
