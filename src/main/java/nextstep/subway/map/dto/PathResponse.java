@@ -3,6 +3,7 @@ package nextstep.subway.map.dto;
 import nextstep.subway.station.dto.StationResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PathResponse {
     private List<StationResponse> stations;
@@ -22,5 +23,11 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    public List<String> getStationsName() {
+        return getStations().stream()
+                .map(it -> it.getName())
+                .collect(Collectors.toList());
     }
 }
