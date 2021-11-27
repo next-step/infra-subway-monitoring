@@ -30,6 +30,7 @@
   - [ ] member 항목에대한 Log 추가
   - [ ] station 항목에대한 Log 추가
 - [ ] Nginx Access Log 설정
+- [ ] Docker 상태확인하기 (cAdvisor 설치)
 - [ ] Cloudwatch로 로그 수집하기
 - [ ] Cloudwatch로 메트릭 수집하기
 ---
