@@ -17,9 +17,13 @@
 ## 1단계 - 인프라 운영하기
 ### PR 질문 문답
 1. 각 서버내 로깅 경로를 알려주세요
-  =>
+- syslog : /var/log/syslog
+- nginx access log : /var/log/nginx/access.log
+- nginx error log : /var/log/nginx/error.log
+- application log : /app/infra_monitoring/log/subway.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
-  =>
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=lunechaser-publicA2-DASHBOARD
 
 ### 작업 리스트
 - [x] Application Log에대한 로그파일 생성 및 저장
