@@ -20,7 +20,7 @@
 - syslog : /var/log/syslog
 - nginx access log : /var/log/nginx/access.log
 - nginx error log : /var/log/nginx/error.log
-- application log : /app/infra_monitoring/log/subway.log
+- application log : /app/infra_monitoring/log/file_subway.log, /app/infra_monitoring/log/json_subway.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=lunechaser-publicA2-DASHBOARD
