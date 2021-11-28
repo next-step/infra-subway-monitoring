@@ -36,6 +36,9 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+	compile "org.slf4j:slf4j-api:1.7.7"
+	compile 'ch.qos.logback:logback-classic:1.2.3'
 }
 
 test {
