@@ -5,11 +5,11 @@ services:
     container_name: local-db
     restart: always
     ports:
-      - 13306:3306
+      - 23306:3306
     environment:
       MYSQL_ROOT_PASSWORD: masterpw
       MYSQL_DATABASE: subway
-      TZ: Asia/Seoul
+#      TZ: Asia/Seoul
     volumes:
       - ./db/mysql/data:/var/lib/mysql
       - ./db/mysql/config:/etc/mysql/conf.d
