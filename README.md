@@ -53,7 +53,6 @@ npm run dev
 3. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=bgpark82-dashboard
 
----
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
