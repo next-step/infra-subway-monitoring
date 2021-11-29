@@ -14,32 +14,41 @@
 
 # 인프라공방 샘플 서비스 - 지하철 노선도
 
-## 1단계 - 인프라 운영하기
-### PR 질문 문답
+<br>
+
+## 🚀 Getting Started
+
+### Install
+#### npm 설치
+```
+cd frontend
+npm install
+```
+> `frontend` 디렉토리에서 수행해야 합니다.
+
+### Usage
+#### webpack server 구동
+```
+npm run dev
+```
+#### application 구동
+```
+./gradlew clean build
+```
+<br>
+
+## 미션
+
+* 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
+
+### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-- syslog : /var/log/syslog
-- nginx access log : /var/log/nginx/access.log
-- nginx error log : /var/log/nginx/error.log
-- application log : /app/infra_monitoring/log/file_subway.log, /app/infra_monitoring/log/json_subway.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=lunechaser-publicA2-DASHBOARD
 
-### 작업 리스트
-- [x] Application Log에대한 로그파일 생성 및 저장
-  - [x] Auth 항목에대한 Log 추가
-  - [x] favorite 항목에대한 Log 추가
-  - [x] line 항목에대한 Log 추가
-  - [x] map 항목에대한 Log 추가
-  - [x] member 항목에대한 Log 추가
-  - [x] station 항목에대한 Log 추가
-- [x] Nginx Access Log 설정
-- [x] Docker 상태확인하기 (cAdvisor 설치)
-- [x] Cloudwatch로 로그 수집하기
-- [x] Cloudwatch로 메트릭 수집하기
 ---
 
-## 2단계 - 성능 테스트
+### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요

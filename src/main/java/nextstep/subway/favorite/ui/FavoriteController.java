@@ -2,7 +2,6 @@ package nextstep.subway.favorite.ui;
 
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
-import nextstep.subway.common.JsonLogging;
 import nextstep.subway.favorite.application.FavoriteService;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
@@ -28,7 +27,6 @@ public class FavoriteController {
                 .build();
     }
 
-    @JsonLogging
     @GetMapping("/favorites")
     public ResponseEntity<List<FavoriteResponse>> getFavorites(@AuthenticationPrincipal LoginMember loginMember) {
         List<FavoriteResponse> favorites = favoriteService.findFavorites(loginMember);
