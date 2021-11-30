@@ -12,7 +12,6 @@
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
             <includeContext>true</includeContext>
             <includeCallerData>true</includeCallerData>

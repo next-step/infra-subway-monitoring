@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/lines")
 public class LineController {
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -24,6 +28,9 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
+        fileLogger.info("Line 생성 : {}", lineRequest);
+        jsonLogger.info("Line 생성 : {}", lineRequest);
+
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
