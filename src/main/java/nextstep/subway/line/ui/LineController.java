@@ -70,25 +70,14 @@ public class LineController {
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
-    public String findLockLeft() throws InterruptedException {
-
-        synchronized (left) {
-            Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
-        }
+    public String findLockLeft() {
+        System.out.println("left");
         return "ok";
     }
 
     @GetMapping("/lock-right")
-    public String findLockRight() throws InterruptedException {
-        synchronized (right) {
-            Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
-        }
+    public String findLockRight() {
+        System.out.println("right");
         return "ok";
     }
 
@@ -101,10 +90,7 @@ public class LineController {
     }
 
     private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
-        return null;
+        return any -> (int) Math.tan(value);
     }
 
 
