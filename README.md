@@ -56,7 +56,7 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+- 성능 퍼포먼스 점수 30% 개선 (pagespeed.web.dev 기준)
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - 정적 리소스 gzip 압축
@@ -89,6 +89,10 @@ npm run dev
     <link rel="stylesheet" href="/path/to/my.css" media="print" onload="this.media='all'">
     ```
   - 출처 : https://www.filamentgroup.com/lab/load-css-simpler/
+- 결과
+  - 67점 -> 89점 (약 30% 개선)
+  ![](./images/webpage-speed.png)
+  ![](./images/webpage-test.png)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
