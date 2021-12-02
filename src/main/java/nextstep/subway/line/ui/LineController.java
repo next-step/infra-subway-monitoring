@@ -26,8 +26,10 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-        fileLogger.info("Line 생성 : {}", lineRequest);
-        jsonLogger.info("Line 생성 : {}", lineRequest);
+        fileLogger.info("Line 생성 : name = {}, color = {}, upStation = {}, downStation = {}"
+                , lineRequest.getName(), lineRequest.getColor(), lineRequest.getUpStationId(), lineRequest.getDownStationId());
+        jsonLogger.info("Line 생성 : name = {}, color = {}, upStation = {}, downStation = {}"
+                , lineRequest.getName(), lineRequest.getColor(), lineRequest.getUpStationId(), lineRequest.getDownStationId());
 
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
