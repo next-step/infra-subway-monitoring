@@ -41,7 +41,9 @@ dependencies {
 	implementation "mysql:mysql-connector-java"
 
 	compile "org.slf4j:slf4j-api:1.7.7"
-	compile 'ch.qos.logback:logback-classic:1.2.3'
+	compile 'ch.qos.logback:logback-classic:1.2.7'
+
+	testImplementation 'io.rest-assured:xml-path:4.2.0'
 
 }
 
