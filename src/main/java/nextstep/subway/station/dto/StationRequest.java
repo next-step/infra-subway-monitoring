@@ -3,6 +3,7 @@ package nextstep.subway.station.dto;
 import nextstep.subway.station.domain.Station;
 
 public class StationRequest {
+
     private String name;
 
     public String getName() {
@@ -11,5 +12,12 @@ public class StationRequest {
 
     public Station toStation() {
         return new Station(name);
+    }
+
+    @Override
+    public String toString() {
+        return "StationRequest{" +
+            "name='" + name + '\'' +
+            '}';
     }
 }

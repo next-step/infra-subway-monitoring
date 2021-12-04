@@ -46,14 +46,14 @@ public class LoggingAspect {
         String requestId = newRequestId();
         MDC.put(REQUEST_ID, requestId);
         jsonLogger.info("Requested Id {} Start", requestId);
-        jsonLogger.info("Requested Id: ({}) / Invoked Method: {}::{}", requestId,
+        jsonLogger.info("Requested Id: {} / Invoked Method: {}::{}", requestId,
             joinPoint.getSignature().getDeclaringTypeName(),
             joinPoint.getSignature().getName()
         );
 
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
-            jsonLogger.info("Requested Id: ({}) / Arguments[{}]: {}", requestId, i, args[i]);
+            jsonLogger.info("Requested Id: {} / Arguments[{}]: {}", requestId, i, args[i]);
         }
     }
 
