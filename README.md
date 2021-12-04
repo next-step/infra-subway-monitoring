@@ -42,9 +42,23 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
+1. 각 서버내 로깅 경로를 알려주세요 
+
+  - nginx
+    - name: devyonghee-subway-reverse-proxy
+    - public ip: 3.34.196.5
+    - private ip: 192.169.0.61
+    - log : /var/log/nginx
+      
+  - application
+    - name: devyonghee-subway-service-web
+    - public ip: 15.164.225.129
+    - private ip: 192.169.0.158
+    - log: /home/ubuntu/infra-subway-monitoring/log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=devyonghee-dashboard
 
 ---
 
