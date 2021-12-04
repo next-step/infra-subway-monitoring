@@ -43,8 +43,24 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- URL : https://tyranotyrano-subway.p-e.kr
+- public-web1
+    - public ip : 54.180.141.237
+    - private ip : 198.168.100.14
+    - app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
+    - app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access-file.log
+- public-web2
+    - public ip : 13.209.49.162
+    - private ip : 198.168.100.115
+    - app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
+    - app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access-file.log
+- (공통) nginx
+    - /var/log/nginx/access.log
+    - /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- public-web1 : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=tyranotyrano-public-web1-dashboard
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=tyranotyrano-public-web2-dashboard
 
 ---
 
