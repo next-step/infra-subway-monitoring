@@ -50,7 +50,7 @@ npm run dev
     - app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
     - app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access-file.log
 - public-web2
-    - public ip : 13.209.49.162
+    - public ip : 13.209.68.20
     - private ip : 198.168.100.115
     - app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
     - app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access-file.log
