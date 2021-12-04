@@ -43,7 +43,9 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+   - ip : 172.30.0.122
+   - nginx : /var/log/nginx
+   - syslog : /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
    https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2&state=hashArgs%23alarmsV2%3A%3F~(alarmStateFilter~%27ALARM)#dashboards:name=ungseokchoi-dashboard;start=PT1H
 ---
