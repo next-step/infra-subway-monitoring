@@ -16,7 +16,7 @@ import org.springframework.util.StopWatch;
 public class LoggingAspect {
 
     private static final String REQUEST_ID = "requestId";
-    private static final Logger LOGGER = LoggerFactory.getLogger("json");
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
 
     @Around("execution(* nextstep.subway.*.ui.*.*(..)) && @annotation(Logging)")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -38,29 +38,29 @@ public class LoggingAspect {
 
     private void logResult(Object result, long totalTimeMillis) {
         String requestId = MDC.get(REQUEST_ID);
-        LOGGER.info("Requested Id {} End (Time: {}ms)", requestId, totalTimeMillis);
-        LOGGER.info("Requested Id: {} / Response: {}", requestId, result);
+        jsonLogger.info("Requested Id {} End (Time: {}ms)", requestId, totalTimeMillis);
+        jsonLogger.info("Requested Id: {} / Response: {}", requestId, result);
     }
 
     private void logBefore(JoinPoint joinPoint) {
         String requestId = newRequestId();
         MDC.put(REQUEST_ID, requestId);
-        LOGGER.info("Requested Id {} Start", requestId);
-        LOGGER.info("Requested Id: ({}) / Invoked Method: {}::{}", requestId,
+        jsonLogger.info("Requested Id {} Start", requestId);
+        jsonLogger.info("Requested Id: ({}) / Invoked Method: {}::{}", requestId,
             joinPoint.getSignature().getDeclaringTypeName(),
             joinPoint.getSignature().getName()
         );
 
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
-            LOGGER.debug("Requested Id: ({}) / Arguments[{}]: {}", requestId, i, args[i]);
+            jsonLogger.info("Requested Id: ({}) / Arguments[{}]: {}", requestId, i, args[i]);
         }
     }
 
     private void logError(ProceedingJoinPoint joinPoint, Exception e, long totalTimeMillis) {
         String requestId = MDC.get(REQUEST_ID);
-        LOGGER.error("Requested Id {} Error (Time: {}ms)", requestId, totalTimeMillis);
-        LOGGER.error("Requested Id: {} / Invoked Method: {}::{} / Occurred Error: {}.{}",
+        jsonLogger.error("Requested Id {} Error (Time: {}ms)", requestId, totalTimeMillis);
+        jsonLogger.error("Requested Id: {} / Invoked Method: {}::{} / Occurred Error: {}.{}",
             requestId,
             joinPoint.getSignature().getDeclaringTypeName(),
             joinPoint.getSignature().getName(),
