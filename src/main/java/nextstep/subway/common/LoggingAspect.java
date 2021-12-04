@@ -16,7 +16,7 @@ import org.springframework.util.StopWatch;
 public class LoggingAspect {
 
     private static final String REQUEST_ID = "requestId";
-    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private static final Logger jsonLogger = LoggerFactory.getLogger(LoggingAspect.class);
 
     @Around("execution(* nextstep.subway.*.ui.*.*(..)) && @annotation(Logging)")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -39,14 +39,14 @@ public class LoggingAspect {
     private void logResult(Object result, long totalTimeMillis) {
         String requestId = MDC.get(REQUEST_ID);
         jsonLogger.info("Requested Id {} End (Time: {}ms)", requestId, totalTimeMillis);
-        jsonLogger.info("Requested Id: {} / Response: {}", requestId, result);
+        jsonLogger.info("Response: {}", result);
     }
 
     private void logBefore(JoinPoint joinPoint) {
         String requestId = newRequestId();
         MDC.put(REQUEST_ID, requestId);
         jsonLogger.info("Requested Id {} Start", requestId);
-        jsonLogger.info("Requested Id: {} / Invoked Method: {}::{}", requestId,
+        jsonLogger.info("Invoked Method: {}::{}",
             joinPoint.getSignature().getDeclaringTypeName(),
             joinPoint.getSignature().getName()
         );
@@ -58,10 +58,8 @@ public class LoggingAspect {
     }
 
     private void logError(ProceedingJoinPoint joinPoint, Exception e, long totalTimeMillis) {
-        String requestId = MDC.get(REQUEST_ID);
-        jsonLogger.error("Requested Id {} Error (Time: {}ms)", requestId, totalTimeMillis);
-        jsonLogger.error("Requested Id: {} / Invoked Method: {}::{} / Occurred Error: {}.{}",
-            requestId,
+        jsonLogger.error("Requested Id {} Error (Time: {}ms)", MDC.get(REQUEST_ID), totalTimeMillis);
+        jsonLogger.error("Invoked Method: {}::{} / Occurred Error: {}.{}",
             joinPoint.getSignature().getDeclaringTypeName(),
             joinPoint.getSignature().getName(),
             e.getClass().getName(),
