@@ -42,8 +42,12 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요 
-
+1. 각 서버내 로깅 경로를 알려주세요
+  - bation 서버
+    - name : devyonghee-bastion
+    - public ip: 3.36.132.241
+    - private ip: 192.169.0.175
+      
   - nginx
     - name: devyonghee-subway-reverse-proxy
     - public ip: 3.34.196.5
