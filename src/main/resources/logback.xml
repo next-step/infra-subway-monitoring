@@ -2,7 +2,7 @@
 
 <configuration debug="false">
     <timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
-    <timestamp key="BY_SECONDS" datePattern="yyyy-MM-dd'T'HH_mm_ss"/>
+    <timestamp key="BY_SECONDS" datePattern="yyyy-MM-dd__HH_mm_ss"/>
     <property name="LOG_PATTERN"
               value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
 
