@@ -1,5 +1,8 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.aop.ConsoleLog;
+import nextstep.subway.aop.FileLog;
+import nextstep.subway.aop.JsonLog;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -22,6 +25,7 @@ public class LineController {
         this.lineService = lineService;
     }
 
+    @FileLog
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
         LineResponse line = lineService.saveLine(lineRequest);
@@ -38,6 +42,7 @@ public class LineController {
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
+    @FileLog
     @PutMapping("/{id}")
     public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
         lineService.updateLine(id, lineUpdateRequest);

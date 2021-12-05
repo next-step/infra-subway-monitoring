@@ -1,5 +1,8 @@
 package nextstep.subway.member.ui;
 
+import nextstep.subway.aop.ConsoleLog;
+import nextstep.subway.aop.FileLog;
+import nextstep.subway.aop.JsonLog;
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
@@ -18,6 +21,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @FileLog
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
