@@ -80,8 +80,8 @@ npm run dev
 |Cumulative Layout Shift|0.004|0.017|유지
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-- [ ]텍스트 압축 사용
-  - [ ] server.compression 설정 추가
+- [X] 텍스트 압축 사용
+  - [X] server.compression 설정 추가
 - [ ] 렌더링 차단 리소스 제거하기
   - [ ] 렌더링 차단 js 에 async 적용
   - [ ] 렌더링 차단 css 에 Critical CSS 적용
