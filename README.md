@@ -72,12 +72,12 @@ npm run dev
 
 | |내 사이트|카카오맵|목표|결과|
 |---|---|---|---|---|
-|First Contentful Paint|2.8s|0.6s|2s 미만
-|Time to Interactive|2.9s|3.0s|2s 미만
-|Speed Index|2.8s|2.7s|2s 미만
-|Total Blocking Time|50ms|860ms|유지
-|Largest Contentful Paint|2.9s|0.7s| 1s 미만
-|Cumulative Layout Shift|0.004|0.017|유지
+|First Contentful Paint|2.8s|0.6s|2s 미만|0.7s
+|Time to Interactive|2.9s|3.0s|2s 미만|1.3s
+|Speed Index|2.8s|2.7s|2s 미만|1.8s
+|Total Blocking Time|50ms|860ms|유지|220ms
+|Largest Contentful Paint|2.9s|0.7s| 1s 미만|1.3s
+|Cumulative Layout Shift|0.004|0.017|유지|0.004
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - [X] 텍스트 압축 사용
