@@ -7,7 +7,8 @@ module.exports = {
   devtool: 'cheap-eval-source-map',
   output: {
     path: outputPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: 'js/[name].js'
   },
   devServer: {
     contentBase: outputPath,

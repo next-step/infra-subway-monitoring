@@ -6,6 +6,7 @@ module.exports = {
   mode: 'production',
   output: {
     path: outputPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: 'js/[name].js'
   }
 }

@@ -7,7 +7,7 @@ const clientPath = path.resolve(__dirname, 'src')
 
 module.exports = {
   entry: {
-    'js/vendors': ['vue', 'vue-router', 'vuex', 'vuetify', 'axios', 'vue-axios'],
+    'vendors': ['vue', 'vue-router', 'vuex', 'vuetify', 'axios', 'vue-axios'],
     'js/main': ['babel-polyfill', `${clientPath}/main.js`]
   },
   resolve: {
@@ -23,7 +23,7 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'js/vendors'
+          name: 'vendors'
         }
       }
     }
