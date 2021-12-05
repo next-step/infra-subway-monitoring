@@ -1,6 +1,7 @@
 package nextstep.subway.favorite.dto;
 
 public class FavoriteRequest {
+
     private Long source;
     private Long target;
 
@@ -18,5 +19,13 @@ public class FavoriteRequest {
 
     public Long getTarget() {
         return target;
+    }
+
+    @Override
+    public String toString() {
+        return "FavoriteRequest{" +
+            "source=" + source +
+            ", target=" + target +
+            '}';
     }
 }

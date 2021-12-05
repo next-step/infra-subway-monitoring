@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.common.Logging;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -22,6 +23,7 @@ public class LineController {
         this.lineService = lineService;
     }
 
+    @Logging
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
         LineResponse line = lineService.saveLine(lineRequest);
@@ -38,24 +40,28 @@ public class LineController {
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
+    @Logging
     @PutMapping("/{id}")
     public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
         lineService.updateLine(id, lineUpdateRequest);
         return ResponseEntity.ok().build();
     }
 
+    @Logging
     @DeleteMapping("/{id}")
     public ResponseEntity deleteLine(@PathVariable Long id) {
         lineService.deleteLineById(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Logging
     @PostMapping("/{lineId}/sections")
     public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
         lineService.addLineStation(lineId, sectionRequest);
         return ResponseEntity.ok().build();
     }
 
+    @Logging
     @DeleteMapping("/{lineId}/sections")
     public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
         lineService.removeLineStation(lineId, stationId);
@@ -70,25 +76,14 @@ public class LineController {
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
-    public String findLockLeft() throws InterruptedException {
-
-        synchronized (left) {
-            Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
-        }
+    public String findLockLeft() {
+        System.out.println("left");
         return "ok";
     }
 
     @GetMapping("/lock-right")
-    public String findLockRight() throws InterruptedException {
-        synchronized (right) {
-            Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
-        }
+    public String findLockRight() {
+        System.out.println("right");
         return "ok";
     }
 
@@ -101,10 +96,7 @@ public class LineController {
     }
 
     private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
-        return null;
+        return any -> (int) Math.tan(value);
     }
 
 
