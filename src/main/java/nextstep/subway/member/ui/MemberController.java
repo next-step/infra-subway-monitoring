@@ -3,6 +3,7 @@ package nextstep.subway.member.ui;
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
+import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
 import org.slf4j.Logger;
@@ -14,8 +15,7 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
-    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
     private MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -24,8 +24,7 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
-        fileLogger.info("Member 생성 : email = {}", request.getEmail());
-        jsonLogger.info("Member 생성 : email = {}", request.getEmail());
+        logger.info("Member 생성 : {}", request.toString());
         MemberResponse member = memberService.createMember(request);
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }

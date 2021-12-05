@@ -16,8 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/lines")
 public class LineController {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
-    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private static final Logger logger = LoggerFactory.getLogger(LineController.class);
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -26,11 +25,7 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-        fileLogger.info("Line 생성 : name = {}, color = {}, upStation = {}, downStation = {}"
-                , lineRequest.getName(), lineRequest.getColor(), lineRequest.getUpStationId(), lineRequest.getDownStationId());
-        jsonLogger.info("Line 생성 : name = {}, color = {}, upStation = {}, downStation = {}"
-                , lineRequest.getName(), lineRequest.getColor(), lineRequest.getUpStationId(), lineRequest.getDownStationId());
-
+        logger.info("Line 생성 : {}", lineRequest.toString());
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }

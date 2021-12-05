@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration debug="false">
+    <timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
+    <timestamp key="BY_SECONDS" datePattern="yyyy-MM-dd'T'HH_mm_ss"/>
+    <property name="LOG_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <include resource="console-appender.xml"/>
-    <include resource="file-appender.xml"/>
-    <include resource="json-appender.xml"/>
 
-    <logger name="console" level="TRACE">
-        <appender-ref ref="console"/>
-    </logger>
+    <springProfile name="local">
+        <include resource="console-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="console"/>
+        </root>
 
-    <logger name="file" level="INFO">
-        <appender-ref ref="file"/>
-    </logger>
+    </springProfile>
 
-    <logger name="json" level="INFO">
-        <appender-ref ref="json"/>
-    </logger>
+    <springProfile name="test">
+        <include resource="test-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="TEST_LOG"/>
+        </root>
+    </springProfile>
 
+    <springProfile name="prod">
+        <include resource="prod-info-appender.xml"/>
+        <include resource="prod-debug-appender.xml"/>
+        <include resource="prod-error-appender.xml"/>
+
+        <root level="INFO">
+            <appender-ref ref="PROD_INFO_LOG"/>
+            <appender-ref ref="PROD_DEBUG_LOG"/>
+            <appender-ref ref="PROD_ERROR_LOG"/>
+        </root>
+
+    </springProfile>
 </configuration>

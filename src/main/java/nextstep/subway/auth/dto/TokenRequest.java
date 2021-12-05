@@ -4,7 +4,7 @@ public class TokenRequest {
     private String email;
     private String password;
 
-    public TokenRequest() {
+    private TokenRequest() {
     }
 
     public TokenRequest(String email, String password) {
@@ -18,5 +18,10 @@ public class TokenRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "email='" + email;
     }
 }

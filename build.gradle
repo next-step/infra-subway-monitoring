@@ -44,9 +44,9 @@ dependencies {
 	compile 'ch.qos.logback:logback-classic:1.2.7'
 
 	testImplementation 'io.rest-assured:xml-path:4.2.0'
-        implementation "org.springframework.boot:spring-boot-starter-actuator"
-        implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE"
-        implementation "io.micrometer:micrometer-registry-cloudwatch"
+	implementation "org.springframework.boot:spring-boot-starter-actuator"
+	implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE"
+	implementation "io.micrometer:micrometer-registry-cloudwatch"
 
 }
 
