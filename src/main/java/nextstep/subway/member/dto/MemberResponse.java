@@ -3,6 +3,7 @@ package nextstep.subway.member.dto;
 import nextstep.subway.member.domain.Member;
 
 public class MemberResponse {
+
     private Long id;
     private String email;
     private Integer age;
@@ -36,7 +37,6 @@ public class MemberResponse {
     public String toString() {
         return "MemberResponse{" +
             "id=" + id +
-            ", email='" + email + '\'' +
             ", age=" + age +
             '}';
     }

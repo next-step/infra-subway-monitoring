@@ -32,11 +32,7 @@ public class MemberRequest {
         return new Member(email, password, age);
     }
 
-    @Override
-    public String toString() {
-        return "MemberRequest{" +
-            "email='" + email + '\'' +
-            ", age=" + age +
-            '}';
+    public MemberRequest(Integer age) {
+        this.age = age;
     }
 }
