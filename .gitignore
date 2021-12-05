@@ -42,3 +42,4 @@ fronted/.prttierrc.js
 fronted/.eslintrc.js
 
 docker/db/mysql/data
+/log/file.log
