@@ -66,8 +66,27 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- Desktop 을 기준으로 경쟁사(카카오 맵) 과 비교하여설정
+  - 내 사이트 : https://tyranotyrano-subway.p-e.kr
+  - 경쟁사 : 카카오 맵(https://map.kakao.com/)
+
+| |내 사이트|카카오맵|목표|결과|
+|---|---|---|---|---|
+|First Contentful Paint|2.8s|0.6s|2s 미만
+|Time to Interactive|2.9s|3.0s|2s 미만
+|Speed Index|2.8s|2.7s|2s 미만
+|Total Blocking Time|50ms|860ms|유지
+|Largest Contentful Paint|2.9s|0.7s| 1s 미만
+|Cumulative Layout Shift|0.004|0.017|유지
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- [ ]텍스트 압축 사용
+  - [ ] server.compression 설정 추가
+- [ ] 렌더링 차단 리소스 제거하기
+  - [ ] 렌더링 차단 js 에 async 적용
+  - [ ] 렌더링 차단 css 에 Critical CSS 적용
+- [ ] 정적자원들에 캐싱 적용
+  - [ ] spring.web.resources.chain 설정 추가
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
