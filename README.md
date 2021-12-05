@@ -85,8 +85,8 @@ npm run dev
 - [X] 렌더링 차단 리소스 제거하기
   - [X] 렌더링 차단 js 에 async 적용
   - [X] 렌더링 차단 css 에 Critical CSS 적용
-- [ ] 정적자원들에 캐싱 적용
-  - [ ] spring.web.resources.chain 설정 추가
+- [X] 정적자원들에 캐싱 적용
+  - [X] spring.web.resources.chain 설정 추가
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
