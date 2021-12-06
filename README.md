@@ -92,9 +92,9 @@ npm run dev
 ![after-performance](img/after-performance.png)
 
 - spring 의 compression 을 통해 정적 리소스 압축 
-- 프론트엔드 코드 분리하여 dynamic import 적용
-- link 태그에 media 를 지정해주면서 로드할 때 렌더링 차단 방지
 - spring 의 캐싱 기능을 이용하여 정적 리소스 캐싱
+- 프론트엔드에서 필요한 소스만 가져오도록 `dynamic import` 적용
+- `link` 태그에 `media` 를 지정해주면서 로드할 때 렌더링 차단 방지
 
 68점에서 93점으로 약 36.7% 개선되었습니다.
 적용한 방법 이외에도 CDN 적용, 이미지 용량 감소 등을 통해 추가 개선할 수 있다고 생각됩니다.
