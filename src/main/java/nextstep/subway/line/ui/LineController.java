@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.common.log.Logging;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -23,9 +24,9 @@ public class LineController {
         this.lineService = lineService;
     }
 
+    @Logging(description = "Line생성")
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-        logger.info("Line 생성 : {}", lineRequest.toString());
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }

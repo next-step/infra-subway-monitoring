@@ -1,6 +1,6 @@
 package nextstep.subway.station.ui;
 
-import nextstep.subway.line.ui.LineController;
+import nextstep.subway.common.log.Logging;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+
 @RestController
 public class StationController {
     private static final Logger logger = LoggerFactory.getLogger(StationController.class);
@@ -23,9 +24,9 @@ public class StationController {
         this.stationService = stationService;
     }
 
+    @Logging(description = "역 생성")
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
-        logger.info("지하철역 생성 : {}", stationRequest.toString());
         StationResponse station = stationService.saveStation(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
