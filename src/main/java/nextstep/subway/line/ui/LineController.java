@@ -1,6 +1,6 @@
 package nextstep.subway.line.ui;
 
-import nextstep.subway.common.log.Logging;
+import nextstep.subway.common.logging.Logging;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
