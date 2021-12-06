@@ -25,7 +25,7 @@ public class StationController {
 
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
-        logger.debug("지하철역 생성 : {}", stationRequest.toString());
+        logger.info("지하철역 생성 : {}", stationRequest.toString());
         StationResponse station = stationService.saveStation(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
