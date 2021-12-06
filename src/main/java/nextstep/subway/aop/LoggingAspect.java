@@ -48,14 +48,14 @@ public class LoggingAspect {
 
         long startAt = System.currentTimeMillis();
 
-        log.info("file - request : {}({}) = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
+        fileLogger.info("file - request : {}({}) = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), params);
 
         Object result = proceedingJoinPoint.proceed(); // 4
 
         long endAt = System.currentTimeMillis();
 
-        log.info("file - response : {}({}) = {} ({}ms)", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
+        fileLogger.info("file - response : {}({}) = {} ({}ms)", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), result, endAt - startAt);
 
         return result;
@@ -67,14 +67,14 @@ public class LoggingAspect {
 
         long startAt = System.currentTimeMillis();
 
-        log.info("json - request : {}({}) = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
+        jsonLogger.info("json - request : {}({}) = {}", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), params);
 
         Object result = proceedingJoinPoint.proceed(); // 4
 
         long endAt = System.currentTimeMillis();
 
-        log.info("json - response : {}({}) = {} ({}ms)", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
+        jsonLogger.info("json - response : {}({}) = {} ({}ms)", proceedingJoinPoint.getSignature().getDeclaringTypeName(),
                 proceedingJoinPoint.getSignature().getName(), result, endAt - startAt);
 
         return result;
