@@ -52,9 +52,29 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+> 기본적으로 모든 웹 페이지가 5초 이내로 사용자에게 제공될 수 있도록 해야한다고 생각합니다.   
+> 그러므로 웹 성능 확인 사이트에서 85~90 점 이상이 되야 한다고 생각합니다.  
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 전반적으로 모든 페이지에 자바 스크립트 실행 시간을 단축
+- 미사용 스크립트 제거
+- Keep-Alive 설정
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   - smoke 
+   > 기능 정상 작동하는지를 확인하기 위해 1 유저가 10초 동안 테스트 
+   - load
+   > 조회 로드 속도를 확인하기 위해 30 유저가 10초 동안 테스트
+   - stress
+   > 과부하 테스트를 위해  5~10초 동안 100유저 -> 200유저 -> 300유저 로 증가하며 테스트
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   - Smoke  
+      ![smokeTest.png](images/smokeTest.PNG)
+      ![smokeTest_result.png](images/smokeTest_result.PNG)
+   - load   
+     ![loadTest.png](images/loadTest.PNG)
+     ![loadTest_result.png](images/loadTest_result.PNG)
+   - stress  
+     ![stressTest.png](images/stressTest.PNG)
+     ![stress_result.png](images/stressTest_result.PNG)
