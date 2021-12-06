@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<included>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+</included>
