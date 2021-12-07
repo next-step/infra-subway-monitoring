@@ -5,12 +5,25 @@
 
     <springProfile name="test, local">
         <include resource="config/logs/logback-console.xml"/>
-        <logger name="com.project.admin"  level="DEBUG">
+
+        <logger name="nextstep.subway"  level="DEBUG">
             <appender-ref ref="CONSOLE"/>
         </logger>
 
-        <logger name="org.springframework.web"  level="DEBUG">
-            <appender-ref ref="CONSOLE"/>
+        <logger name="org.springframework.core">
+            <level value="INFO" />
+        </logger>
+
+        <logger name="org.springframework.beans">
+            <level value="INFO" />
+        </logger>
+
+        <logger name="org.springframework.context">
+            <level value="INFO" />
+        </logger>
+
+        <logger name="org.springframework.web">
+            <level value="INFO" />
         </logger>
 
         <logger name="org.hibernate.sql" level="DEBUG" additivity="false">
@@ -23,6 +36,10 @@
 
         <logger name="org.hibernate.internal.util.EntityPrinter" level="DEBUG" additivity="false">
             <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.hibernate.type.BasicTypeRegistry">
+            <level value="OFF" />
         </logger>
     </springProfile>
 
