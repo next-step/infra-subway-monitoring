@@ -23,8 +23,6 @@ public class TokenRequest {
 
     @Override
     public String toString() {
-        return "TokenRequest{" +
-            "email='" + email + '\'' +
-            '}';
+        return "TokenRequest{}";
     }
 }

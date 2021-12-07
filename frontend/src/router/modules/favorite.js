@@ -1,9 +1,7 @@
-import Favorites from '@/views/favorite/Favorites'
-
 const favoriteRoutes = [
   {
     path: '/favorites',
-    component: Favorites
+    component: () => import(/* webpackChunkName: "favorites" */ '@/views/favorite/Favorites')
   }
 ]
 export default favoriteRoutes
