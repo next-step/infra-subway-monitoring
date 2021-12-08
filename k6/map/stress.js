@@ -4,15 +4,13 @@ import {BASE_URL} from '../common/common.js';
 
 export let options = {
     stages: [
-        { duration: '5', target: 1 },
-        { duration: '10s', target: 5 },
-        { duration: '15s', target: 25 },
-        { duration: '20s', target: 40 },
-        { duration: '25s', target: 50 },
-        { duration: '20s', target: 40 },
-        { duration: '15s', target: 25 },
-        { duration: '10s', target: 5 },
-        { duration: '5', target: 0 }
+        { duration: '5s', target: 1 },
+        { duration: '10s', target: 20 },
+        { duration: '15s', target: 100 },
+        { duration: '20s', target: 250 },
+        { duration: '25s', target: 300 },
+        { duration: '20s', target: 200 },
+        { duration: '5s', target: 0 }
     ],
 
     thresholds: {

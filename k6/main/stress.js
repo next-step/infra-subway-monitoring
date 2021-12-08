@@ -4,7 +4,7 @@ import {BASE_URL} from '../common/common.js';
 
 export let options = {
     stages: [
-        { duration: '5', target: 1 },
+        { duration: '5s', target: 1 },
         { duration: '10s', target: 5 },
         { duration: '15s', target: 25 },
         { duration: '20s', target: 40 },
@@ -12,7 +12,7 @@ export let options = {
         { duration: '20s', target: 40 },
         { duration: '15s', target: 25 },
         { duration: '10s', target: 5 },
-        { duration: '5', target: 0 }
+        { duration: '5s', target: 0 }
     ],
 
     thresholds: {
