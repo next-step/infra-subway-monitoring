@@ -1029,35 +1029,33 @@ export function 최단경로_조회_성공(경로탐색_response) {
      script: stress.js
      output: -
 
-  scenarios: (100.00%) 1 scenario, 50 max VUs, 2m25s max duration (incl. graceful stop):
-           * default: Up to 50 looping VUs for 1m55.01s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 150 max VUs, 1m50s max duration (incl. graceful stop):
+           * default: Up to 150 looping VUs for 1m20s over 6 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-  running (1m56.1s), 00/50 VUs, 645 complete and 0 interrupted iterations
-  default ↓ [======================================] 07/50 VUs  1m55.01s
+  running (1m38.5s), 000/150 VUs, 519 complete and 0 interrupted iterations
+  default ✓ [======================================] 000/150 VUs  1m20s
 
      ✓ 메인페이지 응답 결과 ===>
      ✓ 최단경로 조회 응답 결과 ===>
 
-     checks.........................: 100.00% ✓ 1290      ✗ 0
-     data_received..................: 1.6 MB  14 kB/s
-     data_sent......................: 193 kB  1.7 kB/s
-     http_req_blocked...............: avg=269.61µs min=3.61µs   med=4.87µs   max=35.19ms  p(90)=6.72µs  p(95)=10.66µs
-     http_req_connecting............: avg=42.2µs   min=0s       med=0s       max=4.55ms   p(90)=0s      p(95)=0s
-   ✗ http_req_duration..............: avg=2.85s    min=2.18ms   med=315.08ms max=10.06s   p(90)=7.87s   p(95)=8.49s
-       { expected_response:true }...: avg=2.85s    min=2.18ms   med=315.08ms max=10.06s   p(90)=7.87s   p(95)=8.49s
-     http_req_failed................: 0.00%   ✓ 0         ✗ 1290
-     http_req_receiving.............: avg=68.95µs  min=30.32µs  med=68.25µs  max=396.44µs p(90)=96.42µs p(95)=109.44µs
-     http_req_sending...............: avg=19.75µs  min=10.31µs  med=15.79µs  max=2ms      p(90)=22.72µs p(95)=42.85µs
-     http_req_tls_handshaking.......: avg=218.48µs min=0s       med=0s       max=33.95ms  p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=2.85s    min=2.11ms   med=314.91ms max=10.06s   p(90)=7.87s   p(95)=8.49s
-     http_reqs......................: 1290    11.112187/s
-     iteration_duration.............: avg=5.7s     min=592.18ms med=6.56s    max=10.06s   p(90)=8.49s   p(95)=8.97s
-     iterations.....................: 645     5.556093/s
-     vus............................: 1       min=1       max=50
-     vus_max........................: 50      min=50      max=50
-
-ERRO[0117] some thresholds have failed
+     checks.........................: 100.00% ✓ 1038      ✗ 0
+     data_received..................: 1.8 MB  18 kB/s
+     data_sent......................: 198 kB  2.0 kB/s
+     http_req_blocked...............: avg=970.68µs min=3.53µs   med=5.08µs   max=38.02ms  p(90)=5.64ms   p(95)=6.36ms
+     http_req_connecting............: avg=178.76µs min=0s       med=0s       max=11.23ms  p(90)=596.64µs p(95)=1.22ms
+   ✗ http_req_duration..............: avg=8.45s    min=2.62ms   med=362.36ms max=27.85s   p(90)=24.82s   p(95)=26.01s
+       { expected_response:true }...: avg=8.45s    min=2.62ms   med=362.36ms max=27.85s   p(90)=24.82s   p(95)=26.01s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 1038
+     http_req_receiving.............: avg=79.92µs  min=29.81µs  med=74.13µs  max=1.06ms   p(90)=110.03µs p(95)=126.89µs
+     http_req_sending...............: avg=24.64µs  min=10.57µs  med=17.41µs  max=380.96µs p(90)=59.68µs  p(95)=65.98µs
+     http_req_tls_handshaking.......: avg=747.7µs  min=0s       med=0s       max=17.36ms  p(90)=4.43ms   p(95)=5ms
+     http_req_waiting...............: avg=8.45s    min=2.56ms   med=362.25ms max=27.85s   p(90)=24.82s   p(95)=26.01s
+     http_reqs......................: 1038    10.538233/s
+     iteration_duration.............: avg=16.9s    min=661.29ms med=19.57s   max=27.87s   p(90)=26.03s   p(95)=26.47s
+     iterations.....................: 519     5.269117/s
+     vus............................: 4       min=1       max=150
+     vus_max........................: 150     min=150     max=150
 
 ```
 </details>
@@ -1076,3 +1074,12 @@ ERRO[0117] some thresholds have failed
   - load test : 실패
   - stress test : 실패
   - ※경로조회 API 는 다소 무거워 http_req_duration 결과에서 fail 이 발생했는데, @Cacheable 등을 통해 성능개선을 하거나 API 내부 구현 자체를 개선할 필요성이 대두댐
+  
+#### 5. 추가 설정
+- nginx
+  - [x] 텍스트 압축
+      - [x] nginx.conf 에 gzip 설정을 추가
+  - [x] 정적 자원 캐싱
+      - [x] /etc/nginx/tmp 디렉토리 생성 -> proxy_cache_path 로 사용
+      - [x] nginx.conf 에 proxy_cache 속성 추가
+      - [x] 정적자원 Response Header 에 X-Proxy-Cache 추가 -> MISS 에서 HIT 로 캐싱 확인

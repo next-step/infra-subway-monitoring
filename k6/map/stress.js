@@ -7,9 +7,8 @@ export let options = {
         { duration: '5s', target: 1 },
         { duration: '10s', target: 20 },
         { duration: '15s', target: 100 },
-        { duration: '20s', target: 250 },
-        { duration: '25s', target: 300 },
-        { duration: '20s', target: 200 },
+        { duration: '25s', target: 150 },
+        { duration: '20s', target: 100 },
         { duration: '5s', target: 0 }
     ],
 
