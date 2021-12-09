@@ -15,8 +15,7 @@ import java.net.URI;
 @RestController
 public class MemberController {
 
-    private static final Logger log = LoggerFactory.getLogger(MemberController.class);
-
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private final MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -25,9 +24,9 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
-        log.info("members join request {}", request.getEmail());
+        fileLogger.info("members join request {}", request.getEmail());
         MemberResponse member = memberService.createMember(request);
-        log.info("members join success {}", request.getEmail());
+        fileLogger.info("members join success {}", request.getEmail());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
