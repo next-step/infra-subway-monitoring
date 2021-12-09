@@ -16,6 +16,7 @@ public class ControllerLogger {
     private static Logger log;
     public static void requestLog(HttpServletRequest request, JoinPoint joinPoint) {
         log = LoggerFactory.getLogger(joinPoint.getSignature().getDeclaringType());
+
         StringBuilder logContents =
                 new StringBuilder("[controller-in] " +
                         joinPoint.getSignature().getName() + "\n" +
@@ -66,6 +67,33 @@ public class ControllerLogger {
         }
 
         log.info(logContents.toString());
+    }
+
+    public static void responseErrorLog(HttpServletResponse response, JoinPoint joinPoint, Throwable throwable) {
+        log = LoggerFactory.getLogger(joinPoint.getSignature().getDeclaringType());
+
+        StringBuilder logContents =
+                new StringBuilder("[controller-error] " +
+                        joinPoint.getSignature().getName() + "\n" +
+                        "[http-response-status-line] " +
+                        HttpStatus.valueOf(response.getStatus()) + "\n");
+
+        Collection<String> headerNames = response.getHeaderNames();
+        for (String header : headerNames) {
+            logContents
+                    .append("[http-response-header] ")
+                    .append(header)
+                    .append(": ")
+                    .append(response.getHeader(header))
+                    .append("\n");
+        }
+
+        logContents
+                .append("[http-response-error-message] ")
+                .append(throwable.getMessage())
+                .append("\n");
+
+        log.error(logContents.toString());
     }
 
     private static JSONObject getParams(HttpServletRequest request) {
