@@ -2,6 +2,7 @@ package nextstep.subway.common;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -25,5 +26,11 @@ public class RestControllerAspect {
     public void responseLogging(JoinPoint joinPoint) {
         HttpServletResponse response = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
         ControllerLogger.responseLog(response, joinPoint);
+    }
+
+    @AfterThrowing(value = "@within(org.springframework.web.bind.annotation.RestController)", throwing = "throwable")
+    public void responseErrorLogging(JoinPoint joinPoint, Throwable throwable) {
+        HttpServletResponse response = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
+        ControllerLogger.responseErrorLog(response, joinPoint, throwable);
     }
 }
