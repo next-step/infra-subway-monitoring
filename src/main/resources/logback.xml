@@ -22,4 +22,18 @@
     <logger name="json" level="INFO">
         <appender-ref ref="json"/>
     </logger>
+
+    <root>
+        <springProfile name="test">
+            <appender-ref ref="console" level="TRACE"/>
+        </springProfile>
+
+        <springProfile name="local">
+            <appender-ref ref="file" level="INFO"/>
+        </springProfile>
+
+        <springProfile name="prod">
+            <appender-ref ref="json" level="INFO"/>
+        </springProfile>
+    </root>
 </configuration>
