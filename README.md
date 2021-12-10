@@ -43,8 +43,17 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
-2. Cloudwatch 대시보드 URL을 알려주세요
+- SUBWAYWEB (192.168.170.39) - \[접속 도메인 주소 : https://jerry92k-subway.n-e.kr/]
+  - 애플리케이션 로그 : /home/ubuntu/infra-subway-monitoring/log/*
+  - nginx 로그 : /var/log/nginx/*
+  - syslog : /var/log/syslog
+- SUBWAYWAS (192.168.170.155)
+  - syslog : /var/log/syslog
+- BASTION (192.168.170.190)
+    - syslog : /var/log/syslog
+    
+2. Cloudwatch 대시보드 URL을 알려주세요 
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-jerry92k
 
 ---
 
