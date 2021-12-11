@@ -1,21 +1,3 @@
-# 1단계 - 로깅과 모니터링
-
-## 요구사항
-- 어플리케이션 로그 설정
-- CloudWatch 모니터링 
-
-## 기능 목록
-
-- 어플리케이션 로그 설정
-  - 로그 설정 
-  - 회원가입, 로그인, 이벤트 로깅 설정
-- Nginx Access 로그 설정
-- CloudWatch 설정
-  - 로그 수집
-  - 메트리 수집
-
----
-
 <p align="center">
     <img width="200px;" src="https://raw.githubusercontent.com/woowacourse/atdd-subway-admin-frontend/master/images/main_logo.png"/>
 </p>
@@ -60,7 +42,13 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
+
 1. 각 서버내 로깅 경로를 알려주세요
+
+- nginx : 
+- logPath : 
+- WAS : 
+- logPath : 
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
