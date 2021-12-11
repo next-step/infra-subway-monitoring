@@ -19,22 +19,30 @@
 ## 🚀 Getting Started
 
 ### Install
+
 #### npm 설치
+
 ```
 cd frontend
 npm install
 ```
+
 > `frontend` 디렉토리에서 수행해야 합니다.
 
 ### Usage
+
 #### webpack server 구동
+
 ```
 npm run dev
 ```
+
 #### application 구동
+
 ```
 ./gradlew clean build
 ```
+
 <br>
 
 ## 미션
@@ -45,16 +53,18 @@ npm run dev
 
 1. 각 서버내 로깅 경로를 알려주세요
 
-- nginx : 
-- logPath : 
-- WAS : 
-- logPath : 
+- nginx:
+    - access log: /home/ubuntu/nginx/access.log
+    - error log: /home/ubuntu/nginx/error.log
+- logPath: /home/ubuntu/infra-subway-monitoring-app/logs
+- WAS: 13.125.64.39
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 ---
 
 ### 2단계 - 성능 테스트
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
