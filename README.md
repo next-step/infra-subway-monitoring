@@ -56,7 +56,7 @@ npm run dev
 - nginx:
     - access log: /home/ubuntu/nginx/access.log
     - error log: /home/ubuntu/nginx/error.log
-- logPath: /home/ubuntu/infra-subway-monitoring-app/logs
+- logPath: /home/ubuntu/infra-subway-monitoring-app/logs/infra-subway-monitoring.log
 - WAS: 13.125.64.39
 
 2. Cloudwatch 대시보드 URL을 알려주세요
