@@ -36,6 +36,9 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+	// actuator
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 test {
