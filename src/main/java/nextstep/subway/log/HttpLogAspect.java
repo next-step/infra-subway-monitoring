@@ -37,8 +37,8 @@ public class HttpLogAspect {
 	public Object logAction(ProceedingJoinPoint joinPoint) throws Throwable {
 		Object result = joinPoint.proceed(joinPoint.getArgs());
 		String requestUrl = getRequestUrl(joinPoint);
-		String parameters = OBJECT_MAPPER.writeValueAsString(params(joinPoint));
-		String response = OBJECT_MAPPER.writeValueAsString(result);
+		String parameters = params(joinPoint).toString();
+		String response = result.toString();
 		LOGGER.info(generateHttpLogText(requestUrl, parameters, response));
 		return result;
 	}
