@@ -43,6 +43,11 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- subway application
+  - /home/ubuntu/apps/infra01/log/file.log
+- nginx
+  - /var/log/nginx/access.log
+  - /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
