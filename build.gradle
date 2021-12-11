@@ -39,6 +39,10 @@ dependencies {
 
 	// actuator
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+	// AWS cloudwatch
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 }
 
 test {
