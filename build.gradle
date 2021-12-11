@@ -24,6 +24,7 @@ dependencies {
 
 	// log
 	implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
+	implementation 'net.logstash.logback:logstash-logback-encoder:7.0.1'
 
 	// jgraph
 	implementation 'org.jgrapht:jgrapht-core:1.0.1'
