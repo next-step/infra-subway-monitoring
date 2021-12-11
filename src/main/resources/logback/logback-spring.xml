@@ -11,8 +11,8 @@
     </springProfile>
 
     <springProfile name="prod">
+        <include resource="${config_home}console-appender.xml" />
         <include resource="${config_home}file-appender.xml" />
-        <include resource="${config_home}json-appender.xml" />
     </springProfile>
 
     <root>
@@ -20,9 +20,9 @@
             <appender-ref ref="console" />
             <appender-ref ref="file" />
         </springProfile>
-        <springProfile name="json-logging">
+        <springProfile name="prod">
+            <appender-ref ref="console" />
             <appender-ref ref="file" />
-            <appender-ref ref="json" />
         </springProfile>
     </root>
 </configuration>
