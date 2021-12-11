@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <property name="home" value="log/"/>
-    <property name="filename" value="infra_subway_monitoring"/>
+    <springProfile name="local">
+        <property resource="application-local.properties"/>
+    </springProfile>
+    <springProfile name="test">
+        <property resource="application-test.properties"/>
+    </springProfile>
+    <springProfile name="prod">
+        <property resource="application-prod.properties"/>
+    </springProfile>
+    <property name="LOG_PATH" value="${log.config.path}"/>
+    <property name="LOG_FILE_NAME" value="${log.config.filename}"/>
 
     <appender name="file-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--로깅이 기록될 위치-->
-        <file>${home}${filename}.log</file>
+        <file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${home}${filename}-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/${LOG_FILE_NAME}-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
