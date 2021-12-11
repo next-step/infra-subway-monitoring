@@ -1,3 +1,21 @@
+# 1단계 - 로깅과 모니터링
+
+## 요구사항
+- 어플리케이션 로그 설정
+- CloudWatch 모니터링 
+
+## 기능 목록
+
+- 어플리케이션 로그 설정
+  - 로그 설정 
+  - 회원가입, 로그인, 이벤트 로깅 설정
+- Nginx Access 로그 설정
+- CloudWatch 설정
+  - 로그 수집
+  - 메트리 수집
+
+---
+
 <p align="center">
     <img width="200px;" src="https://raw.githubusercontent.com/woowacourse/atdd-subway-admin-frontend/master/images/main_logo.png"/>
 </p>
