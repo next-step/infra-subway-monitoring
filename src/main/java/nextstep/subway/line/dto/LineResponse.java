@@ -29,10 +29,10 @@ public class LineResponse {
     }
 
     public static LineResponse of(Line line) {
-        if(isEmpty(line)) {
+        if (isEmpty(line)) {
             return new LineResponse(line.getId(), line.getName(), "", new ArrayList(), line.getCreatedDate(), line.getModifiedDate());
         }
-        return new LineResponse(line.getId(), line.getName(),"", assembleStations(line), line.getCreatedDate(), line.getModifiedDate());
+        return new LineResponse(line.getId(), line.getName(), "", assembleStations(line), line.getCreatedDate(), line.getModifiedDate());
     }
 
     private static boolean isEmpty(Line line) {
@@ -41,8 +41,8 @@ public class LineResponse {
 
     private static List<StationResponse> assembleStations(Line line) {
         return line.getStations().stream()
-            .map(StationResponse::of)
-            .collect(Collectors.toList());
+                .map(StationResponse::of)
+                .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -67,5 +67,17 @@ public class LineResponse {
 
     public LocalDateTime getModifiedDate() {
         return modifiedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "LineResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", stations=" + stations +
+                ", createdDate=" + createdDate +
+                ", modifiedDate=" + modifiedDate +
+                '}';
     }
 }
