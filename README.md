@@ -54,7 +54,8 @@ npm run dev
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
 - 경쟁사 분석
-|사이트|First Contentful Paint|Speed Index|Largest Contentful Paint|Cumulative Layout Shift|Total Blocking Time|
+
+|지표|First Contentful Paint|Speed Index|Largest Contentful Paint|Cumulative Layout Shift|Total Blocking Time|  
 |:------:|:------:|:------:|:------:|:------:|:------:|
 |내 사이트|2.404s|2.424s|2.601s|0.004|≥ 0.000s|
 |네이버지도|2.117s|4.971s|9.532s|0|≥0.290s|
