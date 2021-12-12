@@ -12,17 +12,44 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAspect {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger fileLogger = LoggerFactory.getLogger("file");
+    private final Logger jsonLogger = LoggerFactory.getLogger("json");
 
-    @Around("execution(public * nextstep.subway..ui.*Controller.*(..))")
-    public Object controllerLogging(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        String requestMethodName = proceedingJoinPoint.getTarget().getClass().getSimpleName()
-                + "." + proceedingJoinPoint.getSignature().getName();
+    @Around("@annotation(nextstep.subway.aop.ApiLoggingNoInfo)")
+    public Object apiLoggingNoInfo(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String requestMethodName = getRequestMethodName(proceedingJoinPoint);
 
-        logger.info("{} - start : {}", requestMethodName, proceedingJoinPoint.getArgs());
+        fileLogger.info("{} - start", requestMethodName);
         ResponseEntity<?> responseEntity = (ResponseEntity<?>) proceedingJoinPoint.proceed();
-        logger.info("{} - finish : {}", requestMethodName, responseEntity);
+        fileLogger.info("{} - finish", requestMethodName);
 
         return responseEntity;
+    }
+
+    @Around("@annotation(nextstep.subway.aop.ApiLoggingWithInfo)")
+    public Object apiLoggingWithInfo(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String requestMethodName = getRequestMethodName(proceedingJoinPoint);
+
+        fileLogger.info("{} - start : {}", requestMethodName, proceedingJoinPoint.getArgs());
+        ResponseEntity<?> responseEntity = (ResponseEntity<?>) proceedingJoinPoint.proceed();
+        fileLogger.info("{} - finish : {}", requestMethodName, responseEntity);
+
+        return responseEntity;
+    }
+
+    @Around("@annotation(nextstep.subway.aop.ApiLoggingWithInfoJson)")
+    public Object apiLoggingWithInfoJson(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String requestMethodName = getRequestMethodName(proceedingJoinPoint);
+
+        jsonLogger.info("{} - start : {}", requestMethodName, proceedingJoinPoint.getArgs());
+        ResponseEntity<?> responseEntity = (ResponseEntity<?>) proceedingJoinPoint.proceed();
+        jsonLogger.info("{} - finish : {}", requestMethodName, responseEntity);
+
+        return responseEntity;
+    }
+
+    private String getRequestMethodName(ProceedingJoinPoint proceedingJoinPoint) {
+        return proceedingJoinPoint.getTarget().getClass().getSimpleName()
+                + "." + proceedingJoinPoint.getSignature().getName();
     }
 }
