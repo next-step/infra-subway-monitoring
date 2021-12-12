@@ -83,16 +83,16 @@ npm run dev
    
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
    - 모든 유저가 필수로 거쳐가야하는 메인 페이지
-     - smoke js [smoke.js](/k6/main/smoke.js)
-     - smoke 결과 [main_smoke.PNG](/k6/main/main_load.PNG)
-     - load js [load.js](/k6/main/load.js)
-     - load 결과 [main_load.PNG](/k6/main/main_load.PNG)
-     - stress js [stress.js](/k6/main/stress.js)
-     - stress 결과 [main_stress.PNG](/k6/main/main_stress.PNG)
+     - [smoke js](/k6/main/smoke.js)
+     - [smoke 결과](/k6/main/main_load.PNG)
+     - [load js](/k6/main/load.js)
+     - [load 결과](/k6/main/main_load.PNG)
+     - [stress js](/k6/main/stress.js)
+     - [stress 결과](/k6/main/main_stress.PNG)
    - 리소스 부하가 큰 경로 페이지
-       - smoke js [smoke.js](/k6/path/smoke.js)
-       - smoke 결과 [path_smoke.PNG](/k6/path/path_load.PNG)
-       - load js [load.js](/k6/path/load.js)
-       - load 결과 [path_load.PNG](/k6/path/path_load.PNG)
-       - stress js [stress.js](/k6/path/stress.js)
-       - stress 결과 [path_stress.PNG](/k6/path/path_stress.PNG)
+       - [smoke js](/k6/path/smoke.js)
+       - [smoke 결과](/k6/path/path_load.PNG)
+       - [load js](/k6/path/load.js)
+       - [load 결과](/k6/path/path_load.PNG)
+       - [stress js](/k6/path/stress.js)
+       - [stress 결과](/k6/path/path_stress.PNG)
