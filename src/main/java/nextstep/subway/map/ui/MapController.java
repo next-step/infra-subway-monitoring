@@ -22,8 +22,8 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
+        fileLogger.info("최단 거리 조회" );
         log.debug("최단 거리 조회 - " + source + ", " + target);
-        fileLogger.debug("최단 거리 조회 - " + source + ", " + target);
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }

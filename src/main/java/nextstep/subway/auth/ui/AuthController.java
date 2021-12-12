@@ -23,11 +23,10 @@ public class AuthController {
 
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
+        fileLogger.info("login 시도");
         log.debug("login 시도 - " + request.getEmail());
-        fileLogger.debug("login 시도 - " + request.getEmail());
         TokenResponse token = authService.login(request);
         log.debug("token - " + token.getAccessToken());
-        fileLogger.debug("token - " + token.getAccessToken());
         return ResponseEntity.ok().body(token);
     }
 }
