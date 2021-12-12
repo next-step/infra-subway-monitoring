@@ -20,17 +20,20 @@ public class StationController {
         this.stationService = stationService;
     }
 
+    @AspectWarnLogging          // WARN 로그 레벨 테스트용(역생성시 WARN으로 로깅해본다
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
         StationResponse station = stationService.saveStation(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
 
+    @AspectInfoLogging
     @GetMapping(value = "/stations", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StationResponse>> showStations() {
         return ResponseEntity.ok().body(stationService.findAllStations());
     }
 
+    @AspectInfoLogging
     @DeleteMapping("/stations/{id}")
     public ResponseEntity deleteStation(@PathVariable Long id) {
         stationService.deleteStationById(id);
