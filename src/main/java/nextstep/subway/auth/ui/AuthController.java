@@ -1,5 +1,6 @@
 package nextstep.subway.auth.ui;
 
+import nextstep.subway.aop.ApiLoggingNoInfo;
 import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
@@ -17,6 +18,7 @@ public class AuthController {
     }
 
     @PostMapping("/login/token")
+    @ApiLoggingNoInfo
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         TokenResponse token = authService.login(request);
         return ResponseEntity.ok().body(token);
