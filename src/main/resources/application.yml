@@ -2,14 +2,6 @@ handlebars:
   enabled: true
   suffix: .html
 
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
-
 security:
   jwt:
     token:

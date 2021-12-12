@@ -17,10 +17,10 @@ public class ControllerLogAspect {
 	private static final Logger logger = LoggerFactory.getLogger(ControllerLogAspect.class);
 
 	@Around("@annotation(ControllerLog)")
-	public Object log(ProceedingJoinPoint joinPoint) {
+	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 		UUID requestId = UUID.randomUUID();
 		StopWatch stopWatch = new StopWatch();
-		Object result = null;
+		Object result;
 
 		logBefore(joinPoint, requestId);
 
@@ -32,6 +32,7 @@ public class ControllerLogAspect {
 		} catch (Throwable t) {
 			stopWatch.stop();
 			logError(t, requestId, stopWatch.getTotalTimeMillis());
+			throw t;
 		}
 
 		return result;
@@ -52,6 +53,5 @@ public class ControllerLogAspect {
 
 	private void logError(Throwable t, UUID requestId, long elapsedTime) {
 		logger.error("[{}][error] elapsedTime={}ms, errorMessage={}", requestId, elapsedTime, t.getMessage());
-		logger.error(String.format("[%s][stacktrace]", requestId.toString()), t);
 	}
 }
