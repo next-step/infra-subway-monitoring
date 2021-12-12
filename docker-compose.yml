@@ -1,0 +1,32 @@
+version: '3'
+services:
+  spring-app:
+    container_name: spring-app
+    image: "seunghoona/subway:1.1"
+    ports:
+     - "9090:9090"
+    restart: always
+    volumes:
+     - /var/log/app:/var/log/app
+  nginx:
+      container_name: nginx
+      image: "nginx:1.2"
+      ports:
+       - "80:80"
+       - "443:443"
+      volumes:
+       - /var/log/nginx:/var/log/nginx
+      depends_on:
+       - spring-app
+  cAdvisor:
+    container_name: cAdvisor
+    image: gcr.io/google-containers/cadvisor:v0.33.0
+    restart: always
+    privileged: true
+    volumes:
+     - /:/rootfs:ro
+     - /var/run:/var/run:rw
+     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+     - /dev/disk/:/dev/disk:ro
+    ports:
+     - '8080:8080'
