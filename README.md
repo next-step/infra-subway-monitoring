@@ -67,7 +67,7 @@ npm run dev
    > 조회 로드 속도를 확인하기 위해 30 유저가 10초 동안 테스트
    - stress
    > 과부하 테스트를 위해  5~10초 동안 100유저 -> 200유저 -> 300유저 로 증가하며 테스트
-
+   [smoke.js](/k6//smoke.js)
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
    - Smoke  
       ![smokeTest.png](images/smokeTest.PNG)
