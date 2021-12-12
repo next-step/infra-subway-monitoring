@@ -2,7 +2,6 @@ package nextstep.subway.common.logger;
 
 
 import javax.servlet.http.HttpServletRequest;
-import nextstep.subway.common.LogTimer;
 import nextstep.subway.common.RequestUtils;
 import nextstep.subway.common.TraceId;
 import org.aspectj.lang.ProceedingJoinPoint;

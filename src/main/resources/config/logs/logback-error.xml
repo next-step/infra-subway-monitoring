@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
+
+    <property name="LOG_PATH" value="${log.config.path}"/>
+    <property name="ERR_LOG_FILE_NAME" value="err_log"/>
+
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>error</level>
