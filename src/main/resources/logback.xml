@@ -14,7 +14,7 @@
     </logger>
 
     <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="file" level="DEBUG" >
+    <logger name="file" level="INFO" >
         <appender-ref ref="file" />
     </logger>
 
