@@ -7,9 +7,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import nextstep.subway.auth.application.AuthorizationException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<Void> handleAuthorizationException(AuthorizationException e) {
+		logger.error(e.getMessage(), e);
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
 
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<Void> handleRuntimeException(RuntimeException e) {
