@@ -43,24 +43,29 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+   - external-server
+     - nginx
+       - /var/log/nginx/ access.log , error.log
+     - web-app 
+       - /var/log/app/prod/error_log.log, prod_log
+       - 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=seunghoona-dashboard
 
 #### 요구사항정의
-- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
-- [ ] 로그 설정하기
-- [ ] CloudWatch 모니터링
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 로그 설정하기
+- [x] CloudWatch 모니터링
 
 #### 로그 설정하기
-- [ ] Application Log 파일로 저장하기
-    - [ ] 회원가입
-    - [ ] 로그인
-    - [ ] 최단거리 조회 등의 이벤트에 로깅을 설정
-- [ ] Nginx Access Log 설정하기
-- [ ] Cloudwatch로 모니터링
-    - [ ] CloudWatch 로그 수집하기
-    - [ ] CloudWatch 메트릭 수집하기
+- [x] Application Log 파일로 저장하기
+    - [x] 회원가입
+    - [x] 로그인
+    - [x] 최단거리 조회 등의 이벤트에 로깅을 설정
+- [x] Nginx Access Log 설정하기
+- [x] Cloudwatch로 모니터링
+    - [x] CloudWatch 로그 수집하기
+    - [x] CloudWatch 메트릭 수집하기
 
 ---
 
