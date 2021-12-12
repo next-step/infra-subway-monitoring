@@ -16,7 +16,7 @@ import org.springframework.util.StopWatch;
 public class ControllerLogAspect {
 	private static final Logger logger = LoggerFactory.getLogger(ControllerLogAspect.class);
 
-	@Around("@annotation(ControllerLog)")
+	@Around("execution(public * nextstep.subway..ui.*Controller.*(..))")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 		UUID requestId = UUID.randomUUID();
 		StopWatch stopWatch = new StopWatch();
