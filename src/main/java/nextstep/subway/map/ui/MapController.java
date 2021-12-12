@@ -16,7 +16,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @AspectLogging
+    @AspectInfoLogging
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         return ResponseEntity.ok(mapService.findPath(source, target));

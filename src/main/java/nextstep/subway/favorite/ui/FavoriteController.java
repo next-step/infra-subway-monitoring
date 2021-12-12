@@ -20,7 +20,7 @@ public class FavoriteController {
         this.favoriteService = favoriteService;
     }
 
-    @AspectLogging
+    @AspectInfoLogging
     @PostMapping("/favorites")
     public ResponseEntity createFavorite(@AuthenticationPrincipal LoginMember loginMember, @RequestBody FavoriteRequest request) {
         favoriteService.createFavorite(loginMember, request);
@@ -29,14 +29,14 @@ public class FavoriteController {
                 .build();
     }
 
-    @AspectLogging
+    @AspectInfoLogging
     @GetMapping("/favorites")
     public ResponseEntity<List<FavoriteResponse>> getFavorites(@AuthenticationPrincipal LoginMember loginMember) {
         List<FavoriteResponse> favorites = favoriteService.findFavorites(loginMember);
         return ResponseEntity.ok().body(favorites);
     }
 
-    @AspectLogging
+    @AspectInfoLogging
     @DeleteMapping("/favorites/{id}")
     public ResponseEntity deleteFavorite(@AuthenticationPrincipal LoginMember loginMember, @PathVariable Long id) {
         favoriteService.deleteFavorite(loginMember, id);
