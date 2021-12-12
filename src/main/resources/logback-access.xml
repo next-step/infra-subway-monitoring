@@ -1,9 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <property name="home" value="logs/" />
+
+    <appender name="api" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}subway-monitor-api.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${home}subway-monitor-api-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
         <encoder>
-            <pattern>%fullRequest%n%n%fullResponse</pattern>
+            <pattern>%fullRequest%n%fullResponse</pattern>
         </encoder>
     </appender>
-
-    <appender-ref ref="STDOUT" />
+    <appender-ref ref="api" />
 </configuration>
