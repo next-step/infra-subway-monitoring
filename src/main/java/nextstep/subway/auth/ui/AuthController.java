@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import nextstep.subway.auth.application.*;
 import nextstep.subway.auth.dto.*;
-import nextstep.subway.common.*;
 
 @RestController
 public class AuthController {
@@ -15,7 +14,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @AspectLogging
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         TokenResponse token = authService.login(request);
