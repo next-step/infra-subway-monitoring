@@ -43,11 +43,14 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-   keepbang-web-service
-    - tomcat 로그 : /home/log/server.log
-    - api 로그 : /home/log/json.log
-    - nginx access log : /home/ubuntu/log/access.log
+   - keepbang-web-service
+        - tomcat 로그 : /home/log/server.log
+        - api 로그 : /home/log/json.log
+   - keepbang-nginx
+        - nginx access log : /home/ubuntu/log/access.log
+        - nginx error log : /home/ubuntu/log/error.log
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-keepbang
 
 ### 요구사항
 - [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
