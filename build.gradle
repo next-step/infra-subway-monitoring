@@ -31,7 +31,16 @@ dependencies {
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
-	testImplementation 'io.rest-assured:rest-assured:3.3.0'
+    // util
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.5'
+    implementation 'com.googlecode.json-simple:json-simple:1.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
+
+
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	runtimeOnly 'com.h2database:h2'
