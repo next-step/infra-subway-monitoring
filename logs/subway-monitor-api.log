@@ -1,0 +1,273 @@
+GET / HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Keep-Alive: timeout=60
+Connection: keep-alive
+Content-Length: 1000
+Content-Language: ko-KR
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: text/html;charset=UTF-8
+
+
+
+GET /js/main.js HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+sec-ch-ua-platform: "macOS"
+accept: */*
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Keep-Alive: timeout=60
+Connection: keep-alive
+Vary: Origin
+Last-Modified: Sun, 12 Dec 2021 10:17:48 GMT
+Content-Length: 176083
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: application/javascript
+
+
+
+GET /js/vendors.js HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+sec-ch-ua-platform: "macOS"
+accept: */*
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+sec-fetch-dest: script
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Keep-Alive: timeout=60
+Connection: keep-alive
+Vary: Origin
+Last-Modified: Sun, 12 Dec 2021 10:17:48 GMT
+Content-Length: 2176047
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: application/javascript
+
+
+
+GET /images/logo_small.png HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+sec-ch-ua-platform: "macOS"
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+sec-fetch-dest: image
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Keep-Alive: timeout=60
+Connection: keep-alive
+Vary: Origin
+Last-Modified: Sun, 12 Dec 2021 10:17:48 GMT
+Content-Length: 740
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: image/png
+
+[IMAGE CONTENTS SUPPRESSED]
+
+GET /images/main_logo.png HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+sec-ch-ua-platform: "macOS"
+accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+sec-fetch-site: same-origin
+sec-fetch-mode: no-cors
+sec-fetch-dest: image
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Keep-Alive: timeout=60
+Connection: keep-alive
+Vary: Origin
+Last-Modified: Sun, 12 Dec 2021 10:17:48 GMT
+Content-Length: 4214
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: image/png
+
+[IMAGE CONTENTS SUPPRESSED]
+
+GET /members/me HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+accept: application/json, text/plain, */*
+authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3lvdW5nQG5hdmVyLmNvbSIsImlhdCI6MTYzODE4MjcwNSwiZXhwIjoxNjM4MTg2MzA1fQ.ALO44TKM5amHLRMzHDlxiqSavie4_oUvc2aVREVU8T8
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+sec-ch-ua-platform: "macOS"
+sec-fetch-site: same-origin
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: http://localhost:8080/
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 401 Unauthorized
+Transfer-Encoding: chunked
+Keep-Alive: timeout=60
+Connection: keep-alive
+Date: Sun, 12 Dec 2021 10:22:08 GMT
+Content-Type: application/json
+
+
+
+GET /logs/all HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 404 Not Found
+Keep-Alive: timeout=60
+Connection: keep-alive
+Vary: Origin
+Content-Length: 286
+Content-Language: ko-KR
+Date: Sun, 12 Dec 2021 10:22:19 GMT
+Content-Type: text/html;charset=UTF-8
+
+
+
+GET /logs/level HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Keep-Alive: timeout=60
+Connection: keep-alive
+Content-Length: 20
+Date: Sun, 12 Dec 2021 10:22:25 GMT
+Content-Type: text/html;charset=UTF-8
+
+
+
+GET /logs/level HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Keep-Alive: timeout=60
+Connection: keep-alive
+Content-Length: 20
+Date: Sun, 12 Dec 2021 10:22:40 GMT
+Content-Type: text/html;charset=UTF-8
+
+
+
+GET /logs/level HTTP/1.1
+host: localhost:8080
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+HTTP/1.1 200 OK
+Keep-Alive: timeout=60
+Connection: keep-alive
+Content-Length: 20
+Date: Sun, 12 Dec 2021 10:22:44 GMT
+Content-Type: text/html;charset=UTF-8
+
+
+
