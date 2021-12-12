@@ -52,29 +52,46 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-> 기본적으로 모든 웹 페이지가 5초 이내로 사용자에게 제공될 수 있도록 해야한다고 생각합니다.   
-> 그러므로 웹 성능 확인 사이트에서 85~90 점 이상이 되야 한다고 생각합니다.  
+
+- 경쟁사 분석
+|사이트|First Contentful Paint|Speed Index|Largest Contentful Paint|Cumulative Layout Shift|Total Blocking Time|
+|:------:|:------:|:------:|:------:|:------:|:------:|
+|내 사이트|2.404s|2.424s|2.601s|0.004|≥ 0.000s|
+|네이버지도|2.117s|4.971s|9.532s|0|≥0.290s|
+|카카오맵|2.445s|6.071s|3.111s|0.019|≥ 0.920s|
+
+- 예상 예산 (경쟁사중 최고 지표 기준으로 20프로 차이까지 허용)
+  - First Contentful Paint : 2.8s
+  - Speed Index : 6s
+  - Largest Contentful Paint : 3.7s
+  - Cumulative Layout Shift : 0.01
+  - Total Blocking Time : 0.4s
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - 전반적으로 모든 페이지에 자바 스크립트 실행 시간을 단축
 - 미사용 스크립트 제거
-- Keep-Alive 설정
+- Keep-Alive 설정(nginx 설정 잘못해서 설정값이 포함이 안됐음.)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
    - smoke 
    > 기능 정상 작동하는지를 확인하기 위해 1 유저가 10초 동안 테스트 
    - load
-   > 조회 로드 속도를 확인하기 위해 30 유저가 10초 동안 테스트
+   > 조회 로드 속도를 확인하기 위해 1초당 10유저
    - stress
-   > 과부하 테스트를 위해  5~10초 동안 100유저 -> 200유저 -> 300유저 로 증가하며 테스트
-   [smoke.js](/k6//smoke.js)
+   > 과부하 테스트를 위해  5~10초 동안 100유저 -> 200유저 -> 300유저 -> 400유저 로 증가하며 테스트
+   
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-   - Smoke  
-      ![smokeTest.png](images/smokeTest.PNG)
-      ![smokeTest_result.png](images/smokeTest_result.PNG)
-   - load   
-     ![loadTest.png](images/loadTest.PNG)
-     ![loadTest_result.png](images/loadTest_result.PNG)
-   - stress  
-     ![stressTest.png](images/stressTest.PNG)
-     ![stress_result.png](images/stressTest_result.PNG)
+   - 모든 유저가 필수로 거쳐가야하는 메인 페이지
+     - smoke js [smoke.js](/k6/main/smoke.js)
+     - smoke 결과 [main_smoke.PNG](/k6/main/main_load.PNG)
+     - load js [load.js](/k6/main/load.js)
+     - load 결과 [main_load.PNG](/k6/main/main_load.PNG)
+     - stress js [stress.js](/k6/main/stress.js)
+     - stress 결과 [main_stress.PNG](/k6/main/main_stress.PNG)
+   - 리소스 부하가 큰 경로 페이지
+       - smoke js [smoke.js](/k6/path/smoke.js)
+       - smoke 결과 [path_smoke.PNG](/k6/path/path_load.PNG)
+       - load js [load.js](/k6/path/load.js)
+       - load 결과 [path_load.PNG](/k6/path/path_load.PNG)
+       - stress js [stress.js](/k6/path/stress.js)
+       - stress 결과 [path_stress.PNG](/k6/path/path_stress.PNG)
