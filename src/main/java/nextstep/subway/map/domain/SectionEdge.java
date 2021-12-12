@@ -34,4 +34,12 @@ public class SectionEdge extends DefaultWeightedEdge {
     protected double getWeight() {
         return this.section.getDistance();
     }
+
+    @Override
+    public String toString() {
+        return "SectionEdge{" +
+            "section=" + section +
+            ", lineId=" + lineId +
+            '}';
+    }
 }
