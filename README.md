@@ -87,6 +87,7 @@ npm run dev
     - [x] 문제가 되는 코드 수정하기
     - [x] Nginx Access Log 설정하기
 - [ ] CloudWatch 로 모니터링
+    - [x] cAdvisor 설치 
     - [ ] 로그 수집하기
     - [ ] 메트릭 수집하기
 
