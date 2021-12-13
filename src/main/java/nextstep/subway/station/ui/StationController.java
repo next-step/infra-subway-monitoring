@@ -1,6 +1,6 @@
 package nextstep.subway.station.ui;
 
-import nextstep.subway.log.Monitor;
+import nextstep.subway.monitor.Monitor;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;

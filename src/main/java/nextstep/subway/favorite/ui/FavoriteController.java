@@ -5,7 +5,7 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.favorite.application.FavoriteService;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
-import nextstep.subway.log.Monitor;
+import nextstep.subway.monitor.Monitor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

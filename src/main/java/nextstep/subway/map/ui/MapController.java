@@ -1,6 +1,6 @@
 package nextstep.subway.map.ui;
 
-import nextstep.subway.log.Monitor;
+import nextstep.subway.monitor.Monitor;
 import nextstep.subway.map.application.MapService;
 import nextstep.subway.map.dto.PathResponse;
 import org.springframework.http.ResponseEntity;

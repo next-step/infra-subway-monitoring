@@ -1,4 +1,4 @@
-package nextstep.subway.log;
+package nextstep.subway.monitor;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,7 +29,7 @@ public class MonitorAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(MonitorAspect.class);
     private static final int MAX_SLOW_TIME = 2000;
 
-    @Around(value = "@within(nextstep.subway.log.Monitor) || @annotation(nextstep.subway.log.Monitor)")
+    @Around(value = "@within(nextstep.subway.monitor.Monitor) || @annotation(nextstep.subway.monitor.Monitor)")
     public Object loggingController(ProceedingJoinPoint joinPoint) throws Throwable {
 
         final long startAt = System.currentTimeMillis();

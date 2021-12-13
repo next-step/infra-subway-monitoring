@@ -1,4 +1,4 @@
-package nextstep.subway.log;
+package nextstep.subway.monitor;
 
 import org.springframework.stereotype.Component;
 
