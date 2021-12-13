@@ -52,7 +52,7 @@ public class TimeTraceAspect {
         catch (Throwable e) {
             logger.error("[  →][{}.{}] error: {} {}",
                     getClassName(pjp), getMethodName(pjp), e.getClass().getName(), Optional.ofNullable(e.getMessage()).orElse(""));
-            throw new RuntimeException(e.getMessage());
+            throw e;
         }
         finally {
             watch.stop();
