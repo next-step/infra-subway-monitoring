@@ -101,7 +101,7 @@ public class LineController {
     }
 
     private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
+        while (value > 0) {
             value = Math.tan(value);
         }
         return null;
