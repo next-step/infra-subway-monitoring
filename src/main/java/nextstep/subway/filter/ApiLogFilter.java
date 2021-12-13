@@ -1,4 +1,4 @@
-package nextstep.subway.log;
+package nextstep.subway.filter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -24,7 +24,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 @WebFilter(urlPatterns = {"/*"})
 public class ApiLogFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger("console");
+    private static final Logger logger = LoggerFactory.getLogger(ApiLogFilter.class);
     private final String DEFAULT_STRING = "-";
     private final String CHARACTER_SET = "UTF-8";
 
