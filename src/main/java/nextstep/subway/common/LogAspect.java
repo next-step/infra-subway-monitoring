@@ -7,6 +7,7 @@ import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +32,13 @@ public class LogAspect {
     }
 
     @Around("controllerTarget()")
-    public void logBefore(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed(joinPoint.getArgs());
         String requestUrl = getRequestUrl(joinPoint);
         String parameters = params(joinPoint).toString();
         String response = result.toString();
         log.info(httpLogText(requestUrl, parameters, response));
+        return result;
     }
 
     private String getRequestUrl(JoinPoint joinPoint) {
