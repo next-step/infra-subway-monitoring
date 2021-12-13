@@ -87,8 +87,11 @@ npm run dev
     - [x] 문제가 되는 코드 수정하기
     - [x] Nginx Access Log 설정하기
 - [ ] CloudWatch 로 모니터링
-    - [x] cAdvisor 설치 
-    - [ ] 로그 수집하기
+    - [x] cAdvisor 설치
+    - [x] 로그 수집하기
+        - [x] EC2 에 IAM 역할 설정
+        - [x] python & awslogs agent 설치
+        - [x] `awslogs.conf` 수정 및 awslogs 재시작
     - [ ] 메트릭 수집하기
 
 ### 2단계
