@@ -59,9 +59,9 @@ npm run dev
 
 
 ### step1 요구사항
-- [ ] 로그 설정하기
-  - [ ] 로그 추가
-  - [ ] Nginx Access Log 설정하기
+- [X] 로그 설정하기
+  - [X] 로그 추가
+  - [X] Nginx Access Log 설정하기
 - [ ] Cloudwatch 모니터링
   - [ ] Cloudwatch 로그 수집
   - [ ] Cloudwatch 메트릭 수집
