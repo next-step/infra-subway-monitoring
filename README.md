@@ -106,31 +106,31 @@ npm run dev
 
 - 접속 빈도가 높은 페이지
   - Smoke
-    - Script : [smoke-freq.js](./k6/smoke-freq.js])
-    - Result : [smoke-freq-result.txt](./k6/smoke-freq-result.txt])
+    - Script : [smoke-freq.js](./k6/smoke-freq.js)
+    - Result : [smoke-freq-result.txt](./k6/smoke-freq-result.txt)
   - Load
-    - Script : [load-freq.js](./k6/load-freq.js])
-    - Result : [load-freq-result.txt](./k6/load-freq-result.txt])
+    - Script : [load-freq.js](./k6/load-freq.js)
+    - Result : [load-freq-result.txt](./k6/load-freq-result.txt)
   - Stress
-    - Script : [stress-freq.js](./k6/stress-freq.js])
-    - Result : [stress-freq-result.txt](./k6/stress-freq-result.txt])
+    - Script : [stress-freq.js](./k6/stress-freq.js)
+    - Result : [stress-freq-result.txt](./k6/stress-freq-result.txt)
 - 데이터를 갱신하는 페이지
   - Smoke
-    - Script : [smoke-update.js](./k6/smoke-update.js])
-    - Result : [smoke-update-result.txt](./k6/smoke-update-result.txt])
+    - Script : [smoke-update.js](./k6/smoke-update.js)
+    - Result : [smoke-update-result.txt](./k6/smoke-update-result.txt)
   - Load
-    - Script : [load-update.js](./k6/load-update.js])
-    - Result : [load-update-result.txt](./k6/load-update-result.txt])
+    - Script : [load-update.js](./k6/load-update.js)
+    - Result : [load-update-result.txt](./k6/load-update-result.txt)
   - Stress
-    - Script : [stress-update.js](./k6/stress-update.js])
-    - Result : [stress-update-result.txt](./k6/stress-update-result.txt])
+    - Script : [stress-update.js](./k6/stress-update.js)
+    - Result : [stress-update-result.txt](./k6/stress-update-result.txt)
 - 데이터를 조회하는데 여러 데이터를 참조하는 페이지
   - Smoke
-    - Script : [smoke-complex.js](./k6/smoke-complex.js])
-    - Result : [smoke-complex-result.txt](./k6/smoke-complex-result.txt])
+    - Script : [smoke-complex.js](./k6/smoke-complex.js)
+    - Result : [smoke-complex-result.txt](./k6/smoke-complex-result.txt)
   - Load
-    - Script : [load-complex.js](./k6/load-complex.js])
-    - Result : [load-complex-result.txt](./k6/load-complex-result.txt])
+    - Script : [load-complex.js](./k6/load-complex.js)
+    - Result : [load-complex-result.txt](./k6/load-complex-result.txt)
   - Stress
-    - Script : [stress-complex.js](./k6/stress-complex.js])
-    - Result : [stress-complex-result.txt](./k6/stress-complex-result.txt])
+    - Script : [stress-complex.js](./k6/stress-complex.js)
+    - Result : [stress-complex-result.txt](./k6/stress-complex-result.txt)
