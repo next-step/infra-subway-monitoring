@@ -43,8 +43,10 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+/home/ubuntu/log/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-mnonm
 
 ---
 
@@ -62,6 +64,6 @@ npm run dev
 - [X] 로그 설정하기
   - [X] 로그 추가
   - [X] Nginx Access Log 설정하기
-- [ ] Cloudwatch 모니터링
-  - [ ] Cloudwatch 로그 수집
-  - [ ] Cloudwatch 메트릭 수집
+- [X] Cloudwatch 모니터링
+  - [X] Cloudwatch 로그 수집
+  - [X] Cloudwatch 메트릭 수집
