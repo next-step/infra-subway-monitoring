@@ -15,7 +15,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
             .asList("/favorites/**",
                     "/join/**",
                     "/lines/**",
-                    "/login/**",
                     "/members/**",
                     "/mypage/**",
                     "/path",

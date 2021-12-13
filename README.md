@@ -45,12 +45,12 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
    - ALB적용으로 nginx를 종료하고 nginx서버에 was를 구동중입니다.
    - keepbang-web-service
-        - tomcat 로그 : /home/log/server.log
-        - api 로그 : /home/log/json.log
+        - tomcat 로그 : /home/ubuntu/log/server.log
+        - api 로그 : /home/ubuntu/log/json.log
         - system 로그 : /var/log/syslog
    - keepbang-nginx
-       - tomcat 로그 : /home/log/server.log
-       - api 로그 : /home/log/json.log
+       - tomcat 로그 : /home/ubuntu/log/server.log
+       - api 로그 : /home/ubuntu/log/json.log
        - system 로그 : /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
    - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-keepbang
