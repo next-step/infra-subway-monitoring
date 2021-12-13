@@ -47,7 +47,18 @@ npm run dev
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 ---
-
+* [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+* [x] 로그 설정하기
+~~~
+  운영은 파일로 관리, 로컬은 콘솔로 관리
+  aop를 활용
+~~~
+  * 참고자료 aop: https://jeffrey-oh.tistory.com/332
+  * 참고자료 aop: https://memostack.tistory.com/238
+  * 참고자료 springActvie: https://blog.leocat.kr/notes/2018/09/18/spring-logback-config-with-spring-multi-active-profile
+  * 참고자료 log: https://gaemi606.tistory.com/entry/Spring-Boot-AOP%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-%EB%A1%9C%EA%B7%B8-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0-REST-API
+  * [ ] Cloudwatch로 모니터링
+---
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
