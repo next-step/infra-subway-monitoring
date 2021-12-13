@@ -94,4 +94,15 @@ public class Section implements Serializable {
     public boolean existUpStation() {
         return this.upStation != null;
     }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+            "id=" + id +
+            ", lineId=" + line.getId() +
+            ", upStationId=" + upStation.getId() +
+            ", downStationId=" + downStation.getId() +
+            ", distance=" + distance +
+            '}';
+    }
 }
