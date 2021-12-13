@@ -45,10 +45,10 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
 
 * [인프라정보는 여기 있습니다~](https://github.com/lsm7179/infra-subway-deploy/tree/lsm7179#%EB%AF%B8%EC%85%98)
-* logPath  /home/ubuntu/infra-subway-monitoring-app/logs/infra-subway-monitoring.log
+* logPath  /home/ubuntu/infra-subway-monitoring/log/file.log
 * nginx -> 요구사항 변경으로 alb로 수정되었습니다. 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+* https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=lsm7179-dashboard
 ---
 * [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 * [x] 로그 설정하기
