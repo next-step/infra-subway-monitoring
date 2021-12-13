@@ -2,10 +2,9 @@ version: '3'
 services:
   local-db:
     image: library/mysql:5.7
-    container_name: local-db
     restart: always
     ports:
-      - 13306:3306
+      - "13306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: masterpw
       MYSQL_DATABASE: subway
@@ -14,3 +13,21 @@ services:
       - ./db/mysql/data:/var/lib/mysql
       - ./db/mysql/config:/etc/mysql/conf.d
       - ./db/mysql/init:/docker-entrypoint-initdb.d
+  spring-boot:
+    image: nextstep/spring-boot
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILE=prod
+    volumes:
+      - ./logs/spring-boot:/logs
+    depends_on:
+      - local-db
+  nginx:
+    image: nextstep/nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - spring-boot

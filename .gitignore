@@ -43,6 +43,4 @@ fronted/.eslintrc.js
 
 ### Docker ###
 docker/db/mysql/data
-
-## Log ###
-log/
+docker/logs
