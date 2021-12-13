@@ -1,6 +1,155 @@
-2021-12-13 17:55:31.602 http-nio-8080-exec-2 INFO  file - invoke
-2021-12-13 17:55:31.895 http-nio-8080-exec-2 INFO  file - done
-2021-12-13 17:55:38.962 http-nio-8080-exec-3 INFO  file - invoke
-2021-12-13 17:55:39.089 http-nio-8080-exec-3 INFO  file - done
-2021-12-13 17:55:39.098 http-nio-8080-exec-4 INFO  file - invoke
-2021-12-13 17:55:39.121 http-nio-8080-exec-4 INFO  file - done
+2021-12-13 21:10:27.383 http-nio-8080-exec-6 INFO  - [↘︎][GET][/lines][LineController.findAllLines]
+2021-12-13 21:10:27.385 http-nio-8080-exec-5 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:10:27.387 http-nio-8080-exec-5 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 2ms.
+2021-12-13 21:10:27.388 http-nio-8080-exec-5 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:10:27.394 http-nio-8080-exec-5 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:10:27.394 http-nio-8080-exec-6 INFO  - [  →][LineService.findLineResponses]
+2021-12-13 21:10:27.445 http-nio-8080-exec-6 INFO  - [  ←][LineService.findLineResponses] 51ms.
+2021-12-13 21:10:27.449 http-nio-8080-exec-6 INFO  - [↖︎][GET][/lines][LineController.findAllLines] 66ms.
+2021-12-13 21:10:38.135 http-nio-8080-exec-8 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:10:38.139 http-nio-8080-exec-8 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:10:38.194 http-nio-8080-exec-8 INFO  - [  ←][MemberService.createMember] 54ms.
+2021-12-13 21:10:38.201 http-nio-8080-exec-8 INFO  - [↖︎][POST][/members][MemberController.createMember] 65ms.
+2021-12-13 21:13:18.773 http-nio-8080-exec-1 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:13:18.776 http-nio-8080-exec-1 INFO  - [ ↘]︎[MemberRequest{email='haedoang@gmail.com', password='*', age=33}]
+2021-12-13 21:13:18.783 http-nio-8080-exec-1 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:13:18.856 http-nio-8080-exec-1 INFO  - [  ←][MemberService.createMember] 73ms.
+2021-12-13 21:13:18.865 http-nio-8080-exec-1 INFO  - [↖︎][POST][/members][MemberController.createMember] 93ms.
+2021-12-13 21:13:31.265 http-nio-8080-exec-2 INFO  - [↘︎][POST][/login/token][AuthController.login]
+2021-12-13 21:13:31.267 http-nio-8080-exec-2 INFO  - [ ↘]︎[TokenRequest{email='haedoang@gmail.com', password='*'}]
+2021-12-13 21:13:31.269 http-nio-8080-exec-2 INFO  - [  →][AuthService.login]
+2021-12-13 21:13:31.455 http-nio-8080-exec-2 INFO  - [  ←][AuthService.login] 186ms.
+2021-12-13 21:13:31.458 http-nio-8080-exec-2 INFO  - [↖︎][POST][/login/token][AuthController.login] 193ms.
+2021-12-13 21:13:31.501 http-nio-8080-exec-3 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:13:31.503 http-nio-8080-exec-3 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 1ms.
+2021-12-13 21:13:31.503 http-nio-8080-exec-3 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:13:31.506 http-nio-8080-exec-3 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:13:31.527 http-nio-8080-exec-3 INFO  - [  ←][AuthService.findMemberByToken] 21ms.
+2021-12-13 21:13:31.530 http-nio-8080-exec-3 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 26ms.
+2021-12-13 21:13:31.530 http-nio-8080-exec-3 INFO  - [↘︎][GET][/members/me][MemberController.findMemberOfMine]
+2021-12-13 21:13:31.530 http-nio-8080-exec-3 INFO  - [ ↘]︎[nextstep.subway.auth.domain.LoginMember@292b8f8e]
+2021-12-13 21:13:31.531 http-nio-8080-exec-3 INFO  - [  →][MemberService.findMember]
+2021-12-13 21:13:31.538 http-nio-8080-exec-3 INFO  - [  ←][MemberService.findMember] 6ms.
+2021-12-13 21:13:31.540 http-nio-8080-exec-3 INFO  - [↖︎][GET][/members/me][MemberController.findMemberOfMine] 10ms.
+2021-12-13 21:18:57.896 http-nio-8080-exec-6 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:18:57.920 http-nio-8080-exec-6 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 24ms.
+2021-12-13 21:18:57.920 http-nio-8080-exec-6 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:18:57.928 http-nio-8080-exec-6 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:19:04.204 http-nio-8080-exec-8 INFO  - [↘︎][POST][/login/token][AuthController.login]
+2021-12-13 21:19:04.207 http-nio-8080-exec-8 INFO  - [ ↘]︎[TokenRequest{email='haedoang@gmail.com', password='*'}]
+2021-12-13 21:19:04.209 http-nio-8080-exec-8 INFO  - [  →][AuthService.login]
+2021-12-13 21:19:11.872 http-nio-8080-exec-9 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:19:11.874 http-nio-8080-exec-9 INFO  - [ ↘]︎[MemberRequest{email='haedoang@gmail.com', password='*', age=33}]
+2021-12-13 21:19:11.877 http-nio-8080-exec-9 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:19:11.929 http-nio-8080-exec-9 INFO  - [  ←][MemberService.createMember] 52ms.
+2021-12-13 21:19:11.937 http-nio-8080-exec-9 INFO  - [↖︎][POST][/members][MemberController.createMember] 64ms.
+2021-12-13 21:19:16.549 http-nio-8080-exec-10 INFO  - [↘︎][POST][/login/token][AuthController.login]
+2021-12-13 21:19:16.550 http-nio-8080-exec-10 INFO  - [ ↘]︎[TokenRequest{email='haedoang@gmail.com', password='*'}]
+2021-12-13 21:19:16.552 http-nio-8080-exec-10 INFO  - [  →][AuthService.login]
+2021-12-13 21:19:16.567 http-nio-8080-exec-10 INFO  - [  ←][AuthService.login] 14ms.
+2021-12-13 21:19:16.569 http-nio-8080-exec-10 INFO  - [↖︎][POST][/login/token][AuthController.login] 19ms.
+2021-12-13 21:19:16.600 http-nio-8080-exec-1 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:19:16.601 http-nio-8080-exec-1 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:19:16.606 http-nio-8080-exec-1 INFO  - [  ←][AuthService.findMemberByToken] 4ms.
+2021-12-13 21:19:16.609 http-nio-8080-exec-1 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 9ms.
+2021-12-13 21:19:16.609 http-nio-8080-exec-1 INFO  - [↘︎][GET][/members/me][MemberController.findMemberOfMine]
+2021-12-13 21:19:16.609 http-nio-8080-exec-1 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=33}]
+2021-12-13 21:19:16.611 http-nio-8080-exec-1 INFO  - [  →][MemberService.findMember]
+2021-12-13 21:19:16.616 http-nio-8080-exec-1 INFO  - [  ←][MemberService.findMember] 5ms.
+2021-12-13 21:19:16.619 http-nio-8080-exec-1 INFO  - [↖︎][GET][/members/me][MemberController.findMemberOfMine] 9ms.
+2021-12-13 21:24:01.921 http-nio-8080-exec-4 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:24:01.926 http-nio-8080-exec-4 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 6ms.
+2021-12-13 21:24:01.927 http-nio-8080-exec-4 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:24:01.936 http-nio-8080-exec-4 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:24:41.068 http-nio-8080-exec-7 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:24:41.071 http-nio-8080-exec-7 INFO  - [ ↘]︎[MemberRequest{email='haedoang@gmail.com', password='*', age=33}]
+2021-12-13 21:24:41.074 http-nio-8080-exec-7 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:24:41.129 http-nio-8080-exec-7 INFO  - [  ←][MemberService.createMember] 55ms.
+2021-12-13 21:24:41.137 http-nio-8080-exec-7 INFO  - [↖︎][POST][/members][MemberController.createMember] 68ms.
+2021-12-13 21:24:45.490 http-nio-8080-exec-8 INFO  - [↘︎][POST][/login/token][AuthController.login]
+2021-12-13 21:24:45.492 http-nio-8080-exec-8 INFO  - [ ↘]︎[TokenRequest{email='haedoang@gmail.com', password='*'}]
+2021-12-13 21:24:45.495 http-nio-8080-exec-8 INFO  - [  →][AuthService.login]
+2021-12-13 21:24:45.509 http-nio-8080-exec-8 INFO  - [  ←][AuthService.login] 14ms.
+2021-12-13 21:24:45.512 http-nio-8080-exec-8 INFO  - [ ↖︎]︎[TokenResponse{accessToken='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWVkb2FuZ0BnbWFpbC5jb20iLCJpYXQiOjE2MzkzOTgyODUsImV4cCI6MTYzOTQwMTg4NX0.mN_FCb7WJTLiXDPAZFvtta50-mDOjyWzW0Ia1Jrg-LE'}]
+2021-12-13 21:24:45.512 http-nio-8080-exec-8 INFO  - [↖︎][POST][/login/token][AuthController.login] 21ms.
+2021-12-13 21:24:45.569 http-nio-8080-exec-9 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:24:45.581 http-nio-8080-exec-9 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:24:45.587 http-nio-8080-exec-9 INFO  - [  ←][AuthService.findMemberByToken] 5ms.
+2021-12-13 21:24:45.590 http-nio-8080-exec-9 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 21ms.
+2021-12-13 21:24:45.590 http-nio-8080-exec-9 INFO  - [↘︎][GET][/members/me][MemberController.findMemberOfMine]
+2021-12-13 21:24:45.590 http-nio-8080-exec-9 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=33}]
+2021-12-13 21:24:45.591 http-nio-8080-exec-9 INFO  - [  →][MemberService.findMember]
+2021-12-13 21:24:45.597 http-nio-8080-exec-9 INFO  - [  ←][MemberService.findMember] 5ms.
+2021-12-13 21:24:45.600 http-nio-8080-exec-9 INFO  - [↖︎][GET][/members/me][MemberController.findMemberOfMine] 9ms.
+2021-12-13 21:24:49.123 http-nio-8080-exec-1 INFO  - [↘︎][GET][/favorites][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:24:49.138 http-nio-8080-exec-1 INFO  - [↖︎][GET][/favorites][AuthenticationPrincipalArgumentResolver.supportsParameter] 14ms.
+2021-12-13 21:24:49.138 http-nio-8080-exec-1 INFO  - [↘︎][GET][/favorites][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:24:49.141 http-nio-8080-exec-1 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:24:49.145 http-nio-8080-exec-1 INFO  - [  ←][AuthService.findMemberByToken] 4ms.
+2021-12-13 21:24:49.148 http-nio-8080-exec-1 INFO  - [↖︎][GET][/favorites][AuthenticationPrincipalArgumentResolver.resolveArgument] 9ms.
+2021-12-13 21:24:49.148 http-nio-8080-exec-1 INFO  - [↘︎][GET][/favorites][FavoriteController.getFavorites]
+2021-12-13 21:24:49.150 http-nio-8080-exec-1 INFO  - [  →][FavoriteService.findFavorites]
+2021-12-13 21:24:49.165 http-nio-8080-exec-1 INFO  - [  ←][FavoriteService.findFavorites] 15ms.
+2021-12-13 21:24:49.165 http-nio-8080-exec-1 INFO  - [↖︎][GET][/favorites][FavoriteController.getFavorites] 17ms.
+2021-12-13 21:24:55.297 http-nio-8080-exec-3 INFO  - [↘︎][PUT][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:24:55.297 http-nio-8080-exec-3 INFO  - [↖︎][PUT][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 0ms.
+2021-12-13 21:24:55.297 http-nio-8080-exec-3 INFO  - [↘︎][PUT][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:24:55.300 http-nio-8080-exec-3 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:24:55.305 http-nio-8080-exec-3 INFO  - [  ←][AuthService.findMemberByToken] 5ms.
+2021-12-13 21:24:55.308 http-nio-8080-exec-3 INFO  - [↖︎][PUT][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 10ms.
+2021-12-13 21:24:55.309 http-nio-8080-exec-3 INFO  - [↘︎][PUT][/members/me][MemberController.updateMemberOfMine]
+2021-12-13 21:24:55.309 http-nio-8080-exec-3 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=33},MemberRequest{email='haedoang@gmail.com', password='*', age=44}]
+2021-12-13 21:24:55.310 http-nio-8080-exec-3 INFO  - [  →][MemberService.updateMember]
+2021-12-13 21:24:55.310 http-nio-8080-exec-3 INFO  - [  ←][MemberService.updateMember] 0ms.
+2021-12-13 21:24:55.318 http-nio-8080-exec-3 INFO  - [↖︎][PUT][/members/me][MemberController.updateMemberOfMine] 9ms.
+2021-12-13 21:24:55.361 http-nio-8080-exec-2 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:24:55.369 http-nio-8080-exec-2 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:24:55.374 http-nio-8080-exec-2 INFO  - [  ←][AuthService.findMemberByToken] 4ms.
+2021-12-13 21:24:55.376 http-nio-8080-exec-2 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 15ms.
+2021-12-13 21:24:55.377 http-nio-8080-exec-2 INFO  - [↘︎][GET][/members/me][MemberController.findMemberOfMine]
+2021-12-13 21:24:55.377 http-nio-8080-exec-2 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=44}]
+2021-12-13 21:24:55.378 http-nio-8080-exec-2 INFO  - [  →][MemberService.findMember]
+2021-12-13 21:24:55.378 http-nio-8080-exec-2 INFO  - [  ←][MemberService.findMember] 0ms.
+2021-12-13 21:24:55.380 http-nio-8080-exec-2 INFO  - [↖︎][GET][/members/me][MemberController.findMemberOfMine] 3ms.
+2021-12-13 21:25:31.885 http-nio-8080-exec-6 INFO  - [↘︎][POST][/login/token][AuthController.login]
+2021-12-13 21:25:31.885 http-nio-8080-exec-6 INFO  - [ ↘]︎[TokenRequest{email='haedoang@gmail.com', password='*'}]
+2021-12-13 21:25:31.888 http-nio-8080-exec-6 INFO  - [  →][AuthService.login]
+2021-12-13 21:25:31.891 http-nio-8080-exec-6 INFO  - [  ←][AuthService.login] 3ms.
+2021-12-13 21:25:31.893 http-nio-8080-exec-6 INFO  - [ ↖︎]︎[TokenResponse{accessToken='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWVkb2FuZ0BnbWFpbC5jb20iLCJpYXQiOjE2MzkzOTgzMzEsImV4cCI6MTYzOTQwMTkzMX0.i4gjOz8VkKxL4jbz-R9mW0b-KeP0q75ACwdNK292jrE'}]
+2021-12-13 21:25:31.893 http-nio-8080-exec-6 INFO  - [↖︎][POST][/login/token][AuthController.login] 8ms.
+2021-12-13 21:25:31.917 http-nio-8080-exec-4 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:25:31.918 http-nio-8080-exec-4 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:25:31.924 http-nio-8080-exec-4 INFO  - [  ←][AuthService.findMemberByToken] 5ms.
+2021-12-13 21:25:31.927 http-nio-8080-exec-4 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 10ms.
+2021-12-13 21:25:31.927 http-nio-8080-exec-4 INFO  - [↘︎][GET][/members/me][MemberController.findMemberOfMine]
+2021-12-13 21:25:31.928 http-nio-8080-exec-4 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=44}]
+2021-12-13 21:25:31.929 http-nio-8080-exec-4 INFO  - [  →][MemberService.findMember]
+2021-12-13 21:25:31.929 http-nio-8080-exec-4 INFO  - [  ←][MemberService.findMember] 0ms.
+2021-12-13 21:25:31.931 http-nio-8080-exec-4 INFO  - [↖︎][GET][/members/me][MemberController.findMemberOfMine] 3ms.
+2021-12-13 21:25:41.417 http-nio-8080-exec-7 INFO  - [↘︎][DELETE][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:25:41.418 http-nio-8080-exec-7 INFO  - [↖︎][DELETE][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 0ms.
+2021-12-13 21:25:41.418 http-nio-8080-exec-7 INFO  - [↘︎][DELETE][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:25:41.420 http-nio-8080-exec-7 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:25:41.425 http-nio-8080-exec-7 INFO  - [  ←][AuthService.findMemberByToken] 5ms.
+2021-12-13 21:25:41.428 http-nio-8080-exec-7 INFO  - [↖︎][DELETE][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument] 9ms.
+2021-12-13 21:25:41.428 http-nio-8080-exec-7 INFO  - [↘︎][DELETE][/members/me][MemberController.deleteMemberOfMine]
+2021-12-13 21:25:41.428 http-nio-8080-exec-7 INFO  - [ ↘]︎[LoginMember{id=1, email='haedoang@gmail.com', age=44}]
+2021-12-13 21:25:41.429 http-nio-8080-exec-7 INFO  - [  →][MemberService.deleteMember]
+2021-12-13 21:25:41.432 http-nio-8080-exec-7 INFO  - [  ←][MemberService.deleteMember] 2ms.
+2021-12-13 21:25:41.441 http-nio-8080-exec-7 INFO  - [↖︎][DELETE][/members/me][MemberController.deleteMemberOfMine] 12ms.
+2021-12-13 21:25:51.180 http-nio-8080-exec-10 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:25:51.181 http-nio-8080-exec-10 INFO  - [ ↘]︎[MemberRequest{email='haedoang@gmail.com', password='*', age=33}]
+2021-12-13 21:25:51.184 http-nio-8080-exec-10 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:25:51.242 http-nio-8080-exec-10 INFO  - [  ←][MemberService.createMember] 57ms.
+2021-12-13 21:25:51.245 http-nio-8080-exec-10 INFO  - [↖︎][POST][/members][MemberController.createMember] 64ms.
+2021-12-13 21:28:59.798 http-nio-8080-exec-3 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter]
+2021-12-13 21:28:59.802 http-nio-8080-exec-3 INFO  - [↖︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.supportsParameter] 4ms.
+2021-12-13 21:28:59.802 http-nio-8080-exec-3 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:28:59.809 http-nio-8080-exec-3 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:30:17.456 http-nio-8080-exec-1 INFO  - [↘︎][GET][/members/me][AuthenticationPrincipalArgumentResolver.resolveArgument]
+2021-12-13 21:30:17.459 http-nio-8080-exec-1 INFO  - [  →][AuthService.findMemberByToken]
+2021-12-13 21:30:26.019 http-nio-8080-exec-4 INFO  - [↘︎][POST][/members][MemberController.createMember]
+2021-12-13 21:30:26.022 http-nio-8080-exec-4 INFO  - [ ↘]︎[MemberRequest{email='haedoang@gmail.com', password='****', age=11}]
+2021-12-13 21:30:26.024 http-nio-8080-exec-4 INFO  - [  →][MemberService.createMember]
+2021-12-13 21:30:26.077 http-nio-8080-exec-4 INFO  - [  ←][MemberService.createMember] 53ms.
+2021-12-13 21:30:26.085 http-nio-8080-exec-4 INFO  - [↖︎][POST][/members][MemberController.createMember] 66ms.

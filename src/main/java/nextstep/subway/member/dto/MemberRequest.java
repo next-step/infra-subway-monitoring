@@ -1,6 +1,7 @@
 package nextstep.subway.member.dto;
 
 import nextstep.subway.member.domain.Member;
+import org.apache.commons.lang3.StringUtils;
 
 public class MemberRequest {
     private String email;
@@ -30,5 +31,14 @@ public class MemberRequest {
 
     public Member toMember() {
         return new Member(email, password, age);
+    }
+
+    @Override
+    public String toString() {
+        return "MemberRequest{" +
+                "email='" + email + '\'' +
+                ", password='" +  StringUtils.overlay(password, StringUtils.repeat('*', password.length()), 0, password.length()) + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

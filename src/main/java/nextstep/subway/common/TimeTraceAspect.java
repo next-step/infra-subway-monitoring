@@ -1,5 +1,6 @@
 package nextstep.subway.common;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -28,12 +29,32 @@ public class TimeTraceAspect {
     }
 
     @Around("execution(* nextstep.subway..ui.*.*(..))")
-    public void controllerPointCut(ProceedingJoinPoint pjp) throws Throwable {
+    public Object controllerPointCut(ProceedingJoinPoint pjp) throws Throwable {
         StopWatch watch = new StopWatch();
-        logger.info(request.getRequestURI() + "invoke");
         watch.start();
-        pjp.proceed();
-        watch.stop();;
-        logger.info(request.getRequestURI() + "done" + watch.getTotalTimeMillis() + "left");
+        logger.info("[↘︎][{}][{}][{}.{}]", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp));
+        Object proceed = pjp.proceed();
+        watch.stop();
+        logger.info("[↖︎][{}][{}][{}.{}] {}ms.", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+        return proceed;
+    }
+
+    @Around("execution(* nextstep.subway..application.*.*(..))")
+    public Object servicePointCut(ProceedingJoinPoint pjp) throws Throwable {
+        StopWatch watch = new StopWatch();
+        watch.start();
+        logger.info("[  →][{}.{}]", getClassName(pjp), getMethodName(pjp));
+        Object proceed = pjp.proceed();
+        watch.stop();
+        logger.info("[  ←][{}.{}] {}ms.", getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+        return proceed;
+    }
+
+    private String getMethodName(ProceedingJoinPoint pjp) {
+        return pjp.getSignature().getName();
+    }
+
+    private String getClassName(ProceedingJoinPoint pjp) {
+        return StringUtils.substringAfterLast(pjp.getTarget().getClass().toString(), ".");
     }
 }
