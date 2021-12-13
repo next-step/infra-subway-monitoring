@@ -43,9 +43,11 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+ - public1(3.36.209.24) : `/home/ubuntu/logs/infra-subway-monitoring` alias : `logpath`
+ - public2(3.36.233.76) : `/home/ubuntu/logs/infra-subway-monitoring` alias : `logpath`
 
-2. Cloudwatch 대시보드 URL을 알려주세요
-
+3. Cloudwatch 대시보드 URL을 알려주세요
+ - [링크](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-haedoang)
 ---
 
 ### 2단계 - 성능 테스트
@@ -67,7 +69,7 @@ npm run dev
 ---
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 - [x] 로그 설정하기
-- [ ] Cloudwatch로 모니터링
+- [x] Cloudwatch로 모니터링
 
 ### 요구사항 설명
 - [저장소](https://github.com/next-step/infra-subway-monitoring) 를 활용하여 아래 요구사항을 해결합니다.
@@ -78,5 +80,5 @@ npm run dev
 - [ ] ~~Nginx Access Log 설정하기~~ => nginx 미사용으로 변경됨.
 
 ### Cloudwatch로 모니터링
-- [ ] Cloudwatch로 로그 수집하기
-- [ ] Cloudwatch로 메트릭 수집하기
+- [x] Cloudwatch로 로그 수집하기 => Dashboard 위젯 설정 완료
+- [x] Cloudwatch로 메트릭 수집하기 => haedoang-matrics-public1, public2
