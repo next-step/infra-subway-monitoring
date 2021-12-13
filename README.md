@@ -43,7 +43,10 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-/home/ubuntu/log/file.log
+key: mnonm-aws-key.pem
+bastion: 3.34.191.156
+EC2: ssh web (alias 적용)
+로그: /home/ubuntu/log/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-mnonm
