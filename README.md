@@ -45,6 +45,7 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=wangki-dashboard
 
 
 ### 요구사항 
@@ -54,9 +55,9 @@ npm run dev
     - [x] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
   - [x] Nginx Access Log 설정하기 (설정 x)
     - [x] ALB 로 대체
-- [ ] Cloudwatch 로 모니터링
-  - [ ] Cloudwatch 로 로그 수집하기
-  - [ ] Cloudwatch 로 메트릭 수집하기
+- [x] Cloudwatch 로 모니터링
+  - [x] Cloudwatch 로 로그 수집하기
+  - [x] Cloudwatch 로 메트릭 수집하기
 
 ---
 
