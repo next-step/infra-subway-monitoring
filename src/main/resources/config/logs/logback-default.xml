@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <springProfile name="dev">
+        <property resource="config/logs/properties/logback-dev.properties"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <property resource="config/logs/properties/logback-prod.properties"/>
+    </springProfile>
+
+    <property name="LOG_PATTERN" value="%d{yy-MM-dd HH:mm:ss}[%thread] %-5level [%c]  [%logger{0}:%line] - %msg%n"/>
+</included>

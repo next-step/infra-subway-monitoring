@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+  <!--공통 부분 -->
+  <include resource="config/logs/logback-default.xml"/>
+
+  <springProfile name="test, local">
+    <include resource="config/logs/logback-console.xml"/>
+
+    <logger name="nextstep.subway" level="DEBUG">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.hibernate.sql" level="DEBUG" additivity="false">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.hibernate.type.descriptor.sql" level="TRACE" additivity="false">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.springframework.core" level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.springframework.beans" level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.springframework.context" level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="root" level="WARN">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="root" level="ERROR">
+      <appender-ref ref="CONSOLE"/>
+    </logger>
+
+  </springProfile>
+
+  <springProfile name="prod">
+
+    <include resource="config/logs/logback-error.xml"/>
+    <include resource="config/logs/logback-file.xml"/>
+
+    <logger name="nextstep.subway" level="INFO">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="nextstep.subway" level="ERROR">
+      <appender-ref ref="ERROR"/>
+    </logger>
+
+    <logger name="org.hibernate.sql" level="WARN" additivity="false">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.core" level="INFO">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.beans" level="INFO">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.context" level="INFO">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="INFO">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="root" level="WARN">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="root" level="ERROR">
+      <appender-ref ref="ERROR"/>
+    </logger>
+  </springProfile>
+</configuration>
