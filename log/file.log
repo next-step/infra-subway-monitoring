@@ -1,0 +1,11 @@
+
+2021-12-13 15:42:54.639 http-nio-8080-exec-3 INFO  file - ↘[GET]/stationsinvoke
+2021-12-13 15:42:54.640 http-nio-8080-exec-3 INFO  file - ↙[GET]/stationsdone
+2021-12-13 15:42:55.258 http-nio-8080-exec-4 INFO  file - ↘[GET]/stationsinvoke
+2021-12-13 15:42:55.265 http-nio-8080-exec-4 INFO  file -  ↘[%s.%s] invoke
+2021-12-13 15:42:55.269 http-nio-8080-exec-4 INFO  file -  ↙[%s.%s] invoke
+2021-12-13 15:43:09.188 http-nio-8080-exec-5 INFO  file - ↘[GET]/stationsinvoke
+2021-12-13 15:43:09.189 http-nio-8080-exec-5 INFO  file - ↙[GET]/stationsdone
+2021-12-13 15:43:09.770 http-nio-8080-exec-6 INFO  file - ↘[GET]/stationsinvoke
+2021-12-13 15:43:09.777 http-nio-8080-exec-6 INFO  file -  ↘[%s.%s] invoke
+2021-12-13 15:43:09.781 http-nio-8080-exec-6 INFO  file -  ↙[%s.%s] invoke

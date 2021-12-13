@@ -1,0 +1,5 @@
+{"timestamp":"2021-12-13 15:19:25.761","@version":"1","message":"hello=world, this=is, json=log","logger_name":"json",
+"thread":"http-nio-8080-exec-2","level":"INFO","level_value":20000,"hello":"world","this":"is","json":"log",
+"caller_class_name":"nextstep.subway.station.ui.StationController","caller_method_name":"showStations",
+"caller_file_name":"StationController.java","caller_line_number":40}
+{"timestamp":"2021-12-13 15:26:01.396","@version":"1","message":"hello=world, this=is, json=log","logger_name":"json","thread":"http-nio-8080-exec-2","level":"INFO","level_value":20000,"hello":"world","this":"is","json":"log","caller_class_name":"nextstep.subway.station.ui.StationController","caller_method_name":"showStations","caller_file_name":"StationController.java","caller_line_number":40}
