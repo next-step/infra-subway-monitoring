@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 /**
  * packageName : nextstep.subway.common
@@ -42,11 +43,21 @@ public class TimeTraceAspect {
     @Around("execution(* nextstep.subway..application.*.*(..))")
     public Object servicePointCut(ProceedingJoinPoint pjp) throws Throwable {
         StopWatch watch = new StopWatch();
+        Object proceed = null;
         watch.start();
         logger.info("[  →][{}.{}]", getClassName(pjp), getMethodName(pjp));
-        Object proceed = pjp.proceed();
-        watch.stop();
-        logger.info("[  ←][{}.{}] {}ms.", getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+        try {
+             proceed = pjp.proceed();
+        }
+        catch (Throwable e) {
+            logger.error("[  →][{}.{}] error: {} {}",
+                    getClassName(pjp), getMethodName(pjp), e.getClass().getName(), Optional.ofNullable(e.getMessage()).orElse(""));
+            throw new RuntimeException(e.getMessage());
+        }
+        finally {
+            watch.stop();
+            logger.info("[  ←][{}.{}] {}ms.", getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+        }
         return proceed;
     }
 
