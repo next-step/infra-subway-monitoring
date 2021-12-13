@@ -1,10 +1,10 @@
 package nextstep.subway;
 
+import com.google.common.base.Joiner;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
-
+import org.apache.commons.io.IOUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,57 +15,63 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.google.common.base.Joiner;
-
 @Aspect
 @Component
 public class LogAspect {
-	private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-	@Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
-	public Object logging(ProceedingJoinPoint pjp) throws Throwable {
+    private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-		String params = getRequestParams();
+    @Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
+    public Object logging(ProceedingJoinPoint pjp) throws Throwable {
 
-		long startAt = System.currentTimeMillis();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String params = getRequestParams();
 
-		logger.info("----------> REQUEST : {}({}) = {}", pjp.getSignature().getDeclaringTypeName(),
-			pjp.getSignature().getName(), params);
+        long startAt = System.currentTimeMillis();
 
-		Object result = pjp.proceed();
+        logger.info("----------> REQUEST : {}({}) = {}", pjp.getSignature().getDeclaringTypeName(),
+            pjp.getSignature().getName(), params);
 
-		long endAt = System.currentTimeMillis();
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            logger.info("Body: {} ", IOUtil.toString(request.getReader()));
+        }
 
-		logger.info("----------> RESPONSE : {}({}) = {} ({}ms)", pjp.getSignature().getDeclaringTypeName(),
-			pjp.getSignature().getName(), result, endAt - startAt);
+        Object result = pjp.proceed();
 
-		return result;
+        long endAt = System.currentTimeMillis();
 
-	}
+        logger.info("----------> RESPONSE : {}({}) = {} ({}ms)",
+            pjp.getSignature().getDeclaringTypeName(),
+            pjp.getSignature().getName(), result, endAt - startAt);
 
-	private String getRequestParams() {
 
-		String params = "";
+        return result;
 
-		RequestAttributes requestAttribute = RequestContextHolder.getRequestAttributes();
+    }
 
-		if (requestAttribute != null) {
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder
-				.getRequestAttributes()).getRequest();
+    private String getRequestParams() {
 
-			Map<String, String[]> paramMap = request.getParameterMap();
+        String params = "";
 
-			if (!paramMap.isEmpty()) {
-				params = " [" + paramMapToString(paramMap) + "]";
-			}
-		}
-		return params;
-	}
+        RequestAttributes requestAttribute = RequestContextHolder.getRequestAttributes();
 
-	private String paramMapToString(Map<String, String[]> paramMap) {
-		return paramMap.entrySet().stream()
-			.map(entry -> String.format("%s -> (%s)",
-				entry.getKey(), Joiner.on(",").join(entry.getValue())))
-			.collect(Collectors.joining(", "));
-	}
+        if (requestAttribute != null) {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getRequest();
+
+            Map<String, String[]> paramMap = request.getParameterMap();
+
+            if (!paramMap.isEmpty()) {
+                params = " [" + paramMapToString(paramMap) + "]";
+            }
+        }
+        return params;
+    }
+
+    private String paramMapToString(Map<String, String[]> paramMap) {
+        return paramMap.entrySet().stream()
+            .map(entry -> String.format("%s -> (%s)",
+                entry.getKey(), Joiner.on(",").join(entry.getValue())))
+            .collect(Collectors.joining(", "));
+    }
 }
