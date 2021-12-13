@@ -60,6 +60,8 @@ npm run dev
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-y2o2u2n
+
 ---
 
 ### 2단계 - 성능 테스트
@@ -86,13 +88,15 @@ npm run dev
             - [x] 글로벌 예외 처리시 `ERROR` 로깅
     - [x] 문제가 되는 코드 수정하기
     - [x] Nginx Access Log 설정하기
-- [ ] CloudWatch 로 모니터링
+- [x] CloudWatch 로 모니터링
     - [x] cAdvisor 설치
     - [x] 로그 수집하기
         - [x] EC2 에 IAM 역할 설정
         - [x] python & awslogs agent 설치
         - [x] `awslogs.conf` 수정 및 awslogs 재시작
-    - [ ] 메트릭 수집하기
+    - [x] 메트릭 수집하기
+      - [x] cloudwatch agent 설치 및 `config.json` 설정
+      - [x] 대시보드 내 위젯 추가
 
 ### 2단계
 
