@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
-    <property name="home" value="logs/"/>
+    <property name="home" value="log/"/>
 
-    <appender name="api" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="API" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${home}subway-monitor-api.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${home}subway-monitor-api-%d{yyyyMMdd}-%i.log</fileNamePattern>
@@ -15,5 +15,5 @@
             <pattern>%fullRequest%n%fullResponse</pattern>
         </encoder>
     </appender>
-    <appender-ref ref="api"/>
+    <appender-ref ref="API"/>
 </configuration>
