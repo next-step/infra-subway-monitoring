@@ -16,7 +16,7 @@
 <!--        </appender>-->
 <!--    </springProfile>-->
 
-    <springProfile name="local | prod">
+    <springProfile name="prod">
         <!--  appender이름이 file인 consoleAppender를 선언  -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <!--로깅이 기록될 위치-->
@@ -69,7 +69,7 @@
 <!--            <appender-ref ref="CONSOLE"/>-->
 <!--        </springProfile>-->
 
-        <springProfile name="local | prod">
+        <springProfile name="prod">
             <appender-ref ref="FILE"/>
         </springProfile>
 
