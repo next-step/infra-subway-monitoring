@@ -94,21 +94,66 @@ ___
     - keep-alive 사용
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+- 대상 시스템 범위
+    - 접속 빈도가 높은 페이지
+    - DB를 사용하는 기능
+- 목푯값
+    - 예상 1일 사용자 수(DAU) : 40,000
+    - 피크 시간대의 집중률 : 4
+    - 1명당 1일 평균 접속 혹은 요청수 : 10
+    - Throughput
+        - 1일 총 접속 수 : 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 40,000 * 10 = 400,000
+        - 1일 평균 rps : 1일 총 접속 수 / 86,400 (초/일) = 40,000 / 86,400 = 4.6
+        - 1일 최대 rps : 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 4.6 * 4 = 18.4 
+    - Latency
+        - 50 ~ 100ms
+    - 부하 유지기간
+        - 30분 ~ 1시간
+    - 부하 테스트 시 저장될 데이터 건수 및 크기
+        - 테스트 데이터 1 ~ 2건
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+- 접속 빈도가 높은 페이지
+    - load
+        - [스크립트](./k6/main/load-main.js)
+        - [결과](./k6/main/load_main_output.log)
+    - smoke
+        - [스크립트](./k6/main/smoke-main.js)
+        - [결과](./k6/main/smoke_main_output.log)
+    - stress
+        - [스크립트](./k6/main/stress-main.js)
+        - [결과](./k6/main/stress_main_output.log)
+- 데이터를 갱신하는 페이지
+    - load
+        - [스크립트](./k6/update/load-update.js)
+        - [결과](./k6/update/load_update_output.log)
+    - smoke
+        - [스크립트](./k6/update/smoke-update.js)
+        - [결과](./k6/update/smoke_update_output.log)
+    - stress
+        - [스크립트](./k6/update/stress-update.js)
+        - [결과](./k6/update/stress_update_output.log)
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - load
+        - [스크립트](./k6/path/load-path.js)
+        - [결과](./k6/path/load_path_output.log)
+    - smoke
+        - [스크립트](./k6/path/smoke-path.js)
+        - [결과](./k6/path/smoke_path_output.log)
+    - stress
+        - [스크립트](./k6/path/stress-path.js)
+        - [결과](./k6/path/stress_path_output.log)
 
 ### 요구사항
 - [X] 웹 성능 테스트
     - [X] 웹 성능 예산을 작성
     - [X] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
-- [ ] 부하 테스트
-    - [ ] 테스트 전제조건 정리
-        - [ ] 대상 시스템 범위
-        - [ ] 목푯값 설정(latency, throughput, 부하 유지기간)
-        - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
-    - [ ] 각 시나리오에 맞춰 스트립트 작성
-        - [ ] 접속 빈도가 높은 페이지
-        - [ ] 데이터를 갱신하는 페이지
-        - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-    - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+- [X] 부하 테스트
+    - [X] 테스트 전제조건 정리
+        - [X] 대상 시스템 범위
+        - [X] 목푯값 설정(latency, throughput, 부하 유지기간)
+        - [X] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - [X] 각 시나리오에 맞춰 스트립트 작성
+        - [X] 접속 빈도가 높은 페이지
+        - [X] 데이터를 갱신하는 페이지
+        - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - [X] Smoke, Load, Stress 테스트 후 결과를 기록
