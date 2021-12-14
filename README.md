@@ -60,3 +60,6 @@ npm run dev
 ## todo list
 - [x] Application Log 파일로 저장하기
     - [x] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+- [x] Nginx Access Log 설정하기
+- [x] Cloudwatch로 로그 수집하기
+- [x] Cloudwatch로 메트릭 수집하기
