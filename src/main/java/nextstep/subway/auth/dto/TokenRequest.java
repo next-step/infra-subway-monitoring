@@ -24,7 +24,6 @@ public class TokenRequest {
     public String toString() {
         return "TokenRequest{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
