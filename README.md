@@ -77,11 +77,11 @@ npm run dev
 
 카카오맵
 
-![카카오맵](docs/kakao-map.jpg)
+![카카오맵](docs/kakao_map.jpg)
 
 현재 서비스
 
-![나의 맵](docs/my-map.jpg)
+![나의 맵](docs/my_map.jpg)
 
 First Contentful Paint, Largest Contentful Paint 개선이 필요함을 확인함
 
@@ -92,6 +92,10 @@ First Contentful Paint, Largest Contentful Paint 개선이 필요함을 확인�
 - 이미지 파일 해상도 줄이기
 - 정적 파일 캐싱 설정
 - 웹 폰트 다이나믹 로딩 설정
+
+67 -> 91 으로 개선
+
+![나의_맵_개선](docs/my_map_improve.jpg)
 
 5. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
