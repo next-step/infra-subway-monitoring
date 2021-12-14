@@ -8,11 +8,12 @@ group = 'nextstep'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-processResources {
-	from('config/') {
-		into '.'
-	}
-}
+//processResources {
+//	from('config/') {
+//		into '.'
+//	}
+//}
+
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
@@ -42,16 +43,19 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+
+	// Metric 수집
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation('org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE')
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 }
 
-if (System.getenv('SPRING_PROFILES_ACTIVE') == "prod") {
-	// Metric 수집
-	dependencies {
-		implementation("org.springframework.boot:spring-boot-starter-actuator")
-		implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
-		implementation("io.micrometer:micrometer-registry-cloudwatch")
-	}
-}
+//if (System.getenv('SPRING_PROFILES_ACTIVE') == "prod") {
+
+//	dependencies {
+//
+//	}
+//}
 
 test {
 	useJUnitPlatform()
