@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MapController {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
     private MapService mapService;
 
     public MapController(MapService mapService) {
@@ -21,6 +22,9 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        return ResponseEntity.ok(mapService.findPath(source, target));
+        PathResponse path = mapService.findPath(source, target);
+        fileLogger.info("경로를 조회합니다.");
+        jsonLogger.info("{}", path);
+        return ResponseEntity.ok(path);
     }
 }

@@ -16,6 +16,7 @@ import java.net.URI;
 @RestController
 public class MemberController {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
     private MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -51,6 +52,7 @@ public class MemberController {
     public ResponseEntity<MemberResponse> findMemberOfMine(@AuthenticationPrincipal LoginMember loginMember) {
         MemberResponse member = memberService.findMember(loginMember.getId());
         fileLogger.info("내 정보를 조회합니다.");
+        jsonLogger.info("{}", member);
         return ResponseEntity.ok().body(member);
     }
 
