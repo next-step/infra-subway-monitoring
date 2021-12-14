@@ -7,10 +7,10 @@
 
 
     <springProfile name="local,test">
-        <root level = "TRACE">
+        <root level = "DEBUG">
             <appender-ref ref="console"/>
         </root>
-        <logger name="nextstep.subway" level="TRACE" additivity="false">
+        <logger name="nextstep.subway.auth" level="TRACE" additivity="false">
             <appender-ref ref="console"/>
         </logger>
     </springProfile>
