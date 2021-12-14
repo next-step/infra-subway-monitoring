@@ -43,9 +43,10 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요<br>
-: 외부망서버 (/home/ubuntu/infra-subway-monitoring/build/libs/log)
+: admin서버 접속(pem_key : codingknowjam.pem) -> ssh external(alias 설정) <br>
+-> 로그 경로 : /home/ubuntu/infra-subway-monitoring/build/libs/log)
 
-3. Cloudwatch 대시보드 URL을 알려주세요<br>
+2. Cloudwatch 대시보드 URL을 알려주세요<br>
 : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-codingknowjam
 
 ---
