@@ -5,9 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtil;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,7 +24,10 @@ public class LogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    @Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
+    @Pointcut("execution(* nextstep.subway.*.ui.*Controller.*(..))")
+    private static void advicePoint() {}
+
+    @Around("advicePoint()")
     public Object logging(ProceedingJoinPoint pjp) throws Throwable {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
@@ -47,6 +53,11 @@ public class LogAspect {
 
         return result;
 
+    }
+
+    @AfterThrowing(pointcut = "advicePoint()", throwing = "ex")
+    public void loggingError(JoinPoint joinPoint, Throwable ex) throws RuntimeException {
+        logger.error("----------> ERROR: {}, {}", joinPoint.getSignature().toString(), ex);
     }
 
     private String getRequestParams() {
