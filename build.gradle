@@ -8,12 +8,6 @@ group = 'nextstep'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-def env
-task configUsingEnvironmetVarible {
-	env = System.getenv('SPRING_PROFILES_ACTIVE')
-	println("Running environment:	" + env);
-}
-
 processResources {
 	from('config/') {
 		into '.'
@@ -48,14 +42,9 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
-
-
 }
 
-task productionDependencies {
-	if (env != "prod") {
-		return;
-	}
+if (System.getenv('SPRING_PROFILES_ACTIVE') == "prod") {
 	// Metric 수집
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-actuator")
