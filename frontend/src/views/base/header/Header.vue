@@ -3,7 +3,7 @@
     <v-toolbar-title class="pl-0 mr-12 align-center relative bottom-2">
       <v-btn to="/" text>
         <div class="title">
-          <img class="header-logo relative top-5" src="/images/logo_small.png" />
+          <img class="header-logo relative top-5" src="/images/logo_small.png" width="25px" height="25px"/>
           <span>RUNNINGMAP</span>
         </div>
       </v-btn>
