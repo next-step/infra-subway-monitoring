@@ -56,7 +56,7 @@ npm run dev
 - 베스천 서버 접속 : `ssh -i y2o2u2n-RSA.pem ubuntu@52.79.198.129`
 - 서비스 서버 접속 : `ssh service-b`
 - 로깅 경로 이동 : `cd infra-subway-monitoring/docker/logs/`
-- 각각 `nginx`, `spring-boot` 내 파일 로그
+- 각각 ~~nginx~~, spring-boot 내 파일 로그
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
@@ -129,7 +129,8 @@ TBD
             - [x] 컨트롤러의 요청, 응답에 대한 `INFO`, `ERROR` 로깅
             - [x] 글로벌 예외 처리시 `ERROR` 로깅
     - [x] 문제가 되는 코드 수정하기
-    - [x] Nginx Access Log 설정하기
+    - [x] ~~Nginx Access Log 설정하기~~
+    - [x] ALB 구성
 - [x] CloudWatch 로 모니터링
     - [x] cAdvisor 설치
     - [x] 로그 수집하기

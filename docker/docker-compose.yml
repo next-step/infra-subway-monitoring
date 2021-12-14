@@ -23,14 +23,6 @@ services:
       - ./logs/spring-boot:/logs
     depends_on:
       - local-db
-  nginx:
-    image: nextstep/nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./logs/nginx:/var/log/nginx
-    depends_on:
-      - spring-boot
   cadvisor:
     image: google/cadvisor:v0.32.0
     ports:
