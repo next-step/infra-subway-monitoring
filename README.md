@@ -82,9 +82,30 @@ json appender도 추가하였습니다~!
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+* 중요한 페이지 : 경로 조회 페이지
 
+* 경쟁사이트 성능 조사
+First Contentful Paint | Time to Interactive | Speed Index | Total Blocking Time | Largest Contentful Paint
+  * 네이버      2.4 초 | 3.5 초 | 2.4 초 | 530 밀리초     | 1.6 초
+  * 카카오맵    2.6 초  | 2.7 초 | 2.5 초 | 690 밀리초   | 0.7 초
+  * 우리 사이트  2.7 초 | 2.8 초 | 5.3 초 | 70 밀리초    | 5.3 초
+  * 성능 차이    0.3 초 | 0.7 초 | 2.9 초  | 70 밀리초   | 4.6 초
+
+* 성능 기준
+  * 3초안에 로딩되어야함, 경쟁사이트 최대 성능 20% 이하 차이로 좁혀야함
+  * Compress Transfer 에서 F 점수 , Cache static content 에서 C 점수를 받음
+  * First Contentful Paint: 3s 미만
+  * Time to Interactive: 3s 미만
+  * Speed Index: 3s 미만
+  * Total Blocking Time: 600ms 미만
+  * Largest Contentful Paint: 3s 미만
+
+* 우선순위 
+  * Largest Contentful Paint 가 가장 성능차이가 남.
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
+* js 경량화
+* 리소스 압축
+* 정적 컨텐츠 캐싱
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
