@@ -43,8 +43,26 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- key: wangkdk-admin.pem
+- bastion server: 13.125.123.16
+- application server: ssh public01
+- application log: /home/ubuntu/infra-subway-monitoring/build/libs/log/file.log
+- nginx: nginx 가 alb 로 대체 되었습니다.
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=wangki-dashboard
+
+
+### 요구사항 
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 로그 설정하기
+  - [x] Application Log 파일로 저장하기
+    - [x] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+  - [x] Nginx Access Log 설정하기 (설정 x)
+    - [x] ALB 로 대체
+- [x] Cloudwatch 로 모니터링
+  - [x] Cloudwatch 로 로그 수집하기
+  - [x] Cloudwatch 로 메트릭 수집하기
 
 ---
 
