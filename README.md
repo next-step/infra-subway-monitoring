@@ -58,5 +58,5 @@ npm run dev
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ## todo list
-- [ ] Application Log 파일로 저장하기
-    - [ ] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+- [x] Application Log 파일로 저장하기
+    - [x] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
