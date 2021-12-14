@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/lines")
 public class LineController {
+    private static final Logger log = LoggerFactory.getLogger("console");
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -30,6 +35,8 @@ public class LineController {
 
     @GetMapping
     public ResponseEntity<List<LineResponse>> findAllLines() {
+        log.info("지하철 노선 목록 조회 시도");
+        fileLogger.info("지하철 노선 목록 조회 시도");
         return ResponseEntity.ok(lineService.findLineResponses());
     }
 
