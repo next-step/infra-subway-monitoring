@@ -13,6 +13,6 @@ class MaskingUtilsTest {
         // when
         final String masking = MaskingUtils.masking(text);
         // then
-        assertThat(masking).isEqualTo("1111******");
+        assertThat(masking).isEqualTo("111*******");
     }
 }
