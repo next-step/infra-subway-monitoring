@@ -35,6 +35,7 @@ npm run dev
 ```
 ./gradlew clean build
 ```
+
 <br>
 
 ## 미션
@@ -42,13 +43,24 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
+
 1. 각 서버내 로깅 경로를 알려주세요
 
+```KEY:KEY-DOYOUNG0205-NEXT-STEP.pem```
+- WEB SERVER (EC2-doyoung0205-was-01) 
+    - /var/log/nginx/access.log
+    - /var/log/nginx/error.log
+- WAS SERVER (EC2-doyoung0205-webserver) :
+    - /var/subway-was/log/file.log
+    - /var/subway-was/log/subway-monitor-api.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=doyoung0205-dashboard
 
 ---
 
 ### 2단계 - 성능 테스트
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
