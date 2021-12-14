@@ -61,6 +61,25 @@ npm run dev
   * springActvie: https://blog.leocat.kr/notes/2018/09/18/spring-logback-config-with-spring-multi-active-profile
   * log: https://gaemi606.tistory.com/entry/Spring-Boot-AOP%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%B4-%EB%A1%9C%EA%B7%B8-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0-REST-API
 ---
+#### 피드백 정리
+1. https 접속은 안되고 http 접속만 가능한 상태로 보이네요!
+~~~
+    https 사용할수 있게 변경했습니다.~!
+    다만 aws 도메인 연결(?)권한이 없어서 보안경고가 뜨네요. ㅎㅎ
+~~~
+2. 컨트롤러 이외에도 서비스 및 도메인 로직 등에서도 상황에 따라 적절한 로그를 심어주는게 좋지 않을까요?
+~~~
+    LogServiceAspect 클래스를 만들고 aop 설정을 하여 로그를 설정했습니다. ~
+~~~
+3. 로그를 파일은 주로 ELK 스택을 통해 관리하는데요, 이를 위해 json appender도 추가되면 좋지 않을까요?
+~~~
+json appender도 추가하였습니다~! 
+~~~
+4. 하나의 로그로 쌓는 것이 좋지 않을까요? 멀티스레드 환경이라면 로그가 뒤섞이면서 알아보기 힘들 것 같습니다.
+~~~
+넵 하나의 로그로 쌓도록 변경했습니다~ 감사합니다
+~~~
+
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
