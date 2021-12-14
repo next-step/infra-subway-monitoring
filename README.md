@@ -76,7 +76,7 @@ npm run dev
 
 ##### B. 경쟁사 분석
 
-- [지하철 서비스](http://54.180.71.34/path)
+- [지하철 서비스](http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/)
 - [서울교통공사 사이버 스테이션](http://www.seoulmetro.co.kr/kr/cyberStation.do)
 - [네이버 지도](https://m.map.naver.com/)
 - [카카오 맵](https://m.map.kakao.com/)
@@ -130,7 +130,7 @@ TBD
             - [x] 글로벌 예외 처리시 `ERROR` 로깅
     - [x] 문제가 되는 코드 수정하기
     - [x] ~~Nginx Access Log 설정하기~~
-    - [x] ALB 구성
+    - [x] ALB 구성 : http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/
 - [x] CloudWatch 로 모니터링
     - [x] cAdvisor 설치
     - [x] 로그 수집하기
