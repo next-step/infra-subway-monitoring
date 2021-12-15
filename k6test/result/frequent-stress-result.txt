@@ -1,0 +1,39 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: frequent-stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 230 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: Up to 230 looping VUs for 30s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m33.3s), 000/230 VUs, 992 complete and 0 interrupted iterations
+default ✓ [======================================] 000/230 VUs  30s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 1984      ✗ 0
+     data_received..................: 1.7 MB  52 kB/s
+     data_sent......................: 590 kB  18 kB/s
+     http_req_blocked...............: avg=558.87µs min=3.56µs  med=5.6µs   max=18.75ms p(90)=3.86ms   p(95)=4.24ms
+     http_req_connecting............: avg=81.98µs  min=0s      med=0s      max=13.97ms p(90)=440.16µs p(95)=520.86µs
+   ✗ http_req_duration..............: avg=2.75s    min=83.39ms med=3.13s   max=8.12s   p(90)=3.36s    p(95)=3.39s
+       { expected_response:true }...: avg=2.75s    min=83.39ms med=3.13s   max=8.12s   p(90)=3.36s    p(95)=3.39s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 1984
+     http_req_receiving.............: avg=92.67µs  min=28.24µs med=63.59µs max=4.96ms  p(90)=99.29µs  p(95)=157.98µs
+     http_req_sending...............: avg=33.66µs  min=10.19µs med=20.17µs max=2.94ms  p(90)=58.82µs  p(95)=71.29µs
+     http_req_tls_handshaking.......: avg=458.11µs min=0s      med=0s      max=17.13ms p(90)=3.3ms    p(95)=3.55ms
+     http_req_waiting...............: avg=2.75s    min=83.26ms med=3.13s   max=8.12s   p(90)=3.36s    p(95)=3.39s
+     http_reqs......................: 1984    59.598748/s
+     iteration_duration.............: avg=6.51s    min=1.22s   med=7.35s   max=13.45s  p(90)=7.54s    p(95)=7.69s
+     iterations.....................: 992     29.799374/s
+     vus............................: 23      min=23      max=230
+     vus_max........................: 230     min=230     max=230
+
+ERRO[0034] some thresholds have failed
