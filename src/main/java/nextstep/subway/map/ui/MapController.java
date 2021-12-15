@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MapController {
-    private MapService mapService;
+    private final MapService mapService;
 
     public MapController(MapService mapService) {
         this.mapService = mapService;
