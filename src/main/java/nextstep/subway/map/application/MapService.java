@@ -20,7 +20,6 @@ public class MapService {
     private final LineService lineService;
     private final StationService stationService;
     private final PathService pathService;
-    private static final Logger logger = LoggerFactory.getLogger("file");
 
     public MapService(LineService lineService, StationService stationService, PathService pathService) {
         this.lineService = lineService;
@@ -33,7 +32,6 @@ public class MapService {
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-        logger.info("경로가 조회되었습니다. 출발 : {}, 도착 : {}", sourceStation.getName(), targetStation.getName());
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
