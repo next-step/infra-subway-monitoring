@@ -54,10 +54,31 @@ npm run dev
 ---
 
 ### 2단계 - 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+#### 1. 웹 성능 예산은 어느 정도가 적당하다고 생각하시나요
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+* 서비스 진입점인 `메인 페이지`를 기준으로 비교.
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+| 비교 분석 | [내 사이트](https://kelicia91.kro.kr/) | [네이버지도](https://map.naver.com/v5/subway) | [카카오맵](https://map.kakao.com/) |
+|:------:|:------:|:------:|:------:|
+|First Contentful Paint   |2.8s|2.5s|1.6s|
+|Speed Index              |2.8s|3.4s|2.7s|
+|Largest Contentful Paint |2.9s|3.5s|2.8s|
+|Time to Interactive      |2.9s|3.1s|3.2s|
+|Total Blocking Time      |≥ 0.050s|≥ 0.580s|≥ 0.680s|
+|Cumulative Layout Shift  |0.004|0.019|0.018|
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* 웹 성능 예산 추산 (성능 점수가 낮은 항목만 고려)
+  - First Contentful Paint : 2.0s
+  - Speed Index : 2.7s
+  - Largest Contentful Paint : 2.8s
+  - Time to Interactive : 2.8s
+
+#### 2. 웹 성능 예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+- 텍스트 압축 사용
+- 미사용 자바스크립트 줄이기
+- 렌더링 차단 리소스 제거하기
+
+#### 3. 부하테스트 전제조건은 어느 정도로 설정하셨나요
+
+#### 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
