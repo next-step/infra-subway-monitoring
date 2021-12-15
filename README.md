@@ -45,7 +45,6 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
 - SUBWAYWEB (192.168.170.39) - \[접속 도메인 주소 : https://jerry92k-subway.n-e.kr/]
   - 애플리케이션 로그 : /home/ubuntu/infra-subway-monitoring/log/*
-  - nginx 로그 : /var/log/nginx/*
   - syslog : /var/log/syslog
 - SUBWAYWAS (192.168.170.155)
   - syslog : /var/log/syslog
