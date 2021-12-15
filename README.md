@@ -80,7 +80,15 @@ B. 경쟁사 분석
  
     
 C. 성능 기준 설정
-D. 우선순위 
+  - 네이버 지하철과 동등한 기준으로 측정 설정
+  - 네이버 지하철 (https://m.map.naver.com/subway/subwayLine.naver?region=1000) - webpagetest.org 분석 결과
+    - First Contentful Paint    : 2179.667(ms) 
+    - Largest Contentful Paint  : 7189.667(ms)
+    - Load Time                 : 3217.000(ms)
+    - Browser-reported Load Time: 3217.333(ms)
+    - Speed Index               : 6139.000(ms)
+    - Time to First Byte        :  828.333(ms)
+
 ```
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
