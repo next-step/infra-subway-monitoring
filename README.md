@@ -89,6 +89,26 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 - 스크립트 병합하여 요청 최소화
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 대상 시스템 범위
+  nginx, application, mysql
+
+- 목푯값 설정
+  - Throughput (23.15 ~ 231.5)
+    - DAU: 100만
+    - 피크 시간대 집중률: 10
+    - 1명당 1일 평균 접속수: 2회
+    - 100만 * 2 = 200만 (1일 총 접속수)
+    - 200만/86400 = 23.15 (1일 평균 rps)
+    - 23.15 * 10 = 231.5 (1일 최대 rps)
+
+  - Latency
+    100ms 이하
+
+  - 부하 유지기간
+    30분
+
+- 부하 테스트시 저장될 데이터 건수 및 크기
+  역 추가 1만건
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -100,10 +120,10 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
   - [X] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
   
 - [ ] 부하 테스트 
-  - [ ] 테스트 전제조건 정리
-    - [ ] 대상 시스템 범위
-    - [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
-    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기 
+  - [X] 테스트 전제조건 정리
+    - [X] 대상 시스템 범위
+    - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [X] 부하 테스트 시 저장될 데이터 건수 및 크기 
   - [ ] 각 시나리오에 맞춰 스크립트 작성 
     - [ ] 접속 빈도가 높은 페이지 
     - [ ] 데이터를 갱신하는 페이지 
