@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<included>
+
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="console-appender.xml" />
+
     <property name="filename" value="application.log" />
     <property name="path" value="/home/ubuntu/logs/infra-subway-monitoring"/>
 
-    <!--  appender이름이 file인 consoleAppender를 선언  -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--로깅이 기록될 위치-->
         <file>${path}/${filename}</file>
-        <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${path}/${filename}-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -22,4 +23,8 @@
             </Pattern>
         </encoder>
     </appender>
-</included>
+
+    <root level="info">
+        <appender-ref ref="file"/>
+    </root>
+</configuration>
