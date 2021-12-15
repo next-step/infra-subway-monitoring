@@ -74,9 +74,8 @@ npm run dev
   - Time to Interactive : 2.8s
 
 #### 2. 웹 성능 예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
 - 텍스트 압축 사용
-  - `application.properties` 파일에서 `server.compression` 설정 변경 후 측정 결과
+  - `application.properties` 파일에서 `server.compression` 설정 후 측정 결과
     - First Contentful Paint : 1.3s
     - Speed Index : 1.7s
     - Largest Contentful Paint : 1.4s
@@ -86,5 +85,12 @@ npm run dev
 - 정적 리소스 캐싱
 
 #### 3. 부하테스트 전제조건은 어느 정도로 설정하셨나요
+1. 예상 1일 사용자 수(DAU) : 1,500,000
+2. 예상 피크 시간대의 집중률(최대 트래픽 / 평소 트래픽) : 3
+3. 예상 1명당 1일 평균 접속 혹은 요청수(rps) : 4
+4. Throughput (일반적으로 Latency는 50~100ms 이하)
+   - 1일 총 접속 수 = 1,500,000 * 4 = 6,000,000
+   - 1일 평균 rps = 6,000,000 / 86,400 (초/일) = 약 69
+   - 1일 최대 rps = 69 * 3 = 207
 
 #### 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
