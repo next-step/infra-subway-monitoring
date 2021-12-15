@@ -1,0 +1,28 @@
+import http from 'k6/http';
+import {check, sleep} from 'k6';
+
+export let options = {
+    vus: 1, // 1 user looping for 1 minute
+    duration: '10s',
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'http://host.docker.internal:8080';
+const USERNAME = 'username@gmail.com';
+const PASSWORD = 'password';
+
+export default function () {
+    const loginRes = http.post(`${BASE_URL}/login/token`,
+        JSON.stringify({email: USERNAME, password: PASSWORD}),
+        {headers: {'Content-Type': 'application/json'}});
+    check(loginRes, {'logged in': (r) => r.json('accessToken') !== ''});
+
+    const getMembersMeRes = http.get(`${BASE_URL}/members/me`,
+        {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`}});
+    check(getMembersMeRes.json(), {'got profile': (obj) => obj.id !== 0});
+
+    sleep(1);
+};
