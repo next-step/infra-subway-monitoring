@@ -64,15 +64,14 @@ npm run dev
        - /home/ubuntu/infra-monitoring/application.log
        - /var/log/subway/json.log
        - /var/log/subway/file.log
-     - 로그 그룹 : wooobo-webservice
+     - 로그 그룹 : [wooobo-webservice](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/wooobo-webservice)
    - 프록시 서버 : `Name : EC2-wooobo-proxy`
      - log 위치
        -  /var/log/nginx
-     - 로그 그룹 : wooobo-proxy
-       그룹 : [wooobo-proxy](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/wooobo-proxy)
+     - 로그 그룹 : [wooobo-proxy](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/wooobo-proxy)
 
 2. Cloudwatch 대시보드 URL을 알려주세요
- - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-wooobo
+ - [대쉬보드](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-wooobo)
 
 #### 1단계 작업 내용
 
