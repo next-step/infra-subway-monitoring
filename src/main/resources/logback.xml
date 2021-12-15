@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <property name="home" value="log/"/>
+
+<!--    <springProfile name="local">-->
+<!--        &lt;!&ndash;  appender이름이 console인 consoleAppender를 선언  &ndash;&gt;-->
+<!--        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--            &lt;!&ndash;   해당 로깅의 패턴을 설정   &ndash;&gt;-->
+<!--            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+<!--            </encoder>-->
+<!--        </appender>-->
+<!--    </springProfile>-->
+
+    <springProfile name="prod">
+        <!--  appender이름이 file인 consoleAppender를 선언  -->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--로깅이 기록될 위치-->
+            <file>${home}file.log</file>
+            <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder>
+                <charset>utf8</charset>
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+                </Pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+
+    <springProfile name="json-logging">
+        <appender name="JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!--로깅이 기록될 위치-->
+            <file>${home}json.log</file>
+            <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <includeContext>true</includeContext>
+                <includeCallerData>true</includeCallerData>
+                <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+                <fieldNames>
+                    <timestamp>timestamp</timestamp>
+                    <thread>thread</thread>
+                    <message>message</message>
+                    <stackTrace>exception</stackTrace>
+                    <mdc>context</mdc>
+                </fieldNames>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <root>
+<!--        <springProfile name="local">-->
+<!--            <appender-ref ref="CONSOLE"/>-->
+<!--        </springProfile>-->
+
+        <springProfile name="prod">
+            <appender-ref ref="FILE"/>
+        </springProfile>
+
+        <springProfile name="json-logging">
+            <appender-ref ref="JSON"/>
+        </springProfile>
+    </root>
+
+</configuration>

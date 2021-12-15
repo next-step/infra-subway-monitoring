@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PathResponseAssembler {
+    private PathResponseAssembler() {
+    }
+
     public static PathResponse assemble(SubwayPath subwayPath) {
         List<StationResponse> stationResponses = subwayPath.getStations().stream()
                 .map(StationResponse::of)
@@ -15,8 +18,5 @@ public class PathResponseAssembler {
         int distance = subwayPath.calculateDistance();
 
         return new PathResponse(stationResponses, distance);
-    }
-
-    private PathResponseAssembler() {
     }
 }
