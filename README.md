@@ -127,7 +127,7 @@ FCP 가 경쟁사 대비 성능 차이가 가장 크며 다른 지표에도 영�
 - Latency
     - 100ms 이하
 - 부하 유지기간
-    - 피크시간대라면 약 2시간
+    - 피크시간대라면 약 2시간... 이지만 편의상 1분 내외로 테스트
 
 - 참고 자료
     - [지하철 종결자 – 전국 스마트버스, 누적 다운로드 2000만 넘어](https://platum.kr/archives/61943)
@@ -150,9 +150,11 @@ FCP 가 경쟁사 대비 성능 차이가 가장 크며 다른 지표에도 영�
 docker run -i loadimpact/k6 run - < ${fileName}
 ```
 
-- Smoke :
-- Load :
-- Stress :
+- [home](k6/home) : [smoke](k6/home/smoke.js), [load](k6/home/load.js), [stress](k6/home/stress.js)
+- [path](k6/path) : [smoke](k6/path/smoke.js), [load](k6/path/load.js), [stress](k6/path/stress.js)
+- [profile](k6/profile) : [smoke](k6/profile/smoke.js), [load](k6/profile/load.js), [stress](k6/profile/stress.js)
+
+> 결과는 각 시나리오 디렉토리 내 `result`에서 확인 가능합니다.
 
 ## 요구사항
 
@@ -184,7 +186,7 @@ docker run -i loadimpact/k6 run - < ${fileName}
 - [x] 웹 성능 테스트
     - [x] 웹 성능 예산을 작성
     - [x] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
-- [ ] 부하 테스트
+- [x] 부하 테스트
     - [x] 테스트 전제조건 정리
         - [x] 대상 시스템 범위
         - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
@@ -193,4 +195,4 @@ docker run -i loadimpact/k6 run - < ${fileName}
         - [x] 접속 빈도가 높은 페이지 : 홈페이지
         - [x] 데이터를 갱신하는 페이지 : 홈페이지 > 나의 페이지 > 수정
         - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 > 검색
-    - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+    - [x] Smoke, Load, Stress 테스트 후 결과를 기록
