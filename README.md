@@ -153,56 +153,8 @@ npm run dev
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
-### 접속빈도가 높은 페이지 
-```javascript
-import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
-
-export let options = {
-  vus: 1, // 1 user looping for 1 minute
-  duration: '10s',
-  thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-  },
-};
-
-const BASE_URL = 'http://seunghoona-alb-174439830.ap-northeast-2.elb.amazonaws.com';
-const USERNAME = 'test@gmail.com';
-const PASSWORD = 'rndrmagody';
-
-export default function ()  {
-
-  const payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
-
-  const params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-
-  const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-
-
-  const authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-
-  const myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id !== 0 });
-  sleep(1);
-};
-```
-
+### 접속빈도가 높은 페이지
+#### frequency_smoke_test.js [SMOKE-TEST]
 ```shell
 
           /\      |‾‾| /‾‾/   /‾‾/
@@ -212,101 +164,39 @@ export default function ()  {
   / __________ \  |__| \__\ \_____/ .io
 
   execution: local
-     script: smoke.js
+     script: frequency_smoke_test.js
      output: -
 
   scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
            * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
 
-running (10.6s), 0/1 VUs, 10 complete and 0 interrupted iterations
+running (10.3s), 0/1 VUs, 10 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  10s
 
-     ✓ logged in successfully
-     ✓ retrieved member
+     ✓ mainpage
 
-     checks.........................: 100.00% ✓ 20       ✗ 0
-     data_received..................: 5.0 kB  475 B/s
-     data_sent......................: 5.4 kB  509 B/s
-     http_req_blocked...............: avg=756.45µs min=0s      med=0s      max=15.12ms p(90)=0s       p(95)=756.45µs
-     http_req_connecting............: avg=356.19µs min=0s      med=0s      max=7.12ms  p(90)=0s       p(95)=356.19µs
-   ✓ http_req_duration..............: avg=23.27ms  min=15.35ms med=22.09ms max=51.48ms p(90)=27.3ms   p(95)=48.77ms
-       { expected_response:true }...: avg=23.27ms  min=15.35ms med=22.09ms max=51.48ms p(90)=27.3ms   p(95)=48.77ms
-     http_req_failed................: 0.00%   ✓ 0        ✗ 20
-     http_req_receiving.............: avg=183.31µs min=0s      med=53.45µs max=779.7µs p(90)=561.55µs p(95)=666.93µs
-     http_req_sending...............: avg=46.16µs  min=0s      med=0s      max=503.4µs p(90)=143.74µs p(95)=303.14µs
-     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s      max=0s      p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=23.04ms  min=15.08ms med=22.09ms max=50.58ms p(90)=27.28ms  p(95)=48.53ms
-     http_reqs......................: 20      1.894205/s
-     iteration_duration.............: avg=1.05s    min=1.04s   med=1.05s   max=1.12s   p(90)=1.06s    p(95)=1.09s
-     iterations.....................: 10      0.947103/s
+     checks.........................: 100.00% ✓ 10       ✗ 0
+     data_received..................: 17 kB   1.6 kB/s
+     data_sent......................: 1.0 kB  99 B/s
+     http_req_blocked...............: avg=11.67ms  min=0s     med=0s      max=116.72ms p(90)=11.67ms  p(95)=64.19ms
+     http_req_connecting............: avg=702.19µs min=0s     med=0s      max=7.02ms   p(90)=702.18µs p(95)=3.86ms
+   ✓ http_req_duration..............: avg=10.82ms  min=8.78ms med=10ms    max=18.44ms  p(90)=11.6ms   p(95)=15.02ms
+       { expected_response:true }...: avg=10.82ms  min=8.78ms med=10ms    max=18.44ms  p(90)=11.6ms   p(95)=15.02ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 10
+     http_req_receiving.............: avg=243.85µs min=0s     med=135.9µs max=698µs    p(90)=595.22µs p(95)=646.6µs
+     http_req_sending...............: avg=100.5µs  min=0s     med=0s      max=512.8µs  p(90)=494.26µs p(95)=503.53µs
+     http_req_tls_handshaking.......: avg=9.52ms   min=0s     med=0s      max=95.2ms   p(90)=9.52ms   p(95)=52.36ms
+     http_req_waiting...............: avg=10.48ms  min=8.78ms med=9.62ms  max=17.95ms  p(90)=11.06ms  p(95)=14.5ms
+     http_reqs......................: 10      0.973883/s
+     iteration_duration.............: avg=1.02s    min=1.01s  med=1.01s   max=1.14s    p(90)=1.03s    p(95)=1.08s
+     iterations.....................: 10      0.973883/s
      vus............................: 1       min=1      max=1
      vus_max........................: 1       min=1      max=1
-
 ```
-### 데이터를 갱신하는 페이지 [LOAD-TEST]
+
+#### frequency_load_test.js [LOAD-TEST]
 ```javascript
-import http from 'k6/http';
-import { check, group, sleep } from 'k6';
-
-export const options = {
-  stages: [
-
-    { duration: '1m', target: 100 }, // 5분동안 1명의 사용자에서 100의 사용자로 증가
-    { duration: '2m', target: 100 }, // 10분동안 100명
-    { duration: '1m', target: 0 }, // 0명으로감소
-  ],
-  thresholds: {
-    'http_req_duration': ['p(99)<1500'], // 요청의 99%는 1.5초 이내에 해결
-    'logged in successfully': ['p(99)<1500'], // 요청의 99% 1.5 이내에 완료해야한다.
-  },
-};
-
-const BASE_URL = 'http://seunghoona-alb-174439830.ap-northeast-2.elb.amazonaws.com';
-const USERNAME = 'test@gmail.com';
-const PASSWORD = 'rndrmagody';
-const NEWUSERNAME = 'newTest@gamil.com'
-const NEWPASSWORD = 'newPassword'
-
-export default function ()  {
-
-  const payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
-
-  const params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-
-  const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-
-
-  const authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-
-  const updateParams = {
-    email: NEWUSERNAME,
-    password: NEWPASSWORD,
-  }
-
-  const myObjects = http.put(`${BASE_URL}/members/me`, authHeaders, updateParams).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id !== 0 });
-  sleep(1);
-};
-
-```
-```shell
 
           /\      |‾‾| /‾‾/   /‾‾/
      /\  /  \     |  |/  /   /  /
@@ -315,69 +205,346 @@ export default function ()  {
   / __________ \  |__| \__\ \_____/ .io
 
   execution: local
-     script: loadTest.js
+     script: frequency_load_test.js
      output: -
 
-  scenarios: (100.00%) 1 scenario, 100 max VUs, 4m30s max duration (incl. graceful stop):
-           * default: Up to 100 looping VUs for 4m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 80 max VUs, 2m20s max duration (incl. graceful stop):
+           * default: Up to 80 looping VUs for 1m50s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (4m01.0s), 000/100 VUs, 17470 complete and 0 interrupted iterations
-default ✓ [======================================] 000/100 VUs  4m0s
+running (1m50.9s), 00/80 VUs, 6355 complete and 0 interrupted iterations
+default ✓ [======================================] 00/80 VUs  1m50s
+
+     ✓ mainpage
+
+     checks.........................: 100.00% ✓ 6355      ✗ 0
+     data_received..................: 7.9 MB  71 kB/s
+     data_sent......................: 320 kB  2.9 kB/s
+     http_req_blocked...............: avg=338.47µs min=0s     med=0s     max=104.9ms p(90)=0s       p(95)=0s
+     http_req_connecting............: avg=89.79µs  min=0s     med=0s     max=15.69ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=10.57ms  min=6.79ms med=9.94ms max=34.25ms p(90)=12.9ms   p(95)=14.84ms
+       { expected_response:true }...: avg=10.57ms  min=6.79ms med=9.94ms max=34.25ms p(90)=12.9ms   p(95)=14.84ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 6355
+     http_req_receiving.............: avg=215.23µs min=0s     med=0s     max=6.82ms  p(90)=749.22µs p(95)=925µs
+     http_req_sending...............: avg=61.67µs  min=0s     med=0s     max=1.37ms  p(90)=277.6µs  p(95)=517.15µs
+     http_req_tls_handshaking.......: avg=241.67µs min=0s     med=0s     max=89.04ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=10.3ms   min=6.38ms med=9.62ms max=34.25ms p(90)=12.62ms  p(95)=14.57ms
+     http_reqs......................: 6355    57.311709/s
+     iteration_duration.............: avg=1.01s    min=1s     med=1.01s  max=1.12s   p(90)=1.02s    p(95)=1.02s
+     iterations.....................: 6355    57.311709/s
+     vus............................: 2       min=2       max=80
+     vus_max........................: 80      min=80      max=80
+```
+#### frequency_stress_test.js [STRESS-TEST]
+```javascript
+          /\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: frequency_stress_test.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 1500 max VUs, 6m55s max duration (incl. graceful stop):
+* default: Up to 1500 looping VUs for 6m25s over 14 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0038] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": dial tcp 3.34.111.170:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+WARN[0038] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": dial tcp 3.34.111.170:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+WARN[0173] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": request timeout"
+WARN[0197] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": request timeout"
+WARN[0215] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": request timeout"
+WARN[0277] Request Failed                                error="Get \"https://www.subwayinfra.p-e.kr\": request timeout"
+
+running (6m25.7s), 0000/1500 VUs, 281832 complete and 3 interrupted iterations
+default ✓ [======================================] 0000/1500 VUs  6m25s
+
+data_received..................: 673 MB 1.7 MB/s
+data_sent......................: 65 MB  168 kB/s
+http_req_blocked...............: avg=69.49µs  min=0s     med=0s      max=507.69ms p(90)=0s      p(95)=0s
+http_req_connecting............: avg=25.24µs  min=0s     med=0s      max=447.9ms  p(90)=0s      p(95)=0s
+http_req_duration..............: avg=195.18ms min=0s     med=13.86ms max=1m0s     p(90)=24.8ms  p(95)=32.16ms
+{ expected_response:true }...: avg=38.45ms  min=5.61ms med=13.76ms max=54.62s   p(90)=23.72ms p(95)=28.92ms
+http_req_failed................: 1.56%  ✓ 8833       ✗ 554834
+http_req_receiving.............: avg=130.83µs min=0s     med=0s      max=32.99ms  p(90)=514.7µs p(95)=816.1µs
+http_req_sending...............: avg=94.97µs  min=0s     med=0s      max=33.99ms  p(90)=513µs   p(95)=545.4µs
+http_req_tls_handshaking.......: avg=43.66µs  min=0s     med=0s      max=500.11ms p(90)=0s      p(95)=0s
+http_req_waiting...............: avg=194.96ms min=0s     med=13.65ms max=1m0s     p(90)=24.55ms p(95)=31.9ms
+http_reqs......................: 563667 1461.23232/s
+iteration_duration.............: avg=1.33s    min=1s     med=1.01s   max=1m1s     p(90)=1.03s   p(95)=1.04s
+iterations.....................: 281832 730.612272/s
+vus............................: 4      min=4        max=1500
+vus_max........................: 1500   min=1500     max=1500
+```
+
+### 데이터를 갱신하는 페이지 
+ 
+#### update_smoke_test.js [SMOKE-TEST]
+```javascript
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: update_smoke_test.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 1m30s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (1m00.3s), 0/1 VUs, 29 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  1m0s
 
      ✓ logged in successfully
-     ✓ retrieved member
+     ✓ response member
 
-     checks.........................: 100.00% ✓ 34940     ✗ 0
-     data_received..................: 10 MB   42 kB/s
-     data_sent......................: 11 MB   45 kB/s
-     http_req_blocked...............: avg=21.75µs  min=0s     med=0s      max=16.64ms  p(90)=0s       p(95)=0s
-     http_req_connecting............: avg=19.04µs  min=0s     med=0s      max=9.54ms   p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=15.11ms  min=6.91ms med=14.15ms max=235.54ms p(90)=21ms     p(95)=24.27ms
-       { expected_response:true }...: avg=18.09ms  min=10.1ms med=16.69ms max=235.54ms p(90)=23.74ms  p(95)=28.03ms
-     http_req_failed................: 50.00%  ✓ 17470     ✗ 17470
-     http_req_receiving.............: avg=329.81µs min=0s     med=0s      max=29.08ms  p(90)=947.92µs p(95)=1.13ms
-     http_req_sending...............: avg=11.93µs  min=0s     med=0s      max=1.25ms   p(90)=0s       p(95)=0s
-     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s      max=0s       p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=14.77ms  min=6.68ms med=13.85ms max=230.02ms p(90)=20.58ms  p(95)=23.8ms
-     http_reqs......................: 34940   144.99158/s
-     iteration_duration.............: avg=1.03s    min=1.02s  med=1.03s   max=1.25s    p(90)=1.04s    p(95)=1.04s
-     iterations.....................: 17470   72.49579/s
-     vus............................: 1       min=1       max=100
-     vus_max........................: 100     min=100     max=100
-
+     checks.........................: 100.00% ✓ 58       ✗ 0
+     data_received..................: 20 kB   334 B/s
+     data_sent......................: 12 kB   206 B/s
+     http_req_blocked...............: avg=1.69ms   min=0s      med=0s      max=98.52ms  p(90)=0s       p(95)=0s
+     http_req_connecting............: avg=118.34µs min=0s      med=0s      max=6.86ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=29.48ms  min=13.73ms med=21.42ms max=527.4ms  p(90)=27.71ms  p(95)=29.25ms
+       { expected_response:true }...: avg=43.17ms  min=22.54ms med=25.77ms max=527.4ms  p(90)=29.26ms  p(95)=30.61ms
+     http_req_failed................: 50.00%  ✓ 29       ✗ 29
+     http_req_receiving.............: avg=471.71µs min=0s      med=256.7µs max=3.61ms   p(90)=1.02ms   p(95)=1.21ms
+     http_req_sending...............: avg=130.77µs min=0s      med=0s      max=1ms      p(90)=563.15µs p(95)=595.06µs
+     http_req_tls_handshaking.......: avg=1.54ms   min=0s      med=0s      max=89.65ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=28.88ms  min=13.72ms med=20.94ms max=525.87ms p(90)=26.36ms  p(95)=28.64ms
+     http_reqs......................: 58      0.962091/s
+     iteration_duration.............: avg=2.07s    min=2.04s   med=2.05s   max=2.64s    p(90)=2.06s    p(95)=2.07s
+     iterations.....................: 29      0.481045/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
 ```
-### 데이터를 조회하는데 여러 데이터를 참조하는 페이지 [STRESS-TEST]
+
+#### update_load_test.js [LOAD-TEST]
 ```javascript
-import http from 'k6/http';
-import { sleep } from 'k6';
 
-export const options = {
-  stages: [
-    { duration: '2m', target: 100 }, // below normal load
-    { duration: '5m', target: 100 },
-    { duration: '2m', target: 200 }, // normal load
-    { duration: '5m', target: 200 },
-    { duration: '2m', target: 300 }, // around the breaking point
-    { duration: '5m', target: 300 },
-    { duration: '2m', target: 400 }, // beyond the breaking point
-    { duration: '5m', target: 400 },
-    { duration: '10m', target: 0 }, // scale down. Recovery stage.
-  ],
-};
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
 
-export default function () {
-  const BASE_URL = 'http://seunghoona-alb-174439830.ap-northeast-2.elb.amazonaws.com'; // make sure this is not production
+  execution: local
+     script: update_load_test.js
+     output: -
 
-  const responses = http.batch([
-    ['GET', `${BASE_URL}/paths/source=344&target=383`, null, { tags: { name: 'PublicCrocs' } }],
-    ['GET', `${BASE_URL}/paths/source=344&target=380`, null, { tags: { name: 'PublicCrocs' } }],
-    ['GET', `${BASE_URL}/paths/source=344&target=363`, null, { tags: { name: 'PublicCrocs' } }],
-  ]);
+  scenarios: (100.00%) 1 scenario, 80 max VUs, 4m30s max duration (incl. graceful stop):
+           * default: Up to 80 looping VUs for 4m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-  sleep(1);
-}
+
+running (4m00.9s), 00/80 VUs, 13938 complete and 0 interrupted iterations
+default ✓ [======================================] 00/80 VUs  4m0s
+
+     ✓ logged in successfully
+     ✓ response member
+
+     checks.........................: 100.00% ✓ 27876      ✗ 0
+     data_received..................: 7.8 MB  32 kB/s
+     data_sent......................: 5.7 MB  24 kB/s
+     http_req_blocked...............: avg=70.85µs  min=0s      med=0s      max=112.86ms p(90)=0s       p(95)=0s
+     http_req_connecting............: avg=19.48µs  min=0s      med=0s      max=13.96ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=16.74ms  min=6.8ms   med=15.55ms max=113.1ms  p(90)=24.39ms  p(95)=29.7ms
+       { expected_response:true }...: avg=21.54ms  min=11.11ms med=19.17ms max=113.1ms  p(90)=29.32ms  p(95)=35.91ms
+     http_req_failed................: 50.00%  ✓ 13938      ✗ 13938
+     http_req_receiving.............: avg=435.35µs min=0s      med=0s      max=48.5ms   p(90)=990.3µs  p(95)=1.58ms
+     http_req_sending...............: avg=70.2µs   min=0s      med=0s      max=6ms      p(90)=504.75µs p(95)=530.22µs
+     http_req_tls_handshaking.......: avg=49.49µs  min=0s      med=0s      max=93.05ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=16.23ms  min=6.8ms   med=15.18ms max=113.1ms  p(90)=23.72ms  p(95)=28.91ms
+     http_reqs......................: 27876   115.706711/s
+     iteration_duration.............: avg=1.03s    min=1.02s   med=1.03s   max=1.21s    p(90)=1.04s    p(95)=1.05s
+     iterations.....................: 13938   57.853356/s
+     vus............................: 1       min=1        max=80
+     vus_max........................: 80      min=80       max=80
+```
+
+#### update_load_test.js [STRESS-TEST]
+```javascript
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: update_stress_test.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1500 max VUs, 6m55s max duration (incl. graceful stop):
+           * default: Up to 1500 looping VUs for 6m25s over 14 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0032] Request Failed                                error="Post \"https://www.subwayinfra.p-e.kr/login/token\": dial tcp 3.34.111.170:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+ERRO[0032] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+        at reflect.methodValueCall (native)
+        at logged in successfully (file:///C:/Users/hoo/IdeaProjects/nextstep/infra-subway-monitoring/src/main/resources/k6test/update_stress_test.js:44:49(4))
+        at go.k6.io/k6/js/common.Bind.func1 (native)
+        at file:///C:/Users/hoo/IdeaProjects/nextstep/infra-subway-monitoring/src/main/resources/k6test/update_stress_test.js:43:27(35)  executor=ramping-vus scenario=default source=stacktrace
+WARN[0102] Request Failed                                error="Post \"https://www.subwayinfra.p-e.kr/login/token\": dial tcp 3.34.111.170:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+ERRO[0102] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+        at reflect.methodValueCall (native)
+        at logged in successfully (file:///C:/Users/hoo/IdeaProjects/nextstep/infra-subway-monitoring/src/main/resources/k6test/update_stress_test.js:44:49(4))
+        at go.k6.io/k6/js/common.Bind.func1 (native)
+        at file:///C:/Users/hoo/IdeaProjects/nextstep/infra-subway-monitoring/src/main/resources/k6test/update_stress_test.js:43:27(35)  executor=ramping-vus scenario=default source=stacktrace
+
+running (6m25.9s), 0000/1500 VUs, 190043 complete and 0 interrupted iterations
+default ✓ [======================================] 0000/1500 VUs  6m25s
+
+     ✗ logged in successfully
+      ↳  99% — ✓ 190041 / ✗ 2
+     ✓ response member
+
+     checks.........................: 99.99% ✓ 380082     ✗ 2
+     data_received..................: 108 MB 281 kB/s
+     data_sent......................: 78 MB  202 kB/s
+     http_req_blocked...............: avg=91.3µs   min=0s     med=0s       max=381.44ms p(90)=0s      p(95)=0s
+     http_req_connecting............: avg=27.86µs  min=0s     med=0s       max=355.6ms  p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=489.47ms min=0s     med=239.86ms max=4.57s    p(90)=1.36s   p(95)=1.79s
+       { expected_response:true }...: avg=509.4ms  min=9.73ms med=239.15ms max=4.57s    p(90)=1.42s   p(95)=1.85s
+     http_req_failed................: 50.00% ✓ 190043     ✗ 190041
+     http_req_receiving.............: avg=1.47ms   min=0s     med=0s       max=893.17ms p(90)=1.03ms  p(95)=2.23ms
+     http_req_sending...............: avg=54.93µs  min=0s     med=0s       max=70.26ms  p(90)=143.3µs p(95)=521.4µs
+     http_req_tls_handshaking.......: avg=62.18µs  min=0s     med=0s       max=102.27ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=487.94ms min=0s     med=237.84ms max=4.57s    p(90)=1.36s   p(95)=1.79s
+     http_reqs......................: 380084 984.897038/s
+     iteration_duration.............: avg=1.98s    min=1.02s  med=1.74s    max=21.14s   p(90)=3.3s    p(95)=3.78s
+     iterations.....................: 190043 492.45111/s
+     vus............................: 6      min=6        max=1500
+     vus_max........................: 1500   min=1500     max=1500
 
 ```
 
-![img.png](src/main/resources/k6test/stressTest.png)
+
+### 데이터를 조회하는데 여러 데이터를 참조하는 페이지 
+
+
+#### multiple_data_smoke_test.js [SMOKE-TEST]
+```javascript
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: multiple_data_smoke_test.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.1s), 0/1 VUs, 8 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ 경로찾기정상
+
+     checks.........................: 100.00% ✓ 8        ✗ 0
+     data_received..................: 7.7 kB  770 B/s
+     data_sent......................: 954 B   95 B/s
+     http_req_blocked...............: avg=13.53ms  min=0s      med=0s      max=108.27ms p(90)=32.48ms  p(95)=70.37ms
+     http_req_connecting............: avg=884.78µs min=0s      med=0s      max=7.07ms   p(90)=2.12ms   p(95)=4.6ms
+   ✓ http_req_duration..............: avg=232.07ms min=58.29ms med=90.51ms max=682.34ms p(90)=678.92ms p(95)=680.63ms
+       { expected_response:true }...: avg=232.07ms min=58.29ms med=90.51ms max=682.34ms p(90)=678.92ms p(95)=680.63ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 8
+     http_req_receiving.............: avg=789.12µs min=0s      med=296.1µs max=3ms      p(90)=2.37ms   p(95)=2.68ms
+     http_req_sending...............: avg=136.47µs min=0s      med=0s      max=522.59µs p(90)=520.15µs p(95)=521.37µs
+     http_req_tls_handshaking.......: avg=11.2ms   min=0s      med=0s      max=89.64ms  p(90)=26.89ms  p(95)=58.26ms
+     http_req_waiting...............: avg=231.14ms min=58.22ms med=90.32ms max=678.83ms p(90)=676.02ms p(95)=677.42ms
+     http_reqs......................: 8       0.795978/s
+     iteration_duration.............: avg=1.25s    min=1.06s   med=1.1s    max=1.79s    p(90)=1.72s    p(95)=1.76s
+     iterations.....................: 8       0.795978/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+```
+
+#### multiple_data_load_test.js [LOAD-TEST]
+```javascript
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: multiple_data_load_test.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 80 max VUs, 4m30s max duration (incl. graceful stop):
+           * default: Up to 80 looping VUs for 4m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+
+
+
+running (4m00.2s), 00/80 VUs, 14012 complete and 0 interrupted iterations
+default ✓ [===================================] 00/80 VUs  4m0s
+
+     ✓ 경로찾기정상
+
+     checks.........................: 100.00% ✓ 14012     ✗ 0
+     data_received..................: 5.8 MB  24 kB/s
+     data_sent......................: 651 kB  2.7 kB/s
+     http_req_blocked...............: avg=151.79µs min=0s      med=0s      max=141.76ms p(90)=0s       p(95)=0s
+     http_req_connecting............: avg=40.72µs  min=0s      med=0s      max=12.54ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=27.25ms  min=16.34ms med=24.94ms max=142.12ms p(90)=35.88ms  p(95)=42.33ms
+       { expected_response:true }...: avg=27.25ms  min=16.34ms med=24.94ms max=142.12ms p(90)=35.88ms  p(95)=42.33ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 14012
+     http_req_receiving.............: avg=454.64µs min=0s      med=32.85µs max=34.08ms  p(90)=1ms      p(95)=1.71ms
+     http_req_sending...............: avg=61.73µs  min=0s      med=0s      max=1.52ms   p(90)=261.29µs p(95)=521.1µs
+     http_req_tls_handshaking.......: avg=105.39µs min=0s      med=0s      max=93.35ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=26.73ms  min=16.34ms med=24.53ms max=140.85ms p(90)=35.03ms  p(95)=41.26ms
+     http_reqs......................: 14012   58.338962/s
+     iteration_duration.............: avg=1.03s    min=1.01s   med=1.03s   max=1.22s    p(90)=1.04s    p(95)=1.04s
+     iterations.....................: 14012   58.338962/s
+     vus............................: 1       min=1       max=80
+     vus_max........................: 80      min=80      max=80
+```
+
+#### multiple_data_stress_test.js [STRESS-TEST]
+```javascript
+          /\      |‾‾| /‾‾/   /‾‾/
+/\  /  \     |  |/  /   /  /
+/  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+/ __________ \  |__| \__\ \_____/ .io
+
+execution: local
+script: multiple_data_stress_test.js
+output: -
+
+    scenarios: (100.00%) 1 scenario, 3050 max VUs, 14m5s max duration (incl. graceful stop):
+* default: Up to 3050 looping VUs for 13m35s over 19 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (13m35.8s), 0000/3050 VUs, 106501 complete and 0 interrupted iterations
+default ✓ [======================================] 0000/3050 VUs  13m35s
+
+     ✓ 경로탐색 정상
+
+checks.........................: 100.00% ✓ 319503     ✗ 0
+data_received..................: 815 MB  999 kB/s
+data_sent......................: 23 MB   28 kB/s
+http_req_blocked...............: avg=227.62µs min=0s      med=0s      max=110.34ms p(90)=0s      p(95)=0s
+http_req_connecting............: avg=72µs     min=0s      med=0s      max=50.51ms  p(90)=0s      p(95)=0s
+http_req_duration..............: avg=11.41s   min=15.54ms med=11.39s  max=31.17s   p(90)=25.72s  p(95)=26.59s
+  { expected_response:true }...: avg=11.41s   min=15.54ms med=11.39s  max=31.17s   p(90)=25.72s  p(95)=26.59s
+http_req_failed................: 0.00%   ✓ 0          ✗ 319503
+http_req_receiving.............: avg=3.32ms   min=0s      med=241.4µs max=1.24s    p(90)=4.62ms  p(95)=12.5ms
+http_req_sending...............: avg=62.84µs  min=0s      med=0s      max=14ms     p(90)=504.8µs p(95)=529.69µs
+http_req_tls_handshaking.......: avg=154.28µs min=0s      med=0s      max=93.32ms  p(90)=0s      p(95)=0s
+http_req_waiting...............: avg=11.41s   min=15.54ms med=11.39s  max=31.17s   p(90)=25.71s  p(95)=26.59s
+http_reqs......................: 319503  391.662109/s
+iteration_duration.............: avg=17.81s   min=1.02s   med=18.47s  max=32.17s   p(90)=27.16s  p(95)=28.08s
+iterations.....................: 106501  130.554036/s
+vus............................: 24      min=16       max=3050
+vus_max........................: 3050    min=3050     max=3050
+```
