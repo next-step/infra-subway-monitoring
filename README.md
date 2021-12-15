@@ -66,7 +66,7 @@ npm run dev
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
  
 - gziop 리소스 압축을 통해 성능을 가장 많이 향상시킬 수 있습니다. Lighthouse의 에뮬레이션 결과에 따르면 모바일의 경우 FCP를 9.3s, 데스크톱의 경우 1.44s까지 줄일 수 있습니다.
-- [/js/vendors.js](https://chapitak.kro.kr/js/vendors.js), [/js/main.js](https://chapitak.kro.kr/js/main.js)의 경우 사용하지 않는 자바스크립트라면 제외해주는 경우 속도를 개선할 수 있습니다.
+- js/vendors.js, js/main.js의 경우 사용하지 않는 자바스크립트라면 제외해주는 경우 속도를 개선할 수 있습니다.
 - 자바스크립트 파일과 로고 이미지 파일에  대해 CDN을 제공할 수 있습니다.
  
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
