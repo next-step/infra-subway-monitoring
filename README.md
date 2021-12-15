@@ -53,10 +53,40 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 ---
 
+# kakao
+- First Contentful Paint(FCP): 2.5s
+- Time to Interactive(TTI): 5.3s
+- Largest Contentful Paint(LCP): 5.9s
+- Total Blocking Time(TBT): 130ms
+- 
+# nextstep
+- First Contentful Paint(FCP): 2.7s
+- Time to Interactive(TTI): 2.8s
+- Largest Contentful Paint(LCP): 5.9s
+- Total Blocking Time(TBT): 70ms
+
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- FCP: 2.5s
+  - 경쟁사 대비 20% 차이는 나지 않아 경쟁사와 동일한 수치를 목표로 했습니다.
+  
+- TTI: 2.6s
+  - 현재는 FCP랑 큰 차이가 없어 비슷한 수치를 목표로 했습니다.
+  
+- 압축된 리소스 최대 크기: 200kb 미만
+
+- Lighthouse 성능 감사: 75점 이상(개선 이전 대비 10% 증가)
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 텍스트 기반 리소스 압축
+- 이미지 압축
+- 사용하지 않는 자바스크립트 삭제
+- 글꼴 표시 CSS
+- 이미지 너비, 높이 설정
+- JS, CSS, 이미지, 웹 폰트 등 정적 컨텐츠 캐시 적용
+- CDN 사용
+- JS/CSS 지연 로딩
+- 스크립트 병합하여 요청 최소화
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
@@ -65,9 +95,9 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 
 ### step2 요구사항
-- [ ] 웹 성능 테스트
-  - [ ] 웹 성능 예산을 작성
-  - [ ] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
+- [X] 웹 성능 테스트
+  - [X] 웹 성능 예산을 작성
+  - [X] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
   
 - [ ] 부하 테스트 
   - [ ] 테스트 전제조건 정리
