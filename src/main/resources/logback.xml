@@ -5,7 +5,6 @@
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="console-appender.xml" />
     <include resource="file-appender.xml" />
-    <include resource="json-appender.xml" />
 
     <springProfile name="prod">
         <root level="INFO">
@@ -17,7 +16,6 @@
         <root level="INFO">
             <appender-ref ref="console"/>
             <appender-ref ref="file"/>
-            <appender-ref ref="json"/>
         </root>
     </springProfile>
 
