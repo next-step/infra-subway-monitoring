@@ -1,25 +1,23 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
+
     <springProfile name="prod">
-        <include resource="member-appender.xml"/>
-        <include resource="login-appender.xml"/>
+        <include resource="file-appender.xml"/>
         <include resource="json-appender.xml"/>
-        <include resource="path-appender.xml"/>
+        <include resource="console-appender.xml"/>
 
-        <logger name="login" level="INFO">
-            <appender-ref ref="login"/>
-        </logger>
 
-        <logger name="member" level="INFO">
-            <appender-ref ref="member"/>
-        </logger>
-
-        <logger name="path" level="INFO">
-            <appender-ref ref="path"/>
+        <logger name="file" level="INFO">
+            <appender-ref ref="file"/>
         </logger>
 
         <logger name="json" level="INFO">
             <appender-ref ref="json"/>
         </logger>
+
+        <logger name="console" level="INFO">
+            <appender-ref ref="console"/>
+        </logger>
+
     </springProfile>
 </configuration>

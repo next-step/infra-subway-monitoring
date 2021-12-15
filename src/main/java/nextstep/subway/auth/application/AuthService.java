@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
-    private static final Logger loginLogger = LoggerFactory.getLogger("login");
+    private static final Logger logger = LoggerFactory.getLogger("file");
 
     public AuthService(MemberRepository memberRepository, JwtTokenProvider jwtTokenProvider) {
         this.memberRepository = memberRepository;
@@ -28,7 +28,7 @@ public class AuthService {
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
-        loginLogger.info(member.getEmail() + "(" + member.getId() + ") 회원이 로그인했습니다.");
+        logger.info(member.getEmail() + "(" + member.getId() + ") 회원이 로그인했습니다.");
         return new TokenResponse(token);
     }
 
