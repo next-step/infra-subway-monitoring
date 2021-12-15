@@ -4,7 +4,7 @@
   <springProfile name="local">
     <property name="home" value="log/"/>
   </springProfile>
-  <springProfile name="prod]">
+  <springProfile name="prod">
     <property name="home" value="/var/log/subway/"/>
   </springProfile>
 
