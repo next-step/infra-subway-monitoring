@@ -76,8 +76,14 @@ npm run dev
 #### 2. 웹 성능 예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - 텍스트 압축 사용
+  - `application.properties` 파일에서 `server.compression` 설정 변경 후 측정 결과
+    - First Contentful Paint : 1.3s
+    - Speed Index : 1.7s
+    - Largest Contentful Paint : 1.4s
+    - Time to Interactive : 1.4s
 - 미사용 자바스크립트 줄이기
 - 렌더링 차단 리소스 제거하기
+- 정적 리소스 캐싱
 
 #### 3. 부하테스트 전제조건은 어느 정도로 설정하셨나요
 
