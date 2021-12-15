@@ -46,6 +46,16 @@ npm run dev
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
+#### 1단계 미션
+
+- [ ] Application Log 파일로 저장하기
+    - [ ] 회원가입 이벤트 로깅
+    - [ ] 로그인 이벤트 로깅
+    - [ ] 최단거리 조회 이벤트 로깅
+- [ ] Nginx Access Log 설정하기
+- [ ] Cloudwatch로 로그 수집하기
+- [ ] Cloudwatch로 메트릭 수집하기
+- 
 ---
 
 ### 2단계 - 성능 테스트
