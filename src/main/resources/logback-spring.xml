@@ -6,7 +6,7 @@
   <springProfile name="test, local">
     <include resource="config/logs/logback-console.xml"/>
 
-    <logger name="nextstep.subway" level="DEBUG">
+    <logger name="nextstep.subway" level="INFO" additivity="false" >
       <appender-ref ref="CONSOLE"/>
     </logger>
 
@@ -18,27 +18,12 @@
       <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="org.springframework.core" level="INFO">
-      <appender-ref ref="CONSOLE"/>
-    </logger>
-
-    <logger name="org.springframework.beans" level="INFO">
-      <appender-ref ref="CONSOLE"/>
-    </logger>
-
-    <logger name="org.springframework.context" level="INFO">
-      <appender-ref ref="CONSOLE"/>
-    </logger>
-
-    <logger name="org.springframework.web" level="INFO">
-      <appender-ref ref="CONSOLE"/>
-    </logger>
-
-    <logger name="root" level="WARN">
+    <logger name="org.springframework" level="WARN" additivity="false">
       <appender-ref ref="CONSOLE"/>
     </logger>
 
     <logger name="root" level="ERROR">
+      <level value="ERROR"/>
       <appender-ref ref="CONSOLE"/>
     </logger>
 
@@ -49,11 +34,8 @@
     <include resource="config/logs/logback-error.xml"/>
     <include resource="config/logs/logback-file.xml"/>
 
-    <logger name="nextstep.subway" level="INFO">
+    <logger name="nextstep.subway" level="INFO" additivity="false">
       <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="nextstep.subway" level="ERROR">
       <appender-ref ref="ERROR"/>
     </logger>
 
@@ -61,27 +43,12 @@
       <appender-ref ref="FILE"/>
     </logger>
 
-    <logger name="org.springframework.core" level="INFO">
-      <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="org.springframework.beans" level="INFO">
-      <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="org.springframework.context" level="INFO">
-      <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="org.springframework.web" level="INFO">
-      <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="root" level="WARN">
-      <appender-ref ref="FILE"/>
+    <logger name="org.springframework" level="WARN" additivity="false">
+      <appender-ref ref="CONSOLE"/>
     </logger>
 
     <logger name="root" level="ERROR">
+      <level value="ERROR"/>
       <appender-ref ref="ERROR"/>
     </logger>
   </springProfile>
