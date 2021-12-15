@@ -105,3 +105,22 @@ npm run dev
         - [ ] 데이터를 갱신하는 페이지
         - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
     - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+
+
+---
+
+### WebPageTest 측정 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/webpagetest_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/webpagetest_public2_before.png)
+
+### WebPageTest 측정 분석
+- FCP 성능 개선하기 => 3초 이내
+- Compress Transfer 적용하기
+
+### PageSpeed 측정 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/pagespeed_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/pagespeed_public2_before.png)
