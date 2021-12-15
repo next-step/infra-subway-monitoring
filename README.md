@@ -37,14 +37,31 @@ npm run dev
 ```
 <br>
 
+### 기능 구현 목록
+- [x] application log
+   - [x] 모든 요청,응답에 대한 로깅 설정 -> filter
+   - [x] active profile 에따라 다른 로깅 방법 설정
+- [x] cloudwatch로 모니터링  
+   - [x] cloudwatch로 로그 수집하기
+   - [x] cloudwatch로 메트릭 수집하기
+
 ## 미션
 
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
-
+   <br>
+   ```text
+      keyfile: shinmj-nextstep-ec2-key.cer
+      bastion: shinmj-bastion-ec2(13.124.238.137)
+      webserver: shinmj-web-ec2 (bastion에서 ssh webserver)
+      application log: /home/ubuntu/infra-logs
+   ```
+   
 2. Cloudwatch 대시보드 URL을 알려주세요
+<br>
+[shinmj-dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=shinmj-dashboard)
 
 ---
 
