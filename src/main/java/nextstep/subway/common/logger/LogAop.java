@@ -31,9 +31,10 @@ public class LogAop {
         HttpServletRequest request = RequestUtils.request();
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
+        TraceId traceId = TraceId.of();
         try {
             logger.info("=======================================================");
-            logger.info("TRACE_ID: {}", TraceId.of());
+            logger.info("TRACE_ID: {}", traceId);
             logger.info("REQUEST_URI: {}", request.getRequestURI());
             logger.info("METHOD_NAME: {}", request.getMethod());
             logger.info("METHOD_SIGNATURE: {}", joinPoint.getSignature());
@@ -43,12 +44,12 @@ public class LogAop {
             stopWatch.stop();
             return proceed;
         } catch (Exception e) {
-            logger.info("==================예외발생 START=================");
+            logger.info("==================[{}] 예외발생 START=================", traceId);
             logger.error(e.getMessage());
-            logger.info("==================예외발생  END =================");
+            logger.info("==================[{}] 예외발생  END =================", traceId);
             throw e;
         } finally {
-            logger.info(stopWatch.prettyPrint());
+            logger.debug(stopWatch.prettyPrint());
         }
     }
 
