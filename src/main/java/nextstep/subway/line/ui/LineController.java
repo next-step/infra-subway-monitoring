@@ -1,5 +1,7 @@
 package nextstep.subway.line.ui;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -13,51 +15,67 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
+import static nextstep.subway.common.LogUtils.fileLog;
+
 @RestController
 @RequestMapping("/lines")
 public class LineController {
-    private final LineService lineService;
 
-    public LineController(final LineService lineService) {
+    private final LineService lineService;
+    private final ObjectMapper objectMapper;
+
+    public LineController(LineService lineService, ObjectMapper objectMapper) {
         this.lineService = lineService;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping
-    public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
+    public ResponseEntity createLine(@RequestBody LineRequest lineRequest) throws JsonProcessingException {
+        fileLog.info("LineRequest: {}", objectMapper.writeValueAsString(lineRequest));
         LineResponse line = lineService.saveLine(lineRequest);
+        fileLog.info("LineResponse: {}", objectMapper.writeValueAsString(line));
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
 
     @GetMapping
-    public ResponseEntity<List<LineResponse>> findAllLines() {
-        return ResponseEntity.ok(lineService.findLineResponses());
+    public ResponseEntity<List<LineResponse>> findAllLines() throws JsonProcessingException {
+        List<LineResponse> lineResponses = lineService.findLineResponses();
+        fileLog.info("LineResponses: {}", objectMapper.writeValueAsString(lineResponses));
+        return ResponseEntity.ok(lineResponses);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
-        return ResponseEntity.ok(lineService.findLineResponseById(id));
+    public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) throws JsonProcessingException {
+        fileLog.info("LineId: {}", id);
+        LineResponse lineResponse = lineService.findLineResponseById(id);
+        fileLog.info("LineResponse: {}", objectMapper.writeValueAsString(lineResponse));
+        return ResponseEntity.ok(lineResponse);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
+    public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) throws JsonProcessingException {
+        fileLog.info("LineId: {} / LineRequest: {}", id, objectMapper.writeValueAsString(lineUpdateRequest));
         lineService.updateLine(id, lineUpdateRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteLine(@PathVariable Long id) {
+        fileLog.info("LineId: {}", id);
         lineService.deleteLineById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{lineId}/sections")
-    public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
+    public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) throws JsonProcessingException {
+        fileLog.info("LineId: {} / SectionRequest: {}", lineId, objectMapper.writeValueAsString(sectionRequest));
         lineService.addLineStation(lineId, sectionRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{lineId}/sections")
     public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
+        fileLog.info("LineId: {} / StationId: {}", lineId, stationId);
         lineService.removeLineStation(lineId, stationId);
         return ResponseEntity.ok().build();
     }
