@@ -1,0 +1,41 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 1m45s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 1m15s over 11 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] error getting terminal size                   error="The handle is invalid."
+
+running (1m45.0s), 000/400 VUs, 954 complete and 212 interrupted iterations
+default ✓ [======================================] 000/400 VUs  1m15s
+
+     ✗ find path
+      ↳  83% — ✓ 796 / ✗ 158
+
+     checks.........................: 83.43% ✓ 796      ✗ 158
+     data_received..................: 2.8 MB 26 kB/s
+     data_sent......................: 170 kB 1.6 kB/s
+     http_req_blocked...............: avg=1.2ms    min=0s       med=0s       max=7.99ms  p(90)=4.61ms   p(95)=4.89ms
+     http_req_connecting............: avg=1.07ms   min=0s       med=0s       max=5.65ms  p(90)=4.12ms   p(95)=4.44ms
+   ✗ http_req_duration..............: avg=11.88s   min=113.79ms med=6.98s    max=44.37s  p(90)=31.25s   p(95)=33.51s
+       { expected_response:true }...: avg=7.98s    min=113.79ms med=6.63s    max=44.37s  p(90)=12.58s   p(95)=21.01s
+     http_req_failed................: 16.56% ✓ 158      ✗ 796
+     http_req_receiving.............: avg=792.24µs min=0s       med=528.79µs max=15.68ms p(90)=1.37ms   p(95)=2.47ms
+     http_req_sending...............: avg=87.14µs  min=0s       med=0s       max=1.16ms  p(90)=414.06µs p(95)=576.87µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=11.87s   min=113.29ms med=6.98s    max=44.37s  p(90)=31.25s   p(95)=33.51s
+     http_reqs......................: 954    9.084382/s
+     iteration_duration.............: avg=12.88s   min=1.11s    med=7.99s    max=45.38s  p(90)=32.26s   p(95)=34.52s
+     iterations.....................: 954    9.084382/s
+     vus............................: 1      min=1      max=400
+     vus_max........................: 400    min=400    max=400
+
+ERRO[0106] some thresholds have failed

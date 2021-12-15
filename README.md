@@ -124,3 +124,24 @@ First Contentful Paint | Time to Interactive | Speed Index | Total Blocking Time
 참고자료 : https://platum.kr/archives/61943, http://www.gocarnet.co.kr/nomal/2018/02/13047
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* 접속 빈도가 높은 기능 : 메인 페이지
+  * [Smoke 테스트 스크립트](/k6/main/smoke.js)
+  * [Smoke 테스트 결과](/k6/main/smoke.log)
+  * [Load 테스트 스크립트](/k6/main/load.js)
+  * [Load 테스트 결과](/k6/main/load.log)
+  * [Stress 테스트 스크립트](/k6/main/stress.js)
+  * [Stress 테스트 결과](/k6/main/stress.log)
+* 데이터를 갱신하는 페이지 : 회원 수정 페이지
+  * [Smoke 테스트 스크립트](/k6/updateMemeber/smoke.js)
+  * [Smoke 테스트 결과](/k6/updateMemeber/smoke.log)
+  * [Load 테스트 스크립트](/k6/updateMemeber/load.js)
+  * [Load 테스트 결과](/k6/updateMemeber/load.log)
+  * [Stress 테스트 스크립트](/k6/updateMemeber/stress.js)
+  * [Stress 테스트 결과](/k6/main/stress.log)
+* 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 조회
+  * [Smoke 테스트 스크립트](/k6/findPath/smoke.js)
+  * [Smoke 테스트 결과](/k6/findPath/smoke.log)
+  * [Load 테스트 스크립트](/k6/findPath/load.js)
+  * [Load 테스트 결과](/k6/findPath/load.log)
+  * [Stress 테스트 스크립트](/k6/findPath/stress.js)
+  * [Stress 테스트 결과](/k6/findPath/stress.log)

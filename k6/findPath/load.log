@@ -1,0 +1,42 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 300 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: Up to 300 looping VUs for 30s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] error getting terminal size                   error="The handle is invalid."
+
+running (0m48.8s), 000/300 VUs, 649 complete and 0 interrupted iterations
+default ✓ [======================================] 000/300 VUs  30s
+
+     ✗ find path
+      ↳  99% — ✓ 648 / ✗ 1
+
+     checks.........................: 99.84% ✓ 648      ✗ 1
+     data_received..................: 2.2 MB 45 kB/s
+     data_sent......................: 95 kB  1.9 kB/s
+     http_req_blocked...............: avg=1.9ms    min=0s       med=0s      max=7.62ms  p(90)=4.67ms   p(95)=4.99ms
+     http_req_connecting............: avg=1.72ms   min=0s       med=0s      max=6.55ms  p(90)=4.21ms   p(95)=4.52ms
+   ✗ http_req_duration..............: avg=12.67s   min=113.01ms med=13.59s  max=31.71s  p(90)=20.82s   p(95)=20.92s
+       { expected_response:true }...: avg=12.64s   min=113.01ms med=13.59s  max=31.71s  p(90)=20.82s   p(95)=20.91s
+     http_req_failed................: 0.15%  ✓ 1        ✗ 648
+     http_req_receiving.............: avg=870.27µs min=0s       med=585.9µs max=18.44ms p(90)=1.46ms   p(95)=2.56ms
+     http_req_sending...............: avg=120.14µs min=0s       med=0s      max=1.18ms  p(90)=504.38µs p(95)=727.46µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=12.67s   min=111.93ms med=13.59s  max=31.71s  p(90)=20.82s   p(95)=20.92s
+     http_reqs......................: 649    13.30029/s
+     iteration_duration.............: avg=13.68s   min=1.11s    med=14.6s   max=32.72s  p(90)=21.83s   p(95)=21.93s
+     iterations.....................: 649    13.30029/s
+     vus............................: 16     min=10     max=300
+     vus_max........................: 300    min=300    max=300
+
+ERRO[0050] some thresholds have failed
+
