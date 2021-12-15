@@ -56,9 +56,28 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+```text
+A. 예비 분석
+B. 경쟁사 분석
+C. 성능 기준 설정
+D. 우선순위 
+```
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+```text
+A. 압축 기능 사용
+ - properties
+  - server.compression.enabled=true
+  - server.compression.mime-types=text/html,text/css,application/javascript,application/json
+  - server.compression.min-response-size=1024
+```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+```text
+
+```
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+```text
+
+```
