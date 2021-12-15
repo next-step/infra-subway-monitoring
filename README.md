@@ -47,15 +47,30 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
 
 ```KEY:KEY-DOYOUNG0205-NEXT-STEP.pem```
-- WEB SERVER (EC2-doyoung0205-was-01) 
-    - /var/log/nginx/access.log
-    - /var/log/nginx/error.log
-- WAS SERVER (EC2-doyoung0205-webserver) :
+
+- WAS SERVER (EC2-doyoung0205-was-01)
+    - /var/log/syslog
+    - /var/subway-was/log/file.log
+    - /var/subway-was/log/subway-monitor-api.log
+- WAS SERVER (EC2-doyoung0205-was-02)
+    - /var/log/syslog
     - /var/subway-was/log/file.log
     - /var/subway-was/log/subway-monitor-api.log
 
-2. Cloudwatch 대시보드 URL을 알려주세요
-   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=doyoung0205-dashboard
+- ALB : `ALB-doyoung0205`
+
+- 로그 그룹
+    - LOG_GROUP_doyoung0205-was1-api
+    - LOG_GROUP_doyoung0205-was1-monitor
+    - LOG_GROUP_doyoung0205-was1-syslog
+    - LOG_GROUP_doyoung0205-was2-api
+    - LOG_GROUP_doyoung0205-was2-monitor
+    - LOG_GROUP_doyoung0205-was2-syslog
+
+
+2. Cloudwatch 대시보드 URL을 알려주세요 <br/>
+   [대시보드링크](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=doyoung0205-dashboard)
+3.
 
 ---
 
