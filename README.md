@@ -58,7 +58,24 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+무조건 성능이 빠르기 보다 일반적인 웹 평균보다 빠르면서, Lighthouse의 Green 지표 안에만 들면 성능이 좋다고 판단하여 다음과 같은 예산을 잡았습니다.
+- FCP : 1.8초
+  - HTTP Archive에서 2017.04.15 ~ 2021.10.01 Top 1,000,000 Loading Speed에서 Desktop의 First Contentful Panit 중앙값은 2.1초이며, Lighthouse에서 빠름은 0~1.8초 입니다. 
+  - 중앙값인 2.1초 보다 높으면서 Lighthouse에서 Green 지표의 마지막 노선이 1.8초 이기 때문에 1.8초로 예산을 잡았습니다.
+- Speed Index : 3.4초
+  - HTTP Archive에서 2017.04.15 ~ 2021.10.01 Top 1,000,000 Loading Speed에서 Desktop의 Speed Index 중앙값은 3.8초이며, Lighthouse에서 빠름은 0~3.4초 입니다.
+  - 중앙값인 3.8초 보다 높으면서 Lighthouse에서 Green 지표의 마지막 노선이 3.4초 이기 때문에 3.4초로 예산을 잡았습니다.
+- LCP : 2.5초
+  - Lighthouse에서 빠름은 0~2.5초 입니다.
+  - Lighthouse에서 Green 지표의 마지막 노선이 2.5초 이기 때문에 2.5초로 예산을 잡았습니다.
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+gzip으로 컨텐츠 압축을 하여 FCP와 Speed Index의 속도를 개선해야 합니다.
+- 압축 전 속도
+  - ![img.png](image/압축전.png)
+- 압축 후 속도
+  - ![img.png](image/압축후.png)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
