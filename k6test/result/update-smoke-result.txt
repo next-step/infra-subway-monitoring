@@ -5,7 +5,7 @@
   / __________ \  |__| \__\ \_____/ .io
 
   execution: local
-     script: test.js
+     script: update-smoke.js
      output: -
 
   scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
