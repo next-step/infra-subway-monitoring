@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class Logging {
     private static final Logger logger = LoggerFactory.getLogger(Logging.class);
 
-    @Pointcut("within(nextstep.subway.*.ui.*Controller)")
+    @Pointcut("within(nextstep.subway.*.ui..*)")
     public void onRequest() {
     }
 

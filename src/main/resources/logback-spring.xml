@@ -1,11 +1,14 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <springProfile name="prod">
+    <springProfile name="test, prod">
         <include resource="file-appender.xml"/>
         <include resource="json-appender.xml"/>
         <include resource="console-appender.xml"/>
 
+        <logger name="nextstep.subway" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
 
         <logger name="file" level="INFO">
             <appender-ref ref="file"/>
@@ -13,10 +16,6 @@
 
         <logger name="json" level="INFO">
             <appender-ref ref="json"/>
-        </logger>
-
-        <logger name="console" level="INFO">
-            <appender-ref ref="console"/>
         </logger>
 
     </springProfile>
