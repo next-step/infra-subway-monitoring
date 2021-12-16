@@ -91,9 +91,9 @@ npm run dev
 ### 요구사항
 
 --- 
-- [ ] 웹 성능 테스트
-    - [ ] 웹 성능 예산을 작성
-    - [ ] [WebPageTest](https://www.webpagetest.org/) [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)
+- [x] 웹 성능 테스트
+    - [x] 웹 성능 예산을 작성
+    - [x] [WebPageTest](https://www.webpagetest.org/) [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)
       등 테스트해보고 개선이 필요한 부분을 파악
 - [ ] 부하 테스트
     - [ ] 테스트 전제조건 정리
@@ -119,8 +119,23 @@ npm run dev
 - FCP 성능 개선하기 => 3초 이내
 - Compress Transfer 적용하기
 
+### WebPageTest 개선 결과 
+- 3.36.209.24:8080(public1)
+  ![image info](./images/webpagetest_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/webpagetest_public2_before.png)
+
 ### PageSpeed 측정 결과
 - 3.36.209.24:8080(public1)
-  ![image info](./images/pagespeed_public1_before.png)
+  ![image info](./images/webpagetest_public1_after.png)
 - 3.36.233.76:8080(public2)
-  ![image info](./images/pagespeed_public2_before.png)
+  ![image info](./images/webpagetest_public2_after.png)
+
+### PageSpeed 측정 분석 
+- 성능 종합 점수 개선하기 => 90 이상
+
+### PageSpeed 개선 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/pagespeed_public1_after.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/pagespeed_public2_after.png)
