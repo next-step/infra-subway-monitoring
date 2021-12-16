@@ -21,19 +21,16 @@ public class LoggerAspect {
     private Logger json = LoggerFactory.getLogger("json");
     
     @Around("execution(* nextstep.subway..ui.*Controller.*(..))")
-    public void aroundApi(ProceedingJoinPoint joinPoint) {
+    public Object aroundApi(ProceedingJoinPoint joinPoint) throws Throwable {
         UUID requestId = UUID.randomUUID();
         
         logBefore(requestId, request.getMethod(), request.getRequestURI(), joinPoint.getArgs());
         
-        try {
-            long start = System.currentTimeMillis();
-            Object result = joinPoint.proceed();
-            long end = System.currentTimeMillis();
-            logAfter(requestId, result, end - start);
-        } catch (Throwable e) {
-            logError(requestId, e.getMessage());
-        }
+        long start = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long end = System.currentTimeMillis();
+        logAfter(requestId, result, end - start);
+        return result;
     }
     
     private void logBefore(UUID requestId, String method, String resource, Object[] args) {
@@ -45,10 +42,6 @@ public class LoggerAspect {
     
     private void logAfter(UUID requestId, Object result, long execTime) {
         json.info("response about - [{}], exec time - [{}],  arg - [{}]", requestId, execTime, dtoToString(result));
-    }
-    
-    private void logError(UUID requestId, String message) {
-        json.error("error about - [{}], message - [{}]", requestId, message);
     }
     
     private String dtoToString(Object arg) {
