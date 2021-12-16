@@ -43,8 +43,13 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+key: mnonm-aws-key.pem
+bastion: 3.34.191.156
+EC2: ssh web (alias 적용)
+로그: /home/ubuntu/log/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-mnonm
 
 ---
 
@@ -56,3 +61,12 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+
+### step1 요구사항
+- [X] 로그 설정하기
+  - [X] 로그 추가
+  - [X] Nginx Access Log 설정하기
+- [X] Cloudwatch 모니터링
+  - [X] Cloudwatch 로그 수집
+  - [X] Cloudwatch 메트릭 수집
