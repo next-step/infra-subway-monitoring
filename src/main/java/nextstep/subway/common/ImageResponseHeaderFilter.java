@@ -10,13 +10,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/js/*")
-public class JsResponseHeaderFilter implements Filter {
+@WebFilter("/images/*")
+public class ImageResponseHeaderFilter implements Filter {
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws
         IOException, ServletException {
         final HttpServletResponse httpServletResponse = (HttpServletResponse)response;
-        httpServletResponse.setHeader("Content-Encoding", "gzip");
         httpServletResponse.setHeader("Cache-Control", "max-age=864000");
 
         chain.doFilter(request, response);
