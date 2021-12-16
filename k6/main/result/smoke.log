@@ -1,0 +1,37 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: k6/main/smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.2s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ main
+
+     checks.........................: 100.00% ✓ 10       ✗ 0
+     data_received..................: 12 kB   1.1 kB/s
+     data_sent......................: 1.3 kB  123 B/s
+     http_req_blocked...............: avg=1.74ms  min=4µs    med=5µs     max=17.42ms p(90)=1.75ms   p(95)=9.58ms
+     http_req_connecting............: avg=550.1µs min=0s     med=0s      max=5.5ms   p(90)=550.09µs p(95)=3.02ms
+   ✓ http_req_duration..............: avg=10.38ms min=8.55ms med=9.94ms  max=16.59ms p(90)=11.36ms  p(95)=13.97ms
+       { expected_response:true }...: avg=10.38ms min=8.55ms med=9.94ms  max=16.59ms p(90)=11.36ms  p(95)=13.97ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 10
+     http_req_receiving.............: avg=67.39µs min=44µs   med=57.99µs max=129µs   p(90)=89.4µs   p(95)=109.19µs
+     http_req_sending...............: avg=34.8µs  min=18µs   med=25µs    max=125µs   p(90)=43.09µs  p(95)=84.04µs
+     http_req_tls_handshaking.......: avg=0s      min=0s     med=0s      max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=10.28ms min=8.46ms med=9.87ms  max=16.33ms p(90)=11.26ms  p(95)=13.79ms
+     http_reqs......................: 10      0.984169/s
+     iteration_duration.............: avg=1.01s   min=1.01s  med=1.01s   max=1.03s   p(90)=1.01s    p(95)=1.02s
+     iterations.....................: 10      0.984169/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1

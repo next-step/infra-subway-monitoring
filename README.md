@@ -134,3 +134,63 @@ npm run dev
         * 초기 데이터 활용
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+    * 접속 빈도가 높은 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/main/smoke.js)
+
+            * [테스트 결과](/k6/main/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/main/load.js)
+
+            * [테스트 결과](/k6/main/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/main/stress.js)
+
+            * [테스트 결과](/k6/main/result/stress.log)
+
+    * 데이터를 갱신하는 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/update_member/smoke.js)
+
+            * [테스트 결과](/k6/update_member/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/update_member/load.js)
+
+            * [테스트 결과](/k6/update_member/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/update_member/stress.js)
+
+            * [테스트 결과](/k6/update_member/result/stress.log)
+
+    * 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/find_path/smoke.js)
+
+            * [테스트 결과](/k6/find_path/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/find_path/load.js)
+
+            * [테스트 결과](/k6/find_path/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/find_path/stress.js)
+
+            * [테스트 결과](/k6/find_path/result/stress.log)

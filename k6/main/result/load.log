@@ -1,0 +1,37 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: k6/main/load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 1m5s max duration (incl. graceful stop):
+           * default: Up to 100 looping VUs for 35s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m35.6s), 000/100 VUs, 2405 complete and 0 interrupted iterations
+default ✓ [======================================] 000/100 VUs  35s
+
+     ✓ main
+
+     checks.........................: 100.00% ✓ 2405      ✗ 0
+     data_received..................: 2.8 MB  78 kB/s
+     data_sent......................: 301 kB  8.4 kB/s
+     http_req_blocked...............: avg=242.67µs min=2µs    med=4µs    max=13.82ms p(90)=8µs    p(95)=16.79µs
+     http_req_connecting............: avg=234.69µs min=0s     med=0s     max=12.49ms p(90)=0s     p(95)=0s
+   ✓ http_req_duration..............: avg=8.02ms   min=4.33ms med=7.81ms max=40.19ms p(90)=9.75ms p(95)=10.56ms
+       { expected_response:true }...: avg=8.02ms   min=4.33ms med=7.81ms max=40.19ms p(90)=9.75ms p(95)=10.56ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 2405
+     http_req_receiving.............: avg=39.79µs  min=20µs   med=33µs   max=361µs   p(90)=59µs   p(95)=75µs
+     http_req_sending...............: avg=18.55µs  min=7µs    med=15µs   max=176µs   p(90)=30µs   p(95)=43µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s     max=0s      p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=7.97ms   min=4.29ms med=7.75ms max=40.06ms p(90)=9.69ms p(95)=10.52ms
+     http_reqs......................: 2405    67.477718/s
+     iteration_duration.............: avg=1s       min=1s     med=1s     max=1.04s   p(90)=1.01s  p(95)=1.01s
+     iterations.....................: 2405    67.477718/s
+     vus............................: 6       min=6       max=100
+     vus_max........................: 100     min=100     max=100
