@@ -1,0 +1,37 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 26 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: Up to 26 looping VUs for 30s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m30.5s), 00/26 VUs, 435 complete and 0 interrupted iterations
+default ✓ [======================================] 00/26 VUs  30s
+
+     ✓ logged in successfully
+     ✓ updated member
+
+     checks.........................: 100.00% ✓ 870       ✗ 0
+     data_received..................: 273 kB  9.0 kB/s
+     data_sent......................: 187 kB  6.1 kB/s
+     http_req_blocked...............: avg=165.47µs min=2.58µs  med=2.76µs  max=18.45ms  p(90)=2.94µs   p(95)=3.16µs
+     http_req_connecting............: avg=23.73µs  min=0s      med=0s      max=1.23ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=7.37ms   min=5.02ms  med=7.11ms  max=19.05ms  p(90)=8.57ms   p(95)=9.27ms
+       { expected_response:true }...: avg=7.37ms   min=5.02ms  med=7.11ms  max=19.05ms  p(90)=8.57ms   p(95)=9.27ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 870
+     http_req_receiving.............: avg=73.56µs  min=16.09µs med=45.57µs max=3.52ms   p(90)=121.19µs p(95)=171.63µs
+     http_req_sending...............: avg=79.05µs  min=49.61µs med=70.21µs max=454.96µs p(90)=104.78µs p(95)=115.83µs
+     http_req_tls_handshaking.......: avg=130.45µs min=0s      med=0s      max=14.87ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=7.21ms   min=4.88ms  med=6.96ms  max=18.95ms  p(90)=8.44ms   p(95)=9.16ms
+     http_reqs......................: 870     28.520133/s
+     iteration_duration.............: avg=1.01s    min=1.01s   med=1.01s   max=1.04s    p(90)=1.01s    p(95)=1.02s
+     iterations.....................: 435     14.260067/s
+     vus............................: 3       min=2       max=25
+     vus_max........................: 26      min=26      max=26
