@@ -1,7 +1,9 @@
 package nextstep.subway.member.dto;
 
+import nextstep.subway.common.PersonalData;
 import nextstep.subway.member.domain.Member;
 
+@PersonalData
 public class MemberRequest {
     private String email;
     private String password;

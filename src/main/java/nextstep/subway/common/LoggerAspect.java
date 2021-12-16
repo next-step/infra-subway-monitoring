@@ -39,15 +39,22 @@ public class LoggerAspect {
     private void logBefore(UUID requestId, String method, String resource, Object[] args) {
         json.info("request of - [{}], api - [{} {}]", requestId, method, resource);
         for (Object arg : args) {
-            json.info("parameter about - [{}], arg - [{}]", requestId, arg);
+            json.info("parameter about - [{}], arg - [{}]", requestId, dtoToString(arg));
         }
     }
     
     private void logAfter(UUID requestId, Object result, long execTime) {
-        json.info("response about - [{}], exec time - [{}],  arg - [{}]", requestId, execTime, result);
+        json.info("response about - [{}], exec time - [{}],  arg - [{}]", requestId, execTime, dtoToString(result));
     }
     
     private void logError(UUID requestId, String message) {
         json.error("error about - [{}], message - [{}]", requestId, message);
+    }
+    
+    private String dtoToString(Object arg) {
+        if (arg.getClass().isAnnotationPresent(PersonalData.class)) {
+            return "personal data";
+        }
+        return arg.toString();
     }
 }
