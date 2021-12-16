@@ -126,7 +126,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - [X] 부하 테스트 시 저장될 데이터 건수 및 크기 
   - [ ] 각 시나리오에 맞춰 스크립트 작성 
     - [X] 접속 빈도가 높은 페이지
-    - [ ] 데이터를 갱신하는 페이지 
+    - [X] 데이터를 갱신하는 페이지 
     - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 
   - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
 
