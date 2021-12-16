@@ -5,6 +5,7 @@ import nextstep.subway.station.dto.StationResponse;
 import java.util.List;
 
 public class PathResponse {
+
     private List<StationResponse> stations;
     private int distance;
 
@@ -22,5 +23,13 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return "PathResponse{" +
+            "stations=" + stations +
+            ", distance=" + distance +
+            '}';
     }
 }

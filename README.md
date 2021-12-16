@@ -37,15 +37,53 @@ npm run dev
 ```
 <br>
 
+# 서버 구성
+- 관리망
+  - `Name : EC2-wooobo-bastion`
+- 외부망
+  - `Name : EC2-wooobo-web-service`
+- 프록시
+  - `Name : EC2-wooobo-proxy`
+- 데이터베이스(내부망)
+  - `Name : EC2-wooobo-database`
+
+## 접속 
+1. `EC2-wooobo-bastion` 관리방 접속
+2. 웹서비스 접속 : `ssh ubuntu@webservice`
+2. 프록시 접속 : `ssh ubuntu@proxy`
+2. 데이터베이스 접속 : `ssh ubuntu@database`
+
 ## 미션
 
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+   - 외부망 : `Name : EC2-wooobo-web-service`
+     - log 위치
+       - /home/ubuntu/infra-monitoring/application.log
+       - /var/log/subway/json.log
+       - /var/log/subway/file.log
+     - 로그 그룹 : [wooobo-webservice](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/wooobo-webservice)
+   - 프록시 서버 : `Name : EC2-wooobo-proxy`
+     - log 위치
+       -  /var/log/nginx
+     - 로그 그룹 : [wooobo-proxy](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/wooobo-proxy)
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+ - [대쉬보드](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-wooobo)
 
+#### 1단계 작업 내용
+
+- [X] Application Log 파일로 저장하기
+    - [X] 회원가입 이벤트 로깅
+    - [X] 로그인 이벤트 로깅
+    - [X] 최단거리 조회 이벤트 로깅
+- [X] Nginx Access Log 설정하기
+- [X] Cloudwatch로 로그 수집하기
+- [X] Cloudwatch로 메트릭 수집하기
+- [X]  EC2 Metric 수집
+- [X] Cloudwatch 대쉬보드 구성
 ---
 
 ### 2단계 - 성능 테스트
@@ -56,3 +94,11 @@ npm run dev
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+
+### 환경세팅
+```
+# DB 도커
+$ docker run -d -p 13306:3306 brainbackdoor/data-subway:0.0.1
+```
+

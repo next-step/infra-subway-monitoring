@@ -73,7 +73,6 @@ public class LineController {
     public String findLockLeft() throws InterruptedException {
 
         synchronized (left) {
-            Thread.sleep(5000);
             synchronized (right) {
                 System.out.println("left");
             }
@@ -84,7 +83,6 @@ public class LineController {
     @GetMapping("/lock-right")
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
-            Thread.sleep(5000);
             synchronized (left) {
                 System.out.println("right");
             }
