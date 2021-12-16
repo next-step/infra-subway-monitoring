@@ -113,32 +113,32 @@ npm run dev
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 - 접속 빈도가 높은 페이지(메인페이지)
-  - Smoke
-    - [Smoke 스크립트](/k6/frequency/smoke.js)
-    - [Smoke 결과](/k6/frequency/smoke.log)
-  - Load
-    - [Load 스크립트](/k6/frequency/load.js)
-    - [Load 결과](/k6/frequency/load.log)
-  - Stress
-    - [Stress 스크립트](/k6/frequency/stress.js)
-    - [Stress 결과](/k6/frequency/stress.log)
+    - Smoke
+        - [Smoke 스크립트](/k6/frequency/smoke.js)
+        - [Smoke 결과](/k6/frequency/smoke.log)
+    - Load
+        - [Load 스크립트](/k6/frequency/load.js)
+        - [Load 결과](/k6/frequency/load.log)
+    - Stress
+        - [Stress 스크립트](/k6/frequency/stress.js)
+        - [Stress 결과](/k6/frequency/stress.log)
 - 데이터를 갱신하는 페이지(내 정보 수정 페이지)
-  - Smoke
-    - [Smoke 스크립트](/k6/update/smoke.js)
-    - [Smoke 결과](/k6/update/smoke.log)
-  - Load
-    - [Load 스크립트](/k6/update/load.js)
-    - [Load 결과](/k6/update/load.log)
-  - Stress
-    - [Stress 스크립트](/k6/update/stress.js)
-    - [Stress 결과](/k6/update/stress.log)
+    - Smoke
+        - [Smoke 스크립트](/k6/update/smoke.js)
+        - [Smoke 결과](/k6/update/smoke.log)
+    - Load
+        - [Load 스크립트](/k6/update/load.js)
+        - [Load 결과](/k6/update/load.log)
+    - Stress
+        - [Stress 스크립트](/k6/update/stress.js)
+        - [Stress 결과](/k6/update/stress.log)
 - 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로 찾기 페이지)
-  - Smoke
-    - [Smoke 스크립트](/k6/complex/smoke.js)
-    - [Smoke 결과](/k6/complex/smoke.log)
-  - Load
-    - [Load 스크립트](/k6/complex/load.js)
-    - [Load 결과](/k6/complex/load.log)
-  - Stress
-    - [Stress 스크립트](/k6/complex/stress.js)
-    - [Stress 결과](/k6/complex/stress.log)
+    - Smoke
+        - [Smoke 스크립트](/k6/complex/smoke.js)
+        - [Smoke 결과](/k6/complex/smoke.log)
+    - Load
+        - [Load 스크립트](/k6/complex/load.js)
+        - [Load 결과](/k6/complex/load.log)
+    - Stress
+        - [Stress 스크립트](/k6/complex/stress.js)
+        - [Stress 결과](/k6/complex/stress.log)
