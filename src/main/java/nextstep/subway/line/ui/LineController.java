@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.common.LogParams;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -25,8 +26,8 @@ public class LineController {
     }
 
     @PostMapping
+    @LogParams
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-        logger.info("[{}]", lineRequest);
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
@@ -37,35 +38,35 @@ public class LineController {
     }
 
     @GetMapping("/{id}")
+    @LogParams
     public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
-        logger.info("[{}]", id);
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
     @PutMapping("/{id}")
+    @LogParams
     public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
-        logger.info("[{},{}]", id, lineUpdateRequest);
         lineService.updateLine(id, lineUpdateRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
+    @LogParams
     public ResponseEntity deleteLine(@PathVariable Long id) {
-        logger.info("[{}]", id);
         lineService.deleteLineById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{lineId}/sections")
+    @LogParams
     public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
-        logger.info("[{},{}]", lineId, sectionRequest);
         lineService.addLineStation(lineId, sectionRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{lineId}/sections")
+    @LogParams
     public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
-        logger.info("[{},{}]", lineId, stationId);
         lineService.removeLineStation(lineId, stationId);
         return ResponseEntity.ok().build();
     }

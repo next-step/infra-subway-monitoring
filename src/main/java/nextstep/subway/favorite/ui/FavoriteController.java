@@ -2,6 +2,7 @@ package nextstep.subway.favorite.ui;
 
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
+import nextstep.subway.common.LogParams;
 import nextstep.subway.favorite.application.FavoriteService;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
@@ -20,6 +21,7 @@ public class FavoriteController {
     }
 
     @PostMapping("/favorites")
+    @LogParams
     public ResponseEntity createFavorite(@AuthenticationPrincipal LoginMember loginMember, @RequestBody FavoriteRequest request) {
         favoriteService.createFavorite(loginMember, request);
         return ResponseEntity
@@ -34,6 +36,7 @@ public class FavoriteController {
     }
 
     @DeleteMapping("/favorites/{id}")
+    @LogParams
     public ResponseEntity deleteFavorite(@AuthenticationPrincipal LoginMember loginMember, @PathVariable Long id) {
         favoriteService.deleteFavorite(loginMember, id);
         return ResponseEntity.noContent().build();
