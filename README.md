@@ -108,7 +108,6 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     30분
 
 - 부하 테스트시 저장될 데이터 건수 및 크기
-  역 추가 1만건
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -124,10 +123,13 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - [X] 대상 시스템 범위
     - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
     - [X] 부하 테스트 시 저장될 데이터 건수 및 크기 
-  - [ ] 각 시나리오에 맞춰 스크립트 작성 
+  - [X] 각 시나리오에 맞춰 스크립트 작성 
     - [X] 접속 빈도가 높은 페이지
-    - [X] 데이터를 갱신하는 페이지 
-    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 
+      - 메인
+    - [X] 데이터를 갱신하는 페이지
+      - 내 정보 수정
+    - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+      - 노선 조회
   - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
 
 
