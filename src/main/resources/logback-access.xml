@@ -2,18 +2,22 @@
 
 <configuration>
     <property name="home" value="log/"/>
+    <springProfile name="api-logging">
+        <appender name="API" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${home}subway-monitor-api.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${home}subway-monitor-api-%d{yyyyMMdd}-%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%fullRequest%n%fullResponse</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
 
-    <appender name="API" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${home}subway-monitor-api.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${home}subway-monitor-api-%d{yyyyMMdd}-%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%fullRequest%n%fullResponse</pattern>
-        </encoder>
-    </appender>
-    <appender-ref ref="API"/>
+    <springProfile name="api-logging">
+        <appender-ref ref="API"/>
+    </springProfile>
 </configuration>

@@ -8,6 +8,7 @@ import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Aspect
@@ -33,7 +35,7 @@ public class MonitorAspect {
     public Object loggingController(ProceedingJoinPoint joinPoint) throws Throwable {
 
         final long startAt = System.currentTimeMillis();
-
+        MDC.put("traceId", UUID.randomUUID().toString());
         LOGGER.info("Aspect Service Log == request {} : {}({}) = {}",
                 getRequestUrl(joinPoint),
                 joinPoint.getSignature().getDeclaringTypeName(),
@@ -58,6 +60,8 @@ public class MonitorAspect {
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
                 result);
+
+        MDC.clear();
 
         return result;
     }
