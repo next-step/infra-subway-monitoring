@@ -75,5 +75,27 @@ npm run dev
 (테스트는 가장 느린 것으로 보이는 https://minseoklim.p-e.kr/stations을 대상으로 진행하였습니다)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- DAU: 10000, 피크시간 집중률: 10, 1명당 1일 평균 접속 수: 50 으로 가정
+- 1일 평균 rps: (10000 * 50) / 86400 = 5.8 -> (DAU * 1명당 1일 평균 접속 수) / 86400 
+- 1일 최대 rps: 5.8 * 10 = 58 -> 1일 평균 rps * 피크시간 집중률
+
+- 테스트 대상 엔드포인트
+  - 로그인 : POST /login/token {"email":"test@test.com","password":"password"}
+  - 내 정보 조회 : GET /members/me
+  - 지하철역 목록 조회 : GET /stations
+  - 경로 검색 : GET /paths/?source=1&target=2
+  - 지하철역 저장 : POST /stations {"name": "TEST"}
+  - 노선 저장 : POST /lines {"name":"TEST","color":"red lighten-1","upStationId":1,"downStationId":2,"distance":"1"}
+
+- Smoke Test VUser: 1
+- Load Test VUser: 58 * (6 * 1.5) / 6 = 87 -> 1일 최대 rps * (요청 횟수 * http_req_duration) / 요청 횟수
+- Stress Test VUser: 500 * (6 * 1.5) / 6 = 750 -> 목표 rps * (요청 횟수 * http_req_duration) / 요청 횟수
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 스크립트는 k6 디렉토리 내에 작성하였습니다.
+- Smoke 테스트 결과
+![스크린샷 2021-12-16 오후 4 10 37](https://user-images.githubusercontent.com/36442984/146325117-aca27c79-7169-44de-ba46-bfb874d1a70e.png)
+- Load 테스트 결과
+![스크린샷 2021-12-16 오후 4 13 09](https://user-images.githubusercontent.com/36442984/146325111-b51989c6-5ccd-4ff0-9846-7a2459eb7a7a.png)
+- Stress 테스트 결과
+![스크린샷 2021-12-16 오후 4 14 49](https://user-images.githubusercontent.com/36442984/146325104-744e8089-f4b3-4337-9609-19078889271f.png)
