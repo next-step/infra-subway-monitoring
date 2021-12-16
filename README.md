@@ -58,6 +58,9 @@ npm run dev
  - 경쟁 사이트: 서울교통공사 사이버 스테이션 [http://www.seoulmetro.co.kr/kr/cyberStation.do](http://www.seoulmetro.co.kr/kr/cyberStation.do)
    - 모바일 FCP 7.2초 TTI 9.0초
    - 데스크톱 FCP 1.6초 TTI 2.1초
+ - 현재 대상 웹사이트 chapitak.kro.kr
+   - 모바일 FCP 15초 TTI 15.6초 
+   - 데스크톱 FCP 2.7초 TTI 2.8초
  - 메인 페이지에 대한 웹 성능예산 산정
    - FCP를 3초 미만으로 유지한다
    - TTI를  5초 미만으로 유지한다
