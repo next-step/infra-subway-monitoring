@@ -1,0 +1,97 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 18 max VUs, 50s max duration (incl. graceful stop):
+           * default: Up to 18 looping VUs for 20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (01.0s), 01/18 VUs, 0 complete and 0 interrupted iterations
+default   [   5% ] 01/18 VUs  01.0s/20.0s
+
+running (02.0s), 02/18 VUs, 1 complete and 0 interrupted iterations
+default   [  10% ] 02/18 VUs  02.0s/20.0s
+
+running (03.0s), 03/18 VUs, 3 complete and 0 interrupted iterations
+default   [  15% ] 03/18 VUs  03.0s/20.0s
+
+running (04.0s), 04/18 VUs, 6 complete and 0 interrupted iterations
+default   [  20% ] 04/18 VUs  04.0s/20.0s
+
+running (05.0s), 05/18 VUs, 10 complete and 0 interrupted iterations
+default   [  25% ] 05/18 VUs  05.0s/20.0s
+
+running (06.0s), 07/18 VUs, 15 complete and 0 interrupted iterations
+default   [  30% ] 07/18 VUs  06.0s/20.0s
+
+running (07.0s), 08/18 VUs, 22 complete and 0 interrupted iterations
+default   [  35% ] 08/18 VUs  07.0s/20.0s
+
+running (08.0s), 09/18 VUs, 30 complete and 0 interrupted iterations
+default   [  40% ] 09/18 VUs  08.0s/20.0s
+
+running (09.0s), 10/18 VUs, 39 complete and 0 interrupted iterations
+default   [  45% ] 10/18 VUs  09.0s/20.0s
+
+running (10.0s), 11/18 VUs, 49 complete and 0 interrupted iterations
+default   [  50% ] 11/18 VUs  10.0s/20.0s
+
+running (11.0s), 13/18 VUs, 60 complete and 0 interrupted iterations
+default   [  55% ] 13/18 VUs  11.0s/20.0s
+
+running (12.0s), 14/18 VUs, 73 complete and 0 interrupted iterations
+default   [  60% ] 14/18 VUs  12.0s/20.0s
+
+running (13.0s), 15/18 VUs, 87 complete and 0 interrupted iterations
+default   [  65% ] 15/18 VUs  13.0s/20.0s
+
+running (14.0s), 16/18 VUs, 102 complete and 0 interrupted iterations
+default   [  70% ] 16/18 VUs  14.0s/20.0s
+
+running (15.0s), 17/18 VUs, 118 complete and 0 interrupted iterations
+default   [  75% ] 17/18 VUs  15.0s/20.0s
+
+running (16.0s), 18/18 VUs, 135 complete and 0 interrupted iterations
+default   [  80% ] 18/18 VUs  16.0s/20.0s
+
+running (17.0s), 12/18 VUs, 153 complete and 0 interrupted iterations
+default   [  85% ] 12/18 VUs  17.0s/20.0s
+
+running (18.0s), 11/18 VUs, 165 complete and 0 interrupted iterations
+default   [  90% ] 11/18 VUs  18.0s/20.0s
+
+running (19.0s), 06/18 VUs, 176 complete and 0 interrupted iterations
+default   [  95% ] 06/18 VUs  19.0s/20.0s
+
+running (20.0s), 04/18 VUs, 182 complete and 0 interrupted iterations
+default   [ 100% ] 04/18 VUs  20.0s/20.0s
+
+running (20.1s), 00/18 VUs, 186 complete and 0 interrupted iterations
+default ✓ [ 100% ] 00/18 VUs  20s
+
+     ✓ load main page
+
+     checks.........................: 100.00% ✓ 186     ✗ 0
+     data_received..................: 321 kB  16 kB/s
+     data_sent......................: 18 kB   915 B/s
+     http_req_blocked...............: avg=609.12µs min=2.57µs  med=2.87µs  max=27.62ms  p(90)=7.12µs   p(95)=4.26ms
+     http_req_connecting............: avg=88.21µs  min=0s      med=0s      max=1.49ms   p(90)=0s       p(95)=687.26µs
+   ✓ http_req_duration..............: avg=2.33ms   min=1.18ms  med=2.48ms  max=5.84ms   p(90)=3.01ms   p(95)=3.13ms
+       { expected_response:true }...: avg=2.33ms   min=1.18ms  med=2.48ms  max=5.84ms   p(90)=3.01ms   p(95)=3.13ms
+     http_req_failed................: 0.00%   ✓ 0       ✗ 186
+     http_req_receiving.............: avg=83.84µs  min=25.88µs med=71.18µs max=451.63µs p(90)=137.16µs p(95)=161.55µs
+     http_req_sending...............: avg=80.58µs  min=34.05µs med=79.26µs max=378.66µs p(90)=115.49µs p(95)=137.91µs
+     http_req_tls_handshaking.......: avg=449.11µs min=0s      med=0s      max=16.38ms  p(90)=0s       p(95)=3.5ms
+     http_req_waiting...............: avg=2.16ms   min=1.02ms  med=2.35ms  max=5.39ms   p(90)=2.85ms   p(95)=2.96ms
+     http_reqs......................: 186     9.25301/s
+     iteration_duration.............: avg=1s       min=1s      med=1s      max=1.03s    p(90)=1s       p(95)=1s
+     iterations.....................: 186     9.25301/s
+     vus............................: 4       min=1     max=18
+     vus_max........................: 18      min=18    max=18
