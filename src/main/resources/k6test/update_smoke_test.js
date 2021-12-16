@@ -1,46 +1,45 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import {BASE} from './Constant.js'
 
 export const options = {
   vus: 1,
-  duration: '1m',
+  duration: '10s',
   thresholds: {
     http_req_duration: ['p(95)<1500'],
   },
 };
 
-const BASE_URL = 'https://www.subwayinfra.p-e.kr';
-const USERNAME = 'subwaytest@gmail.com';
-const PASSWORD = '123';
-
 export default function ()  {
 
   const payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
+    email: BASE.USERNAME,
+    password: BASE.PASSWORD,
   });
 
   const params = {
     headers: {
       'Content-Type': 'application/json',
+      'dataType': 'json'
+    },
+    tags: {
+      name: 'login',
     },
   };
 
-  const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+  const loginRes = http.post(`${BASE.URL}/login/token`, payload, params);
 
   check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== ''
+    'login is success': (resp) => resp.json('accessToken') !== ''
   });
 
-  const authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`
-    },
-  };
+  sleep(1);
 
-  const updateParams = params;
+  params.headers['Authorization'] = `Bearer ${loginRes.json('accessToken')}`
+  params.tags['name'] = 'update Member';
 
-  const myObjects = http.put(`${BASE_URL}/members/me`, authHeaders, updateParams).json();
-  check(myObjects, { 'update Member': (obj) => obj.id !== 0 });
+  let updateMember = http.put(`${BASE.URL}/members/me`, payload, params);
+  check(updateMember, { 'update success': (obj) => obj.status === 200});
+
   sleep(1);
 };

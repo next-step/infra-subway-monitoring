@@ -1,5 +1,6 @@
 import http from 'k6/http';
-import { check, group, sleep } from 'k6';
+import { check, sleep } from 'k6';
+import {BASE} from './Constant.js'
 
 export const options = {
   stages: [
@@ -14,41 +15,36 @@ export const options = {
   },
 };
 
-const BASE_URL = 'https://www.subwayinfra.p-e.kr';
-const USERNAME = 'subwaytest@gmail.com';
-const PASSWORD = '123'
-
-
 export default function ()  {
-
   const payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
+    email: BASE.USERNAME,
+    password: BASE.PASSWORD,
   });
 
   const params = {
     headers: {
       'Content-Type': 'application/json',
+      'dataType': 'json'
+    },
+    tags: {
+      name: 'login',
     },
   };
 
-
-  const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+  const loginRes = http.post(`${BASE.URL}/login/token`, payload, params);
 
   check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    'login is success': (resp) => resp.json('accessToken') !== ''
   });
 
+  sleep(1);
 
-  const authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
+  // 멤버 업데이트
+  params.headers['Authorization'] = `Bearer ${loginRes.json('accessToken')}`
+  params.tags['name'] = 'update Member';
 
-  const updateParams = params;
+  let updateMember = http.put(`${BASE.URL}/members/me`, payload, params);
+  check(updateMember, { 'update success': (obj) => obj.status === 200});
 
-  const myObjects = http.put(`${BASE_URL}/members/me`, authHeaders, updateParams).json();
-  check(myObjects, { 'response member': (obj) => obj.id !== 0 });
   sleep(1);
 };
