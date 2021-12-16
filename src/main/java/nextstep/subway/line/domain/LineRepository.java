@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LineRepository extends JpaRepository<Line, Long> {
-    List<Line> findAll();
 }
