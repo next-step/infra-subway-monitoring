@@ -63,6 +63,20 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+    * 경쟁사 성능 테스트 결과 by PageSpeed (데스크톱)
+
+        |Service                  | First Contentful Paint | Time to Interactive| Speed Index | Total Blocking Time| Largest Contentful Paint | Cumulative Layout Shift|
+        |-------------------------|:----------------------:|:------------------:|:-----------:|:------------------:|:------------------------:|:----------------------:|
+        |https://map.naver.com/v5/|0.8s                    |3.4s                |2.7s         |260ms               |3.5s                      |0                       |
+        |https://map.kakao.com/   |0.6s                    |3.3s                |2.7s         |1270ms              |0.7s                      |0.018                   |
+        |우테캠Pro 지하철 서비스       |2.8s                    |2.9s                |2.7s         |70ms                |2.9s                      |0.004                   |
+
+    * 웹 성능 예산 (경쟁사 성능 평균이내)
+
+        |Service                  | First Contentful Paint | Time to Interactive| Speed Index | Total Blocking Time| Largest Contentful Paint | Cumulative Layout Shift|
+        |-------------------------|:----------------------:|:------------------:|:-----------:|:------------------:|:------------------------:|:----------------------:|
+        |우테캠Pro 지하철 서비스       | <= 0.7s                |<= 3.35s            |<= 2.7s      |<= 765ms            |<= 2.1s                   |<= 0.009                |
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
