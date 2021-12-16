@@ -23,4 +23,12 @@ public class PathResponse {
     public int getDistance() {
         return distance;
     }
+
+    @Override
+    public String toString() {
+        return "PathResponse{" +
+            "stations=" + stations +
+            ", distance=" + distance +
+            '}';
+    }
 }
