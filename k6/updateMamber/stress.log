@@ -1,0 +1,38 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 1m45s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 1m15s over 11 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] error getting terminal size                   error="The handle is invalid."
+
+running (1m16.0s), 000/400 VUs, 11296 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  1m15s
+
+     ✓ load main page
+
+     checks.........................: 100.00% ✓ 11296      ✗ 0
+     data_received..................: 13 MB   173 kB/s
+     data_sent......................: 1.4 MB  18 kB/s
+     http_req_blocked...............: avg=158.82µs min=0s  med=0s     max=38.06ms p(90)=0s       p(95)=105.85µs
+     http_req_connecting............: avg=134.85µs min=0s  med=0s     max=7.1ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=6.3ms    min=3ms med=6.18ms max=30.73ms p(90)=7.41ms   p(95)=7.99ms
+       { expected_response:true }...: avg=6.3ms    min=3ms med=6.18ms max=30.73ms p(90)=7.41ms   p(95)=7.99ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 11296
+     http_req_receiving.............: avg=115.48µs min=0s  med=0s     max=1.51ms  p(90)=519.65µs p(95)=612.1µs
+     http_req_sending...............: avg=39.63µs  min=0s  med=0s     max=2.43ms  p(90)=79.35µs  p(95)=403µs
+     http_req_tls_handshaking.......: avg=0s       min=0s  med=0s     max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=6.15ms   min=3ms med=6.03ms max=30.73ms p(90)=7.26ms   p(95)=7.84ms
+     http_reqs......................: 11296   148.707378/s
+     iteration_duration.............: avg=1.01s    min=1s  med=1.01s  max=1.05s   p(90)=1.02s    p(95)=1.02s
+     iterations.....................: 11296   148.707378/s
+     vus............................: 19      min=10       max=400
+     vus_max........................: 400     min=400      max=400

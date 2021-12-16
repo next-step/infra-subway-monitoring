@@ -7,7 +7,6 @@ import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +19,11 @@ import java.util.stream.Stream;
 
 @Aspect
 @Component
-public class LogAspect {
+public class LogControllerAspect {
 
     private static final String CONTROLLER_POINT_CUT = "execution(public * nextstep.subway..ui.*Controller.*(..))";
 
-    private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+    private static final Logger log = LoggerFactory.getLogger(LogControllerAspect.class);
 
     @Pointcut(CONTROLLER_POINT_CUT)
     private void controllerTarget() {
@@ -76,9 +75,24 @@ public class LogAspect {
         return params;
     }
 
+    @AfterThrowing(value = "controllerTarget()", throwing = "exception")
+    public void logException(JoinPoint joinPoint, Exception exception) throws Throwable {
+        String methodName = joinPoint.getSignature().getName();
+        String className = joinPoint.getSignature().getDeclaringTypeName();
+        log.error(exceptionLogText(className,methodName,exception.getMessage()));
+    }
+
+    private String exceptionLogText(String className, String methodName, String exceptionMessage) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ErrorClassName: " + className);
+        builder.append("ErrorMethodName: " + methodName);
+        builder.append("ErrorMessage: " + exceptionMessage);
+        return builder.toString();
+    }
+
     private String httpLogText(String requestUrl, String parameters, String response) {
         StringBuilder builder = new StringBuilder();
-        builder.append("===========HTTP REQUEST===========\r\n");
+        builder.append("\r\n===========HTTP REQUEST===========\r\n");
         builder.append(requestUrl);
         builder.append("\r\n");
         builder.append("PARAMETERS: ");
@@ -89,15 +103,6 @@ public class LogAspect {
         builder.append("\r\n");
         builder.append("===================================");
         return builder.toString();
-    }
-
-    @AfterThrowing(value = "controllerTarget()", throwing = "exception")
-    public void logException(JoinPoint joinPoint, Exception exception) throws Throwable {
-        String methodName = joinPoint.getSignature().getName();
-        String className = joinPoint.getSignature().getDeclaringTypeName();
-        log.error("ErrorClassName: " + className);
-        log.error("ErrorMethodName: " + methodName);
-        log.error(exception.getMessage());
     }
 
 }

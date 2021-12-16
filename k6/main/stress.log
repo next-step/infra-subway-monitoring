@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 400 max VUs, 1m45s max duration (incl. graceful stop):
+           * default: Up to 400 looping VUs for 1m15s over 11 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] error getting terminal size                   error="The handle is invalid."
+
+running (1m16.0s), 000/400 VUs, 11303 complete and 0 interrupted iterations
+default ✓ [======================================] 000/400 VUs  1m15s
+
+     ✓ load main page
+
+     checks.........................: 100.00% ✓ 11303      ✗ 0
+     data_received..................: 13 MB   173 kB/s
+     data_sent......................: 1.4 MB  18 kB/s
+     http_req_blocked...............: avg=156.33µs min=0s     med=0s     max=49.35ms p(90)=0s       p(95)=85.05µs
+     http_req_connecting............: avg=133.83µs min=0s     med=0s     max=7.55ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=6.42ms   min=3.2ms  med=6.24ms max=34.96ms p(90)=7.67ms   p(95)=8.35ms
+       { expected_response:true }...: avg=6.42ms   min=3.2ms  med=6.24ms max=34.96ms p(90)=7.67ms   p(95)=8.35ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 11303
+     http_req_receiving.............: avg=115.46µs min=0s     med=0s     max=2ms     p(90)=521.29µs p(95)=637.74µs
+     http_req_sending...............: avg=38.96µs  min=0s     med=0s     max=2ms     p(90)=0s       p(95)=393.44µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s     max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=6.27ms   min=3.19ms med=6.09ms max=34.96ms p(90)=7.5ms    p(95)=8.23ms
+     http_reqs......................: 11303   148.728194/s
+     iteration_duration.............: avg=1.01s    min=1s     med=1.01s  max=1.07s   p(90)=1.02s    p(95)=1.02s
+     iterations.....................: 11303   148.728194/s
+     vus............................: 19      min=10       max=399
+     vus_max........................: 400     min=400      max=400
+
