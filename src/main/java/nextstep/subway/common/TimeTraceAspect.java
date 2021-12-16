@@ -33,10 +33,10 @@ public class TimeTraceAspect {
     public Object controllerPointCut(ProceedingJoinPoint pjp) throws Throwable {
         StopWatch watch = new StopWatch();
         watch.start();
-        logger.info("[↘︎][{}][{}][{}.{}]", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp));
+        logger.info("[{}][{}][{}.{}]", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp));
         Object proceed = pjp.proceed();
         watch.stop();
-        logger.info("[↖︎][{}][{}][{}.{}] {}ms.", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+        logger.info("[{}][{}][{}.{}] {}ms.", request.getMethod(), request.getRequestURI(), getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
         return proceed;
     }
 
@@ -45,18 +45,18 @@ public class TimeTraceAspect {
         StopWatch watch = new StopWatch();
         Object proceed = null;
         watch.start();
-        logger.info("[  →][{}.{}]", getClassName(pjp), getMethodName(pjp));
+        logger.info("[{}.{}]", getClassName(pjp), getMethodName(pjp));
         try {
              proceed = pjp.proceed();
         }
         catch (Throwable e) {
-            logger.error("[  →][{}.{}] error: {} {}",
+            logger.error("[{}.{}] error: {} {}",
                     getClassName(pjp), getMethodName(pjp), e.getClass().getName(), Optional.ofNullable(e.getMessage()).orElse(""));
             throw e;
         }
         finally {
             watch.stop();
-            logger.info("[  ←][{}.{}] {}ms.", getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
+            logger.info("[{}.{}] {}ms.", getClassName(pjp), getMethodName(pjp), watch.getTotalTimeMillis());
         }
         return proceed;
     }

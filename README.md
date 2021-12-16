@@ -95,20 +95,20 @@ npm run dev
     - [x] 웹 성능 예산을 작성
     - [x] [WebPageTest](https://www.webpagetest.org/) [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)
       등 테스트해보고 개선이 필요한 부분을 파악
-- [ ] 부하 테스트
-    - [ ] 테스트 전제조건 정리
-        - [ ] 대상 시스템 범위
-        - [ ] 목표값 설정(latency, throughput, 부하 유지기간)
-        - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
-    - [ ] 각 시나리오에 맞춰 스크립트 작성
-        - [ ] 접속 빈도가 높은 페이지
-        - [ ] 데이터를 갱신하는 페이지
-        - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-    - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+- [x] 부하 테스트
+    - [x] 테스트 전제조건 정리
+        - [x] 대상 시스템 범위
+        - [x] 목표값 설정(latency, throughput, 부하 유지기간)
+        - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - [x] 각 시나리오에 맞춰 스크립트 작성
+        - [x] 접속 빈도가 높은 페이지
+        - [x] 데이터를 갱신하는 페이지
+        - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - [x] Smoke, Load, Stress 테스트 후 결과를 기록
 
 
 ---
-
+## 웹 성능 테스트 
 ### WebPageTest 측정 결과
 - 3.36.209.24:8080(public1)
   ![image info](./images/webpagetest_public1_before.png)
@@ -139,3 +139,73 @@ npm run dev
   ![image info](./images/pagespeed_public1_after.png)
 - 3.36.233.76:8080(public2)
   ![image info](./images/pagespeed_public2_after.png)
+
+---
+
+## 부하테스트 
+- 대상 시스템 범위 => public1, public2
+- 목푯값 설정 
+    - 예상 1일 사용자 수 : 8,640,000(DAU)
+    - 피크 시간 대의 집중율 예상 : 10
+    - 1일 요청 수 : 1
+    - Throughput : 1일 평균 rps ~ 1일 최대 rps
+        - 1일 총 접속 수 = 8,640,000 x 1 = 8,640,000
+        - 1일 평균 rps = 100
+        - 1일 최대 rps = 1,000
+      
+- VUser 구하기 :
+  - T = (R * http_req_duration) (+ ls) 
+  - VUser = (목표 rps * T) / R 
+  - VUser = (100 * 2) / 2 = 100
+    
+### 부하테스트 결과 
+ 1) 시나리오 : 접속 빈도가 높은 페이지 요청
+    - 3.36.209.24:8080(public1)
+    - smoke
+      ![image info](./images/smoke_public1_scenario1.png)
+    - load
+      ![image info](./images/load_public1_scenario1.png)
+    - stress test
+      ![image info](./images/stress_public1_scenario1.png)
+    
+    - 3.36.233.76:8080(public2)
+    - smoke
+      ![image info](./images/smoke_public2_scenario1.png)
+    - load
+      ![image info](./images/load_public2_scenario1.png)
+    - stress test
+      ![image info](./images/stress_public2_scenario1.png)
+    
+ 2) 시나리오2 : 데이터를 갱신하는 페이지 요청 
+     - 3.36.209.24:8080(public1)
+     - smoke
+       ![image info](./images/smoke_public1_scenario2.png)
+     - load
+       ![image info](./images/load_public1_scenario2.png)
+     - stress test
+       ![image info](./images/stress_public1_scenario2.png)
+
+     - 3.36.233.76:8080(public2)
+     - smoke
+       ![image info](./images/smoke_public2_scenario2.png)
+     - load
+       ![image info](./images/load_public2_scenario2.png)
+     - stress test
+       ![image info](./images/stress_public2_scenario2.png)
+     
+ 3) 시나리오3 : 
+     - 3.36.209.24:8080(public1)
+     - smoke
+       ![image info](./images/smoke_public1_scenario3.png)
+     - load
+       ![image info](./images/load_public1_scenario3.png)
+     - stress test
+       ![image info](./images/stress_public1_scenario3.png)
+
+     - 3.36.233.76:8080(public2)
+     - smoke
+       ![image info](./images/smoke_public2_scenario3.png)
+     - load
+       ![image info](./images/load_public2_scenario3.png)
+     - stress test
+       ![image info](./images/stress_public2_scenario3.png)

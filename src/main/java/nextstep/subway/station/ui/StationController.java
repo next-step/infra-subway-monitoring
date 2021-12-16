@@ -24,7 +24,7 @@ public class StationController {
 
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
-        logger.info("[ ↘]︎[{}]", stationRequest);
+        logger.info("[{}]", stationRequest);
         StationResponse station = stationService.saveStation(stationRequest);
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
@@ -36,7 +36,7 @@ public class StationController {
 
     @DeleteMapping("/stations/{id}")
     public ResponseEntity deleteStation(@PathVariable Long id) {
-        logger.info("[ ↘]︎[{}]", id);
+        logger.info("[{}]", id);
         stationService.deleteStationById(id);
         return ResponseEntity.noContent().build();
     }

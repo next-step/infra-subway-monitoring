@@ -20,7 +20,7 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        logger.info("[ ↘]︎[{},{}]", source, target);
+        logger.info("[{},{}]", source, target);
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }

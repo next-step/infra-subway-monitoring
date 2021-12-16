@@ -21,9 +21,9 @@ public class AuthController {
 
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
-        logger.info("[ ↘]︎[{}]", request);
+        logger.info("token request: [{}]", request);
         TokenResponse token = authService.login(request);
-        logger.info("[ ↖︎]︎[{}]", token);
+        logger.info("token response: [{}]", token);
         return ResponseEntity.ok().body(token);
     }
 }

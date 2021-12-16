@@ -24,6 +24,6 @@
 
     <root level="info">
         <appender-ref ref="file"/>
-        <appender-ref ref="console"/>
+<!--        <appender-ref ref="console"/>-->
     </root>
 </configuration>
