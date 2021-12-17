@@ -11,6 +11,8 @@ export const options = {
         {duration: '60s', target: 600},
         {duration: '30s', target: 1000}, // beyond the breaking point
         {duration: '60s', target: 1000},
+        {duration: '30s', target: 1200}, // beyond the breaking point
+        {duration: '60s', target: 1200},
         {duration: '10s', target: 0}, // scale down. Recovery stage.
     ],
 };
@@ -18,6 +20,9 @@ export const options = {
 const BASE_URL = 'https://hidy.kro.kr';
 
 export default function () {
-    http.get(`${BASE_URL}`);
+    const mainResponse = http.get(`${BASE_URL}`);
+    check(mainResponse, {
+        'load main page': response => response.status === 200
+    });
     sleep(1);
 }
