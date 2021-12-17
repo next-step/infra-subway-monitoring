@@ -18,30 +18,30 @@ const HOST = {
 //   duration: '10s',
 
 //   thresholds: {
-//     http_req_duration: ['p(99) < 1500'], // 99% of requests must complete below 1.5s
+//     http_req_duration: ['p(99) < 1000'], 
 //   },
 // };
 
 // load options
 // export let options = {
 //   stages: [
-//     { duration: '1m', target: 50 }, 
-//     { duration: '2m', target: 100 }, 
-//     { duration: '10s', target: 80 }, 
+//     { duration: '1m', target: 8 }, 
+//     { duration: '2m', target: 88 }, 
+//     { duration: '10s', target: 100 }, 
 //   ],
 //   thresholds: {
-//     http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-//     'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
+//     http_req_duration: ['p(99)<1000'], 
+//     'logged in successfully': ['p(99)<500'],
 //   },
 // };
 
 
 // stress
 export let options = {
-  vus: 200, // 1 user looping for 1 minute
-  duration: '3m',
+  vus: 110, // 1 user looping for 1 minute
+  duration: '1m',
     thresholds: {
-      http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+      http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1.5s
   },
 };
 

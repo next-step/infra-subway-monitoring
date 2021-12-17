@@ -52,13 +52,16 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+  FCP 1.5초 이내. LCP 1.5초 이내. TTL 1.5초이내
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
+  Gzip 압축하기, 미사용 js 제거 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+ 경쟁사 네이버 일평균접속자 수를 기준으로 함
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+ - 시나리오 1 임계지점 동시접속자 110명
+ - 시나리오 2 임계지점 동시접속자 110명  
+ - 시나리오 3 임계지점 동시접속자 120명
+ - 하단 참조
 
 --- 
 
@@ -106,7 +109,6 @@ npm run dev
         - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
     - [x] Smoke, Load, Stress 테스트 후 결과를 기록
 
-
 ---
 ## 웹 성능 테스트 
 ### WebPageTest 측정 결과
@@ -127,9 +129,9 @@ npm run dev
 
 ### PageSpeed 측정 결과
 - 3.36.209.24:8080(public1)
-  ![image info](./images/webpagetest_public1_after.png)
+  ![image info](./images/pagespeed_public1_before.png)
 - 3.36.233.76:8080(public2)
-  ![image info](./images/webpagetest_public2_after.png)
+  ![image info](./images/pagespeed_public2_before.png)
 
 ### PageSpeed 측정 분석 
 - 성능 종합 점수 개선하기 => 90 이상
@@ -143,21 +145,23 @@ npm run dev
 ---
 
 ## 부하테스트 
-- 대상 시스템 범위 => public1, public2
-- 목푯값 설정 
-    - 예상 1일 사용자 수 : 8,640,000(DAU)
+- 대상 시스템 범위 => application, mysql
+- 목푯값 설정
+    - 예상 1일 사용자 수 : 700,000 DAU (경쟁사 네이버 지도 일평균 접속자 수) [링크](https://website.informer.com/map.naver.com)
     - 피크 시간 대의 집중율 예상 : 10ut
-    - 1일 요청 수 : 1
-    - Throughput : 1일 평균 rps ~ 1일 최대 rps
-        - 1일 총 접속 수 = 8,640,000 x 1 = 8,640,000
-        - 1일 평균 rps = 100
-        - 1일 최대 rps = 1,000
+    - 1일 요청 수 : 2
+    - Throughput : 8 ~ 88
+        - 1일 총 접속 수 = 700,000 x 1 = 700,000
+        - 1일 평균 rps = 700,000/86,400 = 8
+        - 1일 최대 rps = 700/8 = 88
       
 - VUser 구하기 :
   - T = (R * http_req_duration) (+ ls) 
   - VUser = (목표 rps * T) / R 
   - VUser = (100 * 2) / 2 = 100
-    
+
+  => 네이버 일평균 접속자수를 참조하여 목표값을 설정하였고, 목표 rps를 100으로 지정.
+  
 ### 부하테스트 결과 
  1) 시나리오 : 접속 빈도가 높은 페이지 요청
     - 3.36.209.24:8080(public1)
