@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: outputPath,
     filename: '[name].js',
-    chunkFilename: 'chunk/[name].js'
+    chunkFilename: 'js/chunk/[name].js'
   },
   devServer: {
     contentBase: outputPath,
