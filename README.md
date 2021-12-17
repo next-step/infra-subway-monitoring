@@ -84,6 +84,8 @@ npm run dev
 - [X] Cloudwatch로 메트릭 수집하기
 - [X]  EC2 Metric 수집
 - [X] Cloudwatch 대쉬보드 구성
+
+---
 ---
 
 ### 2단계 - 성능 테스트
@@ -121,6 +123,7 @@ npm run dev
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
+- nginx proxy 서버 캐싱 적용 (https://wooobo.kro.kr/)
 - `text/html,text/xml,text/plain,text/css,text/javascript,application/javascript` 압축 사용 
 - vue 라우터 지연로딩 적용
 - 폰트 로딩 수정 
