@@ -1,6 +1,5 @@
 package nextstep.subway.common;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,45 +23,26 @@ public class LogAspect {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Around("execution(* nextstep.subway..ui.*Controller.*(..)) || execution(* nextstep.subway..application.*Service.*(..))")
-    public Object jsonLogger(ProceedingJoinPoint proceedingJoinPoint) {
+    public Object jsonLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
       	HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
         Object result = null;
-        try {
-            before(request);
-
-            StopWatch stopWatch = new StopWatch();
-            stopWatch.start();
-            result = proceedingJoinPoint.proceed();
-            stopWatch.stop();
-
-            after(request, stopWatch);
-        } catch (Throwable throwable) {
-            error(request, throwable);
-        }
-        return result;
-    }
-
-    private void before(HttpServletRequest request) throws JsonProcessingException {
         jsonLogger.info("{}, {}",
                 keyValue("request", request.getRequestURI()),
                 keyValue("parameters", objectMapper.writeValueAsString(request.getParameterMap()))
         );
-    }
 
-    private void after(HttpServletRequest request, StopWatch stopWatch) throws JsonProcessingException {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        result = proceedingJoinPoint.proceed();
+        stopWatch.stop();
+
         jsonLogger.info("{}, {}, {}",
                 keyValue("request", request.getRequestURI()),
                 keyValue("parameters", objectMapper.writeValueAsString(request.getParameterMap())),
                 keyValue("performanceTime", stopWatch.getTotalTimeMillis())
         );
-    }
 
-    private void error(HttpServletRequest request, Throwable throwable) {
-        jsonLogger.error("{}, {}",
-                keyValue("request", request.getRequestURI()),
-                keyValue("error", throwable.getMessage())
-        );
+        return result;
     }
-
 }
