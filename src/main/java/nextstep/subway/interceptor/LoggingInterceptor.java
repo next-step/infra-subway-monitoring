@@ -16,7 +16,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 public class LoggingInterceptor implements HandlerInterceptor {
 
 	private static final Logger fileLogger = LoggerFactory.getLogger("file");
-	private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws
@@ -35,13 +35,6 @@ public class LoggingInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 		ModelAndView modelAndView) throws Exception {
-
-		// filter에서 ContentCachingResponseWrapperd으로 래핑된 reponse는 여러번 출력 가능하고 isCommitted()가 true
-		if(!response.isCommitted()){
-			ContentCachingResponseWrapper responseConent = (ContentCachingResponseWrapper)response;
-			String responseBody = new String(responseConent.getContentAsByteArray());
-			jsonLogger.info("request: {} {}, bodyContent: {}", request.getMethod(),request.getRequestURI(), responseBody);
-		}
 
 		fileLogger.info("==========Response Status Code = {}", response.getStatus());
 		MDC.clear();
