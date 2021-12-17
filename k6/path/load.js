@@ -23,7 +23,7 @@ const BASE_URL = 'https://hidy.kro.kr';
 
 export default function () {
     // 지하철 역 조회
-    const stationsResponse = http.post(`${BASE_URL}/stations`);
+    const stationsResponse = http.get(`${BASE_URL}/stations`);
     check(stationsResponse, {
         'retrieved stations': (res) => res.status === 200,
     });
