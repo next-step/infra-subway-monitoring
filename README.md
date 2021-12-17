@@ -19,22 +19,30 @@
 ## 🚀 Getting Started
 
 ### Install
+
 #### npm 설치
+
 ```
 cd frontend
 npm install
 ```
+
 > `frontend` 디렉토리에서 수행해야 합니다.
 
 ### Usage
+
 #### webpack server 구동
+
 ```
 npm run dev
 ```
+
 #### application 구동
+
 ```
 ./gradlew clean build
 ```
+
 <br>
 
 ## 미션
@@ -42,46 +50,48 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
-   - EC2-pageprologue-public-web1
-     - 시스템 로그: /var/log/syslog/
-     - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
 
-   - EC2-pageprologue-public-web2
-      - 시스템 로그: /var/log/syslog/
-      - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
+1. 각 서버내 로깅 경로를 알려주세요
+    - EC2-pageprologue-public-web1
+        - 시스템 로그: /var/log/syslog/
+        - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
+
+    - EC2-pageprologue-public-web2
+        - 시스템 로그: /var/log/syslog/
+        - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-pageprologue
+    - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-pageprologue
 
 ---
 
 ### 2단계 - 성능 테스트
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-  - 사이트 분석 (PageSpeed Insights)
+- 사이트 분석 (PageSpeed Insights)
     - https://subway-deploy.kro.kr
     - http://www.seoulmetro.co.kr/kr/cyberStation.do#stationInfo
     - https://m.map.naver.com/subway/subwayLine.naver
 
-    |  |성능 개선 전<br>subway|서울교통공사<br>사이버 스테이션|네이버 지하철|
-    |:---:|:---:|:---:|:---:|
-    | 성능 | 68<br>(29) | 70<br>(39) | 92<br>(58) |
-    | FCP | 2.7 초<br>(14.7 초) | 1.6 초<br>(6.8 초) | 0.5 초<br>(2.1 초) |
-    | TOI | 2.8 초<br>(15.5 초)) | 2.0 초<br>(8.7 초) | 0.7 초<br>(6.6 초) |
-    | SI | 2.7 초<br>(14.7 초) | 2.5 초<br>(8.6 초) | 1.6 초<br>(4.7 초) |
-    | TBT | 70 밀리초 | 90 밀리초 | 10 밀리초 |
-    | LCP | 2.8 초 | 3.5 초 | 1.6 초 |
-    | CLS | 0.004 | 0.014 | 0.006 |
-    | requests | 21 | 86 | 40 |
-    | transferred | 1.3 kB | 338 kB | 165 kB |
-    | resources | 3.1 MB | 1.3 MB | 2.4 MB |
-    | DOMContent<br>Loaded | 189 ms | 867 ms | 139 ms |
-    | Load | 313 ms | 890 ms | 174 ms |
-    *(괄호 안의 값은 모바일 값)
+  |  |성능 개선 전<br>subway|성능 개선 후<br>subway|서울교통공사<br>사이버 스테이션|네이버 지하철|
+  |:---:|:---:|:---:|:---:|:---:|
+  | 성능 | 68<br>(29) | 94<br>(45) | 70<br>(39) | 92<br>(58) |
+  | FCP | 2.7 초<br>(14.7 초) | 1.2 초<br>(5.4 초) | 1.6 초<br>(6.8 초) | 0.5 초<br>(2.1 초) |
+  | TOI | 2.8 초<br>(15.5 초) | 1.3 초<br>(6.0 초) | 2.0 초<br>(8.7 초) | 0.7 초<br>(6.6 초) |
+  | SI | 2.7 초<br>(14.7 초) | 1.2 초<br>(5.4 초) | 2.5 초<br>(8.6 초) | 1.6 초<br>(4.7 초) |
+  | TBT | 70 밀리초 | 40 밀리초 | 90 밀리초 | 10 밀리초 |
+  | LCP | 2.8 초 | 1.3 초 | 3.5 초 | 1.6 초 |
+  | CLS | 0.004 | 0.004 | 0.014 | 0.006 |
+  | requests | 21 | 19 | 86 | 40 |
+  | transferred | 1.3 kB | 957 B | 338 kB | 165 kB |
+  | resources | 3.1 MB | 2.8 MB | 1.3 MB | 2.4 MB |
+  | DOMContent<br>Loaded | 189 ms | 310 ms | 867 ms | 139 ms |
+  | Load | 313 ms | 194 ms | 890 ms | 174 ms |
+  *(괄호 안의 값은 모바일 값)
 
-  - 웹 성능 예산
-    - 성능을 타 사이트 분석 평균인 81점 이상으로 올린다. 
+- 웹 성능 예산
+    - 성능을 타 사이트 분석 평균인 81점 이상으로 올린다.
     - FCP 지수를 타 사이트 분석 평균과 20% 이상 차이가 나지 않도록 줄인다.  
       ((1.6 + 0.5) / 2 ) * 1.2 = 1.26
     - TOI 지수를 타 사이트 분석 평균과 20% 이상 차이가 나지 않도록 줄인다.  
@@ -89,7 +99,7 @@ npm run dev
     - SI 지수를 타 사이트 분석 평균과 20% 이상 차이가 나지 않도록 줄인다.  
       ((2.5 + 1.6) / 2 ) * 1.2 = 2.05
 
-  - 모바일 성능 예산
+- 모바일 성능 예산
     - 성능을 타 사이트 분석 평균인 48.5점 이상으로 올린다.
     - FCP 지수를 타 사이트 분석 평균과 20% 이상 차이가 나지 않도록 줄인다.  
       ((6.8 + 2.1) / 2 ) * 1.2 = 5.34
@@ -99,6 +109,11 @@ npm run dev
       ((8.6 + 4.7) / 2 ) * 1.2 = 7.98
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+    - TCP 연결을 재사용하기 위한 Keep-Alive ALB에 60초로 설정 (기본 설정 되어 있음)
+    - 스크립트 파일 Content-Encoding 으로 압축, 최소 압축 사이즈 설정
+    - 정적 파일이 캐싱을 위한 Cache Static Content 설정
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
