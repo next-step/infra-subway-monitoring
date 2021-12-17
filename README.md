@@ -43,9 +43,16 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+- service (3.36.98.105)
+  - application log: /home/ubuntu/infra-subway-monitoring/log/file.log
+  - syslog: /var/log/syslog
+- db
+  - syslog: /var/log/syslog
+- bastion
+  - syslog: /var/log/syslog
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=junhwankim-dashboard
 ---
 
 ### 2단계 - 성능 테스트
