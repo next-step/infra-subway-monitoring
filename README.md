@@ -89,12 +89,163 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+경쟁사 : 카카오맵 경쟁사 MAU : 카카오맵 : 729만명 (https://www.sedaily.com/NewsVIew/22RH3PUBN6)
+
+**[https://pagespeed.web.dev/ 통계]**
+
+1. 카카오맵(https://pagespeed.web.dev/report?url=https%3A%2F%2Fmap.kakao.com%2F)
+
+- First Contentful Paint    : 0.6 s
+- Time to Interactive       : 2.9 s
+- Speed Index               : 2.5 s
+- Total Blocking Time       : 850 ms
+- Largest Contentful Paint  : 0.7 s
+
+2. 나의 지하철 노선도 서비스(https://pagespeed.web.dev/report?url=https%3A%2F%2Fwooobo.kro.kr%2F)
+
+- First Contentful Paint    : 14.9 s
+- Time to Interactive       : 15.6 s
+- Speed Index               : 14.9 s
+- Total Blocking Time       : 600 ms
+- Largest Contentful Paint  : 15.5 s
+
+목표치
+
+- First Contentful Paint    : 0.6 s
+- Time to Interactive       : 1.5 s
+- Speed Index               : 1.5 s
+- Total Blocking Time       : 150 ms
+- Largest Contentful Paint  : 1.5 s
+
+> 카카오맵에 대비 30% 이상의 빠른 속도로 목표로 합니다.
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+- nginx proxy 캐싱 작업
+- vue 라우터 지연로딩 적용
+- 폰트 로딩 수정 
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+> 카카오맵 : 729만명 (https://www.sedaily.com/NewsVIew/22RH3PUBN6)
+
+- 목표
+    - MAU : 365만명 (카카오맵 MAU 절반으로 산정)
+    - 예상 DAU : 12만명
+    - 1일 평균 접속 수 : 2회 (출,퇴근때 사용을 가정으로 2회 산정)
+    - 평균 요청 가정 (메인, 로그인, 즐겨찾기, 경로검색 * 2) : 5회
+    - 1일 평균 요청수 : 2*6 = 12회
+    - 1일 총 요청수 : DAU x 1명당 1일 평균 접속수 = 1440000
+    - 1일 평균 RPS : 17 (1440000 / 86400)
+    - 1일 최대 RPS : 340 (2.8 * 20)
+        - 평소 트래픽의 20배로 산정
+    - 목표 RPS : **340**
+
+
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+##### 접속빈도가 높은 페이지
+
+- 페이지 : 메인페이지 (`/`)
+- 시나리오 :
+    - `/` 접속 요청
+- VUser
+
+```text
+# 요청 수 : 1 
+# http_req_duration : 0.5
+T = (1 * 0.5) + 1 = 1.5
+VUser = (340 * 1.5) / 1 = 510
+```
+
+- smoke 테스트
+    - 스크립트 : `mainpage/smoke.js`
+    - 결과 : `mainpage/smoke.md`
+- load 테스트
+    - 스크립트 : `mainpage/load.js`
+    - 결과 : `mainpage/load.md`
+- stress 테스트
+    - 스크립트 : `mainpage/stress.js`
+    - 결과 : `mainpage/stress.md`
+
+##### 데이터를 갱신하는 페이지
+
+- 페이지 : 프로필 정보 수정
+- 시나리오 :
+    1. 로그인페이지 접속
+    1. GET : `https://wooobo.kro.kr/login`
+    2. 로그인요청
+    1. POST : `https://wooobo.kro.kr/login/token`
+    2. 파라미터 : {"email":"test20@email.com","password":"11"}
+    3. 수정페이지 접속
+    1. GET : `https://wooobo.kro.kr/mypage/edit`
+    4. 내정보 수정 요청
+    1. PUT : `https://wooobo.kro.kr/members/me`
+    2. 파라미터 : {"email":"test20@email.com","age":"25","password":"11"}
+- VUser
+
+```text
+# 요청 수 : 4
+# http_req_duration : 0.5
+T = (4 * 0.5) + 1 = 3
+VUser = (340 * 3) / 4 = 255
+```
+
+#### 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+
+- 페이지 : 경로검색
+- 시나리오 :
+    1. 로그인페이지 접속
+    1. GET : `https://wooobo.kro.kr/login`
+    2. 로그인요청
+    1. POST : `https://wooobo.kro.kr/login/token`
+    2. 파라미터 : {"email":"test20@email.com","password":"11"}
+    3. 경로검색 페이지 접속
+    1. GET : `https://wooobo.kro.kr/path`
+    4. 경로 검색
+    1. GET : `https://wooobo.kro.kr/paths/?source=2&target=6`
+    2. 파라미터 : {"source":2,"target":6}
+    5. 경로 좋아요
+    1. POST : `https://wooobo.kro.kr/favorites`
+    2. 파라미터 : {"source":2,"target":6}
+- VUser
+
+```text
+# 요청 수 : 5
+# http_req_duration : 0.5
+T = (5 * 0.5) + 1 = 3.5
+VUser = (340 * 3.5) / 5 = 238
+```
+
+### ALB,WAF,ACM
+
+- [ACM](https://ap-northeast-2.console.aws.amazon.com/acm/home?region=ap-northeast-2#/certificates/164a3186-e637-49b4-9dfd-9fc282ecb2de)
+    - 도메인 이름 : `wooobo.r-e.kr`
+- [Target Group](https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#TargetGroup:targetGroupArn=arn:aws:elasticloadbalancing:ap-northeast-2:843255971531:targetgroup/wooobo-webservice/b0af8fa04d7b0f64)
+    - Name : `wooobo-webservice`
+- [ALB](https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#LoadBalancers:search=wooobo;sort=loadBalancerName)
+    - Name : `wooobo-abl`
+- [WAF]
+    - NAME = `wooobo-abl`
+
+---
+
+#### 2단계 작업 내용
+
+- [ ] 웹 성능 예산 작성
+- 테스트 전제조건정리
+    - [ ] 대상 시스템 범위
+    - [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
+- 각 시나리오에 맞춰 스크립트 작성
+    - [ ] 접속 빈도가 높은 페이지
+        - 메인 페이지 : `/`
+    - [ ] 데이터를 갱신하는 페이지
+        - 나의정보 수정 페이지 : `/mypage/edit`
+    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+        - 경로 검색 페이지 : `/path`
+- [ ] Smoke, Load, Stress 테스트 후 결과를 기록
 
 ### 환경세팅
 ```
