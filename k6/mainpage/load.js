@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://wooobo.r-e.kr/';
 
 // 요청 수 : 1
 // http_req_duration : 0.5

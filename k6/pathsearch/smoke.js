@@ -10,7 +10,7 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://wooobo.kro.kr';
+const BASE_URL = 'https://wooobo.r-e.kr';
 const LOGIN_PAGE = BASE_URL + '/login';
 const LOGIN_POST = BASE_URL + '/login/token';
 const PATH_PAGE = BASE_URL + '/path';

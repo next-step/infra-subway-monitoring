@@ -1,6 +1,10 @@
 import http from 'k6/http';
 import {check, group, sleep, fail} from 'k6';
 
+// 요청 수 : 4
+// http_req_duration : 0.5
+// T = (4 * 0.5) + 1 = 3
+// VUser = (340 * 3) / 4 = 255
 export let options = {
   vus: 1,
   duration: '10s',
@@ -10,7 +14,7 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://wooobo.kro.kr';
+const BASE_URL = 'https://wooobo.r-e.kr';
 const LOGIN_PAGE = BASE_URL + '/login';
 const LOGIN_POST = BASE_URL + '/login/token';
 const EDIT_PAGE = BASE_URL + '/mypage/edit';
