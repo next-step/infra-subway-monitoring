@@ -44,9 +44,18 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
    - /home/ubuntu/logs/file.log
+    
+- [X] aop를 이용한 메소드 실행 전과 후 로그 설정
+  - Service 파일의 대해서 로그 설정
+    - 비즈니스 로직을 수행하기 때문에 설정
+- [X] logback 설정
+  - profile를 이용하여 local, prod 구분하여 진행
 
 2. Cloudwatch 대시보드 URL을 알려주세요
     - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-codeleesh
+
+- [X] cloudwatch 설정 진행
+
 ---
 
 ### 2단계 - 성능 테스트
