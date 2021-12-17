@@ -14,14 +14,14 @@
     </springProfile>
 
     <springProfile name="local">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="file" />
         </root>
     </springProfile>
 
     <springProfile name="test">
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="file" />
             <appender-ref ref="json" />
