@@ -1,5 +1,8 @@
 package nextstep.subway.auth.dto;
 
+import nextstep.subway.common.PersonalData;
+
+@PersonalData
 public class TokenRequest {
     private String email;
     private String password;
@@ -18,5 +21,10 @@ public class TokenRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenRequest [email=" + email + ", password=" + password + "]";
     }
 }

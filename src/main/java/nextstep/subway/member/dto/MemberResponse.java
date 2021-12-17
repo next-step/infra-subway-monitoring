@@ -1,7 +1,9 @@
 package nextstep.subway.member.dto;
 
+import nextstep.subway.common.PersonalData;
 import nextstep.subway.member.domain.Member;
 
+@PersonalData
 public class MemberResponse {
     private Long id;
     private String email;
@@ -30,5 +32,10 @@ public class MemberResponse {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberResponse [id=" + id + ", email=" + email + ", age=" + age + "]";
     }
 }
