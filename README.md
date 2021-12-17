@@ -43,8 +43,16 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+   - EC2-pageprologue-public-web1
+     - 시스템 로그: /var/log/syslog/
+     - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
+
+   - EC2-pageprologue-public-web2
+      - 시스템 로그: /var/log/syslog/
+      - 애플리케이션 로그: /home/ubuntu/pageprologue/logs/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-pageprologue
 
 ---
 

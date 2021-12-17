@@ -1,16 +1,11 @@
-version: '3'
+version: "3"
 services:
-  local-db:
-    image: library/mysql:5.7
-    container_name: local-db
-    restart: always
+  subway:
+    image: pageprologue/subway-monitoring:0.1
+    container_name: subway-monitoring
     ports:
-      - 13306:3306
+      - "80:8080"
     environment:
-      MYSQL_ROOT_PASSWORD: masterpw
-      MYSQL_DATABASE: subway
-      TZ: Asia/Seoul
+      - SPRING_PROFILE=prod
     volumes:
-      - ./db/mysql/data:/var/lib/mysql
-      - ./db/mysql/config:/etc/mysql/conf.d
-      - ./db/mysql/init:/docker-entrypoint-initdb.d
+      - ./logs:/logs
