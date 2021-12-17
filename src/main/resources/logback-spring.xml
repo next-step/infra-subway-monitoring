@@ -1,0 +1,36 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProfile name="prod">
+        <property resource="logback-prod.properties"/>
+    </springProfile>
+
+    <springProfile name="test">
+        <property resource="logback-test.properties"/>
+    </springProfile>
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>
+
+    <property name="LOG_PATH" value="${log.config.path}"/>
+
+    <include resource="file-appender.xml"/>
+    <include resource="json-appender.xml"/>
+    <include resource="console-appender.xml"/>
+
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+    <logger name="nextstep.subway" level="DEBUG">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="file" level="INFO">
+        <appender-ref ref="file"/>
+    </logger>
+
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
+    </logger>
+
+</configuration>
