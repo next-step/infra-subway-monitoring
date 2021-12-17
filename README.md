@@ -108,7 +108,7 @@ npm run dev
 - 이미지 요소의 width 와 height 명시 하기
 - 캐싱 설정,
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+3부하테스트 전제조건은 어느정도로 설정하셨나요
 
 - DAU 설정: 9만명
   - '네이버 지도'의 MAU가 1112만명 이고 DAU는 36만 명으로 예상
@@ -128,3 +128,19 @@ npm run dev
 
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- ### 접속 빈도가 높은 메인 페이지
+  - [load 테스트 결과](./k6/main/load-result.txt)
+  - [smoke 테스트 결과](./k6/main/smoke-result.txt)
+  - [stress 테스트 결과](./k6/main/stress-result.txt)
+
+- ### 데이터를 갱신하는 내정보 수정 페이지
+
+  - [load 테스트 결과](./k6/myinfo-update/load-result.txt)
+  - [smoke 테스트 결과](./k6/myinfo-update/smoke-result.txt)
+  - [stress 테스트 결과](./k6/myinfo-update/stress-result.txt)
+
+- ### 데이터를 조회하는데 여러 데이터를 참조하는 경로 탐색 페이지
+  - [load 테스트 결과](./k6/path/load-result.txt)
+  - [smoke 테스트 결과](./k6/path/smoke-result.txt)
+  - [stress 테스트 결과](./k6/path/stress-result.txt)
