@@ -52,8 +52,12 @@ npm run dev
 - [X] Cloudwatch로 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
-
+   - public: 15.165.195.83
+   - private: 192.168.218.0/26 (don-key-external-a)
+   - log: /home/ubuntu/infra-subway-monitoring/log  
+   - alb: http://don-key-alb-1030470679.ap-northeast-2.elb.amazonaws.com/
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=don-key-dashboard
 
 ---
 
