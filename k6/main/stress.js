@@ -9,8 +9,8 @@ export const options = {
         {duration: '60s', target: 400},
         {duration: '30s', target: 600}, // around the breaking point
         {duration: '60s', target: 600},
-        {duration: '30s', target: 2000}, // beyond the breaking point
-        {duration: '60s', target: 2000},
+        {duration: '30s', target: 1000}, // beyond the breaking point
+        {duration: '60s', target: 1000},
         {duration: '10s', target: 0}, // scale down. Recovery stage.
     ],
 };
