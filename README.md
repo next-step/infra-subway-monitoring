@@ -158,4 +158,12 @@ npm run dev
            - 사용자 정보 수정: [mypage-load.js](/k6/script/load/mypage-load.js), [mypage-load.txt](/k6/result/mypage-load.txt)
        - DB를 사용하는 기능
            - 경로 조회: [path-load.js](/k6/script/load/path-load.js), [path-load.txt](/k6/result/path-load.txt)
+
+   - Stress 테스트
+       - 접속 빈도가 높은 기능
+           - 메인 페이지: [main-stress.js](/k6/script/stress/main-stress.js), [main-stress.txt](/k6/result/main-stress.txt)
+       - 서버 리소스 소비량이 높은 기능
+           - 사용자 정보 수정: [mypage-stress.js](/k6/script/stress/mypage-stress.js), [mypage-stress.txt](/k6/result/mypage-stress.txt)
+       - DB를 사용하는 기능
+           - 경로 조회: [path-stress.js](/k6/script/stress/path-stress.js), [path-stress.txt](/k6/result/path-stress.txt)
       
