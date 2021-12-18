@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="console-appender.xml" />
+
+    <property name="filename" value="application.log" />
+    <property name="path" value="/home/ubuntu/logs/infra-subway-monitoring"/>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}/${filename}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${path}/${filename}-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

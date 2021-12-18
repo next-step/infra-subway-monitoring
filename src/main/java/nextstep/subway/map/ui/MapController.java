@@ -1,5 +1,6 @@
 package nextstep.subway.map.ui;
 
+import nextstep.subway.common.LogParams;
 import nextstep.subway.map.application.MapService;
 import nextstep.subway.map.dto.PathResponse;
 import org.slf4j.Logger;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MapController {
-    private static final Logger logger = LoggerFactory.getLogger("file");
     private MapService mapService;
 
     public MapController(MapService mapService) {
@@ -19,8 +19,8 @@ public class MapController {
     }
 
     @GetMapping("/paths")
+    @LogParams
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        logger.info("[ ↘]︎[{},{}]", source, target);
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }

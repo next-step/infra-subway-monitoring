@@ -52,13 +52,16 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+  FCP 1.5초 이내. LCP 1.5초 이내. TTL 1.5초이내
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
+  Gzip 압축하기, 미사용 js 제거 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+ 경쟁사 네이버 일평균접속자 수를 기준으로 함
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+ - 시나리오 1 임계지점 동시접속자 110명
+ - 시나리오 2 임계지점 동시접속자 110명  
+ - 시나리오 3 임계지점 동시접속자 120명
+ - 하단 참조
 
 --- 
 
@@ -82,3 +85,131 @@ npm run dev
 ### Cloudwatch로 모니터링
 - [x] Cloudwatch로 로그 수집하기 => Dashboard 위젯 설정 완료
 - [x] Cloudwatch로 메트릭 수집하기 => haedoang-matrics-public1, public2
+
+
+---
+
+## 2단계 - 성능 테스트
+
+### 요구사항
+
+--- 
+- [x] 웹 성능 테스트
+    - [x] 웹 성능 예산을 작성
+    - [x] [WebPageTest](https://www.webpagetest.org/) [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)
+      등 테스트해보고 개선이 필요한 부분을 파악
+- [x] 부하 테스트
+    - [x] 테스트 전제조건 정리
+        - [x] 대상 시스템 범위
+        - [x] 목표값 설정(latency, throughput, 부하 유지기간)
+        - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - [x] 각 시나리오에 맞춰 스크립트 작성
+        - [x] 접속 빈도가 높은 페이지
+        - [x] 데이터를 갱신하는 페이지
+        - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - [x] Smoke, Load, Stress 테스트 후 결과를 기록
+
+---
+## 웹 성능 테스트 
+### WebPageTest 측정 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/webpagetest_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/webpagetest_public2_before.png)
+
+### WebPageTest 측정 분석
+- FCP 성능 개선하기 => 3초 이내
+- Compress Transfer 적용하기
+
+### WebPageTest 개선 결과 
+- 3.36.209.24:8080(public1)
+  ![image info](./images/webpagetest_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/webpagetest_public2_before.png)
+
+### PageSpeed 측정 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/pagespeed_public1_before.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/pagespeed_public2_before.png)
+
+### PageSpeed 측정 분석 
+- 성능 종합 점수 개선하기 => 90 이상
+
+### PageSpeed 개선 결과
+- 3.36.209.24:8080(public1)
+  ![image info](./images/pagespeed_public1_after.png)
+- 3.36.233.76:8080(public2)
+  ![image info](./images/pagespeed_public2_after.png)
+
+---
+
+## 부하테스트 
+- 대상 시스템 범위 => application, mysql
+- 목푯값 설정
+    - 예상 1일 사용자 수 : 700,000 DAU (경쟁사 네이버 지도 일평균 접속자 수) [링크](https://website.informer.com/map.naver.com)
+    - 피크 시간 대의 집중율 예상 : 10ut
+    - 1일 요청 수 : 2
+    - Throughput : 8 ~ 88
+        - 1일 총 접속 수 = 700,000 x 1 = 700,000
+        - 1일 평균 rps = 700,000/86,400 = 8
+        - 1일 최대 rps = 700/8 = 88
+      
+- VUser 구하기 :
+  - T = (R * http_req_duration) (+ ls) 
+  - VUser = (목표 rps * T) / R 
+  - VUser = (100 * 2) / 2 = 100
+
+  => 네이버 일평균 접속자수를 참조하여 목표값을 설정하였고, 목표 rps를 100으로 지정.
+  
+### 부하테스트 결과 
+ 1) 시나리오 : 접속 빈도가 높은 페이지 요청
+    - 3.36.209.24:8080(public1)
+    - smoke
+      ![image info](./images/smoke_public1_scenario1.png)
+    - load
+      ![image info](./images/load_public1_scenario1.png)
+    - stress test
+      ![image info](./images/stress_public1_scenario1.png)
+    
+    - 3.36.233.76:8080(public2)
+    - smoke
+      ![image info](./images/smoke_public2_scenario1.png)
+    - load
+      ![image info](./images/load_public2_scenario1.png)
+    - stress test
+      ![image info](./images/stress_public2_scenario1.png)
+    
+ 2) 시나리오2 : 데이터를 갱신하는 페이지 요청 
+     - 3.36.209.24:8080(public1)
+     - smoke
+       ![image info](./images/smoke_public1_scenario2.png)
+     - load
+       ![image info](./images/load_public1_scenario2.png)
+     - stress test
+       ![image info](./images/stress_public1_scenario2.png)
+
+     - 3.36.233.76:8080(public2)
+     - smoke
+       ![image info](./images/smoke_public2_scenario2.png)
+     - load
+       ![image info](./images/load_public2_scenario2.png)
+     - stress test
+       ![image info](./images/stress_public2_scenario2.png)
+     
+ 3) 시나리오3 : 
+     - 3.36.209.24:8080(public1)
+     - smoke
+       ![image info](./images/smoke_public1_scenario3.png)
+     - load
+       ![image info](./images/load_public1_scenario3.png)
+     - stress test
+       ![image info](./images/stress_public1_scenario3.png)
+
+     - 3.36.233.76:8080(public2)
+     - smoke
+       ![image info](./images/smoke_public2_scenario3.png)
+     - load
+       ![image info](./images/load_public2_scenario3.png)
+     - stress test
+       ![image info](./images/stress_public2_scenario3.png)

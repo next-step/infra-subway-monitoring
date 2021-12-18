@@ -3,6 +3,7 @@ package nextstep.subway.auth.ui;
 import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
+import nextstep.subway.common.LogParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,10 @@ public class AuthController {
     }
 
     @PostMapping("/login/token")
+    @LogParams
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
-        logger.info("[ ↘]︎[{}]", request);
         TokenResponse token = authService.login(request);
-        logger.info("[ ↖︎]︎[{}]", token);
+        logger.info("token response: [{}]", token);
         return ResponseEntity.ok().body(token);
     }
 }
