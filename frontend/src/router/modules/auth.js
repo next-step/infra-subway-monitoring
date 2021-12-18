@@ -1,24 +1,19 @@
-import LoginPage from '@/views/auth/LoginPage'
-import JoinPage from '@/views/auth/JoinPage'
-import Mypage from '@/views/auth/Mypage'
-import MypageEdit from '@/views/auth/MypageEdit'
-
 const authRoutes = [
   {
     path: '/login',
-    component: LoginPage
+    component: () => import(/* webpackChunkName: "loginPage" */ '@/views/auth/LoginPage')
   },
   {
     path: '/join',
-    component: JoinPage
+    component: () => import(/* webpackChunkName: "joinPage" */ '@/views/auth/JoinPage')
   },
   {
     path: '/mypage',
-    component: Mypage
+    component: () => import(/* webpackChunkName: "mypage" */ '@/views/auth/Mypage')
   },
   {
     path: '/mypage/edit',
-    component: MypageEdit
+    component: () => import(/* webpackChunkName: "mypageEdit" */ '@/views/auth/MypageEdit')
   }
 ]
 export default authRoutes
