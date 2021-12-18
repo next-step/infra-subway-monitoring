@@ -5,6 +5,11 @@
 
     <!--  appender이름이 json consoleAppender를 선언  -->
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
         <!--로깅이 기록될 위치-->
         <file>${home}json.log</file>
         <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
