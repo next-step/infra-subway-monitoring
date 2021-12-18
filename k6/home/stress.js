@@ -22,7 +22,7 @@ export let options = {
     },
 };
 
-const BASE_URL = 'http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/';
+const BASE_URL = 'http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com';
 const USERNAME = 'username@gmail.com';
 const PASSWORD = 'password';
 
