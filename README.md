@@ -123,3 +123,4 @@ npm run dev
 - [ ] [접속빈도가 높은 페이지](./k6-scripts/frequency/README.md)  -  메인 (로그인 - 내정보 조회 - 즐겨찾기 조회)
 - [ ] [데이터를 갱신하는 페이지](./k6-scripts/updated/README.md) - 노선정보 변경 (로그인 - 노선 목록 조회, 노선 정보 변경)
 - [ ] [데이터를 조회하는데 여러 데이터를 참조하는 페이지](./k6-scripts/reference/README.md)- 경로 검색 (지하철 역조회 - 최단 거리 조회)
+    - **최단 거리 조회하는 api에 대한 stress 테스트 결과 vus 250~300 부터 실패하는 요청이 발생했다.** 

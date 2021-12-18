@@ -6,7 +6,7 @@ import http from 'k6/http'
  * 지하철 역 목록 조회 - 최단 거리 조회
  *
  * Throughput = 11.8 ~ 177
- * Latency = 50~100ms
+ * Latency = 100ms
  *
  * vus
  * 11.8 x (3x1.5 ) /3 = 18,
@@ -23,14 +23,10 @@ export let options = {
     { duration: '10s', target: 100 },
     { duration: '10s', target: 200 },
     { duration: '10s', target: 300 },
-    { duration: '20s', target: 50 },
-    { duration: '20s', target: 100 },
-    { duration: '20s', target: 200 },
-    { duration: '20s', target: 300 },
     { duration: '5s', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 100ms
   },
 }
 
@@ -43,16 +39,16 @@ export default function () {
     },
   }
 
-  let stations = http.get(`${BASE_URL}/stations`, params).json()
-  check(stations, { 'retrieved stations': (resp) => resp.length > 0 })
+  let stationsRes = http.get(`${BASE_URL}/stations`, params)
+  check(stationsRes, { 'retrieved stations': (resp) => resp.status === 200 })
   sleep(1)
 
+  const stations = stationsRes.json()
   let paths = http
     .get(
       `${BASE_URL}/paths?source=${stations[0].id}&target=${stations[10].id}`,
       params
     )
-    .json()
-  check(paths, { 'retrieved paths': (resp) => resp.distance >= 0 })
+  check(paths, { 'retrieved paths': (resp) => resp.status === 200 })
   sleep(1)
 }

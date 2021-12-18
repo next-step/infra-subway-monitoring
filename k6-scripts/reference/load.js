@@ -6,7 +6,7 @@ import http from 'k6/http'
  * 지하철 역 목록 조회 - 최단 거리 조회
  *
  * Throughput = 11.8 ~ 177
- * Latency = 50~100ms
+ * Latency = 100ms
  *
  * vus
  * 11.8 x (3x1.5 ) /3 = 18,
@@ -21,7 +21,7 @@ export let options = {
     { duration: '20s', target: 266 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 100ms
   },
 }
 

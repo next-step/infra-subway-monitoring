@@ -7,14 +7,14 @@ import http from 'k6/http'
  *
  * VUser = 1
  * Throughput = 11.8 ~ 177
- * Latency = 50~100ms
+ * Latency = 100ms
  */
 
 export let options = {
   vus: 1,
   duration: '10s',
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 100ms
   },
 }
 
