@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -18,40 +19,41 @@ public class ControllerLogAspect {
 
 	@Around("execution(public * nextstep.subway..ui.*Controller.*(..))")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
-		UUID requestId = UUID.randomUUID();
+		MDC.put("traceId", UUID.randomUUID().toString());
 		StopWatch stopWatch = new StopWatch();
 		Object result;
 
-		logBefore(joinPoint, requestId);
+		logBefore(joinPoint);
 
 		try {
 			stopWatch.start();
 			result = joinPoint.proceed();
 			stopWatch.stop();
-			logAfter(result, requestId, stopWatch.getTotalTimeMillis());
+			logAfter(result, stopWatch.getTotalTimeMillis());
 		} catch (Throwable t) {
 			stopWatch.stop();
-			logError(t, requestId, stopWatch.getTotalTimeMillis());
+			logError(t, stopWatch.getTotalTimeMillis());
 			throw t;
 		}
 
+		MDC.clear();
 		return result;
 	}
 
-	private void logBefore(JoinPoint joinPoint, UUID requestId) {
-		logger.info("[{}][start] signature={}", requestId, joinPoint.getSignature().toShortString());
+	private void logBefore(JoinPoint joinPoint) {
+		logger.info("[start] signature={}", joinPoint.getSignature().toShortString());
 
 		Object[] args = joinPoint.getArgs();
 		for (int i = 0; i < args.length; i++) {
-			logger.info("[{}][args][{}] {}", requestId, i, args[i]);
+			logger.info("[args][{}] {}", i, args[i]);
 		}
 	}
 
-	private void logAfter(Object result, UUID requestId, long elapsedTime) {
-		logger.info("[{}][end] elapsedTime={}ms, response={}", requestId, elapsedTime, result);
+	private void logAfter(Object result, long elapsedTime) {
+		logger.info("[end] elapsedTime={}ms, response={}", elapsedTime, result);
 	}
 
-	private void logError(Throwable t, UUID requestId, long elapsedTime) {
-		logger.error("[{}][error] elapsedTime={}ms, errorMessage={}", requestId, elapsedTime, t.getMessage());
+	private void logError(Throwable t, long elapsedTime) {
+		logger.error("[error] elapsedTime={}ms, errorMessage={}", elapsedTime, t.getMessage());
 	}
 }

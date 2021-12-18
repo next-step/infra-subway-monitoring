@@ -56,7 +56,7 @@ npm run dev
 - 베스천 서버 접속 : `ssh -i y2o2u2n-RSA.pem ubuntu@52.79.198.129`
 - 서비스 서버 접속 : `ssh service-b`
 - 로깅 경로 이동 : `cd infra-subway-monitoring/docker/logs/`
-- 각각 `nginx`, `spring-boot` 내 파일 로그
+- 각각 ~~nginx~~, spring-boot 내 파일 로그
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
@@ -66,13 +66,95 @@ npm run dev
 
 ### 2단계 - 성능 테스트
 
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+#### 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+##### A. 예비 분석
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 역, 노선, 구간이 모두 등록되어 있다는 가정 하에 사용자가 제일 자주 사용할 기능은 경로 검색이라 예상됨.
+- 그러므로 **경로 검색 페이지**가 가장 중요한 페이지로 보임.
+- 사용자는 이동하면서 서비스를 사용할 것이라 예상되어 **휴대전화**로 **경로 검색 페이지**를 방문하는 것으로 가정함.
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+##### B. 경쟁사 분석
+
+- [지하철 서비스](http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com)
+- [서울교통공사 사이버 스테이션](http://www.seoulmetro.co.kr/kr/cyberStation.do)
+- [네이버 지도](https://m.map.naver.com/)
+- [카카오 맵](https://m.map.kakao.com/)
+
+|                          | subway | metro  | naver | kakao |
+|--------------------------|--------|--------|-------|-------|
+| First Contentful Paint   | 16.6s  | 6.9s   | 2.2s  | 1.7s  |
+| Time to Interactive      | 16.7s  | 9.0s   | 5.7s  | 4.7s  |
+| Speed Index              | 16.6s  | 8.3s   | 5.1s  | 5.0s  |
+| Total Blocking Time      | 220ms  | 1050ms | 300ms | 150ms |
+| Largest Contentful Paint | 16.6s  | 6.9s   | 6.4s  | 7.3s  |
+| Cumulative Layout Shift  | 0.004  | 0      | 0.017 | 0.005 |
+
+> 경쟁사 대비 FCP, TTI, SI, LCP 4가지 지표가 20% 이상 성능 차이 발생함.
+
+##### C. 성능 기준 설정
+
+- FCP : Orange (1.8-3)
+- TTI : Orange (3.9-7.3)
+- SI : Orange (3.4-5.8)
+- LCP : Orange (2.5-4)
+
+##### D. 우선 순위
+
+FCP 가 경쟁사 대비 성능 차이가 가장 크며 다른 지표에도 영향을 주는 듯 해서 제일 첫번째 개선 대상으로 생각함.
+
+#### 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+- 텍스트 압축 사용 : gzip 으로 리소스를 압축해서 제공해볼 수 있을 듯
+- 사용하지 않는 자바스크립트 줄이기 : 코드 스플리팅을 통해 번들 파일을 여러 개의 파일로 분리해볼 수 있을 듯
+
+#### 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+##### 대상 시스템 범위
+
+- 시나리오별 테스트 대상
+    - 접속 빈도가 높은 페이지 : 홈페이지
+    - 데이터를 갱신하는 페이지 : 홈페이지 > 나의 페이지 > 수정
+    - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 > 검색
+- 이미 노선, 구간, 역이 등록되어 있는 상태로 가정
+
+##### 목푯값 설정
+
+- Throughput
+    - `1일 사용자 수 (DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수` : 1,000,000 x 2 = 2,000,000
+    - `1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps` : 2,000,000 / 86,400 = 23
+    - `1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps` : 23 x 2 = 46
+- Latency
+    - 100ms 이하
+- 부하 유지기간
+    - 피크시간대라면 약 2시간... 이지만 편의상 1분 내외로 테스트
+
+- 참고 자료
+    - [지하철 종결자 – 전국 스마트버스, 누적 다운로드 2000만 넘어](https://platum.kr/archives/61943)
+        - 1일 사용자 수 (DAU) : 1,000,000
+    - [서울 지하철 5~8호선, 9억7천만 이용](http://www.mcnews.co.kr/49485)
+        - 피크 사용 시간대 : 7~9시, 18-20시
+        - 피크시간대 집중율 : (최대 트래픽 비율 / 평소 트래픽) = 2
+        - 1명당 1일 평균 접속 수 : 출근, 퇴근 = 2
+
+##### 부하 테스트 시 저장될 데이터 건수 및 크기
+
+- 데이터는 `brainbackdoor/data-subway:0.0.1`를 사용
+    - 노선 23개
+    - 구간 340개
+    - 역 616개
+
+#### Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+```
+docker run -i loadimpact/k6 run - < ${fileName}
+```
+
+- [home](k6/home) : [smoke](k6/home/smoke.js), [load](k6/home/load.js), [stress](k6/home/stress.js)
+- [path](k6/path) : [smoke](k6/path/smoke.js), [load](k6/path/load.js), [stress](k6/path/stress.js)
+- [profile](k6/profile) : [smoke](k6/profile/smoke.js), [load](k6/profile/load.js), [stress](k6/profile/stress.js)
+
+> 결과는 각 시나리오 디렉토리 내 `result`에서 확인 가능합니다.
 
 ## 요구사항
 
@@ -87,7 +169,8 @@ npm run dev
             - [x] 컨트롤러의 요청, 응답에 대한 `INFO`, `ERROR` 로깅
             - [x] 글로벌 예외 처리시 `ERROR` 로깅
     - [x] 문제가 되는 코드 수정하기
-    - [x] Nginx Access Log 설정하기
+    - [x] ~~Nginx Access Log 설정하기~~
+    - [x] ALB 구성 : http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com
 - [x] CloudWatch 로 모니터링
     - [x] cAdvisor 설치
     - [x] 로그 수집하기
@@ -95,9 +178,21 @@ npm run dev
         - [x] python & awslogs agent 설치
         - [x] `awslogs.conf` 수정 및 awslogs 재시작
     - [x] 메트릭 수집하기
-      - [x] cloudwatch agent 설치 및 `config.json` 설정
-      - [x] 대시보드 내 위젯 추가
+        - [x] cloudwatch agent 설치 및 `config.json` 설정
+        - [x] 대시보드 내 위젯 추가
 
 ### 2단계
 
-TBD
+- [x] 웹 성능 테스트
+    - [x] 웹 성능 예산을 작성
+    - [x] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
+- [x] 부하 테스트
+    - [x] 테스트 전제조건 정리
+        - [x] 대상 시스템 범위
+        - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+        - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - [x] 각 시나리오에 맞춰 스크립트 작성
+        - [x] 접속 빈도가 높은 페이지 : 홈페이지
+        - [x] 데이터를 갱신하는 페이지 : 홈페이지 > 나의 페이지 > 수정
+        - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 > 검색
+    - [x] Smoke, Load, Stress 테스트 후 결과를 기록

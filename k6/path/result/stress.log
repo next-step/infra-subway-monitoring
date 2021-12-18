@@ -1,0 +1,927 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: -
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1500 max VUs, 3m40s max duration (incl. graceful stop):
+           * default: Up to 1500 looping VUs for 3m10s over 19 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m00.7s), 0002/1500 VUs, 0 complete and 0 interrupted iterations
+default   [   0% ] 0002/1500 VUs  0m00.7s/3m10.0s
+
+running (0m01.7s), 0004/1500 VUs, 2 complete and 0 interrupted iterations
+default   [   1% ] 0004/1500 VUs  0m01.7s/3m10.0s
+
+running (0m02.7s), 0007/1500 VUs, 6 complete and 0 interrupted iterations
+default   [   1% ] 0007/1500 VUs  0m02.7s/3m10.0s
+
+running (0m03.7s), 0009/1500 VUs, 11 complete and 0 interrupted iterations
+default   [   2% ] 0009/1500 VUs  0m03.7s/3m10.0s
+
+running (0m04.7s), 0011/1500 VUs, 20 complete and 0 interrupted iterations
+default   [   2% ] 0011/1500 VUs  0m04.7s/3m10.0s
+
+running (0m05.7s), 0013/1500 VUs, 28 complete and 0 interrupted iterations
+default   [   3% ] 0013/1500 VUs  0m05.7s/3m10.0s
+
+running (0m06.7s), 0015/1500 VUs, 41 complete and 0 interrupted iterations
+default   [   4% ] 0015/1500 VUs  0m06.7s/3m10.0s
+
+running (0m07.7s), 0018/1500 VUs, 56 complete and 0 interrupted iterations
+default   [   4% ] 0018/1500 VUs  0m07.7s/3m10.0s
+
+running (0m08.7s), 0020/1500 VUs, 72 complete and 0 interrupted iterations
+default   [   5% ] 0020/1500 VUs  0m08.7s/3m10.0s
+
+running (0m09.7s), 0022/1500 VUs, 91 complete and 0 interrupted iterations
+default   [   5% ] 0022/1500 VUs  0m09.7s/3m10.0s
+
+running (0m10.7s), 0023/1500 VUs, 111 complete and 0 interrupted iterations
+default   [   6% ] 0023/1500 VUs  0m10.7s/3m10.0s
+
+running (0m11.7s), 0023/1500 VUs, 129 complete and 0 interrupted iterations
+default   [   6% ] 0023/1500 VUs  0m11.7s/3m10.0s
+
+running (0m12.7s), 0023/1500 VUs, 146 complete and 0 interrupted iterations
+default   [   7% ] 0023/1500 VUs  0m12.7s/3m10.0s
+
+running (0m13.7s), 0023/1500 VUs, 165 complete and 0 interrupted iterations
+default   [   7% ] 0023/1500 VUs  0m13.7s/3m10.0s
+
+running (0m14.7s), 0023/1500 VUs, 188 complete and 0 interrupted iterations
+default   [   8% ] 0023/1500 VUs  0m14.7s/3m10.0s
+
+running (0m15.7s), 0023/1500 VUs, 211 complete and 0 interrupted iterations
+default   [   8% ] 0023/1500 VUs  0m15.7s/3m10.0s
+
+running (0m16.7s), 0023/1500 VUs, 234 complete and 0 interrupted iterations
+default   [   9% ] 0023/1500 VUs  0m16.7s/3m10.0s
+
+running (0m17.7s), 0023/1500 VUs, 257 complete and 0 interrupted iterations
+default   [   9% ] 0023/1500 VUs  0m17.7s/3m10.0s
+
+running (0m18.7s), 0023/1500 VUs, 268 complete and 0 interrupted iterations
+default   [  10% ] 0023/1500 VUs  0m18.7s/3m10.0s
+
+running (0m19.7s), 0023/1500 VUs, 289 complete and 0 interrupted iterations
+default   [  10% ] 0023/1500 VUs  0m19.7s/3m10.0s
+
+running (0m20.7s), 0024/1500 VUs, 311 complete and 0 interrupted iterations
+default   [  11% ] 0024/1500 VUs  0m20.7s/3m10.0s
+
+running (0m21.7s), 0027/1500 VUs, 335 complete and 0 interrupted iterations
+default   [  11% ] 0027/1500 VUs  0m21.7s/3m10.0s
+
+running (0m22.7s), 0029/1500 VUs, 361 complete and 0 interrupted iterations
+default   [  12% ] 0029/1500 VUs  0m22.7s/3m10.0s
+
+running (0m23.7s), 0031/1500 VUs, 385 complete and 0 interrupted iterations
+default   [  12% ] 0031/1500 VUs  0m23.7s/3m10.0s
+
+running (0m24.7s), 0033/1500 VUs, 413 complete and 0 interrupted iterations
+default   [  13% ] 0033/1500 VUs  0m24.7s/3m10.0s
+
+running (0m25.7s), 0036/1500 VUs, 446 complete and 0 interrupted iterations
+default   [  14% ] 0036/1500 VUs  0m25.7s/3m10.0s
+
+running (0m26.7s), 0038/1500 VUs, 475 complete and 0 interrupted iterations
+default   [  14% ] 0038/1500 VUs  0m26.7s/3m10.0s
+
+running (0m27.7s), 0040/1500 VUs, 511 complete and 0 interrupted iterations
+default   [  15% ] 0040/1500 VUs  0m27.7s/3m10.0s
+
+running (0m28.7s), 0043/1500 VUs, 545 complete and 0 interrupted iterations
+default   [  15% ] 0043/1500 VUs  0m28.7s/3m10.0s
+
+running (0m29.7s), 0045/1500 VUs, 585 complete and 0 interrupted iterations
+default   [  16% ] 0045/1500 VUs  0m29.7s/3m10.0s
+
+running (0m30.7s), 0046/1500 VUs, 630 complete and 0 interrupted iterations
+default   [  16% ] 0046/1500 VUs  0m30.7s/3m10.0s
+
+running (0m31.7s), 0046/1500 VUs, 662 complete and 0 interrupted iterations
+default   [  17% ] 0046/1500 VUs  0m31.7s/3m10.0s
+
+running (0m32.7s), 0046/1500 VUs, 698 complete and 0 interrupted iterations
+default   [  17% ] 0046/1500 VUs  0m32.7s/3m10.0s
+
+running (0m33.7s), 0046/1500 VUs, 743 complete and 0 interrupted iterations
+default   [  18% ] 0046/1500 VUs  0m33.7s/3m10.0s
+
+running (0m34.7s), 0046/1500 VUs, 785 complete and 0 interrupted iterations
+default   [  18% ] 0046/1500 VUs  0m34.7s/3m10.0s
+
+running (0m35.7s), 0046/1500 VUs, 814 complete and 0 interrupted iterations
+default   [  19% ] 0046/1500 VUs  0m35.7s/3m10.0s
+
+running (0m36.7s), 0046/1500 VUs, 858 complete and 0 interrupted iterations
+default   [  19% ] 0046/1500 VUs  0m36.7s/3m10.0s
+
+running (0m37.7s), 0046/1500 VUs, 897 complete and 0 interrupted iterations
+default   [  20% ] 0046/1500 VUs  0m37.7s/3m10.0s
+
+running (0m38.7s), 0046/1500 VUs, 940 complete and 0 interrupted iterations
+default   [  20% ] 0046/1500 VUs  0m38.7s/3m10.0s
+
+running (0m39.7s), 0046/1500 VUs, 972 complete and 0 interrupted iterations
+default   [  21% ] 0046/1500 VUs  0m39.7s/3m10.0s
+
+running (0m40.7s), 0050/1500 VUs, 1015 complete and 0 interrupted iterations
+default   [  21% ] 0050/1500 VUs  0m40.7s/3m10.0s
+
+running (0m41.7s), 0055/1500 VUs, 1062 complete and 0 interrupted iterations
+default   [  22% ] 0055/1500 VUs  0m41.7s/3m10.0s
+
+running (0m42.7s), 0060/1500 VUs, 1092 complete and 0 interrupted iterations
+default   [  22% ] 0060/1500 VUs  0m42.7s/3m10.0s
+
+running (0m43.7s), 0066/1500 VUs, 1149 complete and 0 interrupted iterations
+default   [  23% ] 0066/1500 VUs  0m43.7s/3m10.0s
+
+running (0m44.7s), 0071/1500 VUs, 1195 complete and 0 interrupted iterations
+default   [  24% ] 0071/1500 VUs  0m44.7s/3m10.0s
+
+running (0m45.7s), 0077/1500 VUs, 1250 complete and 0 interrupted iterations
+default   [  24% ] 0077/1500 VUs  0m45.7s/3m10.0s
+
+running (0m46.7s), 0082/1500 VUs, 1307 complete and 0 interrupted iterations
+default   [  25% ] 0082/1500 VUs  0m46.7s/3m10.0s
+
+running (0m47.7s), 0087/1500 VUs, 1363 complete and 0 interrupted iterations
+default   [  25% ] 0087/1500 VUs  0m47.7s/3m10.0s
+
+running (0m48.8s), 0093/1500 VUs, 1420 complete and 0 interrupted iterations
+default   [  26% ] 0093/1500 VUs  0m48.7s/3m10.0s
+
+running (0m49.8s), 0098/1500 VUs, 1476 complete and 0 interrupted iterations
+default   [  26% ] 0098/1500 VUs  0m49.7s/3m10.0s
+
+running (0m50.8s), 0100/1500 VUs, 1528 complete and 0 interrupted iterations
+default   [  27% ] 0100/1500 VUs  0m50.7s/3m10.0s
+
+running (0m51.8s), 0100/1500 VUs, 1581 complete and 0 interrupted iterations
+default   [  27% ] 0100/1500 VUs  0m51.7s/3m10.0s
+
+running (0m52.8s), 0100/1500 VUs, 1640 complete and 0 interrupted iterations
+default   [  28% ] 0100/1500 VUs  0m52.7s/3m10.0s
+
+running (0m53.8s), 0100/1500 VUs, 1696 complete and 0 interrupted iterations
+default   [  28% ] 0100/1500 VUs  0m53.7s/3m10.0s
+
+running (0m54.8s), 0100/1500 VUs, 1751 complete and 0 interrupted iterations
+default   [  29% ] 0100/1500 VUs  0m54.7s/3m10.0s
+
+running (0m55.8s), 0100/1500 VUs, 1807 complete and 0 interrupted iterations
+default   [  29% ] 0100/1500 VUs  0m55.7s/3m10.0s
+
+running (0m56.8s), 0100/1500 VUs, 1865 complete and 0 interrupted iterations
+default   [  30% ] 0100/1500 VUs  0m56.7s/3m10.0s
+
+running (0m57.8s), 0100/1500 VUs, 1921 complete and 0 interrupted iterations
+default   [  30% ] 0100/1500 VUs  0m57.7s/3m10.0s
+
+running (0m58.8s), 0100/1500 VUs, 1976 complete and 0 interrupted iterations
+default   [  31% ] 0100/1500 VUs  0m58.7s/3m10.0s
+
+running (0m59.8s), 0100/1500 VUs, 2035 complete and 0 interrupted iterations
+default   [  31% ] 0100/1500 VUs  0m59.7s/3m10.0s
+
+running (1m00.8s), 0111/1500 VUs, 2093 complete and 0 interrupted iterations
+default   [  32% ] 0111/1500 VUs  1m00.7s/3m10.0s
+
+running (1m01.8s), 0126/1500 VUs, 2143 complete and 0 interrupted iterations
+default   [  32% ] 0126/1500 VUs  1m01.7s/3m10.0s
+
+running (1m02.8s), 0141/1500 VUs, 2198 complete and 0 interrupted iterations
+default   [  33% ] 0141/1500 VUs  1m02.7s/3m10.0s
+
+running (1m03.8s), 0156/1500 VUs, 2244 complete and 0 interrupted iterations
+default   [  34% ] 0156/1500 VUs  1m03.7s/3m10.0s
+
+running (1m04.8s), 0171/1500 VUs, 2291 complete and 0 interrupted iterations
+default   [  34% ] 0171/1500 VUs  1m04.7s/3m10.0s
+
+running (1m05.8s), 0186/1500 VUs, 2349 complete and 0 interrupted iterations
+default   [  35% ] 0186/1500 VUs  1m05.7s/3m10.0s
+
+running (1m06.8s), 0201/1500 VUs, 2407 complete and 0 interrupted iterations
+default   [  35% ] 0201/1500 VUs  1m06.7s/3m10.0s
+
+running (1m07.8s), 0216/1500 VUs, 2455 complete and 0 interrupted iterations
+default   [  36% ] 0216/1500 VUs  1m07.7s/3m10.0s
+
+running (1m08.8s), 0231/1500 VUs, 2509 complete and 0 interrupted iterations
+default   [  36% ] 0231/1500 VUs  1m08.7s/3m10.0s
+
+running (1m09.8s), 0246/1500 VUs, 2556 complete and 0 interrupted iterations
+default   [  37% ] 0246/1500 VUs  1m09.7s/3m10.0s
+
+running (1m10.8s), 0250/1500 VUs, 2606 complete and 0 interrupted iterations
+default   [  37% ] 0250/1500 VUs  1m10.7s/3m10.0s
+
+running (1m11.8s), 0250/1500 VUs, 2660 complete and 0 interrupted iterations
+default   [  38% ] 0250/1500 VUs  1m11.7s/3m10.0s
+
+running (1m12.8s), 0250/1500 VUs, 2705 complete and 0 interrupted iterations
+default   [  38% ] 0250/1500 VUs  1m12.7s/3m10.0s
+
+running (1m13.8s), 0250/1500 VUs, 2763 complete and 0 interrupted iterations
+default   [  39% ] 0250/1500 VUs  1m13.7s/3m10.0s
+
+running (1m14.8s), 0250/1500 VUs, 2817 complete and 0 interrupted iterations
+default   [  39% ] 0250/1500 VUs  1m14.7s/3m10.0s
+
+running (1m15.8s), 0250/1500 VUs, 2872 complete and 0 interrupted iterations
+default   [  40% ] 0250/1500 VUs  1m15.7s/3m10.0s
+
+running (1m16.8s), 0250/1500 VUs, 2923 complete and 0 interrupted iterations
+default   [  40% ] 0250/1500 VUs  1m16.7s/3m10.0s
+
+running (1m17.8s), 0250/1500 VUs, 2981 complete and 0 interrupted iterations
+default   [  41% ] 0250/1500 VUs  1m17.7s/3m10.0s
+
+running (1m18.8s), 0250/1500 VUs, 3034 complete and 0 interrupted iterations
+default   [  41% ] 0250/1500 VUs  1m18.7s/3m10.0s
+
+running (1m19.8s), 0250/1500 VUs, 3082 complete and 0 interrupted iterations
+default   [  42% ] 0250/1500 VUs  1m19.7s/3m10.0s
+
+running (1m20.8s), 0268/1500 VUs, 3143 complete and 0 interrupted iterations
+default   [  42% ] 0268/1500 VUs  1m20.7s/3m10.0s
+
+running (1m21.8s), 0293/1500 VUs, 3196 complete and 0 interrupted iterations
+default   [  43% ] 0293/1500 VUs  1m21.7s/3m10.0s
+
+running (1m22.8s), 0318/1500 VUs, 3247 complete and 0 interrupted iterations
+default   [  44% ] 0318/1500 VUs  1m22.7s/3m10.0s
+
+running (1m23.8s), 0343/1500 VUs, 3293 complete and 0 interrupted iterations
+default   [  44% ] 0343/1500 VUs  1m23.7s/3m10.0s
+
+running (1m24.8s), 0368/1500 VUs, 3343 complete and 0 interrupted iterations
+default   [  45% ] 0368/1500 VUs  1m24.7s/3m10.0s
+
+running (1m25.8s), 0393/1500 VUs, 3397 complete and 0 interrupted iterations
+default   [  45% ] 0393/1500 VUs  1m25.7s/3m10.0s
+
+running (1m26.8s), 0418/1500 VUs, 3451 complete and 0 interrupted iterations
+default   [  46% ] 0418/1500 VUs  1m26.7s/3m10.0s
+
+running (1m27.8s), 0443/1500 VUs, 3506 complete and 0 interrupted iterations
+default   [  46% ] 0443/1500 VUs  1m27.7s/3m10.0s
+
+running (1m28.8s), 0468/1500 VUs, 3553 complete and 0 interrupted iterations
+default   [  47% ] 0468/1500 VUs  1m28.7s/3m10.0s
+
+running (1m29.8s), 0493/1500 VUs, 3584 complete and 0 interrupted iterations
+default   [  47% ] 0493/1500 VUs  1m29.7s/3m10.0s
+
+running (1m30.8s), 0500/1500 VUs, 3643 complete and 0 interrupted iterations
+default   [  48% ] 0500/1500 VUs  1m30.7s/3m10.0s
+
+running (1m31.8s), 0500/1500 VUs, 3686 complete and 0 interrupted iterations
+default   [  48% ] 0500/1500 VUs  1m31.7s/3m10.0s
+
+running (1m32.8s), 0500/1500 VUs, 3740 complete and 0 interrupted iterations
+default   [  49% ] 0500/1500 VUs  1m32.7s/3m10.0s
+
+running (1m33.8s), 0500/1500 VUs, 3785 complete and 0 interrupted iterations
+default   [  49% ] 0500/1500 VUs  1m33.7s/3m10.0s
+
+running (1m34.8s), 0500/1500 VUs, 3831 complete and 0 interrupted iterations
+default   [  50% ] 0500/1500 VUs  1m34.7s/3m10.0s
+
+running (1m35.8s), 0500/1500 VUs, 3886 complete and 0 interrupted iterations
+default   [  50% ] 0500/1500 VUs  1m35.7s/3m10.0s
+
+running (1m36.8s), 0500/1500 VUs, 3951 complete and 0 interrupted iterations
+default   [  51% ] 0500/1500 VUs  1m36.7s/3m10.0s
+
+running (1m37.8s), 0500/1500 VUs, 4014 complete and 0 interrupted iterations
+default   [  51% ] 0500/1500 VUs  1m37.7s/3m10.0s
+
+running (1m38.8s), 0500/1500 VUs, 4078 complete and 0 interrupted iterations
+default   [  52% ] 0500/1500 VUs  1m38.7s/3m10.0s
+
+running (1m39.8s), 0500/1500 VUs, 4122 complete and 0 interrupted iterations
+default   [  52% ] 0500/1500 VUs  1m39.7s/3m10.0s
+
+running (1m40.8s), 0518/1500 VUs, 4179 complete and 0 interrupted iterations
+default   [  53% ] 0518/1500 VUs  1m40.7s/3m10.0s
+
+running (1m41.8s), 0543/1500 VUs, 4241 complete and 0 interrupted iterations
+default   [  54% ] 0543/1500 VUs  1m41.7s/3m10.0s
+
+running (1m42.8s), 0568/1500 VUs, 4283 complete and 0 interrupted iterations
+default   [  54% ] 0568/1500 VUs  1m42.7s/3m10.0s
+
+running (1m43.8s), 0593/1500 VUs, 4336 complete and 0 interrupted iterations
+default   [  55% ] 0593/1500 VUs  1m43.7s/3m10.0s
+
+running (1m44.8s), 0619/1500 VUs, 4387 complete and 0 interrupted iterations
+default   [  55% ] 0619/1500 VUs  1m44.8s/3m10.0s
+
+running (1m45.8s), 0643/1500 VUs, 4437 complete and 0 interrupted iterations
+default   [  56% ] 0643/1500 VUs  1m45.7s/3m10.0s
+
+running (1m46.8s), 0668/1500 VUs, 4484 complete and 0 interrupted iterations
+default   [  56% ] 0668/1500 VUs  1m46.7s/3m10.0s
+
+running (1m47.8s), 0693/1500 VUs, 4536 complete and 0 interrupted iterations
+default   [  57% ] 0693/1500 VUs  1m47.7s/3m10.0s
+
+running (1m48.7s), 0718/1500 VUs, 4596 complete and 0 interrupted iterations
+default   [  57% ] 0718/1500 VUs  1m48.7s/3m10.0s
+
+running (1m49.7s), 0743/1500 VUs, 4651 complete and 0 interrupted iterations
+default   [  58% ] 0743/1500 VUs  1m49.7s/3m10.0s
+
+running (1m50.7s), 0750/1500 VUs, 4704 complete and 0 interrupted iterations
+default   [  58% ] 0750/1500 VUs  1m50.7s/3m10.0s
+
+running (1m51.7s), 0750/1500 VUs, 4758 complete and 0 interrupted iterations
+default   [  59% ] 0750/1500 VUs  1m51.7s/3m10.0s
+
+running (1m52.7s), 0750/1500 VUs, 4806 complete and 0 interrupted iterations
+default   [  59% ] 0750/1500 VUs  1m52.7s/3m10.0s
+
+running (1m53.7s), 0750/1500 VUs, 4855 complete and 0 interrupted iterations
+default   [  60% ] 0750/1500 VUs  1m53.7s/3m10.0s
+
+running (1m54.7s), 0750/1500 VUs, 4908 complete and 0 interrupted iterations
+default   [  60% ] 0750/1500 VUs  1m54.7s/3m10.0s
+
+running (1m55.7s), 0750/1500 VUs, 4953 complete and 0 interrupted iterations
+default   [  61% ] 0750/1500 VUs  1m55.7s/3m10.0s
+
+running (1m56.7s), 0750/1500 VUs, 4997 complete and 0 interrupted iterations
+default   [  61% ] 0750/1500 VUs  1m56.7s/3m10.0s
+
+running (1m57.7s), 0750/1500 VUs, 5057 complete and 0 interrupted iterations
+default   [  62% ] 0750/1500 VUs  1m57.7s/3m10.0s
+
+running (1m58.7s), 0750/1500 VUs, 5105 complete and 0 interrupted iterations
+default   [  62% ] 0750/1500 VUs  1m58.7s/3m10.0s
+
+running (1m59.7s), 0750/1500 VUs, 5165 complete and 0 interrupted iterations
+default   [  63% ] 0750/1500 VUs  1m59.7s/3m10.0s
+
+running (2m00.7s), 0768/1500 VUs, 5222 complete and 0 interrupted iterations
+default   [  64% ] 0768/1500 VUs  2m00.7s/3m10.0s
+
+running (2m01.7s), 0793/1500 VUs, 5278 complete and 0 interrupted iterations
+default   [  64% ] 0793/1500 VUs  2m01.7s/3m10.0s
+
+running (2m02.7s), 0818/1500 VUs, 5323 complete and 0 interrupted iterations
+default   [  65% ] 0818/1500 VUs  2m02.7s/3m10.0s
+
+running (2m03.7s), 0843/1500 VUs, 5382 complete and 0 interrupted iterations
+default   [  65% ] 0843/1500 VUs  2m03.7s/3m10.0s
+
+running (2m04.7s), 0868/1500 VUs, 5445 complete and 0 interrupted iterations
+default   [  66% ] 0868/1500 VUs  2m04.7s/3m10.0s
+
+running (2m05.7s), 0893/1500 VUs, 5505 complete and 0 interrupted iterations
+default   [  66% ] 0893/1500 VUs  2m05.7s/3m10.0s
+
+running (2m06.7s), 0918/1500 VUs, 5554 complete and 0 interrupted iterations
+default   [  67% ] 0918/1500 VUs  2m06.7s/3m10.0s
+
+running (2m07.7s), 0943/1500 VUs, 5612 complete and 0 interrupted iterations
+default   [  67% ] 0943/1500 VUs  2m07.7s/3m10.0s
+
+running (2m08.7s), 0968/1500 VUs, 5666 complete and 0 interrupted iterations
+default   [  68% ] 0968/1500 VUs  2m08.7s/3m10.0s
+
+running (2m09.7s), 0993/1500 VUs, 5709 complete and 0 interrupted iterations
+default   [  68% ] 0993/1500 VUs  2m09.7s/3m10.0s
+
+running (2m10.7s), 1000/1500 VUs, 5746 complete and 0 interrupted iterations
+default   [  69% ] 1000/1500 VUs  2m10.7s/3m10.0s
+
+running (2m11.7s), 1000/1500 VUs, 5792 complete and 0 interrupted iterations
+default   [  69% ] 1000/1500 VUs  2m11.7s/3m10.0s
+
+running (2m12.7s), 1000/1500 VUs, 5838 complete and 0 interrupted iterations
+default   [  70% ] 1000/1500 VUs  2m12.7s/3m10.0s
+time="2021-12-18T09:19:01Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:19:01Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (2m13.7s), 1000/1500 VUs, 5885 complete and 0 interrupted iterations
+default   [  70% ] 1000/1500 VUs  2m13.7s/3m10.0s
+
+running (2m14.7s), 1000/1500 VUs, 5928 complete and 0 interrupted iterations
+default   [  71% ] 1000/1500 VUs  2m14.7s/3m10.0s
+
+running (2m15.7s), 1000/1500 VUs, 5983 complete and 0 interrupted iterations
+default   [  71% ] 1000/1500 VUs  2m15.7s/3m10.0s
+
+running (2m16.7s), 1000/1500 VUs, 6031 complete and 0 interrupted iterations
+default   [  72% ] 1000/1500 VUs  2m16.7s/3m10.0s
+
+running (2m17.7s), 1000/1500 VUs, 6090 complete and 0 interrupted iterations
+default   [  72% ] 1000/1500 VUs  2m17.7s/3m10.0s
+
+running (2m18.7s), 1000/1500 VUs, 6142 complete and 0 interrupted iterations
+default   [  73% ] 1000/1500 VUs  2m18.7s/3m10.0s
+
+running (2m19.7s), 1000/1500 VUs, 6196 complete and 0 interrupted iterations
+default   [  74% ] 1000/1500 VUs  2m19.7s/3m10.0s
+
+running (2m20.7s), 1018/1500 VUs, 6260 complete and 0 interrupted iterations
+default   [  74% ] 1018/1500 VUs  2m20.7s/3m10.0s
+
+running (2m21.7s), 1043/1500 VUs, 6323 complete and 0 interrupted iterations
+default   [  75% ] 1043/1500 VUs  2m21.7s/3m10.0s
+
+running (2m22.7s), 1068/1500 VUs, 6387 complete and 0 interrupted iterations
+default   [  75% ] 1068/1500 VUs  2m22.7s/3m10.0s
+
+running (2m23.7s), 1093/1500 VUs, 6452 complete and 0 interrupted iterations
+default   [  76% ] 1093/1500 VUs  2m23.7s/3m10.0s
+
+running (2m24.7s), 1118/1500 VUs, 6516 complete and 0 interrupted iterations
+default   [  76% ] 1118/1500 VUs  2m24.7s/3m10.0s
+
+running (2m25.7s), 1143/1500 VUs, 6573 complete and 0 interrupted iterations
+default   [  77% ] 1143/1500 VUs  2m25.7s/3m10.0s
+time="2021-12-18T09:19:14Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+
+running (2m26.7s), 1168/1500 VUs, 6620 complete and 0 interrupted iterations
+default   [  77% ] 1168/1500 VUs  2m26.7s/3m10.0s
+
+running (2m27.7s), 1193/1500 VUs, 6678 complete and 0 interrupted iterations
+default   [  78% ] 1193/1500 VUs  2m27.7s/3m10.0s
+
+running (2m28.7s), 1218/1500 VUs, 6731 complete and 0 interrupted iterations
+default   [  78% ] 1218/1500 VUs  2m28.7s/3m10.0s
+
+running (2m29.7s), 1243/1500 VUs, 6786 complete and 0 interrupted iterations
+default   [  79% ] 1243/1500 VUs  2m29.7s/3m10.0s
+time="2021-12-18T09:19:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:19:18Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:19:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:19:18Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:19:19Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:19:19Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:19:19Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:19:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+
+running (2m30.7s), 1250/1500 VUs, 6818 complete and 0 interrupted iterations
+default   [  79% ] 1250/1500 VUs  2m30.7s/3m10.0s
+
+running (2m31.7s), 1250/1500 VUs, 6876 complete and 0 interrupted iterations
+default   [  80% ] 1250/1500 VUs  2m31.7s/3m10.0s
+
+running (2m32.7s), 1250/1500 VUs, 6876 complete and 0 interrupted iterations
+default   [  80% ] 1250/1500 VUs  2m32.7s/3m10.0s
+
+running (2m33.7s), 1250/1500 VUs, 6876 complete and 0 interrupted iterations
+default   [  81% ] 1250/1500 VUs  2m33.7s/3m10.0s
+
+running (2m34.7s), 1250/1500 VUs, 7016 complete and 0 interrupted iterations
+default   [  81% ] 1250/1500 VUs  2m34.7s/3m10.0s
+
+running (2m35.7s), 1250/1500 VUs, 7016 complete and 0 interrupted iterations
+default   [  82% ] 1250/1500 VUs  2m35.7s/3m10.0s
+
+running (2m36.7s), 1250/1500 VUs, 7016 complete and 0 interrupted iterations
+default   [  82% ] 1250/1500 VUs  2m36.7s/3m10.0s
+
+running (2m37.7s), 1250/1500 VUs, 7038 complete and 0 interrupted iterations
+default   [  83% ] 1250/1500 VUs  2m37.7s/3m10.0s
+
+running (2m38.7s), 1250/1500 VUs, 7165 complete and 0 interrupted iterations
+default   [  84% ] 1250/1500 VUs  2m38.7s/3m10.0s
+time="2021-12-18T09:19:28Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:19:28Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (2m39.7s), 1250/1500 VUs, 7256 complete and 0 interrupted iterations
+default   [  84% ] 1250/1500 VUs  2m39.7s/3m10.0s
+
+running (2m40.7s), 1268/1500 VUs, 7300 complete and 0 interrupted iterations
+default   [  85% ] 1268/1500 VUs  2m40.7s/3m10.0s
+
+running (2m41.7s), 1293/1500 VUs, 7367 complete and 0 interrupted iterations
+default   [  85% ] 1293/1500 VUs  2m41.7s/3m10.0s
+
+running (2m42.7s), 1318/1500 VUs, 7449 complete and 0 interrupted iterations
+default   [  86% ] 1318/1500 VUs  2m42.7s/3m10.0s
+time="2021-12-18T09:19:31Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:19:31Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:19:31Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+
+running (2m43.7s), 1343/1500 VUs, 7468 complete and 0 interrupted iterations
+default   [  86% ] 1343/1500 VUs  2m43.7s/3m10.0s
+
+running (2m44.7s), 1368/1500 VUs, 7547 complete and 0 interrupted iterations
+default   [  87% ] 1368/1500 VUs  2m44.7s/3m10.0s
+
+running (2m45.7s), 1393/1500 VUs, 7660 complete and 0 interrupted iterations
+default   [  87% ] 1393/1500 VUs  2m45.7s/3m10.0s
+
+running (2m46.7s), 1418/1500 VUs, 7732 complete and 0 interrupted iterations
+default   [  88% ] 1418/1500 VUs  2m46.7s/3m10.0s
+
+running (2m47.7s), 1443/1500 VUs, 7810 complete and 0 interrupted iterations
+default   [  88% ] 1443/1500 VUs  2m47.7s/3m10.0s
+
+running (2m48.7s), 1468/1500 VUs, 7888 complete and 0 interrupted iterations
+default   [  89% ] 1468/1500 VUs  2m48.7s/3m10.0s
+
+running (2m49.7s), 1493/1500 VUs, 7969 complete and 0 interrupted iterations
+default   [  89% ] 1493/1500 VUs  2m49.7s/3m10.0s
+
+running (2m50.7s), 1500/1500 VUs, 8020 complete and 0 interrupted iterations
+default   [  90% ] 1500/1500 VUs  2m50.7s/3m10.0s
+
+running (2m51.7s), 1500/1500 VUs, 8093 complete and 0 interrupted iterations
+default   [  90% ] 1500/1500 VUs  2m51.7s/3m10.0s
+
+running (2m52.7s), 1500/1500 VUs, 8137 complete and 0 interrupted iterations
+default   [  91% ] 1500/1500 VUs  2m52.7s/3m10.0s
+
+running (2m53.7s), 1500/1500 VUs, 8149 complete and 0 interrupted iterations
+default   [  91% ] 1500/1500 VUs  2m53.7s/3m10.0s
+
+running (2m54.7s), 1500/1500 VUs, 8167 complete and 0 interrupted iterations
+default   [  92% ] 1500/1500 VUs  2m54.7s/3m10.0s
+
+running (2m55.7s), 1500/1500 VUs, 8202 complete and 0 interrupted iterations
+default   [  92% ] 1500/1500 VUs  2m55.7s/3m10.0s
+
+running (2m56.7s), 1500/1500 VUs, 8253 complete and 0 interrupted iterations
+default   [  93% ] 1500/1500 VUs  2m56.7s/3m10.0s
+
+running (2m57.7s), 1500/1500 VUs, 8270 complete and 0 interrupted iterations
+default   [  94% ] 1500/1500 VUs  2m57.7s/3m10.0s
+
+running (2m58.7s), 1500/1500 VUs, 8292 complete and 0 interrupted iterations
+default   [  94% ] 1500/1500 VUs  2m58.7s/3m10.0s
+
+running (2m59.7s), 1500/1500 VUs, 8313 complete and 0 interrupted iterations
+default   [  95% ] 1500/1500 VUs  2m59.7s/3m10.0s
+time="2021-12-18T09:19:48Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:19:48Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m00.7s), 1499/1500 VUs, 8343 complete and 0 interrupted iterations
+default   [  95% ] 1499/1500 VUs  3m00.7s/3m10.0s
+time="2021-12-18T09:19:49Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:19:49Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m01.7s), 1497/1500 VUs, 8389 complete and 0 interrupted iterations
+default   [  96% ] 1497/1500 VUs  3m01.7s/3m10.0s
+
+running (3m02.7s), 1483/1500 VUs, 8431 complete and 0 interrupted iterations
+default   [  96% ] 1483/1500 VUs  3m02.7s/3m10.0s
+
+running (3m03.7s), 1472/1500 VUs, 8477 complete and 0 interrupted iterations
+default   [  97% ] 1472/1500 VUs  3m03.7s/3m10.0s
+
+running (3m04.7s), 1447/1500 VUs, 8542 complete and 0 interrupted iterations
+default   [  97% ] 1447/1500 VUs  3m04.7s/3m10.0s
+
+running (3m05.7s), 1420/1500 VUs, 8593 complete and 0 interrupted iterations
+default   [  98% ] 1420/1500 VUs  3m05.7s/3m10.0s
+
+running (3m06.7s), 1375/1500 VUs, 8662 complete and 0 interrupted iterations
+default   [  98% ] 1375/1500 VUs  3m06.7s/3m10.0s
+
+running (3m07.7s), 1314/1500 VUs, 8733 complete and 0 interrupted iterations
+default   [  99% ] 1314/1500 VUs  3m07.7s/3m10.0s
+
+running (3m08.7s), 1254/1500 VUs, 8805 complete and 0 interrupted iterations
+default   [  99% ] 1254/1500 VUs  3m08.7s/3m10.0s
+
+running (3m09.7s), 1195/1500 VUs, 8869 complete and 0 interrupted iterations
+default   [ 100% ] 1195/1500 VUs  3m09.7s/3m10.0s
+
+running (3m10.7s), 1134/1500 VUs, 8931 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m11.7s), 1074/1500 VUs, 8991 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m12.7s), 1023/1500 VUs, 9042 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m13.7s), 0965/1500 VUs, 9100 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m14.7s), 0880/1500 VUs, 9185 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m15.7s), 0784/1500 VUs, 9281 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m16.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m17.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m18.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m19.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m20.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m21.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m22.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m23.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m24.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m25.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m26.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m27.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m28.7s), 0767/1500 VUs, 9298 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+time="2021-12-18T09:20:17Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:17Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:18Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:18Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:18Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m29.7s), 0763/1500 VUs, 9302 complete and 0 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:18Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:18Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/paths?source=3&target=7\": request timeout"
+
+running (3m30.7s), 0719/1500 VUs, 9304 complete and 42 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:19Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:20Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:20Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m31.7s), 0625/1500 VUs, 9331 complete and 109 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m32.7s), 0549/1500 VUs, 9331 complete and 185 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m33.7s), 0471/1500 VUs, 9331 complete and 263 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=warning msg="Request Failed" error="request timeout"
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:23Z" level=error msg="SyntaxError: unexpected EOF\n\tat parse (native)\n\tat stations are not empty (file:///-:41:51(5))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m34.7s), 0340/1500 VUs, 9394 complete and 331 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m35.7s), 0270/1500 VUs, 9394 complete and 401 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m36.7s), 0209/1500 VUs, 9394 complete and 462 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m37.7s), 0143/1500 VUs, 9394 complete and 528 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m38.7s), 0079/1500 VUs, 9394 complete and 592 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+time="2021-12-18T09:20:27Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": dial: i/o timeout"
+time="2021-12-18T09:20:27Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:27Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:27Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:27Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:27Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+time="2021-12-18T09:20:27Z" level=warning msg="Request Failed" error="Get \"http://y2o2u2n-alb-1093980542.ap-northeast-2.elb.amazonaws.com/stations\": request timeout"
+time="2021-12-18T09:20:27Z" level=error msg="TypeError: Cannot read property 'map' of undefined or null\n\tat stations are not empty (file:///-:41:50(8))\n\tat go.k6.io/k6/js/common.Bind.func1 (native)\n\tat file:///-:39:35(19)\n" executor=ramping-vus scenario=default source=stacktrace
+
+running (3m39.7s), 0014/1500 VUs, 9398 complete and 653 interrupted iterations
+default ↓ [ 100% ] 1180/1500 VUs  3m10s
+
+running (3m39.9s), 0000/1500 VUs, 9398 complete and 667 interrupted iterations
+default ✓ [ 100% ] 0000/1500 VUs  3m10s
+
+     ✗ got stations
+      ↳  98% — ✓ 9462 / ✗ 107
+     ✗ stations are not empty
+      ↳  98% — ✓ 9463 / ✗ 106
+     ✗ found path
+      ↳  99% — ✓ 9282 / ✗ 10
+
+     checks.........................: 99.21% ✓ 28207     ✗ 223
+     data_received..................: 705 MB 3.2 MB/s
+     data_sent......................: 2.7 MB 12 kB/s
+     http_req_blocked...............: avg=14.19ms  min=0s          med=3.57µs  max=18.07s  p(90)=9.82µs  p(95)=3.63ms
+     http_req_connecting............: avg=14.18ms  min=-17354255ns med=0s      max=18.07s  p(90)=0s      p(95)=3.55ms
+   ✗ http_req_duration..............: avg=4.98s    min=0s          med=3.48s   max=59.97s  p(90)=10.6s   p(95)=12.01s
+       { expected_response:true }...: avg=4.65s    min=18.28ms     med=3.44s   max=28.16s  p(90)=10.49s  p(95)=11.48s
+     http_req_failed................: 0.62%  ✓ 117       ✗ 18744
+     http_req_receiving.............: avg=311.09ms min=-8281105ns  med=14.43ms max=50.77s  p(90)=68.54ms p(95)=108.03ms
+     http_req_sending...............: avg=38.4µs   min=0s          med=12.3µs  max=29.69ms p(90)=40.14µs p(95)=70.17µs
+     http_req_tls_handshaking.......: avg=0s       min=0s          med=0s      max=0s      p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=4.67s    min=0s          med=3.45s   max=59.96s  p(90)=10.41s  p(95)=11.24s
+     http_reqs......................: 18861  85.761574/s
+     iteration_duration.............: avg=10.85s   min=1.04s       med=9.66s   max=1m11s   p(90)=21.28s  p(95)=24.35s
+     iterations.....................: 9398   42.733009/s
+     vus............................: 64     min=3       max=1500
+     vus_max........................: 1500   min=1500    max=1500
+
+time="2021-12-18T09:20:31Z" level=error msg="some thresholds have failed"
