@@ -96,3 +96,33 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
      * 1일 최대 rps, 23 * (2 / 1) = 약 46
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+    * 접속 빈도가 높은 페이지: 메인 페이지
+        * smoke
+            * k6/main/smoke.js
+            * k6/main/smoke.log
+        * load
+            * k6/main/load.js
+            * k6/main/load.log
+        * stress
+            * k6/main/stress.js
+            * k6/main/stress.log
+    * 데이터를 갱신하는 페이지: 회원 정보 수정 페이지
+        * smoke
+            * k6/update/smoke.js
+            * k6/update/smoke.log
+        * load
+            * k6/update/load.js
+            * k6/update/load.log
+        * stress
+            * k6/update/stress.js
+            * k6/update/stress.log
+    * 테스터를 조회하는데 여러 데이터를 참조하는 페이지: 경로 조회
+        * smoke
+            * k6/findpath/smoke.js
+            * k6/findpath/smoke.log
+        * load
+            * k6/findpath/load.js
+            * k6/findpath/load.log
+        * stress
+            * k6/findpath/stress.js
+            * k6/findpath/stress.log
