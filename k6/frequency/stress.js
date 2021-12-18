@@ -3,17 +3,19 @@ import {check, group, sleep} from 'k6';
 
 export let options = {
     stages: [
-        { duration: '10s', target: 50},
-        { duration: '10s', target: 100},
-        { duration: '10s', target: 150},
-        { duration: '10s', target: 200},
-        { duration: '10s', target: 250},
-        { duration: '10s', target: 300},
-        { duration: '10s', target: 0},
+        { duration: '30s', target: 100},
+        { duration: '1m', target: 100},
+        { duration: '30s', target: 900},
+        { duration: '1m', target: 900},
+        { duration: '30s', target: 1800},
+        { duration: '1m', target: 1800},
+        { duration: '30s', target: 2700},
+        { duration: '1m', target: 2700},
+        { duration: '30s', target: 0},
     ],
 
     thresholds: {
-        http_req_duration: ['p(99)<1500'],
+        http_req_duration: ['p(99)<500'],
     },
 };
 

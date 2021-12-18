@@ -8,29 +8,29 @@
      script: stress.js
      output: -
 
-  scenarios: (100.00%) 1 scenario, 31 max VUs, 55s max duration (incl. graceful stop):
-           * default: Up to 31 looping VUs for 25s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 36 max VUs, 3m20s max duration (incl. graceful stop):
+           * default: Up to 36 looping VUs for 2m50s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (25.7s), 00/31 VUs, 336 complete and 0 interrupted iterations
-default ✓ [======================================] 00/31 VUs  25s
+running (2m50.2s), 00/36 VUs, 2244 complete and 0 interrupted iterations
+default ✓ [======================================] 00/36 VUs  2m50s
 
      ✓ find paths
 
-     checks.........................: 100.00% ✓ 336       ✗ 0
-     data_received..................: 817 kB  32 kB/s
-     data_sent......................: 33 kB   1.3 kB/s
-     http_req_blocked...............: avg=559.74µs min=2.66µs  med=2.92µs   max=30.04ms p(90)=11.48µs  p(95)=4.47ms
-     http_req_connecting............: avg=74.76µs  min=0s      med=0s       max=1.25ms  p(90)=0s       p(95)=548.84µs
-   ✓ http_req_duration..............: avg=570.42ms min=86.94ms med=652.93ms max=1.12s   p(90)=919.66ms p(95)=970.67ms
-       { expected_response:true }...: avg=570.42ms min=86.94ms med=652.93ms max=1.12s   p(90)=919.66ms p(95)=970.67ms
-     http_req_failed................: 0.00%   ✓ 0         ✗ 336
-     http_req_receiving.............: avg=431.42µs min=30.47µs med=87.76µs  max=12.51ms p(90)=882.07µs p(95)=1.66ms
-     http_req_sending...............: avg=76.66µs  min=39.64µs med=68.03µs  max=433.1µs p(90)=110.17µs p(95)=131.99µs
-     http_req_tls_handshaking.......: avg=425.74µs min=0s      med=0s       max=15.36ms p(90)=0s       p(95)=3.54ms
-     http_req_waiting...............: avg=569.92ms min=86.82ms med=652.67ms max=1.11s   p(90)=919.35ms p(95)=970.41ms
-     http_reqs......................: 336     13.071597/s
-     iteration_duration.............: avg=1.57s    min=1.08s   med=1.65s    max=2.12s   p(90)=1.92s    p(95)=1.97s
-     iterations.....................: 336     13.071597/s
-     vus............................: 3       min=3       max=31
-     vus_max........................: 31      min=31      max=31
+     checks.........................: 100.00% ✓ 2244      ✗ 0
+     data_received..................: 4.7 MB  27 kB/s
+     data_sent......................: 118 kB  693 B/s
+     http_req_blocked...............: avg=85.74µs  min=2.57µs  med=2.91µs   max=20.48ms  p(90)=3.07µs   p(95)=3.19µs
+     http_req_connecting............: avg=12.19µs  min=0s      med=0s       max=1.19ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=618ms    min=80.82ms med=586.77ms max=1.69s    p(90)=1.26s    p(95)=1.32s
+       { expected_response:true }...: avg=618ms    min=80.82ms med=586.77ms max=1.69s    p(90)=1.26s    p(95)=1.32s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 2244
+     http_req_receiving.............: avg=391.13µs min=27.11µs med=79.89µs  max=18.4ms   p(90)=680.48µs p(95)=1.47ms
+     http_req_sending...............: avg=71.71µs  min=36.77µs med=68.42µs  max=543.05µs p(90)=85.46µs  p(95)=96.71µs
+     http_req_tls_handshaking.......: avg=66.53µs  min=0s      med=0s       max=16.26ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=617.53ms min=80.69ms med=586.59ms max=1.69s    p(90)=1.26s    p(95)=1.32s
+     http_reqs......................: 2244    13.182789/s
+     iteration_duration.............: avg=1.61s    min=1.08s   med=1.58s    max=2.69s    p(90)=2.26s    p(95)=2.32s
+     iterations.....................: 2244    13.182789/s
+     vus............................: 2       min=2       max=36
+     vus_max........................: 36      min=36      max=36

@@ -122,6 +122,7 @@ npm run dev
     - Stress
         - [Stress 스크립트](/k6/frequency/stress.js)
         - [Stress 결과](/k6/frequency/stress.log)
+        - [Stress 실패](/k6/frequency/stress-fail.log)
 - 데이터를 갱신하는 페이지(내 정보 수정 페이지)
     - Smoke
         - [Smoke 스크립트](/k6/update/smoke.js)
@@ -132,6 +133,7 @@ npm run dev
     - Stress
         - [Stress 스크립트](/k6/update/stress.js)
         - [Stress 결과](/k6/update/stress.log)
+        - [Stress 실패](/k6/update/stress-fail.log)
 - 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로 찾기 페이지)
     - Smoke
         - [Smoke 스크립트](/k6/complex/smoke.js)
@@ -142,3 +144,4 @@ npm run dev
     - Stress
         - [Stress 스크립트](/k6/complex/stress.js)
         - [Stress 결과](/k6/complex/stress.log)
+        - [Stress 실패](/k6/complex/stress-fail.log)
