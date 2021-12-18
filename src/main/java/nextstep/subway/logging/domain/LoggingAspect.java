@@ -15,8 +15,8 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger("file");
 
-    @Around("@annotation(Logging)")
-    public Object log(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("@annotation(nextstep.subway.logging.domain.Logging)")
+    public Object writeLogMessage(ProceedingJoinPoint pjp) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Logging logging = methodSignature.getMethod().getAnnotation(Logging.class);
         logger.info(String.format("%s api 호출하였습니다.", logging.target()));
