@@ -44,7 +44,7 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 * Application Log
-  * /home/ubuntu/infra-subway-monitoring/log/file.log
+  * /home/ubuntu/infra-subway-monitoring/build/libs/log/file.log
 * System Log
   * /var/log/syslog
 
