@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: k6/main/stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 100 looping VUs for 45s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m45.2s), 000/100 VUs, 1197 complete and 0 interrupted iterations
+default ✓ [======================================] 000/100 VUs  45s
+
+     ✓ main
+
+     checks.........................: 100.00% ✓ 1197      ✗ 0
+     data_received..................: 488 kB  11 kB/s
+     data_sent......................: 178 kB  3.9 kB/s
+     http_req_blocked...............: avg=1.29ms   min=3µs     med=6µs      max=247.47ms p(90)=20µs     p(95)=6.15ms
+     http_req_connecting............: avg=1.27ms   min=0s      med=0s       max=247.4ms  p(90)=0s       p(95)=6.04ms
+   ✗ http_req_duration..............: avg=263.91ms min=29.45ms med=140.77ms max=1.53s    p(90)=733.6ms  p(95)=821.78ms
+       { expected_response:true }...: avg=263.91ms min=29.45ms med=140.77ms max=1.53s    p(90)=733.6ms  p(95)=821.78ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 1197
+     http_req_receiving.............: avg=909.56µs min=26µs    med=79µs     max=236.04ms p(90)=1.11ms   p(95)=1.92ms
+     http_req_sending...............: avg=35.63µs  min=10µs    med=31µs     max=264µs    p(90)=58.4µs   p(95)=80.4µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=262.97ms min=29.36ms med=139.69ms max=1.53s    p(90)=728.99ms p(95)=818.31ms
+     http_reqs......................: 1197    26.492023/s
+     iteration_duration.............: avg=1.26s    min=1.02s   med=1.14s    max=2.54s    p(90)=1.73s    p(95)=1.82s
+     iterations.....................: 1197    26.492023/s
+     vus............................: 1       min=1       max=99
+     vus_max........................: 100     min=100     max=100
+
+ERRO[0047] some thresholds have failed

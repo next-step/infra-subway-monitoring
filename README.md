@@ -63,8 +63,134 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+    * 경쟁사 성능 테스트 결과 by PageSpeed (데스크톱)
+
+        |Service                  | First Contentful Paint | Time to Interactive| Speed Index | Total Blocking Time| Largest Contentful Paint | Cumulative Layout Shift|
+        |-------------------------|:----------------------:|:------------------:|:-----------:|:------------------:|:------------------------:|:----------------------:|
+        |https://map.naver.com/v5/|0.8s                    |3.4s                |2.7s         |260ms               |3.5s                      |0                       |
+        |https://map.kakao.com/   |0.6s                    |3.3s                |2.7s         |1270ms              |0.7s                      |0.018                   |
+        |우테캠Pro 지하철 서비스       |2.8s                    |2.9s                |2.7s         |70ms                |2.9s                      |0.004                   |
+
+    * 웹 성능 예산 (경쟁사 성능 평균이내)
+
+        |Service                  | First Contentful Paint | Time to Interactive| Speed Index | Total Blocking Time| Largest Contentful Paint | Cumulative Layout Shift|
+        |-------------------------|:----------------------:|:------------------:|:-----------:|:------------------:|:------------------------:|:----------------------:|
+        |우테캠Pro 지하철 서비스       | <= 0.7s                |<= 3.35s            |<= 2.7s      |<= 765ms            |<= 2.1s                   |<= 0.009                |
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
+    * 텍스트 압축 사용
+
+    * 사용하지 않는 자바스크립트 줄이기
+
+    * 웹 폰트 변경
+
+    * 이미지 요소에 width, height 명시
+
+    * 정적 컨텐츠 캐싱 적용
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+    * 대상 시스템 범위
+
+        * 접속 빈도가 높은 페이지
+
+            * `GET /`
+
+        * 데이터를 갱신하는 페이지
+
+            * `PUT /updateMember`
+
+        * 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+
+            * `GET /paths`
+
+    * 목푯값 설정
+
+        * latency
+
+            * 200ms
+
+        * throughput
+
+            * 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+
+                * 1,000,000 * 2 = 2,000,000
+
+            * 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+
+                * 2,000,000 / 86,400 = 23
+             
+            * 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+
+                * 23 * 2 = 46
+ 
+        * 부하 유지기간
+
+            * 2시간 이내
+
+    * 부하 테스트 시 저장될 데이터 건수 및 크기
+
+        * 초기 데이터 활용
+
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+    * 접속 빈도가 높은 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/main/smoke.js)
+
+            * [테스트 결과](/k6/main/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/main/load.js)
+
+            * [테스트 결과](/k6/main/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/main/stress.js)
+
+            * [테스트 결과](/k6/main/result/stress.log)
+
+    * 데이터를 갱신하는 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/update_member/smoke.js)
+
+            * [테스트 결과](/k6/update_member/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/update_member/load.js)
+
+            * [테스트 결과](/k6/update_member/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/update_member/stress.js)
+
+            * [테스트 결과](/k6/update_member/result/stress.log)
+
+    * 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+
+        * Smoke Test
+
+            * [테스트 스크립트](/k6/find_path/smoke.js)
+
+            * [테스트 결과](/k6/find_path/result/smoke.log)
+
+        * Load Test
+
+            * [테스트 스크립트](/k6/find_path/load.js)
+
+            * [테스트 결과](/k6/find_path/result/load.log)
+
+        * Stress Test
+
+            * [테스트 스크립트](/k6/find_path/stress.js)
+
+            * [테스트 결과](/k6/find_path/result/stress.log)
