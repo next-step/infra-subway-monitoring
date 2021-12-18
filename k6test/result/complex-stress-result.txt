@@ -1,0 +1,39 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: complex-stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 230 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: Up to 230 looping VUs for 30s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m59.3s), 000/230 VUs, 265 complete and 34 interrupted iterations
+default ✓ [======================================] 000/230 VUs  30s
+
+     ✗ selected successfully
+      ↳  56% — ✓ 150 / ✗ 115
+
+     checks.........................: 56.60% ✓ 150      ✗ 115
+     data_received..................: 1.2 MB 19 kB/s
+     data_sent......................: 128 kB 2.2 kB/s
+     http_req_blocked...............: avg=3.97ms   min=4.88µs  med=3.97ms   max=22.39ms  p(90)=5.46ms   p(95)=7.49ms
+     http_req_connecting............: avg=496.28µs min=0s      med=475.58µs max=8.32ms   p(90)=556.85µs p(95)=683.79µs
+   ✗ http_req_duration..............: avg=28.24s   min=3.76s   med=30.02s   max=44.34s   p(90)=41.13s   p(95)=43.19s
+       { expected_response:true }...: avg=26.83s   min=3.76s   med=28.76s   max=44.34s   p(90)=41.62s   p(95)=43.62s
+     http_req_failed................: 43.39% ✓ 115      ✗ 150
+     http_req_receiving.............: avg=86.38µs  min=35.84µs med=76.56µs  max=968.78µs p(90)=105.77µs p(95)=115.92µs
+     http_req_sending...............: avg=57.53µs  min=13.04µs med=57.03µs  max=240.55µs p(90)=78.23µs  p(95)=85.26µs
+     http_req_tls_handshaking.......: avg=3.38ms   min=0s      med=3.39ms   max=16.46ms  p(90)=4.37ms   p(95)=6.91ms
+     http_req_waiting...............: avg=28.24s   min=3.76s   med=30.02s   max=44.34s   p(90)=41.13s   p(95)=43.19s
+     http_reqs......................: 265    4.471518/s
+     iteration_duration.............: avg=29.25s   min=4.77s   med=31.03s   max=45.34s   p(90)=42.13s   p(95)=44.19s
+     iterations.....................: 265    4.471518/s
+     vus............................: 12     min=12     max=230
+     vus_max........................: 230    min=230    max=230
+
+ERRO[0060] some thresholds have failed
