@@ -150,4 +150,12 @@ npm run dev
            - 사용자 정보 수정: [mypage-smoke.js](/k6/script/smoke/mypage-smoke.js), [mypage-smoke.txt](/k6/result/mypage-smoke.txt)
        - DB를 사용하는 기능
            - 경로 조회: [path-smoke.js](/k6/script/smoke/path-smoke.js), [path-smoke.txt](/k6/result/path-smoke.txt)
-           
+
+   - Load 테스트
+       - 접속 빈도가 높은 기능
+           - 메인 페이지: [main-load.js](/k6/script/load/main-load.js), [main-load.txt](/k6/result/main-load.txt)
+       - 서버 리소스 소비량이 높은 기능
+           - 사용자 정보 수정: [mypage-load.js](/k6/script/load/mypage-load.js), [mypage-load.txt](/k6/result/mypage-load.txt)
+       - DB를 사용하는 기능
+           - 경로 조회: [path-load.js](/k6/script/load/path-load.js), [path-load.txt](/k6/result/path-load.txt)
+      
