@@ -2,6 +2,7 @@ package nextstep.subway.member.ui;
 
 import nextstep.subway.auth.domain.AuthenticationPrincipal;
 import nextstep.subway.auth.domain.LoginMember;
+import nextstep.subway.logging.domain.Logging;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
@@ -14,18 +15,18 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
+
     private MemberService memberService;
-    private static final Logger logger = LoggerFactory.getLogger("file");
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
+    @Logging(message = "회원 생성을 요청하였습니다.")
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
         ResponseEntity response = ResponseEntity.created(URI.create("/members/" + member.getId())).build();
-        logger.info("회원 생성 : " + member.getId());
         return response;
     }
 

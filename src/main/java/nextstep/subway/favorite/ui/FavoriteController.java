@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 public class FavoriteController {
+
     private FavoriteService favoriteService;
 
     public FavoriteController(FavoriteService favoriteService) {
