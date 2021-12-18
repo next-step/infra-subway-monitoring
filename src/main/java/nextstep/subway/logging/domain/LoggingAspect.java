@@ -19,8 +19,9 @@ public class LoggingAspect {
     public Object log(ProceedingJoinPoint pjp) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Logging logging = methodSignature.getMethod().getAnnotation(Logging.class);
-        logger.info(logging.message());
+        logger.info(String.format("%s api 호출하였습니다.", logging.target()));
         Object retValue = pjp.proceed();
+        logger.info(String.format("%s api 호출이 성공하였습니다.", logging.target()));
         return retValue;
     }
 

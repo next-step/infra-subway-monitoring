@@ -22,7 +22,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @Logging(message = "회원 생성을 요청하였습니다.")
+    @Logging(target = "/members")
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);

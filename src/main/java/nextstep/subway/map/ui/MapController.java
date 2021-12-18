@@ -18,7 +18,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @Logging(message = "최단경로를 조회하였습니다.")
+    @Logging(target = "/paths")
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
         ResponseEntity<PathResponse> response = ResponseEntity.ok(mapService.findPath(source, target));
