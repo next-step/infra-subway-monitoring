@@ -140,3 +140,14 @@ npm run dev
     - Latency : 50~100ms 이하
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+   - /k6 폴더에 script 와 result 가 있습니다.
+
+   - Smoke 테스트
+       - 접속 빈도가 높은 기능
+           - 메인 페이지: [main-smoke.js](/k6/script/smoke/main-smoke.js), [main-smoke.txt](/k6/result/main-smoke.txt)
+       - 서버 리소스 소비량이 높은 기능
+           - 사용자 정보 수정: [mypage-smoke.js](/k6/script/smoke/mypage-smoke.js), [mypage-smoke.txt](/k6/result/mypage-smoke.txt)
+       - DB를 사용하는 기능
+           - 경로 조회: [path-smoke.js](/k6/script/smoke/path-smoke.js), [path-smoke.txt](/k6/result/path-smoke.txt)
+           
