@@ -4,20 +4,19 @@
 
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="console-appender.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="json-appender.xml" />
 
-    <springProfile name="local">
-        <include resource="console-appender.xml"/>
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
 
-        <logger name="console" level="TRACE">
-            <appender-ref ref="console" level="TRACE"/>
-        </logger>
-    </springProfile>
+    <logger name="file" level="INFO" >
+        <appender-ref ref="file" />
+    </logger>
 
-    <springProfile name="prod">
-        <include resource="file-appender.xml"/>
-
-        <logger name="nextstep.subway" level="INFO">
-            <appender-ref ref="file"/>
-        </logger>
-    </springProfile>
+    <logger name="json" level="INFO" >
+        <appender-ref ref="json" />
+    </logger>
 </configuration>
