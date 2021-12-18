@@ -73,6 +73,7 @@ npm run dev
     - https://subway-deploy.kro.kr
     - http://www.seoulmetro.co.kr/kr/cyberStation.do#stationInfo
     - https://m.map.naver.com/subway/subwayLine.naver
+    - /k6 폴더에 site 비교 이미지를 첨부 하였습니다.
 
   |  |성능 개선 전<br>subway|성능 개선 후<br>subway|서울교통공사<br>사이버 스테이션|네이버 지하철|
   |:---:|:---:|:---:|:---:|:---:|
@@ -113,10 +114,15 @@ npm run dev
     - TCP 연결을 재사용하기 위한 Keep-Alive ALB에 60초로 설정 (기본 설정 되어 있음)
     - 스크립트 파일 Content-Encoding 으로 압축, 최소 압축 사이즈 설정
     - 정적 파일이 캐싱을 위한 Cache Static Content 설정
+    
+    > 성능 개선 결과
+    > - 데스트탑에서 68점 에서 94점으로 약 38% 개선 
+    > - 모바일에서 29점에서 45점으로 약 55% 개선
 
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+    - /k6 폴더에 analysis 자료를 참고하였습니다.
+   
     - 예상 1일 사용자 수(DAU): 69,000명
         - 2020년 12월 31일 기준 지하철 이용자 수 3,791만명
         - 20210년 1월 기준 네이버지도 순이용자수 1,380만명
@@ -139,8 +145,7 @@ npm run dev
         - 1일 최대 rps: 4 * 2.23 = 9
     - Latency : 50~100ms 이하
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
    - /k6 폴더에 script 와 result 가 있습니다.
 
    - Smoke 테스트
