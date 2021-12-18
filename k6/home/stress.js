@@ -1,20 +1,30 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
 
-const vUserOnAverageTraffic = (23 * ((2 * 0.5) + 1)) / 2;
-const vUserOnMaxTraffic = (46 * ((2 * 0.5) + 1)) / 2;
+const vUserOnAverageTraffic = (23 * ((2 * 0.5) + 1)) / 2; // 23
+const vUserOnMaxTraffic = (46 * ((2 * 0.5) + 1)) / 2; // 46
 
 export let options = {
     stages: [
-        {duration: '10s', target: vUserOnAverageTraffic}, // 0 ~ average traffic
-        {duration: '10s', target: vUserOnAverageTraffic}, // average traffic
-        {duration: '10s', target: vUserOnMaxTraffic}, // average traffic ~ max traffic
-        {duration: '10s', target: vUserOnMaxTraffic}, // max traffic
-        {duration: '10s', target: Math.floor(1.25 * vUserOnMaxTraffic)}, // max traffic ~ 1.25 * max traffic
-        {duration: '10s', target: Math.floor(1.25 * vUserOnMaxTraffic)}, // 1.25 * max traffic
-        {duration: '10s', target: Math.floor(1.5 * vUserOnMaxTraffic)}, // 1.25 * max traffic ~ 1.5 * max traffic
-        {duration: '10s', target: Math.floor(1.5 * vUserOnMaxTraffic)}, // 1.5 * max traffic
-        {duration: '10s', target: 0}, // 1.5 * max traffic ~ 0
+        {duration: '10s', target: 23},
+        {duration: '10s', target: 23},
+        {duration: '10s', target: 46},
+        {duration: '10s', target: 46},
+        {duration: '10s', target: 100},
+        {duration: '10s', target: 100},
+        {duration: '10s', target: 250},
+        {duration: '10s', target: 250},
+        {duration: '10s', target: 500},
+        {duration: '10s', target: 500},
+        {duration: '10s', target: 750},
+        {duration: '10s', target: 750},
+        {duration: '10s', target: 1000},
+        {duration: '10s', target: 1000},
+        {duration: '10s', target: 1250},
+        {duration: '10s', target: 1250},
+        {duration: '10s', target: 1500},
+        {duration: '10s', target: 1500},
+        {duration: '10s', target: 0},
     ],
 
     thresholds: {
