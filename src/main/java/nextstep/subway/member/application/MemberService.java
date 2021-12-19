@@ -22,30 +22,47 @@ public class MemberService {
     }
 
     public MemberResponse createMember(MemberRequest request) {
+        log.info("회원가입을 요청 되었습니다. email : {}", request.getEmail());
+
         Member member = memberRepository.save(request.toMember());
+
         log.info("회원가입 되었습니다. email : {}", request.getEmail());
+
         return MemberResponse.of(member);
     }
 
     public MemberResponse findMember(Long id) {
-        Member member = memberRepository.findById(id).orElseThrow(() -> {
-            log.error("회원 조회 중 오류가 발생하였습니다. id : {}", id);
-            return new RuntimeException();
-        });
+        log.info("회원 조회가 요청 되었습니다. id : {}", id);
+
+        Member member = findById(id);
+
+        log.info("회원 조회되었습니다. id : {}", id);
+
         return MemberResponse.of(member);
     }
 
     public void updateMember(Long id, MemberRequest param) {
-        Member member = memberRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.error("회원 업데이트 중 오류가 발생하였습니다. id : {}", id);
-                    return new RuntimeException();
-                });
+        log.info("회원 수정이 요청 되었습니다. id : {}", id);
+
+        Member member = findById(id);
         member.update(param.toMember());
+
+        log.info("회원 수정되었습니다. id : {}", id);
     }
 
     public void deleteMember(Long id) {
+        log.info("회원 삭제가 요청 되었습니다. id : {}", id);
+
         memberRepository.deleteById(id);
+
+        log.info("회원 삭제되었습니다. id : {}", id);
+    }
+
+    private Member findById(Long id) {
+        return memberRepository.findById(id).orElseThrow(() -> {
+            log.error("회원 조회 중 오류가 발생하였습니다. id : {}", id);
+            return new RuntimeException();
+        });
     }
 
     public Member findMemberByEmail(String email) {

@@ -24,21 +24,32 @@ public class StationService {
     }
 
     public StationResponse saveStation(StationRequest stationRequest) {
+        log.info("역 등록이 요청 되었습니다. name : {}", stationRequest.getName());
+
         Station persistStation = stationRepository.save(stationRequest.toStation());
+
+        log.info("역 등록되었습니다. name : {}", stationRequest.getName());
         return StationResponse.of(persistStation);
     }
 
     @Transactional(readOnly = true)
     public List<StationResponse> findAllStations() {
+        log.info("역 목록 조회가 요청 되었습니다.");
+
         List<Station> stations = stationRepository.findAll();
 
+        log.info("역 목록 조회되었습니다.");
         return stations.stream()
                 .map(StationResponse::of)
                 .collect(Collectors.toList());
     }
 
     public void deleteStationById(Long id) {
+        log.info("역 삭제가 요청 되었습니다. id {}", id);
+
         stationRepository.deleteById(id);
+
+        log.info("역 삭제되었습니다. id {}", id);
     }
 
     public Station findById(Long id) {

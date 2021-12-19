@@ -25,15 +25,20 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
+        log.info("로그인 요청 되었습니다. email : {}", request.getEmail());
+
         Member member = memberService.findMemberByEmail(request.getEmail());
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
+
         log.info("로그인 되었습니다. email : {}", member.getEmail());
         return new TokenResponse(token);
     }
 
     public LoginMember findMemberByToken(String credentials) {
+        log.info("인증 요청 되었습니다.");
+
         if (!jwtTokenProvider.validateToken(credentials)) {
             log.error("인증되지 않은 멤버입니다.");
             throw new AuthorizationException();
@@ -41,6 +46,7 @@ public class AuthService {
 
         String email = jwtTokenProvider.getPayload(credentials);
         Member member = memberService.findMemberByEmail(email);
+
         log.info("인증되었습니다. email : {}", member.getEmail());
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
     }

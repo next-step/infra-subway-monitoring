@@ -33,14 +33,20 @@ public class FavoriteService {
     }
 
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
+        log.info("즐겨찾기 생성을 요청하였습니다. id : {}", loginMember.getId());
+
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
         favoriteRepository.save(favorite);
+
+        log.info("즐겨찾기 생성되었습니다. id : {}", loginMember.getId());
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
+        log.info("즐겨찾기 조회를 요청하였습니다. id : {}", loginMember.getId());
         List<Favorite> favorites = favoriteRepository.findByMemberId(loginMember.getId());
         Map<Long, Station> stations = extractStations(favorites);
 
+        log.info("즐겨찾기 조회되었습니다. id : {}", loginMember.getId());
         return favorites.stream()
             .map(it -> FavoriteResponse.of(
                 it,
@@ -50,16 +56,22 @@ public class FavoriteService {
     }
 
     public void deleteFavorite(LoginMember loginMember, Long id) {
+        log.error("즐겨찾기 삭제를 요청하였습니다. id : {}", id);
+
         Favorite favorite = favoriteRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error("즐겨찾기 조회 중 오류가 발생하였습니다. id : {}", id);
                     return new RuntimeException();
                 });
+
         if (!favorite.isCreatedBy(loginMember.getId())) {
             log.error("{} 는 삭제할 권한이 없습니다.", loginMember.getId());
             throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
         }
+
         favoriteRepository.deleteById(id);
+
+        log.error("즐겨찾기 삭제되었습니다. id : {}", id);
     }
 
     private Map<Long, Station> extractStations(List<Favorite> favorites) {

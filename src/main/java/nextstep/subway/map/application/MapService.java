@@ -30,11 +30,14 @@ public class MapService {
     }
 
     public PathResponse findPath(Long source, Long target) {
+        log.info("최단 경로가 조회를 요청하였습니다. source : {} target: {} ", source, target);
+
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-        log.info("최단 경로가 조회 되었습니다.");
+
+        log.info("최단 경로가 조회 되었습니다. source : {} target: {} ", source, target);
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
