@@ -4,6 +4,8 @@ import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
+    private static final Logger log = LoggerFactory.getLogger("file");
+
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -37,11 +41,11 @@ public class StationService {
         stationRepository.deleteById(id);
     }
 
-    public Station findStationById(Long id) {
-        return stationRepository.findById(id).orElseThrow(RuntimeException::new);
-    }
-
     public Station findById(Long id) {
-        return stationRepository.findById(id).orElseThrow(RuntimeException::new);
+        return stationRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("역 찾는 중 오류가 발생하였습니다. id : {}", id);
+                    return new RuntimeException();
+                });
     }
 }

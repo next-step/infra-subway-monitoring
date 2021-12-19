@@ -9,6 +9,8 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
+    private static final Logger log = LoggerFactory.getLogger("file");
+
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
 
@@ -46,8 +50,13 @@ public class FavoriteService {
     }
 
     public void deleteFavorite(LoginMember loginMember, Long id) {
-        Favorite favorite = favoriteRepository.findById(id).orElseThrow(RuntimeException::new);
+        Favorite favorite = favoriteRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("즐겨찾기 조회 중 오류가 발생하였습니다. id : {}", id);
+                    return new RuntimeException();
+                });
         if (!favorite.isCreatedBy(loginMember.getId())) {
+            log.error("{} 는 삭제할 권한이 없습니다.", loginMember.getId());
             throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
         }
         favoriteRepository.deleteById(id);
