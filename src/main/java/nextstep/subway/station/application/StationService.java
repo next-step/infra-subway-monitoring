@@ -1,6 +1,5 @@
 package nextstep.subway.station.application;
 
-import nextstep.subway.map.application.MapService;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class StationService {
     private static final Logger log = LoggerFactory.getLogger(StationService.class);
+
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -39,14 +39,6 @@ public class StationService {
 
     public void deleteStationById(Long id) {
         stationRepository.deleteById(id);
-    }
-
-    public Station findStationById(Long id) {
-        return stationRepository.findById(id)
-                .orElseThrow(() -> {
-                    log.error("역 찾는 중 오류가 발생하였습니다. id : {}", id);
-                    return new RuntimeException();
-                });
     }
 
     public Station findById(Long id) {

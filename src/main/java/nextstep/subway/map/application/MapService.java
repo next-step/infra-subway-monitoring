@@ -1,12 +1,10 @@
 package nextstep.subway.map.application;
 
-import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
-import nextstep.subway.member.application.MemberService;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
 import org.slf4j.Logger;
@@ -20,6 +18,7 @@ import java.util.List;
 @Transactional
 public class MapService {
     private static final Logger log = LoggerFactory.getLogger(MapService.class);
+
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
