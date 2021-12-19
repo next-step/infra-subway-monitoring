@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class LineService {
-    private static final Logger log = LoggerFactory.getLogger(LineService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
 
     private LineRepository lineRepository;
     private StationService stationService;

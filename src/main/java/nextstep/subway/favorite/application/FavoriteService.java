@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
-    private static final Logger log = LoggerFactory.getLogger(FavoriteService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
 
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;

@@ -1,6 +1,5 @@
 package nextstep.subway.member.application;
 
-import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.auth.application.AuthorizationException;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MemberService {
-    private static final Logger log = LoggerFactory.getLogger(MemberService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
