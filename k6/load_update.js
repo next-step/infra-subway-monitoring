@@ -53,7 +53,7 @@ export default function () {
         age: 30
     });
 
-    let updateRes = http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
+    let updateRes = http.post(`${BASE_URL}/members/me`, payload, authHeaders).json();
     check(updateRes, { 'updated member': (response) => response.status === 200 });
     sleep(1);
 };
