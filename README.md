@@ -354,7 +354,7 @@ default ✓ [======================================] 000/300 VUs  50s
      vus_max........................: 300    min=300       max=300
 ```
 
-데이터를 갱싱하는 페이지
+데이터를 갱신하는 페이지: 회원 정보 변경
 * smoke.js
 ```
 import http from 'k6/http';
@@ -411,58 +411,45 @@ export default function () {
 };
 ```
 ```
-import http from 'k6/http';
-import {check, group, sleep, fail} from 'k6';
+➜  update git:(step2) ✗ k6 run smoke.js
 
-export let options = {
-  vus: 1,
-  duration: '10s',
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
 
-  thresholds: {
-    http_req_duration: ['p(99)<100'],
-  },
-};
+  execution: local
+     script: smoke.js
+     output: -
 
-const BASE_URL = 'https://mnonm-subway.kro.kr';
-const USERNAME = 'test@test.com';
-const PASSWORD = 'hi';
-const AGE = 20;
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
-export default function () {
 
-  var payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
+running (10.1s), 0/1 VUs, 9 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
 
-  var params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+     ✓ logged in successfully
+     ✓ retrieved member
 
-  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-
-  let authHeaders = {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-
-  var payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-    age: AGE,
-  });
-
-  let myObjects = http.put(`${BASE_URL}/members/me`, payload, authHeaders).json();
-  check(myObjects, {'retrieved member': (obj) => obj.id != 0});
-  sleep(1);
-};
+     checks.........................: 100.00% ✓ 18       ✗ 0
+     data_received..................: 12 kB   1.1 kB/s
+     data_sent......................: 5.9 kB  586 B/s
+     http_req_blocked...............: avg=18.89ms  min=2µs     med=4µs     max=340.01ms p(90)=11.1µs  p(95)=51.01ms
+     http_req_connecting............: avg=524.16µs min=0s      med=0s      max=9.43ms   p(90)=0s      p(95)=1.41ms
+   ✓ http_req_duration..............: avg=39.93ms  min=16.98ms med=21.47ms max=316.72ms p(90)=35.41ms p(95)=86.24ms
+       { expected_response:true }...: avg=62.13ms  min=23.89ms med=28.52ms max=316.72ms p(90)=99.8ms  p(95)=208.26ms
+     http_req_failed................: 50.00%  ✓ 9        ✗ 9
+     http_req_receiving.............: avg=65.33µs  min=45µs    med=55.5µs  max=142µs    p(90)=92.6µs  p(95)=113.09µs
+     http_req_sending...............: avg=33.66µs  min=17µs    med=25µs    max=124µs    p(90)=56µs    p(95)=84.04µs
+     http_req_tls_handshaking.......: avg=9.83ms   min=0s      med=0s      max=177.04ms p(90)=0s      p(95)=26.55ms
+     http_req_waiting...............: avg=39.83ms  min=16.91ms med=21.38ms max=316.5ms  p(90)=35.31ms p(95)=86.06ms
+     http_reqs......................: 18      1.785293/s
+     iteration_duration.............: avg=1.11s    min=1.04s   med=1.04s   max=1.67s    p(90)=1.18s   p(95)=1.43s
+     iterations.....................: 9       0.892647/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
 ```
 
 * load.js
@@ -656,7 +643,7 @@ default ✓ [======================================] 000/300 VUs  50s
      vus_max........................: 300    min=300       max=300
 ```
 
-데이터를 조회하는데 여러 데이터를 참조하는 페이지
+데이터를 조회하는데 여러 데이터를 참조하는 페이지: 최단 경로 조회
 * smoke.js
 ```
 import http from 'k6/http';
