@@ -8,4 +8,4 @@ services:
     environment:
       - SPRING_PROFILE=prod
     volumes:
-      - ./logs:/logs
+      - ../logs:/logs
