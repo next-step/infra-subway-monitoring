@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MapController {
-    private static final Logger log = LoggerFactory.getLogger("console");
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private MapService mapService;
 
     public MapController(MapService mapService) {
@@ -21,8 +19,6 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        log.info("최단 경로가 조회 되었습니다.");
-        fileLogger.info("최단 경로가 조회 되었습니다");
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }

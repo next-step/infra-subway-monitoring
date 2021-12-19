@@ -26,8 +26,6 @@ public class MemberController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
-        log.info("회원가입 되었습니다. email : {}", request.getEmail());
-        fileLogger.info("회원가입 되었습니다. email : {}", request.getEmail());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
