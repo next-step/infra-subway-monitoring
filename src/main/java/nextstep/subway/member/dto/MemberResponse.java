@@ -36,6 +36,7 @@ public class MemberResponse {
     public String toString() {
         return "MemberResponse{" +
                 "id=" + id +
+                ", email='" + email + '\'' +
                 ", age=" + age +
                 '}';
     }

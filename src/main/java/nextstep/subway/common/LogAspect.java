@@ -1,48 +1,63 @@
 package nextstep.subway.common;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static net.logstash.logback.argument.StructuredArguments.keyValue;
 
 @Aspect
 @Component
 public class LogAspect {
 
     private static final Logger jsonLogger = LoggerFactory.getLogger("json");
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
-    @Around("execution(* nextstep.subway..ui.*Controller.*(..)) || execution(* nextstep.subway..application.*Service.*(..))")
+    @Around("execution(* nextstep.subway..ui.*Controller.*(..)) && !@annotation(JsonLogging)")
+    public Object defaultLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        return executeAop(proceedingJoinPoint, fileLogger);
+    }
+
+    @Around("@annotation(JsonLogging)")
     public Object jsonLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-      	HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        return executeAop(proceedingJoinPoint, jsonLogger);
+    }
 
+    private Object executeAop(ProceedingJoinPoint proceedingJoinPoint, Logger fileLogger) throws Throwable {
+        before(proceedingJoinPoint, fileLogger);
         Object result = null;
-        jsonLogger.info("{}, {}",
-                keyValue("request", request.getRequestURI()),
-                keyValue("parameters", objectMapper.writeValueAsString(request.getParameterMap()))
-        );
 
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        result = proceedingJoinPoint.proceed();
-        stopWatch.stop();
+        try {
+            result = proceedingJoinPoint.proceed();
+            afterReturning(proceedingJoinPoint, fileLogger);
+        } catch (Exception e) {
+            error(proceedingJoinPoint, fileLogger, e);
+            result = proceedingJoinPoint.proceed();
 
-        jsonLogger.info("{}, {}, {}",
-                keyValue("request", request.getRequestURI()),
-                keyValue("parameters", objectMapper.writeValueAsString(request.getParameterMap())),
-                keyValue("performanceTime", stopWatch.getTotalTimeMillis())
-        );
-
+        }
         return result;
+    }
+
+    private void before(ProceedingJoinPoint proceedingJoinPoint, Logger logger) {
+        logger.info("type: {}, Method: {}, parameters: {}",
+                proceedingJoinPoint.getSignature().getDeclaringType(),
+                proceedingJoinPoint.getSignature().getName(),
+                proceedingJoinPoint.getArgs());
+    }
+
+    private void afterReturning(ProceedingJoinPoint proceedingJoinPoint, Logger logger) {
+        logger.info("type: {}, Method: {}, parameters: {}",
+                proceedingJoinPoint.getSignature().getDeclaringType(),
+                proceedingJoinPoint.getSignature().getName(),
+                proceedingJoinPoint.getArgs());
+    }
+
+    private void error(ProceedingJoinPoint proceedingJoinPoint, Logger logger, Exception e) {
+        logger.error("type: {}, Method: {}, Error: {}, Message : {}",
+                proceedingJoinPoint.getSignature().getDeclaringType(),
+                proceedingJoinPoint.getSignature().getName(),
+                e.getClass(),
+                e.getMessage());
     }
 }

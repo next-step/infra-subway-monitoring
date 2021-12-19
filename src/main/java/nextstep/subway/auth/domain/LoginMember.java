@@ -27,6 +27,7 @@ public class LoginMember {
     public String toString() {
         return "LoginMember{" +
                 "id=" + id +
+                ", email='" + email + '\'' +
                 ", age=" + age +
                 '}';
     }
