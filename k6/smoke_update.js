@@ -40,7 +40,8 @@ export default function () {
 
     let authHeaders = {
         headers: {
-          Authorization: `Bearer ${loginRes.json('accessToken')}`,
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
         },
     };
 
@@ -50,7 +51,7 @@ export default function () {
         age: 30
     });
 
-    let updateRes = http.post(`${BASE_URL}/members/me`, payload, authHeaders).json();
+    let updateRes = http.put(`${BASE_URL}/members/me`, payload, authHeaders);
     check(updateRes, { 'updated member': (response) => response.status === 200 });
     sleep(1);
 };
