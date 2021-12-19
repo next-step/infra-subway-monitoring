@@ -13,7 +13,7 @@ export let options = {
         {duration: '10s', target: 800},
     ],
     thresholds: {
-          http_req_duration: ['p(99)<1500'],
+        http_req_duration: ['p(99)<1500'],
     },
 };
 
