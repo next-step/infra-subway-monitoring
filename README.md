@@ -42,9 +42,22 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
 
+### 요구사항
+
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [X] 로그 설정하기
+  - [X] Application Log 파일로 저장하기
+    * 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+- [X] Cloudwatch로 모니터링
+
+1. 각 서버내 로깅 경로를 알려주세요
+   - public: 15.165.195.83
+   - private: 192.168.218.0/26 (don-key-external-a)
+   - log: /home/ubuntu/infra-subway-monitoring/log  
+   - alb: http://don-key-alb-1030470679.ap-northeast-2.elb.amazonaws.com/
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=don-key-dashboard
 
 ---
 
