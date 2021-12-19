@@ -10,7 +10,7 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://all-forone.p-e.kr/';
+const BASE_URL = 'https://all-forone.p-e.kr';
 const USERNAME = 'abc@abc.co.kr';
 const PASSWORD = '1234';
 
