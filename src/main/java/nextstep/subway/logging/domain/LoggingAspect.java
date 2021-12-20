@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
+
 @Component
 @Aspect
 public class LoggingAspect {
@@ -17,12 +19,26 @@ public class LoggingAspect {
 
     @Around("@annotation(nextstep.subway.logging.domain.Logging)")
     public Object writeLogMessage(ProceedingJoinPoint pjp) throws Throwable {
-        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
-        Logging logging = methodSignature.getMethod().getAnnotation(Logging.class);
-        logger.info(String.format("%s api 호출하였습니다.", logging.target()));
-        Object retValue = pjp.proceed();
-        logger.info(String.format("%s api 호출이 성공하였습니다.", logging.target()));
-        return retValue;
+
+        loggingMethod(pjp);
+        loggingArguments(pjp);
+        return pjp.proceed();
     }
 
+    private void loggingMethod(ProceedingJoinPoint pjp) {
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        Method method = methodSignature.getMethod();
+        logger.info("==== Method Name {} ====", method.getName());
+    }
+
+    private void loggingArguments(ProceedingJoinPoint pjp) {
+
+        Object[] args = pjp.getArgs();
+        if(args.length <= 0) logger.info("no parameter");
+        for(Object arg : args) {
+            logger.info("parameter type : {} ", arg.getClass().getSimpleName());
+            logger.info("parameter value : {}", arg);
+        }
+
+    }
 }
