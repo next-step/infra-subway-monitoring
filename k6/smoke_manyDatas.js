@@ -15,5 +15,5 @@ const BASE_URL = 'https://all-forone.p-e.kr/stations';
 export default function ()  {
     let pageResponse = http.get(BASE_URL);
     check(pageResponse, { 'page loading complete': (response) => response.status === 200 });
-    sleep(1);
+	sleep(1);
 };
