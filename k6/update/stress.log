@@ -1,0 +1,41 @@
+$ k6 run stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1000 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 1000 looping VUs for 45s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m49.2s), 0000/1000 VUs, 8588 complete and 0 interrupted iterations
+default ↓ [======================================] 1000/1000 VUs  45s
+
+     ✓ logged in successfully
+     ✓ update member
+
+     checks.........................: 100.00% ✓ 17176      ✗ 0
+     data_received..................: 3.5 MB  72 kB/s
+     data_sent......................: 5.6 MB  115 kB/s
+     http_req_blocked...............: avg=153.01µs min=3.02µs  med=4.48µs  max=53.74ms p(90)=19.68µs p(95)=742.88µs
+     http_req_connecting............: avg=116.61µs min=0s      med=0s      max=53.57ms p(90)=0s      p(95)=525.47µs
+   ✗ http_req_duration..............: avg=1.51s    min=5.35ms  med=1.33s   max=4.55s   p(90)=3.02s   p(95)=3.08s
+       { expected_response:true }...: avg=1.51s    min=5.35ms  med=1.33s   max=4.55s   p(90)=3.02s   p(95)=3.08s
+     http_req_failed................: 0.00%   ✓ 0          ✗ 17176
+     http_req_receiving.............: avg=426.9µs  min=15.88µs med=42.06µs max=96.78ms p(90)=1.08ms  p(95)=2.28ms
+     http_req_sending...............: avg=87.29µs  min=10.75µs med=16.94µs max=58.81ms p(90)=64.33µs p(95)=204.85µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s      max=0s      p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=1.51s    min=5.25ms  med=1.33s   max=4.55s   p(90)=3.02s   p(95)=3.08s
+     http_reqs......................: 17176   349.002646/s
+     iteration_duration.............: avg=3.04s    min=12.13ms med=2.91s   max=7.11s   p(90)=5.94s   p(95)=6.1s
+     iterations.....................: 8588    174.501323/s
+     vus............................: 76      min=20       max=999
+     vus_max........................: 1000    min=1000     max=1000
+
+1000 VUs 까지는 실패하는 요청이 없었으나, http_req_duration 이 기준보다 초과 됨

@@ -1,0 +1,42 @@
+$ k6 run stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1100 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 1100 looping VUs for 45s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+    WARN[0046] Request Failed  error="Get \"http://don-key-alb-1030470679.ap-northeast-2.elb.amazonaws.com/path?source=5&target=11\": dial tcp 3.34.119.93:80: socket: too many open files"
+
+running (0m45.1s), 0000/1100 VUs, 152285 complete and 0 interrupted iterations
+default ✗ [======================================] 0000/1100 VUs  45s
+
+     ✗ path-page
+      ↳  99% — ✓ 151559 / ✗ 726
+
+     checks.........................: 99.52% ✓ 151559      ✗ 726
+     data_received..................: 176 MB 3.9 MB/s
+     data_sent......................: 22 MB  484 kB/s
+     http_req_blocked...............: avg=901.91µs min=0s       med=3.84µs   max=467.67ms p(90)=5.98µs   p(95)=21.31µs
+     http_req_connecting............: avg=863.41µs min=0s       med=0s       max=467.6ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=144.32ms min=0s       med=130.68ms max=1.24s    p(90)=280.69ms p(95)=307.67ms
+       { expected_response:true }...: avg=145.01ms min=1.85ms   med=131.53ms max=1.24s    p(90)=280.87ms p(95)=307.87ms
+     http_req_failed................: 0.47%  ✓ 726         ✗ 151559
+     http_req_receiving.............: avg=622.47µs min=0s       med=29.34µs  max=317.51ms p(90)=75.82µs  p(95)=280.24µs
+     http_req_sending...............: avg=495.11µs min=0s       med=11.44µs  max=342.86ms p(90)=33.82µs  p(95)=73.53µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=143.2ms  min=0s       med=129.69ms max=1.24s    p(90)=279.22ms p(95)=305.33ms
+     http_reqs......................: 152285 3377.004593/s
+     iteration_duration.............: avg=159.32ms min=160.57µs med=142.02ms max=2.03s    p(90)=298.01ms p(95)=345.17ms
+     iterations.....................: 152285 3377.004593/s
+     vus............................: 1099   min=20        max=1099
+     vus_max........................: 1100   min=1100      max=1100
+
+1000 VUs 가 넘어가면서 요청이 실패되는 에러 발생함

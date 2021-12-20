@@ -1,0 +1,39 @@
+$ k6 run load.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 70 max VUs, 1m10s max duration (incl. graceful stop):
+           * default: Up to 70 looping VUs for 40s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m40.0s), 00/70 VUs, 7026 complete and 0 interrupted iterations
+default ✓ [======================================] 00/70 VUs  40s
+
+     ✓ logged in successfully
+     ✓ update member
+
+     checks.........................: 100.00% ✓ 14052      ✗ 0
+     data_received..................: 2.9 MB  73 kB/s
+     data_sent......................: 4.6 MB  115 kB/s
+     http_req_blocked...............: avg=21.67µs  min=3.15µs  med=4.43µs   max=9.39ms   p(90)=5.42µs   p(95)=8.03µs
+     http_req_connecting............: avg=6.12µs   min=0s      med=0s       max=6.39ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=149.27ms min=4.93ms  med=175.73ms max=574.47ms p(90)=213.43ms p(95)=226.85ms
+       { expected_response:true }...: avg=149.27ms min=4.93ms  med=175.73ms max=574.47ms p(90)=213.43ms p(95)=226.85ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 14052
+     http_req_receiving.............: avg=322.92µs min=16.05µs med=42.9µs   max=27.3ms   p(90)=736.7µs  p(95)=1.63ms
+     http_req_sending...............: avg=57.1µs   min=10.85µs med=16.53µs  max=19.05ms  p(90)=33.26µs  p(95)=75.68µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=148.89ms min=4.82ms  med=175.37ms max=574.42ms p(90)=212.84ms p(95)=226.65ms
+     http_reqs......................: 14052   351.198655/s
+     iteration_duration.............: avg=299.31ms min=11.14ms med=357.57ms max=934.02ms p(90)=422ms    p(95)=451.73ms
+     iterations.....................: 7026    175.599327/s
+     vus............................: 1       min=1        max=70
+     vus_max........................: 70      min=70       max=70
