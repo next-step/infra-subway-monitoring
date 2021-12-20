@@ -44,7 +44,19 @@ npm run dev
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
 
+FILE : [moonjuhyeon-manage-key-pair.pem](https://drive.google.com/file/d/1NVC7AWCaGsdhXbAhkfxk5mUpzGisCIGH/view?usp=sharing)
+
+ - moonjuhyeon-public-a
+    - application log = /home/ubuntu/logs.log
+    - syslog: /var/log/syslog
+ - moonjuhyeon-private
+    - syslog: /var/log/syslog
+ - moonjuhyeon-manage
+    - syslog: /var/log/syslog
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+- [링크](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-moonjuhyeon)
 
 ---
 
