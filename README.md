@@ -169,5 +169,8 @@ npm run dev
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
     * 접속 빈도가 높은 페이지: 메인페이지
+        * [메인 페이지 테스트](https://github.com/don-key/infra-subway-monitoring/tree/step2/k6/main)
     * 데이터를 갱신하는 페이지: 내 정보 수정
+        * [내 정보 수정 테스트](https://github.com/don-key/infra-subway-monitoring/tree/step2/k6/update)
     * 데이터를 조회하는데 여러 데이터를 참조하는 페이지: 경로 조회
+        * [경로 조회](https://github.com/don-key/infra-subway-monitoring/tree/step2/k6/path)
