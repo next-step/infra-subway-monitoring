@@ -1,0 +1,75 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 4000 max VUs, 11m10s max duration (incl. graceful stop):
+           * default: Up to 4000 looping VUs for 10m40s over 13 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+WARN[0570] Request Failed                                error="Put \"https://hidy.kro.kr/members/me\": request timeout"
+WARN[0570] Request Failed                                error="Put \"https://hidy.kro.kr/members/me\": request timeout"
+WARN[0570] Request Failed                                error="Get \"https://hidy.kro.kr/members/me\": request timeout"
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+WARN[0570] Request Failed                                error="Get \"https://hidy.kro.kr/members/me\": request timeout"
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+WARN[0570] Request Failed                                error="Post \"https://hidy.kro.kr/login/token\": read tcp 192.168.0.34:60491->3.36.29.124:443: read: connection reset by peer"
+WARN[0570] Request Failed                                error="Put \"https://hidy.kro.kr/members/me\": request timeout"
+WARN[0570] Request Failed                                error="Post \"https://hidy.kro.kr/login/token\": read tcp 192.168.0.34:63101->3.37.178.30:443: read: connection reset by peer"
+WARN[0570] Request Failed                                error="Get \"https://hidy.kro.kr/members/me\": request timeout"
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:31:46(13)  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+WARN[0570] Request Failed                                error="Get \"https://hidy.kro.kr/members/me\": request timeout"
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:31:46(13)  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0570] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///Users/doyoung/work-space/nextstep/infra-subway-monitoring/k6/myinfo-update/stress.js:44:49(48)  executor=ramping-vus scenario=default source=stacktrace
+
+running (12m58.8s), 0000/4000 VUs, 229417 complete and 0 interrupted iterations
+default ✓ [======================================] 0000/4000 VUs  10m40s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✗ updated member
+      ↳  99% — ✓ 225352 / ✗ 1293
+
+     checks.........................: 99.81% ✓ 680198     ✗ 1293
+     data_received..................: 443 MB 569 kB/s
+     data_sent......................: 244 MB 314 kB/s
+     http_req_blocked...............: avg=1.84ms   min=0s     med=1µs     max=2m16s p(90)=1µs   p(95)=2µs
+     http_req_connecting............: avg=794.42µs min=0s     med=0s      max=5.68s p(90)=0s    p(95)=0s
+     http_req_duration..............: avg=1.54s    min=0s     med=94.3ms  max=3m14s p(90)=2.2s  p(95)=2.92s
+       { expected_response:true }...: avg=634.3ms  min=7.25ms med=91.38ms max=3m9s  p(90)=2.12s p(95)=2.87s
+     http_req_failed................: 0.59%  ✓ 4068       ✗ 680195
+     http_req_receiving.............: avg=690.3µs  min=0s     med=35µs    max=2m16s p(90)=110µs p(95)=981µs
+     http_req_sending...............: avg=283.3µs  min=0s     med=65µs    max=2m16s p(90)=138µs p(95)=185µs
+     http_req_tls_handshaking.......: avg=851.32µs min=0s     med=0s      max=6.4s  p(90)=0s    p(95)=0s
+     http_req_waiting...............: avg=1.54s    min=0s     med=93.78ms max=3m14s p(90)=2.2s  p(95)=2.92s
+     http_reqs......................: 684263 878.62768/s
+     iteration_duration.............: avg=3.43s    min=1.27ms med=1.56s   max=1m8s  p(90)=6.75s p(95)=7.59s
+     iterations.....................: 229417 294.582824/s
+     vus............................: 635    min=2        max=4000
+     vus_max........................: 4000   min=4000     max=4000

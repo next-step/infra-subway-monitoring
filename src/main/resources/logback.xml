@@ -16,7 +16,7 @@
 <!--        </appender>-->
 <!--    </springProfile>-->
 
-    <springProfile name="prod">
+    <springProfile name="file-logging">
         <!--  appender이름이 file인 consoleAppender를 선언  -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <!--로깅이 기록될 위치-->
@@ -31,7 +31,7 @@
             <encoder>
                 <charset>utf8</charset>
                 <Pattern>
-                    %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %X{traceId} %-5level %logger - %m%n
                 </Pattern>
             </encoder>
         </appender>
@@ -69,7 +69,7 @@
 <!--            <appender-ref ref="CONSOLE"/>-->
 <!--        </springProfile>-->
 
-        <springProfile name="prod">
+        <springProfile name="file-logging">
             <appender-ref ref="FILE"/>
         </springProfile>
 
