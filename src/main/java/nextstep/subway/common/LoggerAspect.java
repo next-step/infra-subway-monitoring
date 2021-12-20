@@ -18,7 +18,7 @@ public class LoggerAspect {
     @Autowired(required = false)
     private HttpServletRequest request;
     
-    private Logger json = LoggerFactory.getLogger("json");
+    private static final Logger json = LoggerFactory.getLogger("json");
     
     @Around("execution(* nextstep.subway..ui.*Controller.*(..))")
     public Object aroundApi(ProceedingJoinPoint joinPoint) throws Throwable {

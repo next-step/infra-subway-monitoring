@@ -1,0 +1,42 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress-path.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 6000 max VUs, 2m50s max duration (incl. graceful stop):
+           * default: Up to 6000 looping VUs for 2m20s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0103] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+
+running (2m21.9s), 0000/6000 VUs, 316122 complete and 0 interrupted iterations
+default ✓ [======================================] 0000/6000 VUs  2m20s
+
+     ✗ reached request rate
+      ↳  99% — ✓ 316121 / ✗ 1
+
+     checks.........................: 99.99% ✓ 316121      ✗ 1
+     data_received..................: 367 MB 2.6 MB/s
+     data_sent......................: 47 MB  328 kB/s
+     http_req_blocked...............: avg=201.14µs min=0s     med=0s      max=1s       p(90)=0s       p(95)=0s
+     http_req_connecting............: avg=173.03µs min=0s     med=0s      max=1s       p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=50.61ms  min=3.69ms med=14.47ms max=1.59s    p(90)=145.87ms p(95)=233.13ms
+       { expected_response:true }...: avg=50.61ms  min=3.69ms med=14.47ms max=1.59s    p(90)=145.87ms p(95)=233.13ms
+     http_req_failed................: 0.00%  ✓ 0           ✗ 316122
+     http_req_receiving.............: avg=988.84µs min=0s     med=0s      max=862.88ms p(90)=508.9µs  p(95)=1ms
+     http_req_sending...............: avg=402.35µs min=0s     med=0s      max=410.5ms  p(90)=0s       p(95)=1ms
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=49.22ms  min=3.12ms med=14ms    max=1.59s    p(90)=144.99ms p(95)=231.29ms
+     http_reqs......................: 316122 2228.491532/s
+     iteration_duration.............: avg=2.01s    min=1.99s  med=2s      max=3.67s    p(90)=2.01s    p(95)=2.03s
+     iterations.....................: 316122 2228.491532/s
+     vus............................: 72     min=72        max=6000
+     vus_max........................: 6000   min=6000      max=6000
+
+
+C:\Program Files\k6>
