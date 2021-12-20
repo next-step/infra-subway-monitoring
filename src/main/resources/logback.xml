@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="console-appender.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="json-appender.xml" />
+
+    <springProfile name="local">
+        <root>
+            <appender-ref ref="console" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="file" />
+        </root>
+        <logger name="com.zaxxer.hikari.pool.HikariPool" level="DEBUG">
+            <appender-ref ref="file" />
+        </logger>
+    </springProfile>
+
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="file" level="INFO" >
+        <appender-ref ref="file" />
+    </logger>
+    <logger name="json" level="INFO" >
+        <appender-ref ref="json" />
+    </logger>
+
+</configuration>
+

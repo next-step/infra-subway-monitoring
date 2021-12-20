@@ -1,6 +1,8 @@
 package nextstep.subway.auth.infrastructure;
 
 import io.jsonwebtoken.*;
+import nextstep.subway.auth.application.AuthorizationException;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +38,7 @@ public class JwtTokenProvider {
 
             return !claims.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
-            return false;
+            throw new AuthorizationException(e.getMessage());
         }
     }
 }
