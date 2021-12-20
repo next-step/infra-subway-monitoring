@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 142, // 1 user looping for 1 minute
+    vus: 1, // 1 user looping for 1 minute
     duration: '10s',
 
     thresholds: {
