@@ -77,7 +77,7 @@ npm run dev
     - [X] 웹 성능 예산을 작성
     - [X] WebPageTest, PageSpeed 등 테스트해보고 개선이 필요한 부분을 파악
 
-- [ ] 부하 테스트
+- [X] 부하 테스트
     - [X] 테스트 전제조건 정리
         - [X] 대상 시스템 범위
         - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
