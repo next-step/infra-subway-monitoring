@@ -1,0 +1,28 @@
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 700 max VUs, 38m30s max duration (incl. graceful stop):
+           * default: Up to 700 looping VUs for 38m0s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] Error from API server                         error="listen tcp 127.0.0.1:6565: bind: address already in use"
+
+running (38m00.8s), 000/700 VUs, 819484 complete and 0 interrupted iterations
+default ✓ [======================================] 000/700 VUs  38m0s
+
+     data_received..................: 932 MB 409 kB/s
+     data_sent......................: 71 MB  31 kB/s
+     http_req_blocked...............: avg=297.42µs min=76ns     med=4.95µs  max=1.55s p(90)=8.58µs   p(95)=20.79µs
+     http_req_connecting............: avg=197.74µs min=0s       med=0s      max=1.18s p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=129.94ms min=624.17µs med=58.21ms max=1.9s  p(90)=358.09ms p(95)=461.95ms
+       { expected_response:true }...: avg=129.94ms min=624.17µs med=58.21ms max=1.9s  p(90)=358.09ms p(95)=461.95ms
+     http_req_failed................: 0.00%  ✓ 0          ✗ 819484
+     http_req_receiving.............: avg=994.58µs min=14.98µs  med=35.06µs max=1.26s p(90)=177.62µs p(95)=879.79µs
+     http_req_sending...............: avg=1.5ms    min=8.07µs   med=14.62µs max=1.43s p(90)=295.58µs p(95)=1.71ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s    p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=127.44ms min=570.92µs med=55.77ms max=1.79s p(90)=354.17ms p(95)=456.76ms
+     http_reqs......................: 819484 359.298868/s
+     iteration_duration.............: avg=1.14s    min=1s       med=1.07s   max=3.15s p(90)=1.37s    p(95)=1.48s
+     iterations.....................: 819484 359.298868/s
+     vus............................: 1      min=1        max=700
+     vus_max........................: 700    min=700      max=700

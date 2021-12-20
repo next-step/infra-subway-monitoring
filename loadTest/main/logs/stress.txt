@@ -1,0 +1,27 @@
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 700 max VUs, 38m30s max duration (incl. graceful stop):
+           * default: Up to 700 looping VUs for 38m0s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (38m00.6s), 000/700 VUs, 934051 complete and 0 interrupted iterations
+default ✓ [======================================] 000/700 VUs  38m0s
+
+     data_received..................: 1.1 GB 466 kB/s
+     data_sent......................: 77 MB  34 kB/s
+     http_req_blocked...............: avg=25.79µs min=0s       med=5.24µs  max=47.54ms p(90)=8.26µs   p(95)=21.86µs
+     http_req_connecting............: avg=11.11µs min=0s       med=0s      max=47.45ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=1.66ms  min=574.53µs med=1.32ms  max=49.98ms p(90)=2.81ms   p(95)=3.64ms
+       { expected_response:true }...: avg=1.66ms  min=574.53µs med=1.32ms  max=49.98ms p(90)=2.81ms   p(95)=3.64ms
+     http_req_failed................: 0.00%  ✓ 0          ✗ 934051
+     http_req_receiving.............: avg=81.83µs min=14.6µs   med=36.72µs max=22.31ms p(90)=138.22µs p(95)=252.53µs
+     http_req_sending...............: avg=68.38µs min=8.25µs   med=14.91µs max=25.66ms p(90)=107.11µs p(95)=248.31µs
+     http_req_tls_handshaking.......: avg=0s      min=0s       med=0s      max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=1.51ms  min=508.02µs med=1.2ms   max=49.92ms p(90)=2.56ms   p(95)=3.34ms
+     http_reqs......................: 934051 409.557237/s
+     iteration_duration.............: avg=1s      min=1s       med=1s      max=1.07s   p(90)=1s       p(95)=1s
+     iterations.....................: 934051 409.557237/s
+     vus............................: 1      min=1        max=700
+     vus_max........................: 700    min=700      max=700

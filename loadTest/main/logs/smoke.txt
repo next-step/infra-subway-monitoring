@@ -1,0 +1,27 @@
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.0s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     data_received..................: 11 kB 1.1 kB/s
+     data_sent......................: 820 B 82 B/s
+     http_req_blocked...............: avg=61.41µs min=6.7µs   med=7.26µs  max=546.71µs p(90)=63.86µs  p(95)=305.28µs
+     http_req_connecting............: avg=47.38µs min=0s      med=0s      max=473.89µs p(90)=47.38µs  p(95)=260.63µs
+   ✓ http_req_duration..............: avg=1.3ms   min=1.22ms  med=1.31ms  max=1.37ms   p(90)=1.36ms   p(95)=1.37ms
+       { expected_response:true }...: avg=1.3ms   min=1.22ms  med=1.31ms  max=1.37ms   p(90)=1.36ms   p(95)=1.37ms
+     http_req_failed................: 0.00% ✓ 0        ✗ 10
+     http_req_receiving.............: avg=86.69µs min=54.47µs med=76.73µs max=131.27µs p(90)=122.13µs p(95)=126.7µs
+     http_req_sending...............: avg=32.95µs min=21.31µs med=24.27µs max=84.77µs  p(90)=48.02µs  p(95)=66.39µs
+     http_req_tls_handshaking.......: avg=0s      min=0s      med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=1.18ms  min=1.12ms  med=1.18ms  max=1.27ms   p(90)=1.23ms   p(95)=1.25ms
+     http_reqs......................: 10    0.997851/s
+     iteration_duration.............: avg=1s      min=1s      med=1s      max=1s       p(90)=1s       p(95)=1s
+     iterations.....................: 10    0.997851/s
+     vus............................: 1     min=1      max=1
+     vus_max........................: 1     min=1      max=1
