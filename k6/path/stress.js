@@ -11,6 +11,8 @@ export const options = {
         {duration: '60s', target: 330},
         {duration: '30s', target: 550}, // beyond the breaking point
         {duration: '60s', target: 550},
+        {duration: '60s', target: 2000}, // beyond the breaking point
+        {duration: '120s', target: 2000},
         {duration: '10s', target: 0}, // scale down. Recovery stage.
     ],
 };

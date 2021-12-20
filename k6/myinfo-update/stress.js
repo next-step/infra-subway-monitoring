@@ -11,8 +11,10 @@ export const options = {
         {duration: '60s', target: 200},
         {duration: '30s', target: 330}, // beyond the breaking point
         {duration: '60s', target: 330},
-        {duration: '30s', target: 400}, // beyond the breaking point
-        {duration: '60s', target: 400},
+        {duration: '30s', target: 1000}, // beyond the breaking point
+        {duration: '60s', target: 1000},
+        {duration: '60s', target: 4000}, // beyond the breaking point
+        {duration: '120s', target: 4000},
         {duration: '10s', target: 0}, // scale down. Recovery stage.
     ],
 };
@@ -26,7 +28,7 @@ const loginPayload = JSON.stringify({email, password});
 
 export default function () {
     // 로그인 시도
-    const loginResponse = http.post(`${BASE_URL}/login/token`,
+    const loginResponse = http.post(`${BASE_UclRL}/login/token`,
         loginPayload, params).json();
     check(loginResponse, {
         'logged in successfully': response => response.accessToken !== '',
