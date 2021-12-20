@@ -1,0 +1,38 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 266 max VUs, 1m20s max duration (incl. graceful stop):
+           * default: Up to 266 looping VUs for 50s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m52.0s), 000/266 VUs, 3407 complete and 0 interrupted iterations
+default ✓ [======================================] 000/266 VUs  50s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+     ✓ retrieved favorite
+
+     checks.........................: 100.00% ✓ 10221     ✗ 0
+     data_received..................: 5.4 MB  103 kB/s
+     data_sent......................: 2.9 MB  56 kB/s
+     http_req_blocked...............: avg=158.11µs min=3.08µs  med=5.82µs  max=35.82ms p(90)=9.05µs  p(95)=28.5µs
+     http_req_connecting............: avg=22.56µs  min=0s      med=0s      max=14.58ms p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=13.17ms  min=6.15ms  med=11.45ms max=62.95ms p(90)=19.4ms  p(95)=22.22ms
+       { expected_response:true }...: avg=13.17ms  min=6.15ms  med=11.45ms max=62.95ms p(90)=19.4ms  p(95)=22.22ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 10221
+     http_req_receiving.............: avg=95.78µs  min=24.29µs med=57.39µs max=10.32ms p(90)=113.7µs p(95)=232.2µs
+     http_req_sending...............: avg=45.57µs  min=10.3µs  med=19.38µs max=15.42ms p(90)=45.49µs p(95)=71.79µs
+     http_req_tls_handshaking.......: avg=119.78µs min=0s      med=0s      max=29.25ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=13.03ms  min=6.09ms  med=11.34ms max=62.9ms  p(90)=19.24ms p(95)=21.99ms
+     http_reqs......................: 10221   196.41932/s
+     iteration_duration.............: avg=2.04s    min=2.03s   med=2.03s   max=2.12s   p(90)=2.05s   p(95)=2.06s
+     iterations.....................: 3407    65.473107/s
+     vus............................: 6       min=4       max=266
+     vus_max........................: 266     min=266     max=266
