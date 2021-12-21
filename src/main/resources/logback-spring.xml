@@ -25,7 +25,7 @@
         </springProfile>
     </logger>
 
-    <logger name="json" level="debug">
+    <logger name="json" level="debug" additivity="false">
         <appender-ref ref="json"/>
     </logger>
 </configuration>
