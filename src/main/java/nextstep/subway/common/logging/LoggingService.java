@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoggingService {
-    private static final Logger log = LoggerFactory.getLogger(LoggingService.class);
+    private static final Logger log = LoggerFactory.getLogger("json");
 
     public void logRequest(HttpServletRequest httpServletRequest, Object body) {
         LogInfo logInfo = LogInfo.builder()
