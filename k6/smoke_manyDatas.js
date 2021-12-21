@@ -10,10 +10,10 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://all-forone.p-e.kr/stations';
+const BASE_URL = 'https://all-forone.p-e.kr';
 
 export default function ()  {
-    let pageResponse = http.get(BASE_URL);
+    let pageResponse = http.get(`${BASE_URL}/stations`);
     check(pageResponse, { 'page loading complete': (response) => response.status === 200 });
     let pathResponse = http.get(`${BASE_URL}/paths?source=1&target=5`);
     check(pathResponse, {'find path': (response) => response.status === 200});
