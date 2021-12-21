@@ -131,3 +131,4 @@ smoke 테스트
         - [x] 데이터를 갱신하는 페이지
         - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
 - [x] Smoke, Load, Stress 테스트 후 결과를 기록
+/loadTest/main/logs, /loadTest/member/logs, /loadTest/path/logs
