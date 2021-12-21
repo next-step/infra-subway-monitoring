@@ -36,6 +36,7 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
+	implementation 'org.codehaus.janino:janino'
 }
 
 test {
