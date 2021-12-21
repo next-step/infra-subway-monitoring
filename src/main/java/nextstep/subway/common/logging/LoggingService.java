@@ -26,7 +26,7 @@ public class LoggingService {
             .body(body)
             .build();
 
-        log.info(logInfo.toString());
+        log.debug(logInfo.toString());
     }
 
     public void logResponse(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
@@ -39,7 +39,7 @@ public class LoggingService {
             .body(body)
             .build();
 
-        log.info(logInfo.toString());
+        log.debug(logInfo.toString());
     }
 
     private Map<String, String> buildParametersMap(HttpServletRequest httpServletRequest) {
