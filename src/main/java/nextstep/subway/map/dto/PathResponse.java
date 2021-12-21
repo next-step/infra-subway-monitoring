@@ -23,4 +23,13 @@ public class PathResponse {
     public int getDistance() {
         return distance;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("PathResponse{");
+        sb.append("stations=").append(stations);
+        sb.append(", distance=").append(distance);
+        sb.append('}');
+        return sb.toString();
+    }
 }

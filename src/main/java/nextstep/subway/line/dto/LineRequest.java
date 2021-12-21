@@ -35,4 +35,16 @@ public class LineRequest {
     public Line toLine() {
         return new Line(name, color);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LineRequest{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", color='").append(color).append('\'');
+        sb.append(", upStationId=").append(upStationId);
+        sb.append(", downStationId=").append(downStationId);
+        sb.append(", distance=").append(distance);
+        sb.append('}');
+        return sb.toString();
+    }
 }

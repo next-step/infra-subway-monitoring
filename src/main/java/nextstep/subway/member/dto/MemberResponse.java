@@ -31,4 +31,14 @@ public class MemberResponse {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MemberResponse{");
+        sb.append("id=").append(id);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", age=").append(age);
+        sb.append('}');
+        return sb.toString();
+    }
 }

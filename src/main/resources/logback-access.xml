@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <configuration>
-    <include resource="access-console-appender.xml" />
-    <include resource="access-file-appender.xml" />
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%fullRequest%n%n%fullResponse</pattern>
+        </encoder>
+    </appender>
 
-    <springProfile name="local,test">
-        <appender-ref ref="console-access" />
-    </springProfile>
-
-    <springProfile name="prod">
-        <appender-ref ref="file-access" />
-    </springProfile>
+    <appender-ref ref="STDOUT" />
 </configuration>

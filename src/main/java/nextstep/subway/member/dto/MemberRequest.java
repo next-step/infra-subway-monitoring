@@ -31,4 +31,13 @@ public class MemberRequest {
     public Member toMember() {
         return new Member(email, password, age);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MemberRequest{");
+        sb.append("email='").append(email).append('\'');
+        sb.append(", age=").append(age);
+        sb.append('}');
+        return sb.toString();
+    }
 }

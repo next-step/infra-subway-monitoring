@@ -9,7 +9,7 @@
     <include resource="json-appender.xml" />
 
     <springProfile name="local">
-        <root>
+        <root level="debug" >
             <appender-ref ref="console" />
         </root>
     </springProfile>
@@ -23,15 +23,8 @@
         </logger>
     </springProfile>
 
-    <logger name="console" level="TRACE" >
-        <appender-ref ref="console" />
-    </logger>
-    <logger name="file" level="INFO" >
-        <appender-ref ref="file" />
-    </logger>
-    <logger name="json" level="INFO" >
+    <logger name="json" level="debug" >
         <appender-ref ref="json" />
     </logger>
-
 </configuration>
 

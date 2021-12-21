@@ -19,4 +19,13 @@ public class FavoriteRequest {
     public Long getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FavoriteRequest{");
+        sb.append("source=").append(source);
+        sb.append(", target=").append(target);
+        sb.append('}');
+        return sb.toString();
+    }
 }
