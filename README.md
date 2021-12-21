@@ -42,10 +42,11 @@ npm run dev
 * 미션 진행 후에 아래 질문의 답을 작성하여 PR을 보내주세요.
 
 ### 1단계 - 인프라 운영하기
-1. 각 서버내 로깅 경로를 알려주세요
+1. 각 서버내 로깅 경로를 알려주세요  
+ - EC2-eedys1234-tomcat : /home/ubuntu/infra-subway-monitoring/log/
 
 2. Cloudwatch 대시보드 URL을 알려주세요
-
+ - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-eedys1234
 ---
 
 ### 2단계 - 성능 테스트
