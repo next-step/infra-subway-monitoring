@@ -56,9 +56,22 @@ npm run dev
    - Largest Contentful Paint(최대 콘텐츠풀 페인트, LCP) : 2.5초 이하
    - Total Blocking Time(총 차단 시간, TBT) : 200ms 이하
    - Cumulative Layout Shift(누적 레이아웃 이동, CLS) : 0.1 이하
+   
+   : 또한 경쟁사(NAVER)의 성능 테스트시 아래와 같은 결과를 얻었습니다.  
+     경쟁사보다 LCP가 20% 이상 적은 결과를 얻을 수 있도록 개선한다면 사용자가 성능이 좋다고 느낄 수 있을 것 같습니다.
+   ![performance_naver](https://user-images.githubusercontent.com/73328076/146875684-62750807-af73-4069-bdfd-3a020436f006.png)
+
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
    - 성능 측정 결과 vender.js 페이지를 로드하는데 가장 오랜 시간이 걸렸기때문에 gzip 압축을 통해 응답속도를 개선시키면 좋겠습니다.
+     정적 페이지 응답시 gzip 압축된 내용으로 응답할 수 있도록 properties에 내용을 추가하였습니다.   
+     <성능 테스트 결과 - ASIS>
+   ![performance_asis](https://user-images.githubusercontent.com/73328076/146876070-46688453-a0f0-4d6d-9e85-6944b7269dac.png)   
+     <성능 테스트 결과 - TOBE>
+   ![performance_tobe](https://user-images.githubusercontent.com/73328076/146876075-b1159f00-dde5-48a8-8f1e-13b1630e5a15.png)
+
+     gzip 압축 적용 후 LCP에 걸리는 시간이 ASIS 대비 1/3, 경쟁사 대비 1/4로 감소함을 확인하였습니다.
+ 
    
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
    - 전제조건
