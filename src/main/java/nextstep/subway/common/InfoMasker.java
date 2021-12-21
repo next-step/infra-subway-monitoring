@@ -5,10 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InfoMasker {
-    private static final String EMAIL_PATTERN = "\\b(\\S+)+@(\\S+.\\S+)";
+    private static final Pattern PATTERN = Pattern.compile("\\b(\\S+)+@(\\S+.\\S+)");
 
     public static String getMaskedEmail(String email) {
-        Matcher matcher = Pattern.compile(EMAIL_PATTERN).matcher(email);
+        Matcher matcher = PATTERN.matcher(email);
         if (matcher.find()) {
             String id = matcher.group(1); // 마스킹 처리할 부분인 userId
             int length = id.length();
