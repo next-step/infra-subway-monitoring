@@ -35,4 +35,15 @@ public class LineRequest {
     public Line toLine() {
         return new Line(name, color);
     }
+
+    @Override
+    public String toString() {
+        return "LineRequest{" +
+            "name='" + name + '\'' +
+            ", color='" + color + '\'' +
+            ", upStationId=" + upStationId +
+            ", downStationId=" + downStationId +
+            ", distance=" + distance +
+            '}';
+    }
 }
