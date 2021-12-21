@@ -3,6 +3,8 @@ package nextstep.subway.member.dto;
 import nextstep.subway.member.domain.Member;
 
 public class MemberResponse {
+    public static final String EMAIL_PATTERN = "(?<=.{3}).(?=.*@)";
+    public static final String ASTERISK = "*";
     private Long id;
     private String email;
     private Integer age;
@@ -34,10 +36,15 @@ public class MemberResponse {
 
     @Override
     public String toString() {
+
         return "MemberResponse{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", email='" + maskString(email) + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    private String maskString(String str) {
+        return str.replaceAll(EMAIL_PATTERN, ASTERISK);
     }
 }
