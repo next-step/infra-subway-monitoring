@@ -17,7 +17,7 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger("file");
 
-    @Around("execution(* nextstep.subway..*Controller.*(..))")
+    @Around("execution(* nextstep.subway..*Controller.*(..)) && !@target(nextstep.subway.logging.domain.Privacy)")
     public Object writeLogMessage(ProceedingJoinPoint pjp) throws Throwable {
 
         loggingMethod(pjp);
@@ -41,13 +41,13 @@ public class LoggingAspect {
         }
 
         for(Object arg : args) {
-            logger.info("request parameter type : {} ", arg.getClass().getSimpleName());
-            logger.info("request parameter value : {}", arg);
+            String logFormat = String.format("request parameter type %s \n request parameter value : %s", arg.getClass().getSimpleName(), arg);
+            logger.info(logFormat);
         }
     }
 
     private void loggingResponseResult(Object retValue) {
-        logger.info("response result type : {} ", retValue.getClass().getSimpleName());
-        logger.info("response result value : {} ", retValue);
+        String logFormat = String.format("response result type : %s \n response result value : %s", retValue.getClass().getSimpleName(), retValue);
+        logger.info(logFormat);
     }
 }
