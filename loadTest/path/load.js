@@ -16,7 +16,7 @@ const PASSWORD = '123123';
 
 export default function ()  {
 
-  http.get(`${BASE_URL}/path`);
+  http.get(`${BASE_URL}/paths/?source=3&target=4`);
 
   sleep(1);
 };
