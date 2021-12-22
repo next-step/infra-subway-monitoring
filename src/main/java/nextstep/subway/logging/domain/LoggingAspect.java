@@ -36,7 +36,10 @@ public class LoggingAspect {
     private void loggingRequestArguments(ProceedingJoinPoint pjp) {
 
         Object[] args = pjp.getArgs();
-        if(args.length <= 0) logger.info("no parameter");
+        if(args.length <= 0) {
+            logger.info("no parameter");
+        }
+
         for(Object arg : args) {
             logger.info("request parameter type : {} ", arg.getClass().getSimpleName());
             logger.info("request parameter value : {}", arg);
