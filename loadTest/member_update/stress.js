@@ -50,7 +50,13 @@ export default function ()  {
     },
   };
 
-  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  var memberUpdate = JSON.stringify({
+                         email: "updated",
+                         password: "PASSWORD",
+                         age : "12"
+  });
+
+  let myObjects = http.put(`${BASE_URL}/members/me`, memberUpdate, authHeaders).json();
 
   check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
 
