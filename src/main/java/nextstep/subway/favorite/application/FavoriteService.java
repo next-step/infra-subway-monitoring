@@ -9,6 +9,8 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
+    private final Logger logger = LoggerFactory.getLogger("file");
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
 
@@ -29,14 +32,15 @@ public class FavoriteService {
     }
 
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
+        logger.info("즐겨찾기 생성. loginMember: {}, favoriteRequest: {}", loginMember.toString(), request.toString());
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
         favoriteRepository.save(favorite);
+        logger.info("즐겨찾기 생성 성공");
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
         List<Favorite> favorites = favoriteRepository.findByMemberId(loginMember.getId());
         Map<Long, Station> stations = extractStations(favorites);
-
         return favorites.stream()
             .map(it -> FavoriteResponse.of(
                 it,
@@ -46,11 +50,13 @@ public class FavoriteService {
     }
 
     public void deleteFavorite(LoginMember loginMember, Long id) {
+        logger.info("즐겨찾기 삭제. loginMember: {}, favoriteId: {}", loginMember.toString(), id);
         Favorite favorite = favoriteRepository.findById(id).orElseThrow(RuntimeException::new);
         if (!favorite.isCreatedBy(loginMember.getId())) {
             throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
         }
         favoriteRepository.deleteById(id);
+        logger.info("즐겨찾기 삭제 성공");
     }
 
     private Map<Long, Station> extractStations(List<Favorite> favorites) {
