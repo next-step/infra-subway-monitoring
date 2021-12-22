@@ -23,11 +23,11 @@ public class ExceptionController {
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
-    public ResponseEntity<Void> badRequestExceptionHandler(Exception e) {
+    public ResponseEntity<String> badRequestExceptionHandler(Exception e) {
         log.error("잘못된 요청입니다.", e);
 
         return ResponseEntity.badRequest()
-            .build();
+            .body(e.getMessage());
     }
 
     @ExceptionHandler({AuthorizationException.class})
