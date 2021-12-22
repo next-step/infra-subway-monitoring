@@ -3,15 +3,11 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '2m', target: 300 }, // below normal load
-    { duration: '5m', target: 400 },
-    { duration: '2m', target: 500 }, // normal load
-    { duration: '5m', target: 600 },
-    { duration: '2m', target: 500 }, // around the breaking point
-    { duration: '5m', target: 600 },
-    { duration: '2m', target: 700 }, // beyond the breaking point
-    { duration: '5m', target: 400 },
-    { duration: '10m', target: 0 }, // scale down. Recovery stage.
+    { duration: '2s', target: 300 }, // below normal load
+    { duration: '10s', target: 600 },
+    { duration: '10s', target: 700 },
+    { duration: '10s', target: 1000 },
+    { duration: '3s', target: 0 }, // scale down. Recovery stage.
   ],
   thresholds: {
     http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s

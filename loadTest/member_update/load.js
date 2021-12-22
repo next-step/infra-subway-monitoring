@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-  vus: 34, // 1 user looping for 1 minute
+  vus: 34,
   duration: '10s',
   thresholds: {
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
