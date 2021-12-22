@@ -6,7 +6,7 @@ export let options = {
     { duration: '2s', target: 300 }, // below normal load
     { duration: '10s', target: 600 },
     { duration: '10s', target: 700 },
-    { duration: '10s', target: 1000 },
+    { duration: '10s', target: 1500 },
     { duration: '3s', target: 0 }, // scale down. Recovery stage.
   ],
   thresholds: {
