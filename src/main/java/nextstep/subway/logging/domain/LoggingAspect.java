@@ -1,6 +1,7 @@
 package nextstep.subway.logging.domain;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 @Component
 @Aspect
@@ -17,14 +19,20 @@ public class LoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger("file");
 
-    @Around("execution(* nextstep.subway..*Controller.*(..)) && !@target(nextstep.subway.logging.domain.Privacy)")
+    @Around("execution(* nextstep.subway..*Controller.*(..))")
     public Object writeLogMessage(ProceedingJoinPoint pjp) throws Throwable {
+
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        Privacy privacy = methodSignature.getMethod().getAnnotation(Privacy.class);
 
         StringBuilder sb = new StringBuilder();
         sb.append("==== Method Name");
         sb.append(getCallMethod(pjp));
         sb.append("====\n");
-        sb.append(extractRequestArguments(pjp));
+
+        if(Objects.nonNull(privacy)) {
+            sb.append(extractRequestArguments(pjp));
+        }
         Object retValue = pjp.proceed();
         sb.append(extractResponseResult(retValue));
         loggingIOParameter(sb.toString());
