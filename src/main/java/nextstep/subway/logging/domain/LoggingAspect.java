@@ -20,34 +20,56 @@ public class LoggingAspect {
     @Around("execution(* nextstep.subway..*Controller.*(..)) && !@target(nextstep.subway.logging.domain.Privacy)")
     public Object writeLogMessage(ProceedingJoinPoint pjp) throws Throwable {
 
-        loggingMethod(pjp);
-        loggingRequestArguments(pjp);
+        StringBuilder sb = new StringBuilder();
+        sb.append("==== Method Name");
+        sb.append(getCallMethod(pjp));
+        sb.append("====\n");
+        sb.append(extractRequestArguments(pjp));
         Object retValue = pjp.proceed();
-        loggingResponseResult(retValue);
+        sb.append(extractResponseResult(retValue));
+        loggingIOParameter(sb.toString());
         return retValue;
     }
 
-    private void loggingMethod(ProceedingJoinPoint pjp) {
+    private String getCallMethod(ProceedingJoinPoint pjp) {
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Method method = methodSignature.getMethod();
-        logger.info("==== Method Name {} ====", method.getName());
+        return method.getName();
     }
 
-    private void loggingRequestArguments(ProceedingJoinPoint pjp) {
+    private String extractRequestArguments(ProceedingJoinPoint pjp) {
+
+        StringBuilder sb = new StringBuilder();
 
         Object[] args = pjp.getArgs();
         if(args.length <= 0) {
-            logger.info("no parameter");
+            sb.append("no parameter");
+            return sb.toString();
         }
 
         for(Object arg : args) {
-            String logFormat = String.format("request parameter type %s \n request parameter value : %s", arg.getClass().getSimpleName(), arg);
-            logger.info(logFormat);
+            sb.append("request parameter type ");
+            sb.append(arg.getClass().getSimpleName());
+            sb.append("\n");
+            sb.append("request parameter value");
+            sb.append(arg);
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
-    private void loggingResponseResult(Object retValue) {
-        String logFormat = String.format("response result type : %s \n response result value : %s", retValue.getClass().getSimpleName(), retValue);
-        logger.info(logFormat);
+    private String extractResponseResult(Object retValue) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("response result type");
+        sb.append(retValue.getClass().getSimpleName());
+        sb.append("\n");
+        sb.append("response result value");
+        sb.append(retValue);
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    private void loggingIOParameter(String message) {
+        logger.info(message);
     }
 }
