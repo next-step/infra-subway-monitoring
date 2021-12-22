@@ -17,7 +17,7 @@ public class ExceptionController {
 
     @ExceptionHandler(SubwayNotFoundException.class)
     public ResponseEntity<Void> subwayNotFoundExceptionHandler(SubwayNotFoundException e) {
-        log.error("요청받은 데이터가 존재하지 않습니다.", e);
+        log.info("요청받은 데이터가 존재하지 않습니다.", e);
         return ResponseEntity.notFound()
             .build();
     }
@@ -32,7 +32,7 @@ public class ExceptionController {
 
     @ExceptionHandler({AuthorizationException.class})
     public ResponseEntity<Void> unAuthorizedExceptionHandler(Exception e) {
-        log.error("접근 권한이 없는 요청입니다.", e);
+        log.info("접근 권한이 없는 요청입니다.", e);
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .build();
