@@ -106,6 +106,10 @@ npm run dev
     Latency 50ms
     부하유지 기간 30분 목표
     데이터량 계산 : 메인 (3.3MB) + 회원 조회(1~2kb) + 노선 조회 페이지(3.6MB)
+      
+    VUser 계산
+    - 목표 rps 23 (초당 23번의 request를 받게)
+    - VUser = (23 * 3) / 2 = 69 / 2 = 34
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 smoke 테스트
 
