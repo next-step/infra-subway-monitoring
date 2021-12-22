@@ -1,4 +1,4 @@
-
+// 300 -> 1000 -> 0 테스트 시 p(95) 1.5s
 
   execution: local
      script: stress.js
@@ -33,3 +33,39 @@ default ✓ [======================================] 0000/1000 VUs  1m2s
      vus_max........................: 1000    min=1000     max=1000
 
 ERRO[0065] some thresholds have failed
+
+// 300 -> 600 -> 700 -> 1000 -> 0 테스트 시 p(95) 1.45s
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1000 max VUs, 1m5s max duration (incl. graceful stop):
+           * default: Up to 1000 looping VUs for 35s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m36.5s), 0000/1000 VUs, 9499 complete and 0 interrupted iterations
+default ↓ [======================================] 0596/1000 VUs  35s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 18998      ✗ 0
+     data_received..................: 5.1 MB  138 kB/s
+     data_sent......................: 4.9 MB  134 kB/s
+     http_req_blocked...............: avg=341.29µs min=3.35µs  med=5.55µs   max=224.8ms  p(90)=27.3µs   p(95)=605.84µs
+     http_req_connecting............: avg=266.06µs min=0s      med=0s       max=224.6ms  p(90)=0s       p(95)=461.45µs
+   ✗ http_req_duration..............: avg=702.74ms min=4.3ms   med=685.86ms max=2.85s    p(90)=1.32s    p(95)=1.45s
+       { expected_response:true }...: avg=750.83ms min=4.3ms   med=750.4ms  max=2.85s    p(90)=1.36s    p(95)=1.46s
+     http_req_failed................: 50.00%  ✓ 9499       ✗ 9499
+     http_req_receiving.............: avg=643.71µs min=25.4µs  med=53.98µs  max=226.81ms p(90)=1.04ms   p(95)=2.24ms
+     http_req_sending...............: avg=398.48µs min=11.61µs med=20.32µs  max=122.65ms p(90)=226.79µs p(95)=835.13µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=701.7ms  min=3.99ms  med=685.29ms max=2.85s    p(90)=1.31s    p(95)=1.45s
+     http_reqs......................: 18998   519.821523/s
+     iteration_duration.............: avg=2.4s     min=1.01s   med=2.37s    max=4.95s    p(90)=3.56s    p(95)=3.78s
+     iterations.....................: 9499    259.910761/s
+     vus............................: 244     min=150      max=999
+     vus_max........................: 1000    min=1000     max=1000
+
+ERRO[0038] some thresholds have failed
