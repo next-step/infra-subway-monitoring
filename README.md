@@ -120,8 +120,8 @@ FILE : [moonjuhyeon-manage-key-pair.pem](https://drive.google.com/file/d/1NVC7AW
        - [스크립트](./k6/main/load.js)
        - [결과](./k6/main/load.md) 
      - stress
-       - [스크립트](./k6/main/smoke.js)
-       - [결과](./k6/main/smoke.md)
+       - [스크립트](./k6/main/stress.js)
+       - [결과](./k6/main/stress.md)
    - 로그인
      - smoke
        - [스크립트](./k6/login/smoke.js)
@@ -130,8 +130,8 @@ FILE : [moonjuhyeon-manage-key-pair.pem](https://drive.google.com/file/d/1NVC7AW
        - [스크립트](./k6/login/load.js)
        - [결과](./k6/login/load.md)
      - stress
-        - [스크립트](./k6/login/smoke.js)
-        - [결과](./k6/login/smoke.md)
+        - [스크립트](./k6/login/stress.js)
+        - [결과](./k6/login/stress.md)
    - 로그인 -> 마이페이지 -> 내정보 수정
         - smoke
            - [스크립트](./k6/member/smoke.js)
@@ -140,8 +140,8 @@ FILE : [moonjuhyeon-manage-key-pair.pem](https://drive.google.com/file/d/1NVC7AW
            - [스크립트](./k6/member/load.js)
            - [결과](./k6/member/load.md)
        - stress
-           - [스크립트](./k6/member/smoke.js)
-           - [결과](./k6/member/smoke.md)
+           - [스크립트](./k6/member/stress.js)
+           - [결과](./k6/member/stress.md)
    - 경로 검색 페이지 -> 경로 검색
        - smoke
          - [스크립트](./k6/path/smoke.js)
@@ -150,7 +150,7 @@ FILE : [moonjuhyeon-manage-key-pair.pem](https://drive.google.com/file/d/1NVC7AW
            - [스크립트](./k6/path/load.js)
            - [결과](./k6/path/load.md)
        - stress
-           - [스크립트](./k6/path/smoke.js)
-           - [결과](./k6/path/smoke.md)
+           - [스크립트](./k6/path/stress.js)
+           - [결과](./k6/path/stress.md)
 
 
