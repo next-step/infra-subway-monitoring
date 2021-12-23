@@ -89,8 +89,8 @@ npm run dev
 
 사용자 입장에선 페이지가 화면에 빨리 나타나는게 중요하다고 생각합니다. PageSpeed 와 WebPageTest 의 결과를 봤을 때,
 
-- WebPageTest 결과에서 Compress Transfer, Cache statice content 가 F 
-- 경쟁사 대비 전반적인 성능이 좋지 않지만 특히 FCP 와 LCP 의 성능이 좋지 않습니다 
+- WebPageTest 결과에서 Compress Transfer, Cache statice content 가 F. 
+- 경쟁사 대비 전반적인 성능이 좋지 않지만 특히 FCP 와 LCP 의 성능이 좋지 않습니다. 
 
  그래서 FCP 와 LCP 의 수치를 낮출 수 있는 방향으로 개선해보려 합니다.
 
@@ -100,7 +100,20 @@ npm run dev
 - 텍스트 압축 사용 - 네트워크 바이트 최소화하려면 텍스트 기반 리소르를 압축(gzip)하여 제공해야 함.
 
 
+- 캐시 적용 전
+  - ![image](https://user-images.githubusercontent.com/10750614/147263723-d3c580e2-66d7-40f9-adca-3ebd719d119a.png)
+  - FCP : 2.9 TTI : 2.9 SI  : 2.9 TBT : 10  LCP : 2.9 CLS : 0
+- 캐시 적용 후
+  - FCP : 3.0 TTI : 3.2 SI  : 3.0 TBT : 20  LCP : 3.0 CLS : 0
+  - WebPageTest, PageSpeed 의 결과를 보면 캐시가 적용됨을 확인할 수 있으나 적용 직후의 성능 수치는 안좋아짐...
+    ![image](https://user-images.githubusercontent.com/10750614/147264375-26fa054c-5de1-424f-b956-6d460b3aa1c7.png)
+  - ![image](https://user-images.githubusercontent.com/10750614/147264436-1c91e750-1660-4e15-99fb-abcd25531e70.png)
 
+
+- 텍스트 압축 사용 전
+  - ![image](https://user-images.githubusercontent.com/10750614/147265673-d38abacd-959b-462a-932e-38a5ac00dd3c.png)
+- 텍스트 압축 사용 후
+  - 
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
