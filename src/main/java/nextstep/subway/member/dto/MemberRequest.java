@@ -1,5 +1,8 @@
 package nextstep.subway.member.dto;
 
+import static nextstep.subway.common.MaskingUtil.maskingAll;
+import static nextstep.subway.common.MaskingUtil.maskingExceptFirst3;
+
 import nextstep.subway.member.domain.Member;
 
 public class MemberRequest {
@@ -30,5 +33,14 @@ public class MemberRequest {
 
     public Member toMember() {
         return new Member(email, password, age);
+    }
+
+    @Override
+    public String toString() {
+        return "MemberRequest{" +
+            "email='" + maskingExceptFirst3(email) + '\'' +
+            ", password='" + maskingAll(password) + '\'' +
+            ", age=" + age +
+            '}';
     }
 }
