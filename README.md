@@ -59,11 +59,11 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - [X] Cloudwatch로 메트릭 수집하기
     
 #### 코드 리뷰사항
-- [ ] SubwayNotFoundException 로그 레벨 변경
-- [ ] badRequest일 때 어떠한 문제인지 전달
-- [ ] 불필요한 주석 제거
-- [ ] gradle 컨벤션
-- [ ] request 로그 제대로 남기도록 수정
+- [X] SubwayNotFoundException 로그 레벨 변경
+- [X] badRequest일 때 어떠한 문제인지 전달
+- [X] 불필요한 주석 제거
+- [X] gradle 컨벤션
+- [X] request 로그 제대로 남기도록 수정
 ---
 
 ### 2단계 - 성능 테스트
