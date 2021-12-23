@@ -1,17 +1,22 @@
 package nextstep.subway.auth.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class AuthService {
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
 
@@ -21,7 +26,7 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
+        Member member = findByEmail(request.getEmail());
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
@@ -34,7 +39,15 @@ public class AuthService {
         }
 
         String email = jwtTokenProvider.getPayload(credentials);
-        Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+        Member member = findByEmail(email);
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
+    }
+
+    private Member findByEmail(String email) {
+        return memberRepository.findByEmail(email)
+            .orElseThrow(() -> {
+                fileLogger.info("사용자 이메일이 존재하지 않습니다 >>> {}", email);
+                throw new AuthorizationException();
+            });
     }
 }
