@@ -95,12 +95,11 @@ PageSpeed 와 WebPageTest 의 결과를 봤을 때,
 
 결론 : FCP 와 LCP 의 수치를 낮출 수 있는 방향으로 개선해보려 합니다.
 
-### 개선방향
+## 개선사향
+  - 정적인 애셋 제공 - 캐시 사용 
+  - 텍스트 압축 사용 - 네트워크 바이트 최소화하려면 텍스트 기반 리소르를 압축(gzip)하여 제공해야 함.
 
-- 정적인 애셋 제공 - 캐시 사용 
-- 텍스트 압축 사용 - 네트워크 바이트 최소화하려면 텍스트 기반 리소르를 압축(gzip)하여 제공해야 함.
-
-
+### 캐시 적용
 - 캐시 적용 전
   - ![image](https://user-images.githubusercontent.com/10750614/147263723-d3c580e2-66d7-40f9-adca-3ebd719d119a.png)
   - FCP : 2.9 TTI : 2.9 SI  : 2.9 TBT : 10  LCP : 2.9 CLS : 0
@@ -110,11 +109,21 @@ PageSpeed 와 WebPageTest 의 결과를 봤을 때,
     ![image](https://user-images.githubusercontent.com/10750614/147264375-26fa054c-5de1-424f-b956-6d460b3aa1c7.png)
   - ![image](https://user-images.githubusercontent.com/10750614/147264436-1c91e750-1660-4e15-99fb-abcd25531e70.png)
 
+### 텍스트 압축
 
 - 텍스트 압축 사용 전
   - ![image](https://user-images.githubusercontent.com/10750614/147265673-d38abacd-959b-462a-932e-38a5ac00dd3c.png)
+  - ![image](https://user-images.githubusercontent.com/10750614/147267876-a472f6db-bbc1-4ec3-afce-1c9dad283935.png)
+  - FCP : 3.0 TTI : 3.2 SI  : 3.0 TBT : 20  LCP : 3.0 CLS : 0
 - 텍스트 압축 사용 후
-  - 
+  - FCP : 1.5 TTI : 1.7 SI  : 1.5 TBT : 50  LCP : 1.5 CLS : 0
+  - 성능이 개선된 것을 확인할 수 있다
+  - WebPageTest, PageSpeed 의 결과를 보면 텍스트 압축이 적용된 것을 확인할 수 있다.
+  - ![image](https://user-images.githubusercontent.com/10750614/147267406-2beb92f0-4513-4ce5-8a4b-40f8e0332cc5.png)
+  - ![image](https://user-images.githubusercontent.com/10750614/147267291-c874295b-e638-409d-a1cd-7f87fb8588f2.png)
+  - ![image](https://user-images.githubusercontent.com/10750614/147267922-1e132992-c46e-46ce-a366-f9635226e1a4.png)
+
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
