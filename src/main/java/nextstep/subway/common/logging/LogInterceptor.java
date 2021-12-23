@@ -1,10 +1,8 @@
 package nextstep.subway.common.logging;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,8 +16,8 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        if (DispatcherType.REQUEST == request.getDispatcherType()
-            && HttpMethod.GET.name().equals(request.getMethod())) {
+        int length = request.getContentLength();
+        if (length <= 0) {
             loggingService.logRequest(request, null);
         }
 
