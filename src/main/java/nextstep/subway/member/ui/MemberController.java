@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
-    public static Logger logger = LoggerFactory.getLogger(MemberController.class);
+    public static Logger logger = LoggerFactory.getLogger("json");
     private MemberService memberService;
 
     public MemberController(MemberService memberService) {

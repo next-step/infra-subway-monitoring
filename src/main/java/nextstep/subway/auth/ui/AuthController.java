@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
-    public static Logger logger = LoggerFactory.getLogger(AuthController.class);
+    public static Logger logger = LoggerFactory.getLogger("json");
     private AuthService authService;
 
     public AuthController(AuthService authService) {

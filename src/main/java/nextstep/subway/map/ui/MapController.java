@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MapController {
-    public static Logger logger = LoggerFactory.getLogger(MapController.class);
+    public static Logger logger = LoggerFactory.getLogger("json");
     private MapService mapService;
 
     public MapController(MapService mapService) {
