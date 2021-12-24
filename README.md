@@ -43,9 +43,27 @@ npm run dev
 
 ### 1단계 - 인프라 운영하기
 1. 각 서버내 로깅 경로를 알려주세요
+EC2-lights93-public(/home/ubuntu/logs/subway)
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-lights93
 
+#### 기능 요구사항
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [X] 로그 설정하기
+    - [X] Application Log 파일로 저장하기
+        - [X] 회원가입, 로그인, 최단거리 조회 등의 이벤트에 로깅을 설정
+    - ~~Nginx Access Log 설정하기~~
+- [x] Cloudwatch로 모니터링
+    - [X] Cloudwatch로 로그 수집하기
+    - [X] Cloudwatch로 메트릭 수집하기
+    
+#### 코드 리뷰사항
+- [X] SubwayNotFoundException 로그 레벨 변경
+- [X] badRequest일 때 어떠한 문제인지 전달
+- [X] 불필요한 주석 제거
+- [X] gradle 컨벤션
+- [X] request 로그 제대로 남기도록 수정
 ---
 
 ### 2단계 - 성능 테스트

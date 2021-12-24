@@ -32,4 +32,14 @@ public class FavoriteResponse {
     public StationResponse getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FavoriteResponse{");
+        sb.append("id=").append(id);
+        sb.append(", source=").append(source);
+        sb.append(", target=").append(target);
+        sb.append('}');
+        return sb.toString();
+    }
 }

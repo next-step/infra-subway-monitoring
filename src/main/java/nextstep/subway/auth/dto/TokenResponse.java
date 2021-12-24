@@ -13,4 +13,12 @@ public class TokenResponse {
     public String getAccessToken() {
         return accessToken;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TokenResponse{");
+        sb.append("accessToken='").append(accessToken).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

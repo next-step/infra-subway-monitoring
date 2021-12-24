@@ -19,4 +19,14 @@ public class SectionRequest {
     public int getDistance() {
         return distance;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("SectionRequest{");
+        sb.append("upStationId=").append(upStationId);
+        sb.append(", downStationId=").append(downStationId);
+        sb.append(", distance=").append(distance);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -12,4 +12,12 @@ public class StationRequest {
     public Station toStation() {
         return new Station(name);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("StationRequest{");
+        sb.append("name='").append(name).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

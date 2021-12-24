@@ -19,4 +19,12 @@ public class TokenRequest {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TokenRequest{");
+        sb.append("email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
