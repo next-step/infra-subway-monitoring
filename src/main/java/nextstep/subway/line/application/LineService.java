@@ -50,7 +50,7 @@ public class LineService {
     public Line findLineById(Long id) {
         return lineRepository.findById(id).orElseThrow(() -> {
             fileLogger.error("지하철 노선이 존재하지 않습니다. 노선아이디: {}", id);
-            throw new RuntimeException();
+            return new RuntimeException();
         });
     }
 

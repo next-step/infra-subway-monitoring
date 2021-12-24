@@ -42,7 +42,7 @@ public class MemberService {
     private Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(()->{
             fileLogger.error("없는 사용자 입니다. 사용자: {}", id);
-            throw new RuntimeException();
+            return new RuntimeException();
         });
     }
 }

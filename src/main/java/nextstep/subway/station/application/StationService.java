@@ -44,14 +44,14 @@ public class StationService {
     public Station findStationById(Long id) {
         return stationRepository.findById(id).orElseThrow(() -> {
             fileLogger.error("지하철역이 존재하지 않습니다. 지하철역: {}", id);
-            throw new RuntimeException();
+            return new RuntimeException();
         });
     }
 
     public Station findById(Long id) {
         return stationRepository.findById(id).orElseThrow(() -> {
             fileLogger.error("지하철역이 존재하지 않습니다. 지하철역: {}", id);
-            throw new RuntimeException();
+            return new RuntimeException();
         });
     }
 }

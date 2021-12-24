@@ -47,7 +47,7 @@ public class AuthService {
         return memberRepository.findByEmail(email)
             .orElseThrow(() -> {
                 fileLogger.info("사용자 이메일이 존재하지 않습니다 >>> {}", email);
-                throw new AuthorizationException();
+                return new AuthorizationException();
             });
     }
 }
