@@ -1,8 +1,8 @@
 package nextstep.subway.map.domain;
 
-import nextstep.subway.station.domain.Station;
-
 import java.util.List;
+
+import nextstep.subway.station.domain.Station;
 
 public class SubwayPath {
     private List<SectionEdge> sectionEdges;
