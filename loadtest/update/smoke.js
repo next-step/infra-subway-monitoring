@@ -10,40 +10,45 @@ export let options = {
     },
 };
 
-const BASE_URL = 'http://15.164.72.205:8080/';
+const BASE_URL = 'http://15.164.72.205:8080';
 const USERNAME = 'koola976@gmail.com';
 const PASSWORD = '1234';
 
-export default function ()  {
-
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-    });
-
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
-
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+export default function () {
+    let loginRes = http.post(`${BASE_URL}/login/token`,
+        JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD,
+        })
+        , {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
     check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
+        'login successfully': (resp) => resp.json('accessToken') !== '',
     });
-
 
     let authHeaders = {
         headers: {
             Authorization: `Bearer ${loginRes.json('accessToken')}`,
+            'Content-Type': 'application/json',
         },
     };
 
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    let updateRes = http.put(`${BASE_URL}/members/me`,
+        JSON.stringify({
+            email: USERNAME,
+            password: PASSWORD,
+            age: 77
+        }),
+        authHeaders);
+    check(updateRes, { 'updated member': (resp) => resp.status === 200 });
 
-    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    let myObjects = http.get(`${BASE_URL}/members/me`,
+        authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id === 1 });
 
     sleep(1);
 };
