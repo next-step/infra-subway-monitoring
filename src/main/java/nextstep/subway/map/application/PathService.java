@@ -19,7 +19,7 @@ public class PathService {
         graph.addVertexWith(lines);
         graph.addEdge(lines);
 
-        // 다익스트라 최단 경로 찾기
+
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
