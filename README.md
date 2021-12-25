@@ -149,10 +149,8 @@ http://www.koreanclick.com/insights/newsletter_view.html?id=563
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요 
 
 - 접속 빈도 높은 페이지 : 메인 페이지 (main)
+  - https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/main/mainResult.md
 - 데이터 갱신 페이지 : 로그인 -> 회원정보 변경 페이지 (update)
+  - https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/update/updateResult.md
 - 데이터 조회시 여러 데이터 참조하는 페이지 : 경로 조회 페이지 (path)
-
-
-
-
-
+  - https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/path/pathResult.md
