@@ -92,15 +92,15 @@ Total Blocking Time | 640ms | 130ms | 130ms
      - [load](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/frequent/load_result.md)
      - [stress](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/frequent/stress_result.md)
 
- - 4.2. 데이터를 갱신하는 페이지(로그인, 내정보수정)
-     - [smoke](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/smoke_result.md)
-     - [load](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/load_result.md)
-     - [stress](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/stress_result.md)
+   - 4.2. 데이터를 갱신하는 페이지(로그인, 내정보수정)
+      - [smoke](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/smoke_result.md)
+      - [load](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/load_result.md)
+      - [stress](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/update/stress_result.md)
  
- - 4.3. 데이터를 조회하는데 여러 데이터를 참조하는 페이지(지하철 노선목록 조회, 경로찾기)   
-     - [smoke](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/smoke_result.md)
-     - [load](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/load_result.md)
-     - [stress](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/stress_result.md)
+   - 4.3. 데이터를 조회하는데 여러 데이터를 참조하는 페이지(지하철 노선목록 조회, 경로찾기)   
+      - [smoke](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/smoke_result.md)
+      - [load](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/load_result.md)
+      - [stress](https://github.com/eedys1234/infra-subway-monitoring/blob/step2/load-test/join/stress_result.md)
  
  
 
