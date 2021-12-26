@@ -50,7 +50,15 @@ npm run dev
 ---
 
 ### 2단계 - 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요.  
+- 경쟁사(카카오맵)과 비교하여 결정  
+항목 | 경쟁사(카카오맵) | 지하철노선도 | 목표치  
+---- | ---- | ---- | ---- |  
+First ContentFul Paint |  0.6s | 0.0s | 0.0s  
+Speed Index | 0.0s | 0.0s | 0.0s |  
+Large ContentFul Paint | 0.0s | 0.0s | 0.0s  
+Cumulative Layout Shift | 0.0s | 0.0s | 0.0s  
+Total Blocking Time | 0.0s | 0.0s | 0.0s  
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
