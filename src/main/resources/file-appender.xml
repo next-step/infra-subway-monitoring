@@ -7,7 +7,7 @@
 <!--        로깅이 기록될 위치-->
         <file>${home}file.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>file-%d{yyyyMMdd}.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
