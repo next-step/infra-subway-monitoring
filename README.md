@@ -69,5 +69,13 @@ Total Blocking Time | 640ms | 130ms | 130ms
  - 불필요한 api 요청 최소화(프론트 내부에서 캐싱처리)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+ - web server
+ - application server
+ - db server
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+`
+
+`
+
