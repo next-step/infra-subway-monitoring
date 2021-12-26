@@ -65,7 +65,8 @@ Total Blocking Time | 640ms | 130ms | 130ms
  - gzip으로 transfer-encoding 적용
  - 코드 스플릿팅을 통해 js/css 지연로딩
  - 이미지 압축
- - 불필요한 api 요청  
+ - css/js/image 등 정적파일등 캐싱 처리
+ - 불필요한 api 요청 최소화(프론트 내부에서 캐싱처리)
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
