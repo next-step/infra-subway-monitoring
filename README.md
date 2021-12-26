@@ -56,18 +56,6 @@ npm run dev
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-
-
-
-Desktop | FCP | TTI
--- | -- | --
-Homepage |   |
-Result page |   |
-
-
-
-
-
 ```aidl
 A. 예비 분석
   1. 가장 중요한 페이지 판단
@@ -117,6 +105,7 @@ C. 성능 기준 설정
     - 압축된 리소스 최대 크기 200KB 미만
 ```
 
+<br/>
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - [ ] 텍스트 압축 사용
@@ -124,29 +113,74 @@ C. 성능 기준 설정
 - [ ] 렌더링 차단 리소스 제거하기
 
 
-[ 개선 전 ]
-![img.png](src/main/resources/static/images/pagespeed-before.png)
-
-[ 개선 후 ]
-![img.png](src/main/resources/static/images/pagespeed-after.png)
+<br/>
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 ```
-[ 목푯값 설정 ]
+1.  대상 시스템 범위: application
+```
+```
+2.  목표 rpc 구하기
+ A) 1일 사용자 수 (DAU) : 1,000,000 (백만)
+ B) 피크 시간대의 집중률  (최대 트개픽 / 평소 트래픽) : 3
+ C) 1명당 1일 평균 접속 혹은 요청수 : 2
+ D) Throughput: 23 ~ 69
+  - 1일 총 접속수: 100만 * 2 = 200만
+  - 1일 평균 rps: 200만 / 86400 = 23
+  - 1일 최대 rps: 23 * 3 = 69
 
-A) 1일 사용자 수 (DAU) : 10,000,000 (천만)
-B) 피크 시간대의 집중률  (최대 트개픽 / 평소 트래픽) : 
-C) 1명당 1일 평균 접속 혹은 요청수 : 
-D) Throughput: 
+-------------------------------------------------------------
+ A) 네이버 지도의 길 찾기만 하루 1억건 이라고 함.
+소박하게 1% 사용자만 노려본다..
+https://news.mt.co.kr/mtview.php?no=2021090916014079809
+
+ B) 출퇴근 피크 시간대에 평소보다 3배 정도 더 트래픽이 있을 것으로 예상해본다.
+```
+```
+3.  VUser 구하기
+----------------------------------
+T = (R * http_req_duration) (+ 1s)
+VUser = (목표 rps * T) / R
+----------------------------------
+세개의 요청 (R=3) 이 있고 왕복 시간이 0.5s, 지연 시간이 0.3초라고 할 때
+T = (3 * 0.5 s) + 0.3 s = 1.8 s
+VUser_평균 = (23 * 1.8 s) / 3 = 14
+VUser_최대 = (69 * 1.8 s) / 3 = 41
+----------------------------------
+```
 
 ```
-A) 네이버 지도의 길 찾기만 하루 [1억건](https://news.mt.co.kr/mtview.php?no=2021090916014079809) 이라고 함.
-소박하게 10% 사용자만 노려본다..
+4. 테스트 기간: 30분
+```
 
-B)
-
+<br/>
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- 시나리오: `메인페이지 - 로그인 - 길찾기`
 
-- 시나리오: 메인페이지 - 로그인 - 길찾기
+  A. Smoke (k6/smoke.js) 테스트 결과
+```aidl
 
+```
+
+  B. Load (k6/load.js) 테스트 결과
+```aidl
+
+```
+
+  C. Stress (k6/stress.js) 테스트 결과
+```aidl
+
+```
+
+<br/>
+5. 웹 페이지 개선 내역
+
+[ 개선 전 ]
+![img.png](src/main/resources/static/images/pagespeed-before.png)
+
+[ 개선 후 - 텍스트(리소스) 압축 사용 ]
+![img.png](src/main/resources/static/images/pagespeed-after-zip.png)
+
+[ 개선 후 - 텍스트(리소스) 압축 사용 ]
+![img.png](src/main/resources/static/images/pagespeed-after-zip.png)
