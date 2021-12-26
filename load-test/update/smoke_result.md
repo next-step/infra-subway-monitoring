@@ -83,39 +83,6 @@ export default function() {
            * default: 1 looping VUs for 10s (gracefulStop: 30s)
 
 
-running (01.0s), 1/1 VUs, 140 complete and 0 interrupted iterations
-default   [  10% ] 1 VUs  01.0s/10s
-
-running (02.0s), 1/1 VUs, 273 complete and 0 interrupted iterations
-default   [  20% ] 1 VUs  02.0s/10s
-
-running (03.0s), 1/1 VUs, 420 complete and 0 interrupted iterations
-default   [  30% ] 1 VUs  03.0s/10s
-
-running (04.0s), 1/1 VUs, 564 complete and 0 interrupted iterations
-default   [  40% ] 1 VUs  04.0s/10s
-
-running (05.0s), 1/1 VUs, 711 complete and 0 interrupted iterations
-default   [  50% ] 1 VUs  05.0s/10s
-
-running (06.0s), 1/1 VUs, 856 complete and 0 interrupted iterations
-default   [  60% ] 1 VUs  06.0s/10s
-
-running (07.0s), 1/1 VUs, 1002 complete and 0 interrupted iterations
-default   [  70% ] 1 VUs  07.0s/10s
-
-running (08.0s), 1/1 VUs, 1151 complete and 0 interrupted iterations
-default   [  80% ] 1 VUs  08.0s/10s
-
-running (09.0s), 1/1 VUs, 1292 complete and 0 interrupted iterations
-default   [  90% ] 1 VUs  09.0s/10s
-
-running (10.0s), 1/1 VUs, 1440 complete and 0 interrupted iterations
-default   [ 100% ] 1 VUs  10.0s/10s
-
-running (10.0s), 0/1 VUs, 1442 complete and 0 interrupted iterations
-default ✓ [ 100% ] 1 VUs  10s
-
      ✓ logged in successfully
      ✓ updated member
 
