@@ -79,7 +79,7 @@ Total Blocking Time | 640ms | 130ms | 130ms
  
  3.3. 부하 테스트 시 저장될 데이터의 건수 및 크기  
  
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요  
  4.1. 접속빈도가 높은 페이지  
  
  4.2. 데이터를 갱신하는 페이지  
