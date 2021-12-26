@@ -1,0 +1,57 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 240 max VUs, 1m5s max duration (incl. graceful stop):
+           * default: Up to 240 looping VUs for 35s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0025] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": read tcp 192.168.190.177:42370->52.78.231.49:443: read: connection reset by peer"
+WARN[0026] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0026] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0026] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0026] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+WARN[0026] Request Failed                                error="Get \"https://devsigner9920.n-e.kr/stations\": EOF"
+
+running (0m35.2s), 000/240 VUs, 16523 complete and 0 interrupted iterations
+default ✓ [======================================] 000/240 VUs  35s
+
+     ✗ stress test
+      ↳  99% — ✓ 16504 / ✗ 19
+
+     checks.........................: 99.88% ✓ 16504     ✗ 19
+     data_received..................: 17 MB  487 kB/s
+     data_sent......................: 2.1 MB 61 kB/s
+     http_req_blocked...............: avg=105.15µs min=0s     med=4.41µs   max=34.04ms p(90)=5.38µs   p(95)=7.28µs
+     http_req_connecting............: avg=9.92µs   min=0s     med=0s       max=2.58ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=325.7ms  min=0s     med=313.55ms max=2.79s   p(90)=521.21ms p(95)=708.25ms
+       { expected_response:true }...: avg=326.07ms min=5.49ms med=313.66ms max=2.79s   p(90)=521.35ms p(95)=708.29ms
+     http_req_failed................: 0.11%  ✓ 19        ✗ 16504
+     http_req_receiving.............: avg=62.38µs  min=0s     med=61.92µs  max=1.08ms  p(90)=78.85µs  p(95)=86.67µs
+     http_req_sending...............: avg=26.97µs  min=0s     med=13.46µs  max=17.7ms  p(90)=24.59µs  p(95)=30.1µs
+     http_req_tls_handshaking.......: avg=79.57µs  min=0s     med=0s       max=23.15ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=325.61ms min=0s     med=313.48ms max=2.79s   p(90)=521.13ms p(95)=708.15ms
+     http_reqs......................: 16523  469.91782/s
+     iteration_duration.............: avg=325.91ms min=4.64ms med=313.67ms max=2.79s   p(90)=521.31ms p(95)=708.35ms
+     iterations.....................: 16523  469.91782/s
+     vus............................: 101    min=20      max=240
+     vus_max........................: 240    min=240     max=240
