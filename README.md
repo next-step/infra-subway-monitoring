@@ -84,6 +84,7 @@ Total Blocking Time | 640ms | 130ms | 130ms
    - 처리량 : 370 ~ 1850 rps
  
  - 3.3. 부하 테스트 시 저장될 데이터의 건수 및 크기  
+   - 저장되는 데이터 없음 
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
