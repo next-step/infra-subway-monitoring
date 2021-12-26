@@ -55,11 +55,11 @@ npm run dev
 
 항목 | 경쟁사(카카오맵) | 지하철노선도 | 목표치  
 ---- | ---- | ---- | ---- |  
-First ContentFul Paint |  0.6s | 0.0s | 0.0s  
-Speed Index | 2.3s | 0.0s | 0.0s |  
-Large ContentFul Paint | 0.6s | 0.0s | 0.0s  
-Cumulative Layout Shift | 0.018 | 0.0s | 0.0s  
-Total Blocking Time | 640ms | 0.0s | 0.0s  
+First ContentFul Paint |  0.6s | 12.2s | 0.7s  
+Speed Index | 2.3s | 12.2s | 3.0s |  
+Large ContentFul Paint | 0.6s | 12.2s | 0.7s  
+Cumulative Layout Shift | 0.018 | 0.004 | 0.004  
+Total Blocking Time | 640ms | 130ms | 130ms  
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
  - gzip으로 transfer-encoding 적용
