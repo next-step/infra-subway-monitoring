@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
+    private static final Logger log = LoggerFactory.getLogger("console");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private FavoriteRepository favoriteRepository;
@@ -35,7 +36,8 @@ public class FavoriteService {
 
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
-        favoriteRepository.save(favorite);
+        Favorite persistFavorite = favoriteRepository.save(favorite);
+        log.info("즐겨찾기 생성 아이디 >>> {}", persistFavorite.getId());
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {

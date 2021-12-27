@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MemberService {
+    private static final Logger log = LoggerFactory.getLogger("console");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -22,6 +24,7 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
+        log.info("사용자 생성 키 >> {}", member.getId());
         return MemberResponse.of(member);
     }
 
@@ -40,7 +43,7 @@ public class MemberService {
     }
 
     private Member findById(Long id) {
-        return memberRepository.findById(id).orElseThrow(()->{
+        return memberRepository.findById(id).orElseThrow(() -> {
             fileLogger.error("없는 사용자 입니다. 사용자: {}", id);
             return new RuntimeException();
         });

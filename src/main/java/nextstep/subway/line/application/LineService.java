@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class LineService {
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger log = LoggerFactory.getLogger("console");
     private LineRepository lineRepository;
     private StationService stationService;
 
@@ -33,6 +34,9 @@ public class LineService {
         Station downStation = stationService.findById(request.getDownStationId());
         Line persistLine = lineRepository.save(
             new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
+
+        log.info("노선 생성 키 >>> {}", persistLine.getId());
+
         return LineResponse.of(persistLine);
     }
 

@@ -16,6 +16,7 @@ import nextstep.subway.station.dto.StationResponse;
 @Service
 @Transactional
 public class StationService {
+    private static final Logger log = LoggerFactory.getLogger("console");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private StationRepository stationRepository;
 
@@ -25,6 +26,9 @@ public class StationService {
 
     public StationResponse saveStation(StationRequest stationRequest) {
         Station persistStation = stationRepository.save(stationRequest.toStation());
+
+        log.info("지하철역 생성 키 >>> {}", persistStation.getId());
+
         return StationResponse.of(persistStation);
     }
 

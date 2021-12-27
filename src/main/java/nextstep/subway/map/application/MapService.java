@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @Transactional
 public class MapService {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger log = LoggerFactory.getLogger("console");
 
     private LineService lineService;
     private StationService stationService;
@@ -34,8 +34,9 @@ public class MapService {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
-        fileLogger.info("시작역: {}, 종료역: {}", sourceStation, targetStation);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
+        log.info("경로 조회 시작역 : {} {}", source, sourceStation.getName());
+        log.info("경로 조회 종료역 : {} {}", target, targetStation.getName());
 
         return PathResponseAssembler.assemble(subwayPath);
     }

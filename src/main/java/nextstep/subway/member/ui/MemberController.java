@@ -15,7 +15,6 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private MemberService memberService;
 
@@ -25,16 +24,13 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
-        fileLogger.info("createMember >>> {}", request);
         MemberResponse member = memberService.createMember(request);
-        fileLogger.info("createMember >>> {}", member);
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
     @GetMapping("/members/{id}")
     public ResponseEntity<MemberResponse> findMember(@PathVariable Long id) {
         MemberResponse member = memberService.findMember(id);
-        fileLogger.info("findMember >>> request: {}, response: {}", id, member.getId());
         return ResponseEntity.ok().body(member);
     }
 
@@ -46,16 +42,13 @@ public class MemberController {
 
     @DeleteMapping("/members/{id}")
     public ResponseEntity<MemberResponse> deleteMember(@PathVariable Long id) {
-        fileLogger.info("deleteMember >>> request: {}", id);
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/members/me")
     public ResponseEntity<MemberResponse> findMemberOfMine(@AuthenticationPrincipal LoginMember loginMember) {
-        fileLogger.info("findMemberOfMine >>> request: {}", loginMember.getId());
         MemberResponse member = memberService.findMember(loginMember.getId());
-        fileLogger.info("findMemberOfMine >>> response: {}", member.getId());
         return ResponseEntity.ok().body(member);
     }
 

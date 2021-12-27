@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 public class FavoriteController {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private FavoriteService favoriteService;
 
     public FavoriteController(FavoriteService favoriteService) {
@@ -26,7 +25,6 @@ public class FavoriteController {
     @PostMapping("/favorites")
     public ResponseEntity createFavorite(@AuthenticationPrincipal LoginMember loginMember,
         @RequestBody FavoriteRequest request) {
-        fileLogger.info("createFavorite >>> {}", request);
         favoriteService.createFavorite(loginMember, request);
         return ResponseEntity.created(URI.create("/favorites/" + 1L)).build();
     }

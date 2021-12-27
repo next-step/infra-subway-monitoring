@@ -19,7 +19,6 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/lines")
 public class LineController {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -28,9 +27,7 @@ public class LineController {
 
     @PostMapping
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
-        fileLogger.info("createLine request >>> {}", lineRequest);
         LineResponse line = lineService.saveLine(lineRequest);
-        fileLogger.info("createLine response >>> {}", line);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
 
