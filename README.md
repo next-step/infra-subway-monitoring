@@ -109,7 +109,7 @@ C. 성능 기준 설정
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - [x] 텍스트 압축 사용
-- [x] 사용하지 않는 자바스크립트 줄이기
+- [ ] 사용하지 않는 자바스크립트 줄이기
 - [x] 렌더링 차단 리소스 제거하기
 
 
@@ -161,15 +161,134 @@ VUser_최대 = (69 * 1.8 s) / 3 = 41
   A. Smoke (k6/smoke.js) 테스트 결과
 ```aidl
 
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.2s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ get main page successfully
+     ✓ logged in successfully
+     ✓ found shortest path successfully
+
+     checks.........................: 100.00% ✓ 30       ✗ 0
+     data_received..................: 25 kB   2.5 kB/s
+     data_sent......................: 8.0 kB  791 B/s
+     http_req_blocked...............: avg=767.59µs min=4.26µs  med=4.72µs  max=22.86ms  p(90)=8.38µs   p(95)=8.42µs
+     http_req_connecting............: avg=13.32µs  min=0s      med=0s      max=399.83µs p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=3.81ms   min=1.41ms  med=1.64ms  max=8.42ms   p(90)=8.35ms   p(95)=8.39ms
+       { expected_response:true }...: avg=4.97ms   min=1.58ms  med=4.96ms  max=8.42ms   p(90)=8.39ms   p(95)=8.39ms
+     http_req_failed................: 33.33%  ✓ 10       ✗ 20
+     http_req_receiving.............: avg=90.45µs  min=55µs    med=84.77µs max=151.11µs p(90)=131.31µs p(95)=144.03µs
+     http_req_sending...............: avg=23.94µs  min=16.05µs med=19.28µs max=82.15µs  p(90)=27.79µs  p(95)=47.63µs
+     http_req_tls_handshaking.......: avg=519.59µs min=0s      med=0s      max=15.58ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=3.69ms   min=1.31ms  med=1.5ms   max=8.3ms    p(90)=8.23ms   p(95)=8.24ms
+     http_reqs......................: 30      2.955144/s
+     iteration_duration.............: avg=1.01s    min=1.01s   med=1.01s   max=1.03s    p(90)=1.01s    p(95)=1.02s
+     iterations.....................: 10      0.985048/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+
+
 ```
 
   B. Load (k6/load.js) 테스트 결과
 ```aidl
 
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 41 max VUs, 30m30s max duration (incl. graceful stop):
+           * default: Up to 41 looping VUs for 30m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (30m00.7s), 00/41 VUs, 54744 complete and 0 interrupted iterations
+default ✓ [======================================] 00/41 VUs  30m0s
+
+     ✓ get main page successfully
+     ✓ logged in successfully
+     ✓ found shortest path successfully
+
+     checks.........................: 100.00% ✓ 164232    ✗ 0
+     data_received..................: 115 MB  64 kB/s
+     data_sent......................: 42 MB   23 kB/s
+     http_req_blocked...............: avg=19.36µs  min=3.07µs   med=4.96µs  max=23.58ms p(90)=8.43µs   p(95)=10.42µs
+     http_req_connecting............: avg=693ns    min=0s       med=0s      max=2.39ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=4.19ms   min=888.37µs med=2.29ms  max=54.72ms p(90)=8.76ms   p(95)=9.96ms
+       { expected_response:true }...: avg=5.21ms   min=888.37µs med=6.33ms  max=44.53ms p(90)=9.41ms   p(95)=10.64ms
+     http_req_failed................: 33.33%  ✓ 54744     ✗ 109488
+     http_req_receiving.............: avg=107.18µs min=22.51µs  med=52.66µs max=24.27ms p(90)=137.89µs p(95)=285.64µs
+     http_req_sending...............: avg=43.84µs  min=10.74µs  med=17.58µs max=26.57ms p(90)=42.67µs  p(95)=82.87µs
+     http_req_tls_handshaking.......: avg=4.9µs    min=0s       med=0s      max=16.65ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=4.04ms   min=822.42µs med=2.12ms  max=44.44ms p(90)=8.6ms    p(95)=9.74ms
+     http_reqs......................: 164232  91.202722/s
+     iteration_duration.............: avg=1.01s    min=1s       med=1.01s   max=1.07s   p(90)=1.01s    p(95)=1.02s
+     iterations.....................: 54744   30.400907/s
+     vus............................: 1       min=1       max=41
+     vus_max........................: 41      min=41      max=41
+
+
 ```
 
   C. Stress (k6/stress.js) 테스트 결과
 ```aidl
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 150 max VUs, 31m30s max duration (incl. graceful stop):
+           * default: Up to 150 looping VUs for 31m0s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (31m00.9s), 000/150 VUs, 159078 complete and 0 interrupted iterations
+default ✓ [======================================] 000/150 VUs  31m0s
+
+     ✓ get main page successfully
+     ✓ logged in successfully
+     ✓ found shortest path successfully
+
+     checks.........................: 100.00% ✓ 477234     ✗ 0
+     data_received..................: 335 MB  180 kB/s
+     data_sent......................: 122 MB  65 kB/s
+     http_req_blocked...............: avg=22.52µs  min=3.09µs   med=4.87µs  max=65.4ms   p(90)=7.26µs   p(95)=9.99µs
+     http_req_connecting............: avg=1.17µs   min=0s       med=0s      max=32.49ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=5.06ms   min=873.35µs med=2.48ms  max=124.88ms p(90)=9.6ms    p(95)=12.99ms
+       { expected_response:true }...: avg=6.12ms   min=873.35µs med=6.49ms  max=124.88ms p(90)=10.56ms  p(95)=14.55ms
+     http_req_failed................: 33.33%  ✓ 159078     ✗ 318156
+     http_req_receiving.............: avg=125.26µs min=20.65µs  med=50.53µs max=67.64ms  p(90)=135.39µs p(95)=305.33µs
+     http_req_sending...............: avg=66.95µs  min=10.32µs  med=17.27µs max=70.69ms  p(90)=43.68µs  p(95)=103.73µs
+     http_req_tls_handshaking.......: avg=5.85µs   min=0s       med=0s      max=42.37ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=4.86ms   min=811.71µs med=2.3ms   max=124.79ms p(90)=9.37ms   p(95)=12.57ms
+     http_reqs......................: 477234  256.449537/s
+     iteration_duration.............: avg=1.01s    min=1s       med=1.01s   max=1.21s    p(90)=1.02s    p(95)=1.03s
+     iterations.....................: 159078  85.483179/s
+     vus............................: 2       min=1        max=150
+     vus_max........................: 150     min=150      max=150
 
 ```
 
@@ -182,5 +301,5 @@ VUser_최대 = (69 * 1.8 s) / 3 = 41
 [ 개선 후 - 텍스트(리소스) 압축 사용 ]
 ![img.png](src/main/resources/static/images/pagespeed-after-zip.png)
 
-[ 개선 후 - 텍스트(리소스) 압축 사용 ]
-![img.png](src/main/resources/static/images/pagespeed-after-zip.png)
+[ 개선 후 - 렌더링 차단 리소스 제거 ]
+![img.png](src/main/resources/static/images/pagespeed-after-rendering-remove.png)
