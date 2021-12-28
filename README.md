@@ -137,12 +137,12 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
         - [stress.js](./performance/me/stress.js)
         - [stress 결과](./performance/me/stress.txt)
     - 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로 조회)        
-        - [smoke.js](./performance/me/smoke.js)
-        - [smoke 결과](./performance/me/smoke.txt)
-        - [load.js](./performance/me/load.js)
-        - [load 결과](./performance/me/load.txt)
-        - [stress.js](./performance/me/stress.js)
-        - [stress 결과](./performance/me/stress.txt)
+        - [smoke.js](./performance/path/smoke.js)
+        - [smoke 결과](./performance/path/smoke.txt)
+        - [load.js](./performance/path/load.js)
+        - [load 결과](./performance/path/load.txt)
+        - [stress.js](./performance/path/stress.js)
+        - [stress 결과](./performance/path/stress.txt)
 #### 기능 요구사항
 - [X] 웹 성능 테스트
     - [X] 웹 성능 예산을 작성
