@@ -1,0 +1,37 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: performance/main/load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 210 max VUs, 30m30s max duration (incl. graceful stop):
+           * default: Up to 210 looping VUs for 30m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (30m01.7s), 000/210 VUs, 104235 complete and 0 interrupted iterations
+default ✓ [======================================] 000/210 VUs  30m0s
+
+     ✓ reached request rate
+
+     checks.........................: 100.00% ✓ 104235    ✗ 0
+     data_received..................: 121 MB  67 kB/s
+     data_sent......................: 4.6 MB  2.6 kB/s
+     http_req_blocked...............: avg=53.22µs min=0s     med=1µs    max=190.72ms p(90)=1µs     p(95)=2µs
+     http_req_connecting............: avg=14.31µs min=0s     med=0s     max=84.56ms  p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=11.38ms min=6.04ms med=9.97ms max=184.81ms p(90)=13.47ms p(95)=15.71ms
+       { expected_response:true }...: avg=11.38ms min=6.04ms med=9.97ms max=184.81ms p(90)=13.47ms p(95)=15.71ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 104235
+     http_req_receiving.............: avg=119.1µs min=13µs   med=51µs   max=67.72ms  p(90)=117µs   p(95)=377µs
+     http_req_sending...............: avg=88.31µs min=20µs   med=82µs   max=1.29ms   p(90)=137µs   p(95)=155µs
+     http_req_tls_handshaking.......: avg=37.39µs min=0s     med=0s     max=175.06ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=11.17ms min=5.95ms med=9.76ms max=181.72ms p(90)=13.27ms p(95)=15.49ms
+     http_reqs......................: 104235  57.853642/s
+     iteration_duration.............: avg=2s      min=1.99s  med=2s     max=2.01s    p(90)=2s      p(95)=2s
+     iterations.....................: 104235  57.853642/s
+     vus............................: 1       min=1       max=210
+     vus_max........................: 210     min=210     max=210

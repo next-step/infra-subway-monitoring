@@ -113,10 +113,29 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
             - 1일 평균 tps(1일 총 접속 수 / 86,400): 21
             - 1일 최대 rps(1일 평균 rps x (최대 트래픽 / 평소 트래픽)): 105
         - Latency: 50ms
-        - 부하 유지 기간: 1시간
+        - 부하 유지 기간: 30
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
-
+    - 접속 빈도가 높은 페이지(메인 페이지)
+        - [smoke.js](./performance/main/smoke.js)
+        - [smoke 결과](./performance/main/smoke.txt)
+        - [load.js](./performance/main/load.js)
+        - [load 결과](./performance/main/load.txt)
+        - [stress.js](./performance/main/stress.js)
+        - [stress 결과](./performance/main/stress.txt)
+    - 데이터를 갱신하는 페이지(내 정보 수정)
+        - [smoke.js](./performance/me/smoke.js)
+        - [smoke 결과](./performance/me/smoke.txt)
+        - [load.js](./performance/me/load.js)
+        - [load 결과](./performance/me/load.txt)
+        - [stress.js](./performance/me/stress.js)
+        - [stress 결과](./performance/me/stress.txt)
+    - 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로 조회)        
+        - [smoke.js](./performance/me/smoke.js)
+        - [smoke 결과](./performance/me/smoke.txt)
+        - [load.js](./performance/me/load.js)
+        - [load 결과](./performance/me/load.txt)
+        - [stress.js](./performance/me/stress.js)
+        - [stress 결과](./performance/me/stress.txt)
 #### 기능 요구사항
 - [ ] 웹 성능 테스트
     - [ ] 웹 성능 예산을 작성
