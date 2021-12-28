@@ -99,7 +99,8 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
         - TTI: 사용자가 노선 검색을 빠르게 클릭해야 하기 때문에 2번째로 중요
         - TBT: 사용자가 버벅임을 느끼는 현상, 3번째로 중요
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
+    - 텍스트 압축 사용(gzip, deflate, brotli)
+    - 정적 리소스 캐시 적용 또는 CDN 적용
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
