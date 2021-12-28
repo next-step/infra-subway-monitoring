@@ -15,6 +15,7 @@ import nextstep.subway.member.domain.MemberRepository;
 @Service
 @Transactional
 public class AuthService {
+    private static final Logger log = LoggerFactory.getLogger("console");
     private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private MemberRepository memberRepository;
@@ -35,6 +36,7 @@ public class AuthService {
 
     public LoginMember findMemberByToken(String credentials) {
         if (!jwtTokenProvider.validateToken(credentials)) {
+            log.debug("토큰이 일치하지 않습니다. {}", credentials);
             throw new AuthorizationException();
         }
 
@@ -46,7 +48,7 @@ public class AuthService {
     private Member findByEmail(String email) {
         return memberRepository.findByEmail(email)
             .orElseThrow(() -> {
-                fileLogger.info("사용자 이메일이 존재하지 않습니다 >>> {}", email);
+                fileLogger.error("사용자 이메일이 존재하지 않습니다 >>> {}", email);
                 return new AuthorizationException();
             });
     }

@@ -27,7 +27,7 @@ public class StationService {
     public StationResponse saveStation(StationRequest stationRequest) {
         Station persistStation = stationRepository.save(stationRequest.toStation());
 
-        log.info("지하철역 생성 키 >>> {}", persistStation.getId());
+        log.debug("지하철역 생성 키 >>> {}", persistStation.getId());
 
         return StationResponse.of(persistStation);
     }

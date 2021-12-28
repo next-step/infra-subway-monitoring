@@ -24,7 +24,7 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        log.info("사용자 생성 키 >> {}", member.getId());
+        log.debug("사용자 생성 키 >> {}", member.getId());
         return MemberResponse.of(member);
     }
 

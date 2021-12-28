@@ -35,7 +35,7 @@ public class LineService {
         Line persistLine = lineRepository.save(
             new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
 
-        log.info("노선 생성 키 >>> {}", persistLine.getId());
+        log.error("노선 생성 키 >>> {}", persistLine.getId());
 
         return LineResponse.of(persistLine);
     }

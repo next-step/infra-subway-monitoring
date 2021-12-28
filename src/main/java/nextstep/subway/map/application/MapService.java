@@ -1,5 +1,12 @@
 package nextstep.subway.map.application;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
@@ -7,13 +14,6 @@ import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -35,8 +35,8 @@ public class MapService {
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-        log.info("경로 조회 시작역 : {} {}", source, sourceStation.getName());
-        log.info("경로 조회 종료역 : {} {}", target, targetStation.getName());
+        log.debug("경로 조회 시작역 : {} {}", source, sourceStation.getName());
+        log.debug("경로 조회 종료역 : {} {}", target, targetStation.getName());
 
         return PathResponseAssembler.assemble(subwayPath);
     }
