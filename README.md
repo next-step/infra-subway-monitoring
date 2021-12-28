@@ -92,7 +92,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - 목표 웹성능예산
         - FCP: 0.48 초 (가장 빠른 네이버와 20% 이내 차이)
         - TTI: 2.0 초 (가장 빠른 서울지하철 사이트와 동일)
-        - TBT: 40 밀리초 (가장 빠른 서울지하철 사이트와 동일)상
+        - TBT: 40 밀리초 (가장 빠른 서울지하철 사이트와 동일)
         이 외에는 가장 빠르므로 목표롤 설정 X
     - 우선순위
         - FCP: 화면이 보이는 초기 렌더링이므로 제일 높음
@@ -102,7 +102,18 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
     - 텍스트 압축 사용(gzip, deflate, brotli)
     - 정적 리소스 캐시 적용 또는 CDN 적용
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+    - 대상 시스템 범위
+        application, mysql
+    - 목푯값 설정
+        - 예상 1일 사용자 수(DAU): 23만 (네이버지도 MAU 1392만, 1392/30 => 46 의 절반)
+        - 피크 시간대의 집중률을 예상: 5배
+        - 1명당 1일 평균 접속 혹은 요청수 예상: 8회 = 2(출근, 퇴근) * 4(메인, 로그인, 경로 검색페이지, 검색요청)
+        - Throughput(1일 평균 rps ~ 1일 최대 rps)
+            - 1일 총 접속 수(1일 사용자 수(DAU) x 1명당 1일 평균 접속 수): 184만 
+            - 1일 평균 tps(1일 총 접속 수 / 86,400): 21
+            - 1일 최대 rps(1일 평균 rps x (최대 트래픽 / 평소 트래픽)): 105
+        - Latency: 50ms
+        - 부하 유지 기간: 1시간
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 
