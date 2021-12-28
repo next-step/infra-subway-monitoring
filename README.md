@@ -70,7 +70,34 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 
 ### 2단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+    - 웹 성능 측정(pagespeed)
+        - 현재 내 페이지 성능(https://lights93.o-r.kr/)
+            - FCP: 2.7 초
+            - LCP: 2.8 초
+            - TTI: 2.8 초
+            - TBT: 50 밀리초
+            - CLS: 0.003
+        - 경쟁사 페이지 성능(http://www.seoulmetro.co.kr/kr/cyberStation.do)
+            - FCP: 1.6 초
+            - LCP: 3.5 초
+            - TTI: 2.0 초
+            - TBT: 40 밀리초
+            - CLS: 0.013
+        - 경쟁사 페이지 성능(https://map.naver.com/v5/subway/)
+            - FCP: 0.4 초
+            - LCP: 7.7 초
+            - TTI: 3.6 초
+            - TBT: 570 밀리초
+            - CLS: 0.019
+    - 목표 웹성능예산
+        - FCP: 0.48 초 (가장 빠른 네이버와 20% 이내 차이)
+        - TTI: 2.0 초 (가장 빠른 서울지하철 사이트와 동일)
+        - TBT: 40 밀리초 (가장 빠른 서울지하철 사이트와 동일)상
+        이 외에는 가장 빠르므로 목표롤 설정 X
+    - 우선순위
+        - FCP: 화면이 보이는 초기 렌더링이므로 제일 높음
+        - TTI: 사용자가 노선 검색을 빠르게 클릭해야 하기 때문에 2번째로 중요
+        - TBT: 사용자가 버벅임을 느끼는 현상, 3번째로 중요
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
