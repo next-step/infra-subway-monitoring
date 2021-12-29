@@ -65,7 +65,7 @@ https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeas
 - [X] gradle 컨벤션
 - [X] request 로그 제대로 남기도록 수정
 - [X] 시스템 에러 로그를 노출하면 안 되는 이유
-- [ ] AOP를 사용하지 않은 이유?
+- [X] AOP를 사용하지 않은 이유? -> 취향 차이, AOP를 사용하면 좀 더 유연하게 사용 가능
 ---
 
 ### 2단계 - 성능 테스트
