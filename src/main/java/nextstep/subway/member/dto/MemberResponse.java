@@ -1,5 +1,6 @@
 package nextstep.subway.member.dto;
 
+import nextstep.subway.common.SimpleMaskingUtil;
 import nextstep.subway.member.domain.Member;
 
 public class MemberResponse {
@@ -37,7 +38,7 @@ public class MemberResponse {
     public String toString() {
         return "MemberResponse{" +
             "id=" + id +
-            ", email='" + email + '\'' +
+            ", email='" + SimpleMaskingUtil.mask(email) + '\'' +
             ", age=" + age +
             '}';
     }
