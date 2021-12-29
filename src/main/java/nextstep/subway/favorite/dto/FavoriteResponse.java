@@ -4,6 +4,7 @@ import nextstep.subway.favorite.domain.Favorite;
 import nextstep.subway.station.dto.StationResponse;
 
 public class FavoriteResponse {
+
     private Long id;
     private StationResponse source;
     private StationResponse target;
@@ -17,7 +18,8 @@ public class FavoriteResponse {
         this.target = target;
     }
 
-    public static FavoriteResponse of(Favorite favorite, StationResponse source, StationResponse target) {
+    public static FavoriteResponse of(Favorite favorite, StationResponse source,
+        StationResponse target) {
         return new FavoriteResponse(favorite.getId(), source, target);
     }
 
@@ -31,5 +33,14 @@ public class FavoriteResponse {
 
     public StationResponse getTarget() {
         return target;
+    }
+
+    @Override
+    public String toString() {
+        return "FavoriteResponse{" +
+            "id=" + id +
+            ", source=" + source +
+            ", target=" + target +
+            '}';
     }
 }
