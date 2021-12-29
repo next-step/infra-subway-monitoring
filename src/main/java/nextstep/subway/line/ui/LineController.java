@@ -4,6 +4,9 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +72,7 @@ public class LineController {
 
     static final Object left = new Object();
     static final Object right = new Object();
+
     @GetMapping("/lock-left")
     public String findLockLeft() throws InterruptedException {
 
@@ -106,6 +110,5 @@ public class LineController {
         }
         return null;
     }
-
 
 }
