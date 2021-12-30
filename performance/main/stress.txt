@@ -1,0 +1,132 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: performance/main/stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 210 max VUs, 30m30s max duration (incl. graceful stop):
+           * default: 210 looping VUs for 30m0s (gracefulStop: 30s)
+
+WARN[0002] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0003] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+WARN[0004] Timer exhausted! The execution time of the test took longer than 2 seconds  source=console
+
+running (30m01.7s), 000/210 VUs, 188905 complete and 0 interrupted iterations
+default ✓ [======================================] 210 VUs  30m0s
+
+     ✗ reached request rate
+      ↳  99% — ✓ 188812 / ✗ 93
+
+     checks.........................: 99.95% ✓ 188812     ✗ 93
+     data_received..................: 219 MB 121 kB/s
+     data_sent......................: 8.2 MB 4.6 kB/s
+     http_req_blocked...............: avg=1.33ms   min=0s     med=1µs     max=1.49s    p(90)=1µs     p(95)=1µs
+     http_req_connecting............: avg=71.95µs  min=0s     med=0s      max=153.66ms p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=23.63ms  min=5.96ms med=18.52ms max=2.94s    p(90)=33.81ms p(95)=43.94ms
+       { expected_response:true }...: avg=23.63ms  min=5.96ms med=18.52ms max=2.94s    p(90)=33.81ms p(95)=43.94ms
+     http_req_failed................: 0.00%  ✓ 0          ✗ 188905
+     http_req_receiving.............: avg=149.09µs min=12µs   med=39µs    max=857.1ms  p(90)=149.6µs p(95)=476µs
+     http_req_sending...............: avg=97.84µs  min=17µs   med=57µs    max=7.69ms   p(90)=146µs   p(95)=264µs
+     http_req_tls_handshaking.......: avg=1.22ms   min=0s     med=0s      max=1.35s    p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=23.38ms  min=5.81ms med=18.3ms  max=2.94s    p(90)=33.5ms  p(95)=43.58ms
+     http_reqs......................: 188905 104.850139/s
+     iteration_duration.............: avg=2s       min=1.99s  med=2s      max=4.23s    p(90)=2s      p(95)=2s
+     iterations.....................: 188905 104.850139/s
+     vus............................: 153    min=153      max=210
+     vus_max........................: 210    min=210      max=210
+

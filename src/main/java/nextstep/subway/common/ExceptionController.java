@@ -24,10 +24,10 @@ public class ExceptionController {
 
     @ExceptionHandler({DataIntegrityViolationException.class})
     public ResponseEntity<String> badRequestExceptionHandler(Exception e) {
-        log.error("잘못된 요청입니다.", e);
+        log.error("잘못된 ID값을 사용한 요청입니다.", e);
 
         return ResponseEntity.badRequest()
-            .body(e.getMessage());
+            .body("잘못된 키 또는 ID 값을 사용하여 에러가 발생했습니다.");
     }
 
     @ExceptionHandler({AuthorizationException.class})
