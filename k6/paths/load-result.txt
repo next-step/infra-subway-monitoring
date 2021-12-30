@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 35 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: Up to 35 looping VUs for 30s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m31.3s), 00/35 VUs, 233 complete and 0 interrupted iterations
+default ✓ [======================================] 00/35 VUs  30s
+
+     ✓ found paths
+
+     checks.........................: 100.00% ✓ 233      ✗ 0
+     data_received..................: 570 kB  18 kB/s
+     data_sent......................: 31 kB   995 B/s
+     http_req_blocked...............: avg=931.31µs min=2.65µs   med=2.95µs  max=21.43ms  p(90)=4.99ms   p(95)=5.49ms
+     http_req_connecting............: avg=201.86µs min=0s       med=0s      max=4.82ms   p(90)=1.1ms    p(95)=1.24ms
+   ✗ http_req_duration..............: avg=3.12s    min=192.6ms  med=3.71s   max=5.22s    p(90)=4.73s    p(95)=4.85s
+       { expected_response:true }...: avg=3.12s    min=192.6ms  med=3.71s   max=5.22s    p(90)=4.73s    p(95)=4.85s
+     http_req_failed................: 0.00%   ✓ 0        ✗ 233
+     http_req_receiving.............: avg=407.78µs min=31.73µs  med=73.53µs max=9.92ms   p(90)=876.07µs p(95)=1.25ms
+     http_req_sending...............: avg=88.19µs  min=38.19µs  med=55.71µs max=877.53µs p(90)=161.06µs p(95)=241.82µs
+     http_req_tls_handshaking.......: avg=674.51µs min=0s       med=0s      max=15.33ms  p(90)=3.66ms   p(95)=4.04ms
+     http_req_waiting...............: avg=3.12s    min=192.33ms med=3.71s   max=5.22s    p(90)=4.73s    p(95)=4.85s
+     http_reqs......................: 233     7.455639/s
+     iteration_duration.............: avg=3.12s    min=193.2ms  med=3.71s   max=5.22s    p(90)=4.73s    p(95)=4.85s
+     iterations.....................: 233     7.455639/s
+     vus............................: 8       min=2      max=35
+     vus_max........................: 35      min=35     max=35
+
+ERRO[0032] some thresholds have failed
