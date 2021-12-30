@@ -1,6 +1,9 @@
 package nextstep.subway.auth.dto;
 
+import nextstep.subway.common.SimpleMaskingUtil;
+
 public class TokenRequest {
+
     private String email;
     private String password;
 
@@ -18,5 +21,12 @@ public class TokenRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenRequest{" +
+            "email='" + SimpleMaskingUtil.mask(email) + '\'' +
+            '}';
     }
 }

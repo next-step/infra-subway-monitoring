@@ -1,6 +1,7 @@
 package nextstep.subway.auth.dto;
 
 public class TokenResponse {
+
     private String accessToken;
 
     public TokenResponse() {
@@ -12,5 +13,12 @@ public class TokenResponse {
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenResponse{" +
+            "accessToken='" + accessToken + '\'' +
+            '}';
     }
 }
