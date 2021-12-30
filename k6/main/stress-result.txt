@@ -1,0 +1,37 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 350 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 350 looping VUs for 45s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m45.0s), 000/350 VUs, 152455 complete and 0 interrupted iterations
+default ✗ [======================================] 000/350 VUs  45s
+
+     ✓ loaded main page
+
+     checks.........................: 100.00% ✓ 152455      ✗ 0
+     data_received..................: 177 MB  3.9 MB/s
+     data_sent......................: 6.8 MB  150 kB/s
+     http_req_blocked...............: avg=249.42µs min=2.5µs   med=2.72µs  max=286.17ms p(90)=2.89µs   p(95)=6.92µs
+     http_req_connecting............: avg=76.09µs  min=0s      med=0s      max=128.72ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=44.32ms  min=1.09ms  med=34.38ms max=292.24ms p(90)=93.85ms  p(95)=107.47ms
+       { expected_response:true }...: avg=44.32ms  min=1.09ms  med=34.38ms max=292.24ms p(90)=93.85ms  p(95)=107.47ms
+     http_req_failed................: 0.00%   ✓ 0           ✗ 152455
+     http_req_receiving.............: avg=13.81ms  min=18.65µs med=8.25ms  max=166.6ms  p(90)=35.12ms  p(95)=45.25ms
+     http_req_sending...............: avg=380.78µs min=20.58µs med=37.99µs max=119.07ms p(90)=142.57µs p(95)=480.15µs
+     http_req_tls_handshaking.......: avg=159.46µs min=0s      med=0s      max=228.15ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=30.12ms  min=0s      med=25.19ms max=194.52ms p(90)=63.22ms  p(95)=72.62ms
+     http_reqs......................: 152455  3386.445384/s
+     iteration_duration.............: avg=45.18ms  min=1.19ms  med=34.92ms max=339.31ms p(90)=95.19ms  p(95)=109.83ms
+     iterations.....................: 152455  3386.445384/s
+     vus............................: 349     min=7         max=349
+     vus_max........................: 350     min=350       max=350
