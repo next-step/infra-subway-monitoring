@@ -41,6 +41,49 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+테스트 웹: https://giyeon95.kro.kr/
+
+개선전
+ - PageSpeed Test: [결과보기](https://pagespeed.web.dev/report?url=https%3A%2F%2Fgiyeon95.kro.kr%2F)
+
+| 측정 항목                    | My    |     |     |
+|--------------------------|-------|-----|-----|
+| First Contentful Paint   | 2.7s  |     |     |
+| Time to Interactive      | 2.8s  |     |     |
+| Speed Index              | 2.7s  |     |     |
+| Total Blocking Time      | 0.05s |     |     |
+| Largest Contentful Paint | 2.8s  |     |     |
+| Cumulative Layout Shift  | 0.004 |     |     |
+
+- WebPage Test: [결과보기](https://www.webpagetest.org/result/220216_BiDcFR_CB2/)
+
+| 측정 항목      | My      |     |     |
+|------------|---------|-----|-----|
+| First View | 5.0004s |     |     |
+
+
+
+2022/02/16 14:40:43 - Starting test
+2022/02/16 14:40:43 - Test Created
+2022/02/16 14:40:57 - Extracting 102273 byte uploaded file '/tmp/phpUz5bGF' to './results/22/02/16/BiDcFR/CB2'
+2022/02/16 14:40:57 - Test Run Complete. Run: 1, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.201-3.38.1.35
+2022/02/16 14:40:57 - 1 of 3 tests complete
+2022/02/16 14:40:57 - Done Processing. Run: 1, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.201-3.38.1.35
+2022/02/16 14:41:02 - Extracting 105916 byte uploaded file '/tmp/phpukUQHG' to './results/22/02/16/BiDcFR/CB2'
+2022/02/16 14:41:02 - Test Run Complete. Run: 2, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.202-3.38.1.35
+2022/02/16 14:41:02 - 2 of 3 tests complete
+2022/02/16 14:41:02 - Done Processing. Run: 2, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.202-3.38.1.35
+2022/02/16 14:41:11 - Extracting 105208 byte uploaded file '/tmp/phpAtnmqX' to './results/22/02/16/BiDcFR/CB2'
+2022/02/16 14:41:11 - Test Run Complete. Run: 3, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.201-3.38.1.35
+2022/02/16 14:41:11 - 3 of 3 tests complete
+2022/02/16 14:41:11 - All done
+2022/02/16 14:41:11 - Done Processing. Run: 3, Cached: 0, Done: 1, Tester: wpt_apne2_instance-10.10.1.201-3.38.1.35
+2022/02/16 14:41:11 - Test Complete
+2022/02/16 14:41:11 - Test post-processing complete
+
+---
+
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
