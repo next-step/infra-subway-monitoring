@@ -46,20 +46,20 @@ npm run dev
 개선전
  - PageSpeed Test: [결과보기](https://pagespeed.web.dev/report?url=https%3A%2F%2Fgiyeon95.kro.kr%2F)
 
-| 측정 항목                    | My    |     |     |
-|--------------------------|-------|-----|-----|
-| First Contentful Paint   | 2.7s  |     |     |
-| Time to Interactive      | 2.8s  |     |     |
-| Speed Index              | 2.7s  |     |     |
-| Total Blocking Time      | 0.05s |     |     |
-| Largest Contentful Paint | 2.8s  |     |     |
-| Cumulative Layout Shift  | 0.004 |     |     |
+| 측정 항목                    | My    | 서울교통공사 [결과보기](https://pagespeed.web.dev/report?url=http%3A%2F%2Fwww.seoulmetro.co.kr%2Fkr%2FcyberStation.do) | Naver [결과보기](https://pagespeed.web.dev/report?url=https%3A%2F%2Fm.map.naver.com%2Fsubway%2FsubwayLine.naver%3Fregion%3D1000) |
+|--------------------------|-------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| First Contentful Paint   | 2.7s  | 1.6s                                                                                                         | 0.5s                                                                                                                         |
+| Time to Interactive      | 2.8s  | 3.1s                                                                                                         | 0.7s                                                                                                                         |
+| Speed Index              | 2.7s  | 3.4s                                                                                                         | 2.7s                                                                                                                         |
+| Total Blocking Time      | 0.05s | 1.3s                                                                                                         | 0.01s                                                                                                                        |
+| Largest Contentful Paint | 2.8s  | 3.6s                                                                                                         | 1.6s                                                                                                                         |
+| Cumulative Layout Shift  | 0.004 | 0.013                                                                                                        | 0.006                                                                                                                        |
 
 - WebPage Test: [결과보기](https://www.webpagetest.org/result/220216_BiDcFR_CB2/)
 
-| 측정 항목      | My      |     |     |
-|------------|---------|-----|-----|
-| First View | 5.0004s |     |     |
+| 측정 항목      | My      | 서울교통공사 [결과보기](https://www.webpagetest.org/result/220216_BiDc19_CNQ/) | Naver [결과보기](https://www.webpagetest.org/result/220216_AiDc4A_EEE/) | 
+|------------|---------|----------------------------------------------------------------------|---------------------------------------------------------------------|
+| First View | 5.0004s | 4.231s                                                               | 1.330s                                                              |   
 
 
 
