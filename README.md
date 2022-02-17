@@ -129,9 +129,9 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDcFV_JC
 | Cumulative Layout Shift  | 0.004      | 0.004      |
 
 
-| 측정 항목      | 적용 전   | 적용 후 |
-|------------|--------|--|
-| First View | 1.876s | 1.791s |
+| 측정 항목      | 적용 전   | 적용 후    |
+|------------|--------|---------|
+| First View | 1.876s | 1.791s  |
 
 WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JNK/)
 
