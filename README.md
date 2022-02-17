@@ -75,7 +75,9 @@ npm run dev
 
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-- nginx 내 텍스트 압축 설정 적용 [Reference](https://chicpro.dev/nginx-gzip-압축-설정/)
+
+### nginx 내 텍스트 압축 설정 적용
+[Reference](https://chicpro.dev/nginx-gzip-압축-설정/)
 
 | 측정 항목                    | 적용 전 (68점) | 적용 후 (90점) |
 |--------------------------|------------|------------|
@@ -86,9 +88,16 @@ npm run dev
 | Largest Contentful Paint | 2.8s       | 1.4s       |
 | Cumulative Layout Shift  | 0.004      | 0.004      |
 
+| 측정 항목      | 적용 전    | 적용 후   |
+|------------|---------|--------|
+| First View | 5.0004s | 1.826s |
+
+WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc28_J64/)
+
+결과: 5.0004s - 1.826s / 1.826 = 173% 개선
 
 
-- 
+
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
