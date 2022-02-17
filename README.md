@@ -64,12 +64,12 @@ npm run dev
 | First View | 5.0004s | 4.231s                                                               | 1.330s                                                              |   
 
 개선 목표
-- First Contentful Paint: 1초 이내
-- Time To Interactive: 1초 이내
-- Speed Index: 
-- Largest Contentful Paint: 2초 이내
-- First View: 3초 이내
-- Lighthouse: 80점 이상
+- [x] First Contentful Paint: 1초 이내
+- [x] Time To Interactive: 1초 이내
+- [x] Speed Index: 2초 이내
+- [x] Largest Contentful Paint: 2초 이내
+- [x] First View: 3초 이내
+- [x] Lighthouse: 80점 이상
 
 ---
 
@@ -95,6 +95,47 @@ npm run dev
 WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc28_J64/)
 
 결과: 5.0004s - 1.826s / 1.826 = 173% 개선
+
+### http2 설정
+[Reference](https://ma.ttias.be/enable-http2-in-nginx/)
+
+| 측정 항목                    | 적용 전 (90점) | 적용 후 (94점) |
+|--------------------------|------------|------------|
+| First Contentful Paint   | 1.3s       | 1.2s       |
+| Time to Interactive      | 1.4s       | 1.2s       |
+| Speed Index              | 1.7s       | 1.3s       |
+| Total Blocking Time      | 0.07s      | 0.02s      |
+| Largest Contentful Paint | 1.4s       | 1.2s       |
+| Cumulative Layout Shift  | 0.004      | 0.004      |
+
+| 측정 항목      | 적용 전   | 적용 후   |
+|------------|--------|--------|
+| First View | 1.826s | 1.876s |
+
+WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDcFV_JCK/)
+
+결과: PageSpeedInsignt 결과는 좋아졌지만,, 속도 개선 미비함, (컨텐츠가 많지 않아 그렇지 않을까 추측🤔)
+
+### 렌더링 차단 리소스 제거
+[Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload)
+
+| 측정 항목                    | 적용 전 (94점) | 적용 후 (90점) |
+|--------------------------|------------|------------|
+| First Contentful Paint   | 1.2s       | 1.0s       |
+| Time to Interactive      | 1.2s       | 1.3s       |
+| Speed Index              | 1.3s       | 1.4s       |
+| Total Blocking Time      | 0.02s      | 0.17s      |
+| Largest Contentful Paint | 1.2s       | 1.3s       |
+| Cumulative Layout Shift  | 0.004      | 0.004      |
+
+
+| 측정 항목      | 적용 전   | 적용 후 |
+|------------|--------|--|
+| First View | 1.876s | 1.791s |
+
+WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JNK/)
+
+결과: PageSpeedInsignt 결과가 나빠(?)지고, 약간의 속도 개선 (흠,, 값이 튀어서, 평균값을 구할껄..🤔)
 
 
 
