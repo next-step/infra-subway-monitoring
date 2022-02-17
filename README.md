@@ -39,13 +39,52 @@ npm run dev
 
 
 ### 1단계 - 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요 
+
+* [내 subway](https://pagespeed.web.dev/report?url=https%3A%2F%2Fparkeeseul.kro.kr%2F) 서비스
+![test](./image/webpageBefore.png)
+
+* [naver subway](https://pagespeed.web.dev/report?url=https%3A%2F%2Fmap.naver.com%2Fv5%2Fsubway%2F1000%2F-%2F-%2F-%3Fc%3D14146635.9803238%2C4519514.4759440%2C15%2C0%2C0%2C0%2Cdh) 서비스
+![test](./image/naverSubway.png)
+- 성능 점수를 70 점 까지 높여보자!
+- 페이지 로드 3초 미만
+- TTI 5초 미만
+- 압축된 리소스 최대 크기 200KB 미만
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+  - gzip 압축 : vendors.js, main.js
+  - 사용하지 않는 자바스크립트 제거
+  - 사용하지 않는 CSS 제거
+  - 캐싱 설정
+  - keep-alive 설정
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+3. 부하테스트 전제조건은 어느정도로 설정하셨나요([기사](https://platum.kr/archives/61943) 를 참고해 보았습니다)
+- 목표 rps 구하기
+  * 1일 사용자 수(DAU) : 1000000
+  * 피크 시간대의 집중률 : 10 배
+  * 1일 평균 접속 수 = 2
 
+- 1일 총 접속 수 = DAU x 1명당 1일 평균 접속 수
+  * 1000000 x 2 = 2000000
+- 1일 평균 rps = 1일 총 접속 수 / 86,400 (초/일)  
+  * (1000000 x 2) /  86,400 = 23.148
+- 1일 최대 rps = 1일 평균 rps x (최대 트래픽 / 평소 트래픽)
+  * 23 x ((1.5 * 10) / 1.5) = 230
+  * 질문) 평소 트래픽 (1.5를 다음과 같은 기준으로 잡았는데 괜찮을까요?)
+  * ![test](./image/traffic.png)
+  
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+ - smoke test
+   ![test](./image/smoke.png)
+
+ - load test
+   - VUser 구하기
+     * T = (2 * 0.1) + 0 = 0.2 
+     * (230 * 0.2) / 2 = 23 (VUser)  
+ - 
+   ![test](./image/load.png)
+ - stress test
+ - ![test](./image/stress.png)
 
 ---
 
