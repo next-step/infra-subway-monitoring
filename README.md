@@ -88,8 +88,34 @@ npm run dev
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+  - smoke
 
+    ![test](./image/smoke2.png)
+  - load
+
+    ![test](./image/load2.png)
+  - stress
+
+    ![test](./image/stress2.png)
+
+ 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+- Reverse Proxy 개선
+
+  - gzip 압축
+
+  ![test](./image/gzip.png)
+  - cache 설정
+
+  ![test](./image/cache.png)
+  - http2 설정
+
+  ![test](./image/http2.png)
+  - redis cache 설정
+  - 사용하지 않는 css 제거 (materialdesignicons.min.css)
+  - 사용하지 않는 자바스크립트 제거 (/js/vendors.js)
+
+
 
 ---
 
