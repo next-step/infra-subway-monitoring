@@ -76,6 +76,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.rest-assured:xml-path:4.2.0'
 
+	// cache
+	implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
 }
