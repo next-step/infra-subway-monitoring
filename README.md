@@ -51,8 +51,26 @@ npm run dev
   - 이미지 압축하기
   - 캐싱 설정하기
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+  - 목표 rps 구하기
+    - 1일 예상 사용자 수(DAU) : 100,000명
+    - 피크 시간대의 집중률 : 5배
+    - 1명당 1일  평군 접속/요청 수 : 3
+    - 1일 총 접속 수 : 300,000
+    - 1일 평균 rps : 900,000 / 86,400 = 10.416
+  - VUser 구하기
+    - Request Rate : 50
+    - R : 2
+      - 로그인(/login/token) + 정보조회(/members/me)
+    - T : 0.1s
+      - 로그인(/login/token) 76ms + 정보조회(/members/me) 26ms
+    - VUser :  (50 * 0.1) / 2 = 2.5
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+    - smoke test
+      <img width="810" alt="smoke" src="https://user-images.githubusercontent.com/16080479/154799428-efea0441-925b-4e66-af5a-1b0b6dfb5662.png">
+    - load test : VUser 3으로 진행
+      <img width="834" alt="load" src="https://user-images.githubusercontent.com/16080479/154799446-cabf0e9c-ec1e-4c2b-a3d9-6daed57addba.png">
+    - stress test
+      <img width="856" alt="stress" src="https://user-images.githubusercontent.com/16080479/154799454-a38cd4c1-735e-4603-8f23-9b7afdbeef8b.png">
 
 ---
 
