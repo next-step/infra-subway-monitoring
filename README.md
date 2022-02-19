@@ -166,16 +166,28 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JN
 [참고자료: 데이터로 보는 서울시 대중교통 이용](https://www.bigdata-map.kr/datastory/traffic/seoul) 를 참고하여, 지하철 이용자의 70% 가 노선을 확인한다고 가정하였습니다.
 - 예상 1일 사용자 수(DAU): 4,500,000 * 0.7 = 3,150,000
 - 피크 시간대의 집중률: (최대 트래픽 / 평소 트래픽)
-  - 트래픽 계산 법: 메인 (약 3MB) + 경로검색 (3MB) = 6MB로 가정
-    - 최대 트래픽: (1,100,000 * 0.7) * 6MB = 4,620,000MB -> 4,620GB 
-    - 평소 트래픽: (500,000 * 0.7) * 6MB = 350,000 -> 2,100GB
+  - 트래픽 계산 법: 메인 -> 경로검색 -> 출발역 & 도착역 입력 -> 검색 (약 3MB)
+    - 최대 트래픽: (1,100,000 * 0.7) * 3MB = 2,310,000MB -> 2,310GB 
+    - 평소 트래픽: (500,000 * 0.7) * 3MB = 175,000 -> 1,750GB
 
 - 1명당 1일 평균 요청 수: 3회 ([참고: 카카오 모바일 APP 현황](https://ko.lab.appa.pe/2016-09/kakao-korea.html))
 - Throughput(RPS): 3,150,000 / 86,400 = 36.45
 - Latency: 100 이하
 
+- VUser: 36 * 4(4번의 request) / 0.4 = 360
+
 5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+## Load (/k6/load.js)
+<img width="997" alt="CleanShot 2022-02-19 at 21 22 04@2x" src="https://user-images.githubusercontent.com/37217320/154800551-f94f267d-3e2a-4f4b-a2f2-3abddb274171.png">
+
+## Smoke (/k6/smoke.js)
+<img width="1163" alt="CleanShot 2022-02-19 at 22 02 29@2x" src="https://user-images.githubusercontent.com/37217320/154801919-0be8fd0c-04b9-48c2-9680-6c3808d2fcb5.png">
+
+## Stress (/k6/stress.js)
+<img width="1196" alt="CleanShot 2022-02-19 at 22 35 51@2x" src="https://user-images.githubusercontent.com/37217320/154803070-e7eacd64-d13b-4a43-9ab5-7bed67c49f1d.png">
+
+성
 ---
 
 ### 2단계 - 화면 응답 개선하기
