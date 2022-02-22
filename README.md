@@ -187,11 +187,11 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JN
 ## Stress (/k6/stress.js)
 <img width="1196" alt="CleanShot 2022-02-19 at 22 35 51@2x" src="https://user-images.githubusercontent.com/37217320/154803070-e7eacd64-d13b-4a43-9ab5-7bed67c49f1d.png">
 
-성
 ---
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
