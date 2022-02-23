@@ -195,6 +195,22 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JN
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
+- 웹서버 성능 개선은, 1차때 진행한 결과로 도출했으므로 스킵하였습니다.
+
+참고사항
+- 위 테스트는 목표 레이턴시 1500ms
+- 이후 성능개선 목표 레이턴시 100ms
+
+## Redis 원격 캐시 적용
+- 반복 조회성 데이터 캐시 적용
+- load test 기준, 평균 응답 시간이 53.37ms -> 4.05ms로 약 1200% 성능 개선
+
+## Load
+<img width="1098" alt="CleanShot 2022-02-24 at 01 08 58@2x" src="https://user-images.githubusercontent.com/37217320/155359035-6003936d-dfde-4ba6-8214-024eb188c159.png">
+
+
+
+
 ---
 
 ### [추가] 로깅, 모니터링
