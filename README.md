@@ -237,7 +237,36 @@ spring:
 결과: 음 성능이 더 떨어졌다.. 데이터 양이 적고, 캐시에 저장 설정등이 추가되면서, 영향이 있지 않을까 추측해본다.
 
 
+### 로드 밸런싱
+동일 서버에 5개의 인스턴스를 추가로 띄워 보았다.
+```
+  upstream app {
+    server 172.17.0.1:8080 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8081 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8082 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8083 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8084 max_fails=3 fail_timeout=3s;
+  }
+```
 
+## Load
+<img width="1077" alt="CleanShot 2022-02-26 at 00 13 57@2x" src="https://user-images.githubusercontent.com/37217320/155739564-324dd8e6-23da-4e10-a512-f506008ccb34.png">
+
+## Smoke
+<img width="1499" alt="CleanShot 2022-02-25 at 23 35 20@2x" src="https://user-images.githubusercontent.com/37217320/155733233-2570e68b-e551-4553-b16f-ee83888d1e94.png">
+
+
+## Stress
+<img width="942" alt="CleanShot 2022-02-26 at 00 07 52@2x" src="https://user-images.githubusercontent.com/37217320/155738542-b6a087f4-f39f-41ed-9965-a1345c319a9b.png">
+
+
+## 결과분석
+```
+ - Load Test: 평균 응답 속도가 (28.3ms -> 19.4ms)로 줄어들었으며, LoadTest의 경우, 크게 줄지 않을 줄 알았는데 의외였습니다. (추측은, 로드밸런싱이 되면서 JVM GC와, 최대 Heap 메모리 등이, 영향이 있지 않을까 싶습니다.)
+ - Smoke Test: 로드밸런싱 (Scale out)을 진행함으로서, 평균 응답 속도가, 크게 줄었습니다. (1790ms -> 117ms)
+ - Stress Test: 평균 응답 속도는 (1140s -> 412ms) 으로, 줄어들었으나, 최대 요청시간이 1분이 넘고, Timeout이 걸린듯 한 요청들도 많이 보여 에러율이 더 높아졌습니다.
+   이같은 경우는, 서버내 리소스 부족 문제로 보여지며, Scale Up 또는 다른 신규 서버로 Scale Out 하면 개선이 될 것 으로 확인됩니다.
+```
 
 
 ---
