@@ -204,9 +204,38 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JN
 ## Redis 원격 캐시 적용
 - 반복 조회성 데이터 캐시 적용
 - load test 기준, 평균 응답 시간이 53.37ms -> 4.05ms로 약 1200% 성능 개선
+- smoke 테스트, stress 테스트는, Thread pool 이슈로 판단되어, 부하분산시 추가 측정 예정
 
 ## Load
 <img width="1098" alt="CleanShot 2022-02-24 at 01 08 58@2x" src="https://user-images.githubusercontent.com/37217320/155359035-6003936d-dfde-4ba6-8214-024eb188c159.png">
+
+
+## HikariCP 옵션 최적화
+- DB 성능이 효과가 있을지는 모르겠으나, HikariCP 옵션 최적화를 진행후 결과를 도출해보자.
+- `show variables like 'max_connections';` 명령어로 확인결과, 151 건이며,, HikariCP의 connection_pool 을 20으로 변경 및 권장 옵션을 추가하고자 한다.
+<img width="334" alt="CleanShot 2022-02-25 at 21 54 52@2x" src="https://user-images.githubusercontent.com/37217320/155718640-e61b2c9d-62da-476b-8e05-cf61dc508fb5.png">
+
+[Recerence](https://2ssue.github.io/programming/HikariCP-MySQL/)
+```yaml
+spring:
+  datasource:
+   hikari:
+      maximum-pool-size: 20
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: true
+```
+
+<img width="1059" alt="CleanShot 2022-02-25 at 22 21 30@2x" src="https://user-images.githubusercontent.com/37217320/155722167-c40d9c16-ca65-45b3-869e-d6ad1d810f5b.png">
+
+결과: 음 성능이 더 떨어졌다.. 데이터 양이 적고, 캐시에 저장 설정등이 추가되면서, 영향이 있지 않을까 추측해본다.
+
 
 
 
