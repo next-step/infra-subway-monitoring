@@ -187,13 +187,87 @@ WebPage Test: [결과보기](https://www.webpagetest.org/result/220217_BiDc24_JN
 ## Stress (/k6/stress.js)
 <img width="1196" alt="CleanShot 2022-02-19 at 22 35 51@2x" src="https://user-images.githubusercontent.com/37217320/154803070-e7eacd64-d13b-4a43-9ab5-7bed67c49f1d.png">
 
-성
 ---
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
+
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+
+- 웹서버 성능 개선은, 1차때 진행한 결과로 도출했으므로 스킵하였습니다.
+
+참고사항
+- 위 테스트는 목표 레이턴시 1500ms
+- 이후 성능개선 목표 레이턴시 100ms
+
+## Redis 원격 캐시 적용
+- 반복 조회성 데이터 캐시 적용
+- load test 기준, 평균 응답 시간이 53.37ms -> 4.05ms로 약 1200% 성능 개선
+- smoke 테스트, stress 테스트는, Thread pool 이슈로 판단되어, 부하분산시 추가 측정 예정
+
+## Load
+<img width="1098" alt="CleanShot 2022-02-24 at 01 08 58@2x" src="https://user-images.githubusercontent.com/37217320/155359035-6003936d-dfde-4ba6-8214-024eb188c159.png">
+
+
+## HikariCP 옵션 최적화
+- DB 성능이 효과가 있을지는 모르겠으나, HikariCP 옵션 최적화를 진행후 결과를 도출해보자.
+- `show variables like 'max_connections';` 명령어로 확인결과, 151 건이며,, HikariCP의 connection_pool 을 20으로 변경 및 권장 옵션을 추가하고자 한다.
+<img width="334" alt="CleanShot 2022-02-25 at 21 54 52@2x" src="https://user-images.githubusercontent.com/37217320/155718640-e61b2c9d-62da-476b-8e05-cf61dc508fb5.png">
+
+[Recerence](https://2ssue.github.io/programming/HikariCP-MySQL/)
+```yaml
+spring:
+  datasource:
+   hikari:
+      maximum-pool-size: 20
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: true
+```
+
+<img width="1059" alt="CleanShot 2022-02-25 at 22 21 30@2x" src="https://user-images.githubusercontent.com/37217320/155722167-c40d9c16-ca65-45b3-869e-d6ad1d810f5b.png">
+
+결과: 음 성능이 더 떨어졌다.. 데이터 양이 적고, 캐시에 저장 설정등이 추가되면서, 영향이 있지 않을까 추측해본다.
+
+
+### 로드 밸런싱
+동일 서버에 5개의 인스턴스를 추가로 띄워 보았다.
+```
+  upstream app {
+    server 172.17.0.1:8080 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8081 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8082 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8083 max_fails=3 fail_timeout=3s;
+    server 172.17.0.1:8084 max_fails=3 fail_timeout=3s;
+  }
+```
+
+## Load
+<img width="1077" alt="CleanShot 2022-02-26 at 00 13 57@2x" src="https://user-images.githubusercontent.com/37217320/155739564-324dd8e6-23da-4e10-a512-f506008ccb34.png">
+
+## Smoke
+<img width="1499" alt="CleanShot 2022-02-25 at 23 35 20@2x" src="https://user-images.githubusercontent.com/37217320/155733233-2570e68b-e551-4553-b16f-ee83888d1e94.png">
+
+
+## Stress
+<img width="942" alt="CleanShot 2022-02-26 at 00 07 52@2x" src="https://user-images.githubusercontent.com/37217320/155738542-b6a087f4-f39f-41ed-9965-a1345c319a9b.png">
+
+
+## 결과분석
+```
+ - Load Test: 평균 응답 속도가 (28.3ms -> 19.4ms)로 줄어들었으며, LoadTest의 경우, 크게 줄지 않을 줄 알았는데 의외였습니다. (추측은, 로드밸런싱이 되면서 JVM GC와, 최대 Heap 메모리 등이, 영향이 있지 않을까 싶습니다.)
+ - Smoke Test: 로드밸런싱 (Scale out)을 진행함으로서, 평균 응답 속도가, 크게 줄었습니다. (1790ms -> 117ms)
+ - Stress Test: 평균 응답 속도는 (1140s -> 412ms) 으로, 줄어들었으나, 최대 요청시간이 1분이 넘고, Timeout이 걸린듯 한 요청들도 많이 보여 에러율이 더 높아졌습니다.
+   이같은 경우는, 서버내 리소스 부족 문제로 보여지며, Scale Up 또는 다른 신규 서버로 Scale Out 하면 개선이 될 것 으로 확인됩니다.
+```
+
 
 ---
 
