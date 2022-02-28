@@ -101,21 +101,46 @@ npm run dev
  
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 - Reverse Proxy 개선
+  -  
+    - gzip 압축
+      - 
 
-  - gzip 압축
+    ![test](./image/gzip.png)
+    - cache 설정
+      - 
 
-  ![test](./image/gzip.png)
-  - cache 설정
-
-  ![test](./image/cache.png)
-  - http2 설정
-
-  ![test](./image/http2.png)
+    ![test](./image/cache.png)
+    - http2 설정
+      -
+    ![test](./image/http2.png)
+    - 사용하지 않는 css 제거 (materialdesignicons.min.css)
+    - 사용하지 않는 자바스크립트 제거 (/js/vendors.js)
+- 부하 테스트
+  - 
+  - 테스트 시나리오
+    -
+    - 접속 빈도가 높은 페이지
+      - 홈 페이지
+    - 데이터를 갱신하는 페이지
+      - 구간 등록
+    - 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+      - 경로 조회
+      
+  - vus 350 으로 설정했을 경우 CPU 자원을 초과하여 vus 를 230으로 낮춤
+    
+    - CPU 사용량
+     ![test](./image/cpu.png)
+    - K6 발생 문제 발생
+     ![test](./image/error.png)
+- stress test 진행
+  - 
+  - 개선 전
+      ![test](./image/new_stress.png)
   - redis cache 설정
-  - 사용하지 않는 css 제거 (materialdesignicons.min.css)
-  - 사용하지 않는 자바스크립트 제거 (/js/vendors.js)
-
-
+      ![test](./image/redis.png)
+  - 부하 분산(EC2 추가 생성) -> 캐시 설정했을 때와 크게 차이는 없지만 부하를 늘렸을 때 많은 차이가 발생할 것이라 예상.
+      ![test](./image/test.png)
+  
 
 ---
 
