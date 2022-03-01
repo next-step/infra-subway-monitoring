@@ -46,5 +46,9 @@ export default () => {
     };
     let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
     check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+    let linesRes = http.get(`${BASE_URL}/lines/1`).json();
+    check(linesRes, { 'retrieved lines': (obj) =>  obj.id === 1 });
+
     sleep(1);
 };
