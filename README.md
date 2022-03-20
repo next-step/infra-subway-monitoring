@@ -41,9 +41,34 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+경쟁사인 카카오맵, 네이버지도 대비 전체적인 지표가 낮다. 
+
+CLS, FCP, LCP, TTI 의 지표를 전체적으로 줄인다. // 디테일하게 적기
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+PageSpeed에서 해주는 제안을 반영할 수 있을 것 같다. 
+
+당장 적용 가능한 부분
+- Enable text compression :  vendors.js를 gzip으로 압축해도 좋을 것 같다. Content-encoding=gzip
+- Serve static assets with an efficient cache policy : 정적자원을 캐싱해본다. cache-Control을 1년으로 추가.
+- Image elements do not have explicit width and height: width와 height가 없는 이미지의 값을 셋팅한다. 
+
+
+당장 적용이 어려운 부분
+Reduce unused JavaScript : 사용하지 않는 vendors.js를 지연로딩할 수 있도록 한다. 
+코드 스프리팅이나, Dead Code Elimination, Dead Imported Code 을 적용해주는 빌드 툴을 쓴다. 
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 대상 시스템 범위: 지하철 노선도 서비스 
+
+- 목푯값 설정 (latency, throughput, 부하 유지기간)
+
+	- latency = 100ms 이하 
+
+	- 부하유지 시간 = 30분
+
+	- Throughput = 0.23 ~ 0.34
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
