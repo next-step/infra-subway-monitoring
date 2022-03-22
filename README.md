@@ -77,6 +77,7 @@ PageSpeed에서 해주는 제안을 반영할 수 있을 것 같다. 
 Login 페이지 대상 smoke, Load, Stress 테스트 결과 
 
 - smoke test 
+![image](https://user-images.githubusercontent.com/55608425/159466498-23b3c5be-bcc4-41be-8c27-3ad025dc0b55.png)
 
 - Load tset 
 
