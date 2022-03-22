@@ -74,16 +74,14 @@ PageSpeed에서 해주는 제안을 반영할 수 있을 것 같다. 
 	- Throughput = 0.23 ~ 0.34
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+README에 이미지를 남기려면 주소로 남겨야하는 것 같아 코멘트에 추가했습니다.
 Login 페이지 대상 smoke, Load, Stress 테스트 결과 
 
 - smoke test 
-![image](https://user-images.githubusercontent.com/55608425/159466498-23b3c5be-bcc4-41be-8c27-3ad025dc0b55.png)
 
 - Load tset 
 
 - Stress test
-
-
 
 ---
 
