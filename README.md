@@ -131,9 +131,9 @@ PageSpeed 결과
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
-- 메인페이지 : 
-- 데이터 갱신 페이지 : 
-- 데이터 조회 페이지 :
+- 메인페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step1/loadtest/main/mainResult.md 
+- 데이터 갱신 페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step1/loadtest/update/updateResult.md
+- 데이터 조회 페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step1/loadtest/path/pathResult.md
 
 
 
