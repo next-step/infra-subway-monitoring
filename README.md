@@ -41,11 +41,39 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+모바일 환경 기준
+
+경쟁사 : 네이버지도 (https://m.map.naver.com/subway/subwayLine.naver?region=1000)
+
+| 비교                       | 경쟁사   | 내 서비스  | 목표치 |
+|--------------------------|-------|--------|-----|
+| First Contentful Paint   | 2.2 초 | 15.1 초 | 2초  |
+| Time to Interactive      | 2.6 초 | 15.9 초 | 2초  |
+| Speed Index              | 6.1 초 | 15.6 초 | 6초  |
+| Largest Contentful Paint | 8.7 초 | 15.6 초 | 8초  |
+| PageSpeed score          | 41 점  | 27 점   | 50점 |
+
+데스크탑 환경 기준
+
+| 비교                       | 경쟁사   | 내 서비스 | 목표치  |
+|--------------------------|-------|-------|------|
+| First Contentful Paint   | 0.5 초 | 2.8 초 | 0.5초 |
+| Time to Interactive      | 0.7 초 | 2.9 초 | 0.5초 |
+| Speed Index              | 2.3 초 | 2.8 초 | 2초   |
+| Largest Contentful Paint | 1.6 초 | 2.9 초 | 1.5초 |
+| PageSpeed score          | 89 점  | 67 점  | 90점  |
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 모바일에서의 성능이 너무 낮습니다. 사용하지 않는 자바스크립트를 제거하고, 텍스트 기반 리소스를 gzip 으로 압축해야할 것 같습니다.
+  특히 webpagetest에서 compress transfer 등급이 F인 점을 통해서 gzip 으로의 압축 이후에 전송이 필요하다고 생각합니다. 
+4. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- latency(서버가 클라이언트로부터 요청을 받아서 응답을 보내주는 시간) : 50 ~ 100ms 
+- throughput(1일 평균 rps ~ 1일 최대 rps) : 
+  - DAU를 86.4만
+  - 1명당 1일 평균 접속 수 : 1
+  - 1일 평균 rps : 10
+  - 1일 최대 rps : 50
+5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
 
