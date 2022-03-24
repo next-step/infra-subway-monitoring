@@ -76,9 +76,9 @@ npm run dev
   - 1일 최대 rps : 115 (5배 예상)
 - 부하 유지시간은 2시간이지만 편의상 1분 안으로 테스트 했습니다.
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-[smoke test](infra-subway-monitoring/test-result/smoke.md)
-[load test](infra-subway-monitoring/test-result/load.md)
-[stress test](infra-subway-monitoring/test-result/stress.md)
+- smoke test : [smoke test](https://github.com/mj950425/infra-subway-monitoring/blob/step1/test-result/smoke.md)
+- load  test : [load test](https://github.com/mj950425/infra-subway-monitoring/blob/step1/test-result/load.md)
+- stress tst : [stress test](https://github.com/mj950425/infra-subway-monitoring/blob/step1/test-result/stress.md)
 
 ---
 
