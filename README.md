@@ -41,11 +41,31 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+![pagespeed](/images/page-speed.png)
+![pagespeed](/images/page-speed-seoul.png)
+![pagespeed](/images/webpage-test.png)
+![pagespeed](/images/webpage-test-seoul.png)
+First Contentful Paint 1초 이내로 줄이기
+성능점수 60점까지 올리기 (현재 31점 / 서울 지하철 21점)
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+텍스트 압축 사용
+이미지 캐싱 사용
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+지하철을 이용하며 실제로 어플을 사용해 경로를 탐색하는 경우는 처음가는 곳의 경로를 찾을때 왕복으로 2회로 
+전체 지하철 이용자수 440만명 중 10프로가 2번 사용한다 가정
+- 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+440,000 * 2 = 880,000
+- 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+880,000 / 86400 = 약 10
+- 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+10 * 3 = 30
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+![test](/images/smoke.png)
+![test](/images/load.png)
+![test](/images/stress.png)
 
 ---
 
