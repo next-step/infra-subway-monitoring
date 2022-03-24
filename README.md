@@ -74,8 +74,11 @@ npm run dev
   - 1일 총 요청수 : 200만
   - 1일 평균 rps : 23
   - 1일 최대 rps : 115 (5배 예상)
-  - 부하 유지시간은 2시간이지만 편의상 1분 안으로 테스트 했습니다.
+- 부하 유지시간은 2시간이지만 편의상 1분 안으로 테스트 했습니다.
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+[smoke test](infra-subway-monitoring/test-result/smoke.md)
+[load test](infra-subway-monitoring/test-result/load.md)
+[stress test](infra-subway-monitoring/test-result/stress.md)
 
 ---
 
