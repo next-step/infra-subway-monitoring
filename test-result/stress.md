@@ -1,4 +1,74 @@
-# Stress test script
+# 접속 빈도가 높은 기능
+## Stress test script
+```
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+    stages: [
+        {duration: "10s", target: 200},
+        {duration: "10s", target: 300},
+        {duration: "10s", target: 400},
+        {duration: "10s", target: 500},
+        {duration: "10s", target: 600},
+        {duration: "10s", target: 700},
+        {duration: "10s", target: 800},
+        {duration: "10s", target: 900},
+    ],
+    thresholds: {
+        http_req_duration: ["p(99)<1000"], // 99% of requests must complete below 0.1s
+    },
+};
+const BASE_URL = 'https://minjoonlee.kro.kr';
+
+export default function () {
+    let myObjects = http.get(`${BASE_URL}`);
+    check(myObjects, {'메인화면 로드함': (res) => res.status === 200});
+    sleep(1);
+};
+
+```
+## Stress test result
+```
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+WARN[0081] Request Failed                                error="Get \"https://minjoonlee.kro.kr\": EOF"
+
+running (1m21.7s), 000/900 VUs, 28256 complete and 0 interrupted iterations
+default ↓ [======================================] 865/900 VUs  1m20s
+
+     ✗ 메인화면 로드함
+      ↳  97% — ✓ 27675 / ✗ 581
+
+     checks.........................: 97.94% ✓ 27675      ✗ 581
+     data_received..................: 115 MB 1.4 MB/s
+     data_sent......................: 11 MB  129 kB/s
+     http_req_blocked...............: avg=294.25ms min=0s       med=173.44ms max=1.6s     p(90)=795.01ms p(95)=903.62ms
+     http_req_connecting............: avg=65.85ms  min=0s       med=9.99ms   max=716.61ms p(90)=213.71ms p(95)=251.21ms
+   ✗ http_req_duration..............: avg=141.63ms min=0s       med=59.62ms  max=1.94s    p(90)=356.97ms p(95)=460.47ms
+       { expected_response:true }...: avg=141.13ms min=929.06µs med=59.77ms  max=1.94s    p(90)=355.87ms p(95)=458.08ms
+     http_req_failed................: 2.05%  ✓ 581        ✗ 27675
+     http_req_receiving.............: avg=808.8µs  min=0s       med=35.47µs  max=325.63ms p(90)=93.15µs  p(95)=271.81µs
+     http_req_sending...............: avg=53.04ms  min=0s       med=5.44ms   max=1.57s    p(90)=92.97ms  p(95)=276.79ms
+     http_req_tls_handshaking.......: avg=199.53ms min=0s       med=74.5ms   max=1.46s    p(90)=564.69ms p(95)=671.46ms
+     http_req_waiting...............: avg=87.78ms  min=0s       med=43.46ms  max=1.27s    p(90)=243.85ms p(95)=292.51ms
+     http_reqs......................: 28256  346.044712/s
+     iteration_duration.............: avg=1.43s    min=1s       med=1.28s    max=3.06s    p(90)=2.11s    p(95)=2.24s
+     iterations.....................: 28256  346.044712/s
+     vus............................: 532    min=20       max=890
+     vus_max........................: 900    min=900      max=900
+
+ERRO[0083] some thresholds have failed
+
+```
+**간단한 홈페이지 방문 서비스는 Vuser가 600 부터 깨지는것을 확인할 수 있었습니다.**
+
+
+## Stress test script
 ```
 import http from "k6/http";
 import {check, group, sleep, fail} from "k6";
@@ -60,8 +130,7 @@ export default function () {
 
 
 ```
----
-# Stress test 결과
+## Stress test 결과
 ```
 WARN[0081] Request Failed                                error="Post \"https://minjoonlee.kro.kr/login/token\": EOF"
 ERRO[0082] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
