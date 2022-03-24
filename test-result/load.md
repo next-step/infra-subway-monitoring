@@ -3,13 +3,14 @@
 import http from "k6/http";
 import {check, group, sleep, fail} from "k6";
 
+// T = 0.4s / VuserMax = (460 * 0.4)/2 = 92 / VuserAverage = (92 * 0.4)/2 = 18
 export let options = {
 stages: [
 
-        {duration: "10s", target: 23}, // 0 ~ 평균 트래픽
-        {duration: "10s", target: 23}, // 평균 트래픽
-        {duration: "10s", target: 115}, // 평균 트래픽 ~ 최대 트래픽
-        {duration: "10s", target: 115}, // 최대 트래픽
+        {duration: "10s", target: 18}, // 0 ~ VuserAverage
+        {duration: "10s", target: 18}, // VuserAverage
+        {duration: "10s", target: 92}, // VuserAverage ~ VuserMax
+        {duration: "10s", target: 92}, // VuserMax
 ],
 thresholds: {
 http_req_duration: ["p(99)<100"], // 99% of requests must complete below 0.1s
