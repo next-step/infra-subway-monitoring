@@ -82,6 +82,16 @@ npm run dev
 - T = (4 * 0.1) = 0.4s
 - 평균 VUser = (78.125 * 0.4)/4 = 7.8125 -> 8
 - 최대 VUser = (781.25 * 0.4)/4 = 78.125 -> 79
+- 부하 유지 기간 :
+  - K6 : 
+    - smoke test : 10s
+    - load test : 3m
+    - stress test : 15m
+  - Ngrinder : 
+    - smoke test : 10s
+    - load test : 3m
+    - stress test : 3m
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
 
