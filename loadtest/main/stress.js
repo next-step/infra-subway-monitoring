@@ -9,8 +9,8 @@ export let options = {
         { duration: '30s', target: 500 },
         { duration: '10s', target: 700 }, // around the breaking point
         { duration: '30s', target: 700 },
-        { duration: '10s', target: 900 }, // beyond the breaking point
-        { duration: '30s', target: 900 },
+        { duration: '10s', target: 800 }, // beyond the breaking point
+        { duration: '30s', target: 800 },
         { duration: '50s', target: 0 }, // scale down. Recovery stage
     ],
     thresholds: {

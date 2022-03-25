@@ -13,8 +13,6 @@ export let options = {
 const BASE_URL = 'https://jdragon.r-e.kr/';
 
 export default function ()  {
-
     http.get(`${BASE_URL}`);
-
     sleep(1);
 };
