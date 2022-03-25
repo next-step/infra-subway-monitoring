@@ -1,16 +1,16 @@
-version: '3'
+version: "3.7"
 services:
   local-db:
-    image: library/mysql:5.7
-    container_name: local-db
-    restart: always
+    image: mysql:8.0
+    command: --lower_case_table_names=1
     ports:
-      - 13306:3306
+      - "13306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: masterpw
-      MYSQL_DATABASE: subway
-      TZ: Asia/Seoul
+      - MYSQL_DATABASE=subway
+      - MYSQL_ROOT_PASSWORD=masterpw
+      - TZ=UTC
+    command: # 명령어 실행
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ./db/mysql/data:/var/lib/mysql
-      - ./db/mysql/config:/etc/mysql/conf.d
-      - ./db/mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql:/var/lib/mysql
