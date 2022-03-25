@@ -82,14 +82,7 @@ npm run dev
 - 평균 VUser = (78.125 * 0.4)/4 = 7.8125 -> 8
 - 최대 VUser = (781.25 * 0.4)/4 = 78.125 -> 79
 
-
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
-
----
-
-### 2단계 - 화면 응답 개선하기
-1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 [**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/smoke.js)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160140870-4597f359-d9fb-4fb8-b3a2-7d5f59ee427e.png)
 
@@ -98,6 +91,15 @@ npm run dev
 
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/stress.js)
 ![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160143573-4869a1b5-9544-42f3-9b64-202f4055a792.png)
+
+
+
+---
+
+
+
+### 2단계 - 화면 응답 개선하기
+1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 
 
