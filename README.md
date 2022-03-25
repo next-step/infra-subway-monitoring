@@ -40,7 +40,9 @@ npm run dev
 
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-[WebPageTest결과](https://www.webpagetest.org/result/220325_BiDc1R_8GW/3/performance_optimization/)
+
+[**WebPageTest결과**](https://www.webpagetest.org/result/220325_BiDc1R_8GW/3/performance_optimization/)
+
 |항목|서울교통공사|카카오|네이버|지하철|
 |------|:---:|:---:|:---:|:---:|
 |**성능**|71|94|91|67
@@ -62,10 +64,13 @@ npm run dev
 
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+
 ![](https://user-images.githubusercontent.com/63947424/160116301-fe38ddc5-114a-4c2c-8eba-28d5ae8e7314.png)
+
 - gzip 압축 사용 (compressible text, target size = 497.4 KB)
 - 정적 컨텐츠 캐싱 
 - CDN 사용
+
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 대상 시스템 범위 : 경로찾기 (https://yunha-infra-subway.o-r.kr/path)
