@@ -90,6 +90,16 @@ npm run dev
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160140870-4597f359-d9fb-4fb8-b3a2-7d5f59ee427e.png)
+
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160140886-b2a8bf09-68ca-4a37-89a6-feb825667b70.png)
+
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160143573-4869a1b5-9544-42f3-9b64-202f4055a792.png)
+
+
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
