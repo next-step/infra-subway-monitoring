@@ -82,7 +82,8 @@ npm run dev
 - 평균 VUser = (78.125 * 0.4)/4 = 7.8125 -> 8
 - 최대 VUser = (781.25 * 0.4)/4 = 78.125 -> 79
 
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
+
 [**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/smoke.js)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160140870-4597f359-d9fb-4fb8-b3a2-7d5f59ee427e.png)
 
@@ -91,6 +92,18 @@ npm run dev
 
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/stress.js)
 ![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160143573-4869a1b5-9544-42f3-9b64-202f4055a792.png)
+
+
+
+[**ngrinder 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/ngrinder/ngrinder.groovy)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160182035-1c7d80ff-19c2-4b2c-a793-3f1160b97ed6.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160182031-106cf0c9-7c9d-40d5-b9e1-434a4807d0aa.png)
+
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160182029-88f3e7bb-1c35-478f-a13e-95aeb96fa7c6.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160182024-e881b09e-8c0d-4c46-9a8b-097fa2ca48bd.png)
+
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160182017-df297ebc-3972-46df-b485-215d754e727f.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160181999-81f607bc-4fd3-4202-8cc6-275d11c837c7.png)
 
 
 
