@@ -95,16 +95,38 @@ npm run dev
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
 
-[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/smoke.js)
+
+**PATH 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/smoke.js)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160140870-4597f359-d9fb-4fb8-b3a2-7d5f59ee427e.png)
-
-[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/load.js)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/load.js)
 ![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160140886-b2a8bf09-68ca-4a37-89a6-feb825667b70.png)
-
-[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/stress.js)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/stress.js)
 ![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160143573-4869a1b5-9544-42f3-9b64-202f4055a792.png)
 
 
+**UPDATE 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160191830-cf7503f0-229c-4866-9786-fe815444dd35.png)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160191843-4b328855-74e0-4112-890d-6de16fd23326.png)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160195915-92eee796-358e-4a44-85b5-1f79d7960022.png)
+
+
+**MAIN 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160195923-ba7434f0-eeef-4a90-8734-ae647c0de651.png)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160196321-dba4eb7b-db41-48c5-946e-52e227f1b6ac.png)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160198207-08badf9b-929e-45b4-8c90-f6e1ff8040bd.png)
+
+
+**ngrinder PATH 테스트**
 
 [**ngrinder 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/ngrinder/ngrinder.groovy)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160182035-1c7d80ff-19c2-4b2c-a793-3f1160b97ed6.png)
