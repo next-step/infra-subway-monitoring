@@ -136,7 +136,20 @@ PageSpeed 결과
 - 데이터 조회 페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step1/loadtest/path/pathResult.md
 
 
+**Step1-피드백**
 
+smoke 테스트는 VUser 를 1로 잡고 했고, load 테스트는 몇으로 잡아야하나 생각하다가
+별 생각없이 300으로 했던 것 같아요.
+
+제대로 계산한다면 아래와 같이 계산 하는게 맞을까요?
+
+T = R * http_request_duration
+R = 2 (출퇴근에 한번씩 요청) , duration = 0.075초 * 2 (왕복이니까 2를 곱해줌) = 0.15
+T = 2 * 0.15 = 0.3
+
+vuser = 목표rps ( 9.25 ~ 92.5 중간값) * T / R
+평균 rps로 계산한 vuser = 9.25 * 0.3 / 2  = 1.3875 -> 1.5
+최대 rps로 계산한 vuser = 92.5 * 0.3 / 2 = 13.875 -> 15
 
 ---
 
