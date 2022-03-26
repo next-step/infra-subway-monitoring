@@ -41,6 +41,70 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+#### webpagetest
+##### 네이버 지도 - https://m.map.naver.com/subway/subwayLine.naver?region=1000
+
+|              | desktop | mobile  |
+|--------------|---------|---------|
+| First Byte   | .190S   | .202S   |
+| Start Render | .700S   | .700S   |
+| FCP          | .649S   | .688S   |
+| Speed Index  | 2.380S  | 2.363S  |
+| LCP          | 2.870S  | 3.225S  |
+| CLS          | .041    | .009    |
+| TBT          | ≥ .013S | ≥ .010S |
+| Total Bytes  | 774KB   | 963KB   |
+
+##### RUNNING MAP - https://mirrors89.p-e.kr/
+
+|              | desktop | mobile  |
+|--------------|---------|---------|
+| First Byte   | .160S   | .152S   |
+| Start Render | 4.800S  | 4.800S  |
+| FCP          | 4.883S  | 4.813S  |
+| Speed Index  | 4.804S  | 4.804S  |
+| LCP          | 4.923S  | 4.833S  |
+| CLS          | .004    | .048    |
+| TBT          | ≥ .011S | ≥ .000S |
+| Total Bytes  | 2,493KB | 2,484KB |
+
+
+#### pagespeed
+##### 네이버 지도 - https://m.map.naver.com/subway/subwayLine.naver?region=1000
+|                          | desktop | mobile  |
+|--------------------------|---------|---------|
+| First Contentful Paint   | 0.5 초   | 2.2 초   |
+| Time to Interactive      | 0.5 초   | 7.2 초   |
+| Speed Index              | 2.3 초   | 6.3 초   |
+| Total Blocking Time      | 0 밀리초   | 410 밀리초 |
+| Largest Contentful Paint | 1.6 초   | 7.8 초   |
+| Cumulative Layout Shift  | 0.006   | 0.03    |
+| Lighthouse 성능 점수         | 89 점    | 53 점    |
+
+
+##### RUNNING MAP - https://mirrors89.p-e.kr/
+|                          | desktop | mobile  |
+|--------------------------|---------|---------|
+| First Contentful Paint   | 2.7 초   | 14.6 초  |
+| Time to Interactive      | 2.8 초   | 15.2 초  |
+| Speed Index              | 2.8 초   | 14.6 초  |
+| Total Blocking Time      | 50 밀리초  | 570 밀리초 |
+| Largest Contentful Paint | 2.8 초   | 15.2 초  |
+| Cumulative Layout Shift  | 0.004   | 0.042   |
+| Lighthouse 성능 점수         | 67 점    | 31 점    |
+
+
+**웹 성능예산 측정**
+- FCP(First Contentful Paint) 
+  - 데스크탑 기준 1초 이내로 줄이기 
+  - 모바일 기준 3초 이내로 줄이기
+- TTI(Time to Interactive) 
+  - 데스크탑 기준 1초 이내로 줄이기
+  - 모바일 기준 7초 이내로 줄이기
+- Lighthouse 성능 점수 
+  - 데스크탑 기준 80점 이상 올리기
+  - 모바일 기준 50점 이상 올리기
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
