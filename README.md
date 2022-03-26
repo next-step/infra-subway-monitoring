@@ -64,8 +64,11 @@ First Contentful Paint 1초 이내로 줄이기
 
 5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 ![test](/images/smoke.png)
+![test](/images/smoke-grafana.png)
 ![test](/images/load.png)
+![test](/images/load-grafana.png)
 ![test](/images/stress.png)
+![test](/images/stress-grafana.png)
 
 ---
 
