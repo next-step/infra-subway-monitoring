@@ -190,7 +190,33 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
 
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
+# Reverse Proxy 개선 결과 (Nginx 설정 변경)
+
+- 메인페이지 : 
+- 데이터 갱신 페이지 : 
+- 데이터 조회 페이지 :  
+
+
+
+
+
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+
+# Reverse Proxy 개선 (Nginx 설정 변경)
+## Protocol HTTP2 로 변경
+![image](https://user-images.githubusercontent.com/10750614/160226047-06277c37-867b-4891-96ea-ef08bb2adca6.png)
+
+## gzip 사용
+![image](https://user-images.githubusercontent.com/10750614/160226079-ede710a5-8d76-4cf3-bcb4-1690c61b9c2a.png)
+
+## PageSpeed 결과
+### 변경전
+  ![image](https://user-images.githubusercontent.com/10750614/159509196-afb0fff8-72b4-42ad-b715-b4ffb1c7b203.png)
+### 변경후
+  ![image](https://user-images.githubusercontent.com/10750614/160226164-a8d15fea-d931-4177-b40d-a64e3d56e82f.png)
+
+
+
 
 ---
 
