@@ -68,6 +68,9 @@ npm run dev
   28.9 * 3 = 86.7
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+![smoke](./k6/smoke-before.png)
+![load](./k6/load-before.png)
+![stress](./k6/stress-before.png)
 
 ---
 
