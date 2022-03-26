@@ -192,12 +192,9 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
 
 # Reverse Proxy 개선 결과 (Nginx 설정 변경)
 
-- 메인페이지 : 
-- 데이터 갱신 페이지 : 
-- 데이터 조회 페이지 :  
-
-
-
+- 메인페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/after/main/improveMainResult.md 
+- 데이터 갱신 페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/after/path/improvePathResult.md
+- 데이터 조회 페이지 :  https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/after/update/improveUpdateResult.md
 
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
