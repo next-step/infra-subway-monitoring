@@ -11,9 +11,8 @@ export let options = {
 };
 
 const BASE_URL = 'https://infra-study.p-e.kr/';
-const PATH = ''
+
 
 export default function ()  {
-    http.get(`${BASE_URL}${PATH}`)
-    sleep(1);
+    http.get(`${BASE_URL}`)
 };
