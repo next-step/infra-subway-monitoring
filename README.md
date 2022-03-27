@@ -200,6 +200,15 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
 
 - 데이터 조회 페이지 : 
 
+
+- 개선전 vs Reverse Proxy 개선
+  - 개선전 결과와 Reverse Proxy 개선 후 결과를 보면 개선 후의 load 테스트 결과에서 http_req_blocked, http_req_connecting, http_req_duration
+  의 수치가 낮아진게 보인다.
+
+- Reverse Proxy vs Reverse Proxy + Redis 적용
+  - 좋아진 수치도 있고 안 좋아진 수치도 있는 것 같다.
+  
+
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
 # Reverse Proxy 개선 (Nginx 설정 변경)
