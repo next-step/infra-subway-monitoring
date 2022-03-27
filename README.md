@@ -41,10 +41,10 @@ npm run dev
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-![pagespeed](/images/page-speed.png)
-![pagespeed](/images/page-speed-seoul.png)
-![pagespeed](/images/webpage-test.png)
-![pagespeed](/images/webpage-test-seoul.png)
+![pagespeed](/images/before/page-speed.png)
+![pagespeed](/images/before/page-speed-seoul.png)
+![pagespeed](/images/before/webpage-test.png)
+![pagespeed](/images/before/webpage-test-seoul.png)
 First Contentful Paint 1초 이내로 줄이기
 성능점수 60점까지 올리기 (현재 31점 / 서울 지하철 21점)
 
@@ -63,12 +63,12 @@ First Contentful Paint 1초 이내로 줄이기
 10 * 3 = 30
 
 5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-![test](/images/smoke.png)
-![test](/images/smoke-grafana.png)
-![test](/images/load.png)
-![test](/images/load-grafana.png)
-![test](/images/stress.png)
-![test](/images/stress-grafana.png)
+![test](/images/before/smoke.png)
+![test](/images/before/smoke-grafana.png)
+![test](/images/before/load.png)
+![test](/images/before/load-grafana.png)
+![test](/images/before/stress.png)
+![test](/images/before/stress-grafana.png)
 
 ---
 
