@@ -196,6 +196,9 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
 - 데이터 갱신 페이지 : https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/after/path/improvePathResult.md
 - 데이터 조회 페이지 :  https://github.com/koola97620/infra-subway-monitoring/blob/step2/loadtest/after/update/improveUpdateResult.md
 
+# Redis 적용 결과
+
+- 데이터 조회 페이지 : 
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
@@ -213,7 +216,10 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
   ![image](https://user-images.githubusercontent.com/10750614/160226164-a8d15fea-d931-4177-b40d-a64e3d56e82f.png)
 
 
+# Redis 적용
 
+경로 조회 API(/paths)의 station 조회 부분에 캐시를 적용했습니다.
+ 
 
 ---
 
