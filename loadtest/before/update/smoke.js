@@ -2,15 +2,12 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export let options = {
-    vus: 300,
-    stages: [
-        { duration: '10m', target: 100 },
-        { duration: '20m', target: 200 },
-        { duration: '10m', target: 300 },
-        { duration: '20m', target: 200 },
-        { duration: '10m', target: 100 },
-        { duration: '10m', target: 0 },
-    ],
+    vus: 1, // 1 user looping for 1 minute
+    duration: '10s',
+
+    thresholds: {
+        http_req_duration: ['p(99)<150'], // 99% of requests must complete below 0.15s
+    },
 };
 
 const BASE_URL = 'https://jdragon.r-e.kr';

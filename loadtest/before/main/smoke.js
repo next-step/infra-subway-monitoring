@@ -6,15 +6,13 @@ export let options = {
     duration: '10s',
 
     thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<150'], // 99% of requests must complete below 0.15s
     },
 };
 
 const BASE_URL = 'https://jdragon.r-e.kr/';
 
 export default function ()  {
-
     http.get(`${BASE_URL}`);
-
     sleep(1);
 };
