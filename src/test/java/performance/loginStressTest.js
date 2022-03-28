@@ -3,15 +3,15 @@ import { sleep, check } from 'k6';
 
 export let options = {
   stages: [
-      { duration: '1m', target: 100 }, // below normal load
-      { duration: '3m', target: 100 },
-      { duration: '1m', target: 200 }, // normal load
-      { duration: '3m', target: 200 },
-      { duration: '1m', target: 300 }, // around the breaking point
-      { duration: '3m', target: 300 },
-      { duration: '1m', target: 400 }, // beyond the breaking point
-      { duration: '3m', target: 400 },
-      { duration: '5m', target: 0 }, // scale down. Recovery stage.
+      { duration: '1m', target: 200 }, // below normal load
+      { duration: '2m', target: 200 },
+      { duration: '1m', target: 300 }, // normal load
+      { duration: '2m', target: 300 },
+      { duration: '1m', target: 400 }, // around the breaking point
+      { duration: '2m', target: 400 },
+      { duration: '1m', target: 500 }, // beyond the breaking point
+      { duration: '2m', target: 500 },
+      { duration: '3m', target: 0 }, // scale down. Recovery stage.
   ],
   thresholds: {
           http_req_duration: ['p(99)<500'],
@@ -20,7 +20,7 @@ export let options = {
 
 export default function () {
   const before = new Date().getTime();
-      const T = 1.5;
+      const T = 0.5;
 
       const url = 'https://madini.kro.kr/login/token';
       const data = JSON.stringify({
