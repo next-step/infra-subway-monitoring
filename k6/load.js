@@ -3,12 +3,12 @@ import { check, group, sleep, fail } from 'k6';
 
 export const options = {
     stages: [
-        { duration: '5m', target: 4 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
-        { duration: '87m', target: 10 }, // stay at 100 users for 10 minutes
+        { duration: '5m', target: 10000 }, // simulate ramp-up of traffic from 1 to 17,361 users over 5 minutes.
+        { duration: '10m', target: 17361 }, // stay at 17,361 users for 10 minutes
         { duration: '5m', target: 0 }, // ramp-down to 0 users
     ],
     thresholds: {
-        'http_req_duration': ['p(99)<200'], // 99% of requests must complete below 1.5s
+        'http_req_duration': ['p(99)<2000'], // 99% of requests must complete below 1.5s
     },
 };
 
