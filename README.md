@@ -39,13 +39,40 @@ npm run dev
 
 
 ### 1단계 - 성능 테스트
+0. 참고 자료
+- https://docs.google.com/spreadsheets/d/1W8s0nOR1V_gQTRg_lvffinkRIX2yqHnre8wTRJGqgBU/edit?usp=sharing
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- FCP가 2초를 넘기면 안된다
+- Lighthouse 75점이상
+- TTI는 5초를 넘기면 안된다.
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 의도적인 sleep을 걷어내고, 이미지의 크기를 지정해서 로드하게 하여 이미지 로드 시간을 줄이고,
+- 글씨체를 압축해서 보내서 로드시간을 줄인다.
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 카카오맵==다음맵 하루 이용현황 https://ko.lab.appa.pe/2016-09/kakao-korea.html 를 참고하여 진행했습니다.  
+  => 하루에 250만번이상이 카카오맵을 접속한다고 가정
+  https://m.map.kakao.com/
+
+- 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수    
+  2500000
+
+  10분에 접속하는 사람의 수 -> 2,500,000 / (24 * 6) = 17,361
+
+
+- 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps  
+  2500000 / 86400 = 28.9
+
+
+- 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps  
+  28.9 * 3 = 86.7
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+![smoke](./k6/smoke-before.png)
+![load](./k6/load-before.png)
+![stress](./k6/stress-before.png)
 
 ---
 
