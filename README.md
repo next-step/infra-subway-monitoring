@@ -63,23 +63,29 @@ First Contentful Paint 1초 이내로 줄이기
 10 * 3 = 30
 
 5. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-![test](/images/before/smoke.png)
-![test](/images/before/smoke-grafana.png)
-![test](/images/before/load.png)
-![test](/images/before/load-grafana.png)
-![test](/images/before/stress.png)
-![test](/images/before/stress-grafana.png)
+smoke
+![test](https://user-images.githubusercontent.com/56009774/160617145-71ccc393-674e-4e55-a033-61145961b28f.png)
+![test](https://user-images.githubusercontent.com/56009774/160617162-b1b48b97-11be-44d0-8701-05a1885add26.png)
+load
+![test](https://user-images.githubusercontent.com/56009774/160617031-d22aaf83-2bc6-4028-998a-1821534afd82.png)
+![test](https://user-images.githubusercontent.com/56009774/160617046-19202d50-4706-44f7-b286-a39f03fc4cf9.png)
+stress
+![test](https://user-images.githubusercontent.com/56009774/160617185-11978959-562e-4f33-b7a6-d353d618f90e.png)
+![test](https://user-images.githubusercontent.com/56009774/160617189-9dcd2106-c425-43ee-b7c0-ab07b2dbbdca.png)
 
 ---
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
-![test](/images/before/smoke.png)
-![test](/images/before/smoke-grafana.png)
-![test](/images/before/load.png)
-![test](/images/before/load-grafana.png)
-![test](/images/before/stress.png)
-![test](/images/before/stress-grafana.png)
+smoke
+![test](https://user-images.githubusercontent.com/56009774/160616587-1e6c6418-b7f8-4e33-a870-3e1b83503f02.png)
+![test](https://user-images.githubusercontent.com/56009774/160616651-c1c5ca4d-e7b6-486f-81d6-6b4a60891dbb.png)
+load
+![test](https://user-images.githubusercontent.com/56009774/160616247-df1f4c80-579f-4d46-86a6-1e988e7f6b30.png)
+![test](https://user-images.githubusercontent.com/56009774/160616433-bf154f1f-cb02-47b2-848a-411b631f2ad8.png)
+stress
+![test](https://user-images.githubusercontent.com/56009774/160616738-b4ff519f-4236-45f6-acbf-70d5f1f61a72.png)
+![test](https://user-images.githubusercontent.com/56009774/160616787-c2083232-8743-4ecf-b14c-0f869e5f3911.png)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 - reverse proxy 개선하기
