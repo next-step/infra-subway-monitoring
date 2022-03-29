@@ -3,7 +3,7 @@ import { check, group, sleep, fail } from 'k6';
 
 export const options = {
     vus: 1, // 1 user looping for 1 minute
-    duration: '1m',
+    duration: '10s',
 
     thresholds: {
         http_req_duration: ['p(99)<2000'], // 99% of requests must complete below 2s
