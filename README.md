@@ -56,12 +56,15 @@ npm run dev
 |**Total Byte**|1,365KB|1,564KB|774KB|2,493KB|
 |**Time To Interactive**|2.0S|0.6S|1.0S|2.8S|
 
-- Light house 80점 이상 
-- FCP 3초 이내 
-- TTI 2초 이내 
-- LCP 4초 이내 
-- First View 3초 이내 
+- Light house : (71+94+91)/3 = 85.33 -> 85점 이상 
+- FCP : (3.784+1.696+2.165)/3 = 2.548 -> 3.05초 이내 (평균값과 20% 차이 이내)
+- SI : (4.446+4.235+6.050)/3 = 4.91 -> 5.892초 이내 (평균값과 20% 차이 이내)
+- TTI : (2.0+0.6+1.0)/3 = 1.2 -> 1.44초 이내 (평균값과 20% 차이 이내)
+- First View : (7.160+5.619+3.213)/3 = 5.33 -> 6.396초 이내 (평균값과 20% 차이 이내)
 
+
+- LCP : (5.551+3.270+7.119)/3 = 5.31 (만족)
+- CLS : (.001+.004+.037)/3 = 0.016 (만족)
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
@@ -70,6 +73,7 @@ npm run dev
 - gzip 압축 사용 (compressible text, target size = 497.4 KB)
 - 정적 컨텐츠 캐싱 
 - CDN 사용
+- 렌더링 차단 리소스 제거
 
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
@@ -83,19 +87,20 @@ npm run dev
   - 1일 평균 rps : 6750000 / 86400 = 78.125 
   - 1일 최대 rps : 781.25
 - Latency = 50ms
-- 요청 수 (R) = 4
-- T = (4 * 0.1) = 0.4s
-- 평균 VUser = (78.125 * 0.4)/4 = 7.8125 -> 8
-- 최대 VUser = (781.25 * 0.4)/4 = 78.125 -> 79
+- 요청 수 (R) = 3
+- T = (3 * 0.1) = 0.3s
+- 평균 VUser = (78.125 * 0.3)/4 = 5.8593 -> 6
+- 최대 VUser = (781.25 * 0.3)/4 = 58.593 -> 59
 - 부하 유지 기간 :
   - K6 : 
     - smoke test : 10s
     - load test : 3m
-    - stress test : 15m
+    - stress test : 8m
   - Ngrinder : 
     - smoke test : 10s
     - load test : 3m
     - stress test : 3m
+
 
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
@@ -104,31 +109,40 @@ npm run dev
 **PATH 테스트**
 
 [**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/smoke.js)
-![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160140870-4597f359-d9fb-4fb8-b3a2-7d5f59ee427e.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160393563-2137bb20-7f69-4f02-89e3-0335c2529076.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160393550-9a986a4e-0273-486b-a376-4b77d12e1c89.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160140886-b2a8bf09-68ca-4a37-89a6-feb825667b70.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160396222-e4d8495a-62bd-48d5-a0db-9263d07780e7.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160397762-7cde6d3e-f423-4258-8590-615964040ba3.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160143573-4869a1b5-9544-42f3-9b64-202f4055a792.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160400703-65a20c88-7e09-43e4-bbdd-5b2e94cd37a8.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160400720-58c0a1c8-62c1-4b3d-82f8-cecf892cdb65.png)
 
 
 **UPDATE 테스트**
 
 [**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/smoke.js)
-![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160191830-cf7503f0-229c-4866-9786-fe815444dd35.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160552286-bd7ec8ef-b52f-4d25-a730-fe72aafd262a.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160552288-d1324954-178a-42db-8132-50be24473eb5.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160191843-4b328855-74e0-4112-890d-6de16fd23326.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160552259-f38df532-c758-4879-8ed1-bd7537ee0ef8.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160552281-117ceb8c-b100-4001-9afb-54f36bcaefb0.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160195915-92eee796-358e-4a44-85b5-1f79d7960022.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160552292-6cfecc36-e80b-42f3-91d6-465256e8f167.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160552301-c4f44c21-7a9e-4657-aaa8-81cc03bd757b.png)
 
 
 **MAIN 테스트**
 
 [**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/smoke.js)
-![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160195923-ba7434f0-eeef-4a90-8734-ae647c0de651.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160407155-fb1a485e-7240-4abc-89cd-e2d6a6be9ceb.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160407175-4326f0cc-367e-4b27-b2f6-bdcd52b0576c.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160196321-dba4eb7b-db41-48c5-946e-52e227f1b6ac.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160402730-8dfacc96-f873-4f45-a735-5c3ac94308c7.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160402753-4e914daf-fe3d-4a1a-8496-7ce4b195a13e.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160198207-08badf9b-929e-45b4-8c90-f6e1ff8040bd.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160405889-cb9c142c-c8d7-4bf3-b8b6-d1b5e46d2038.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160405871-5f93a638-63df-49e0-90bc-2057859e0d0f.png)
 
 
 **ngrinder PATH 테스트**
