@@ -40,14 +40,53 @@ npm run dev
 
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 경쟁사 성능 대비 20% 향상된 수준(목표 최대치) ~ 경쟁사 수준(목표 최소치)
+
+  | 환경     | FCP(현재) | TTI(현재)    | SpeedIndex(현재) | TBT(현재)        | LCP(현재)      | CLS(현재)      |
+    |---------|------------|----------------|----------------|--------------|--------------|--------------|
+  | Desktop | 0.4초(2.7초) | 0.56초(2.8초) | 1.76초( 2.7초)   | 8밀리초(50밀리초)    | 1.28초(2.8초)  | 좋음 (0.004)   |
+  | Mobile  | 1.84초(14.9초) | 5.84초(15.5초) | 5.04초(14.9초 )  | 432밀리초(600밀리초) | 6.16초(15.5초) | 0.024(0.041) |
+
+
+(참고용: pagespeed 경쟁사와의 성능비교 )
+- 데스크톱
+
+  | 비교 사이트    | FCP  | TTI  | SpeedIndex | TBT   | LCP  | CLS   | 성능점수 |
+     |-----------|------|------|------|-------|------|------|------|
+  | 내 웹(madini) | 2.7초 | 2.8초 | 2.7초 | 50밀리초 | 2.8초 | 0.004 | 67   |
+  | 경쟁사(N사)   | 0.5초 | 0.7초 | 2.2초 | 10밀리초 | 1.6초 | 0.006 | 90   |
+
+- 모바일
+
+  | 비교 사이트    | FCP   | TTI   | SpeedIndex | TBT    | LCP   | CLS   | 성능점수 |
+     |-----------|-------|-------|------------|--------|-------|------|-----|
+  | 내 웹(madini) | 14.9초 | 15.5초 | 14.9초      | 600밀리초 | 15.5초 | 0.041 | 37   |
+  | 경쟁사(N사)   | 2.3초  | 7.3초  | 6.3초       | 540밀리초 | 7.7초  | 0.03  | 49   |
+
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+    1. 텍스트 기반 리소스를 압축(gzip, deflate, brotli)하여 제공
+    2. 사용하지 않는 자바스크립트를 줄이고 스크립트가 필요할 때까지 로딩을 지연시켜 네트워크 활동에 소비되는 바이트를 줄이기
+    3. 캐시를 사용하여 정적 애셋 제공
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+    1. 우선 예상 1일 사용자 수(DAU) : 450만
+    2. 피크 시간대의 집중률 (최대 트래픽 / 평소 트래픽) : 100만/50만 = 2
+    3. 1명당 1일 평균 접속(요청수): 3
+    4. Throughput: 156 ~ 312
+    5. 1일 최대 rps: 312
+    6. 1일 평균 rps: 156
+
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
----
+    1. 메인 페이지 결과 (T:1.5, R=3, http_req_duration=0.5)
+        - smokeTest: [테스트 스크립트](/src/test/java/perfomance/mainSmokeTest.js), [테스트 결과](/src/test/java/performance/images/mainSmokeTest.png)
+        - loadTest: [테스트 스크립트](/src/test/java/perfomance/mainLoadTest.js), [테스트 결과](/src/test/java/performance/images/mainLoadTest.png)
+        - stressTest: [테스트 스크립트](/src/test/java/perfomance/mainStressTest.js), [테스트 결과](/src/test/java/performance/images/mainStressTest.png)
+    2. 로그인 페이지 결과(T:1.5, R=1, http_req_duration=0.5)
+        - smokeTest: [테스트 스크립트](/src/test/java/perfomance/loginSmokeTest.js), [테스트 결과](/src/test/java/performance/images/loginSmokeTest.png)
+        - loadTest: [테스트 스크립트](/src/test/java/perfomance/loginLoadTest.js), [테스트 결과](/src/test/java/performance/images/loginLoadTest.png)
+        - stressTest: [테스트 스크립트](/src/test/java/perfomance/loginStressTest.js), [테스트 결과](/src/test/java/performance/images/loginStressTest.png)
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
