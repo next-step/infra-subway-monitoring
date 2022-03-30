@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 
 export let options = {
-    vus: 1,
+    vus: 11,
     duration: '10s',
 
     thresholds: {
@@ -14,7 +14,7 @@ const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=1&target=2';
 
 export default function () {
     const before = new Date().getTime();
-    const T = 1.1;
+    const T = 2.4;
 
     const params = {
         headers: {

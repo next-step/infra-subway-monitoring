@@ -3,7 +3,7 @@ import { sleep, check } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '10m', target: 5 }, // simulate ramp-up of traffic from 1 to 100 users over 10 minutes.
+        { duration: '10m', target: 11 }, // simulate ramp-up of traffic from 1 to 100 users over 10 minutes.
         { duration: '15m', target: 28 }, // stay at 100 users for 10 minutes
         { duration: '5m', target: 0 }, // ramp-down to 0 users
     ],
@@ -17,7 +17,7 @@ const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=1&target=2';
 
 export default function () {
     const before = new Date().getTime();
-    const T = 1.1;
+    const T = 2.4;
 
     const params = {
         headers: {
