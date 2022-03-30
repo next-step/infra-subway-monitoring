@@ -167,8 +167,96 @@ npm run dev
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 
+[**WebPageTest결과**](https://www.webpagetest.org/result/220330_BiDcG3_42P/)
+![](https://user-images.githubusercontent.com/63947424/160757097-c628a54d-56df-4dc7-85aa-d058651e0a70.png)
+
+
+|항목|성능개선 전|성능개선 후|
+|------|:---:|:---:|
+|**성능**|67|93|
+|**First Byte**|1.038S|1.065S|
+|**First View**|7.256s|3.459s|
+|**First Contentful Paint**|6.133S|3.150S|
+|**Speed Index**|6.119S|3.130S|
+|**Largest Contentful Paint**|6.298S|3.455S|
+|**Cumulative Layout Shift**|.004|.004|
+|**Total Blocking Time**|.000S|.000S|
+|**Total Byte**|2,493KB|630KB|
+|**Time To Interactive**|2.8S|1.3S|
+
+- [⭕️] Light house : 85점 이상  
+- [❌] FCP : 3.05초 이내 (하지만 3.459s로 유의미한 차이를 나타냄)
+- [⭕️] SI : 5.892초 이내 
+- [⭕️] TTI : 1.44초 이내
+- [⭕️] First View : 6.396초 이내 
+
+
+
+**PATH 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160748943-228104b1-e2d0-4dbe-a9fd-3658740cbb5b.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160748945-c88a30fa-302d-4fbe-a721-7356295ba657.png)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160748930-d05f5074-0497-4449-ac06-5fd9aa754c9c.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160748939-dbe997a9-e645-4ecd-bcae-79eb7ae43e25.png)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160754971-a02af2a0-3cf6-4b13-8381-85cce160a3c0.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160755026-9a9f34bf-82ef-4d75-ae7c-0dc0d40014dc.png)
+
+
+**UPDATE 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160749656-6e430396-3859-47d3-a3ac-f932d81170ca.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160749657-9f2ffcd8-bda1-48df-98f1-9a9e07d6c361.png)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160749640-9dfccad8-f52c-4511-99c7-2ecdb2e98487.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160749652-99e036c7-8e62-4745-b590-19dfc7081b5b.png)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160755982-dea0aa47-df9f-4fb9-8670-ddb47bf65dd8.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160755999-908fdd46-5f40-415b-bef9-819ff0429e7c.png)
+
+
+**MAIN 테스트**
+
+[**smoke 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/smoke.js)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160746648-da388a2e-d703-4ceb-ac14-de9a4b507d41.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/160746653-f9f1d322-e31b-475f-95c3-be4a5ce96a17.png)
+[**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/load.js)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160746637-248883c4-4123-413f-974c-40e46f2c299d.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/160746644-5c31500a-679d-4b18-90bd-7383f579a872.png)
+[**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/stress.js)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160753976-86965074-4bb8-440f-8e92-6d2c375339f8.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/160753997-eb3b08c3-2a0e-41e9-8fd9-21b4777fb7d5.png)
+
+
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+
+![](https://user-images.githubusercontent.com/63947424/160757521-b5b272f9-7a28-4e5e-90ff-d1cd46d3ec4d.png)
+
+- ReverseProxy 개선
+  - gzip 압축
+![](https://user-images.githubusercontent.com/63947424/160758257-7717a865-4851-4a2d-a081-9be9e6e3d31b.png)
+
+  - cache 설정 (css, png등의 경우 만료기간 1년, js의 경우 no-cache, private 설정)
+![](https://user-images.githubusercontent.com/63947424/160758017-301da39c-9103-4ff3-a139-076b10802ab0.png)
+![](https://user-images.githubusercontent.com/63947424/160758357-730f555f-a8c7-4435-800c-c9b630ed7464.png)
+
+  - http2 적용
+![](https://user-images.githubusercontent.com/63947424/160759021-3613763c-6b4c-4ec2-8692-561d50dd6665.png)
+
+  - 부하 분산 적용 (8081 포트의 ec2 추가 생성)
+
+- WAS 성능 개선
+  - path를 조회할 때 redis 캐시를 사용하도록 변경
+
+|한번 조회 시 (조회쿼리)|그 이후 조회 시(조회쿼리 없음)|
+|:---:|:---:|
+|![](https://user-images.githubusercontent.com/63947424/160759260-8edf7a10-e3d0-4f76-8b24-748a83ab2c4c.png)![](https://user-images.githubusercontent.com/63947424/160759277-a45e41af-4999-4de7-9d36-998fcf4a2482.png)|![](https://user-images.githubusercontent.com/63947424/160759322-17f803a9-b3d5-455c-b1d6-12cba45f3e8f.png)|
+
+
 
 ---
 
