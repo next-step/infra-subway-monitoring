@@ -13,21 +13,16 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://infra-subway.p-e.kr';
+const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=1&target=2';
 
 export default function () {
-
-    const url = new URL(`${BASE_URL}/paths/`);
-    url.searchParams.append('source', '2')
-    url.searchParams.append('target', '3')
-
     const params = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
 
-    let pathResponse = http.get(url.toString(), params);
+    let pathResponse = http.get(`${BASE_URL}`, params);
 
     check(pathResponse, {
         'find path in successfully': (response) => response.status == 200,
