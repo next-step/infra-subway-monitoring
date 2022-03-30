@@ -240,9 +240,8 @@ npm run dev
   - gzip 압축
 ![](https://user-images.githubusercontent.com/63947424/160758257-7717a865-4851-4a2d-a081-9be9e6e3d31b.png)
 
-  - cache 설정 (css, png등의 경우 만료기간 1년, js의 경우 no-cache, private 설정)
+  - cache 설정 
 ![](https://user-images.githubusercontent.com/63947424/160758017-301da39c-9103-4ff3-a139-076b10802ab0.png)
-![](https://user-images.githubusercontent.com/63947424/160758357-730f555f-a8c7-4435-800c-c9b630ed7464.png)
 
   - http2 적용
 ![](https://user-images.githubusercontent.com/63947424/160759021-3613763c-6b4c-4ec2-8692-561d50dd6665.png)
