@@ -17,7 +17,7 @@ const BASE_URL = 'https://infra-subway.p-e.kr';
 
 export default function () {
 
-    const url = new URL(`${BASE_URL}/paths`);
+    const url = new URL(`${BASE_URL}/paths/`);
     url.searchParams.append('source', '2')
     url.searchParams.append('target', '3')
 
