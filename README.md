@@ -69,7 +69,8 @@ npm run dev
    * VUser = (9.3 * 2.4) / 2 = 11.16
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+![](../../k6Test/line_load_test.png)![](../../k6Test/line_smoke_test.png)![](../../k6Test/line_stress_test.png)
+![](../../k6Test/login_smoke_test.png)![](../../k6Test/login_load_test.png)![](../../k6Test/login_stress_test.png)
 ---
 
 ### 2단계 - 화면 응답 개선하기
