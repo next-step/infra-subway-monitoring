@@ -4,12 +4,12 @@ import { sleep, check } from 'k6';
 export let options = {
 
     stages: [
-        { duration: '2m', target: 3 }, // below normal load
-        { duration: '3m', target: 5 },
-        { duration: '2m', target: 9 }, // normal load
-        { duration: '3m', target: 15 },
-        { duration: '2m', target: 25 }, // around the breaking point
-        { duration: '3m', target: 28 },
+        { duration: '2m', target: 1 }, // below normal load
+        { duration: '3m', target: 3 },
+        { duration: '2m', target: 5 }, // normal load
+        { duration: '3m', target: 9 },
+        { duration: '2m', target: 15 }, // around the breaking point
+        { duration: '3m', target: 20 },
         { duration: '2m', target: 30 }, // beyond the breaking point
         { duration: '3m', target: 40 },
         { duration: '10m', target: 0 }, // scale down. Recovery stage.
