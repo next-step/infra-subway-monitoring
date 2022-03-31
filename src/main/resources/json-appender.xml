@@ -11,7 +11,7 @@
     </if>
 
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/${home}subway-json</file>
+        <file>${home}subway-json</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
