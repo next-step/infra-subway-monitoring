@@ -3,12 +3,13 @@ package nextstep.subway.line.dto;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.station.dto.StationResponse;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LineResponse {
+public class LineResponse implements Serializable {
     private Long id;
     private String name;
     private String color;
