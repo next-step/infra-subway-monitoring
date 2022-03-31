@@ -135,7 +135,7 @@ npm run dev
 ![smoke](./step1/main/2_smoke_test.png)
 
 
-#### laod 테스트
+#### load 테스트
 개선 전
 ![load](./step1/main/1_load_test.png)
 
@@ -163,7 +163,7 @@ npm run dev
 ![smoke](./step1/lines/2_smoke_test.png)
 
 
-#### laod 테스트
+#### load 테스트
 개선 전
 ![load](./step1/lines/load_test.png)
 
