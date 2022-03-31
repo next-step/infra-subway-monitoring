@@ -10,11 +10,11 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://infra-subway.p-e.kr/path/';
+const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=1&target=2';
 
 export default function () {
     const before = new Date().getTime();
-    const T = 2.4;
+    const T = 1.2;
 
     const params = {
         headers: {

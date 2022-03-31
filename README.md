@@ -65,8 +65,15 @@ npm run dev
      * 800,000 / 86,000 = 9.3...
    * 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
      * 9.3 * 3 = 27.9
-   * T = (2 * 1.2) = 2.4
-   * VUser = (9.3 * 2.4) / 2 = 11.16
+   * VUser 계산
+     * Login
+       * T = (2 * 1.2) = 2.4
+       * VUser = (9.3 * 2.4) / 2 = 11.16 (평균)
+         * 33 (최대)
+     * Path
+       * T = (1 * 1.2) = 1.2
+       * VUser = (9.3 * 1.2) / 1 = 11.16
+         * 33 (최대)
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 ![](k6test/line/line_load_test.png)![](k6test/line/line_smoke_test.png)![](k6test/line/line_stress_test.png)
