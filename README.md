@@ -95,6 +95,12 @@ npm run dev
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+   1. Protocol http2로 개선<br>
+      ![h2](./upgrade/h2.png)
+   2. gzip 사용<br>
+      ![gzip](./upgrade/gzip.png)
+      ![gzip02](./upgrade/gzip02.png)
+   3. Redis 사용
 
 ---
 
