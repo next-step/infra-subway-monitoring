@@ -14,13 +14,13 @@ public class LineResponse implements Serializable {
     private String name;
     private String color;
     private List<StationResponse> stations;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private String createdDate;
+    private String modifiedDate;
 
     public LineResponse() {
     }
 
-    public LineResponse(Long id, String name, String color, List<StationResponse> stations, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public LineResponse(Long id, String name, String color, List<StationResponse> stations, String createdDate, String modifiedDate) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -31,9 +31,9 @@ public class LineResponse implements Serializable {
 
     public static LineResponse of(Line line) {
         if(isEmpty(line)) {
-            return new LineResponse(line.getId(), line.getName(), "", new ArrayList(), line.getCreatedDate(), line.getModifiedDate());
+            return new LineResponse(line.getId(), line.getName(), "", new ArrayList(), line.getCreatedDate().toString(), line.getModifiedDate().toString());
         }
-        return new LineResponse(line.getId(), line.getName(),"", assembleStations(line), line.getCreatedDate(), line.getModifiedDate());
+        return new LineResponse(line.getId(), line.getName(),"", assembleStations(line), line.getCreatedDate().toString(), line.getModifiedDate().toString());
     }
 
     private static boolean isEmpty(Line line) {
@@ -63,10 +63,10 @@ public class LineResponse implements Serializable {
     }
 
     public String getCreatedDate() {
-        return createdDate.toString();
+        return createdDate;
     }
 
     public String getModifiedDate() {
-        return modifiedDate.toString();
+        return modifiedDate;
     }
 }
