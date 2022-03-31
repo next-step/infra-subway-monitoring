@@ -101,6 +101,7 @@ npm run dev
       ![gzip](./upgrade/gzip.png)
       ![gzip02](./upgrade/gzip02.png)
    3. Redis 사용
+      1. feat: redis cache add to line, member, station
 
 ---
 
