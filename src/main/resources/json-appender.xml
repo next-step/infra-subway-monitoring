@@ -6,7 +6,7 @@
             <property name="home" value="C:/log/"/>    <!-- 그 외 os의 로그 경로 -->
         </then>
         <else>
-            <property name="home" value="log/infra-monitoring/"/>  <!-- 리눅스일 경우 로그 경로 -->
+            <property name="home" value="/log/infra-monitoring/"/>  <!-- 리눅스일 경우 로그 경로 -->
         </else>
     </if>
 
