@@ -19,7 +19,7 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=1&target=2';
+const BASE_URL = 'https://infra-subway.p-e.kr/paths/?source=2&target=3';
 
 export default function () {
     const before = new Date().getTime();
