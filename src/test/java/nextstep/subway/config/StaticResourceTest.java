@@ -37,6 +37,7 @@ public class StaticResourceTest {
                 .then().log().headers()
                 .extract();
         assertThat(response.header("Cache-Control")).contains("no-cache","private");
+        assertThat(response.header("ETag")).isNotNull();
 
         response = RestAssured
                 .given().log().all()
@@ -45,5 +46,6 @@ public class StaticResourceTest {
                 .then().log().headers()
                 .extract();
         assertThat(response.header("Cache-Control")).contains("max-age=31536000");
+        assertThat(response.header("ETag")).isNotNull();
     }
 }
