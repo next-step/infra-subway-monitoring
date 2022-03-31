@@ -8,10 +8,13 @@
     <include resource="json-appender.xml" />
 
     <springProfile name="local | prod">
-        <root level="INFO">
+        <logger name="nextstep.subway.auth" level="debug" additivity="false">
             <appender-ref ref="file"/>
+        </logger>
+
+        <logger name="nextstep.subway.map" level="debug" additivity="false">
             <appender-ref ref="json"/>
-        </root>
+        </logger>
     </springProfile>
 
     <springProfile name="test">
