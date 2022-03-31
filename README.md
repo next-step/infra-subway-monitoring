@@ -124,7 +124,7 @@ npm run dev
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
-#### gzip, http2 적용 성능 개선 
+#### gzip, http2 적용 성능 개선 : main 페이지 테스트 
 
 ##### smoke 테스트
 
@@ -151,7 +151,7 @@ npm run dev
 ![stress](./step1/main/2_stress_test.png)
 
 
-#### redis 적용 성능 (lines)
+#### redis 적용 성능 : lines 페이지 테스트
 
 ##### smoke 테스트
 
