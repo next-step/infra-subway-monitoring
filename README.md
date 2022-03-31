@@ -93,6 +93,12 @@ npm run dev
 ---
 
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+   1. smoke<br>
+     ![smoke](./k6/smoke-after.png)
+   2. load<br>
+      ![load](./k6/smoke-after.png)
+   3. stress<br>
+      ![stress](./k6/smoke-after.png)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
    1. Protocol http2로 개선<br>
@@ -102,6 +108,7 @@ npm run dev
       ![gzip02](./upgrade/gzip02.png)
    3. Redis 사용
       1. feat: redis cache add to line, member, station
+      2. stations cache add, path cache add
 
 ---
 
