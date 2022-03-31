@@ -101,6 +101,7 @@ npm run dev
       ![stress](./k6/smoke-after.png)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+    ### 참고자료 : https://docs.google.com/spreadsheets/d/1W8s0nOR1V_gQTRg_lvffinkRIX2yqHnre8wTRJGqgBU/edit?usp=sharing
    1. Protocol http2로 개선<br>
       ![h2](./upgrade/h2.png)
    2. gzip 사용<br>
