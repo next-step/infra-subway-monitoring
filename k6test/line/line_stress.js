@@ -14,8 +14,8 @@ export let options = {
         { duration: '10m', target: 0 }, // scale down. Recovery stage.
     ],
     thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-        'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<1200'], // 99% of requests must complete below 1.5s
+        'logged in successfully': ['p(99)<1200'], // 99% of requests must complete below 1.5s
     },
 };
 
