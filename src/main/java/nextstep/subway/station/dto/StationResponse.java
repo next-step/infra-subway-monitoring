@@ -33,11 +33,11 @@ public class StationResponse implements Serializable {
         return name;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        return createdDate.toString();
     }
 
-    public LocalDateTime getModifiedDate() {
-        return modifiedDate;
+    public String getModifiedDate() {
+        return modifiedDate.toString();
     }
 }

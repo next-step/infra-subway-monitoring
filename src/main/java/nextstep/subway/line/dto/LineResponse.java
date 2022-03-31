@@ -62,11 +62,11 @@ public class LineResponse implements Serializable {
         return stations;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        return createdDate.toString();
     }
 
-    public LocalDateTime getModifiedDate() {
-        return modifiedDate;
+    public String getModifiedDate() {
+        return modifiedDate.toString();
     }
 }
