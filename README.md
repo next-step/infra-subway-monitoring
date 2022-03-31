@@ -150,6 +150,7 @@ npm run dev
 개선 후
 ![stress](./step1/main/2_stress_test.png)
 
+---------
 
 #### redis 적용 성능 : lines 페이지 테스트
 
