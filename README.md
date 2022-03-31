@@ -233,14 +233,14 @@ npm run dev
 **ngrinder PATH 테스트**
 
 [**ngrinder 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/ngrinder/ngrinder.groovy)
-![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161071943-fff7d0ba-c7ce-4a40-aa82-c7bcf39d41d4.png)
-![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161071956-a6d15c3b-a844-4328-a5e1-1f754e61f1d8.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161095460-5888e11a-f90f-4e71-8670-d493e07eede2.png)
+![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161095485-d653e2a9-2202-4084-a5c6-9f6c56acd189.png)
 
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161071960-c9d6a5b9-9701-4e12-b72e-ad81f38a9548.png)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161071967-9d6b345e-df1f-4470-b76c-b45f69252b46.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161095488-18163859-e082-4f0c-aaf6-047ac0ae4d4a.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161095493-be9dafdf-424d-4bc8-8bf5-622294708084.png)
 
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161071971-a7d8a083-9802-402d-8c7b-95729a2d68a0.png)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161071974-4bd9c76c-f9d1-4308-a9b3-b9fa6dcee6f0.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161095498-b141ab25-e4ce-4672-8cd8-bd2a9f3d4146.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161095506-29832472-7f29-4f2d-ab5d-62f92bdae953.png)
 
 
 
