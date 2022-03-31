@@ -26,6 +26,7 @@ public class StationService {
         return StationResponse.of(persistStation);
     }
 
+    @Cacheable(value = "stations")
     @Transactional(readOnly = true)
     public List<StationResponse> findAllStations() {
         List<Station> stations = stationRepository.findAll();
