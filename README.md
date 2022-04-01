@@ -235,4 +235,14 @@ Q. must-revalidate 설정을 추가해야 보다 완벽하게 캐시를 사용�
 ### [추가] 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+/log/infra-subway-monitoring/subway.log 로 하고 싶었으나
+경로 설정에서 계속 에러가 나서 일단은 아래와 같은 경로로 설정했습니다 ㅠㅠ
+
+- /home/ubuntu/infra-subway-monitoring/log/infra-monitoring/subway.log
+- /home/ubuntu/infra-subway-monitoring/log/infra-monitoring/subway.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+- nginx : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=koola97620-nginx
+- public1 : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=koola97620-public1
+- public2 : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=koola97620-public2
