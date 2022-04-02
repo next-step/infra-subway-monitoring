@@ -4,18 +4,18 @@ import { sleep, check } from 'k6';
 export let options = {
 
     stages: [
-        { duration: '2m', target: 2 }, // below normal load
-        { duration: '3m', target: 5 },
-        { duration: '2m', target: 9 }, // normal load
-        { duration: '3m', target: 11 },
-        { duration: '2m', target: 11 }, // around the breaking point
-        { duration: '3m', target: 23 },
-        { duration: '2m', target: 33 }, // beyond the breaking point
+        { duration: '2m', target: 11 }, // below normal load
+        { duration: '3m', target: 15 },
+        { duration: '2m', target: 21 }, // normal load
+        { duration: '3m', target: 33 },
+        { duration: '2m', target: 44 }, // around the breaking point
+        { duration: '3m', target: 100 },
+        { duration: '2m', target: 200 }, // beyond the breaking point
         { duration: '10m', target: 0 }, // scale down. Recovery stage.
     ],
     thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-        'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<1200'], // 99% of requests must complete below 1.5s
+        'logged in successfully': ['p(99)<1200'], // 99% of requests must complete below 1.5s
     },
 };
 
