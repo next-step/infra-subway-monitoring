@@ -10,8 +10,8 @@ export let options = {
         { duration: '3m', target: 200 },
         { duration: '2m', target: 250 }, // around the breaking point
         { duration: '3m', target: 300 },
-        { duration: '2m', target: 350 }, // beyond the breaking point
-        { duration: '10m', target: 0 }, // scale down. Recovery stage.
+        { duration: '10m', target: 350 }, // beyond the breaking point
+        { duration: '5m', target: 0 }, // scale down. Recovery stage.
     ],
     thresholds: {
         http_req_duration: ['p(99)<1200'], // 99% of requests must complete below 1.5s
