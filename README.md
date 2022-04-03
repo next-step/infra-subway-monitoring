@@ -96,9 +96,9 @@ npm run dev
    1. smoke<br>
      ![smoke](./k6/smoke-after.png)
    2. load<br>
-      ![load](./k6/smoke-after.png)
+      ![load](./k6/load-after.png)
    3. stress<br>
-      ![stress](./k6/smoke-after.png)
+      ![stress](./k6/stress-after.png)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
     ### 참고자료 : https://docs.google.com/spreadsheets/d/1W8s0nOR1V_gQTRg_lvffinkRIX2yqHnre8wTRJGqgBU/edit?usp=sharing
@@ -110,7 +110,6 @@ npm run dev
    3. Redis 사용
       1. feat: redis cache add to line, member, station
       2. stations cache add, path cache add
-
 ---
 
 ### [추가] 로깅, 모니터링
