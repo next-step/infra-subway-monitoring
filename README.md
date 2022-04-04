@@ -138,6 +138,45 @@ npm run dev
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+   - Reverse Proxy 개선
+     - gzip 설정
+       - nginx.conf에 설정한 http content-type에 grip을 적용
+         ```
+         gzip on; ## http 블록 수준에서 gzip 압축 활성화
+         gzip_comp_level 9;
+         gzip_vary on;
+         gzip_types text/plain text/css application/json application/x-javascript application/javascript text/xml application/xml application/rss+xml text/javascript image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype;
+         ```
+     - cache
+       - nginx.conf에 정적 데이터에 대한 cache 설정을 적용 
+         ```
+         proxy_cache_path /tmp/nginx levels=1:2 keys_zone=mirrors89:10m inactive=10m max_size=200M;
+          
+         proxy_cache_key "$scheme$host$request_uri $cookie_user";
+          
+         location ~* \.(?:css|js|gif|png|jpg|jpeg)$ {
+           proxy_pass http://app;
+           proxy_cache mirrors89;
+           add_header X-Proxy-Cache $upstream_cache_status;
+           proxy_cache_valid 200 302 20m;
+           expires 1M;
+           access_log off; 
+         ```
+     - 서버 분산
+       - WAS를 3대 실행하여 부하 분산
+         ```
+         upstream app {
+           least_conn;
+           server 192.168.89.59:8080 max_fails=3 fail_timeout=3s;
+           server 192.168.89.59:8081 max_fails=3 fail_timeout=3s;
+           server 192.168.89.59:8082 max_fails=3 fail_timeout=3s;
+         }
+         ```
+       - 새로 사용하는 PORT를 보안 그룹에 설정
+     - HTTP2 적용
+       ```
+       listen 443 ssl http2;
+       ```
 
 ---
 
