@@ -138,7 +138,7 @@ npm run dev
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
-   - Reverse Proxy 개선
+   - **Reverse Proxy 개선**
      - gzip 설정
        - nginx.conf에 설정한 http content-type에 grip을 적용
          ```
@@ -177,7 +177,12 @@ npm run dev
        ```
        listen 443 ssl http2;
        ```
-
+   - **WAS 개선**
+     - Redis Cache 적용
+       - 실제 서비스에서 자주 조회되는 서비스를 찾아 캐시 적용
+       - 캐시 적용 Service
+         - LineService
+         - StationService
 ---
 
 ### [추가] 로깅, 모니터링
