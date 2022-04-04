@@ -178,6 +178,7 @@ npm run dev
        listen 443 ssl http2;
        ```
    - **WAS 개선**
+     - Resource Cache 및 Etag 설정 
      - Redis Cache 적용
        - 실제 서비스에서 자주 조회되는 서비스를 찾아 캐시 적용
        - 캐시 적용 Service
