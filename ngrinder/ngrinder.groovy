@@ -43,7 +43,7 @@ class TestRunner {
 	@BeforeProcess
 	public static void beforeProcess() {
 		HTTPPluginControl.getConnectionDefaults().timeout = 6000
-		test = new GTest(1, "yunha-infra-subway.o-r.kr")
+		test = new GTest(1, "yunha-infra-subway.r-e.kr")
 		request = new HTTPRequest()
 		grinder.logger.info("before process.");
 	}
@@ -64,7 +64,7 @@ class TestRunner {
 
 	@Test
 	public void test(){
-		HTTPResponse result = request.GET("https://yunha-infra-subway.o-r.kr/path", params)
+		HTTPResponse result = request.GET("https://yunha-infra-subway.r-e.kr/path", params)
 
 		if (result.statusCode == 301 || result.statusCode == 302) {
 			grinder.logger.warn("Warning. The response may not be correct. The response code was {}.", result.statusCode); 
