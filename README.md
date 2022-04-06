@@ -100,6 +100,17 @@ npm run dev
    3. stress<br>
       ![stress](./k6/stress-after.png)
 
+   ###빌드 오류로 이전 코드로 gzip http2설정만 한상태로 하여서 정상 빌드후 추가적인 개선후 진행하였습니다.
+   1. load<br>
+     ![load](./k6/load-after-2.png)
+   2. smoke<br>
+     ![smoke](./k6/smoke-after-2.png)
+   3. stress<br>
+     ![stress](./k6/stress-after-2.png)
+     - stress 처음 난 순간<br>
+       ![timing](./k6/stress-after-moment-failed.png)
+
+
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
     ### 참고자료 : https://docs.google.com/spreadsheets/d/1W8s0nOR1V_gQTRg_lvffinkRIX2yqHnre8wTRJGqgBU/edit?usp=sharing
    1. Protocol http2로 개선<br>
