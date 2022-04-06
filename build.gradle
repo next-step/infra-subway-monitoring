@@ -41,7 +41,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-redis')
 
 	// java8 issue
-	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3")
 }
 
 test {
