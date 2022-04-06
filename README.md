@@ -198,11 +198,11 @@ npm run dev
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161036312-9b811837-2a29-4a7e-a1bc-3c137047a376.png)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161036328-2dc283ed-aa7f-4a58-b620-179f94daefdc.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161036337-b5e94482-0197-45de-bce8-29f48169acea.png)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161036341-77ca3e94-647d-4e25-877a-d7b2c6fad897.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161949461-f9e24217-5e6d-4845-85b5-8888ad67754d.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161949482-5a28e919-d413-4737-9b8b-5f297047d015.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/main/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161036345-f436c85a-c29c-47bb-a9d6-389c68d090b5.png)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161036351-e4c20e18-abe4-4495-aa95-dad72ed22a5e.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161949631-e7205e87-26f5-4376-b03f-e29d961ddcb0.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161949644-ee645ae3-a681-4507-899d-945a32babfd7.png)
 
 **PATH 테스트**
 
@@ -210,11 +210,11 @@ npm run dev
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161037879-69bfc533-b3cb-479c-8f33-e4333d091d1c.png)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161037892-b1ffe20c-cc6c-4e4c-834b-266fd9c8cc90.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161037899-371a199f-eda5-4b4c-8738-621f19b43ed1.png)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161037911-5bfe3de6-a1a8-423b-943f-19bab6747c5c.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161949842-3dfdbd08-73f6-4574-a6eb-41da4de7fa9c.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161949857-c0bab9d8-40a3-481d-9d27-0f6036aca3d1.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/path/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161037915-9b142db7-2bb4-43d7-856e-dc333f4366b9.png)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161037918-c1bb1f35-5384-463e-a0a5-22f25e1d68d7.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161949862-58f23aff-53cd-4e5b-97b0-587c3c9ef170.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161949865-2df8e526-c624-4d0d-b70e-0fe3d6fed3f1.png)
 
 
 **UPDATE 테스트**
@@ -223,11 +223,11 @@ npm run dev
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161070705-4bbc21ee-9143-4867-8125-8d2114efbe66.png)
 ![smoke 테스트 결과](https://user-images.githubusercontent.com/63947424/161070724-4ff514e7-772a-4462-8cb1-8472ba1067bd.png)
 [**load 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/load.js)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161070731-ed4e59f0-b7e1-4498-951e-9be755cdee24.png)
-![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161070738-9d7508a5-c0de-401c-9be1-5cec112d2ea8.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161951567-7be73d08-7616-46cd-84b1-f2d39163812b.png)
+![load 테스트 결과](https://user-images.githubusercontent.com/63947424/161951581-8f549b43-fa5a-4efe-a396-5bdc66c7f3d5.png)
 [**stress 스크립트**](https://github.com/yunhalee05/infra-subway-monitoring/blob/step1/k6/update/stress.js)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161070744-fb17b75f-39f9-4b08-b428-924cac18723c.png)
-![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161070750-7d124243-567a-48f7-a5f1-49a144001404.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161951594-0caf28bc-e030-46ee-8984-050981531fed.png)
+![stress 테스트 결과](https://user-images.githubusercontent.com/63947424/161951601-6f4d598c-c2df-489e-9191-0c264bf09313.png)
 
 
 **ngrinder PATH 테스트**
