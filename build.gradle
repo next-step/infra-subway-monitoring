@@ -39,9 +39,6 @@ dependencies {
 
 	// redis
 	implementation('org.springframework.boot:spring-boot-starter-data-redis')
-
-	// java8 issue
-	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 test {
