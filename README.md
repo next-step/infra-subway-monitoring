@@ -77,10 +77,50 @@ npm run dev
 ---
 
 ### 2단계 - 화면 응답 개선하기
+- [X] 모든 정적 자원에 대해 no-cache, private 설정을 하고 테스트 코드를 통해 검증합니다.
+- [X] 확장자는 css인 경우는 max-age를 1년, js인 경우는 no-cache, private 설정을 합니다.
+- Q. 모든 정적 자원에 대해 no-cache, no-store 설정을 한다. 가능한가요?
+  <br>
+  A. 가능하다. 하지만 이는 no-store의 옵션은 어떤 상황에서도 무조건 새로 요청하는 옵션인데 이는 데이터가 장시간 변화가 없더라도 이를 인지하지 못하고 새로 갱신하게 되는 문제를 초래하게 된다.
+    <br>
+    그리고 완전한 캐싱을 위해서라면 must-revalidate 옵션또한 추가하여 no-cache 정책을 프록시 서버에게 요청하여 프록시 서버가 오리진 서버에게 캐시가 유효한지 매번 질의하도록 하여야 한다.
+  ```
+  - max-age = n: 초 단위로 캐시 신선도를 설정한다. 예를 들어 60 * 60 = 3600을 입력하면 한 시간, 3600 * 24 = 86400을 입력하면 하루동안 캐시가 유지된다. 그 이후엔 서버에 요청한 뒤 304 응답을 받을 때에만 캐시를 이용한다.
+  - no-cache: 캐시가 유효한지 확인하기 위해 매번 서버에 요청한다.
+  - no-store: 어떤 요청도 캐시로 저장하지 않는다.
+  ```
+
+---
+
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+   1. smoke<br>
+     ![smoke](./k6/smoke-after.png)
+   2. load<br>
+      ![load](./k6/load-after.png)
+   3. stress<br>
+      ![stress](./k6/stress-after.png)
+
+   ###빌드 오류로 이전 코드로 gzip http2설정만 한상태로 하여서 정상 빌드후 추가적인 개선후 진행하였습니다.
+   1. load<br>
+     ![load](./k6/load-after-2.png)
+   2. smoke<br>
+     ![smoke](./k6/smoke-after-2.png)
+   3. stress<br>
+     ![stress](./k6/stress-after-2.png)
+     - stress 처음 난 순간<br>
+       ![timing](./k6/stress-after-moment-failed.png)
+
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
-
+    ### 참고자료 : https://docs.google.com/spreadsheets/d/1W8s0nOR1V_gQTRg_lvffinkRIX2yqHnre8wTRJGqgBU/edit?usp=sharing
+   1. Protocol http2로 개선<br>
+      ![h2](./upgrade/h2.png)
+   2. gzip 사용<br>
+      ![gzip](./upgrade/gzip.png)
+      ![gzip02](./upgrade/gzip02.png)
+   3. Redis 사용
+      1. feat: redis cache add to line, member, station
+      2. stations cache add, path cache add
 ---
 
 ### [추가] 로깅, 모니터링
