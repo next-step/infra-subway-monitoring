@@ -40,12 +40,67 @@ npm run dev
 
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+   ![image](https://user-images.githubusercontent.com/6476469/161757733-21475074-65df-4d02-94d9-b802c5c50ab5.png)
+   <br>
+   (네이버 지하철 녹양 -> 신도림 길찾기)
+   <br><br>
+   ![image](https://user-images.githubusercontent.com/6476469/161765988-543783d8-a5a5-43a7-b13c-da06b6074dea.png)
+   <br>
+   (Running map 경로검색 페이지)
+```
+FCP: 0.5초 이하
+네이버 수준을 목표
+```
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+```
+불필요한 파일 다운로드 제거, 캐싱 설정, gzip 압축
+```
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
+```
+DAU: 3,000,000 (1,000,000 * 3)
+평균 rps: 34.6
+최대 rps: 346
+```
+
+- 접속 빈도가 높은 페이지(https://pleasesubway.p-e.kr)
+    - T: 0.1 (1 * 0.1)
+    - 평균 VU: 3.45 (34.6 * 0.1 / 1)
+    - 최대 VU: 34.5 (346 * 0.1 / 1)
+
+- 데이터를 갱신하는 페이지(https://pleasesubway.p-e.kr/lines)
+    - T: 0.6 (3 * 0.2)
+    - 평균 VU: 6.92 (34.6 * 0.6 / 3)
+    - 최대 VU: 69.2 (346 * 0.6 / 3)
+
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (https://pleasesubway.p-e.kr/path)
+    - T: 0.4 (2 * 0.2)
+    - 평균 VU: 6.92 (34.6 * 0.4 / 2)
+    - 최대 VU: 69.2 (346 * 0.4 / 2)
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+  - 접속 빈도가 높은 페이지(https://pleasesubway.p-e.kr)
+    - [Smoke](./k6/main/smoke.js)
+      ![img_1.png](k6/main/img_1.png)
+    - [Load](./k6/main/load.js)
+      ![img_2.png](k6/main/img_2.png)
+    - [Stress](./k6/main/stress.js)
+      ![img_1.png](k6/main/img_3.png)
+  - 데이터를 갱신하는 페이지(https://pleasesubway.p-e.kr/lines)
+    - [Smoke](./k6/lines/smoke.js)
+      ![img_1.png](k6/lines/img_1.png)
+    - [Load](./k6/lines/load.js)
+      ![img_2.png](k6/lines/img_2.png)
+    - [Stress](./k6/lines/stress.js)
+      ![img_3.png](k6/lines/img_3.png)
+  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (https://pleasesubway.p-e.kr/path)
+    - [Smoke](./k6/path/smoke.js)
+      ![img_1.png](k6/path/img_1.png)
+    - [Load](./k6/path/load.js)
+      ![img.png](k6/path/img.png)
+    - [Stress](./k6/path/stress.js)
+      ![img_2.png](k6/path/img_2.png)
 
 ---
 
