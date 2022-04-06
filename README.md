@@ -273,5 +273,8 @@ npm run dev
 
 ### [추가] 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- /home/ubuntu/infra-subway-deploy/log
+- /home/ubuntu/infra-subway-deploy/log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yunhalee05;start=PT3H
