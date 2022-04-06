@@ -31,8 +31,13 @@ public class MapService {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
+        jsonLogger.info("경로찾기 요청 {} -> {}", 
+            StructuredArguments.kv("출발역", sourceStation.getName()), 
+            StructuredArguments.kv("도착역", targetStation.getName()));
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-
+        jsonLogger.info("경로찾기 성공 {} -> {}",
+            StructuredArguments.kv("출발역", sourceStation.getName()),
+            StructuredArguments.kv("도착역", targetStation.getName()));
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
