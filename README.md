@@ -276,5 +276,11 @@ npm run dev
 - /home/ubuntu/infra-subway-deploy/log
 - /home/ubuntu/infra-subway-deploy/log
 
+![](https://user-images.githubusercontent.com/63947424/161982965-97623853-95c7-47cb-af96-46104b46019e.png)
+![](https://user-images.githubusercontent.com/63947424/161982980-703298dd-b39b-47da-9927-356e930ed7b6.png)
+![](https://user-images.githubusercontent.com/63947424/161982984-2b596a0c-0a39-41ea-9e66-24d836980789.png)
+
+
 2. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yunhalee05;start=PT3H
+![](https://user-images.githubusercontent.com/63947424/161982987-d248beab-4e5a-4135-9cbe-41907a34a556.png)
