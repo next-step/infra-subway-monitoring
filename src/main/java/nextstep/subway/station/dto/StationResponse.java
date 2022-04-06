@@ -12,10 +12,8 @@ public class StationResponse {
     private String name;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdDate;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime modifiedDate;
 
     public static StationResponse of(Station station) {
@@ -40,10 +38,12 @@ public class StationResponse {
         return name;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
