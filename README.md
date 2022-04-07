@@ -92,11 +92,14 @@ npm run dev
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
-   - nginx에서 zip 압축 활성화하여 파일 경량화 (1.2KB -> 750B)
-   - cache
-   - 부하분산
-   - http2 적용한 속도 개선
-   - 레디스 적용
+   1. nginx에서 zip 압축 활성화하여 파일이 경량화되는 것 확인 (1.2KB -> 750B)
+   2. http2 적용
+   3. cache
+   4. 부하분산(8080, 8081포트 사용)
+   5. 레디스 적용
+- 디비를 조회하는 /lines 기능으로 스트레스 테스트를 개전 전 후로  비교해봤습니다.(98% -> 99% 향상...)
+    - [개선전 line Stress](/src/test/java/performance/images/lineStress_개선전.png)
+    - [개선후 line Stress](/src/test/java/performance/images/lineStress_개선후.png)
 
 ---
 
