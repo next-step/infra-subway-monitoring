@@ -169,7 +169,6 @@ npm run dev
            least_conn;
            server 192.168.89.59:8080 max_fails=3 fail_timeout=3s;
            server 192.168.89.59:8081 max_fails=3 fail_timeout=3s;
-           server 192.168.89.59:8082 max_fails=3 fail_timeout=3s;
          }
          ```
        - 새로 사용하는 PORT를 보안 그룹에 설정
