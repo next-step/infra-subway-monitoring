@@ -24,7 +24,7 @@ public class StaticResourcesTest {
     private WebTestClient client;
 
     @Test
-    void get_static_resources() {
+    void get_static_js_resources() {
         String uri = PREFIX_STATIC_RESOURCES + "/js/main.js";
         EntityExchangeResult<String> response = client
                 .get()
@@ -33,7 +33,35 @@ public class StaticResourcesTest {
                 .expectStatus()
                 .isOk()
                 .expectHeader()
-                .cacheControl(CacheControl.maxAge(60 * 60 * 24 * 365, TimeUnit.SECONDS))
+                .cacheControl(CacheControl.noCache().cachePrivate())
+                .expectBody(String.class)
+                .returnResult();
+
+        logger.debug("body : {}", response.getResponseBody());
+
+        String etag = response.getResponseHeaders()
+                .getETag();
+
+        client
+                .get()
+                .uri(uri)
+                .header("If-None-Match", etag)
+                .exchange()
+                .expectStatus()
+                .isNotModified();
+    }
+
+    @Test
+    void get_static_css_resources() {
+        String uri = PREFIX_STATIC_RESOURCES + "/css/main.css";
+        EntityExchangeResult<String> response = client
+                .get()
+                .uri(uri)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .cacheControl(CacheControl.maxAge(365, TimeUnit.DAYS))
                 .expectBody(String.class)
                 .returnResult();
 
