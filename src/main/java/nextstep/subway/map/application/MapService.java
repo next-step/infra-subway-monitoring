@@ -27,8 +27,8 @@ public class MapService {
 
     public PathResponse findPath(Long source, Long target) {
         List<Line> lines = lineService.findLines();
-        Station sourceStation = stationService.findById(source);
-        Station targetStation = stationService.findById(target);
+        Station sourceStation = stationService.findByIdForPath(source);
+        Station targetStation = stationService.findByIdForPath(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
         return PathResponseAssembler.assemble(subwayPath);

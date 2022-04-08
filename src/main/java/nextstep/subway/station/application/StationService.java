@@ -4,6 +4,7 @@ import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
-    private StationRepository stationRepository;
+    private final StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
         this.stationRepository = stationRepository;
@@ -42,6 +43,11 @@ public class StationService {
     }
 
     public Station findById(Long id) {
+        return stationRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    @Cacheable(value = "station", key = "#id")
+    public Station findByIdForPath(Long id) {
         return stationRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 }

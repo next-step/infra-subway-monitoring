@@ -1,5 +1,6 @@
 package nextstep.subway.line.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import nextstep.subway.common.BaseEntity;
 import nextstep.subway.station.domain.Station;
 
@@ -20,6 +21,7 @@ public class Line extends BaseEntity implements Serializable {
     private String color;
 
     @OneToMany(mappedBy = "line", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @JsonManagedReference
     private List<Section> sections = new ArrayList<>();
 
     public Line() {

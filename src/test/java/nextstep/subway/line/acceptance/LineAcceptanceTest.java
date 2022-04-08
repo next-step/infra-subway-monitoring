@@ -220,6 +220,12 @@ public class LineAcceptanceTest extends AcceptanceTest {
     public static void 지하철_노선_응답됨(ExtractableResponse<Response> response, ExtractableResponse<Response> createdResponse) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.as(LineResponse.class)).isNotNull();
+
+        Long expectedLineIds = Long.parseLong(createdResponse.header("Location").split("/")[2]);
+        Long resultLineIds = response.jsonPath().getObject(".", LineResponse.class)
+                .getId();
+
+        assertThat(resultLineIds).isEqualTo(expectedLineIds);
     }
 
     public static void 지하철_노선_목록_포함됨(ExtractableResponse<Response> response, List<ExtractableResponse<Response>> createdResponses) {
