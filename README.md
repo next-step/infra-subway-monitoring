@@ -223,8 +223,15 @@ export default function() {
 
 ### 2단계 - 화면 응답 개선하기
 1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+   - k6\image\after_notScaleOut\
+    - smoke_notScaleOut.png
+    - load_notScaleOut.png
+    - stress_notScaleOut.png
 
 2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+    - Redis를 사용한 Cache를 적용하였습니다.
+    - Revers Proxy를 사용하여 gzip 압축을 활성화하여 화면 응답속도를 개선하였습니다.
+    - Scale Out을 진행하였지만 적용이 잘 되지 않았습니다.
 
 ---
 
