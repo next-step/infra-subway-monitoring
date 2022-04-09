@@ -1,6 +1,7 @@
 package nextstep.subway.line.domain;
 
 import nextstep.subway.station.domain.Station;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,6 +40,7 @@ public class Section implements Serializable {
         return id;
     }
 
+    @Cacheable(value="line", key="#id")
     public Line getLine() {
         return line;
     }
