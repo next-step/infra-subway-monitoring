@@ -1,4 +1,4 @@
-package nextstep.subway.common;
+package nextstep.subway.config;
 
 import nextstep.subway.auth.application.AuthService;
 import nextstep.subway.auth.ui.AuthenticationPrincipalArgumentResolver;
