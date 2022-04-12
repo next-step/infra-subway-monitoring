@@ -285,3 +285,25 @@ npm run dev
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yunhalee05
 ![](https://user-images.githubusercontent.com/63947424/161982987-d248beab-4e5a-4135-9cbe-41907a34a556.png)
 ![](https://user-images.githubusercontent.com/63947424/162102517-f08cdf6d-dc9c-4b55-ae99-ab8670bfe48d.png)
+
+
+
+
+
+---
+
+### [추가] AWS 구성요소 활용하기
+1. AutoScailing 적용하기 
+- stress를 이용하여 cpu 부하 실행 
+![](https://user-images.githubusercontent.com/63947424/162880551-a3ddd52e-7a07-400a-b83e-ba4aa5a97ce7.png)
+
+- 5분 뒤 자동으로 ec2 추가 생성 
+![](https://user-images.githubusercontent.com/63947424/162880545-5639bdf1-e243-471a-a523-93ba4451e1a3.png)
+![](https://user-images.githubusercontent.com/63947424/162880547-84713737-a75a-43c3-bade-6fc57005961b.png)
+![](https://user-images.githubusercontent.com/63947424/162880535-e383576e-f2a2-4ed5-9974-381441d80a9c.png)
+
+
+- 추가 5분을 더 적용하자 새로운 ec2 추가 생성 
+![](https://user-images.githubusercontent.com/63947424/162880537-05c878dc-7472-410e-8774-d64cda2cd536.png)
+![](https://user-images.githubusercontent.com/63947424/162880544-cd3e9d43-4f74-42e1-b777-9ed220a90344.png)
+![](https://user-images.githubusercontent.com/63947424/162880523-1bc7091f-f062-47d6-8dfa-5fbffa68977a.png)
