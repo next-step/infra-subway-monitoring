@@ -1,0 +1,37 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://192.168.143.7:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.1s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✗ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 20       ✗ 0
+     data_received..................: 12 kB   1.2 kB/s
+     data_sent......................: 5.3 kB  528 B/s
+     http_req_blocked...............: avg=748.11µs min=2.02µs  med=3.97µs  max=14.89ms  p(90)=5.03µs  p(95)=749.66µs
+     http_req_connecting............: avg=25.57µs  min=0s      med=0s      max=511.42µs p(90)=0s      p(95)=25.57µs
+   ✓ http_req_duration..............: avg=3.43ms   min=1.84ms  med=4.14ms  max=5.37ms   p(90)=4.83ms  p(95)=5.31ms
+       { expected_response:true }...: avg=4.54ms   min=4.08ms  med=4.52ms  max=5.31ms   p(90)=4.83ms  p(95)=5.07ms
+     http_req_failed................: 50.00%  ✓ 10       ✗ 10
+     http_req_receiving.............: avg=55.54µs  min=28.19µs med=45.94µs max=184.94µs p(90)=74.95µs p(95)=93.4µs
+     http_req_sending...............: avg=25.27µs  min=9.89µs  med=23.06µs max=60.46µs  p(90)=37.24µs p(95)=59.54µs
+     http_req_tls_handshaking.......: avg=687.69µs min=0s      med=0s      max=13.75ms  p(90)=0s      p(95)=687.69µs
+     http_req_waiting...............: avg=3.35ms   min=1.79ms  med=4.06ms  max=5.31ms   p(90)=4.7ms   p(95)=5.11ms
+     http_reqs......................: 20      1.981158/s
+     iteration_duration.............: avg=1s       min=1s      med=1s      max=1.02s    p(90)=1.01s   p(95)=1.01s
+     iterations.....................: 10      0.990579/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
