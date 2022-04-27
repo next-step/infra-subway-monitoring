@@ -1,0 +1,36 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://192.168.143.7:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.3s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ↓ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.....................: 100.00% ✓ 20       ✗ 0
+     data_received..............: 12 kB   1.1 kB/s
+     data_sent..................: 4.1 kB  395 B/s
+     http_req_blocked...........: avg=1.25ms   min=2.06µs  med=3.67µs  max=24.95ms  p(90)=5.03µs   p(95)=1.25ms
+     http_req_connecting........: avg=27.45µs  min=0s      med=0s      max=549.14µs p(90)=0s       p(95)=27.45µs
+   ✓ http_req_duration..........: avg=12.03ms  min=4.85ms  med=9.46ms  max=66.75ms  p(90)=14.64ms  p(95)=17.28ms
+     http_req_failed............: 100.00% ✓ 20       ✗ 0
+     http_req_receiving.........: avg=75.88µs  min=45.38µs med=69.61µs max=164.95µs p(90)=100.17µs p(95)=136.74µs
+     http_req_sending...........: avg=25.15µs  min=13.03µs med=22.9µs  max=65.42µs  p(90)=32.2µs   p(95)=39.65µs
+     http_req_tls_handshaking...: avg=629.79µs min=0s      med=0s      max=12.59ms  p(90)=0s       p(95)=629.79µs
+     http_req_waiting...........: avg=11.93ms  min=4.77ms  med=9.35ms  max=66.61ms  p(90)=14.55ms  p(95)=17.18ms
+     http_reqs..................: 20      1.945722/s
+     iteration_duration.........: avg=1.02s    min=1.01s   med=1.01s   max=1.09s    p(90)=1.03s    p(95)=1.06s
+     iterations.................: 10      0.972861/s
+     vus........................: 1       min=1      max=1
+     vus_max....................: 1       min=1      max=1

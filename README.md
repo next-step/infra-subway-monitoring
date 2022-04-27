@@ -74,9 +74,40 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+- 대상 시스템 범위
+  application, mysql
+- 목푯값 설정
+    - 예상 1일 사용자 수(DAU): 20만 (네이버지도 MAU 1400만)
+    - 피크 시간대의 집중률을 예상: 3배
+    - 1명당 1일 평균 접속 혹은 요청수 예상: 8회 = 2(출근, 퇴근) * 4(메인, 로그인, 경로 검색페이지, 검색요청)
+    - Throughput(1일 평균 rps ~ 1일 최대 rps)
+        - 1일 총 접속 수(1일 사용자 수(DAU) x 1명당 1일 평균 접속 수): 160만
+        - 1일 평균 tps(1일 총 접속 수 / 86,400): 18
+        - 1일 최대 rps(1일 평균 rps x (최대 트래픽 / 평소 트래픽)): 90
+    - Latency: 150ms
+    - 부하 유지 기간: 1시간
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+- 접속 빈도가 높은 페이지(메인 페이지)
+  - [smoke.js](./test/접속빈도/smoke.js)
+  - [smoke 결과](./test/접속빈도/smoke.txt)
+  - [load.js](./test/접속빈도/load.js)
+  - [load 결과](./test/접속빈도/load.txt)
+  - [stress.js](./test/접속빈도/stress.js)
+  - [stress 결과](./test/접속빈도/stress.txt)
+- 데이터를 갱신하는 페이지(내 정보 수정)
+  - [smoke.js](./test/데이터갱신/smoke.js)
+  - [smoke 결과](./test/데이터갱신/smoke.txt)
+  - [load.js](./test/데이터갱신/load.js)
+  - [load 결과](./test/데이터갱신/load.txt)
+  - [stress.js](./test/데이터갱신/stress.js)
+  - [stress 결과](./test/데이터갱신/stress.txt)
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로 조회)
+  - [smoke.js](./test/데이터조회참조/smoke.js)
+  - [smoke 결과](./test/데이터조회참조/smoke.txt)
+  - [load.js](./test/데이터조회참조/load.js)
+  - [load 결과](./test/데이터조회참조/load.txt)
+  - [stress.js](./test/데이터조회참조/stress.js)
+  - [stress 결과](./test/데이터조회참조/stress.txt)
 ---
 
 ### 3단계 - 로깅, 모니터링

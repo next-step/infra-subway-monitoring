@@ -1,0 +1,38 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://192.168.143.7:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (11.0s), 0/1 VUs, 9 complete and 0 interrupted iterations
+default ↓ [======================================] 1 VUs  10s
+
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 9        ✗ 0
+     data_received..................: 34 kB   3.1 kB/s
+     data_sent......................: 1.6 kB  142 B/s
+     http_req_blocked...............: avg=1.92ms   min=4.25µs   med=5.1µs    max=17.26ms  p(90)=3.46ms   p(95)=10.36ms
+     http_req_connecting............: avg=66.09µs  min=0s       med=0s       max=594.89µs p(90)=118.97µs p(95)=356.93µs
+   ✗ http_req_duration..............: avg=214.01ms min=184.25ms med=198.38ms max=275.75ms p(90)=255.8ms  p(95)=265.77ms
+       { expected_response:true }...: avg=214.01ms min=184.25ms med=198.38ms max=275.75ms p(90)=255.8ms  p(95)=265.77ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 9
+     http_req_receiving.............: avg=81.85µs  min=60.04µs  med=69.3µs   max=162.55µs p(90)=109.34µs p(95)=135.95µs
+     http_req_sending...............: avg=25.39µs  min=16.2µs   med=17.7µs   max=59.09µs  p(90)=38.51µs  p(95)=48.8µs
+     http_req_tls_handshaking.......: avg=1.78ms   min=0s       med=0s       max=16.02ms  p(90)=3.2ms    p(95)=9.61ms
+     http_req_waiting...............: avg=213.9ms  min=184.17ms med=198.27ms max=275.53ms p(90)=255.67ms p(95)=265.6ms
+     http_reqs......................: 9       0.821622/s
+     iteration_duration.............: avg=1.21s    min=1.18s    med=1.19s    max=1.29s    p(90)=1.26s    p(95)=1.27s
+     iterations.....................: 9       0.821622/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+
+ERRO[0012] some thresholds have failed
