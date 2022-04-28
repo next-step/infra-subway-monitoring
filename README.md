@@ -98,8 +98,61 @@ LCP 도 조금은 줄일 수 있을 거 같습니다.
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+    1. 대상 시스템 범위  
+        **웹 서버, 디비 서버**
+    2. 목푯값 설정 (latency, throughput, 부하 유지기간)  
+        DAU: **100,000**   
+        latency: **75ms**  
+        부하 유지기간: **15 minute**   
+        throughput:
+          1일 총 접속 수 : **1,000,000**  
+          1일 평균 rps : **11.5**    
+          1일 최대 rps : **110**
+    3. 부하 테스트 시 저장될 데이터 건수 및 크기
+        데이터 250,000 건 
+    
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+#### Smoke Testing
+- **접속 빈도가 높은 페이지 - ( 메인 페이지 )**   
+  [Source File](./k6/smoke_main.js)
+  ![실행결과](./k6/images/smoke_main.png?v=1)
+
+- **데이터를 갱신 하는 페이지 - ( 지하철역 등록 )**  
+  [Source File](./k6/smoke_station.js)  
+  ![실행결과](./k6/images/smoke_station.png)  
+
+- **데이터를 조회하는데 여러 데이터를 참조하는 페이지 - ( 경로검색 )**  
+  [Source File](./k6/smoke_path.js)
+  ![실행결과](./k6/images/smoke_path.png)
+
+
+#### Load Testing
+- **접속 빈도가 높은 페이지 - ( 메인 페이지 )**       
+  [Source File](./k6/load_main.js)  
+  ![실행결과](./k6/images/load_main.png)
+
+- **데이터를 갱신 하는 페이지 - ( 지하철역 등록 )**  
+  [Source File](./k6/load_station.js)
+  ![실행결과](./k6/images/load_station.png)
+
+- **데이터를 조회하는데 여러 데이터를 참조하는 페이지 - ( 경로검색 )**   
+  [Source File](./k6/load_path.js)  
+  ![실행결과](./k6/images/load_path.png)
+
+
+#### Stress Testing
+- **접속 빈도가 높은 페이지 ( 메인 페이지 )**     
+  [Source File](./k6/stress_main.js)  
+  ![실행결과](./k6/images/stress_main.png)
+
+- **데이터를 갱신 하는 페이지 ( 지하철역 등록 )**   
+  [Source File](./k6/stress_station.js)
+  ![실행결과](./k6/images/stress_station.png)
+
+- **데이터를 조회하는데 여러 데이터를 참조하는 페이지 ( 경로검색 )**    
+  [Source File](./k6/stress_path.js)
+  ![실행결과](./k6/images/stress_path.png)
 
 ---
 
