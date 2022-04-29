@@ -3,9 +3,9 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '1m', target: 10 },
-        { duration: '1m', target: 20 },
-        { duration: '1m', target: 30 },
+        { duration: '10s', target: 10 },
+        { duration: '10s', target: 20 },
+        { duration: '10s', target: 30 },
         { duration: '10s', target: 0 },
     ],
     thresholds: {
