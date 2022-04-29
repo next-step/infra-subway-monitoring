@@ -6,11 +6,11 @@ export const RateContentCreated = new Rate('Content Created');
 
 export const options = {
     stages: [
-        { duration: '3m', target: 12 },
-        { duration: '3m', target: 50 },
-        { duration: '3m', target: 50 },
-        { duration: '3m', target: 110 },
-        { duration: '3m', target: 110 },
+        { duration: '3m', target: 7 },
+        { duration: '3m', target: 7 },
+        { duration: '3m', target: 30 },
+        { duration: '3m', target: 66 },
+        { duration: '3m', target: 66 },
     ],
     thresholds: {
         http_req_duration: ['p(99) < 75'],
