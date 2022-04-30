@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface LineRepository extends JpaRepository<Line, Long> {
 
-    @Query(value = "SELECT * FROM line WHERE SLEEP(3)", nativeQuery = true)
+    @Query(value = "SELECT * FROM line", nativeQuery = true) // todo SLEEP이 왜 있었나 알아보기!!
     List<Line> findAll();
 }
