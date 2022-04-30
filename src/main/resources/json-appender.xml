@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
@@ -11,8 +10,6 @@
             <fileNamePattern>${home}event-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
-                <!--서버에 용량이 많지 않아서 일단 3일분만 저장되게 해두었습니다.-->
-                <maxHistory>3</maxHistory>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
