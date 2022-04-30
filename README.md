@@ -162,4 +162,17 @@ LCP 도 조금은 줄일 수 있을 거 같습니다.
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+서버 : i-0ecf2d23c76752ac7 ( 3.39.147.40 )  
+
+#### Application Log
+/home/ubuntu/nextstep/infra-subway-monitoring/logs/file.log ( 회원가입, 로그인)  
+/home/ubuntu/nextstep/infra-subway-monitoring/logs/json.log ( 경로 검색 )
+
+#### Nginx Access Log
+/var/log/nginx/access_log  
+/var/log/nginx/error.log
+
+
+2. Cloudwatch 대시보드 URL을 알려주세요  
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=shineoov
+
