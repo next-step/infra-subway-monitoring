@@ -44,7 +44,7 @@ npm run dev
 #### 타사 비교 (First View, 데스크톱)
 사이트 3개 모두 TTI, TBT는 PageSpeed (데스크톱), 그 외 메트릭은  webpage test 수치 사용.
 단위: 초(s)
-||[네이버 지도](https://map.naver.com/v5/directions/-/-/-/transit?c=14137575.5199888,4524330.9973991,15,0,0,0,dh)|[카카오지도]()|[nextstep subway](https://dibtp1221.kro.kr/)|
+||[네이버 지도](https://map.naver.com/v5/directions/-/-/-/transit?c=14137575.5199888,4524330.9973991,15,0,0,0,dh)|[카카오지도](https://map.kakao.com/)|[nextstep subway](https://dibtp1221.kro.kr/)|
 |----------------|-------------------------------|-----------------------------|-----------------------------|
 |FCP|0.389|0.741|4.853|
 |TTI|3.2|2.5|2.8|
@@ -55,7 +55,7 @@ npm run dev
 #### 타사 비교 (Repeat View, 데스크톱)
 사이트 3개 모두 메트릭 webpage test 수치 사용.
 단위: 초(s)
-||[네이버 지도](https://map.naver.com/v5/directions/-/-/-/transit?c=14137575.5199888,4524330.9973991,15,0,0,0,dh)|[카카오지도]()|[nextstep subway](https://dibtp1221.kro.kr/)|
+||[네이버 지도](https://map.naver.com/v5/directions/-/-/-/transit?c=14137575.5199888,4524330.9973991,15,0,0,0,dh)|[카카오지도](https://map.kakao.com/)|[nextstep subway](https://dibtp1221.kro.kr/)|
 |----------------|-------------------------------|-----------------------------|-----------------------------|
 |FCP|0.242|0.463|0.639|
 |Speed Index|0.761|1.481|0.700|
@@ -71,6 +71,7 @@ npm run dev
 |Speed Index|2|
 |LCP|1|
 |TBT|유지|
+
 이렇게 정한 이유 개선 필요한 부분과 함께 설명
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
