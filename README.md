@@ -78,11 +78,157 @@ npm run dev
 
 - 접속 빈도가 높은 기능 (Get /)
 
+> smoke
+
+```js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1,
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://next-sangw0804-infra.kro.kr';
+const USERNAME = 'sangw0804@naver.com';
+const PASSWORD = '123456';
+
+export default function ()  {
+  let response = http.get(`${BASE_URL}/`);
+  check(response, { 'main page 200': (response) => response.status === 200 });
+  sleep(1);
+};
+```
+```
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.1s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ main page 200
+
+     checks.........................: 100.00% ✓ 10       ✗ 0
+     data_received..................: 17 kB   1.7 kB/s
+     data_sent......................: 1.6 kB  160 B/s
+     http_req_blocked...............: avg=4.43ms  min=6.72µs  med=7.46µs  max=44.24ms  p(90)=4.43ms  p(95)=24.33ms
+     http_req_connecting............: avg=63.55µs min=0s      med=0s      max=635.54µs p(90)=63.55µs p(95)=349.54µs
+   ✓ http_req_duration..............: avg=2.63ms  min=2.37ms  med=2.67ms  max=2.8ms    p(90)=2.72ms  p(95)=2.76ms
+       { expected_response:true }...: avg=2.63ms  min=2.37ms  med=2.67ms  max=2.8ms    p(90)=2.72ms  p(95)=2.76ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 10
+     http_req_receiving.............: avg=70.58µs min=59.35µs med=67.91µs max=97.42µs  p(90)=81.42µs p(95)=89.42µs
+     http_req_sending...............: avg=29.42µs min=21.95µs med=24.4µs  max=66.28µs  p(90)=39.37µs p(95)=52.83µs
+     http_req_tls_handshaking.......: avg=1.57ms  min=0s      med=0s      max=15.74ms  p(90)=1.57ms  p(95)=8.66ms
+     http_req_waiting...............: avg=2.53ms  min=2.21ms  med=2.58ms  max=2.71ms   p(90)=2.62ms  p(95)=2.67ms
+     http_reqs......................: 10      0.991995/s
+     iteration_duration.............: avg=1s      min=1s      med=1s      max=1.04s    p(90)=1s      p(95)=1.02s
+     iterations.....................: 10      0.991995/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+```
+
 - cpu 부하가 높은 기능 (Post /login/token)
+
+> smoke
+
+```js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1,
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://next-sangw0804-infra.kro.kr';
+const USERNAME = 'sangw0804@naver.com';
+const PASSWORD = '123456';
+
+export default function ()  {
+
+  let loginPayload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  let loginParams = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let response = http.post(`${BASE_URL}/login/token`, loginPayload, loginParams);
+  check(response, { 'access token created': (response) => response.json('accessToken') !== '' });
+  sleep(1);
+};
+```
+```
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.1s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ access token created
+
+     checks.........................: 100.00% ✓ 10       ✗ 0
+     data_received..................: 8.6 kB  852 B/s
+     data_sent......................: 2.8 kB  272 B/s
+     http_req_blocked...............: avg=4.15ms  min=7.08µs  med=7.63µs  max=41.47ms  p(90)=4.15ms  p(95)=22.81ms
+     http_req_connecting............: avg=60.65µs min=0s      med=0s      max=606.58µs p(90)=60.65µs p(95)=333.62µs
+   ✓ http_req_duration..............: avg=9.76ms  min=8.47ms  med=8.74ms  max=16.5ms   p(90)=12.16ms p(95)=14.33ms
+       { expected_response:true }...: avg=9.76ms  min=8.47ms  med=8.74ms  max=16.5ms   p(90)=12.16ms p(95)=14.33ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 10
+     http_req_receiving.............: avg=73.36µs min=63.61µs med=70.99µs max=89.41µs  p(90)=83.13µs p(95)=86.27µs
+     http_req_sending...............: avg=36.28µs min=25.86µs med=30.2µs  max=84.66µs  p(90)=45.08µs p(95)=64.87µs
+     http_req_tls_handshaking.......: avg=2.73ms  min=0s      med=0s      max=27.38ms  p(90)=2.73ms  p(95)=15.06ms
+     http_req_waiting...............: avg=9.65ms  min=8.38ms  med=8.64ms  max=16.34ms  p(90)=12.05ms p(95)=14.19ms
+     http_reqs......................: 10      0.985261/s
+     iteration_duration.............: avg=1.01s   min=1s      med=1s      max=1.05s    p(90)=1.01s   p(95)=1.03s
+     iterations.....................: 10      0.985261/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+```
 
 - db 를 갱신하는 기능 (Post /stations)
 
-- 여러 db를 조회해서 결과를 보여주는 기능 (Get /path)
+> smoke
+
+```js
+```
+```
+```
 
 ---
 
