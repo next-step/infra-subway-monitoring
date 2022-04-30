@@ -1,0 +1,37 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 230 max VUs, 3m30s max duration (incl. graceful stop):
+           * default: Up to 230 looping VUs for 3m0s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (3m00.7s), 000/230 VUs, 15993 complete and 0 interrupted iterations
+default ↓ [======================================] 001/230 VUs  3m0s
+
+     ✓ status is 200
+
+     checks.........................: 100.00% ✓ 31986      ✗ 0
+     data_received..................: 8.8 MB  49 kB/s
+     data_sent......................: 12 MB   67 kB/s
+     http_req_blocked...............: avg=41.3µs  min=947ns   med=2.29µs  max=17.85ms p(90)=4.1µs   p(95)=5.04µs
+     http_req_connecting............: avg=7.56µs  min=0s      med=0s      max=2.94ms  p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=6.89ms  min=3.12ms  med=5.74ms  max=80.51ms p(90)=11.05ms p(95)=13.98ms
+       { expected_response:true }...: avg=6.89ms  min=3.12ms  med=5.74ms  max=80.51ms p(90)=11.05ms p(95)=13.98ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 31986
+     http_req_receiving.............: avg=39.72µs min=10.55µs med=30.57µs max=7.58ms  p(90)=55.53µs p(95)=74.71µs
+     http_req_sending...............: avg=19.71µs min=6.29µs  med=13.22µs max=7.5ms   p(90)=26.56µs p(95)=33.36µs
+     http_req_tls_handshaking.......: avg=30.18µs min=0s      med=0s      max=16.33ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=6.83ms  min=3.07ms  med=5.69ms  max=80.47ms p(90)=10.97ms p(95)=13.9ms
+     http_reqs......................: 31986   177.042505/s
+     iteration_duration.............: avg=1.01s   min=1s      med=1.01s   max=1.09s   p(90)=1.02s   p(95)=1.02s
+     iterations.....................: 15993   88.521253/s
+     vus............................: 1       min=1        max=230
+     vus_max........................: 230     min=230      max=230
