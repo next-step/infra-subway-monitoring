@@ -67,12 +67,13 @@ npm run dev
  - 부하 테스트시에 저장될 데이터 건수와 크기 : 
  
  - 목표값 설정
-   - DAU : 100,000
-   - 집중률 : 5.0
+   - DAU : 500,000
+   - 집중률 : 4.0
    - 1명당 1일 접속수 : 2회
-   - 평균 rps : 1일 총접속수 (200,000) / 86,400 * 1.0 = 2.31 rps
-   - 최대 rps : 1일 총접속수 (200,000) / 86,400 * 5.0 = 11.55 rps
+   - 평균 rps : 1일 총접속수 (800,000) / 86,400 * 1.0 = 9.25 rps
+   - 최대 rps : 1일 총접속수 (800,000) / 86,400 * 5.0 = 46.35 rps
    - latency : 75 ms
+   - T : 0.075 * 46.35 / 1 = 3.47
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -140,6 +141,98 @@ default ✓ [======================================] 1 VUs  10s
      iterations.....................: 10      0.991995/s
      vus............................: 1       min=1      max=1
      vus_max........................: 1       min=1      max=1
+```
+
+> load
+
+```js
+
+```
+```
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 160 max VUs, 7m30s max duration (incl. graceful stop):
+           * default: Up to 160 looping VUs for 7m0s over 2 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (7m00.0s), 000/160 VUs, 637238 complete and 0 interrupted iterations
+default ✗ [======================================] 000/160 VUs  7m0s
+
+     ✓ main page 200
+
+     checks.........................: 100.00% ✓ 637238      ✗ 0
+     data_received..................: 804 MB  1.9 MB/s
+     data_sent......................: 78 MB   186 kB/s
+     http_req_blocked...............: avg=65.46µs min=1.98µs   med=3.7µs   max=200.16ms p(90)=4.49µs   p(95)=5.91µs
+     http_req_connecting............: avg=1.3µs   min=0s       med=0s      max=23.96ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=52.65ms min=803.91µs med=32.89ms max=1.25s    p(90)=119.39ms p(95)=139.75ms
+       { expected_response:true }...: avg=52.65ms min=803.91µs med=32.89ms max=1.25s    p(90)=119.39ms p(95)=139.75ms
+     http_req_failed................: 0.00%   ✓ 0           ✗ 637238
+     http_req_receiving.............: avg=47.49µs min=17.3µs   med=38.22µs max=31.53ms  p(90)=58.7µs   p(95)=67.26µs
+     http_req_sending...............: avg=18.01µs min=7.47µs   med=10.96µs max=46.03ms  p(90)=20.58µs  p(95)=28.3µs
+     http_req_tls_handshaking.......: avg=59.61µs min=0s       med=0s      max=199.21ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=52.59ms min=756.92µs med=32.82ms max=1.25s    p(90)=119.33ms p(95)=139.68ms
+     http_reqs......................: 637238  1517.224492/s
+     iteration_duration.............: avg=52.82ms min=890.38µs med=33.01ms max=1.25s    p(90)=119.61ms p(95)=140ms
+     iterations.....................: 637238  1517.224492/s
+     vus............................: 0       min=0         max=160
+     vus_max........................: 160     min=160       max=160
+```
+
+> stress
+
+```js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '3m', target: 300 },
+    { duration: '3m', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://next-sangw0804-infra.kro.kr';
+const USERNAME = 'sangw0804@naver.com';
+const PASSWORD = '123456';
+
+export default function ()  {
+  let response = http.get(`${BASE_URL}/`);
+  check(response, { 'main page 200': (response) => response.status === 200 });
+};
+```
+```
+     ✗ main page 200
+      ↳  99% — ✓ 682971 / ✗ 1757
+
+     checks.........................: 99.74% ✓ 682971      ✗ 1757
+     data_received..................: 890 MB 2.5 MB/s
+     data_sent......................: 87 MB  242 kB/s
+     http_req_blocked...............: avg=2.1ms    min=0s       med=3.75µs  max=4.87s   p(90)=4.6µs    p(95)=7.4µs
+     http_req_connecting............: avg=10.85µs  min=0s       med=0s      max=67.34ms p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=78.46ms  min=0s       med=42.63ms max=5.33s   p(90)=175.04ms p(95)=266.48ms
+       { expected_response:true }...: avg=78.46ms  min=810.56µs med=42.63ms max=5.33s   p(90)=175.01ms p(95)=266.51ms
+     http_req_failed................: 0.25%  ✓ 1757        ✗ 682971
+     http_req_receiving.............: avg=51.47µs  min=0s       med=37.99µs max=35.7ms  p(90)=60.2µs   p(95)=70.03µs
+     http_req_sending...............: avg=1.78ms   min=0s       med=11.05µs max=5.01s   p(90)=22.24µs  p(95)=32.25µs
+     http_req_tls_handshaking.......: avg=430.47µs min=0s       med=0s      max=4.77s   p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=76.62ms  min=0s       med=42.39ms max=4.02s   p(90)=171.6ms  p(95)=263.72ms
+     http_reqs......................: 684728 1902.002694/s
+     iteration_duration.............: avg=79.03ms  min=898.2µs  med=42.83ms max=5.33s   p(90)=176.02ms p(95)=267.23ms
+     iterations.....................: 684728 1902.002694/s
+     vus............................: 1      min=1         max=300
+     vus_max........................: 300    min=300       max=300
 ```
 
 - cpu 부하가 높은 기능 (Post /login/token)
