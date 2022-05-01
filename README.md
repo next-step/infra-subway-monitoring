@@ -91,10 +91,91 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+ 1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
+	 1.  목표 rps 구하기  
+		 a. 예상 1일 사용자 수(DAU)  : 200,000명    
+		 네이버지도, 티맵, 카카오 맵 등등 몇백만명을 훌쩍 넘는데 <- 이걸 기준으로 잡아야 할지 고민했으나, 현실적으로는 실제 서비스를 하더라도 사용하는 사람이 없을거기 때문에,  
+    이정도 사양의 서버에 이렇게 프로젝트 구성을 하면 어느정도 버티는지 확인을 위한 수치로 잡았습니다
+    
+		 b. 피크 시간대 집중률 예상 (최대 트래픽 / 평소 트래픽)  : 2.4  
+		 시간대별 이용인원 추이에서 가장 높은값(10%) / 1시간 평균트래픽(1/24)  
+    ([2019년 서울 지하철 이용실태 - 시간대별 이용인원 추이](https://www.seouland.com/arti/society/society_general/6239.html) 에서 제일 높은 값이 10%)
+   
+		   c. 1명당 1일 평균 접속 혹은 요청수를 예상해봅니다 : 45회  
+		   [지도, 택시, 내비 앱 사용 현황](https://www.sedaily.com/NewsVIew/1RZNNV5UZG) 에서 지하철 종결자 앱의 1인당 평균 실행횟수 
+
+			d. 이를 바탕으로 Throughput 계산 rps : 250  
+			(200000 * 45 * 2.4 ) / 86400
+	2. VUser
+		R=3 , T=2 -> VU = (250*2)/3 = 166.6666... 약 167
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+```js
+// smoke.js
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://dibtp1221.kro.kr/';
+const USERNAME = 'dibtp1221@gmail.com';
+const PASSWORD = '1221';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params).json();
+  console.log(loginRes.accessToken);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.accessToken !== undefined,
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.accessToken}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+
+  console.log(myObjects.id);
+  check(myObjects, { 'retrieved member': (obj) => obj.id === 1 });
+
+  let pathObject = http.get(`${BASE_URL}/paths?source=24&target=12`).json();
+  console.log(pathObject.distance);
+  check(pathObject, {'correct path': (obj) => obj.distance === 25 });
+  sleep(1);
+};
+
+```  
+
+- 계정 실패 테스트 (smoke)
+![image](https://user-images.githubusercontent.com/87216027/166157336-a779d7bf-8cc5-4428-be23-072616b54413.png)
+계정 성공 테스트 (smoke)
+![image](https://user-images.githubusercontent.com/87216027/166157397-58b644b3-241b-4df9-8bff-2176ddde8afb.png)
+
+- Load Test
 ---
 
 ### 3단계 - 로깅, 모니터링
