@@ -171,6 +171,10 @@ CPU  109% 정도 사용
   [스크립트 stress.js](https://github.com/dibtp1221/infra-subway-monitoring/blob/step2/k6/stress.js)
 ![image](https://user-images.githubusercontent.com/87216027/166163013-9326eece-5a7d-4a88-aa90-30a1bc16e206.png)
 ![image](https://user-images.githubusercontent.com/87216027/166163015-c7c15092-31fe-4781-bc3f-bc7d8c1f1e7b.png)
+
+Http Response Not 200 (수업 실습때 보여주셨던 거에서는 http req failed 자리) - status code 200 아닌 응답이 있으면 수집합니다.  
+stress test 에서 401 응답 1건, 500 응답 1건 발생했습니다.
+
 ```bash
 [ubuntu@LOAD]:~$ k6 run --out influxdb=http://localhost:8086/myk6db stress.js
 
