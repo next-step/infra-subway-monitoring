@@ -41,11 +41,11 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요  
 |       항목          | 지하철노선도 | 카카오 맵 | 네이버 맵 | 서울교통공사 |  
-|---------------------|------------- |----------|-----------|-------------|  
-| First Content Paint | 2.8s | 0.5s | 0.5s | 1.6s |  
-| Time To Interactive | 2.9s | 2.2s | 1.3s | 1.0s |  
-| First Content Paint | 2.8s | 0.5s | 0.5s | 1.6s |  
-| First Content Paint | 2.8s | 0.5s | 0.5s | 1.6s |  
+|---------------------|-------------|----------|-----------|-------------|  
+| First Content Paint |      2.8s   |   0.5s   |    0.5s   |     1.6s    |  
+| Time To Interactive |      2.9s   |   2.2s   |    1.3s   |     1.0s    |  
+| First Content Paint |      2.8s   |   0.5s   |    0.5s   |     1.6s    |  
+| First Content Paint |      2.8s   |   0.5s   |    0.5s   |     1.6s    |  
 
 
 
