@@ -67,45 +67,18 @@ public class LineController {
         return ResponseEntity.badRequest().build();
     }
 
-    static final Object left = new Object();
-    static final Object right = new Object();
     @GetMapping("/lock-left")
-    public String findLockLeft() throws InterruptedException {
-
-        synchronized (left) {
-            Thread.sleep(5000);
-            synchronized (right) {
-                System.out.println("left");
-            }
-        }
+    public String findLockLeft() {
         return "ok";
     }
 
     @GetMapping("/lock-right")
-    public String findLockRight() throws InterruptedException {
-        synchronized (right) {
-            Thread.sleep(5000);
-            synchronized (left) {
-                System.out.println("right");
-            }
-        }
+    public String findLockRight() {
         return "ok";
     }
 
     @GetMapping("/tan")
     public String generateStreams() {
-        double value = 0;
-        IntStream.of(100).parallel().map(extracted(value));
-        extracted(value);
         return "ok";
     }
-
-    private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
-        return null;
-    }
-
-
 }
