@@ -1,0 +1,41 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 200 max VUs, 4m30s max duration (incl. graceful stop):
+           * default: Up to 200 looping VUs for 4m0s over 8 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (4m30.0s), 000/200 VUs, 1141 complete and 9 interrupted iterations
+default ✓ [======================================] 009/200 VUs  4m0s
+
+     ✗ status is 200
+      ↳  95% — ✓ 3295 / ✗ 155
+
+     checks.........................: 95.50% ✓ 3295      ✗ 155
+     data_received..................: 5.6 MB 21 kB/s
+     data_sent......................: 530 kB 2.0 kB/s
+     errors.........................: 155    0.57407/s
+     http_req_blocked...............: avg=313.69µs min=1.14µs  med=2.1µs   max=32.41ms  p(90)=5.58µs  p(95)=4.99ms
+     http_req_connecting............: avg=64.94µs  min=0s      med=0s      max=5.77ms   p(90)=0s      p(95)=1.06ms
+   ✗ http_req_duration..............: avg=6.08s    min=1.44ms  med=2.12ms  max=33.06s   p(90)=30.01s  p(95)=31.43s
+       { expected_response:true }...: avg=4.96s    min=1.44ms  med=2.09ms  max=33.06s   p(90)=25.32s  p(95)=31.53s
+     http_req_failed................: 4.49%  ✓ 155       ✗ 3295
+     http_req_receiving.............: avg=54.06µs  min=18.13µs med=50.48µs max=892.98µs p(90)=79.7µs  p(95)=88.19µs
+     http_req_sending...............: avg=15.59µs  min=5.39µs  med=11.02µs max=488.94µs p(90)=26.75µs p(95)=44.06µs
+     http_req_tls_handshaking.......: avg=237.24µs min=0s      med=0s      max=15.8ms   p(90)=0s      p(95)=3.84ms
+     http_req_waiting...............: avg=6.08s    min=1.4ms   med=2.04ms  max=33.06s   p(90)=30.01s  p(95)=31.43s
+     http_reqs......................: 3450   12.777683/s
+     iteration_duration.............: avg=19.16s   min=1.25s   med=23.47s  max=34.07s   p(90)=33.09s  p(95)=33.51s
+     iterations.....................: 1141   4.225895/s
+     vus............................: 9      min=1       max=200
+     vus_max........................: 200    min=200     max=200
+
+ERRO[0271] some thresholds have failed
