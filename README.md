@@ -102,12 +102,15 @@ LCP 도 조금은 줄일 수 있을 거 같습니다.
         **웹 서버, 디비 서버**
     2. 목푯값 설정 (latency, throughput, 부하 유지기간)  
         DAU: **100,000**   
-        latency: **75ms**  
-        부하 유지기간: **15 minute**   
+        latency: **80ms**  
+        부하 유지기간: **10 minute**
+        피크 시간대 집중률: **10배**        
+        1명당 1일 요청수:  **10건**        
+
         throughput:
           1일 총 접속 수 : **1,000,000**  
           1일 평균 rps : **11.5**    
-          1일 최대 rps : **110**
+          1일 최대 rps : **115**
     3. 부하 테스트 시 저장될 데이터 건수 및 크기
         데이터 250,000 건 
     
@@ -159,4 +162,17 @@ LCP 도 조금은 줄일 수 있을 거 같습니다.
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+서버 : i-0ecf2d23c76752ac7 ( 3.39.147.40 )  
+
+#### Application Log
+/home/ubuntu/nextstep/infra-subway-monitoring/logs/file.log ( 회원가입, 로그인)  
+/home/ubuntu/nextstep/infra-subway-monitoring/logs/json.log ( 경로 검색 )
+
+#### Nginx Access Log
+/var/log/nginx/access_log  
+/var/log/nginx/error.log
+
+
+2. Cloudwatch 대시보드 URL을 알려주세요  
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=shineoov
+

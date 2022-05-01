@@ -7,10 +7,10 @@ export const RateContentCreated = new Rate('Content Created');
 export const options = {
     stages: [
         { duration: '2m', target: 10 },
-        { duration: '2m', target: 110 },
-        { duration: '2m', target: 330 },
-        { duration: '2m', target: 330 },
-        { duration: '2m', target: 110 },
+        { duration: '2m', target: 210 },
+        { duration: '2m', target: 550 },
+        { duration: '2m', target: 550 },
+        { duration: '2m', target: 210 },
         { duration: '2m', target: 50 },
         { duration: '2m', target: 10 },
         { duration: '1m', target: 0 },
