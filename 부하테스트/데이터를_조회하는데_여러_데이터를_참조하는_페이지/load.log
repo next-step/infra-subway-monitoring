@@ -9,33 +9,31 @@
      script: load.js
      output: InfluxDBv1 (http://localhost:8086)
 
-  scenarios: (100.00%) 1 scenario, 230 max VUs, 3m30s max duration (incl. graceful stop):
-           * default: Up to 230 looping VUs for 3m0s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 207 max VUs, 3m30s max duration (incl. graceful stop):
+           * default: Up to 207 looping VUs for 3m0s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (3m00.0s), 000/230 VUs, 3295 complete and 0 interrupted iterations
-default ↓ [======================================] 001/230 VUs  3m0s
+running (3m01.1s), 000/207 VUs, 3543 complete and 0 interrupted iterations
+default ↓ [======================================] 003/207 VUs  3m0s
 
-     ✗ status is 200
-      ↳  99% — ✓ 9884 / ✗ 1
+     ✓ status is 200
 
-     checks.........................: 99.98% ✓ 9884      ✗ 1
-     data_received..................: 15 MB  81 kB/s
-     data_sent......................: 1.4 MB 7.7 kB/s
-     errors.........................: 1      0.005554/s
-     http_req_blocked...............: avg=127.64µs min=903ns   med=2.09µs  max=28.82ms p(90)=4.99µs  p(95)=6.92µs
-     http_req_connecting............: avg=25.38µs  min=0s      med=0s      max=4.11ms  p(90)=0s      p(95)=0s
-   ✗ http_req_duration..............: avg=1.37s    min=1.43ms  med=4.76ms  max=30.02s  p(90)=8.58s   p(95)=9.11s
-       { expected_response:true }...: avg=1.37s    min=1.43ms  med=4.76ms  max=26.39s  p(90)=8.58s   p(95)=9.11s
-     http_req_failed................: 0.01%  ✓ 1         ✗ 9884
-     http_req_receiving.............: avg=51.25µs  min=14.71µs med=44.3µs  max=3.16ms  p(90)=79.3µs  p(95)=91.28µs
-     http_req_sending...............: avg=14.93µs  min=4.78µs  med=10.57µs max=511.7µs p(90)=26.25µs p(95)=34.99µs
-     http_req_tls_handshaking.......: avg=96.56µs  min=0s      med=0s      max=17.32ms p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=1.37s    min=1.4ms   med=4.7ms   max=30.02s  p(90)=8.58s   p(95)=9.11s
-     http_reqs......................: 9885   54.904037/s
-     iteration_duration.............: avg=5.13s    min=1.05s   med=2s      max=31.02s  p(90)=10.4s   p(95)=10.53s
-     iterations.....................: 3295   18.301346/s
-     vus............................: 1      min=1       max=230
-     vus_max........................: 230    min=230     max=230
+     checks.........................: 100.00% ✓ 10629     ✗ 0
+     data_received..................: 16 MB   86 kB/s
+     data_sent......................: 1.5 MB  8.1 kB/s
+     http_req_blocked...............: avg=106.53µs min=1.05µs  med=2.22µs  max=49.67ms p(90)=5µs     p(95)=6.17µs
+     http_req_connecting............: avg=19.06µs  min=0s      med=0s      max=5.12ms  p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=1.55s    min=1.27ms  med=2.14ms  max=17.55s  p(90)=8.09s   p(95)=8.9s
+       { expected_response:true }...: avg=1.55s    min=1.27ms  med=2.14ms  max=17.55s  p(90)=8.09s   p(95)=8.9s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 10629
+     http_req_receiving.............: avg=58.07µs  min=15.62µs med=50.39µs max=3.46ms  p(90)=83.04µs p(95)=97.36µs
+     http_req_sending...............: avg=16.57µs  min=5.35µs  med=12.16µs max=1.54ms  p(90)=26.34µs p(95)=34.02µs
+     http_req_tls_handshaking.......: avg=81.22µs  min=0s      med=0s      max=29.85ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=1.55s    min=1.23ms  med=2.07ms  max=17.55s  p(90)=8.09s   p(95)=8.9s
+     http_reqs......................: 10629   58.698406/s
+     iteration_duration.............: avg=5.65s    min=1.06s   med=3.68s   max=18.55s  p(90)=9.96s   p(95)=10.05s
+     iterations.....................: 3543    19.566135/s
+     vus............................: 1       min=1       max=207
+     vus_max........................: 207     min=207     max=207
 
-ERRO[0181] some thresholds have failed
+ERRO[0182] some thresholds have failed

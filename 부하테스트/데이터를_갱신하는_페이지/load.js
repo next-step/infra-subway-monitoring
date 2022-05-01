@@ -2,8 +2,8 @@ import http from 'k6/http';
 import {check, sleep} from 'k6';
 import { Counter } from "k6/metrics";
 
-const vUserOnAverageTraffic = (23 * (1 * 1)) / 1;
-const vUserOnMaxTraffic = (230 * (1 * 1)) / 1;
+const vUserOnAverageTraffic = (23 * (2 * 1)) / 1;
+const vUserOnMaxTraffic = (69 * (2 * 1)) / 1;
 
 export let options = {
     stages: [
@@ -30,7 +30,7 @@ export default function () {
     const editPageRes = http.get(`${BASE_URL}/members/me`,{
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb29uZ2phbW1AZW1haWwuY29tIiwiaWF0IjoxNjUxMzMyNzk1LCJleHAiOjE2NTEzMzYzOTV9.mDetzkTGL7f0bKZ7b6OALVkWxNgif4Xmgl0v-ZweWkA'
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb29uZ2phbW1AZW1haWwuY29tIiwiaWF0IjoxNjUxMzc0MTIwLCJleHAiOjE2NTEzNzc3MjB9.pqrJd7RHzzrLl00q1kwT6fN1p-c3cFUK9P2V4gLMK1o'
         },
     });
     const editPageOK = check(editPageRes, {'status is 200': (r) => r.status == 200});
@@ -43,7 +43,7 @@ export default function () {
     const editRes = http.put(`${BASE_URL}/members/me`, JSON.stringify(payload),  {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb29uZ2phbW1AZW1haWwuY29tIiwiaWF0IjoxNjUxMzMyNzk1LCJleHAiOjE2NTEzMzYzOTV9.mDetzkTGL7f0bKZ7b6OALVkWxNgif4Xmgl0v-ZweWkA'
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb29uZ2phbW1AZW1haWwuY29tIiwiaWF0IjoxNjUxMzc0MTIwLCJleHAiOjE2NTEzNzc3MjB9.pqrJd7RHzzrLl00q1kwT6fN1p-c3cFUK9P2V4gLMK1o'
         },
     });
     const editOK = check(editRes, {'status is 200': (r) => r.status == 200});

@@ -2,8 +2,8 @@ import http from 'k6/http';
 import {check, sleep} from 'k6';
 import { Counter } from "k6/metrics";
 
-const vUserOnAverageTraffic = (23 * (1 * 1)) / 1;
-const vUserOnMaxTraffic = (230 * (1 * 1)) / 1;
+const vUserOnAverageTraffic = (23 * (3 * 1)) / 1;
+const vUserOnMaxTraffic = (69 * (3 * 1)) / 1;
 
 export let options = {
     stages: [
