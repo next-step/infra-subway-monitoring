@@ -339,4 +339,14 @@ default ↓ [======================================] 001/300 VUs  40m0s
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+Application Log
+- /home/ubuntu/log/file.log
+- /home/ubuntu/log/json.log
+
+Nginx Log
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=gongzza
