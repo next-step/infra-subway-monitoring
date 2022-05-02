@@ -79,6 +79,8 @@ npm run dev
   - 1일 총 접속수 = 200,000
   - 1일 평균 rps = 2.31
   - 1일 최대 rps = 231
+  - T = (2 * 0.2) = 0.4
+  - VU = (231 * 0.4) / 2 = 46.2
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -93,9 +95,9 @@ export const options = {
   duration: '10s',
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    'retrieved stations': ['p(99)<1500'],
-    'retrieved paths': ['p(99)<1500'],
+    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.3s
+    'retrieved stations': ['p(99)<200'],
+    'retrieved paths': ['p(99)<200'],
   },
 };
 
@@ -110,7 +112,6 @@ export default function ()  {
   };
 
   const stations = http.get(`${BASE_URL}/stations`, params).json();
-
   check(stations, {
     'retrieved stations': (obj) => obj.length > 0,
   });
@@ -171,15 +172,15 @@ import { check, group, sleep, fail } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '10m', target: 231 },
-    { duration: '10m', target: 231 },
-    { duration: '10m', target: 0 }, // ramp-down to 0 users
+    { duration: '2m', target: 46 },
+    { duration: '2m', target: 46 },
+    { duration: '2m', target: 0 }, // ramp-down to 0 users
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    'retrieved stations': ['p(99)<1500'],
-    'retrieved paths': ['p(99)<1500'],
+    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.3s
+    'retrieved stations': ['p(99)<200'],
+    'retrieved paths': ['p(99)<200'],
   },
 };
 
@@ -254,16 +255,19 @@ import { check, group, sleep, fail } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '10m', target: 100 },
-    { duration: '10m', target: 200 },
-    { duration: '10m', target: 300 },
-    { duration: '10m', target: 0 }, // ramp-down to 0 users
+    { duration: '2m', target: 46 },
+    { duration: '2m', target: 46*5 },
+    { duration: '2m', target: 46*10 },
+    { duration: '2m', target: 46*20 },
+    { duration: '2m', target: 46*40 },
+    { duration: '2m', target: 46*80 },
+    { duration: '2m', target: 0 }, // ramp-down to 0 users
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    'retrieved stations': ['p(99)<1500'],
-    'retrieved paths': ['p(99)<1500'],
+    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
+    'retrieved stations': ['p(99)<200'],
+    'retrieved paths': ['p(99)<200'],
   },
 };
 
@@ -335,4 +339,14 @@ default ↓ [======================================] 001/300 VUs  40m0s
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+Application Log
+- /home/ubuntu/log/file.log
+- /home/ubuntu/log/json.log
+
+Nginx Log
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=gongzza
