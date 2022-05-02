@@ -73,7 +73,8 @@ npm run dev
    - 평균 rps : 1일 총접속수 (800,000) / 86,400 * 1.0 = 9.25 rps
    - 최대 rps : 1일 총접속수 (800,000) / 86,400 * 5.0 = 46.35 rps
    - latency : 75 ms
-   - T : 0.075 * 46.35 / 1 = 3.47
+   - T : 0.15 * 1 + 0 = 0.15
+   - VUser : 0.15 * 46.35 / 1 = 6.95
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -90,7 +91,7 @@ export let options = {
   duration: '10s',
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -155,7 +156,7 @@ export let options = {
     { duration: '2m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -215,11 +216,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '3m', target: 300 },
+    { duration: '1m', target: 100 },
+    { duration: '1m', target: 100 },
+    { duration: '1m', target: 200 },
+    { duration: '1m', target: 200 },
+    { duration: '1m', target: 300 },
+    { duration: '1m', target: 300 },
     { duration: '3m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -268,7 +274,7 @@ export let options = {
   duration: '10s',
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -346,7 +352,7 @@ export let options = {
     { duration: '2m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -405,11 +411,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '3m', target: 600 },
+    { duration: '1m', target: 200 },
+    { duration: '1m', target: 200 },
+    { duration: '1m', target: 400 },
+    { duration: '1m', target: 400 },
+    { duration: '1m', target: 600 },
+    { duration: '1m', target: 600 },
     { duration: '3m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -472,7 +483,7 @@ export let options = {
   duration: '10s',
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -546,7 +557,7 @@ export let options = {
     { duration: '2m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -601,11 +612,16 @@ import uuid from './uuid.js';
 
 export let options = {
   stages: [
-    { duration: '3m', target: 250 },
+    { duration: '1m', target: 85 },
+    { duration: '1m', target: 85 },
+    { duration: '1m', target: 170 },
+    { duration: '1m', target: 170 },
+    { duration: '1m', target: 255 },
+    { duration: '1m', target: 255 },
     { duration: '3m', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<150'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -657,4 +673,10 @@ default ✗ [======================================] 000/250 VUs  6m0s
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+/home/ubuntu/log : 스프링 로그
+/var/log/nginx : nginx 로그
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sangw0804
+
