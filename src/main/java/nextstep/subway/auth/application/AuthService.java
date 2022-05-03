@@ -21,7 +21,8 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
+        Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(
+                () -> new AuthorizationException("Login failed. Email not found. | email=" + request.getEmail()));
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());

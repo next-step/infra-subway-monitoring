@@ -24,6 +24,12 @@ dependencies {
 
 	// log
 	implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
+	implementation("net.logstash.logback:logstash-logback-encoder:6.1")
+
+	// metric
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 
 	// jgraph
 	implementation 'org.jgrapht:jgrapht-core:1.0.1'
@@ -35,7 +41,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	runtimeOnly 'com.h2database:h2'
-	implementation("mysql:mysql-connector-java")
+
+	// mysql
+	implementation 'mysql:mysql-connector-java:8.0.28'
+
 }
 
 test {
