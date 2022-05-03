@@ -35,6 +35,11 @@ dependencies {
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	// Spring Actuator metric 수집
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
+
 	runtimeOnly 'com.h2database:h2'
 	implementation("mysql:mysql-connector-java")
 }

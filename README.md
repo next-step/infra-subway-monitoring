@@ -100,15 +100,30 @@ npm run dev
 ### 요구사항
 #### 로그 설정하기
 - [x] Application Log 파일로 저장하기
-  - [x] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+  - [x] 회원가입, 로그인 등의 이벤트에 file 로깅을 설정
+    - [x] file.log 수집 확인
   - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
-- [] Nginx Access Log 설정하기
-
+    - [x] json.log 수집 확인 
+- [x] Nginx Access Log 설정하기
+  - 명령어 : sudo docker run -d -p 80:80 -p 443:443 --name proxy -v /var/log/nginx:/var/log/nginx nextstep/reverse-proxy:0.0.2
+  
 #### Cloudwatch로 모니터링
-- [] Cloudwatch로 로그 수집하기
-- [] Cloudwatch로 메트릭 수집하기
-- [] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] cloudwatch logs agent를 설치
+  - [x] Python 설치
+- [x] Cloudwatch로 로그 수집하기 
+  - [x] 로그수집 sudo vi /var/awslogs/etc/awslogs.conf
+- [x] Cloudwatch로 메트릭 수집하기
+  - [x] sudo vi /opt/aws/amazon-cloudwatch-agent/bin/config.json 생성
+- [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
+애플리케이션 로그
+/home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+/home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
+nginx 로그
+/var/log/nginx/access.log
+/var/log/nginx/error.log
+  
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=loopstudy-dashborad
