@@ -1,0 +1,51 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress_paths.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 600 max VUs, 6m40s max duration (incl. graceful stop):
+           * default: Up to 600 looping VUs for 6m10s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0153] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0159] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": read tcp 192.168.8.187:45940->3.37.203.177:443: read: connection reset by peer"
+WARN[0160] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0162] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0163] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": read tcp 192.168.8.187:46038->3.37.203.177:443: read: connection reset by peer"
+WARN[0164] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0164] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0164] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0165] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0165] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0166] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0166] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+
+running (2m45.8s), 000/600 VUs, 2231 complete and 276 interrupted iterations
+default ✗ [================>---------------------] 215/600 VUs  2m45.8s/6m10.0s
+
+     ✗ paths in successfully
+      ↳  95% — ✓ 2153 / ✗ 100
+
+     checks.........................: 95.56% ✓ 2153      ✗ 100
+     data_received..................: 9.0 MB 54 kB/s
+     data_sent......................: 612 kB 3.7 kB/s
+     http_req_blocked...............: avg=500.08µs min=0s      med=4.53µs  max=31.99ms  p(90)=3.02ms   p(95)=3.69ms
+     http_req_connecting............: avg=46.4µs   min=0s      med=0s      max=9.15ms   p(90)=272.45µs p(95)=300.38µs
+   ✗ http_req_duration..............: avg=7.19s    min=0s      med=2.52s   max=32.75s   p(90)=25.4s    p(95)=29.03s
+       { expected_response:true }...: avg=7.38s    min=47.26ms med=2.6s    max=32.75s   p(90)=25.4s    p(95)=28.91s
+     http_req_failed................: 4.43%  ✓ 100       ✗ 2153
+     http_req_receiving.............: avg=85.04µs  min=0s      med=76.68µs max=5.41ms   p(90)=104.52µs p(95)=119.67µs
+     http_req_sending...............: avg=28.58µs  min=0s      med=20.58µs max=489.16µs p(90)=49.51µs  p(95)=59µs
+     http_req_tls_handshaking.......: avg=431.75µs min=0s      med=0s      max=13.53ms  p(90)=2.65ms   p(95)=3.33ms
+     http_req_waiting...............: avg=7.19s    min=0s      med=2.52s   max=32.75s   p(90)=25.4s    p(95)=29.03s
+     http_reqs......................: 2253   13.585742/s
+     iteration_duration.............: avg=8.16s    min=1s      med=3.52s   max=33.47s   p(90)=26.3s    p(95)=29.89s
+     iterations.....................: 2231   13.45308/s
+     vus............................: 275    min=2       max=275
+     vus_max........................: 600    min=600     max=600
+
+ERRO[0167] some thresholds have failed

@@ -1,0 +1,38 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress_main.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 600 max VUs, 6m40s max duration (incl. graceful stop):
+           * default: Up to 600 looping VUs for 6m10s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (6m10.8s), 000/600 VUs, 108001 complete and 0 interrupted iterations
+default ↓ [======================================] 032/600 VUs  6m10s
+
+     ✓ main in successfully
+
+     checks.........................: 100.00% ✓ 108001     ✗ 0
+     data_received..................: 326 MB  878 kB/s
+     data_sent......................: 29 MB   79 kB/s
+     http_req_blocked...............: avg=18.53ms min=1.16µs   med=4.1µs   max=635.95ms p(90)=60.82ms  p(95)=93.66ms
+     http_req_connecting............: avg=1.08ms  min=0s       med=0s      max=267.89ms p(90)=577.53µs p(95)=2.27ms
+   ✓ http_req_duration..............: avg=11.62ms min=521.66µs med=3.39ms  max=728.61ms p(90)=20.59ms  p(95)=43.51ms
+       { expected_response:true }...: avg=11.62ms min=521.66µs med=3.39ms  max=728.61ms p(90)=20.59ms  p(95)=43.51ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 108001
+     http_req_receiving.............: avg=65.91µs min=12.31µs  med=34.67µs max=147.33ms p(90)=66.78µs  p(95)=118.29µs
+     http_req_sending...............: avg=2.9ms   min=4.69µs   med=20.75µs max=683.13ms p(90)=211.4µs  p(95)=1.61ms
+     http_req_tls_handshaking.......: avg=15.33ms min=0s       med=0s      max=586.62ms p(90)=50.66ms  p(95)=80.21ms
+     http_req_waiting...............: avg=8.65ms  min=476.07µs med=3.22ms  max=277.96ms p(90)=16.91ms  p(95)=34.28ms
+     http_reqs......................: 108001  291.269634/s
+     iteration_duration.............: avg=1.02s   min=1s       med=1s      max=1.79s    p(90)=1.07s    p(95)=1.11s
+     iterations.....................: 108001  291.269634/s
+     vus............................: 32      min=2        max=599
+     vus_max........................: 600     min=600      max=600
+
