@@ -1,0 +1,80 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load_paths.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 300 max VUs, 2m40s max duration (incl. graceful stop):
+           * default: Up to 300 looping VUs for 2m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0108] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0111] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0112] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0113] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0114] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0114] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0115] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0115] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0115] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0116] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0116] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0116] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0116] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0117] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0117] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0117] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0117] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": read tcp 192.168.8.187:45586->3.37.203.177:443: read: connection reset by peer"
+WARN[0117] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0118] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0119] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0120] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0120] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0120] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0121] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0121] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0122] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0122] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0122] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0123] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+WARN[0124] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": read tcp 192.168.8.187:46134->3.37.203.177:443: read: connection reset by peer"
+WARN[0125] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": read tcp 192.168.8.187:46182->3.37.203.177:443: read: connection reset by peer"
+WARN[0125] Request Failed                                error="Get \"https://loopstudy.p-e.kr/paths?source=1&target=3\": EOF"
+
+running (2m39.9s), 000/300 VUs, 1970 complete and 82 interrupted iterations
+default ↓ [======================================] 248/300 VUs  2m10s
+
+     ✗ paths in successfully
+      ↳  79% — ✓ 1565 / ✗ 412
+
+     checks.........................: 79.16% ✓ 1565      ✗ 412
+     data_received..................: 8.7 MB 54 kB/s
+     data_sent......................: 661 kB 4.1 kB/s
+     http_req_blocked...............: avg=1.28ms   min=0s      med=4.95µs  max=30.71ms  p(90)=3.61ms   p(95)=3.75ms
+     http_req_connecting............: avg=123.31µs min=0s      med=0s      max=13.52ms  p(90)=317.07µs p(95)=334.53µs
+   ✗ http_req_duration..............: avg=8.74s    min=0s      med=1.23s   max=39.52s   p(90)=31.77s   p(95)=36.31s
+       { expected_response:true }...: avg=10.65s   min=45.34ms med=1.79s   max=39.52s   p(90)=33.62s   p(95)=37.45s
+     http_req_failed................: 20.83% ✓ 412       ✗ 1565
+     http_req_receiving.............: avg=78.38µs  min=0s      med=76.56µs max=711.08µs p(90)=102.58µs p(95)=113.18µs
+     http_req_sending...............: avg=34.51µs  min=0s      med=27.7µs  max=345.26µs p(90)=60.04µs  p(95)=67.37µs
+     http_req_tls_handshaking.......: avg=1.12ms   min=0s      med=0s      max=18.31ms  p(90)=3.22ms   p(95)=3.36ms
+     http_req_waiting...............: avg=8.74s    min=0s      med=1.23s   max=39.51s   p(90)=31.77s   p(95)=36.31s
+     http_reqs......................: 1977   12.363782/s
+     iteration_duration.............: avg=9.64s    min=1s      med=2.23s   max=40.52s   p(90)=32.65s   p(95)=37.13s
+     iterations.....................: 1970   12.320005/s
+     vus............................: 11     min=2       max=299
+     vus_max........................: 300    min=300     max=300

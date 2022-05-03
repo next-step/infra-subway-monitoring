@@ -1,0 +1,1087 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress_stations.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 600 max VUs, 6m40s max duration (incl. graceful stop):
+           * default: Up to 600 looping VUs for 6m10s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0279] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0279] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0280] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0280] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0280] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0280] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0280] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0280] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0281] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0281] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0282] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0282] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0283] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0283] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0284] Request Failed                                error="Post \"https://loopstudy.p-e.kr/stations\": EOF"
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0284] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at stations in successfully (file:///home/ubuntu/script/stress_stations.js:36:46(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/script/stress_stations.js:35:20(47)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+^C
+running (4m43.4s), 000/600 VUs, 66245 complete and 472 interrupted iterations
+default ✗ [============================>---------] 065/600 VUs  4m43.4s/6m10.0s
+
+     ✗ stations in successfully
+      ↳  99% — ✓ 66560 / ✗ 150
+
+     checks.........................: 99.77% ✓ 66560      ✗ 150
+     data_received..................: 34 MB  119 kB/s
+     data_sent......................: 13 MB  47 kB/s
+     http_req_blocked...............: avg=420.03µs min=1.26µs   med=2.91µs  max=82.83ms p(90)=5.03µs  p(95)=9.26µs
+     http_req_connecting............: avg=69.17µs  min=0s       med=0s      max=35.3ms  p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=5.51ms   min=169.64µs med=4.74ms  max=88.8ms  p(90)=7.8ms   p(95)=9.97ms
+       { expected_response:true }...: avg=5.49ms   min=1.9ms    med=4.74ms  max=88.8ms  p(90)=7.77ms  p(95)=9.89ms
+     http_req_failed................: 0.22%  ✓ 150        ✗ 66560
+     http_req_receiving.............: avg=58.32µs  min=0s       med=38.45µs max=33.33ms p(90)=75.66µs p(95)=143.53µs
+     http_req_sending...............: avg=59.95µs  min=6.52µs   med=14.79µs max=50.96ms p(90)=45.23µs p(95)=117.47µs
+     http_req_tls_handshaking.......: avg=339.08µs min=0s       med=0s      max=77.67ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=5.39ms   min=137.45µs med=4.66ms  max=88.61ms p(90)=7.68ms  p(95)=9.82ms
+     http_reqs......................: 66710  235.408792/s
+     iteration_duration.............: avg=1s       min=658.48µs med=1s      max=1.15s   p(90)=1s      p(95)=1.01s
+     iterations.....................: 66245  233.767882/s
+     vus............................: 471    min=2        max=471
+     vus_max........................: 600    min=600      max=600
