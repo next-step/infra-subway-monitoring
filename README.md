@@ -78,12 +78,12 @@ Page Speed를 통해 경쟁사(카카오 맵, 네이버 맵, 서울교통공사)
   - load
   - stress
 
- - 데이터를 갱신하는 페이지(내 정보 수정 api) 
+ - 데이터를 갱신하는 페이지(로그인 api, 내 정보 수정 api) 
   - smoke
   - load
   - stress
 
- - 데이터를 조회하는 여러 데이터를 참조하는 페이지(경로 검색 api)
+ - 데이터를 조회하는 여러 데이터를 참조하는 페이지(로그인 api, 경로 검색 api)
   - smoke
   - load
   - stress
