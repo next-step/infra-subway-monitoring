@@ -1,0 +1,39 @@
+ubuntu@ip-192-168-47-32:~/nextstep/infra-subway-monitoring/k6$ k6 run stress.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 350 max VUs, 1m20s max duration (incl. graceful stop):
+           * default: Up to 350 looping VUs for 50s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (0m50.9s), 000/350 VUs, 11221 complete and 0 interrupted iterations
+default ↓ [======================================] 034/350 VUs  50s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 22442      ✗ 0
+     data_received..................: 9.5 MB  186 kB/s
+     data_sent......................: 5.9 MB  116 kB/s
+     http_req_blocked...............: avg=90.61µs  min=913ns   med=3.17µs  max=62.34ms  p(90)=5.29µs   p(95)=14.81µs
+     http_req_connecting............: avg=12.52µs  min=0s      med=0s      max=18.15ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=8.34ms   min=3.42ms  med=6.13ms  max=146.69ms p(90)=13.4ms   p(95)=18.19ms
+       { expected_response:true }...: avg=8.34ms   min=3.42ms  med=6.13ms  max=146.69ms p(90)=13.4ms   p(95)=18.19ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 22442
+     http_req_receiving.............: avg=153.99µs min=12.88µs med=44.55µs max=51.58ms  p(90)=168.54µs p(95)=420.17µs
+     http_req_sending...............: avg=159.75µs min=5.3µs   med=17.24µs max=69.29ms  p(90)=80.68µs  p(95)=330.85µs
+     http_req_tls_handshaking.......: avg=66.01µs  min=0s      med=0s      max=45.97ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=8.03ms   min=3.37ms  med=6ms     max=119.71ms p(90)=12.87ms  p(95)=17.39ms
+     http_reqs......................: 22442   440.685516/s
+     iteration_duration.............: avg=1.01s    min=1s      med=1.01s   max=1.24s    p(90)=1.02s    p(95)=1.03s
+     iterations.....................: 11221   220.342758/s
+     vus............................: 34      min=30       max=350
+     vus_max........................: 350     min=350      max=350
