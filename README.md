@@ -74,19 +74,19 @@ Page Speed를 통해 경쟁사(카카오 맵, 네이버 맵, 서울교통공사)
  
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
  - 접속빈도가 높은 페이지(로그인 api, 내 정보 조회 api)
-  - smoke
-  - load
-  - stress
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Stress_README.md)
 
  - 데이터를 갱신하는 페이지(로그인 api, 내 정보 수정 api) 
-  - smoke
-  - load
-  - stress
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Stress_README.md)
 
  - 데이터를 조회하는 여러 데이터를 참조하는 페이지(로그인 api, 경로 검색 api)
-  - smoke
-  - load
-  - stress
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Stress_README.md)
 
 ---
 
