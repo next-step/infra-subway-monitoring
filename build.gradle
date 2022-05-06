@@ -6,7 +6,7 @@ plugins {
 }
 
 ext {
-	git = org.ajoberstar.grgit.Grgit.open()
+	git = org.ajoberstar.grgit.Grgit.open(file('.'))
 	gitBranchName = git.branch.current.name.replaceAll(/(.*)\//, '')
 }
 
