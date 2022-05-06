@@ -175,8 +175,10 @@ CPU  109% 정도 사용
 Http Response Not 200 (수업 실습때 보여주셨던 거에서는 http req failed 자리) - status code 200 아닌 응답이 있으면 수집합니다.  
 stress test 에서 401 응답 1건, 500 응답 1건 발생했습니다.
 
-20220506) stress test 다시해서 추가
+20220506) stress.js 수정, stress test 다시해서 추가
 3600개 넘는 에러 발생했고 중간에 테스트 중단.
+![stresstest3-1](https://user-images.githubusercontent.com/87216027/167221465-e2b6f676-26a7-4a45-b187-3886efd79c18.png)
+![stresstest3-2](https://user-images.githubusercontent.com/87216027/167221473-69d13df6-54fe-4f59-a069-73cf9535a1a3.png)
 
 ```bash
 [ubuntu@LOAD]:~$ k6 run --out influxdb=http://localhost:8086/myk6db stress.js
@@ -219,9 +221,10 @@ default ✗ [===========================>----------] 082/410 VUs  13m45.8s/18m20
 
 ERRO[0827] some thresholds have failed
 ```
-WAS 서버 로그
+이때 WAS 서버 로그
 ```shell
 2022-05-06 19:38:05.011  WARN 2263 --- [nio-8080-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@64b83211 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+여러건 남아있음
 ```
 ---
 
