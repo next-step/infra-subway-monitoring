@@ -1,21 +1,22 @@
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-const RAMP_TIME = '3m';
+const RAMP_TIME = '2m';
 const MIDDLE_VUSER = 40;
 const MAX_VUSER = 82;
 
 export let options = {
     stages: [
-        { duration: RAMP_TIME, target: MIDDLE_VUSER / 8 },
-        { duration: RAMP_TIME, target: MIDDLE_VUSER / 4 },
         { duration: RAMP_TIME, target: MIDDLE_VUSER / 2 },
         { duration: RAMP_TIME, target: MIDDLE_VUSER * 1.5 },
         { duration: RAMP_TIME, target: MAX_VUSER },
         { duration: RAMP_TIME, target: MAX_VUSER * 1.5 },
         { duration: RAMP_TIME, target: MAX_VUSER * 2 },
+        { duration: RAMP_TIME, target: MAX_VUSER * 3 },
+        { duration: RAMP_TIME, target: MAX_VUSER * 5 },
+        { duration: RAMP_TIME, target: MAX_VUSER * 3 },
         { duration: RAMP_TIME, target: MIDDLE_VUSER },
-        { duration: '10s', target: 0 },
+        { duration: '20s', target: 0 },
     ],
     thresholds: {
         http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
