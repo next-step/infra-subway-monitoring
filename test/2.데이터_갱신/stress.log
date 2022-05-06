@@ -1,0 +1,1062 @@
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0093] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0093] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0094] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0094] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0095] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0095] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0096] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0096] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0097] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0097] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": read tcp 192.168.13.44:53834->52.78.66.68:443: read: connection reset by peer"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Put \"https://saerang.r-e.kr//members/me\": EOF"
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": read tcp 192.168.13.44:53850->52.78.66.68:443: read: connection reset by peer"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": read tcp 192.168.13.44:53862->52.78.66.68:443: read: connection reset by peer"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": read tcp 192.168.13.44:53864->52.78.66.68:443: read: connection reset by peer"
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Put \"https://saerang.r-e.kr//members/me\": EOF"
+WARN[0117] Request Failed                                error="Put \"https://saerang.r-e.kr//members/me\": EOF"
+WARN[0117] Request Failed                                error="Put \"https://saerang.r-e.kr//members/me\": EOF"
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Put \"https://saerang.r-e.kr//members/me\": EOF"
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0117] Request Failed                                error="Post \"https://saerang.r-e.kr//login/token\": EOF"
+ERRO[0117] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at logged in successfully (file:///home/ubuntu/modify/stress.js:41:44(4))
+	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
+	at file:///home/ubuntu/modify/stress.js:40:20(37)
+	at native  executor=ramping-vus scenario=default source=stacktrace
+
+running (2m10.9s), 000/600 VUs, 37774 complete and 0 interrupted iterations
+default ✓ [======================================] 000/600 VUs  2m10s
+
+     ✗ logged in successfully
+      ↳  99% — ✓ 37586 / ✗ 188
+     ✗ edit member
+      ↳  99% — ✓ 37581 / ✗ 5
+
+     checks.........................: 99.74% ✓ 75167      ✗ 193
+     data_received..................: 92 MB  701 kB/s
+     data_sent......................: 29 MB  225 kB/s
+     http_req_blocked...............: avg=5.93ms   min=0s       med=4.77µs  max=412.24ms p(90)=17.6ms   p(95)=31.85ms
+     http_req_connecting............: avg=821.94µs min=0s       med=0s      max=84.92ms  p(90)=1.18ms   p(95)=1.91ms
+   ✓ http_req_duration..............: avg=15.74ms  min=0s       med=9.7ms   max=709.34ms p(90)=24ms     p(95)=43.97ms
+       { expected_response:true }...: avg=15.73ms  min=5.25ms   med=9.69ms  max=709.34ms p(90)=23.9ms   p(95)=43.81ms
+     http_req_failed................: 0.25%  ✓ 193        ✗ 75167
+     http_req_receiving.............: avg=59.19µs  min=0s       med=35.73µs max=48.17ms  p(90)=59.05µs  p(95)=71.37µs
+     http_req_sending...............: avg=259.12µs min=0s       med=17.07µs max=76.3ms   p(90)=130.34µs p(95)=423.94µs
+     http_req_tls_handshaking.......: avg=5.05ms   min=0s       med=0s      max=411.31ms p(90)=15.67ms  p(95)=28.74ms
+     http_req_waiting...............: avg=15.42ms  min=0s       med=9.6ms   max=709.26ms p(90)=23.18ms  p(95)=41.88ms
+     http_reqs......................: 75360  575.925235/s
+     iteration_duration.............: avg=1.03s    min=527.49µs med=1.02s   max=1.84s    p(90)=1.08s    p(95)=1.15s
+     iterations.....................: 37774  288.680995/s
+     vus............................: 31     min=5        max=600
+     vus_max........................: 600    min=600      max=600

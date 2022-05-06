@@ -1,0 +1,39 @@
+ubuntu@ip-192-168-13-44:~/search$ k6 run --out influxdb=http://localhost:8086/myk6db smoke.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.6s), 0/1 VUs, 9 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ retrieved path
+     ✓ path res
+
+     checks.........................: 100.00% ✓ 18       ✗ 0
+     data_received..................: 24 kB   2.3 kB/s
+     data_sent......................: 2.6 kB  244 B/s
+     http_req_blocked...............: avg=1.01ms   min=4.19µs  med=6.19µs  max=18.09ms  p(90)=9.39µs   p(95)=2.72ms
+     http_req_connecting............: avg=54.77µs  min=0s      med=0s      max=985.9µs  p(90)=0s       p(95)=147.88µs
+   ✓ http_req_duration..............: avg=89.43ms  min=2.24ms  med=62.15ms max=432.5ms  p(90)=153.77ms p(95)=196.44ms
+       { expected_response:true }...: avg=89.43ms  min=2.24ms  med=62.15ms max=432.5ms  p(90)=153.77ms p(95)=196.44ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 18
+     http_req_receiving.............: avg=83.19µs  min=69.53µs med=83.01µs max=107.05µs p(90)=91µs     p(95)=95.86µs
+     http_req_sending...............: avg=19.76µs  min=11.1µs  med=17.84µs max=56.04µs  p(90)=26.44µs  p(95)=32.27µs
+     http_req_tls_handshaking.......: avg=885.15µs min=0s      med=0s      max=15.93ms  p(90)=0s       p(95)=2.38ms
+     http_req_waiting...............: avg=89.33ms  min=2.13ms  med=62.05ms max=432.4ms  p(90)=153.67ms p(95)=196.34ms
+     http_reqs......................: 18      1.691945/s
+     iteration_duration.............: avg=1.18s    min=1.12s   med=1.15s   max=1.45s    p(90)=1.21s    p(95)=1.33s
+     iterations.....................: 9       0.845972/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
