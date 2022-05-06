@@ -17,7 +17,7 @@
         <encoder>
             <charset>utf8</charset>
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} %thread %-5level %logger - %m%n
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
             </Pattern>
         </encoder>
     </appender>
