@@ -16,6 +16,7 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 public class AuthController {
 
     private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private AuthService authService;
 
@@ -28,6 +29,7 @@ public class AuthController {
         jsonLogger.info("{}",
                 kv("login_email", request.getEmail())
         );
+        fileLogger.info("login {}", request.getEmail());
         TokenResponse token = authService.login(request);
         return ResponseEntity.ok().body(token);
     }

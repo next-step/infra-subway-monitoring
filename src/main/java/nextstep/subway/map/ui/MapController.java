@@ -15,6 +15,7 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 public class MapController {
 
     private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private MapService mapService;
 
@@ -28,6 +29,7 @@ public class MapController {
                 kv("source", source),
                 kv("target", target)
         );
+        fileLogger.info("findPath {} {}", source, target);
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
 }
