@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.*;
 @Component
 public class LoggingAOP {
 
-    private static final Logger log = LoggerFactory.getLogger("file");
+    private static final Logger log = LoggerFactory.getLogger("json");
 
     @Around(value = "@annotation(nextstep.subway.common.Loggable)")
     public Object loggingBeforeAndAfter(ProceedingJoinPoint proceedingJoinPoint) {

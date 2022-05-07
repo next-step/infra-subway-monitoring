@@ -7,9 +7,9 @@
     <include resource="file-appender.xml" />
     <include resource="json-appender.xml" />
 
-    <logger name="console" level="TRACE" >
-        <appender-ref ref="console" />
-    </logger>
+<!--    <logger name="console" level="TRACE" >-->
+<!--        <appender-ref ref="console" />-->
+<!--    </logger>-->
 
     <logger name="file" level="INFO">
         <appender-ref ref="file"/>
