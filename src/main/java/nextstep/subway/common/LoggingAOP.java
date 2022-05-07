@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.*;
 @Component
 public class LoggingAOP {
 
-    private static final Logger log = LoggerFactory.getLogger("json");
+    private static final Logger log = LoggerFactory.getLogger("file");
 
     @Around(value = "@annotation(nextstep.subway.common.Loggable)")
     public Object loggingBeforeAndAfter(ProceedingJoinPoint proceedingJoinPoint) {
@@ -32,13 +32,13 @@ public class LoggingAOP {
         loggableString.append(names);
         loggableString.append("\r\n");
         loggableString.append(String.format("request : %s \r\n", Arrays.stream(proceedingJoinPoint.getArgs())
-                .map(s -> s.toString())
+                .map(s -> String.valueOf(s))
                 .collect(joining(","))));
 
         Object retVal = null;
         try {
             retVal = proceedingJoinPoint.proceed();
-            loggableString.append(String.format("response : %s", retVal));
+            loggableString.append(String.format("response : %s", retVal.toString()));
             if(!loggable.privacy()) {
                 log.info(loggableString.toString());
             }
