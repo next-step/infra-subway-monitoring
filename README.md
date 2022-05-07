@@ -98,8 +98,8 @@ T = (R * http_req_duration) (+ 1s)
 VUser = (목표 rps * T) / R
 
 R = 2
-T = 2 * 0.4 + 1 = 1.8
-VU = 100 * 1.8 / 2 = 90
+T = 2 * 2 + 1 = 5
+VU = 100 * 5 / 2 = 250
 ```
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요

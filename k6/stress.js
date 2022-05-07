@@ -3,17 +3,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '5s', target: 150 },
-        { duration: '10s', target: 150 },
-        { duration: '5s', target: 250 },
-        { duration: '10s', target: 250 },
-        { duration: '5s', target: 350 },
-        { duration: '10s', target: 350 },
-        { duration: '5s', target: 0 },
+        { duration: '1m', target: 100 },
+        { duration: '1m', target: 150 },
+        { duration: '1m', target: 200 },
+        { duration: '1m', target: 250 },
+        { duration: '1m', target: 350 },
+        { duration: '1m', target: 400 },
+        { duration: '10s', target: 0 },
     ],
     thresholds: {
         http_req_duration: ['p(95)<2000'],
-        'logged in successfully': ['p(95)<2000']
     },
 };
 
