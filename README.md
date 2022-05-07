@@ -175,57 +175,68 @@ CPU  109% 정도 사용
 Http Response Not 200 (수업 실습때 보여주셨던 거에서는 http req failed 자리) - status code 200 아닌 응답이 있으면 수집합니다.  
 stress test 에서 401 응답 1건, 500 응답 1건 발생했습니다.
 
+20220506) stress.js 수정, stress test 다시해서 추가
+3600개 넘는 에러 발생했고 중간에 테스트 중단.
+![stresstest3-1](https://user-images.githubusercontent.com/87216027/167221465-e2b6f676-26a7-4a45-b187-3886efd79c18.png)
+![stresstest3-2](https://user-images.githubusercontent.com/87216027/167221473-69d13df6-54fe-4f59-a069-73cf9535a1a3.png)
+
 ```bash
 [ubuntu@LOAD]:~$ k6 run --out influxdb=http://localhost:8086/myk6db stress.js
 
-          /\      |‾‾| /‾‾/   /‾‾/
-     /\  /  \     |  |/  /   /  /
-    /  \/    \    |     (   /   ‾‾\
-   /          \   |  |\  \ |  (‾)  |
-  / __________ \  |__| \__\ \_____/ .io
+WARN[0826] Request Failed                                error="Get \"https://dibtp1221.kro.kr//paths?source=24&target=12\": EOF"
+ERRO[0826] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///home/ubuntu/stress.js:60:31(84)
+        at native  executor=ramping-vus scenario=default source=stacktrace
+WARN[0826] Request Failed                                error="Post \"https://dibtp1221.kro.kr//login/token\": EOF"
+ERRO[0826] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+running at reflect.methodValueCall (native)
+default at file:///home/ubuntu/stress.js:44:30(29)
+        at native  executor=ramping-vus scenario=default source=stacktrace
 
-  execution: local
-     script: stress.js
-     output: InfluxDBv1 (http://localhost:8086)
+running (13m45.8s), 000/410 VUs, 72725 complete and 390 interrupted iterations
+default ✗ [===========================>----------] 082/410 VUs  13m45.8s/18m20.0s
 
-  scenarios: (100.00%) 1 scenario, 164 max VUs, 24m40s max duration (incl. graceful stop):
-           * default: Up to 164 looping VUs for 24m10s over 9 stages (gracefulRampDown: 30s, gracefulStop: 30s)
-
-
-running (24m15.7s), 000/164 VUs, 4842 complete and 17 interrupted iterations
-default ↓ [======================================] 027/164 VUs  24m10s
-
-     ✗ logged in successfully
-      ↳  99% — ✓ 4858 / ✗ 1
-     ✗ retrieved member
-      ↳  99% — ✓ 4858 / ✗ 1
+     ✓ logged in successfully
+     ✓ retrieved member
      ✓ correct path
 
-     checks.........................: 99.98% ✓ 14561     ✗ 2
-     data_received..................: 20 MB  14 kB/s
-     data_sent......................: 3.3 MB 2.2 kB/s
-     http_req_blocked...............: avg=61.88µs min=1.03µs  med=3.37µs  max=46.44ms  p(90)=5.32µs  p(95)=6.21µs
-     http_req_connecting............: avg=8.96µs  min=0s      med=0s      max=991.34µs p(90)=0s      p(95)=0s
-   ✗ http_req_duration..............: avg=5.76s   min=4.83ms  med=4.71s   max=30.05s   p(90)=13.38s  p(95)=16.43s
-       { expected_response:true }...: avg=5.76s   min=4.83ms  med=4.71s   max=27.77s   p(90)=13.38s  p(95)=16.43s
-     http_req_failed................: 0.01%  ✓ 2         ✗ 14561
-     http_req_receiving.............: avg=79.15µs min=18.45µs med=71.58µs max=5.67ms   p(90)=99.5µs  p(95)=116.55µs
-     http_req_sending...............: avg=23.09µs min=5.56µs  med=20.2µs  max=4ms      p(90)=33.22µs p(95)=42.51µs
-     http_req_tls_handshaking.......: avg=43.13µs min=0s      med=0s      max=14.91ms  p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=5.76s   min=4.76ms  med=4.71s   max=30.05s   p(90)=13.38s  p(95)=16.43s
-     http_reqs......................: 14563  10.003988/s
-     iteration_duration.............: avg=18.24s  min=1.26s   med=17.31s  max=1m5s     p(90)=39.5s   p(95)=42.73s
-     iterations.....................: 4842   3.32619/s
-     vus............................: 6      min=1       max=164
-     vus_max........................: 164    min=164     max=164
+     checks.........................: 100.00% ✓ 208405     ✗ 0
+     data_received..................: 327 MB  396 kB/s
+     data_sent......................: 51 MB   62 kB/s
+     http_req_blocked...............: avg=1.3ms    min=0s     med=2.17µs  max=290.29ms p(90)=4.86µs   p(95)=3.95ms
+     http_req_connecting............: avg=454.99µs min=0s     med=0s      max=144.16ms p(90)=0s       p(95)=653.77µs
+   ✗ http_req_duration..............: avg=152.33ms min=0s     med=55.77ms max=6.43s    p(90)=434.27ms p(95)=561.14ms
+       { expected_response:true }...: avg=154.92ms min=3.38ms med=58.44ms max=6.43s    p(90)=438.52ms p(95)=564.17ms
+     http_req_failed................: 1.73%   ✓ 3681       ✗ 208405
+     http_req_receiving.............: avg=82.94µs  min=0s     med=41.65µs max=79.5ms   p(90)=77.01µs  p(95)=102.06µs
+     http_req_sending...............: avg=162.23µs min=0s     med=13.16µs max=339.26ms p(90)=34.46µs  p(95)=58.92µs
+     http_req_tls_handshaking.......: avg=911.42µs min=0s     med=0s      max=216.05ms p(90)=0s       p(95)=3.18ms
+     http_req_waiting...............: avg=152.09ms min=0s     med=55.53ms max=6.43s    p(90)=434.14ms p(95)=560.48ms
+     http_reqs......................: 212086  256.826444/s
+     iteration_duration.............: avg=1.39s    min=1.24ms med=1.11s   max=10.59s   p(90)=2.24s    p(95)=2.64s
+     iterations.....................: 72725   88.066648/s
+     vus............................: 389     min=1        max=389
+     vus_max........................: 410     min=410      max=410
 
-ERRO[1458] some thresholds have failed
+ERRO[0827] some thresholds have failed
 ```
-CPU 최대 120% 정도까지 사용
-
+이때 WAS 서버 로그
+```shell
+2022-05-06 19:38:05.011  WARN 2263 --- [nio-8080-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@64b83211 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+여러건 남아있음
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+nginx 192.168.123.78
+   /var/log/nginx/access.log
+   /var/log/nginx/error.log
+   
+app 192.168.123.60
+   /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+   /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dibtp1221
