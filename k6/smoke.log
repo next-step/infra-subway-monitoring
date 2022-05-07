@@ -1,0 +1,39 @@
+ubuntu@ip-192-168-47-32:~/nextstep/infra-subway-monitoring/k6$ k6 run smoke.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.2s), 0/1 VUs, 10 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 20       ✗ 0
+     data_received..................: 12 kB   1.1 kB/s
+     data_sent......................: 5.5 kB  543 B/s
+     http_req_blocked...............: avg=1.48ms   min=2.14µs  med=3.88µs  max=29.6ms   p(90)=5.43µs  p(95)=1.48ms
+     http_req_connecting............: avg=27.13µs  min=0s      med=0s      max=542.68µs p(90)=0s      p(95)=27.13µs
+   ✓ http_req_duration..............: avg=7.97ms   min=5.64ms  med=6.05ms  max=35.23ms  p(90)=8.5ms   p(95)=12.17ms
+       { expected_response:true }...: avg=7.97ms   min=5.64ms  med=6.05ms  max=35.23ms  p(90)=8.5ms   p(95)=12.17ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 20
+     http_req_receiving.............: avg=70.36µs  min=48.36µs med=69.21µs max=99.62µs  p(90)=94.02µs p(95)=99.01µs
+     http_req_sending...............: avg=22.55µs  min=12.37µs med=20.45µs max=76.24µs  p(90)=34.6µs  p(95)=43.67µs
+     http_req_tls_handshaking.......: avg=662.37µs min=0s      med=0s      max=13.24ms  p(90)=0s      p(95)=662.37µs
+     http_req_waiting...............: avg=7.87ms   min=5.55ms  med=5.96ms  max=35.06ms  p(90)=8.43ms  p(95)=12.06ms
+     http_reqs......................: 20      1.960767/s
+     iteration_duration.............: avg=1.01s    min=1.01s   med=1.01s   max=1.07s    p(90)=1.02s   p(95)=1.04s
+     iterations.....................: 10      0.980384/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
