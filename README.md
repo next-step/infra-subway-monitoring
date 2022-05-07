@@ -60,9 +60,33 @@ Page Speed를 통해 경쟁사(카카오 맵, 네이버 맵, 서울교통공사)
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요  
+ - 대상 시스템 범위 
+   - Web Server, Web Application Server, DB Server  
+ - 목표값 설정  
+   - 1일 사용자 수(DAU) : 1000만(네이버 지도, T맵 참고)  
+   - 1명당 1일 평균수 : 출퇴근(2) x 지하철 역 목록 조회 + 경로검색(2) = 4  
+   - 1일 총 접속 수 : 1000만 x 4 = 4000만  
+   - 1일 평균 rps : 4000만 / 86400 = 약 463 rps  
+   - 1일 최대 rps : 1일 평균 rps x (최대 트래픽 / 평균 트래픽) = 463 rps x 5(최대 트래픽을 5배로 봄) = 2315 rps  
+ - 부하 테스트 시 저장될 데이터 건수 및 크기  
+   - 부하 테스트 시 저장할 데이터가 존재하지 않음  
+ 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+ - 접속빈도가 높은 페이지(로그인 api, 내 정보 조회 api)
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/frequent/Stress_README.md)
+
+ - 데이터를 갱신하는 페이지(로그인 api, 내 정보 수정 api) 
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/updated/Stress_README.md)
+
+ - 데이터를 조회하는 여러 데이터를 참조하는 페이지(로그인 api, 경로 검색 api)
+  - [smoke](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Smoke_README.md)
+  - [load](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Load_README.md)
+  - [stress](https://github.com/exemeedys/infra-subway-monitoring/blob/step2/test/join/Stress_README.md)
 
 ---
 
