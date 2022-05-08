@@ -5,7 +5,10 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -18,9 +21,13 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
+        fileLogger.info("[REQUEST] Sign Up : {}", request.getEmail());
         MemberResponse member = memberService.createMember(request);
+        fileLogger.info("[SUCCESS] Sign Up : {}", member.getEmail());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
