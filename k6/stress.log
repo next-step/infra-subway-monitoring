@@ -9,7 +9,6 @@ ubuntu@ip-192-168-47-32:~/nextstep/infra-subway-monitoring/k6$ k6 run stress.js
   execution: local
      script: stress.js
      output: -
-
   scenarios: (100.00%) 1 scenario, 400 max VUs, 6m40s max duration (incl. graceful stop):
            * default: Up to 400 looping VUs for 6m10s over 7 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
