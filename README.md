@@ -73,12 +73,15 @@ npm run dev
    - 접속 빈도가 높은 페이지 (메인페이지)
      - [load 테스트](./scripts/접속빈도가-높은-페이지/load.js)
      - [smoke 테스트](./scripts/접속빈도가-높은-페이지/smoke.js)
+     - [stress 테스트](./scripts/접속빈도가-높은-페이지/stress.js)
    - 데이터 참조 조회하는 페이지
      - [load 테스트](./scripts/데이터-참조-조회하는-페이지/load.js)
      - [smoke 테스트](./scripts/데이터-참조-조회하는-페이지/smoke.js)
+     - [stress 테스트](./scripts/데이터-참조-조회하는-페이지/stress.js)
    - 데이터 갱신하는 페이지
      - [load 테스트](./scripts/데이터-갱신하는-페이지/load.js)
      - [smoke 테스트](./scripts/데이터-갱신하는-페이지/smoke.js)
+     - [stress 테스트](./scripts/데이터-갱신하는-페이지/stress.js)
 ---
 
 ### 3단계 - 로깅, 모니터링
