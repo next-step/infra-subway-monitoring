@@ -1,0 +1,31 @@
+
+
+# 부하발생
+WARN[0167] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": dial tcp 52.78.197.234:443: socket: too many open files"
+WARN[0167] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": dial tcp 52.78.197.234:443: socket: too many open files"
+WARN[0167] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": dial tcp 52.78.197.234:443: socket: too many open files"
+WARN[0167] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": dial tcp 52.78.197.234:443: socket: too many open files"
+WARN[0186] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": EOF"
+WARN[0186] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": EOF"
+WARN[0186] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": EOF"
+WARN[0186] Request Failed                                error="Get \"https://jiwonkwon-infra.p-e.kr/\": EOF"
+
+running (3m30.9s), 0000/1400 VUs, 110485 complete and 0 interrupted iterations
+default ✓ [======================================] 0000/1400 VUs  3m30s
+
+     data_received..................: 547 MB 2.6 MB/s
+     data_sent......................: 50 MB  238 kB/s
+     http_req_blocked...............: avg=326.48ms min=0s      med=191.32ms max=4.03s    p(90)=786.97ms p(95)=820.22ms
+     http_req_connecting............: avg=19.72ms  min=0s      med=1.4ms    max=3.17s    p(90)=26.61ms  p(95)=67.97ms
+   ✓ http_req_duration..............: avg=18.87ms  min=0s      med=9.55ms   max=823.98ms p(90)=38.15ms  p(95)=77.18ms
+       { expected_response:true }...: avg=19.89ms  min=809.6µs med=9.99ms   max=823.98ms p(90)=40.22ms  p(95)=79.57ms
+     http_req_failed................: 5.75%  ✓ 6360       ✗ 104125
+     http_req_receiving.............: avg=125.93µs min=0s      med=35.13µs  max=174.22ms p(90)=57.99µs  p(95)=72.03µs
+     http_req_sending...............: avg=3.58ms   min=0s      med=111.49µs max=782.14ms p(90)=6.57ms   p(95)=17.99ms
+     http_req_tls_handshaking.......: avg=305.92ms min=0s      med=178.89ms max=1.68s    p(90)=778.86ms p(95)=802.44ms
+     http_req_waiting...............: avg=15.16ms  min=0s      med=8.77ms   max=346.25ms p(90)=30.11ms  p(95)=55.65ms
+     http_reqs......................: 110485 523.764977/s
+     iteration_duration.............: avg=1.34s    min=1s      med=1.2s     max=5.24s    p(90)=1.8s     p(95)=1.87s
+     iterations.....................: 110485 523.764977/s
+     vus............................: 13     min=4        max=1400
+     vus_max........................: 1400   min=1400     max=1400
