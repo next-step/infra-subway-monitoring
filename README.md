@@ -178,20 +178,19 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
     
     - 접속 빈도가 높은 페이지 (메인 페이지)
-        - [smoke](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-smoke.js)
-        - [load](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-load.js)
-        - [stress](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-stress.js)
+        - [smoke](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-smoke.js) [결과](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/smoke-result.txt)
+        - [load](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-load.js) [결과](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/load-result.txt)
+        - [stress](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/main-page-stress.js) [결과](src/main/resources/부하테스트/접속량_빈도가_높은_페이지/stress-result.txt)
 
     - 데이터를 갱신하는 페이지 (노선수정 페이지)
-        - [smoke](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-smoke.js)
-        - [load](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-load.js)
-        - [stress](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-stress.js)
+        - [smoke](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-smoke.js) [결과](src/main/resources/부하테스트/데이터를_갱신하는_페이지/smoke-result.txt)
+        - [load](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-load.js) [결과](src/main/resources/부하테스트/데이터를_갱신하는_페이지/load-result.txt)
+        - [stress](src/main/resources/부하테스트/데이터를_갱신하는_페이지/lines-manage-page-stress.js) [결과]()
 
     - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 ( 경로 검색 페이지 )
-        - [smoke](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-smoke.js)
-        - [load](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-load.js)
-        - [stress](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-stress.js)
-
+        - [smoke](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-smoke.js) [결과](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/smoke-result.txt)
+        - [load](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-load.js) [결과](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/load-result.txt)
+        - [stress](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/path-search-page-stress.js) [결과](src/main/resources/부하테스트/데이터를_조회하는데_여러_데이터를_참조하는_페이지/stress-result.txt)
 ---
 
 ### 3단계 - 로깅, 모니터링

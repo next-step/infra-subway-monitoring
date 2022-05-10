@@ -1,0 +1,38 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: main-page-load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 22 max VUs, 40m30s max duration (incl. graceful stop):
+           * default: Up to 22 looping VUs for 40m0s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (40m00.6s), 00/22 VUs, 27438 complete and 0 interrupted iterations
+default ✓ [======================================] 00/22 VUs  40m0s
+
+     ✓ logged in successfully
+     ✓ retrieved member
+
+     checks.........................: 100.00% ✓ 54876     ✗ 0
+     data_received..................: 20 MB   8.2 kB/s
+     data_sent......................: 15 MB   6.1 kB/s
+     http_req_blocked...............: min=852ns   avg=12.86µs med=2.76µs  p(99)=20.66µs  p(90)=5.15µs  max=44.85ms count=54876
+     http_req_connecting............: min=0s      avg=1.15µs  med=0s      p(99)=0s       p(90)=0s      max=2.21ms  count=54876
+   ✓ http_req_duration..............: min=4.83ms  avg=8.07ms  med=7.6ms   p(99)=16.35ms  p(90)=10.19ms max=67.77ms count=54876
+       { expected_response:true }...: min=4.83ms  avg=8.07ms  med=7.6ms   p(99)=16.35ms  p(90)=10.19ms max=67.77ms count=54876
+     http_req_failed................: 0.00%   ✓ 0         ✗ 54876
+     http_req_receiving.............: min=13.71µs avg=58.65µs med=45.95µs p(99)=282.74µs p(90)=86.38µs max=9.15ms  count=54876
+     http_req_sending...............: min=4.92µs  avg=25.9µs  med=15.34µs p(99)=219.67µs p(90)=35.37µs max=9.75ms  count=54876
+     http_req_tls_handshaking.......: min=0s      avg=5.21µs  med=0s      p(99)=0s       p(90)=0s      max=12.9ms  count=54876
+     http_req_waiting...............: min=4.78ms  avg=7.99ms  med=7.52ms  p(99)=16.29ms  p(90)=10.11ms max=67.58ms count=54876
+     http_reqs......................: 54876   22.859479/s
+     iteration_duration.............: min=1.01s   avg=1.01s   med=1.01s   p(99)=1.03s    p(90)=1.02s   max=1.11s   count=27438
+     iterations.....................: 27438   11.429739/s
+     vus............................: 1       min=1       max=22
+     vus_max........................: 22      min=22      max=22

@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: lines-manage-page-smoke.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+
+running (10.7s), 0/1 VUs, 9 complete and 0 interrupted iterations
+default ✗ [======================================] 1 VUs  10s
+
+     ✓ logged in successfully
+     ✓ get lines request successful
+     ✓ update lines is successful
+
+     checks.........................: 100.00% ✓ 36       ✗ 0
+     data_received..................: 803 kB  75 kB/s
+     data_sent......................: 12 kB   1.2 kB/s
+     http_req_blocked...............: min=1.96µs  avg=802.76µs med=2.98µs   p(99)=18.7ms   p(90)=5.79µs   max=28.76ms  count=36
+     http_req_connecting............: min=0s      avg=24.97µs  med=0s       p(99)=584.4µs  p(90)=0s       max=899.08µs count=36
+   ✓ http_req_duration..............: min=6.71ms  avg=45.95ms  med=38.71ms  p(99)=129.82ms p(90)=101.88ms max=131.47ms count=36
+       { expected_response:true }...: min=6.71ms  avg=45.95ms  med=38.71ms  p(99)=129.82ms p(90)=101.88ms max=131.47ms count=36
+     http_req_failed................: 0.00%   ✓ 0        ✗ 36
+     http_req_receiving.............: min=49.58µs avg=429.75µs med=109.73µs p(99)=2.5ms    p(90)=799.08µs max=3.39ms   count=36
+     http_req_sending...............: min=10.93µs avg=25.14µs  med=23.52µs  p(99)=66.36µs  p(90)=37.07µs  max=80.3µs   count=36
+     http_req_tls_handshaking.......: min=0s      avg=414.63µs med=0s       p(99)=9.7ms    p(90)=0s       max=14.92ms  count=36
+     http_req_waiting...............: min=6.62ms  avg=45.5ms   med=38.55ms  p(99)=128.16ms p(90)=101.44ms max=130.75ms count=36
+     http_reqs......................: 36      3.365825/s
+     iteration_duration.............: min=1.14s   avg=1.18s    med=1.15s    p(99)=1.29s    p(90)=1.27s    max=1.29s    count=9
+     iterations.....................: 9       0.841456/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
