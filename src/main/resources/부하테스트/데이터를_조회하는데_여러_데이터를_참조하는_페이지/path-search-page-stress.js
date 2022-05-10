@@ -9,13 +9,13 @@ const BASE_URL = 'https://devrunner21.kro.kr/';
 export let options = {
     stages: [
         { duration: '5m', target: 100 }, // 부하를 서서히 늘림
-        { duration: '5m', target: 100 }, // 해당 부하를 유지
-        { duration: '5m', target: 200 }, // 부하를 서서히 늘림
         { duration: '5m', target: 200 }, // 해당 부하를 유지
         { duration: '5m', target: 300 }, // 부하를 서서히 늘림
-        { duration: '5m', target: 300 }, // 해당 부하를 유지
-        { duration: '5m', target: 400 }, // 부하를 서서히 늘림
         { duration: '5m', target: 400 }, // 해당 부하를 유지
+        { duration: '5m', target: 500 }, // 부하를 서서히 늘림
+        { duration: '5m', target: 600 }, // 해당 부하를 유지
+        { duration: '5m', target: 700 }, // 부하를 서서히 늘림
+        { duration: '5m', target: 800 }, // 해당 부하를 유지
     ],
     thresholds: {
         http_req_duration: ['p(99)<200'], // 왕복 200ms(latency를 100ms 로 세팅)
