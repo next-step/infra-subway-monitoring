@@ -165,8 +165,10 @@ load.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
+
 const aveTraffic = 35;
 const maxTraffic = 210;
+
 
 export let options = {
     stages: [
@@ -174,6 +176,7 @@ export let options = {
         {duration: '1m', target: maxTraffic},
         {duration: '2m', target: aveTraffic},
         {duration: '2m', target: maxTraffic},
+
     ],
     thresholds: {
         http_req_duration: ['p(99)<200'], 
@@ -207,6 +210,7 @@ execution: local
      script: load.js
      output: -
 
+
   scenarios: (100.00%) 1 scenario, 210 max VUs, 6m30s max duration (incl. graceful stop):
            * default: Up to 210 looping VUs for 6m0s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
@@ -234,6 +238,7 @@ default ✗ [======================================] 000/210 VUs  6m0s
      vus............................: 21      min=1       max=210
      vus_max........................: 210     min=210     max=210
 
+
 ERRO[0425] some thresholds have failed
 ```
 
@@ -241,6 +246,7 @@ stress.js
 ```
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
+
 
 const aveTraffic = 70;
 const maxTraffic = 420;
@@ -279,6 +285,7 @@ export default function ()  {
 ```
 stress.js 결과
 ```
+
 running (6m20.5s), 000/420 VUs, 86704 complete and 3 interrupted iterations
 default ✓ [======================================] 000/420 VUs  6m0s
 
@@ -301,7 +308,6 @@ default ✓ [======================================] 000/420 VUs  6m0s
      iterations.....................: 86704   227.86642/s
      vus............................: 20      min=1        max=419
      vus_max........................: 420     min=420      max=420
-
 
 ERRO[0440] some thresholds have failed
 ```
