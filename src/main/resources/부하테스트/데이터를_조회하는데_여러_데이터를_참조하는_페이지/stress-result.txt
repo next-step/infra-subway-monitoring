@@ -1,0 +1,40 @@
+p 192.168.100.27:58254->52.79.89.35:443: read: connection reset by peer"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": read tcp 192.168.100.27:58274->52.79.89.35:443: read: connection reset by peer"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": read tcp 192.168.100.27:58284->52.79.89.35:443: read: connection reset by peer"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//stations\": EOF"
+WARN[2401] Request Failed                                error="Get \"https://devrunner21.kro.kr//paths?source=84&target=105\": read tcp 192.168.100.27:58296->52.79.89.35:443: read: connection reset by peer"
+
+running (40m30.0s), 000/800 VUs, 444958 complete and 115 interrupted iterations
+default ✓ [======================================] 044/800 VUs  40m0s
+
+     ✗ get stations request successful
+      ↳  2% — ✓ 9479 / ✗ 435588
+     ✗ search paths is successful
+      ↳  2% — ✓ 10624 / ✗ 434341
+
+     checks.........................: 2.25%  ✓ 20103      ✗ 869929
+     data_received..................: 1.9 GB 788 kB/s
+     data_sent......................: 322 MB 132 kB/s
+     http_req_blocked...............: min=0s      avg=1.64ms   med=0s       p(99)=12.49ms  p(90)=5.12ms   max=131.49ms count=890032
+     http_req_connecting............: min=0s      avg=1.81ms   med=852.44µs p(99)=17.96ms  p(90)=3.12ms   max=170.64ms count=890032
+   ✗ http_req_duration..............: min=0s      avg=576.56ms med=0s       p(99)=30.4s    p(90)=1.05ms   max=37.14s   count=890032
+       { expected_response:true }...: min=90.19ms avg=25.38s   med=30.19s   p(99)=32.32s   p(90)=31.52s   max=33.2s    count=20103
+     http_req_failed................: 97.74% ✓ 869929     ✗ 20103
+     http_req_receiving.............: min=0s      avg=40.36µs  med=0s       p(99)=828.72µs p(90)=82.87µs  max=61.79ms  count=890032
+     http_req_sending...............: min=0s      avg=36.13µs  med=0s       p(99)=346.25µs p(90)=55.81µs  max=45.35ms  count=890032
+     http_req_tls_handshaking.......: min=0s      avg=1.34ms   med=0s       p(99)=10.64ms  p(90)=4.15ms   max=129.62ms count=890032
+     http_req_waiting...............: min=0s      avg=576.48ms med=0s       p(99)=30.39s   p(90)=899.92µs max=37.14s   count=890032
+     http_reqs......................: 890032 366.266045/s
+     iteration_duration.............: min=1s      avg=2.15s    med=1s       p(99)=33.19s   p(90)=1.02s    max=1m9s     count=444958
+     iterations.....................: 444958 183.109154/s
+     vus............................: 44     min=1        max=799
+     vus_max........................: 800    min=800      max=800

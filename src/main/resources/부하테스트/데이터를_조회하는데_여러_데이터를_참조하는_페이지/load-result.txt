@@ -1,0 +1,38 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: path-search-page-load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 22 max VUs, 40m30s max duration (incl. graceful stop):
+           * default: Up to 22 looping VUs for 40m0s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (40m00.3s), 00/22 VUs, 14119 complete and 0 interrupted iterations
+default ↓ [======================================] 01/22 VUs  40m0s
+
+     ✓ get stations request successful
+     ✓ search paths is successful
+
+     checks.........................: 100.00% ✓ 28238     ✗ 0
+     data_received..................: 1.1 GB  451 kB/s
+     data_sent......................: 4.6 MB  1.9 kB/s
+     http_req_blocked...............: avg=14.98µs  min=1.01µs  med=4.06µs   max=35.38ms p(90)=5.58µs  p(95)=6.34µs
+     http_req_connecting............: avg=1.29µs   min=0s      med=0s       max=1.94ms  p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=488.04ms min=27.17ms med=114.35ms max=3.44s   p(90)=1.48s   p(95)=1.97s
+       { expected_response:true }...: avg=488.04ms min=27.17ms med=114.35ms max=3.44s   p(90)=1.48s   p(95)=1.97s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 28238
+     http_req_receiving.............: avg=667.43µs min=20.87µs med=721.45µs max=32.03ms p(90)=1.04ms  p(95)=1.52ms
+     http_req_sending...............: avg=25.3µs   min=6.26µs  med=19.21µs  max=4.57ms  p(90)=33.47µs p(95)=44.49µs
+     http_req_tls_handshaking.......: avg=5.66µs   min=0s      med=0s       max=13.56ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=487.35ms min=26.24ms med=113.74ms max=3.44s   p(90)=1.48s   p(95)=1.97s
+     http_reqs......................: 28238   11.764479/s
+     iteration_duration.............: avg=1.97s    min=1.08s   med=1.59s    max=5.9s    p(90)=3.31s   p(95)=3.59s
+     iterations.....................: 14119   5.882239/s
+     vus............................: 1       min=1       max=22
+     vus_max........................: 22      min=22      max=22

@@ -1,0 +1,27 @@
+running (40m30.0s), 000/800 VUs, 1500673 complete and 200 interrupted iterations
+default ✓ [======================================] 093/800 VUs  40m0s
+
+     ✗ logged in successfully
+      ↳  2% — ✓ 31759 / ✗ 1469114
+     ✗ get lines request successful
+      ↳  25% — ✓ 16385 / ✗ 46884
+     ✗ update lines is successful
+      ↳  19% — ✓ 6234 / ✗ 25387
+
+     checks.........................: 3.40%   ✓ 54378      ✗ 1541385
+     data_received..................: 2.0 GB  835 kB/s
+     data_sent......................: 509 MB  210 kB/s
+     http_req_blocked...............: min=0s     avg=65.04ms  med=0s       p(99)=753.61ms p(90)=319.69ms max=1.36s    count=1595763
+     http_req_connecting............: min=0s     avg=105.45ms med=92.9ms   p(99)=353.3ms  p(90)=212.28ms max=1.38s    count=1595763
+   ✗ http_req_duration..............: min=0s     avg=283.57ms med=0s       p(99)=9.88s    p(90)=9.75ms   max=35.22s   count=1595763
+       { expected_response:true }...: min=6.22ms avg=8.54s    med=7.01s    p(99)=28.13s   p(90)=16.4s    max=34.81s   count=51329
+     http_req_failed................: 96.78%  ✓ 1544434    ✗ 51329
+     http_req_receiving.............: min=0s     avg=700.05µs med=0s       p(99)=22.25ms  p(90)=0s       max=514.87ms count=1595763
+     http_req_sending...............: min=0s     avg=3.52ms   med=0s       p(99)=84.9ms   p(90)=62.69µs  max=1.42s    count=1595763
+     http_req_tls_handshaking.......: min=0s     avg=51.21ms  med=0s       p(99)=613.25ms p(90)=245.23ms max=1.19s    count=1595763
+     http_req_waiting...............: min=0s     avg=279.35ms med=0s       p(99)=9.85s    p(90)=9.97µs   max=35.22s   count=1595763
+     http_reqs......................: 1595763 656.686682/s
+     iteration_duration.............: min=1.59ms avg=607.78ms med=200.09ms p(99)=11.08s   p(90)=658.92ms max=1m55s    count=1500673
+     iterations.....................: 1500673 617.555347/s
+     vus............................: 74      min=1        max=799
+     vus_max........................: 800     min=800      max=800

@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: lines-manage-page-load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 17 max VUs, 40m30s max duration (incl. graceful stop):
+           * default: Up to 17 looping VUs for 40m0s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (40m00.3s), 00/17 VUs, 8017 complete and 0 interrupted iterations
+default ↓ [======================================] 01/17 VUs  40m0s
+
+     ✓ logged in successfully
+     ✓ get lines request successful
+     ✓ update lines is successful
+
+     checks.........................: 100.00% ✓ 32068     ✗ 0
+     data_received..................: 712 MB  296 kB/s
+     data_sent......................: 11 MB   4.4 kB/s
+     http_req_blocked...............: min=1.02µs  avg=15.07µs  med=3.12µs   p(99)=18.3µs   p(90)=5.27µs   max=45.07ms count=32068
+     http_req_connecting............: min=0s      avg=1.34µs   med=0s       p(99)=0s       p(90)=0s       max=3.17ms  count=32068
+   ✗ http_req_duration..............: min=4.95ms  avg=433.26ms med=111.38ms p(99)=1.99s    p(90)=1.5s     max=2.58s   count=32068
+       { expected_response:true }...: min=4.95ms  avg=433.26ms med=111.38ms p(99)=1.99s    p(90)=1.5s     max=2.58s   count=32068
+     http_req_failed................: 0.00%   ✓ 0         ✗ 32068
+     http_req_receiving.............: min=16.39µs avg=483.15µs med=115.43µs p(99)=4.49ms   p(90)=812.68µs max=26.63ms count=32068
+     http_req_sending...............: min=6.69µs  avg=27.76µs  med=22.97µs  p(99)=105.74µs p(90)=36.17µs  max=9.3ms   count=32068
+     http_req_tls_handshaking.......: min=0s      avg=6.21µs   med=0s       p(99)=0s       p(90)=0s       max=27.39ms count=32068
+     http_req_waiting...............: min=4.89ms  avg=432.75ms med=110.81ms p(99)=1.99s    p(90)=1.5s     max=2.58s   count=32068
+     http_reqs......................: 32068   13.359788/s
+     iteration_duration.............: min=1.12s   avg=2.73s    med=2s       p(99)=5.32s    p(90)=4.87s    max=5.85s   count=8017
+     iterations.....................: 8017    3.339947/s
+     vus............................: 1       min=1       max=17
+     vus_max........................: 17      min=17      max=17
