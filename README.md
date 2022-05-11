@@ -165,8 +165,10 @@ load.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-const aveTraffic = 12;
-const maxTraffic = 70;
+
+const aveTraffic = 35;
+const maxTraffic = 210;
+
 
 export let options = {
     stages: [
@@ -174,13 +176,10 @@ export let options = {
         {duration: '1m', target: maxTraffic},
         {duration: '2m', target: aveTraffic},
         {duration: '2m', target: maxTraffic},
-        {duration: '30s', target: aveTraffic},
-        {duration: '30s', target: maxTraffic},
+
     ],
     thresholds: {
         http_req_duration: ['p(99)<200'], 
-        'retrieved stations': ['p(99)<200'],
-        'retrieved lines': ['p(99)<200'],
     },
 };
 
@@ -211,33 +210,34 @@ execution: local
      script: load.js
      output: -
 
-  scenarios: (100.00%) 1 scenario, 70 max VUs, 7m30s max duration (incl. graceful stop):
-           * default: Up to 70 looping VUs for 7m0s over 6 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+  scenarios: (100.00%) 1 scenario, 210 max VUs, 6m30s max duration (incl. graceful stop):
+           * default: Up to 210 looping VUs for 6m0s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (7m04.3s), 00/70 VUs, 5163 complete and 0 interrupted iterations
-default ✓ [======================================] 00/70 VUs  7m0s
+running (6m14.7s), 000/210 VUs, 4106 complete and 0 interrupted iterations
+default ✗ [======================================] 000/210 VUs  6m0s
 
-     ✓ retrieved stations
-     ✓ retrieved lines
+     ✓ http_req_duration
 
-     checks.........................: 100.00% ✓ 10326     ✗ 0
-     data_received..................: 602 MB  1.4 MB/s
-     data_sent......................: 1.7 MB  4.0 kB/s
-     http_req_blocked...............: avg=87.76µs  min=2.12µs  med=5.37µs   max=71.62ms p(90)=7.13µs  p(95)=11.23µs
-     http_req_connecting............: avg=9.93µs   min=0s      med=0s       max=8.34ms  p(90)=0s      p(95)=0s
-   ✗ http_req_duration..............: avg=993.74ms min=25.86ms med=982.39ms max=3.51s   p(90)=1.88s   p(95)=2.03s
-       { expected_response:true }...: avg=993.74ms min=25.86ms med=982.39ms max=3.51s   p(90)=1.88s   p(95)=2.03s
-     http_req_failed................: 0.00%   ✓ 0         ✗ 10326
-     http_req_receiving.............: avg=2.89ms   min=86.99µs med=2.31ms   max=45.91ms p(90)=5.11ms  p(95)=6.88ms
-     http_req_sending...............: avg=42.99µs  min=7.3µs   med=23.88µs  max=13.01ms p(90)=43.87µs p(95)=50.35µs
-     http_req_tls_handshaking.......: avg=64.11µs  min=0s      med=0s       max=25.02ms p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=990.8ms  min=24.47ms med=979.24ms max=3.51s   p(90)=1.88s   p(95)=2.02s
-     http_reqs......................: 10326   24.336804/s
-     iteration_duration.............: avg=2.99s    min=1.07s   med=2.95s    max=6.65s   p(90)=4.76s   p(95)=5s
-     iterations.....................: 5163    12.168402/s
-     vus............................: 11      min=1       max=70
-     vus_max........................: 70      min=70      max=70
+     checks.........................: 100.00% ✓ 8212      ✗ 0
+     data_received..................: 479 MB  1.3 MB/s
+     data_sent......................: 1.5 MB  3.9 kB/s
+     http_req_blocked...............: avg=234.12µs min=1.8µs   med=5µs     max=46.57ms p(90)=6.89µs  p(95)=25.83µs
+     http_req_connecting............: avg=20.28µs  min=0s      med=0s      max=16.32ms p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=4.43s    min=30.48ms med=4.43s   max=15.43s  p(90)=8.11s   p(95)=8.56s
+       { expected_response:true }...: avg=4.43s    min=30.48ms med=4.43s   max=15.43s  p(90)=8.11s   p(95)=8.56s
+     http_req_failed................: 0.00%   ✓ 0         ✗ 8212
+     http_req_receiving.............: avg=3.42ms   min=87.25µs med=2.47ms  max=63.71ms p(90)=6.59ms  p(95)=9.88ms
+     http_req_sending...............: avg=42.39µs  min=9.21µs  med=21.92µs max=16.22ms p(90)=42.36µs p(95)=61.51µs
+     http_req_tls_handshaking.......: avg=199.77µs min=0s      med=0s      max=46.07ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=4.43s    min=28.88ms med=4.42s   max=15.43s  p(90)=8.11s   p(95)=8.55s
+     http_reqs......................: 8212    21.914479/s
+     iteration_duration.............: avg=9.87s    min=1.08s   med=9.88s   max=23.62s  p(90)=17.15s  p(95)=17.9s
+     iterations.....................: 4106    10.95724/s
+     vus............................: 21      min=1       max=210
+     vus_max........................: 210     min=210     max=210
+
 
 ERRO[0425] some thresholds have failed
 ```
@@ -247,22 +247,19 @@ stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-const aveTraffic = 120;
-const maxTraffic = 600;
+
+const aveTraffic = 70;
+const maxTraffic = 420;
 
 export let options = {
     stages: [
         {duration: '1m', target: aveTraffic},
         {duration: '1m', target: maxTraffic},
-				{duration: '2m', target: aveTraffic},
+	{duration: '2m', target: aveTraffic},
         {duration: '2m', target: maxTraffic},
-        {duration: '30s', target: aveTraffic},
-        {duration: '30s', target: maxTraffic},
     ],
     thresholds: {
         http_req_duration: ['p(99)<200'], 
-        'retrieved stations': ['p(99)<200'],
-        'retrieved lines': ['p(99)<200'],
     },
 };
 
@@ -288,31 +285,29 @@ export default function ()  {
 ```
 stress.js 결과
 ```
-running (7m18.3s), 000/600 VUs, 225326 complete and 16 interrupted iterations
-default ↓ [======================================] 599/600 VUs  7m0s
 
-     ✗ retrieved stations
-      ↳  99% — ✓ 5008 / ✗ 45
-     ✗ retrieved lines
-      ↳  99% — ✓ 2697 / ✗ 15
+running (6m20.5s), 000/420 VUs, 86704 complete and 3 interrupted iterations
+default ✓ [======================================] 000/420 VUs  6m0s
 
-     checks.........................: 99.22% ✓ 7705       ✗ 60
-     data_received..................: 603 MB 1.4 MB/s
-     data_sent......................: 72 MB  164 kB/s
-     http_req_blocked...............: avg=17.17ms  min=0s     med=0s       max=871.47ms p(90)=24.81ms  p(95)=106.01ms
-     http_req_connecting............: avg=47.42ms  min=0s     med=32.03ms  max=473.31ms p(90)=111.25ms p(95)=142.81ms
-   ✗ http_req_duration..............: avg=376.9ms  min=0s     med=0s       max=36.62s   p(90)=0s       p(95)=22.73ms
-       { expected_response:true }...: avg=10.97s   min=25.9ms med=9.37s    max=36.62s   p(90)=20.29s   p(95)=22.41s
-     http_req_failed................: 96.65% ✓ 222676     ✗ 7705
-     http_req_receiving.............: avg=856.87µs min=0s     med=0s       max=469.76ms p(90)=0s       p(95)=0s
-     http_req_sending...............: avg=991.18µs min=0s     med=0s       max=656.05ms p(90)=0s       p(95)=688.69µs
-     http_req_tls_handshaking.......: avg=13.93ms  min=0s     med=0s       max=754.89ms p(90)=19.56ms  p(95)=83.11ms
-     http_req_waiting...............: avg=375.05ms min=0s     med=0s       max=36.4s    p(90)=0s       p(95)=22.1µs
-     http_reqs......................: 230381 525.5697/s
-     iteration_duration.............: avg=591.1ms  min=1.39ms med=147.68ms max=1m5s     p(90)=468.35ms p(95)=642.63ms
-     iterations.....................: 225326 514.037695/s
-     vus............................: 12     min=2        max=600
-     vus_max........................: 600    min=600      max=600
+     ✓ http_req_duration
+
+     checks.........................: 100.00% ✓ 7347       ✗ 0
+     data_received..................: 495 MB  1.3 MB/s
+     data_sent......................: 28 MB   74 kB/s
+     http_req_blocked...............: avg=12.3ms   min=0s       med=0s       max=1.1s     p(90)=11.37ms  p(95)=81.41ms
+     http_req_connecting............: avg=37.09ms  min=0s       med=25.8ms   max=426.67ms p(90)=86.88ms  p(95)=112.1ms
+   ✗ http_req_duration..............: avg=704.85ms min=0s       med=0s       max=31.5s    p(90)=10.45ms  p(95)=5.94s
+       { expected_response:true }...: avg=8.72s    min=30.26ms  med=7.87s    max=31.5s    p(90)=16.17s   p(95)=17.23s
+     http_req_failed................: 91.93%  ✓ 83725      ✗ 7347
+     http_req_receiving.............: avg=1.21ms   min=0s       med=0s       max=578.64ms p(90)=0s       p(95)=2.49ms
+     http_req_sending...............: avg=746.85µs min=0s       med=0s       max=368.17ms p(90)=23.43µs  p(95)=387.46µs
+     http_req_tls_handshaking.......: avg=9.32ms   min=0s       med=0s       max=898.46ms p(90)=8.38ms   p(95)=61.91ms
+     http_req_waiting...............: avg=702.89ms min=0s       med=0s       max=31.48s   p(90)=51.99µs  p(95)=5.94s
+     http_reqs......................: 91072   239.345943/s
+     iteration_duration.............: avg=928.9ms  min=612.21µs med=123.98ms max=47.43s   p(90)=460.08ms p(95)=1.18s
+     iterations.....................: 86704   227.86642/s
+     vus............................: 20      min=1        max=419
+     vus_max........................: 420     min=420      max=420
 
 ERRO[0440] some thresholds have failed
 ```
@@ -322,5 +317,8 @@ ERRO[0440] some thresholds have failed
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+   /home/ubuntu/infra-subway-monitoring/log/file.log
+   /home/ubuntu/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=mincheolkk-dashboard
