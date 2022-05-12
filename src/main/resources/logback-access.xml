@@ -1,9 +1,12 @@
-<configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%fullRequest%n%n%fullResponse</pattern>
-        </encoder>
-    </appender>
+<configuration debug="false">
 
-    <appender-ref ref="STDOUT" />
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="file-appender.xml"/>
+
+    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="file" level="INFO">
+        <appender-ref ref="file"/>
+    </logger>
+
 </configuration>
