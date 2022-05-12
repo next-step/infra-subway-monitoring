@@ -25,8 +25,10 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
+        fileLogger.info("[ Join Member Request ] {}", request.getEmail());
         MemberResponse member = memberService.createMember(request);
-        fileLogger.info("Join Member Success => " + request.getEmail());
+        fileLogger.info("[ Join Member Success ] {}", request.getEmail());
+
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
