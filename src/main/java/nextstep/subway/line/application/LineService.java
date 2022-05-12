@@ -7,15 +7,20 @@ import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @Service
 @Transactional
 public class LineService {
+    private static final Logger logger = LoggerFactory.getLogger("json");
     private LineRepository lineRepository;
     private StationService stationService;
 
@@ -28,6 +33,9 @@ public class LineService {
         Station upStation = stationService.findById(request.getUpStationId());
         Station downStation = stationService.findById(request.getDownStationId());
         Line persistLine = lineRepository.save(new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
+        logger.info("{}, {}",
+                kv("노선 이름", request.getName()),
+                kv("노선 색", request.getColor()));
         return LineResponse.of(persistLine);
     }
 
