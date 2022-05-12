@@ -39,9 +39,9 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	runtimeOnly 'mysql:mysql-connector-java'
 
-	// slf4j & logback
-	implementation('org.slf4j:jcl-over-slf4j')
-	implementation('ch.qos.logback:logback-classic')
+//	// slf4j & logback
+//	implementation('org.slf4j:jcl-over-slf4j')
+//	implementation('ch.qos.logback:logback-classic')
 }
 
 test {
