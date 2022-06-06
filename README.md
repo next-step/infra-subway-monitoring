@@ -45,7 +45,7 @@ npm run dev
      
        * https://subway.kangseonghyo.kro.kr 
        
-           | Desktop  | Lighthouse 성능    | FCP(second) | TTI(second) |
+           | Desktop  | Lighthouse 성능    | FCP(s) | TTI(s) |
            | :------- | ------------------| ---------- | ----------- |
            | 메인     | 67                 | 2.7        | 2.8         |
            | 역관리   | 30                 | 3.0        | 5.1         |
@@ -55,7 +55,7 @@ npm run dev
     
        * 타사 메인페이지(전체 노선) 기준 
          
-           | Desktop  | Lighthouse 성능    | FCP(second) | TTI(second) | 스크립트 최대 크기 | 스크립트 개수 |
+           | Desktop  | Lighthouse 성능    | FCP(s) | TTI(s) | 스크립트 최대 크기 | 스크립트 개수 |
            | :-------   | ----------------| ----------  | ----------- | ------------    | ----------  |
            | 네이버맵    | 90               | 0.5        | 0.7         | 87KB            | 13          |  
            | 서울교통공사 | 70               | 1.6        | 2.0         | 100KB           | 8           |  
