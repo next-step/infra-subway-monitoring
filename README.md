@@ -40,9 +40,40 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+   - 예비 분석 [myService](https://nextsteptest.p-e.kr/path)
+     - desktop
+       - FCP : 3.0s
+       - LCP : 3.0s
+       - TTI : 3.0s
+     - mobile
+        - FCP : 16.4s
+        - LCP : 16.4s
+        - TTI : 17.1s
+   - 경쟁사 분석
+     - 서울교통공사 desktop 
+       - FCP : 1.6s
+       - LCP : 3.6s
+       - TTI : 2.2s
+     - 서울교통공사 mobile
+        - FCP : 1.6s
+        - LCP : 3.6s
+        - TTI : 2.2s
+     - 네이버지도 desktop
+        - FCP : 0.5
+        - LCP : 1.5
+        - TTI : 0.7
+     - 네이버지도 mobile
+        - FCP : 2.2
+        - LCP : 8.2
+        - TTI : 6.8
+   - 성능예산 목표
+     - FCP 3.0 미만
+     - TTI 5.0s 미만
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
+- 자바스크립트 크기 축소
+- 캐싱
+- 웹폰트가 로드되는 동안 텍스트가 계속 표시되는지 확인 및 수정
+- 이미지 사이즈 설정
 
 
 ---
