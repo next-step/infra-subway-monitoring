@@ -87,21 +87,30 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
     * 대상시스템 범위
-         - [Reverse Proxy -> Service(Docker) -> DataBase(Docker)]
+         - [Reverse Proxy -> Service(Pod) -> DataBase(Pod)]
     
     * 목표
         - Throughput : 28 ~ 140
           - 예상 DAU : 500,000 (타사 평균 DAU 1,000,000)
-          - 예상 1명당 평균 접속수 / 1일 총 접속수 : 5회 / 2,500,000
+          - 예상 1명당 평균 접속수/1일 총 접속수 : 5회 / 2,500,000
           - 예상 1일 평균 RPS : 28 RPS  
           - 예상 1일 최대 RPS : 140 RPS
-        - Latency : 1s
-        - 부하유지기간 : 30m
         - 데이터수 (data-subway 이미지 사용) 
           - 지하철 노선 24개
           - 지하철역 617개
           - 구간 341개
           - 즐겨찾기 10개
+    
+    * 각 테스트 조건 (외부망 -> https://subway.kangseonghyo.kro.kr)
+        - Smoke
+          - VUser : 1
+          - Latency : ~ 100ms
+            
+        - Load
+          - VUser(min/max) : 14 / 70
+             - T(2.5) = R(5) * http_req_duration(0.5)  
+          - 부하유지기간 : 30m
+          - Latency : ~ 500ms
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
