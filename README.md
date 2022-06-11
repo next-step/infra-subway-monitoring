@@ -104,13 +104,16 @@ npm run dev
     * 각 테스트 조건 (외부망 -> https://subway.kangseonghyo.kro.kr)
         - Smoke
           - VUser : 1
-          - Latency : ~ 100ms
+          - Http_req_duration
+             - p(99) : ~ 100ms 
             
         - Load
           - VUser(min/max) : 14 / 70
              - T(2.5) = R(5) * http_req_duration(0.5)  
           - 부하유지기간 : 30m
-          - Latency : ~ 500ms
+          - Http_req_duration
+            - p(95) : ~ 100ms   
+            - p(99) : ~ 500ms   
     
     * 테스트 시나리오
         1. 메인페이지에 접속한다.
