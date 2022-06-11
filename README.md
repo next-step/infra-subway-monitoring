@@ -129,10 +129,10 @@ npm run dev
             - 평균 Reqest Duration : 10ms , 최대 Reqest Duration : 700ms 
             - 에러 : 0
         - Stress 테스트(~ max VUser 300)  
-            - VUser 260 오류 발생
+            - VUser 260부터 오류 발생
             - Service EC2 인스턴스 CPU : 최대 52.3%
-    * 상세 ( 스크립트 / 그라파나&K6) 
-        - [Result](/result)
+    * 상세 ( 스크립트 / 그라파나&K6 결과 이미지) 
+        - [이동](/result)
 
 
 ---
