@@ -87,6 +87,8 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
     * 대상시스템 범위
+         - [Reverse Proxy -> Service(Docker) -> DataBase(Docker)]
+        
          1.페이지
             - 메인페이지       /               
             - 역관리페이지     /stations 
@@ -131,6 +133,11 @@ npm run dev
           - 예상 1일 최대 RPS : 55 RPS
         - Latency : 1s
         - 부하유지기간 : 30m
+        - 데이터수 (data-subway 이미지 사용) 
+          - 지하철 노선 24개
+          - 지하철역 617개
+          - 구간 341개
+          - 즐겨찾기 10개
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
