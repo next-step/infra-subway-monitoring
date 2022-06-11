@@ -88,49 +88,13 @@ npm run dev
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
     * 대상시스템 범위
          - [Reverse Proxy -> Service(Docker) -> DataBase(Docker)]
-        
-         1.페이지
-            - 메인페이지       /               
-            - 역관리페이지     /stations 
-            - 노선관리페이지   /lines
-            - 구간관리페이지   /sections
-            - 경로검색페이지   /path
-            - 로그인페이지     /login         
-            - 회원가입페이지   /join            
-            - 마이페이지      /mypage         
-            - 즐겨찾기        /favorites
-      
-         2.Ajax
-             역관리
-                - /stations GET  조회
-                - /stations POST 등록
-             노선관리
-                - /lines POST 노선등록
-             구간관리
-                - /sections GET 조회
-                - /sections POST 등록
-             경로검색
-                - /path GET 조회
-                - /path?source={id}&target={id} GET 조회
-             회원가입
-                - /members POST 등록
-             로그인
-                - /login/token POST 발급
-             즐겨찾기
-                - /favorites GET 
-                - /favorites POST 등록
-                - /favorites DELETE 
-             나의정보
-                - /members/me GET
-                - /members/me PUT 수정
-                - /members/me DELETE
-      
+    
     * 목표
-        - Throughput : 11 ~ 55RPS
+        - Throughput : 28 ~ 140
           - 예상 DAU : 500,000 (타사 평균 DAU 1,000,000)
-          - 예상 1명당 접속수 : 2회  
-          - 예상 1일 평균 RPS : 11 RPS  
-          - 예상 1일 최대 RPS : 55 RPS
+          - 예상 1명당 평균 접속수 / 1일 총 접속수 : 5회 / 2,500,000
+          - 예상 1일 평균 RPS : 28 RPS  
+          - 예상 1일 최대 RPS : 140 RPS
         - Latency : 1s
         - 부하유지기간 : 30m
         - 데이터수 (data-subway 이미지 사용) 
