@@ -128,9 +128,10 @@ npm run dev
             - 평균 RPS : 350, 최대 RPS : 330
             - 평균 Reqest Duration : 10ms , 최대 Reqest Duration : 700ms 
             - 에러율 : 0%
-        - Stress 테스트(~ max VUser 300)  
-            - VUser 260부터 오류 발생(RPS : 약 500 RPS ~)
+        - Stress 테스트(~ max VUser 350)  
+            - VUser 256부터 오류 발생(max 791 RPS, avg 490)
             - Service EC2 인스턴스 CPU : 최대 52.3%
+            - 에러율 : 2%
     * 상세 ( 스크립트 / 그라파나&K6 결과 이미지) 
         - [이동](/result)
 
