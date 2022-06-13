@@ -2,12 +2,7 @@
 
 <configuration debug="false">
 
-    <springProfile name="prod">
-        <property name="home" value="/var/log/subway/" />
-    </springProfile>
-    <springProfile name="!prod">
-        <property name="home" value="./logs/" />
-    </springProfile>
+    <property name="home" value="./logs/" />
 
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="logback/console-appender.xml" />
