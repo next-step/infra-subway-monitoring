@@ -1,0 +1,40 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: get_paths_stress.js
+     output: InfluxDBv1 (http://3.39.80.206:8086)
+
+  scenarios: (100.00%) 1 scenario, 250 max VUs, 2m40s max duration (incl. graceful stop):
+           * default: Up to 250 looping VUs for 2m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0113] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr/paths?source=257&target=1\": dial tcp 3.39.1.80:443: socket: too many open files"
+(반복)...
+
+running (2m10.8s), 000/250 VUs, 13544 complete and 0 interrupted iterations
+default ✓ [======================================] 000/250 VUs  2m10s
+
+     ✗ response code 200
+      ↳  99% — ✓ 13514 / ✗ 30
+
+     checks.........................: 99.77% ✓ 13514      ✗ 30
+     data_received..................: 63 MB  480 kB/s
+     data_sent......................: 2.1 MB 16 kB/s
+     http_req_blocked...............: avg=685.25µs min=0s      med=5µs      max=162.84ms p(90)=9µs      p(95)=11µs
+     http_req_connecting............: avg=169.87µs min=0s      med=0s       max=42.79ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=541.66ms min=0s      med=646.33ms max=1.78s    p(90)=909.26ms p(95)=933.95ms
+       { expected_response:true }...: avg=542.86ms min=24.48ms med=646.89ms max=1.78s    p(90)=909.28ms p(95)=933.97ms
+     http_req_failed................: 0.22%  ✓ 30         ✗ 13514
+     http_req_receiving.............: avg=65.45µs  min=0s      med=59µs     max=4.52ms   p(90)=107µs    p(95)=124µs
+     http_req_sending...............: avg=22.04µs  min=0s      med=21µs     max=662µs    p(90)=36µs     p(95)=42µs
+     http_req_tls_handshaking.......: avg=507.26µs min=0s      med=0s       max=155.34ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=541.57ms min=0s      med=646.26ms max=1.78s    p(90)=909.19ms p(95)=933.88ms
+     http_reqs......................: 13544  103.538506/s
+     iteration_duration.............: avg=1.54s    min=1s      med=1.64s    max=2.78s    p(90)=1.9s     p(95)=1.93s
+     iterations.....................: 13544  103.538506/s
+     vus............................: 20     min=4        max=249
+     vus_max........................: 250    min=250      max=250

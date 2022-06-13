@@ -1,0 +1,38 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: put_members_load.js
+     output: InfluxDBv1 (http://3.39.80.206:8086)
+
+  scenarios: (100.00%) 1 scenario, 70 max VUs, 10m40s max duration (incl. graceful stop):
+           * default: Up to 70 looping VUs for 10m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (10m10.0s), 00/70 VUs, 18944 complete and 0 interrupted iterations
+default ✓ [======================================] 00/70 VUs  10m10s
+
+     ✓ logged in successfully
+     ✓ response code 200
+
+     checks.........................: 100.00% ✓ 37888     ✗ 0
+     data_received..................: 12 MB   19 kB/s
+     data_sent......................: 12 MB   20 kB/s
+     http_req_blocked...............: avg=103.08µs min=0s     med=3µs     max=1.03s    p(90)=8µs     p(95)=11µs
+     http_req_connecting............: avg=44.34µs  min=0s     med=0s      max=1.01s    p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=12.25ms  min=6.24ms med=10.88ms max=167.21ms p(90)=14.83ms p(95)=17.46ms
+       { expected_response:true }...: avg=12.25ms  min=6.24ms med=10.88ms max=167.21ms p(90)=14.83ms p(95)=17.46ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 37888
+     http_req_receiving.............: avg=46.78µs  min=4µs    med=37µs    max=2.27ms   p(90)=85µs    p(95)=107µs
+     http_req_sending...............: avg=25.49µs  min=2µs    med=21µs    max=5.32ms   p(90)=47µs    p(95)=59µs
+     http_req_tls_handshaking.......: avg=53.77µs  min=0s     med=0s      max=142.42ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=12.18ms  min=6.15ms med=10.81ms max=167.16ms p(90)=14.77ms p(95)=17.39ms
+     http_reqs......................: 37888   62.107259/s
+     iteration_duration.............: avg=1.02s    min=1.01s  med=1.02s   max=2.06s    p(90)=1.03s   p(95)=1.03s
+     iterations.....................: 18944   31.05363/s
+     vus............................: 4       min=1       max=69
+     vus_max........................: 70      min=70      max=70
