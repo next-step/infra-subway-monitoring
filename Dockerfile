@@ -7,6 +7,7 @@ COPY settings.gradle .
 COPY src src
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJar
+RUN apk add --no-cache bash
 
 FROM openjdk:8-jdk-alpine
 # copy arthas
