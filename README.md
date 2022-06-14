@@ -145,6 +145,85 @@ Lighthouse 성능점수 80점 이상 목표 : 타사 대비 20%내외
 - 총 구간 수 : 340개 
 
 ### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+**접속 빈도가 높은 페이지**
+- 메인페이지
+- 경로찾기 페이지
+
+**데이터를 갱신하는 페이지**
+- 로그인 
+- 개인정보 수정 (나이 수정)
+
+**데이터를 조회하는데 여러 데이터를 참조하는 페이지**
+- 경로조회
+
+---
+
+**접속 빈도가 높은 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/접속빈도가_높은_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/접속빈도가_높은_페이지/smoke/smoke_result.txt)
+
+Load
+- [Load Test Script](/step2/접속빈도가_높은_페이지/load/load.js)
+- [Load Test Result](/step2/접속빈도가_높은_페이지/load/load_result.txt)
+
+Stress
+- [Stress Test Script](/step2/접속빈도가_높은_페이지/stress/stress.js)
+- [Stress Test Result](/step2/접속빈도가_높은_페이지/stress/stress_result.txt)
+
+---
+
+**데이터를 갱신하는 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/데이터_갱신_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/데이터_갱신_페이지/smoke/smoke_result.txt)
+
+Load
+- [Load Test Script](/step2/데이터_갱신_페이지/load/load.js)
+- [Load Test Result](/step2/데이터_갱신_페이지/load/load_result.txt)
+
+Stress
+- [Stress Test Script](/step2/데이터_갱신_페이지/stress/stress.js)
+- [Stress Test Result](/step2/데이터_갱신_페이지/stress/stress_result.txt)
+
+---
+
+**데이터를 조회하는데 여러 데이터를 참조하는 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke_result.txt)
+
+Load
+- [Load Test Script](/step2/조회시_여러_데이터_참조_페이지/load/load.js)
+- [Load Test Result](/step2/조회시_여러_데이터_참조_페이지/load/load_result.txt)
+
+Stress
+- [Stress Test Script](/step2/조회시_여러_데이터_참조_페이지/stress/stress.js)
+- [Stress Test Result](/step2/조회시_여러_데이터_참조_페이지/stress/stress_result.txt)
+
+---
+**접속빈도가_높은_페이지**
+- threshold : p(99) < 1500
+- smoke, load, stress 모두 통과 
+
+**데이터_갱신_페이지**
+- threshold : p(99) < 1500
+- smoke, load, stress 모두 통과
+
+**조회시_여러_데이터_참조_페이지**
+- threshold : p(99) < 1500
+- smoke 통과
+- **_load 실패_**
+- **_stress 실패_**
+```
+경로 조회의 경우 조회 시 여러 데이터를 참조함으로 성능적인 이슈가 도출되었음.
+-> load, stress 테스트 실패 
+
+관련하여 조회 성능 향상을 위한 조회 쿼리 개선, 캐싱처리등을 통한 응답속도 향상이 필요
+```
 
 ---
 
