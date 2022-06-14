@@ -163,14 +163,17 @@ Lighthouse 성능점수 80점 이상 목표 : 타사 대비 20%내외
 Smoke
 - [Smoke Test Script](/step2/접속빈도가_높은_페이지/smoke/smoke.js)
 - [Smoke Test Result](/step2/접속빈도가_높은_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/smoke/frequency_smoke.png)
 
 Load
 - [Load Test Script](/step2/접속빈도가_높은_페이지/load/load.js)
 - [Load Test Result](/step2/접속빈도가_높은_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/load/frequency_load.png)
 
 Stress
 - [Stress Test Script](/step2/접속빈도가_높은_페이지/stress/stress.js)
 - [Stress Test Result](/step2/접속빈도가_높은_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/stress/frequency_stress.png)
 
 ---
 
@@ -179,14 +182,17 @@ Stress
 Smoke
 - [Smoke Test Script](/step2/데이터_갱신_페이지/smoke/smoke.js)
 - [Smoke Test Result](/step2/데이터_갱신_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/데이터_갱신_페이지/smoke/dataupdate_smoke.png)
 
 Load
 - [Load Test Script](/step2/데이터_갱신_페이지/load/load.js)
 - [Load Test Result](/step2/데이터_갱신_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/데이터_갱신_페이지/load/dataupdate_load.png)
 
 Stress
 - [Stress Test Script](/step2/데이터_갱신_페이지/stress/stress.js)
 - [Stress Test Result](/step2/데이터_갱신_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/데이터_갱신_페이지/stress/dataupdate_stress.png)
 
 ---
 
@@ -195,14 +201,17 @@ Stress
 Smoke
 - [Smoke Test Script](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke.js)
 - [Smoke Test Result](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/smoke/search_smoke.png)
 
 Load
 - [Load Test Script](/step2/조회시_여러_데이터_참조_페이지/load/load.js)
 - [Load Test Result](/step2/조회시_여러_데이터_참조_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/load/search_load.png)
 
 Stress
 - [Stress Test Script](/step2/조회시_여러_데이터_참조_페이지/stress/stress.js)
 - [Stress Test Result](/step2/조회시_여러_데이터_참조_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/stress/search_stress.png)
 
 ---
 **접속빈도가_높은_페이지**
