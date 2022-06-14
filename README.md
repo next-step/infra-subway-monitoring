@@ -85,9 +85,57 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
+    * 대상시스템 범위
+         - [Reverse Proxy -> Service(Pod) -> DataBase(Pod)]
+    
+    * 목표
+        - Throughput : 28 ~ 140
+          - 예상 DAU : 500,000 (타사 평균 DAU 1,000,000)
+          - 예상 1명당 평균 접속수/1일 총 접속수 : 5회 / 2,500,000
+          - 예상 1일 평균 RPS : 28 RPS  
+          - 예상 1일 최대 RPS : 140 RPS
+        - 데이터수 (data-subway 이미지 사용) 
+          - 지하철 노선 24개
+          - 지하철역 617개
+          - 구간 341개
+          - 즐겨찾기 10개
+    
+    * 각 테스트 조건 (외부망 -> https://subway.kangseonghyo.kro.kr)
+        - Smoke
+          - VUser : 1
+          - Http_req_duration
+             - p(99) : ~ 100ms 
+            
+        - Load
+          - VUser(min/max) : 14 / 70
+             - T(2.5) = R(5) * http_req_duration(0.5)  
+          - 부하유지기간 : 30m
+          - Http_req_duration
+            - p(95) : ~ 100ms   
+            - p(99) : ~ 500ms   
+    
+    * 테스트 시나리오
+        1. 메인페이지에 접속한다.
+        2. 로그인 한다. (엑세스토큰 발급)
+        3. 즐겨찾기를 조회한다.
+        4. 경로검색으로 이동한다.
+        5. 경로를 검색한다.
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+    * 결과
+        - Load 테스트 
+            - 평균 RPS : 350, 최대 RPS : 330
+            - 평균 Reqest Duration : 10ms , 최대 Reqest Duration : 700ms 
+            - 에러율 : 0%
+        - Stress 테스트(~ max VUser 350)  
+            - VUser 280부터 오류 발생(max 762 RPS, avg 481)
+            - 평균 Reqest Duration : 224ms , 최대 Reqest Duration : 30s
+            - Service EC2 인스턴스 CPU : 최대 52.3%
+            - 에러율 : 약 2.8%
+    * 상세 ( 스크립트 / 그라파나 & K6 결과 이미지) 
+        - [이동](/result)
+
 
 ---
 
