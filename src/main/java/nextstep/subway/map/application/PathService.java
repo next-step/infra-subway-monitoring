@@ -7,13 +7,20 @@ import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @Service
 public class PathService {
+
+    private static final Logger logger = LoggerFactory.getLogger("json");
+
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
@@ -22,6 +29,11 @@ public class PathService {
         // 다익스트라 최단 경로 찾기
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
+
+        logger.info("find path. {}, {}, {}",
+                kv("source", source),
+                kv("target", target),
+                kv("result", logger.isDebugEnabled() ? path.getVertexList() : "null"));
 
         return convertSubwayPath(path);
     }

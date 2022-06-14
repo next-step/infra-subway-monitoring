@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+
+    <property name="home" value="./logs/" />
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="logback/console-appender.xml" />
+    <include resource="logback/file-appender.xml" />
+    <include resource="logback/json-appender.xml" />
+
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="file" level="INFO" >
+        <appender-ref ref="file" />
+    </logger>
+
+    <logger name="json" level="INFO" >
+        <appender-ref ref="json" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+    </root>
+
+</configuration>
