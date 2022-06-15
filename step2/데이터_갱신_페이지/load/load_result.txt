@@ -1,0 +1,39 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 50 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 50 looping VUs for 45.01s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0001] Error from API server                         error="listen tcp 127.0.0.1:6565: bind: address already in use"
+
+running (0m45.0s), 00/50 VUs, 9508 complete and 0 interrupted iterations
+default ✓ [======================================] 00/50 VUs  45.01s
+
+     ✓ 로그인 요청 결과 :
+     ✓ 로그인 성공
+     ✓ 개인정보 수정 결과 :
+
+     checks.........................: 100.00% ✓ 28524      ✗ 0
+     data_received..................: 6.0 MB  133 kB/s
+     data_sent......................: 6.1 MB  135 kB/s
+     http_req_blocked...............: avg=18.74µs  min=1.24µs  med=2.03µs  max=34.67ms  p(90)=2.85µs   p(95)=3.41µs
+     http_req_connecting............: avg=2.32µs   min=0s      med=0s      max=868.61µs p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=51.92ms  min=3.92ms  med=48.02ms max=1.45s    p(90)=92.62ms  p(95)=104.58ms
+       { expected_response:true }...: avg=51.92ms  min=3.92ms  med=48.02ms max=1.45s    p(90)=92.62ms  p(95)=104.58ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 19016
+     http_req_receiving.............: avg=42.94µs  min=14.95µs med=41.11µs max=1.14ms   p(90)=57.53µs  p(95)=66.79µs
+     http_req_sending...............: avg=20.05µs  min=7.61µs  med=19.34µs max=1.3ms    p(90)=23.33µs  p(95)=27.43µs
+     http_req_tls_handshaking.......: avg=13.88µs  min=0s      med=0s      max=33.28ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=51.86ms  min=3.86ms  med=47.97ms max=1.45s    p(90)=92.57ms  p(95)=104.52ms
+     http_reqs......................: 19016   422.352478/s
+     iteration_duration.............: avg=104.15ms min=8.78ms  med=98.21ms max=1.87s    p(90)=184.09ms p(95)=203.72ms
+     iterations.....................: 9508    211.176239/s
+     vus............................: 6       min=1        max=49
+     vus_max........................: 50      min=50       max=50

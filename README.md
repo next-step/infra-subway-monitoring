@@ -113,9 +113,126 @@ Lighthouse 성능점수 80점 이상 목표 : 타사 대비 20%내외
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+**대상 시스템 범위**
+- Reverse Proxy -> Tomcat -> MySQL (WEB - WAS - DB)
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+**1일 사용자 수(DAU) : 7.4만명**
+- 참고 : https://biz.chosun.com/site/data/html_dir/2020/07/09/2020070901297.html
+  - 경쟁사 네이버맵(지도) MAU : 약 1,112만명 
+  - 러닝맵 서비스를 네이버맵(지도)의 1/5 수준이라 가정 : 1,112 / 5 = 약 222만명
+  - 러닝맵 서비스 DAU : 222만명 / 30 = 7.4만명
+
+**피크 시간대의 집중률 : 08:00 ~ 10:00, 17:00 ~ 19:00**
+- 출퇴근 시간대를 예상 피크 시간대로 설정
+
+**1명당 1일 평균 접속 혹은 요청수**
+- 1명당 1일 평균 요청 수 : 메인 > 로그인 > 즐겨찾기 > 경로조회 x n = 약 6회로 예상
+
+**Throughput(1일 평균 rps ~ 1일 최대 rps)**
+- 1일 총 접속수 = 74000(명) * 6(회) = 444,000번
+- 최대 트래픽 / 평소 트래픽 : 10 (최대와 평소의 차이는 약 10배 라고 가정)
+- 1일 평균 RPS = 444,000(번) / 86,400(초/일) = 5.1388888... = 5
+- 1일 최대 RPS = 5 * 10(배) = 50
+
+**Latency(일반적으로 50~100ms이하)**
+- 100ms 
+
+**부하 테스트 시 저장될 데이터 건수 및 크기**
+- 기준 : private subnet에 위치한 data-subway docker image 
+- 총 지하철 노선 정보 : 23개
+- 총 지하철 역 수 : 616개
+- 총 구간 수 : 340개 
+
+### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+**접속 빈도가 높은 페이지**
+- 메인페이지
+- 경로찾기 페이지
+
+**데이터를 갱신하는 페이지**
+- 로그인 
+- 개인정보 수정 (나이 수정)
+
+**데이터를 조회하는데 여러 데이터를 참조하는 페이지**
+- 경로조회
+
+---
+
+**접속 빈도가 높은 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/접속빈도가_높은_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/접속빈도가_높은_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/smoke/frequency_smoke.png)
+
+Load
+- [Load Test Script](/step2/접속빈도가_높은_페이지/load/load.js)
+- [Load Test Result](/step2/접속빈도가_높은_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/load/frequency_load.png)
+
+Stress
+- [Stress Test Script](/step2/접속빈도가_높은_페이지/stress/stress.js)
+- [Stress Test Result](/step2/접속빈도가_높은_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/접속빈도가_높은_페이지/stress/frequency_stress.png)
+
+---
+
+**데이터를 갱신하는 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/데이터_갱신_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/데이터_갱신_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/데이터_갱신_페이지/smoke/dataupdate_smoke.png)
+
+Load
+- [Load Test Script](/step2/데이터_갱신_페이지/load/load.js)
+- [Load Test Result](/step2/데이터_갱신_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/데이터_갱신_페이지/load/dataupdate_load.png)
+
+Stress
+- [Stress Test Script](/step2/데이터_갱신_페이지/stress/stress.js)
+- [Stress Test Result](/step2/데이터_갱신_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/데이터_갱신_페이지/stress/dataupdate_stress.png)
+
+---
+
+**데이터를 조회하는데 여러 데이터를 참조하는 페이지**
+
+Smoke
+- [Smoke Test Script](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke.js)
+- [Smoke Test Result](/step2/조회시_여러_데이터_참조_페이지/smoke/smoke_result.txt)
+- [Smoke Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/smoke/search_smoke.png)
+
+Load
+- [Load Test Script](/step2/조회시_여러_데이터_참조_페이지/load/load.js)
+- [Load Test Result](/step2/조회시_여러_데이터_참조_페이지/load/load_result.txt)
+- [Load Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/load/search_load.png)
+
+Stress
+- [Stress Test Script](/step2/조회시_여러_데이터_참조_페이지/stress/stress.js)
+- [Stress Test Result](/step2/조회시_여러_데이터_참조_페이지/stress/stress_result.txt)
+- [Stress Test Grafana Monitoring](/step2/조회시_여러_데이터_참조_페이지/stress/search_stress.png)
+
+---
+**접속빈도가_높은_페이지**
+- threshold : p(99) < 1500
+- smoke, load, stress 모두 통과 
+
+**데이터_갱신_페이지**
+- threshold : p(99) < 1500
+- smoke, load, stress 모두 통과
+
+**조회시_여러_데이터_참조_페이지**
+- threshold : p(99) < 1500
+- smoke 통과
+- **_load 실패_**
+- **_stress 실패_**
+```
+경로 조회의 경우 조회 시 여러 데이터를 참조함으로 성능적인 이슈가 도출되었음.
+-> load, stress 테스트 실패 
+
+관련하여 조회 성능 향상을 위한 조회 쿼리 개선, 캐싱처리등을 통한 응답속도 향상이 필요
+```
 
 ---
 

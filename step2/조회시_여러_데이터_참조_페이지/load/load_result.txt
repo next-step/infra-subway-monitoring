@@ -1,0 +1,40 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 50 max VUs, 1m15s max duration (incl. graceful stop):
+           * default: Up to 50 looping VUs for 45.01s over 5 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0000] Error from API server                         error="listen tcp 127.0.0.1:6565: bind: address already in use"
+
+running (0m52.3s), 00/50 VUs, 202 complete and 0 interrupted iterations
+default ✓ [======================================] 00/50 VUs  45.01s
+
+     ✓ 경로조회 요청 결과
+
+     checks.........................: 100.00% ✓ 202      ✗ 0
+     data_received..................: 1.0 MB  20 kB/s
+     data_sent......................: 48 kB   918 B/s
+     http_req_blocked...............: avg=1.49ms   min=2.19µs   med=3.78µs  max=18.39ms  p(90)=5.37ms   p(95)=7.23ms
+     http_req_connecting............: avg=265.77µs min=0s       med=0s      max=10.8ms   p(90)=879.49µs p(95)=906.61µs
+   ✗ http_req_duration..............: avg=6.38s    min=234.37ms med=6.41s   max=13.67s   p(90)=12.06s   p(95)=12.71s
+       { expected_response:true }...: avg=6.38s    min=234.37ms med=6.41s   max=13.67s   p(90)=12.06s   p(95)=12.71s
+     http_req_failed................: 0.00%   ✓ 0        ✗ 202
+     http_req_receiving.............: avg=89.1µs   min=53.44µs  med=85.71µs max=165.15µs p(90)=110.65µs p(95)=115.06µs
+     http_req_sending...............: avg=29.52µs  min=10.06µs  med=22.8µs  max=94.7µs   p(90)=52.09µs  p(95)=55.13µs
+     http_req_tls_handshaking.......: avg=1.19ms   min=0s       med=0s      max=12.94ms  p(90)=4.43ms   p(95)=6.26ms
+     http_req_waiting...............: avg=6.38s    min=234.25ms med=6.41s   max=13.67s   p(90)=12.06s   p(95)=12.71s
+     http_reqs......................: 202     3.864049/s
+     iteration_duration.............: avg=6.39s    min=234.6ms  med=6.41s   max=13.67s   p(90)=12.06s   p(95)=12.71s
+     iterations.....................: 202     3.864049/s
+     vus............................: 5       min=1      max=50
+     vus_max........................: 50      min=50     max=50
+
+ERRO[0056] some thresholds have failed

@@ -1,0 +1,38 @@
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 10s (gracefulStop: 30s)
+
+WARN[0000] Error from API server                         error="listen tcp 127.0.0.1:6565: bind: address already in use"
+
+running (10.1s), 0/1 VUs, 38 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  10s
+
+     ✓ 경로조회 요청 결과
+
+     checks.........................: 100.00% ✓ 38       ✗ 0
+     data_received..................: 156 kB  15 kB/s
+     data_sent......................: 5.8 kB  573 B/s
+     http_req_blocked...............: avg=1.05ms   min=2.68µs   med=3.49µs   max=39.95ms  p(90)=4.29µs   p(95)=4.51µs
+     http_req_connecting............: avg=24.08µs  min=0s       med=0s       max=915.14µs p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=264.14ms min=237.67ms med=252.32ms max=383.23ms p(90)=295.85ms p(95)=348.92ms
+       { expected_response:true }...: avg=264.14ms min=237.67ms med=252.32ms max=383.23ms p(90)=295.85ms p(95)=348.92ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 38
+     http_req_receiving.............: avg=87.69µs  min=75.34µs  med=81.57µs  max=169.98µs p(90)=101.2µs  p(95)=129.58µs
+     http_req_sending...............: avg=25.49µs  min=16.51µs  med=22.74µs  max=87µs     p(90)=25.08µs  p(95)=39.88µs
+     http_req_tls_handshaking.......: avg=691.8µs  min=0s       med=0s       max=26.28ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=264.02ms min=237.57ms med=252.22ms max=383.13ms p(90)=295.73ms p(95)=348.7ms
+     http_reqs......................: 38      3.766586/s
+     iteration_duration.............: avg=265.44ms min=237.9ms  med=252.59ms max=383.82ms p(90)=296.1ms  p(95)=380.32ms
+     iterations.....................: 38      3.766586/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+
