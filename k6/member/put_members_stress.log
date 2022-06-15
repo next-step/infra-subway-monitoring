@@ -9,39 +9,40 @@
      script: put_members_stress.js
      output: InfluxDBv1 (http://3.39.80.206:8086)
 
-  scenarios: (100.00%) 1 scenario, 250 max VUs, 2m40s max duration (incl. graceful stop):
-           * default: Up to 250 looping VUs for 2m10s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 245 max VUs, 4m10s max duration (incl. graceful stop):
+           * default: Up to 245 looping VUs for 3m40s over 6 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-WARN[0120] Request Failed                                error="Post \"https://subway.geunhwanlee.p-e.kr/login/token\": dial tcp 3.39.1.80:443: socket: too many open files"
-ERRO[0120] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
+
+WARN[0151] Request Failed                                error="Post \"https://subway.geunhwanlee.p-e.kr/login/token\": dial tcp 3.39.1.80:443: socket: too many open files"
+ERRO[0151] the body is null so we can't transform it to JSON - this likely was because of a request error getting the response
 running at reflect.methodValueCall (native)
-default at logged in successfully (file:///Users/gunan/IdeaProjects/infra-subway-monitoring/k6/member/put_members_stress.js:31:44(4))
+default at logged in successfully (file:///Users/gunan/IdeaProjects/infra-subway-monitoring/k6/member/put_members_stress.js:34:44(4))
 	at go.k6.io/k6/js/modules/k6.(*K6).Check-fm (native)
-	at file:///Users/gunan/IdeaProjects/infra-subway-monitoring/k6/member/put_members_stress.js:30:20(35)
+	at file:///Users/gunan/IdeaProjects/infra-subway-monitoring/k6/member/put_members_stress.js:33:20(35)
 	at native  executor=ramping-vus scenario=default source=stacktrace
 (반복)...
 
-running (2m10.7s), 000/250 VUs, 90583 complete and 0 interrupted iterations
-default ✓ [======================================] 000/250 VUs  2m10s
+running (3m40.7s), 000/245 VUs, 56578 complete and 0 interrupted iterations
+default ✓ [======================================] 000/245 VUs  3m40s
 
      ✗ logged in successfully
-      ↳  22% — ✓ 20295 / ✗ 70288
+      ↳  66% — ✓ 37471 / ✗ 19107
      ✓ response code 200
 
-     checks.........................: 36.60% ✓ 40590      ✗ 70288
-     data_received..................: 13 MB  102 kB/s
-     data_sent......................: 13 MB  99 kB/s
-     http_req_blocked...............: avg=79.67µs  min=0s      med=0s       max=1.02s    p(90)=4µs     p(95)=5µs
-     http_req_connecting............: avg=26.24µs  min=0s      med=0s       max=1.01s    p(90)=0s      p(95)=0s
-   ✓ http_req_duration..............: avg=4.54ms   min=0s      med=0s       max=162.06ms p(90)=12.45ms p(95)=15.41ms
-       { expected_response:true }...: avg=12.41ms  min=5.71ms  med=10.59ms  max=162.06ms p(90)=17.07ms p(95)=22.19ms
-     http_req_failed................: 63.39% ✓ 70288      ✗ 40590
-     http_req_receiving.............: avg=12.43µs  min=0s      med=0s       max=3.56ms   p(90)=39µs    p(95)=53µs
-     http_req_sending...............: avg=6.61µs   min=0s      med=0s       max=6.74ms   p(90)=21µs    p(95)=27µs
-     http_req_tls_handshaking.......: avg=52.02µs  min=0s      med=0s       max=52.58ms  p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=4.52ms   min=0s      med=0s       max=162.05ms p(90)=12.4ms  p(95)=15.36ms
-     http_reqs......................: 110878 848.435614/s
-     iteration_duration.............: avg=230.03ms min=34.66µs med=147.04µs max=2.04s    p(90)=1.02s   p(95)=1.02s
-     iterations.....................: 90583  693.138794/s
-     vus............................: 16     min=4        max=249
-     vus_max........................: 250    min=250      max=250
+     checks.........................: 79.68% ✓ 74942      ✗ 19107
+     data_received..................: 24 MB  107 kB/s
+     data_sent......................: 24 MB  108 kB/s
+     http_req_blocked...............: avg=89.41µs  min=0s      med=3µs     max=155.26ms p(90)=5µs     p(95)=7µs
+     http_req_connecting............: avg=23.07µs  min=0s      med=0s      max=119.29ms p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=10.33ms  min=0s      med=10.09ms max=741.49ms p(90)=15.42ms p(95)=20.1ms
+       { expected_response:true }...: avg=12.96ms  min=5.69ms  med=10.71ms max=741.49ms p(90)=16.63ms p(95)=22.57ms
+     http_req_failed................: 20.31% ✓ 19107      ✗ 74942
+     http_req_receiving.............: avg=30.95µs  min=0s      med=29µs    max=4.04ms   p(90)=55µs    p(95)=69µs
+     http_req_sending...............: avg=16.09µs  min=0s      med=16µs    max=2.23ms   p(90)=28µs    p(95)=34µs
+     http_req_tls_handshaking.......: avg=62.99µs  min=0s      med=0s      max=47.51ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=10.28ms  min=0s      med=10.03ms max=741.43ms p(90)=15.36ms p(95)=20.02ms
+     http_reqs......................: 94049  426.165203/s
+     iteration_duration.............: avg=680.12ms min=34.95µs med=1.02s   max=1.85s    p(90)=1.02s   p(95)=1.03s
+     iterations.....................: 56578  256.372475/s
+     vus............................: 8      min=4        max=244
+     vus_max........................: 245    min=245      max=245
