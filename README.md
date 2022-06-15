@@ -187,7 +187,6 @@ Latency: 50 ~ 100ms 이하
 최대 트래픽 VUser: 43  
 Throughput: 17.4 ~ 61 이상  
 Latency: 100ms 이하  
-성능 유지 기간: 30분  
 
 
 3) Stress 테스트  
