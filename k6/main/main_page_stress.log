@@ -1,0 +1,70 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: main_page_stress.js
+     output: InfluxDBv1 (http://3.39.80.206:8086)
+
+  scenarios: (100.00%) 1 scenario, 250 max VUs, 4m10s max duration (incl. graceful stop):
+           * default: Up to 250 looping VUs for 3m40s over 6 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0146] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0147] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0147] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0147] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0148] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0148] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0148] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0148] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0149] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0150] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0151] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0151] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0151] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0151] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0151] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0152] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0152] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0152] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0152] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0153] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+WARN[0153] Request Failed                                error="Get \"https://subway.geunhwanlee.p-e.kr\": dial tcp 3.39.1.80:443: socket: too many open files"
+
+running (3m40.8s), 000/250 VUs, 38259 complete and 0 interrupted iterations
+default ✓ [======================================] 000/250 VUs  3m40s
+
+     ✗ response code 200
+      ↳  99% — ✓ 38227 / ✗ 32
+
+     checks.........................: 99.91% ✓ 38227      ✗ 32
+     data_received..................: 49 MB  223 kB/s
+     data_sent......................: 4.7 MB 21 kB/s
+     http_req_blocked...............: avg=207.7µs min=0s     med=4µs    max=64.6ms  p(90)=8µs     p(95)=9µs
+     http_req_connecting............: avg=53.04µs min=0s     med=0s     max=37.3ms  p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=8.85ms  min=0s     med=8.4ms  max=79.06ms p(90)=10.68ms p(95)=11.97ms
+       { expected_response:true }...: avg=8.85ms  min=4.74ms med=8.4ms  max=79.06ms p(90)=10.68ms p(95)=11.97ms
+     http_req_failed................: 0.08%  ✓ 32         ✗ 38227
+     http_req_receiving.............: avg=49.84µs min=0s     med=44µs   max=4.39ms  p(90)=79µs    p(95)=91µs
+     http_req_sending...............: avg=20.77µs min=0s     med=17µs   max=627µs   p(90)=30µs    p(95)=38µs
+     http_req_tls_handshaking.......: avg=148.6µs min=0s     med=0s     max=37.6ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=8.78ms  min=0s     med=8.33ms max=79ms    p(90)=10.61ms p(95)=11.9ms
+     http_reqs......................: 38259  173.263945/s
+     iteration_duration.............: avg=1s      min=1s     med=1s     max=1.07s   p(90)=1.01s   p(95)=1.01s
+     iterations.....................: 38259  173.263945/s
+     vus............................: 11     min=4        max=250
+     vus_max........................: 250    min=250      max=250
