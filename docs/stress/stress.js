@@ -78,7 +78,7 @@ function accessFindPathPage() {
   let findPathResponse = http.get(`${BASE_URL}/path`);
 
   check(findPathResponse, {
-    'find path page success': (response) => response.status = 200
+    'find path page success': (response) => response.status == 200
   });
 }
 
@@ -86,6 +86,6 @@ function searchPath() {
   let searchPathResponse = http.get(`${BASE_URL}/paths?source=10&target=20`);
 
   check(searchPathResponse, {
-    'search path success': (response) => response.status = 200
+    'search path success': (response) => response.status == 200
   });
 }
