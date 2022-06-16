@@ -80,9 +80,29 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   - 대상 시스템 범위
+     - reverseProxy, was, db
+   - 목표값 설정 (latency, throughput, 부하 유지기간)
+     - Throughput
+       - 하루 지하 평균 이용객 수 534만명 중 10%가 사용한다고 가정
+       - DAU 50만
+       - 춡/퇴근 각 5회 접근 가정
+       - 1일 총 접속수 : 500만, 1일 평균 rps : 약57rps
+       - 1일 최대 2배예상 : 114rps
+     - latency
+       - 100ms 이하
+   - 부하 테스트 시 저장될 데이터 건수 및 크기
+     - line : 23
+     - station : 616
+     - section : 340
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+    - 접속 빈도가 높은 페이지 : 메인페이지 (GET `/`)
+    - 데이터를 갱신하는 페이지 : 로그인 -> 내 정보 수정 (PUT `/members/me`)
+    - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로조회 (GET `/path`)
+    - [smoke.js](./docs/smoke/smoke.js)
+    - [load.js](./docs/load/load.js)
+    - [stress.js](./docs/stress/stress.js)
 ---
 
 ### 3단계 - 로깅, 모니터링
