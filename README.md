@@ -237,6 +237,14 @@ Stress
 ---
 
 ### 3단계 - 로깅, 모니터링
+**3단계 미션 요구사항**
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - nginx gzip 설정 (nginx.conf)
+  - nginx 정적캐싱 적용 (nginx.conf)
+  - LineRepository Sleep 제거
+- [ ] 로그 설정하기
+- [ ] Cloudwatch로 모니터링
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
