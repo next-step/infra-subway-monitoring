@@ -95,10 +95,29 @@ npm run dev
      
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-   - 자바스크립트, CSS 리소스 압축 및 사용하지 않는 코드 제거
+   - 자바스크립트 리소스 압축
+     - /js/vendors.js
+       - 전송 크기: 2,125 KB
+       - 가능한 절감 효과: 1,716.5 KB
+     - /js/main.js
+       - 전송 크기: 172.0 KB
+       - 가능한 절감 효과: 143.6 KB 절감
+   - 사용하지 않는 자바스크립트, CSS 코드 제거
+       - /js/vendors.js
+         - 전송 크기: 2,125.4 KB
+         - 가능한 절감 효과: 637.3 KB
+       - /js/main.js
+         - 전송 크기: 172.3 KB
+         - 가능한 절감 효과: 61.8 KB 절감
+       - /css/materialdesignicons.min.css
+         - 전송 크기: 38.2 KB
+         - 가능한 절감 효과: 38.2 KB 절감
    - 정적 리소스 캐싱
+     - /js/vendors.js, /js/main.js, /images/main_logo.png, /images/logo_small.png
    - 웹폰트가 로드되는 동안 사용자에게 텍스트가 표시되도록 글꼴 표시 CSS 기능을 사용
    - 이미지 크기 지정
+     - /images/main_logo.png
+     - /images/logo_small.png
 
 ---
 
