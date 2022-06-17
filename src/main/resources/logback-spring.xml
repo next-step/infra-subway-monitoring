@@ -5,7 +5,7 @@
     <springProfile name="file-log">
         <include resource="appender/file-appender.xml" />
     </springProfile>
-    
+
     <springProfile name="json-logger">
         <include resource="appender/json-appender.xml" />
         <logger name="json">
