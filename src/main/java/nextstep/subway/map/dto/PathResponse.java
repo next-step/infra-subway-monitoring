@@ -27,7 +27,7 @@ public class PathResponse {
     @Override
     public String toString() {
         return "PathResponse{" +
-                "stations=" + stations +
+                "stationsSize=" + stations.size() +
                 ", distance=" + distance +
                 '}';
     }

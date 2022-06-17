@@ -75,9 +75,7 @@ public class LineResponse {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
-                ", stations=" + stations +
-                ", createdDate=" + createdDate +
-                ", modifiedDate=" + modifiedDate +
+                ", stationSize=" + stations.size() +
                 '}';
     }
 }

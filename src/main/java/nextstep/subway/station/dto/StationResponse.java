@@ -45,8 +45,6 @@ public class StationResponse {
         return "StationResponse{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", createdDate=" + createdDate +
-                ", modifiedDate=" + modifiedDate +
                 '}';
     }
 }
