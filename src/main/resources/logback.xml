@@ -2,9 +2,9 @@
 
 <configuration debug="false">
     <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <include resource="logback/console-appender.xml" />
-    <include resource="logback/file-appender.xml" />
-    <include resource="logback/json-appender.xml" />
+    <include resource="appender/console-appender.xml" />
+    <include resource="appender/file-appender.xml" />
+    <include resource="appender/json-appender.xml" />
 
     <logger name="console" level="TRACE" >
         <appender-ref ref="console" />
