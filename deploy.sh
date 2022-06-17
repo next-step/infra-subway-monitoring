@@ -46,7 +46,7 @@ function down() {
 
 function run() {
     echo -e " app Run"
-    nohup java -jar -Dspring.profiles.active=prod build/libs &
+    nohup java -jar -Dspring.profiles.active=prod build/libs/subway-0.0.1-SNAPSHOT.jar &
 }
 
 deploy_message
