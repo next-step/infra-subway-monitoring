@@ -1,5 +1,6 @@
 package nextstep.subway.station.application;
 
+import nextstep.subway.aop.NoLogging;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
@@ -24,6 +25,7 @@ public class StationService {
         return StationResponse.of(persistStation);
     }
 
+    @NoLogging
     @Transactional(readOnly = true)
     public List<StationResponse> findAllStations() {
         List<Station> stations = stationRepository.findAll();

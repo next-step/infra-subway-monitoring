@@ -1,5 +1,6 @@
 package nextstep.subway.line.application;
 
+import nextstep.subway.aop.NoLogging;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.line.domain.LineRepository;
 import nextstep.subway.line.dto.LineRequest;
@@ -31,6 +32,7 @@ public class LineService {
         return LineResponse.of(persistLine);
     }
 
+    @NoLogging
     public List<LineResponse> findLineResponses() {
         List<Line> persistLines = lineRepository.findAll();
         return persistLines.stream()
@@ -38,6 +40,7 @@ public class LineService {
             .collect(Collectors.toList());
     }
 
+    @NoLogging
     public List<Line> findLines() {
         return lineRepository.findAll();
     }
