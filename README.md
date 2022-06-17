@@ -37,6 +37,18 @@ npm run dev
 ```
 <br>
 
+### 0단계 - 학습 
+1. 웹 성능 최적화 요소
+ - TTI(Time TO Interactive) : 상호 작용까지 시간
+   - 사용자가 상호작용 가능할때 까지 걸리는 시간
+   - ~3.8sec : Green, 3.9 ~ 7.3sec : Yellow
+ - FCP(First Contentful Paint) : 페이지 콘텐츠의 일부가 렌더링 시작될때까지 걸리는 시간 
+   - ~1.8sec : Green, 1.9~3sec : yellow 
+ - LCP(Largest Contentful Pain) : 페이지 콘텐츠중 가장큰 이미지 혹은 텍스트 블록의 렌더링까지 걸리는 시간
+   - ~2.5sec : Green, 2.6~5.4sec : yellow
+ - TBT(Total Blocking Time) : FCP 와 상호작용 사이의 시간 
+   - ~200ms : Green, 200~600ms : yellow
+
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
