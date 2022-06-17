@@ -47,10 +47,10 @@ function down() {
 function run() {
     echo -e " Docker Container Run"
     docker run \
+    -v /var/log:/logs
     -d \
     -p 8080:8080 \
     --name subway subway \
-    -v /etc/localtime:/etc/localtime:ro \
     -e TZ=Asia/Seoul
 }
 
