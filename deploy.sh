@@ -45,13 +45,8 @@ function down() {
 }
 
 function run() {
-    echo -e " Docker Container Run"
-    docker run \
-    -d \
-    -p 8080:8080 \
-    --name subway subway \
-    -v /var/log:/logs \
-    -e TZ=Asia/Seoul
+    echo -e " app Run"
+    nohup java -jar -Dspring.profiles.active=prod build/libs &
 }
 
 deploy_message
