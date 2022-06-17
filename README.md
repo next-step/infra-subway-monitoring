@@ -277,9 +277,13 @@ Stress
   
 ```
 
-- [ ] 로그 설정하기
+- [X] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
+   public ip : 13.125.138.173
+   private ip : 192.168.219.48
+   app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
+   app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access.log
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+3. Cloudwatch 대시보드 URL을 알려주세요
