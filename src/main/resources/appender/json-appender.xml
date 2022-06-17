@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="home" value="/var/log/" />
+    <property name="home" value="logs/" />
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${home}app_json.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
