@@ -242,6 +242,41 @@ Stress
   - nginx gzip 설정 (nginx.conf)
   - nginx 정적캐싱 적용 (nginx.conf)
   - LineRepository Sleep 제거
+```javascript
+
+  gzip_comp_level 6;
+  gzip_min_length 1100;
+  gzip_buffers 16 8k;
+  gzip_proxied any;
+  gzip_types
+    text/plain
+    text/css
+    text/js
+    text/xml
+    text/javascript
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    image/svg+xml;
+
+    ///////////////////////
+
+  # Proxy Setting
+  proxy_cache_path /etc/nginx/tmp levels=1:2 keys_zone=my_zone:10m inactive=60m;
+  proxy_cache_key "$scheme$request_method$host$request_uri";
+  
+  // ....
+  
+  location / {
+    proxy_cache my_zone;
+    add_header X-Proxy-Cache $upstream_cache_status;
+    proxy_pass http://app;
+  }
+  
+```
+
 - [ ] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 
