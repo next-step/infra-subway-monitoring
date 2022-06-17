@@ -1,9 +1,14 @@
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%fullRequest%n%n%fullResponse</pattern>
-        </encoder>
-    </appender>
+    <springProfile name="prod">
+        <include resource="logback-access-appender.xml" />
+    </springProfile>
+    <springProfile name="!prod">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%fullRequest%n%n%fullResponse</pattern>
+            </encoder>
+        </appender>
 
-    <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT" />
+    </springProfile>
 </configuration>

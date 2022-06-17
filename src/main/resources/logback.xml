@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProfile name="local">
+        <include resource="console-appender.xml" />
+
+        <logger name="org.hibernate.type.descriptor.sql" level="TRACE">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="nextstep.subway" level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="prod">
+        <include resource="console-appender.xml" />
+        <include resource="file-appender.xml" />
+
+        <logger name="org.hibernate" level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="org.hibernate.type.descriptor.sql" level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </logger>
+        <logger name="nextstep.subway" level="INFO">
+            <appender-ref ref="FILE" />
+        </logger>
+    </springProfile>
+</configuration>
