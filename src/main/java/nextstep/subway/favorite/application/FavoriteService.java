@@ -6,6 +6,7 @@ import nextstep.subway.favorite.domain.FavoriteRepository;
 import nextstep.subway.favorite.domain.HasNotPermissionException;
 import nextstep.subway.favorite.dto.FavoriteRequest;
 import nextstep.subway.favorite.dto.FavoriteResponse;
+import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
@@ -22,15 +23,22 @@ import java.util.stream.Collectors;
 public class FavoriteService {
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
+    private StationService stationService;
 
-    public FavoriteService(FavoriteRepository favoriteRepository, StationRepository stationRepository) {
+    public FavoriteService(FavoriteRepository favoriteRepository,
+                           StationRepository stationRepository,
+                           StationService stationService) {
         this.favoriteRepository = favoriteRepository;
         this.stationRepository = stationRepository;
+        this.stationService = stationService;
     }
 
-    public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
+    public FavoriteResponse createFavorite(LoginMember loginMember, FavoriteRequest request) {
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
-        favoriteRepository.save(favorite);
+        Favorite savedFavorite = favoriteRepository.save(favorite);
+        Station source = stationService.findStationById(savedFavorite.getSourceStationId());
+        Station target = stationService.findStationById(savedFavorite.getTargetStationId());
+        return new FavoriteResponse(savedFavorite.getId(),StationResponse.of(source),StationResponse.of(target));
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
