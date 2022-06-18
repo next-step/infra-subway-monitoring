@@ -69,12 +69,13 @@ npm run dev
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - 텍스트 압축 사용 
-: /js/vendors.js (가능한 절감 효과: 1,716.5 KiB) 
-: /js/main.js (가능한 절감 효과: 143.6 KiB)
+    - gzip 설정을 통해 내용 압축
+    - /js/vendors.js (가능한 절감 효과: 1,716.5 KiB) 
+    - /js/main.js (가능한 절감 효과: 143.6 KiB)
 
 - 사용하지 않는 자바스크립트 줄이기
-: /js/vendors.js (가능한 절감 효과: 637.3 KiB)
-: /js/main.js (가능한 절감 효과: 61.8 KiB)
+    - /js/vendors.js (가능한 절감 효과: 637.3 KiB)
+    - /js/main.js (가능한 절감 효과: 61.8 KiB)
 
 #### 용어 정리
 - *FCP(First Contentful Paint)*
