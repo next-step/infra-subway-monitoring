@@ -1,5 +1,6 @@
 package nextstep.subway.map.domain;
 
+import java.util.stream.Collectors;
 import nextstep.subway.station.domain.Station;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class SubwayPath {
 
     public List<Station> getStations() {
         return stations;
+    }
+
+    public List<String> getStationNames() {
+        return stations.stream()
+            .map(Station::getName)
+            .collect(Collectors.toList());
     }
 
     public int calculateDistance() {

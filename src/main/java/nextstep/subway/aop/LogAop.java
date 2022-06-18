@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogAop {
-    private static final Logger log = LoggerFactory.getLogger(LogAop.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
 
     @Pointcut("execution(* nextstep.subway..*Service.*(..)) && !@target(nextstep.subway.aop.NoLogging)")
     private void cut() {}

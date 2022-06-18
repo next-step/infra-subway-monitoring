@@ -21,11 +21,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    @NoLogging
     public MemberResponse createMember(MemberRequest request) {
-        log.info("======= method name = createMember =======");
-        log.info("email : {}", request.getEmail());
-
         Member member = memberRepository.save(request.toMember());
         return MemberResponse.of(member);
     }
@@ -35,11 +31,7 @@ public class MemberService {
         return MemberResponse.of(member);
     }
 
-    @NoLogging
     public void updateMember(Long id, MemberRequest param) {
-        log.info("======= method name = updateMember =======");
-        log.info("email : {}", param.getEmail());
-
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
     }
