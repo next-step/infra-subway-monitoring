@@ -107,10 +107,19 @@ npm run dev
             - 예상 1일 평균 rps : 52 (1일 총 접속 수 / 86400)
             - 예상 1일 최대 rps : 104 (지하철 비지니스 특성상 이벤트 성으로 트래픽이 갑자기 증가할 날은 없기 때문에 평균 rps 대비 2배)
             - Latency : 100ms 이하
-        - 저장될 데이터 건수 및 크기
-          - 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+        - 저장된 데이터 건수 및 크기 (SELECT table_name, table_rows FROM information_schema. tables WHERE table_schema = 'subway' ORDER BY table_name;)
+          - line : 21
+          - section : 340
+          - station : 616
+          - member : 1
+        - 개인 PC에 k6, grafana 셋팅 후 실제 사용자와 동일한 환경으로 테스트 진행
+      
 
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+    - 메인페이지 -> 로그인 요청 -> 내 정보 조회 -> 경로 찾기 페이지 -> 경로 조회
+    - VUSER가 300 근처에서 에러 발생(EOF)
+    - CPU 최대 평균 30%
+    - [Script / image](./script)
 ---
 
 ### 3단계 - 로깅, 모니터링
