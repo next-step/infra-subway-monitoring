@@ -200,6 +200,7 @@ VUser: 점진적으로 증가시켜보기
 
 1. 각 서버내 로깅 경로를 알려주세요
 - nginx: /var/log/nginx
-- /home/ubuntu/nextstep/infra-subway-monitoring/logs
+- application log: /var/log/app
 
 3. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=limwoobin-dashboard
