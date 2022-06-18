@@ -108,6 +108,10 @@ npm run dev
       - 스크립트  : docs/load.js
       - K6      : docs/load.png
       - grafana : docs/load-grafana.png
+    - stress
+      - 스크립트  : docs/stress.js
+      - K6      : docs/stress.png
+      - grafana : docs/stress-grafana.png
 ---
 
 ### 3단계 - 로깅, 모니터링
