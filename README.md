@@ -129,10 +129,10 @@ npm run dev
     - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
     - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
   - 각 시나리오에 맞춰 스크립트 작성
-    - [ ] 접속 빈도가 높은 페이지
-    - [ ] 데이터를 갱신하는 페이지
-    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+    - [x] 접속 빈도가 높은 페이지
+    - [x] 데이터를 갱신하는 페이지
+    - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  - [x] Smoke, Load, Stress 테스트 후 결과를 기록
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
    - 대상 시스템 범위
@@ -148,12 +148,35 @@ npm run dev
         - 1일 최대 rps: 23 * (3000000 / 1000000) = 69rps
           - 최대 트래픽: 1위 어플 유저수, 평균 트래픽: 출근 이용객 수
       - latency
-        - 50ms 이하
+        - 50ms 이하 (왕복 100ms 이하)
     - 부하 테스트 시 저장될 데이터 정보
         - 지하철 노선: 23
         - 지하철 구간: 340
         - 지하철 역: 616
+    - 부하 유지기간: 최대 30분
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   - 테스트 시나리오: 메인 페이지 접속 -> 로그인 -> 나의 정보 수정 -> 경로 검색
+     - 메인 페이지: 접속 빈도가 높은 페이지
+     - 나의 정보 수정 페이지: 데이터를 갱신하는 페이지
+     - 경로 검색 페이지: 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+   - VUser
+     - R = 4
+     - T = (4 * 0.5) + 1 = 3
+     - 평균 VUser: (23 * 3) / 4 = 17 (소수점 제외)
+     - 최대 VUser: (69 * 3) / 4 = 51 (소수점 제외)
+   - 스크립트 및 결과
+       - smoke
+         - /src/k6/script/script/smoke.js
+         - /src/k6/result/smoke_K6.png
+         - /src/k6/result/smoke_grafana.png
+       - load
+         - /src/k6/script/script/load.js
+         - /src/k6/result/load_K6.png
+         - /src/k6/result/load_grafana.png
+       - stress
+         - /src/k6/script/script/stress.js
+         - /src/k6/result/stress_K6.png
+         - /src/k6/result/stress_grafana.png
 
 ---
 
