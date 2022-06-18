@@ -1,5 +1,7 @@
 package nextstep.subway.favorite.application;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.favorite.domain.Favorite;
 import nextstep.subway.favorite.domain.FavoriteRepository;
@@ -9,6 +11,8 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,8 +24,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class FavoriteService {
-    private FavoriteRepository favoriteRepository;
-    private StationRepository stationRepository;
+    private static final Logger jsonLog = LoggerFactory.getLogger("json");
+
+    private final FavoriteRepository favoriteRepository;
+    private final StationRepository stationRepository;
 
     public FavoriteService(FavoriteRepository favoriteRepository, StationRepository stationRepository) {
         this.favoriteRepository = favoriteRepository;
@@ -31,6 +37,7 @@ public class FavoriteService {
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
         favoriteRepository.save(favorite);
+        jsonLogging(request);
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
@@ -67,4 +74,9 @@ public class FavoriteService {
         }
         return stationIds;
     }
+
+    private void jsonLogging(FavoriteRequest request) {
+        jsonLog.info("즐겨찾기 생성 : [{}]-[{}]",kv("출발역ID", request.getSource()),kv("도착역ID", request.getTarget()));
+    }
+
 }
