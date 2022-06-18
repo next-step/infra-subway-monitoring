@@ -104,6 +104,10 @@ npm run dev
       - 스크립트  : docs/smoke.js
       - K6      : docs/smoke.png
       - grafana : docs/smoke-grafana.png
+    - load
+      - 스크립트  : docs/load.js
+      - K6      : docs/load.png
+      - grafana : docs/load-grafana.png
 ---
 
 ### 3단계 - 로깅, 모니터링
