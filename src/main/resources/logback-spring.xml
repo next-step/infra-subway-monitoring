@@ -1,7 +1,7 @@
 <configuration debug="false">
 
   <springProfile name="prod">
-    <property name="home" value="/var/log/subway" />
+    <property name="home" value="/var/log/subway/" />
   </springProfile>
   <springProfile name="!prod">
     <property name="home" value="./logs/" />
