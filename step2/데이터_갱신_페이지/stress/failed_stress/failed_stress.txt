@@ -1,0 +1,27 @@
+running (1m55.0s), 000/250 VUs, 57607 complete and 0 interrupted iterations
+default ✓ [======================================] 000/250 VUs  1m55.01s
+
+     ✗ 로그인 요청 결과 :
+      ↳  98% — ✓ 56667 / ✗ 940
+     ✗ 로그인 성공
+      ↳  98% — ✓ 56667 / ✗ 940
+     ✗ 개인정보 수정 결과 :
+      ↳  99% — ✓ 56326 / ✗ 341
+
+     checks.........................: 98.70% ✓ 169660     ✗ 2221
+     data_received..................: 40 MB  350 kB/s
+     data_sent......................: 37 MB  321 kB/s
+     http_req_blocked...............: avg=563.38µs min=0s       med=1.89µs   max=506.98ms p(90)=2.72µs   p(95)=3.54µs
+     http_req_connecting............: avg=16.41µs  min=0s       med=0s       max=22.73ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=105.21ms min=0s       med=60.87ms  max=3.3s     p(90)=253.59ms p(95)=391.05ms
+       { expected_response:true }...: avg=106.36ms min=2.51ms   med=62.13ms  max=3.3s     p(90)=255.04ms p(95)=393.54ms
+     http_req_failed................: 1.12%  ✓ 1281       ✗ 112993
+     http_req_receiving.............: avg=40.65µs  min=0s       med=30.58µs  max=24.6ms   p(90)=49.67µs  p(95)=60.13µs
+     http_req_sending...............: avg=25.9µs   min=0s       med=13.83µs  max=16.07ms  p(90)=23.71µs  p(95)=32.41µs
+     http_req_tls_handshaking.......: avg=547.22µs min=0s       med=0s       max=506.08ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=105.15ms min=0s       med=60.82ms  max=3.3s     p(90)=253.52ms p(95)=390.99ms
+     http_reqs......................: 114274 993.451995/s
+     iteration_duration.............: avg=210.15ms min=457.77µs med=131.09ms max=4.7s     p(90)=538.56ms p(95)=842.78ms
+     iterations.....................: 57607  500.811988/s
+     vus............................: 6      min=1        max=249
+     vus_max........................: 250    min=250      max=250

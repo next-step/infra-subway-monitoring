@@ -237,6 +237,63 @@ Stress
 ---
 
 ### 3단계 - 로깅, 모니터링
+**3단계 미션 요구사항**
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - nginx gzip 설정 (nginx.conf)
+  - nginx 정적캐싱 적용 (nginx.conf)
+  - LineRepository Sleep 제거
+```javascript
+
+  gzip_comp_level 6;
+  gzip_min_length 1100;
+  gzip_buffers 16 8k;
+  gzip_proxied any;
+  gzip_types
+    text/plain
+    text/css
+    text/js
+    text/xml
+    text/javascript
+    application/javascript
+    application/x-javascript
+    application/json
+    application/xml
+    application/rss+xml
+    image/svg+xml;
+
+    ///////////////////////
+
+  # Proxy Setting
+  proxy_cache_path /etc/nginx/tmp levels=1:2 keys_zone=my_zone:10m inactive=60m;
+  proxy_cache_key "$scheme$request_method$host$request_uri";
+  
+  // ....
+  
+  location / {
+    proxy_cache my_zone;
+    add_header X-Proxy-Cache $upstream_cache_status;
+    proxy_pass http://app;
+  }
+  
+```
+
+- [X] 로그 설정하기
+  - [ssonsh-ec2-public-1] application log 위치
+    - /home/ubuntu/infra-subway-monitoring/log/app-access.log
+    - /home/ubuntu/infra-subway-monitoring/log/app-file.log
+  - [ssonsh-ec2-public-1] nginx log 위치
+    - /home/ubuntu/volumes/nginx/logs/access.log
+    - /home/ubuntu/volumes/nginx/logs/error.log
+
+- [X] Cloudwatch로 모니터링
+
 1. 각 서버내 로깅 경로를 알려주세요
 
+**ssonsh-ec2-public-1**
+- public ip : 13.125.138.173
+- private ip : 192.168.219.48
+- app-file.log : /home/ubuntu/infra-subway-monitoring/log/app-file.log
+- app-access-file.log : /home/ubuntu/infra-subway-monitoring/log/app-access.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-ssonsh
