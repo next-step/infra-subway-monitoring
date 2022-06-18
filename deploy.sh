@@ -49,6 +49,16 @@ function run() {
     nohup java -jar -Dspring.profiles.active=prod build/libs/subway-0.0.1-SNAPSHOT.jar &
 }
 
+function run() {
+    echo -e " Docker Container Run"
+    docker run \
+    -d \
+    -p 8080:8080 \
+    -v /var/log/app:/logs \
+    --name subway subway \
+    -e TZ=Asia/Seoul
+}
+
 deploy_message
 pull
 build
