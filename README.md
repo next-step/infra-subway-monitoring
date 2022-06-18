@@ -79,9 +79,88 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
+
+#### 대상시스템범위
+- Reverse-proxy(Nginx)
+- WAS(Subway Application)
+- DB(Mysql)
+
+#### 목표값 설정 
+- [데이터로 보는 서울시 대중교통 이용](https://www.bigdata-map.kr/datastory/traffic/seoul) 페이지를 기반으로 목표값을 산정하였음
+- DAU : 264만명 (하루평균 이용인원의 60% 수준)
+  ```
+  2021년 4월 기준 지하철을 하루 평균 4,400,000명이 사용함(승차인원기준)
+  ```
+
+- 1인당 1일 평균 접속수 : 1 
+  ```
+  (근거)
+  통계자료는 하루동안의 모든 역에서의 승차인원을 집계한것
+  만일 동일인이 하루동안 A역, B역에서 승차한 경우 두번 집계되었을 것으로 예상
+  이미 접속횟수가 통계자료에서 반영되어있기때문에 평균 접속수는 1로 잡았음.
+  ```
+
+- 초당 평균 이용자 : 264000 / 86400 = 30rps
+- Throughput : 25 rps ~ 75 rps, Latency : 100ms
+  ```
+  출퇴근 시간대(08~09, 18~19)에 이용인원이 100만명 근처로 급격히 증가하는걸 확인할 수 있다.
+  출퇴근 시간대를 제외하는 경우 평균적으로 시간 당 30만 ~ 40만명이 이용하는 걸로 보임. (새벽시간 제외)
+  따라서 최대트래픽과 평균트래픽의 비율을 약 3:1 정도로 정하였음.
+  ```
+
+#### Vuser 산정 
+- 산정 결과 : 17 users
+- 산정 기준 
+  - T = (R * http_req_duration) (+ 1s)
+  - R = 8, http_req_duration = 0.1s ==> T = 1.8
+  - 목표 RPS : 75
+  - Vuser * 8 = 75 * 1.8
+  - Vuser = 16.875 
+
+#### 시나리오 (R = 8)
+- 로그인
+- 내정보 확인
+- 역정보 조회
+- 노선정보 조회
+- 구간정보 조회
+- 경로 조회
+- 즐겨찾기 추가
+- 즐겨찾기 삭제
+
+#### 부하유지시간 
+- Smoke : 10s (테스트 오류 없는지 확인용도)
+- Load : 1m(ramp up to 17vus), 5m(17vus), 10s(ramp down 0vus) 
+- Stress : 1m(20 vus) 1m(50vus) 1m(100vus) 1m(200vus..until error) 1m(ramp down 0vus)
+- 
+#### 부하 테스트 시 저장될 데이터 건수 및 크기
+- 그럴듯한 서비스 미션에서 사용했던 운영 DB 활용
+  - 역: 616
+  - 노선: 23
+  - 구간 : 340
+- 즐겨찾기가 지속적으로 추가 및 삭제 됨.  
+
+---
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+#### 테스트 스크립트 
+- loadtest 폴더에 있습니다.
+
+#### 결과 캡쳐
+- Smoke
+![smoke-grafana-1](./loadtest/result/smoke_result_grafana.png)
+![smoke-grafana-2](./loadtest/result/smoke_result_grafana2.png)
+![smoke-k6](./loadtest/result/smoke_result_k6.png)
+
+- Load
+![load-grafana-1](./loadtest/result/load_result_grafana.png)
+![load-grafana-2](./loadtest/result/load_result_grafana2.png)
+![load-k6](./loadtest/result/load_result_k6.png)
+
+- Stress(245 VU에서 응답 오류 발생)
+![stress-grafana-1](./loadtest/result/stress_result_grafana.png)
+![stress-grafana-2](./loadtest/result/stress_result_grafana2.png)
+![stress-k6](./loadtest/result/stress_result_k6.png)
 
 ---
 
