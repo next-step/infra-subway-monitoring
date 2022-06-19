@@ -48,13 +48,7 @@ export default function ()  {
         },
     };
 
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(myObjects, {
-        'Unauthorized check ': (r) => r.status === 401,
-        'retrieved member': (obj) => obj.id != 0
-    });
-
-    // createMember(payload);
+    findMyInfo(authHeaders);
 
     sleep(1);
 };
@@ -105,5 +99,14 @@ function createMember(payload) {
 
     const checkRes = check(res, {
         'createMember() status is 201': (r) => r.status === 201,
+    });
+}
+
+function findMyInfo(authHeaders) {
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+
+    check(myObjects, {
+        'findMyInfo() check ': (r) => r.status === 200,
+        'retrieved member': (obj) => obj.id != 0
     });
 }
