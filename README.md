@@ -124,7 +124,49 @@ PC와 Mobile의 속도 차이는, 네트워크 속도 차이 일것 같다.
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+ - 대상 시스템 범위 : reverse proxy ~ was ~ DB 
+ - 목표 값 설정
+   - 1일 최대 RPS = DAU * (1명당 1일 평균 접속수) / 86400 * (최대트래픽 / 평소트래픽)
+     - 500,000 * 4 / 86400 * 1.875 = 약 43
+       - DAU : 약 50만 / 일 
+         - http://www.koreanclick.com/insights/newsletter_view.html?code=topic&id=563&page=1&utm_source=board&utm_medium=board&utm_campaign=topic&utm_content=20200220 
+           - 네이버 지도 순 이용자 수(월별) 참조 
+       - 1명당 1일 평균 접속수 : 4회
+         - 출근, 퇴근, 개인업무 등
+       - 최대트래픽 / 평소트래픽 : 1.875
+         - https://www.bigdata-map.kr/datastory/traffic/seoul
+           - 하루 평균 지하철,버스 승/하차 인원
+             - peak(07 ~ 10 or 17 ~ 19) 평균 : 750,000
+             - normal(11~13) 평균 : 400,000
+   - T = (VU별 Request수) * Duration + (지연예상 시간)= 5 * 0.5 + 1= 3.5
+     - VU별 Request = 5
+       - src 지하철 검색
+       - dst 지하철 검색
+       - 최단 거리 조회 요청
+       - 최단거리 상세조회요청
+       - 최단거리 상세조회요청
+     - Duration = 0.5(sec) 
+       - Request 완료에 총 걸리는 시간(개인 PC 기준)
+     - 지연예상 최대 시간 = 1(sec)
+   - Vuser = (목표rps * T) / (VU별 Request수)
+     - 43 * 3.5 / 5 = 약 30
 
+ - 저장 데이터 
+   - 노선 : 23개
+   - 정류장 : 616개
+   - 구간 : 340개
+
+ - 시나리오 대상
+
+ |  URI         | 시나리오 사유     | 
+ |:------------|:--------:|
+   | https://jhsong2580.kro.kr | 접속 빈도가 높음   | 
+   |https://jhsong2580.kro.kr/path | 접속 빈도가 높음   |  
+   |https://jhsong2580.kro.kr/path | DB를 사용하는 기능 |  
+   |https://jhsong2580.kro.kr/stations | DB를 사용하는 기능 |  
+   |https://jhsong2580.kro.kr/sections | DB를 사용하는 기능 |  
+   
+   
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
