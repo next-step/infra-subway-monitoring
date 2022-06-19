@@ -23,18 +23,20 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
+        fileLogger.info("회원가입 : memberId={}", member.getId());
         return MemberResponse.of(member);
     }
 
     public MemberResponse findMember(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
-        fileLogger.info("내 정보 조회 : memberId={}", member.getId());
+        fileLogger.info("회원 정보 조회 : memberId={}", member.getId());
         return MemberResponse.of(member);
     }
 
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
+        fileLogger.info("회원 정보 수정 : memberId={}", member.getId());
     }
 
     public void deleteMember(Long id) {
