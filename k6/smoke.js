@@ -18,6 +18,8 @@ export default function ()  {
 
     goToMainPage();
 
+    goToLoginPage();
+
     var payload = JSON.stringify({
         email: USERNAME,
         password: PASSWORD,
@@ -52,5 +54,13 @@ function goToMainPage() {
 
     const checkRes = check(res, {
         'goToMainPage() status is 200': (r) => r.status === 200
+    });
+}
+
+function goToLoginPage() {
+    const res = http.get(`${BASE_URL}/login`);
+
+    const checkRes = check(res, {
+        'goToLoginPage() status is 200': (r) => r.status === 200
     });
 }
