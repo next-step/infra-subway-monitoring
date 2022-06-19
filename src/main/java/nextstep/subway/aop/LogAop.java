@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class LogAop {
     private static final Logger log = LoggerFactory.getLogger("file");
 
-    @Pointcut("execution(* nextstep.subway..*Service.*(..)) && @target(nextstep.subway.aop.Logging)")
+    @Pointcut("@annotation(Logging)")
     private void cut() {}
 
     @Around("cut()")
