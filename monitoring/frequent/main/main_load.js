@@ -2,7 +2,7 @@ import executor from '../../executor/index.js';
 
 const targetMethod = 'get';
 const targetPath = '/';
-const checkBy = {'response ok': (res) => res.status === 200}
+const checkBy = {'open main page successfully': (res) => res.status === 200}
 
 export const options = {
     stages: [
@@ -14,7 +14,6 @@ export const options = {
     ],
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-        'open main page successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
     },
 };
 
