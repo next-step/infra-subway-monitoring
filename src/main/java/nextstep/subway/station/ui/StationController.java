@@ -1,10 +1,9 @@
 package nextstep.subway.station.ui;
 
+import nextstep.subway.aop.Logging;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +16,14 @@ import java.util.List;
 public class StationController {
     private StationService stationService;
 
-    private static final Logger log = LoggerFactory.getLogger("file");
-
     public StationController(StationService stationService) {
         this.stationService = stationService;
     }
 
+    @Logging
     @PostMapping("/stations")
     public ResponseEntity<StationResponse> createStation(@RequestBody StationRequest stationRequest) {
         StationResponse station = stationService.saveStation(stationRequest);
-        log.info("=============================================");
-        log.info(station.toString());
-        log.info("=============================================");
         return ResponseEntity.created(URI.create("/stations/" + station.getId())).body(station);
     }
 
@@ -37,6 +32,7 @@ public class StationController {
         return ResponseEntity.ok().body(stationService.findAllStations());
     }
 
+    @Logging
     @DeleteMapping("/stations/{id}")
     public ResponseEntity deleteStation(@PathVariable Long id) {
         stationService.deleteStationById(id);

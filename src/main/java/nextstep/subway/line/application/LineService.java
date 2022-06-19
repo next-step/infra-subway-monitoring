@@ -1,6 +1,5 @@
 package nextstep.subway.line.application;
 
-import nextstep.subway.aop.Logging;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.line.domain.LineRepository;
 import nextstep.subway.line.dto.LineRequest;
@@ -25,7 +24,6 @@ public class LineService {
         this.stationService = stationService;
     }
 
-    @Logging
     public LineResponse saveLine(LineRequest request) {
         Station upStation = stationService.findById(request.getUpStationId());
         Station downStation = stationService.findById(request.getDownStationId());
@@ -53,18 +51,15 @@ public class LineService {
         return LineResponse.of(persistLine);
     }
 
-    @Logging
     public void updateLine(Long id, LineRequest lineUpdateRequest) {
         Line persistLine = lineRepository.findById(id).orElseThrow(RuntimeException::new);
         persistLine.update(new Line(lineUpdateRequest.getName(), lineUpdateRequest.getColor()));
     }
 
-    @Logging
     public void deleteLineById(Long id) {
         lineRepository.deleteById(id);
     }
 
-    @Logging
     public void addLineStation(Long lineId, SectionRequest request) {
         Line line = findLineById(lineId);
         Station upStation = stationService.findStationById(request.getUpStationId());
@@ -72,7 +67,6 @@ public class LineService {
         line.addLineSection(upStation, downStation, request.getDistance());
     }
 
-    @Logging
     public void removeLineStation(Long lineId, Long stationId) {
         Line line = findLineById(lineId);
         line.removeStation(stationId);

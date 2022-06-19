@@ -1,6 +1,5 @@
 package nextstep.subway.member.application;
 
-import nextstep.subway.aop.Logging;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
@@ -17,7 +16,6 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    @Logging
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
         return MemberResponse.of(member);
@@ -28,13 +26,11 @@ public class MemberService {
         return MemberResponse.of(member);
     }
 
-    @Logging
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
     }
 
-    @Logging
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
     }
