@@ -1,5 +1,6 @@
 package nextstep.subway.map.application;
 
+import nextstep.subway.aop.Logging;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
@@ -30,6 +31,7 @@ public class MapService {
         this.pathService = pathService;
     }
 
+    @Logging
     public PathResponse findPath(Long source, Long target) {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);

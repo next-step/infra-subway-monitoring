@@ -1,6 +1,6 @@
 package nextstep.subway.auth.application;
 
-import nextstep.subway.aop.NoLogging;
+import nextstep.subway.aop.Logging;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
@@ -25,11 +25,8 @@ public class AuthService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @NoLogging
+    @Logging
     public TokenResponse login(TokenRequest request) {
-        log.info("======= method name = login =======");
-        log.info("email : {}", request.getEmail());
-
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
         member.checkPassword(request.getPassword());
 

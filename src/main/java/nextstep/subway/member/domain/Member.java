@@ -59,7 +59,6 @@ public class Member extends BaseEntity {
     public String toString() {
         return "Member{" +
             "id=" + id +
-            ", email='" + email + '\'' +
             ", age=" + age +
             '}';
     }
