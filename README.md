@@ -173,7 +173,7 @@ npm run dev
   - local, test, prod profile 활성화시 로깅 용도의 profile도 같이 활성화(spring.profiles.group을 이용)
   - JSON 로그만 모아서 저장(Marker, Filter API 사용)  
 - [X] 애플리케이션 이벤트 발생시 로그 기록
-- [ ] AOP를 이용해서 메서드 Input/Output 남기기
+- [X] AOP를 이용해서 Controller 메서드 Input/Output 남기기
 - [ ] actuator 적용하기
 - [ ] nginx log 남기기 
 - [ ] cloudWatch 적용하기
