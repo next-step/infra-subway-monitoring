@@ -52,6 +52,7 @@ public class MemberController {
         return ResponseEntity.ok().body(member);
     }
 
+    @Logging
     @PutMapping("/members/me")
     public ResponseEntity<MemberResponse> updateMemberOfMine(@AuthenticationPrincipal LoginMember loginMember, @RequestBody MemberRequest param) {
         memberService.updateMember(loginMember.getId(), param);
