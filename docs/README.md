@@ -52,3 +52,28 @@
      pc
      | 2.9s     | 2.9s        | 2.9s    | 2.9s   | 10s    | 0s     |  66
   ```
+----------------
+----------------
+
+## STEP 2 : 부하 테스트 
+#### 요구 사항
+- [ ] 부하 테스트
+  - [ ] 테스트 전제조건 정리
+    - [x] 대상 시스템 범위
+    - [x] 목표값 설정 
+    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
+  - [ ] 각 시나리오에 맞춰 스크립트 작성
+    - [ ] 접속 빈도가 높은 페이지
+    - [ ] 데이터를 갱신하는 페이지
+    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 
+  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록 
+
+- 부하 테스트 소개 
+  - k6 설치 
+  ```text
+     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+     echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+     sudo apt-get update
+     sudo apt-get install k6
+  ```
+  - 
