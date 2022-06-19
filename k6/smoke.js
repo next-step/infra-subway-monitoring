@@ -14,20 +14,13 @@ const BASE_URL = 'https://handh.kro.kr';
 const USERNAME = 'nextstep@nextstep.camp';
 const PASSWORD = 'password';
 const AGE = 20;
+const LOGIN_INFO = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+    age: AGE,
+});
 
 export default function ()  {
-
-    var payload = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-        age: AGE,
-    });
-
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
 
     goToMainPage();
 
@@ -35,19 +28,13 @@ export default function ()  {
 
     goToJoinPage();
 
-    let loginRes = login(payload, params);
-
+    let loginRes = login(LOGIN_INFO);
     if (!isLoginSuccess(loginRes)) {
-        createMember(payload);
-        loginRes = login(payload, params);
+        createMember(LOGIN_INFO);
+        loginRes = login(LOGIN_INFO);
     }
 
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-
+    let authHeaders = getAuthHeaders(loginRes);
     findMyInfo(authHeaders);
 
     findPath();
@@ -79,7 +66,13 @@ function goToJoinPage() {
     });
 }
 
-function login(payload, params) {
+function login(payload) {
+    const params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
     const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
     check(loginRes, {
@@ -92,6 +85,14 @@ function login(payload, params) {
 
 function isLoginSuccess(response) {
     return response.status === 200;
+}
+
+function getAuthHeaders(loginRes) {
+    return {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
 }
 
 function createMember(payload) {
