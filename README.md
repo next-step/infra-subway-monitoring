@@ -344,8 +344,8 @@ export let options = {
 
 |-|Smoke|Load|Stress|
 |---|---|---|---|
-|k6|보기|보기|보기|
-|grafana|보기|보기|보기|
+|k6|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/k6_smoke.png)|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/k6_load.png)|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/k6_stress.png)|
+|grafana|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/grafana_smoke.png)|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/grafana_load.png)|[보기](https://github.com/tasklet1579/infra-subway-monitoring/blob/step2/docs/images/grafana_stress.png)|
 
 ---
 
