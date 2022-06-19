@@ -2,7 +2,8 @@
 
 SCRIPT_PATH=$(dirname "$0")
 
-for MONITORING_SCRIPT_FILE in $(find "$SCRIPT_PATH" -path ./monitoring/executor -prune -o -name '*.js' -print); do
+find "$SCRIPT_PATH" -name '*.js' ! -path "$SCRIPT_PATH/executor/*" | while IFS= read -r MONITORING_SCRIPT_FILE
+do
   NAME="$(basename "$MONITORING_SCRIPT_FILE" .js)"
   OUTPUT_PATH=$(dirname "$MONITORING_SCRIPT_FILE")
 
