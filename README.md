@@ -94,7 +94,17 @@ npm run dev
         - 1600000 / 86400 = 1일 평균 18.5 rps
         - 18.5 * 1.6 = __29.6rps__
         - Latency : 50ms
+   3. 부하 테스트 시 저장될 데이터 건수 및 크기
+      1. Line : 2개
+      2. Station : 138 개
+      3. Section : 89 개
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   1. 접속 빈도가 높은 페이지
+      1. https://mannue.kro.kr/
+   2. 데이터를 갱신하는 페이지 
+      1. https://mannue.kro.kr/stations
+   3. 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+      1. https://mannue.kro.kr/path
 
 ---
 
