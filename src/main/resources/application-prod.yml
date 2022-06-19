@@ -20,7 +20,8 @@ logging:
 
 cloud:
   aws:
-    stack.auto: false  # 로컬에서 실행시 AWS stack autoconfiguration 수행과정에서 발생하는 에러 방지
+    stack:
+      auto: false  # 로컬에서 실행시 AWS stack autoconfiguration 수행과정에서 발생하는 에러 방지
     region:
       static: ap-northeast-2
 management:
