@@ -35,6 +35,7 @@ public class MemberRequest {
     @Override
     public String toString() {
         return "MemberRequest{" +
+            "email='" + "[masked]" + '\'' +
             ", age=" + age +
             '}';
     }
