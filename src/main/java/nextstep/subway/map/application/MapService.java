@@ -36,7 +36,7 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
-        log.info("find Shortest Path: {}, {}, {}, {} ",
+        log.debug("find Shortest Path: {}, {}, {}, {} ",
             kv("departureStation", sourceStation.getName()),
             kv("arrivalStation", targetStation.getName()),
             kv("distance", subwayPath.calculateDistance()),
