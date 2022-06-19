@@ -1,7 +1,7 @@
 import executor from '../../executor/index.js';
 
 const targetMethod = 'get';
-const targetPath = '/';
+const targetPath = '/path';
 const checkBy = {'response ok': (res) => res.status === 200}
 
 export const options = {

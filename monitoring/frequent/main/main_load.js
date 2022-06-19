@@ -2,7 +2,7 @@ import executor from '../../executor/index.js';
 
 const targetMethod = 'get';
 const targetPath = '/';
-const checkBy = {'open main page successfully': (res) => res.status === 200}
+const checkBy = {'response ok': (res) => res.status === 200}
 
 export const options = {
     stages: [

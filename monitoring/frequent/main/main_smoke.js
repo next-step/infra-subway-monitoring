@@ -1,4 +1,4 @@
-import executor from '../../executor';
+import executor from '../../executor/index.js';
 
 const targetMethod = 'get';
 const targetPath = '/';
