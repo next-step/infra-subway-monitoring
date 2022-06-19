@@ -81,7 +81,7 @@ function login(payload, params) {
     const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
 
     check(loginRes, {
-        'login() ': (r) => r.status === 200,
+        'login() status is 200': (r) => r.status === 200,
         'logged in successfully': (resp) => resp.json('accessToken') !== '',
     });
 
@@ -103,10 +103,10 @@ function createMember(payload) {
 }
 
 function findMyInfo(authHeaders) {
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders);
 
     check(myObjects, {
-        'findMyInfo() check ': (r) => r.status === 200,
-        'retrieved member': (obj) => obj.id != 0
+        'findMyInfo() status is 200': (resp) => resp.status === 200,
+        'find member successfully': (resp) => resp.json().id !== 0
     });
 }
