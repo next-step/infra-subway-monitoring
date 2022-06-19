@@ -76,4 +76,11 @@
      sudo apt-get update
      sudo apt-get install k6
   ```
-  - 
+  - 시나리오 상 두 번의 요청이 있고 총 latency 목표값을 0.2s 라고 가정한다면
+    - T(VU iteration) = (요청수 * http_req_duration) + a 
+    - T = (2 * 0.2) + 0 = 0.4s
+  
+  - 목표 rps = (VUser * T) / 요청수
+    - VUser = (100 * 0.4) / 2 = 20
+  
+  - 일반적으로 부하 테스트는 30~ 2시간 정도를 권장 
