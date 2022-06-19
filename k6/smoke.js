@@ -2,8 +2,8 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 1, // 1 user looping for 1 minute
-    duration: '10s',
+    vus: 2, // 2 user looping for 1 minute
+    duration: '1m',
 
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -49,6 +49,8 @@ export default function ()  {
     };
 
     findMyInfo(authHeaders);
+
+    findPath();
 
     sleep(1);
 };
@@ -97,16 +99,24 @@ function createMember(payload) {
         headers: { 'Content-Type': 'application/json' },
     });
 
-    const checkRes = check(res, {
+    check(res, {
         'createMember() status is 201': (r) => r.status === 201,
     });
 }
 
 function findMyInfo(authHeaders) {
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders);
+    const myObjects = http.get(`${BASE_URL}/members/me`, authHeaders);
 
     check(myObjects, {
         'findMyInfo() status is 200': (resp) => resp.status === 200,
         'find member successfully': (resp) => resp.json().id !== 0
+    });
+}
+
+function findPath() {
+    const res = http.get(`${BASE_URL}/paths?source=167&target=392`);
+
+    check(res, {
+        'findPath() status is 200': (resp) => resp.status === 200,
     });
 }
