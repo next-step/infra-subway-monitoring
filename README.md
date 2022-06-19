@@ -172,8 +172,11 @@ npm run dev
   - boot에서 제공하는 로그 기본설정 최대한 재사용(console log appender, file log appender)
   - local, test, prod profile 활성화시 로깅 용도의 profile도 같이 활성화(spring.profiles.group을 이용)
   - JSON 로그만 모아서 저장(Marker, Filter API 사용)  
-- [ ] 애플리케이션 로그 적용하기 
-- [ ] actuator 도입하기
+- [X] 애플리케이션 이벤트 발생시 로그 기록
+- [ ] AOP를 이용해서 메서드 Input/Output 남기기
+- [ ] actuator 적용하기
+- [ ] nginx log 남기기 
+- [ ] cloudWatch 적용하기
 
 1. 각 서버내 로깅 경로를 알려주세요
 
