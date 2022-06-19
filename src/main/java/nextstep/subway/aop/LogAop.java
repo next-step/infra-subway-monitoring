@@ -2,6 +2,7 @@ package nextstep.subway.aop;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Objects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -48,7 +49,9 @@ public class LogAop {
     private void loggingResponse(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();
 
-        log.info("return type = {}", result.getClass().getSimpleName());
-        log.info("return value = {}", result);
+        if (Objects.nonNull(result)) {
+            log.info("return type = {}", result.getClass().getSimpleName());
+            log.info("return value = {}", result);
+        }
     }
 }
