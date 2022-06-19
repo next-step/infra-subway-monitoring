@@ -32,11 +32,20 @@ public class LogAop {
     private void cut() {}
 
     @Around("cut()")
-    public void logging(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object result;
         Method method = getMethod(joinPoint);
         log.info("======= method name = {} =======", method.getName());
         loggingParameter(joinPoint);
-        loggingResponse(joinPoint);
+
+        try {
+            result = joinPoint.proceed();
+            loggingResponse(result);
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return result;
     }
 
     @AfterThrowing(value = "cut()", throwing = "ex")
@@ -56,14 +65,12 @@ public class LogAop {
         log.info("Params = {}", Arrays.toString(joinPoint.getArgs()));
     }
 
-    private void loggingResponse(ProceedingJoinPoint joinPoint) throws Throwable {
-        Object result = joinPoint.proceed();
-
+    private void loggingResponse(Object result) {
         if (Objects.nonNull(result)) {
             HttpStatus status = ((ResponseEntity<?>) result).getStatusCode();
             log.info("REQUEST ID = {}", request.hashCode());
             log.info("RETURN STATUS = {}", status.value());
-            log.info("RETURN VALUE = {}", result);
+            log.info("RETURN VALUE = {}", ((ResponseEntity<?>) result).getBody());
         }
     }
 }
