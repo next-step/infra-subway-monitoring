@@ -11,7 +11,7 @@
     <logger name="file" level="INFO" >
         <appender-ref ref="file" />
     </logger>
-    <logger name="file" level="INFO" >
+    <logger name="json" level="INFO" >
         <appender-ref ref="json" />
     </logger>
     <logger name="console" level="TRACE" >
