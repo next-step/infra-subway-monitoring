@@ -1,6 +1,6 @@
 <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <!--로깅이 기록될 위치-->
-    <file>${home}file.log</file>
+    <file>${home}json.log</file>
     <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
         <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
