@@ -95,17 +95,88 @@ npm run dev
      
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-   - 자바스크립트, CSS 리소스 압축 및 사용하지 않는 코드 제거
+   - 자바스크립트 리소스 압축
+     - /js/vendors.js
+       - 전송 크기: 2,125 KB
+       - 가능한 절감 효과: 1,716.5 KB
+     - /js/main.js
+       - 전송 크기: 172.0 KB
+       - 가능한 절감 효과: 143.6 KB 절감
+   - 사용하지 않는 자바스크립트, CSS 코드 제거
+       - /js/vendors.js
+         - 전송 크기: 2,125.4 KB
+         - 가능한 절감 효과: 637.3 KB
+       - /js/main.js
+         - 전송 크기: 172.3 KB
+         - 가능한 절감 효과: 61.8 KB 절감
+       - /css/materialdesignicons.min.css
+         - 전송 크기: 38.2 KB
+         - 가능한 절감 효과: 38.2 KB 절감
    - 정적 리소스 캐싱
+     - /js/vendors.js, /js/main.js, /images/main_logo.png, /images/logo_small.png
    - 웹폰트가 로드되는 동안 사용자에게 텍스트가 표시되도록 글꼴 표시 CSS 기능을 사용
    - 이미지 크기 지정
+     - /images/main_logo.png
+     - /images/logo_small.png
 
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+#### 요구사항
+- 부하 테스트
+  - 테스트 전제조건 정리
+    - [x] 대상 시스템 범위
+    - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
+  - 각 시나리오에 맞춰 스크립트 작성
+    - [x] 접속 빈도가 높은 페이지
+    - [x] 데이터를 갱신하는 페이지
+    - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  - [x] Smoke, Load, Stress 테스트 후 결과를 기록
 
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   - 대상 시스템 범위
+     - WEB, WAS, DB
+    - 목푯값 설정
+      - 하루 평균 수도권 이용객 수 약 600만명 (https://blog.hyundai-rotem.co.kr/691)
+        - 출퇴근 시간(7~9, 18~20) 기준 전체 이용객의 약 1/3 = 약 200만명
+      - 1위 지하철 종결자 어플 유저 수 약 300만명 (https://blog.naver.com/naks1/222621740616)
+      - Throughput
+        - 1일 사용자 수(DAU): 100만명 * 평균 접속 수: 2회 = 200만
+          - 출퇴근 노선 검색에 이용한다고 가정. 출근 시 1회 퇴근 시 1회 사용
+        - 1일 평균 rps: 2000000/86400 = 23rps (소숫점 제외)
+        - 1일 최대 rps: 23 * (3000000 / 1000000) = 69rps
+          - 최대 트래픽: 1위 어플 유저수, 평균 트래픽: 출근 이용객 수
+      - latency
+        - 50ms 이하 (왕복 100ms 이하)
+    - 부하 테스트 시 저장될 데이터 정보
+        - 지하철 노선: 23
+        - 지하철 구간: 340
+        - 지하철 역: 616
+    - 부하 유지기간: 최대 30분
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   - 테스트 시나리오: 메인 페이지 접속 -> 로그인 -> 나의 정보 수정 -> 경로 검색
+     - 메인 페이지: 접속 빈도가 높은 페이지
+     - 나의 정보 수정 페이지: 데이터를 갱신하는 페이지
+     - 경로 검색 페이지: 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+   - VUser
+     - R = 4
+     - T = (4 * 0.5) + 1 = 3
+     - 평균 VUser: (23 * 3) / 4 = 17 (소수점 제외)
+     - 최대 VUser: (69 * 3) / 4 = 51 (소수점 제외)
+   - 스크립트 및 결과
+       - smoke
+         - /src/k6/script/script/smoke.js
+         - /src/k6/result/smoke_K6.png
+         - /src/k6/result/smoke_grafana.png
+       - load
+         - /src/k6/script/script/load.js
+         - /src/k6/result/load_K6.png
+         - /src/k6/result/load_grafana.png
+       - stress
+         - /src/k6/script/script/stress.js
+         - /src/k6/result/stress_K6.png
+         - /src/k6/result/stress_grafana.png
 
 ---
 
