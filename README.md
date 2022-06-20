@@ -117,12 +117,13 @@ https://m.map.kakao.com/
   - 평균 VUsers : (평균 rps: 32 * 3) / 4 = 24
   - 최대 VUsers : (최대 rps: 128 * 3) / 4 = 96
   
-- smoke test
-  - VUsers : 1
-
-- load test
-  - 부하 유지 시간 : 20분
-  - VUsers : 24 ~ 96
+- 결과
+  - load test
+    - 부하 유지 시간 : 20분
+    - VUsers : 24 ~ 96
+    - http_request_fail : 0.0%
+  - stress test
+    - http_request_fail : 8.84%
 ---
 
 ### 3단계 - 로깅, 모니터링
