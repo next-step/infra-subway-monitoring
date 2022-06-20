@@ -22,13 +22,13 @@ public class LogAspect {
     @Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
         String params = getRequestParams();
-        long startAt = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         logger.info("REQUEST : {}({}) = {}", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), params);
         Object result = joinPoint.proceed();
-        long endAt = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
         logger.info("RESPONSE : {}({}) = {} ({}ms)", joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(), result, endAt - startAt);
+                joinPoint.getSignature().getName(), result, endTime - startTime);
         return result;
     }
 
