@@ -1,8 +1,9 @@
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-let req_duration = 1;
-let VU = 30 * (2 * req_duration) / 2;
+let req_duration = 0.08;
+let T = (2 * req_duration) + 1
+let VU = 18 // 30 * T / 2;
 
 export let options = {
     stages: [
@@ -12,7 +13,6 @@ export let options = {
     ],
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-        'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
     },
 };
 
