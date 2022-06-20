@@ -41,9 +41,38 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+* Infra-Subway/stations 모바일 기준
+
+| 사이트          | FCP  |  TTI  |  SI  |  TBT  |   LCP  |   CLS   |   Score  |
+|----------------|------|------|------|--------|--------| ------- |  :-----: |
+| 서울교통공사     | 7.2s | 8.9s | 9.8s |  310ms |  11.4s  |  0.0  |   43    |
+| 네이버맵        | 2.0s | 6.6s | 5.2s |   300ms  |  7.2s  |  0.03  |    60    |
+| 카카오맵        | 1.7s | 4.4s | 6.5s |  60ms  |  4.7s  |  0.005  |    75    |
+| Infra-Subway(목표)   | 3.0s | 6s | 6s | 250ms |  6s  |   0.0   |    60    |
+
+- `https://songsimo.kro.kr/stations` PageSpeed 검사 결과 FCP, TTI, SI, TBT LCP 모두 낮게 나옴
+
+- 이미지에 대한 랜더링이 없기에 js, css를 최적화하면 성능 향상이 기대됨 <br>
+ 
+- 진단상에도 FCP와 LCP의 개선이 필요하다 나옴
+
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
+```text
+* 텍스트 압축(gzip, deflate, brotli 등)을 사용 : FCP, LCP 개선
+  - /js/vendors.js
+  - /js/main.js
+  - /stations
+  
+* 사용하지 않는 자바스크립트 줄이기 : LCP 개선
+  - /js/vendors.js
+  - /js/main.js
 
+* 과도한 DOM 크기 지양하기 : TBT 개선
+
+* 캐시를 활용하여 정적 속성 제공
+```
 
 ---
 
