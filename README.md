@@ -127,7 +127,9 @@ PC와 Mobile의 속도 차이는, 네트워크 속도 차이 일것 같다.
  - 대상 시스템 범위 : reverse proxy ~ was ~ DB 
  - 목표 값 설정
    - 1일 최대 RPS = DAU * (1명당 1일 평균 접속수) / 86400 * (최대트래픽 / 평소트래픽)
-     - 500,000 * 4 / 86400 * 1.875 = 약 43
+     - 1일 평균 rps : 500,000 * 4 / 86400 = 약 23 
+     - 1일 최대 rps : 500,000 * 4 / 86400 * 1.875 = 약 43
+     - Throughput : 23 ~ 43
        - DAU : 약 50만 / 일 
          - http://www.koreanclick.com/insights/newsletter_view.html?code=topic&id=563&page=1&utm_source=board&utm_medium=board&utm_campaign=topic&utm_content=20200220 
            - 네이버 지도 순 이용자 수(월별) 참조 
@@ -158,16 +160,52 @@ PC와 Mobile의 속도 차이는, 네트워크 속도 차이 일것 같다.
 
  - 시나리오 대상
 
- |  URI         | 시나리오 사유     | 
- |:------------|:--------:|
-   | https://jhsong2580.kro.kr | 접속 빈도가 높음   | 
-   |https://jhsong2580.kro.kr/path | 접속 빈도가 높음   |  
-   |https://jhsong2580.kro.kr/path | DB를 사용하는 기능 |  
-   |https://jhsong2580.kro.kr/stations | DB를 사용하는 기능 |  
-   |https://jhsong2580.kro.kr/sections | DB를 사용하는 기능 |  
+ |  URI         | 시나리오 사유     | 시나리오 여부 |
+ |:------------|:-------:|:--------:|
+   | https://jhsong2580.kro.kr | 접속 빈도가 높음   |    O    |
+   |https://jhsong2580.kro.kr/path | 접속 빈도가 높음   |  O|
+   |https://jhsong2580.kro.kr/path | DB를 사용하는 기능 |  O|
+   |https://jhsong2580.kro.kr/stations | DB를 사용하는 기능 |X|  
+   |https://jhsong2580.kro.kr/sections | DB를 사용하는 기능 | X| 
    
    
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 용어정리
+  - Smoke Test
+    - 최소한의 부하로 구성된 테스트로 테스트 시나리오에 오류가 있는지 없는지 확인
+    - 최소 부하 상태에서 시스템에 오류가 발생하는지 확인
+    - Vuser 1~2로 구성하여 테스트
+  - Load Test
+    - 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능이 어떤지 확인
+    - 애플리케이션 배포 및 인프라 변경(Scale out, Db Failover)시에 성능 변화 확인
+    - 외부 요인(결제 등)에 따른 예외 상황 확인
+  - Stress Test
+    - 서비스가 극한의 상황에서 어떻게 동작하는지 확인
+    - 장기간 부하 발생에 대한 한계치를 확인하고 기능이 정상 동작하는지 확인
+    - 최대 사용자 또는 최대 처리량을 확인
+    - 스트레스 테스트 이후 시스템이 수동 개입없이 복구되는지 확인
+
+- nGrinder Test결과
+  - script : readmeSource/loadTest/nGrinderTest/script/*
+  - result
+  - nGrinder
+    <img src="readmeSource/loadTest/nGrinderTest/result/nGrinderTestResult.png">
+
+- k6 test 결과
+  - Smoke test
+    - script : readmeSource/loadTest/k6Test/smoke.js
+    - result : http://3.35.223.220/d/bvXIAmq7z/k6-smoke-testing-results?orgId=1&from=1655701200000&to=1655705400000
+      <img src="readmeSource/loadTest/k6Test/result/smokeResult.png">
+  - Load test
+      - script : readmeSource/loadTest/k6Test/load.js
+      - result : http://3.35.223.220/d/080n0mqnz/k6-load-testing-results?orgId=1&from=1655701200000&to=1655705400000
+        <img src="readmeSource/loadTest/k6Test/result/loadResult.png">
+  - Stress test
+      - script : readmeSource/loadTest/k6Test/stress.js
+      - result : http://3.35.223.220/d/TMFSAmq7k/k6-stress-test-result?orgId=1&from=1655701200000&to=1655705400000
+        <img src="readmeSource/loadTest/k6Test/result/stressResult.png">
+
+  
 
 ---
 
