@@ -44,7 +44,7 @@ npm run dev
 - 경쟁사 평균의 120% 이내가 목표.
 - **조회** 위주의 웹 어플리케이션으로 성능예산 기준 지표는 FCP, TTI, SI를 선정.
   - FCP : 최대 4.24s
-  - TTI : 최대 7.88s
+  - TTI : 최대 5s
   - SI : 최대 7.8s
 
 https://piopoi.kro.kr 
@@ -93,7 +93,7 @@ https://piopoi.kro.kr
 - 중요한 JS/CSS를 인라인으로 변경
 - 이미지 요소에 width, height 명시
   - /images/main_logo.png, /images/logo_small.png
-
+- 이미지 등 리소스 캐싱
 ---
 
 ### 2단계 - 부하 테스트 
