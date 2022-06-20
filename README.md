@@ -177,8 +177,15 @@ npm run dev
 - [X] 서버에 nginx log 남기도록 처리
 - [X] 서버에 aws cloudwatch agent 설치
 - [X] actuator 적용하기
-- [ ] 사용자 정의 대시보드 구성
+- [X] 사용자 정의 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
-
+- /var/log/syslog
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log
+  - subway_app.log
+  - subway_app.log.json
+  
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=mmtos-dashboard
