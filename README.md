@@ -88,7 +88,35 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- 대상 시스템 범위: `사설 dns -> aws vpc -> ec2 webServer(nginx) -> ec2 was(embedded tomcat) -> ec2 db(docker)`
+  - db 리소스 상태
+  ![db.png](db.png)
+  
+- 목푯값 설정 (latency, throughput, 부하 유지기간)
+    > Throughput : 1일 평균 rps ~ 1일 최대 rps <br/>
+    언론 보도된 경쟁사 앱 DAU: 100~130만 <br/>
+    1일 사용자 수(DAU) x 1명당 1일 평균 접속 수(5회로 가정) = 6500000 <br/> 
+    1일 총 접속 수 / 86,400 (초/일) = 평균 RPS 75 <br/>
+    1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 최대 RPS 112
+   
+    > T = (R * http_req_duration) (+ 1s) <br/>
+    (4 * 0.2) + 1 = 1.8 <br/>
+    VUser = 33 ~ 50
+
+- 부하 테스트 시 저장될 데이터 건수 및 크기
+  - 새로 저장될 데이터는 없다. 이미 저장된 데이터(DB)에 대한 서비스 조회 성능을 확인해 본다.
+
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- smoke
+![smoke_k6.png](smoke_k6.png)
+![smoke_grafana.png](smoke_grafana.png)
+- load
+![load_k6.png](load_k6.png)
+![load_grafana.png](load_grafana.png)
+- stress
+![stress_k6.png](stress_k6.png)
+![stress_grafana.png](stress_grafana.png)
 
 ---
 
