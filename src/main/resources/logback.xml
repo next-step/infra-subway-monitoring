@@ -2,6 +2,10 @@
 
 <configuration debug="false">
 
+    <springProfile name="prod">
+        <property name="home" value="/var/log/subway/" />
+    </springProfile>
+
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <include resource="logback/console-appender.xml" />
     <include resource="logback/file-appender.xml" />
