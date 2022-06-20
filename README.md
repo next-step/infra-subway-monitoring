@@ -216,5 +216,10 @@ npm run dev
 - 인스턴스 : kwonyongil-ec2-public1
 - 경로 /home/ubuntu/nextstep/infra-subway-monitoring/log
 
+- nginx 로그
+- 인스턴스 : kwonyongil-ec2-public2
+- 경로 /var/log/nginx
 
-3. Cloudwatch 대시보드 URL을 알려주세요
+
+2. Cloudwatch 대시보드 URL을 알려주세요
+
