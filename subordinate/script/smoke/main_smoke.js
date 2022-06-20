@@ -27,7 +27,21 @@ export default function ()  {
         },
     };
 
-    let response = http.get(`${BASE_URL}`);
+
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+    check(loginRes, {
+        'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
+
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${loginRes.json('accessToken')}`,
+        },
+    };
+
+    let response = http.get(`${BASE_URL}`, authHeaders);
     check(response, {
         'is status 200': (r) => r.status === 200,
     });
