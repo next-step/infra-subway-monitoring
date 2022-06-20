@@ -51,7 +51,7 @@ npm run dev
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - gzip 압축 
-    <img width="973" alt="image" src="https://user-images.githubusercontent.com/6476469/174579327-7f43c155-ca05-4ea2-be8b-6d9f3359db58.png">
+    <img width="960" alt="image" src="https://user-images.githubusercontent.com/6476469/174582018-fc047481-3f56-4c72-9086-945d1b7d0113.png">
     성능에 가장 많이 미치는 것으로 예측됨
 - 캐시설정, 불필요한 파일 제거
 
