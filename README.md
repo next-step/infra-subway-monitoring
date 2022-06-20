@@ -122,8 +122,45 @@ https://m.map.kakao.com/
     - 부하 유지 시간 : 20분
     - VUsers : 24 ~ 96
     - http_request_fail : 0.0%
+    - latency :
+      - http_req_duration : 21.81ms
   - stress test
     - http_request_fail : 8.84%
+    - vus 290, rps 1000대를 넘어가는 기점으로 에러 발생
+    - latency :
+      - http_req_duration : 25.6s
+  - 테스트 infra spec : t3.medium 1대,
+```
+$ lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              2
+On-line CPU(s) list: 0,1
+Thread(s) per core:  2
+Core(s) per socket:  1
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               85
+Model name:          Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
+Stepping:            7
+CPU MHz:             2499.998
+BogoMIPS:            4999.99
+Hypervisor vendor:   KVM
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            1024K
+L3 cache:            36608K
+```
+```
+$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           3.8G        400M        1.6G        788K        1.7G        3.1G
+Swap:            0B          0B          0B
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
