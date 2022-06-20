@@ -76,6 +76,12 @@ npm run dev
 - 사용하지 않는 자바스크립트 줄이기
     - /js/vendors.js (가능한 절감 효과: 637.3 KiB)
     - /js/main.js (가능한 절감 효과: 61.8 KiB)
+    
+- Chrome DevTools의 Coverage 탭에서는 사용하지 않는 코드를 한 줄씩 분석한 결과를 
+제공하므로 이를 이용하여 자바스크립트 코드를 줄일 수 있다.
+
+- Puppeteer의 Coverage 클래스를 사용하면 사용하지 않는 코드를 감지하고 사용된 코드를 추출하는 
+프로세스를 자동화할 수 있다.
 
 #### 용어 정리
 - *FCP(First Contentful Paint)*
