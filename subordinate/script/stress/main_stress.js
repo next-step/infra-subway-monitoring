@@ -6,11 +6,11 @@ let VU = 16 // 30 * T / 2;
 export let options = {
     stages: [
         { duration: '5m', target: VU },
-        { duration: '5m', target: VU * 2},
-        { duration: '5m', target: VU * 3},
-        { duration: '5m', target: VU * 4},
         { duration: '5m', target: VU * 5},
-        { duration: '5m', target: VU * 6},
+        { duration: '5m', target: VU * 10},
+        { duration: '5m', target: VU * 15},
+        { duration: '5m', target: VU * 20},
+        { duration: '5m', target: VU * 25},
         { duration: '10s', target: 0 },
     ],
     thresholds: {
