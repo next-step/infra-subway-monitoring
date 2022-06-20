@@ -166,7 +166,7 @@ Swap:            0B          0B          0B
 ### 3단계 - 로깅, 모니터링
 
 #### 요구 사항
-- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
   - 근거 로그
 ```shell
 2022-06-20 16:07:33.025 ERROR 12474 --- [nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Function "SLEEP" not found; SQL statement:
