@@ -22,10 +22,10 @@ $ sudo apt-get install k6
 
 **Smoke Test**
 ```shell
-$ k6 run smoke.js
+$ k6 run stress.js
 ```
 ```shell
-# smoke.js
+# stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
@@ -149,7 +149,7 @@ $ sudo service grafana-server start
 
 4. 부하테스트
 ```shell
-$ k6 run --out influxdb=http://localhost:8086/myk6db smoke.js
+$ k6 run --out influxdb=http://localhost:8086/myk6db stress.js
 ```
 
 ![step2_image4.png](images/step2_image4.png)
@@ -166,13 +166,17 @@ $ k6 run --out influxdb=http://localhost:8086/myk6db smoke.js
       - 21년 출퇴근 시간대 이용자수는 전체 이용객의 1/3 (https://blog.hyundai-rotem.co.kr/691)
     - 1명당 1일 평균 접속 혹은 요청 수 
       - 출, 퇴근시 각각 1번씩 사용한다고 가정
-      - 1번 사용 할 때 대략적으로 3회 요청(메인 화면 -> 경로 검색 -> 검색)한다고 가정
+      - 1번 사용 할 때 대략적으로 3회 요청(메인 화면 -> 로그인 -> 검색)한다고 가정
   - latency
     - 100ms 이하
   - throughput
     - **210만**(1일 사용자 수(DAU)) x **2회**(1명당 1일 평균 접속 수) = **420만**(1일 총 접속 수)
     - **420만**(1일 총 접속수) / **86,400**(초/일) = **48.6rps**(1일 평균 rps)
     - **48.6rps**(1일 평균 rps) x **3.3**(피크 시간대의 집중률) = **160.38rps**(1일 최대 rps)
+  - VUser
+    - T = R(요청 횟수) * http_req_duration + 예상 latency = (3 * 0.1) + 1s = 1.3
+    - 평소 VUser = 48.6(목표 rps) * 1.3(T) / 3(R) = 21.06
+    - 최대 VUser = 160.38(목표 rps) * 1.3(T) / 3(r) = 69.498
   - 부하 유지기간
     - 30m
 - 부하 테스트 시 저장될 데이터 건수 및 크기 (brainbackdoor/data-subway:0.0.1)
@@ -187,8 +191,8 @@ $ k6 run --out influxdb=http://localhost:8086/myk6db smoke.js
     - [x] 대상 시스템 범위
     - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
     - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
-  - [ ] 각 시나리오에 맞춰 스크립트 작성
-    - [ ] 접속 빈도가 높은 페이지
-    - [ ] 데이터를 갱신하는 페이지
-    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+  - [x] 각 시나리오에 맞춰 스크립트 작성
+    - [x] 접속 빈도가 높은 페이지
+    - [x] 데이터를 갱신하는 페이지
+    - [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  - [x] Smoke, Load, Stress 테스트 후 결과를 기록
