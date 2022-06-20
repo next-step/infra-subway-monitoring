@@ -176,11 +176,11 @@ SELECT * FROM line WHERE SLEEP(3) [90022-200]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "SLEEP" not found; SQL statement:
 SELECT * FROM line WHERE SLEEP(3) [90022-200]
 ```
-- [ ] 로그 설정하기
-  - [ ] Application Log 파일로 저장하기
+- [x] 로그 설정하기
+  - [x] Application Log 파일로 저장하기
     - 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - 경로찾기 등의 이벤트 로그를 JSON으로 수집
-  - [ ] Nginx Access Log 설정하기
+  - [x] Nginx Access Log 설정하기
 - [ ] Cloudwatch로 모니터링
   - [ ] Cloudwatch로 로그 수집하기
   - [ ] Cloudwatch로 메트릭 수집하기
