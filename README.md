@@ -116,5 +116,14 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+    
+    - nginx:
+      - june2-ec2-web (192.168.1.16) 
+      - /var/log/nginx/access.log, /var/log/nginx/error.log
+      
+    - was: 
+      - june2-ec2-was (192.168.1.92) 
+      - /var/log/subway/file.log, /var/log/subway/json.log
+      
 
 2. Cloudwatch 대시보드 URL을 알려주세요
