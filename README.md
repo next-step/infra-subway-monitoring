@@ -40,11 +40,28 @@ npm run dev
 
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 카카맵 수준인 FCP 0.6초 정도를 목표
+- 측정결과
+    - kakao map 메인
+    <img width="990" alt="image" src="https://user-images.githubusercontent.com/6476469/174578361-2c350920-7821-4935-98bf-db07c15de529.png">
+
+    - 실습 경로 페이지
+    <img width="973" alt="image" src="https://user-images.githubusercontent.com/6476469/174578576-a62ae2ed-5afe-49bd-a36a-dfef47183f95.png">
+
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- gzip 압축 
+    <img width="973" alt="image" src="https://user-images.githubusercontent.com/6476469/174579327-7f43c155-ca05-4ea2-be8b-6d9f3359db58.png">
+    성능에 가장 많이 미치는 것으로 예측됨
+- 캐시설정, 불필요한 파일 제거
 
 3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+- 목푯값
+```
+DAU = 2,000,000 (1,000,000 X 2)
+평균 rps = 23.1 (2,000,000 / 86,400)
+최대 rps = 231 (23.1 x (100/10))
+```
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
