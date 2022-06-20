@@ -1,6 +1,6 @@
 <configuration>
-    <include resource="./log/base.xml" />
-    <include resource="./log/json-appenders.xml" />
+    <include resource="./appender/base.xml" />
+    <include resource="./appender/json-appenders.xml" />
     <root level="INFO">
         <springProfile name="console-log">
             <appender-ref ref="CONSOLE"/>
