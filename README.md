@@ -161,6 +161,21 @@ npm run dev
 
 ### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- Smoke
+    - k6/smoke/smoke.js
+    - k6/smoke/smoke_k6.PNG
+    - k6/smoke/smoke_grafana.png
+
+- Load
+    - k6/load/load.js
+    - k6/load/load_k6.PNG
+    - k6/load/load_grafana.png
+ 
+- Stress
+    - k6/stress/stress.js
+    - k6/stress/stress_k6.PNG
+    - k6/stress/stress_grafana.png
+
 ---
 
 ### 3단계 - 로깅, 모니터링
