@@ -95,7 +95,7 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - smoke : ![smoke.png](smoke.png), ![smoke_grafana.png](smoke_grafana.png)
-- load : 
+- load :  ![load.png](load.png), ![load_grafana.png](load_grafana.png)
 - stress : ![stress.png](stress.png), ![stress_grafana.png](stress_grafana.png)
   -  Request Failed error="Get \"https://soob-forest.n-e.kr/path\": dial tcp socket: too many open files 이와 같은 에러 메세지가 발생하는 것을 보면, 열수 있는 파일의 개수를 넘어서, 소켓 생성을 못하는 것으로 판단됨 
 
