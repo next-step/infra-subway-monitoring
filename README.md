@@ -179,7 +179,7 @@ npm run dev
 - [X] actuator 적용하기
 - [X] 사용자 정의 대시보드 구성
 
-1. 각 서버내 로깅 경로를 알려주세요
+1. 각 서버내 로깅 경로를 알려주세요 (EC2 인스턴스 명 : mmtos-pub1-web)
 - /var/log/syslog
 - /var/log/nginx/access.log
 - /var/log/nginx/error.log
