@@ -126,7 +126,7 @@ npm run dev
     - 2022년 5월 승/하차 인원 시간당 평균: 623,866명
     - 집중률 참고 ([링크](https://insfiler.com/detail/rt_subway_time-0003))
     
-- 1명당 1일 평균 요청수: 6회
+- 1명당 1일 평균 접속 수: 6회
     - 출근 3회, 퇴근 3회
     - 대중교통 환승 시 추가 사용 고려하여 선정 ([링크](https://www.sedaily.com/NewsView/265XF8LQW8))
     
@@ -143,8 +143,17 @@ npm run dev
     - 100ms
     
 ### VUser 구하기
+
+- R(VUser가 1회 테스트 시 요청 보내는 수): 6 
+    - 메인페이지 이동
+    - 로그인 페이지 이동
+    - 회원가입 페이지 이동
+    - 로그인
+    - 내 정보 조회
+    - 최단 경로 조회
+    
 - T = (R * http_req_duration) (+ 1s)
-    - (6 * 0.1) + 1 = 2
+    - (6 * 0.1) + 1 = 2s
     
 - VUser = (목표 rps * T) / R
     - Min VUser = (32 * 2) / 6 = 10
