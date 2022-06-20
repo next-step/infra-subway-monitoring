@@ -174,9 +174,10 @@ npm run dev
   - JSON 로그만 모아서 저장(Marker, Filter API 사용)  
 - [X] 애플리케이션 이벤트 발생시 로그 기록
 - [X] AOP를 이용해서 Controller 메서드 Input/Output 남기기
-- [ ] actuator 적용하기
-- [ ] nginx log 남기기 
-- [ ] cloudWatch 적용하기
+- [X] 서버에 nginx log 남기도록 처리
+- [X] 서버에 aws cloudwatch agent 설치
+- [X] actuator 적용하기
+- [ ] 사용자 정의 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
 
