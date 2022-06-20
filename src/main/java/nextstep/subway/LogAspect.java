@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -21,14 +22,14 @@ public class LogAspect {
 
     @Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
+        Signature signature = joinPoint.getSignature();
         String params = getRequestParams();
         long startTime = System.currentTimeMillis();
-        logger.info("REQUEST : {}({}) = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(), params);
+        logger.info("REQUEST : {}({}) = {}", signature.getDeclaringTypeName(), signature.getName(), params);
         Object result = joinPoint.proceed();
         long endTime = System.currentTimeMillis();
-        logger.info("RESPONSE : {}({}) = {} ({}ms)", joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(), result, endTime - startTime);
+        logger.info("RESPONSE : {}({}) = {} ({}ms)", signature.getDeclaringTypeName(), signature.getName(), result,
+                endTime - startTime);
         return result;
     }
 
