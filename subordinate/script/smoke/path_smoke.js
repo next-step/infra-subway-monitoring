@@ -40,7 +40,7 @@ export default function ()  {
             Authorization: `Bearer ${loginRes.json('accessToken')}`,
         },
     };
-    let response = http.get(`${BASE_URL}/path?source=1&target=7`, authHeaders);
+    let response = http.get(`${BASE_URL}/path?source=1&target=13`, authHeaders);
     check(response, {
         'is status 200': (r) => r.status === 200,
         'result data' : (r) => r.json('stations') !== ''

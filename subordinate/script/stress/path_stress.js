@@ -1,22 +1,22 @@
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-let req_duration = 1;
-let VU = 30 * (2 * req_duration) / 2;
+let req_duration = 0.034;
+let T = (2 * req_duration) + 1
+let VU = 16 // 30 * T / 2;
 
 export let options = {
     stages: [
         { duration: '5m', target: VU },
-        { duration: '5m', target: VU * 2},
-        { duration: '5m', target: VU * 3},
-        { duration: '5m', target: VU * 4},
         { duration: '5m', target: VU * 5},
-        { duration: '5m', target: VU * 6},
+        { duration: '5m', target: VU * 10},
+        { duration: '5m', target: VU * 15},
+        { duration: '5m', target: VU * 20},
+        { duration: '5m', target: VU * 25},
         { duration: '10s', target: 0 },
     ],
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-        'logged in successfully': ['p(99)<1500'], // 99% of requests must complete below 1.5s
     },
 };
 
@@ -50,7 +50,7 @@ export default function ()  {
             Authorization: `Bearer ${loginRes.json('accessToken')}`,
         },
     };
-    let response = http.get(`${BASE_URL}/path?source=1&target=7`, authHeaders);
+    let response = http.get(`${BASE_URL}/path?source=1&target=13`, authHeaders);
     check(response, {
         'is status 200': (r) => r.status === 200,
         'result data' : (r) => r.json('stations') !== ''
