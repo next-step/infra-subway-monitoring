@@ -54,17 +54,17 @@ npm run dev
 |              | Desktop | 1.6s  | 2.1s  | 3.3s  | 0.170s | 3.7s  | 0.014 |
 | 네이버지도     | Mobile  | 2.1s  | 7.5s  | 4.9s  | 0.640s | 8.2s  | 0.030 |
 |              | Desktop | 0.5s  | 0.7s  | 2.2s  | 0.000s | 1.5s  | 0.006 |
-| 다음지도       | Mobile  | 1.7s | 4.2s  | 6.4   | 0.090s | 5.1s   | 0.144 |
+| 다음지도       | Mobile  | 1.7s | 4.2s  | 6.4s   | 0.090s | 5.1s   | 0.144 |
 |              | Desktop | 0.5s  | 1.0s  | 2.3s  | 0.000s | 1.3s  | 0.039 |
 
 | 목표          | 구분     | FCP   | TTI   | SI    | TBT    | LCP   | CLS   |
 |--------------|---------|-------|-------|-------|--------|-------|-------|
-| handh.kro.kr | Mobile  | 7.3s  | 7.8s  | 7.3s |  0.250s | 7.6s  | 0.042 |
-|              | Desktop | 1.3s  | 1.4s  | 1.5s  | 0.025s | 2.0s  | 0.004 |
+| handh.kro.kr | Mobile  | 1.7s  | 6.0s  | 3.9s |  0.512s | 6.6s  | 0.024 |
+|              | Desktop | 0.4s  | 0.6s  | 1.8s  | 0.000s | 1.2s  | 0.005 |
 
 - 서비스가 정상적으로 동작하고 있다는 사실을 알리기 위해서 FCP를 중점적으로 개선 예정
 - 사용자가 빠르게 최단 경로를 조회할 수 있도록 그 다음 우선순위로 TTI 개선 예정
-- 기존보다 50% 성능 향상을 목표로 설정
+- 경쟁사(네이버지도) 보다 20% 빠른 속도 목표
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
@@ -76,6 +76,12 @@ npm run dev
 - 사용하지 않는 자바스크립트 줄이기
     - /js/vendors.js (가능한 절감 효과: 637.3 KiB)
     - /js/main.js (가능한 절감 효과: 61.8 KiB)
+    
+- Chrome DevTools의 Coverage 탭에서는 사용하지 않는 코드를 한 줄씩 분석한 결과를 
+제공하므로 이를 이용하여 자바스크립트 코드를 줄일 수 있다.
+
+- Puppeteer의 Coverage 클래스를 사용하면 사용하지 않는 코드를 감지하고 사용된 코드를 추출하는 
+프로세스를 자동화할 수 있다.
 
 #### 용어 정리
 - *FCP(First Contentful Paint)*
@@ -111,9 +117,70 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+#### Target 시스템 범위
+- Reverse Proxy → Spring Boot → MySQL
+
+#### 목표 rps 구하기
+- 예상 1일 사용자 수(DAU): 450,000명 (2021년 8월 네이버지도 1,392만명 이용)
+    - DAU 참고 ([링크](https://moneys.mt.co.kr/news/mwView.php?no=2021091810258035737))
+    
+- 피크 시간대의 집중률: 2.2
+    - 2022년 5월 승/하차 인원 피크 18~19시 평균: 1,332,176명
+    - 2022년 5월 승/하차 인원 시간당 평균: 623,866명
+    - 집중률 참고 ([링크](https://insfiler.com/detail/rt_subway_time-0003))
+    
+- 1명당 1일 평균 접속 수: 6회
+    - 출근 3회, 퇴근 3회
+    - 대중교통 환승 시 추가 사용 고려하여 선정 ([링크](https://www.sedaily.com/NewsView/265XF8LQW8))
+    
+- 1일 총 접속 수: 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수
+    - 450,000 * 6 = 2,700,000
+    
+- 1일 평균 rps: 1일 총 접속 수 / 86,400
+    - 2,700,000 / 86,400 = 32
+    
+- 1일 최대 rps: 1일 평균 rps x (최대 트래픽 / 평균 트래픽)
+    - 32 * 2.2 = 71
+    
+- Latency: 일반적으로 50 ~ 100ms 이하로
+    - 100ms
+    
+### VUser 구하기
+
+- R(VUser가 1회 테스트 시 요청 보내는 수): 6 
+    - 메인페이지 이동
+    - 로그인 페이지 이동
+    - 회원가입 페이지 이동
+    - 로그인
+    - 내 정보 조회
+    - 최단 경로 조회
+    
+- T = (R * http_req_duration) (+ 1s)
+    - (6 * 0.1) + 1 = 2s
+    
+- VUser = (목표 rps * T) / R
+    - Min VUser = (32 * 2) / 6 = 10
+    - Max VUser = (71 * 2) / 6 = 24  
+
+### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- Smoke
+    - k6/smoke/smoke.js
+    - k6/smoke/smoke_k6.PNG
+    - k6/smoke/smoke_grafana.png
+
+- Load
+    - k6/load/load.js
+    - k6/load/load_k6.PNG
+    - k6/load/load_grafana.png
+ 
+- Stress
+    - k6/stress/stress.js
+    - k6/stress/stress_k6.PNG
+    - k6/stress/stress_grafana.png
 
 ---
 
