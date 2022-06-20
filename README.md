@@ -167,6 +167,15 @@ Swap:            0B          0B          0B
 
 #### 요구 사항
 - [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - 근거 로그
+```shell
+2022-06-20 16:07:33.025 ERROR 12474 --- [nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+2022-06-20 16:07:33.030 ERROR 12474 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement; SQL [SELECT * FROM line WHERE SLEEP(3)]; nested exception is org.hibernate.exception.SQLGrammarException: could not prepare statement] with root cause
+
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+```
 - [ ] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 - 
