@@ -1,16 +1,16 @@
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
-let VU = 16 // 30 * T / 2;
+let VU = 100
 
 export let options = {
     stages: [
         { duration: '5m', target: VU },
+        { duration: '5m', target: VU * 2},
+        { duration: '5m', target: VU * 4},
+        { duration: '5m', target: VU * 6},
+        { duration: '5m', target: VU * 8},
         { duration: '5m', target: VU * 10},
-        { duration: '5m', target: VU * 20},
-        { duration: '5m', target: VU * 30},
-        { duration: '5m', target: VU * 40},
-        { duration: '5m', target: VU * 50},
         { duration: '10s', target: 0 },
     ],
     thresholds: {
