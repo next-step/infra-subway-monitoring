@@ -212,5 +212,11 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- 인스턴스 : kwonyongil-ec2-public1
+- 어플리케이션 로그
+- 경로 /home/ubuntu/nextstep/infra-subway-monitoring/log
+- nginx 로그
+- 경로 /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=kwonyongil-dashboard

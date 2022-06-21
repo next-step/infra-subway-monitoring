@@ -19,4 +19,12 @@ public class TokenRequest {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        return "TokenRequest{" +
+                "email=MASKING" +
+                ", password=MASKING" +
+                '}';
+    }
 }
