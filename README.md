@@ -102,7 +102,26 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
-- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+```
+2022-06-21 17:19:12.642  WARN 255722 --- [nio-8080-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 90022, SQLState: 90022
+2022-06-21 17:19:12.643 ERROR 255722 --- [nio-8080-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+2022-06-21 17:19:12.652 ERROR 255722 --- [nio-8080-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement; SQL [SELECT * FROM line WHERE SLEEP(3)]; nested exception is org.hibernate.exception.SQLGrammarException: could not prepare statement] with root cause
+
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+.
+.
+.
+at com.sun.proxy.$Proxy108.findAll(Unknown Source) ~[na:na]
+	at nextstep.subway.line.application.LineService.findLineResponses(LineService.java:35) ~[classes!/:na]
+```
+위와 같은 로그를 확인 하여, LineService.java:35 의 lineRepository.findAll(); 가 문제 라는 것을 확인.
+결로적으로, line repository 의 
+`@Query(value = "SELECT * FROM line WHERE SLEEP(3)", nativeQuery = true) List<Line> findAll();`
+문장이 문제의 원인이라는 것을 확인함
+
 - [ ] 로그 설정하기
   - [ ] Application Log 파일로 저장하기
     - 회원가입, 로그인 등의 이벤트에 로깅을 설정
