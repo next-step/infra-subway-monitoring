@@ -1,6 +1,7 @@
 version: '3'
 services:
   local-db:
+    platform: linux/amd64
     image: library/mysql:5.7
     container_name: local-db
     restart: always
