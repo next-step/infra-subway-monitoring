@@ -3,13 +3,14 @@ import { check, group, sleep, fail } from 'k6';
 
 let req_duration = 0.03;
 let T = (2 * req_duration) + 1
-let VU = 16 // 30 * T / 2;
+let VU = 10 // 18.5 * T / 2
+let MAX_VU = 16 // 30 * T / 2;
 
 
 export let options = {
     stages: [
-        { duration: '5m', target: VU },
-        { duration: '25m', target: VU },
+        { duration: '15m', target: VU },
+        { duration: '15m', target: MAX_VU },
         { duration: '10s', target: 0 },
     ],
     thresholds: {
