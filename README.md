@@ -122,11 +122,73 @@ https://m.map.kakao.com/
     - 부하 유지 시간 : 20분
     - VUsers : 24 ~ 96
     - http_request_fail : 0.0%
+    - latency :
+      - http_req_duration : 21.81ms
   - stress test
     - http_request_fail : 8.84%
+    - vus 290, rps 1000대를 넘어가는 기점으로 에러 발생
+    - latency :
+      - http_req_duration : 25.6s
+  - 테스트 infra spec : t3.medium 1대,
+```
+$ lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              2
+On-line CPU(s) list: 0,1
+Thread(s) per core:  2
+Core(s) per socket:  1
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               85
+Model name:          Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz
+Stepping:            7
+CPU MHz:             2499.998
+BogoMIPS:            4999.99
+Hypervisor vendor:   KVM
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            1024K
+L3 cache:            36608K
+```
+```
+$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:           3.8G        400M        1.6G        788K        1.7G        3.1G
+Swap:            0B          0B          0B
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+#### 요구 사항
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - 근거 로그
+```shell
+2022-06-20 16:07:33.025 ERROR 12474 --- [nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+2022-06-20 16:07:33.030 ERROR 12474 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement; SQL [SELECT * FROM line WHERE SLEEP(3)]; nested exception is org.hibernate.exception.SQLGrammarException: could not prepare statement] with root cause
+
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "SLEEP" not found; SQL statement:
+SELECT * FROM line WHERE SLEEP(3) [90022-200]
+```
+- [x] 로그 설정하기
+  - [x] Application Log 파일로 저장하기
+    - 회원가입, 로그인 등의 이벤트에 로깅을 설정
+    - 경로찾기 등의 이벤트 로그를 JSON으로 수집
+  - [x] Nginx Access Log 설정하기
+- [x] Cloudwatch로 모니터링
+  - [x] Cloudwatch로 로그 수집하기
+  - [x] Cloudwatch로 메트릭 수집하기
+  - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
+  
+1. 각 서버내 로깅 경로를 알려주세요
+- application : /var/log/subway
+- nginx : /var/log/nginx
+- 
+3. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=toughchb-dashboard

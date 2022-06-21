@@ -1,5 +1,7 @@
 package nextstep.subway.map.application;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
@@ -7,6 +9,8 @@ import nextstep.subway.map.dto.PathResponse;
 import nextstep.subway.map.dto.PathResponseAssembler;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +19,9 @@ import java.util.List;
 @Service
 @Transactional
 public class MapService {
+
+    private static final Logger logger = LoggerFactory.getLogger("json");
+
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -30,7 +37,11 @@ public class MapService {
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-
+        logger.info("path found : {} {} {} {}",
+                kv("source", sourceStation),
+                kv("target", targetStation),
+                kv("distance", subwayPath.calculateDistance()),
+                kv("path", subwayPath.getStations()));
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
