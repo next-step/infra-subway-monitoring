@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MemberService {
-    private static final Logger file = LoggerFactory.getLogger("file");
+    private static final Logger log = LoggerFactory.getLogger("file");
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -21,7 +22,9 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        file.info("join member info = {}", member);
+
+        log.info("join member id = {}", member.getId());
+
         return MemberResponse.of(member);
     }
 
@@ -36,7 +39,8 @@ public class MemberService {
     }
 
     public void deleteMember(Long id) {
-        file.info("delete member id = {}", id);
+        log.info("delete member id = {}", id);
+
         memberRepository.deleteById(id);
     }
 }
