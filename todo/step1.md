@@ -84,7 +84,9 @@
 - TTI 2.0s로 개선이 필요
 
 - vendor.js, main.js 리소스 압축
+  - gzip으로 압축하기 ([적용 할 때 참고해볼 링크](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/))
 - js, image 캐싱 처리
+  - Cache Control Headers를 사용하여 캐싱처리 하기 ([적용 할 때 참고해볼 링크](https://www.baeldung.com/spring-security-cache-control-headers))
 
 ### 📚 Todo List 📚
 - [x] 용어 정리
