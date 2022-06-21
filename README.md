@@ -39,7 +39,7 @@ npm run dev
 
 ### 예비 분석
 1. 사용자 트래픽이 많은 페이지
-- 경로검색 화면 (http://3.36.65.99:8080/path)
+- 경로검색 화면 (http://eaststar1129-infra.p-e.kr:8080/path)
 
 2. Pagespeed를 활용
 - 지하철 사이트 및 경쟁사 비교
