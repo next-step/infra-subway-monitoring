@@ -14,6 +14,7 @@
     <!--rollover 발생시 RollingFileAppender 행동 정의-->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+      <maxHistory>10</maxHistory>
       <!--
       timeBaseRollingPolicy
        - 시간에 기반하여 rollover 정책을 정의 가능하며, 주로 일/월단위로 rollover진행

@@ -1,0 +1,36 @@
+<configuration>
+
+    <springProfile name="prod">
+        <property name="home" value="/home/ubuntu/service/log/subway" />
+    </springProfile>
+
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="console-appender.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="json-appender.xml" />
+
+    <logger name="console" level="TRACE" >
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="file" level="INFO" >
+        <appender-ref ref="file" />
+    </logger>
+
+    <logger name="json" level="INFO" >
+        <appender-ref ref="json" />
+    </logger>
+
+</configuration>
+
+<!--
+log4j와 logback차이
+ - logback은 log4j보다 빠르고 메모리도 더 적게 사용한다
+ - logback-classic에 포함된 Logger classs는 기본적으로 Slf4j API를 구현하므로 Slf4j를 사용한 기존 소스코드를 수정할 필요가 없음.
+ - logback의 fileAppender및 RollingFileAppender는 I/O실패에 대해 정상적으로 복구 가능
+    -> 파일 서버에 장애 발생시, 로깅을 위해 어플리케이션을 재시작 할 필요가 없음
+ - TimeBaseRollingPolicy 및 SizeAndTimeBasedFNATP등 의 Property를 사용하여 아카이브 로그를 관리/삭제 가능함 (유연한 디스크 사용 가능)
+ - Prudent모드에서 FileAppender는 여러 JVM에서 실행되는 여러 인스턴스가 하나의 로그파일에 I/O가 가능함
+ - logback-access : tomcat같은 servlet 컨테이너와 통합되어, HTTP access 로그 기능을 제공한다.
+-->
