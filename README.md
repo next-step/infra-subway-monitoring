@@ -185,6 +185,31 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
+
+- [X] Application Log 파일로 저장하기
+    - [X] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+    - [X] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+- [X] Cloudwatch로 모니터링
+    - [X] Cloudwatch로 로그 수집하기
+    - [X] Cloudwatch로 메트릭 수집하기
+    - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
+
 1. 각 서버내 로깅 경로를 알려주세요
+- EC2: handh0413-public-application01-EC2
+    - 퍼블릭 IPv4: 15.164.66.164
+    - 프라이빗 IPv4: 192.168.30.40
+    - 인스턴스 ID: i-0284e29fad9741042
+
+- 실습 관련 로그 경로 (andh0413-public-application01-EC2)
+    - application.log(springboot): /home/ubuntu/nextstep/application.log
+    - file.log(springboot): /home/ubuntu/nextstep/log/file.log
+    - json.log(springboot): /home/ubuntu/nextstep/log/json.log
+    - access.log(nginx): /var/log/nginx/access.log
+    - error.log(nginx): /var/log/nginx/error.log
+    - syslog(system): /var/log/syslog
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- [CloudWatch 링크](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=handh0413-dashboard)
+
+3. Spring Actuator Metric 수집
+- [Actuator 링크](https://handh.kro.kr/actuator)
