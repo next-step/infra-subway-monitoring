@@ -36,8 +36,8 @@ public class LoggingAspect {
 
     private void logArgs(ProceedingJoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        for(int i=0; i<args.length ; i++){
-            String arg = args[i] != null ?  args[i].toString() : "null";
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i] != null ? args[i].toString() : "null";
             logger.info("Argument {} : {}", i, arg);
         }
     }
@@ -45,7 +45,7 @@ public class LoggingAspect {
     private void logReturnObject(Object returnObject) {
         if (returnObject instanceof ResponseEntity) {
             ResponseEntity<?> responseEntity = (ResponseEntity<?>) returnObject;
-            logger.info("Response Code : {}",responseEntity.getStatusCode().name());
+            logger.info("Response Code : {}", responseEntity.getStatusCode().name());
             return;
         }
     }
