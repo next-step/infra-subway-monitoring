@@ -73,8 +73,31 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 테스트 전제조건 정리
+  - 대상 시스템 범위 : web server (nginx), web application server, db
+  - 목푯값 설정
+    - latency : 100ms 이하
+    - throughput : 20.8rps ~ 104rps
+      - 1일 사용자 수 dau : 60만 (2016년 기사의 자하철 앱 1위 dau가 130만임을 감안해 이의 50%를 목표로 잡음)
+      - 1일 총 접속 수 : 3번 ( 출근 퇴근 2번 + 환승 1번으로 가정함 )
+      - 피크 트래픽 / 평소 트래픽 : 5  ( 선릉역 기준 250000 출근시간 / 50000 평상시 ) 참고자료 https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do
+      - 1일 평균 rps : 20.8rps (60만 * 3 / 86400)
+      - 1일 최대 rps : 104rps (20.8rps * 5)
+    - T : 1.3 (3 * 0.1 + 1)
+    - min VUser: (20.8 * 1.3) / 3 = 9.0
+    - max VUser: (104 * 1.3) / 3 = 45.0
+
+- 각 시나리오에 맞춰 스크립트 작성
+  - 접속 빈도가 높은 페이지 : 메인페이지
+  - 데이터를 갱신하는 페이지 : 경로 조회 페이지로 이동
+  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 조회
+
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- smoke : ![smoke.png](smoke.png), ![smoke_grafana.png](smoke_grafana.png)
+- load :  ![load.png](load.png), ![load_grafana.png](load_grafana.png)
+- stress : ![stress.png](stress.png), ![stress_grafana.png](stress_grafana.png)
+  -  Request Failed error="Get \"https://soob-forest.n-e.kr/path\": dial tcp socket: too many open files 이와 같은 에러 메세지가 발생하는 것을 보면, 열수 있는 파일의 개수를 넘어서, 소켓 생성을 못하는 것으로 판단됨 
 
 ---
 
