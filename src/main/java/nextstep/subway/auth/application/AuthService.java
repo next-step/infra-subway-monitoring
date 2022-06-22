@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AuthService {
-    private MemberRepository memberRepository;
-    private JwtTokenProvider jwtTokenProvider;
-
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
+    private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public AuthService(MemberRepository memberRepository, JwtTokenProvider jwtTokenProvider) {
         this.memberRepository = memberRepository;
@@ -34,7 +34,8 @@ public class AuthService {
 
         String token = jwtTokenProvider.createToken(request.getEmail());
 
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "LOGIN"), kv("payload", MemberResponse.of(member)));
+        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "LOGIN"),
+                kv("payload", MemberResponse.of(member)));
         return new TokenResponse(token);
     }
 
