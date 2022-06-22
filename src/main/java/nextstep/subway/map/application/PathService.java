@@ -18,7 +18,6 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @Service
 public class PathService {
-    private static final Logger LOG = LoggerFactory.getLogger("json");
 
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
@@ -28,11 +27,6 @@ public class PathService {
         // 다익스트라 최단 경로 찾기
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
-
-        LOG.info("{}, {}",
-                kv("출발지", source.getName()),
-                kv("도착지", target.getName())
-        );
 
         return convertSubwayPath(path);
     }
