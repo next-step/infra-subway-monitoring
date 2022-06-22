@@ -25,8 +25,6 @@ dependencies {
 	// log
 	implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
 	implementation 'net.logstash.logback:logstash-logback-encoder:6.1'
-	implementation 'org.codehaus.janino:janino:3.1.2'
-	implementation 'org.codehaus.janino:commons-compiler:3.1.2'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'

@@ -3,7 +3,6 @@ package nextstep.subway.map.application;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 import java.util.List;
-import nextstep.subway.common.LogMarker;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SubwayPath;
@@ -23,7 +22,7 @@ public class MapService {
     private StationService stationService;
     private PathService pathService;
 
-    private static final Logger logger = LoggerFactory.getLogger(MapService.class);
+    private static final Logger logger = LoggerFactory.getLogger("json");
 
     public MapService(LineService lineService, StationService stationService, PathService pathService) {
         this.lineService = lineService;
@@ -37,7 +36,7 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
         PathResponse response = PathResponseAssembler.assemble(subwayPath);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "FIND_PATH"), kv("payload", response));
+        logger.info("{},{}", kv("event", "FIND_PATH"), kv("payload", response));
         return response;
     }
 }

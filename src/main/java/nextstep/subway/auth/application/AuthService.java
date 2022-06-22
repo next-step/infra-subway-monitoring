@@ -6,7 +6,6 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
-import nextstep.subway.common.LogMarker;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberResponse;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AuthService {
-    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+    private static final Logger logger = LoggerFactory.getLogger("json");
 
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
@@ -34,8 +33,7 @@ public class AuthService {
 
         String token = jwtTokenProvider.createToken(request.getEmail());
 
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "LOGIN"),
-                kv("payload", MemberResponse.of(member)));
+        logger.info("{},{}", kv("event", "LOGIN"),kv("payload", MemberResponse.of(member)));
         return new TokenResponse(token);
     }
 

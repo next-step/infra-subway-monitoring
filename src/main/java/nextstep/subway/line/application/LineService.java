@@ -5,7 +5,6 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import nextstep.subway.common.LogMarker;
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.line.domain.LineRepository;
 import nextstep.subway.line.dto.LineRequest;
@@ -25,7 +24,7 @@ public class LineService {
     private LineRepository lineRepository;
     private StationService stationService;
 
-    private static final Logger logger = LoggerFactory.getLogger(LineService.class);
+    private static final Logger logger = LoggerFactory.getLogger("json");
 
     public LineService(LineRepository lineRepository, StationService stationService) {
         this.lineRepository = lineRepository;
@@ -37,7 +36,7 @@ public class LineService {
         Station downStation = stationService.findById(request.getDownStationId());
         Line persistLine = lineRepository.save(new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
         LineResponse response =  LineResponse.of(persistLine);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "SAVE_LINE"), kv("payload", response));
+        logger.info("{},{}", kv("event", "SAVE_LINE"), kv("payload", response));
         return response;
     }
 
@@ -66,12 +65,12 @@ public class LineService {
         Line persistLine = lineRepository.findById(id).orElseThrow(RuntimeException::new);
         persistLine.update(new Line(lineUpdateRequest.getName(), lineUpdateRequest.getColor()));
         LineResponse response =  LineResponse.of(persistLine);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "UPDATE_LINE"), kv("payload", response));
+        logger.info("{},{}", kv("event", "UPDATE_LINE"), kv("payload", response));
     }
 
     public void deleteLineById(Long id) {
         lineRepository.deleteById(id);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "DELETE_LINE"), kv("payload", id));
+        logger.info("{},{}", kv("event", "DELETE_LINE"), kv("payload", id));
     }
 
     public void addLineStation(Long lineId, SectionRequest request) {
@@ -79,7 +78,7 @@ public class LineService {
         Station upStation = stationService.findStationById(request.getUpStationId());
         Station downStation = stationService.findStationById(request.getDownStationId());
         line.addLineSection(upStation, downStation, request.getDistance());
-        logger.info(LogMarker.JSON.getMarker(), "{},{}"
+        logger.info("{},{}"
                 ,kv("event", "ADD_SECTION")
                 ,a("payload"
                     ,kv("upStation", StationResponse.of(upStation))
@@ -92,7 +91,7 @@ public class LineService {
     public void removeLineStation(Long lineId, Long stationId) {
         Line line = findLineById(lineId);
         line.removeStation(stationId);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}"
+        logger.info("{},{}"
                 ,kv("event", "REMOVE_SECTION")
                 ,a("payload"
                     ,kv("line", LineResponse.of(line))

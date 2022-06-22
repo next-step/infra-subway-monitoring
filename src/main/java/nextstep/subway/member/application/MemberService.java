@@ -2,7 +2,6 @@ package nextstep.subway.member.application;
 
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
-import nextstep.subway.common.LogMarker;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
@@ -17,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private MemberRepository memberRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+    private static final Logger logger = LoggerFactory.getLogger("json");
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -26,7 +25,7 @@ public class MemberService {
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
         MemberResponse response = MemberResponse.of(member);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "CREATE_MEMBER"), kv("payload", response));
+        logger.info("{},{}", kv("event", "CREATE_MEMBER"), kv("payload", response));
         return response;
     }
 
@@ -38,11 +37,11 @@ public class MemberService {
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "UPDATE_MEMBER"), kv("payload", MemberResponse.of(member)));
+        logger.info("{},{}", kv("event", "UPDATE_MEMBER"), kv("payload", MemberResponse.of(member)));
     }
 
     public void deleteMember(Long id) {
         memberRepository.deleteById(id);
-        logger.info(LogMarker.JSON.getMarker(), "{},{}", kv("event", "DELETE_MEMBER"), kv("payload",id));
+        logger.info("{},{}", kv("event", "DELETE_MEMBER"), kv("payload",id));
     }
 }

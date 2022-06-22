@@ -1,20 +1,5 @@
 <included>
     <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
-            <evaluator>
-                <expression>
-                    if(marker == null){
-                        return false;
-                    }
-                    if("json".equals(marker.getName())){
-                        return true;
-                    }
-                    return false;
-                </expression>
-            </evaluator>
-            <OnMatch>ACCEPT</OnMatch>
-            <OnMismatch>DENY</OnMismatch>
-        </filter>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
             <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
             <fieldNames>
@@ -29,21 +14,6 @@
         </encoder>
     </appender>
     <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
-            <evaluator>
-                <expression>
-                    if(marker == null){
-                    return false;
-                    }
-                    if("json".equals(marker.getName())){
-                    return true;
-                    }
-                    return false;
-                </expression>
-            </evaluator>
-            <OnMatch>ACCEPT</OnMatch>
-            <OnMismatch>DENY</OnMismatch>
-        </filter>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
             <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
             <fieldNames>
