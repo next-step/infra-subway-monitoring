@@ -40,10 +40,79 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+- 우선 순위
+    + 1순위: FCP (UI적인 접근이 우선)
+    + 2순위: TTI
+- 경쟁사 평균 대비 20% 이상 차이나지 않도록 설정
+- 목표 성능예산
+    + 압축된 리소스 최대 크기 200KB 미만
+    + TTI: 3s 이하
+    + FCP: 2s 이하
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- `vendors.js`, `main.js` 의 크기를 줄여본다. (vendors.js의 경우 200KB 이하로)
+    + 압축
+    + 소스 스플릿
+    + lazy-loading
+    + 불필요한 소스 제거
+- 정적 리소스 캐싱
+    + `cache-control` 헤더 활용
+    + CDN 서버 이용
+- 웹폰트가 로드되는 동안 텍스트 표시하기
 
+### 용어 정리
+- [FCP(First Contentful Paint)](https://web.dev/fcp/): 페이지가 로드되기 시작한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링될 때까지의 시간
+- [TTI(Time To Interactive)](https://web.dev/tti/): 페이지가 로드되기 시작한 시점부터 주요 하위 리소스가 로드되고 사용자 입력에 신속하게 안정적으로 응답할 수 있는 시점까지의 시간
+- [SI(Speed Index)](https://web.dev/speed-index/): 페이지 로드 중에 내용이 시각적으로 표시되는 속도
+- [TBT(Total Blocking Time)](https://web.dev/tbt/): 메인 스레드가 입력 응답을 막을 만큼 오래 차단되었을 때 FCP와 TTI 사이 총 시간
+- [LCP(Largest Contentful Paint)](https://web.dev/lcp/): 페이지가 처음으로 로드를 시작한 시점을 기준으로 뷰포트 내에 있는 가장 큰 이미지 또는 텍스트 블록의 렌더링 시간
+- [CLS(Cumulative Layout Shift)](https://web.dev/cls/): 페이지의 전체 수명 동안 발생하는 모든 예기치 않은 레이아웃 이동에 대해 가장 큰 레이아웃 이동 점수
 
+### 경쟁사 비교
+1. [서울교통공사](http://www.seoulmetro.co.kr/kr/cyberStation.do)
+- mobile
+    + FCP: 6.6 s
+    + TTI: 8.4 s
+    + SI: 7.5 s
+    + TBT: 130 ms
+    + LCP: 7.0 s
+    + CLS: 0
+- pc
+    + FCP: 1.7 s
+    + TTI: 1.9 s
+    + SI: 2.3 s
+    + TBT: 60 ms
+    + LCP: 3.6 s
+    + CLS: 0.016
+2. [네이버지도](https://m.map.naver.com/subway/subwayLine.naver?region=1000)
+- mobile
+    + FCP: 2.2 s
+    + TTI: 5.8 s
+    + SI: 6.6 s
+    + TBT: 260 ms
+    + LCP: 8.3 s
+    + CLS: 0.03
+- pc
+    + FCP: 0.5 s
+    + TTI: 1.1 s
+    + SI: 2.4 s
+    + TBT: 0 ms
+    + LCP: 1.7 s
+    + CLS: 0.006
+3. [카카오맵](https://m.map.kakao.com/)
+- mobile
+    + FCP: 1.7 s
+    + TTI: 4.2 s
+    + SI: 6.4 s
+    + TBT: 50 ms
+    + LCP: 6.3 s
+    + CLS: 0.005
+- pc
+    + FCP: 0.5 s
+    + TTI: 0.7 s
+    + SI: 2.2 s
+    + TBT: 0 ms
+    + LCP: 1.3 s
+    + CLS: 0.039
 
 ---
 
