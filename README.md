@@ -97,10 +97,50 @@ https://piopoi.kro.kr
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+#### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+   - 대상 시스템 범위
+     - Reverse-Proxy(Nginx), WAS(Subway App), DB(MySQL)
+     
+   - 우선 예상 1일 사용자 수(DAU)를 정해봅니다.
+     - `예상 1일 사용자 수(DAU) : 50만`
+       - 네이버지도는 2020년 여름 휴가 성수기 기간 평균 322만 DAU 기록.
+       - 여름 휴가 성수기임과 동시에 업계 1위 앱이라는 점을 감안.
+       - 참고 : https://www.greened.kr/news/articleView.html?idxno=72469
+       
+   - 피크 시간대의 집중률을 예상해봅니다. (최대 트개픽 / 평소 트래픽)
+     - `피크 시간대 집중률 예상 : 10배`
+       - 최대 트개픽 / 평소 트래픽
+       
+   - 1명당 1일 평균 접속 혹은 요청수를 예상해봅니다.
+     - `1명당 1일 평균 접속 혹은 요청수 예상 : 2회`
+     
+   - 이를 바탕으로 Throughput을 계산합니다.
+     - `Throughput : 11.6 rps ~ 115.7 rps`
+       - 1일 평균 rps ~ 1일 최대 rps
+       - 50만 x 2회 = 100만회 (1일 총 접속 수)
+       - 100만회 / 86,400 = 11.6 (1일 평균 rps)
+       - 11.57 x 10 = 115.7 (1일 최대 rps)
+       
+     - `Latency : 100ms`
+     
+     - `VUser : 69.4`
+       - 목표 rps : 115.7
+       - (2 x 0.1) + 1 = 1.2
+       - (115.7 * 1.2) / 2 = 69.4
+#### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+  - Smoke
+    - script : /docs/smoke/smoke.js
+    - k6 : /docs/smoke/smoke_k6.js
+    - grafana : /docs/smoke/smoke_grafana.js  
+  - Load
+    - script : /docs/load/load.js
+    - k6 : /docs/load/load_k6.js
+    - grafana : /docs/load/load_grafana.js
+  - Stress
+    - script : /docs/stress/stress.js
+    - k6 : /docs/stress/stress_k6.js
+    - grafana : /docs/stress/stress_grafana.js  
 ---
 
 ### 3단계 - 로깅, 모니터링
