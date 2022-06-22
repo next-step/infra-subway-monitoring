@@ -81,9 +81,10 @@ npm run dev
        - TTI: 페이지 로드가 시작되고 주요 하위 리소스가 로드되어 사용자 입력에 응답할 수 있는 시점까지의 시간 측정값
      * 경쟁사 평균 **FCP: 1.8s, LCP: 2.54s, TTI: 1.03s** 
      * 목표값
-       - First Contentful Paint(FCP): 2.16s 미만
-       - Largest Contentful Paint(LCP): 3.04s 미만
-       - Time to Interactive(TTI): 1.23s 미만
+       - 경쟁사 대비 10% 내외 속도 개선
+       - First Contentful Paint(FCP): 1.62s 미만
+       - Largest Contentful Paint(LCP): 2.28s 미만
+       - Time to Interactive(TTI): 1.0s 미만
    - [x] 규칙
      * Lighthouse 성능 점수 81점 이상
 
