@@ -91,13 +91,12 @@ public class LineService {
 
     public void removeLineStation(Long lineId, Long stationId) {
         Line line = findLineById(lineId);
-        Station station = stationService.findStationById(stationId);
         line.removeStation(stationId);
         logger.info(LogMarker.JSON.getMarker(), "{},{}"
                 ,kv("event", "REMOVE_SECTION")
                 ,a("payload"
                     ,kv("line", LineResponse.of(line))
-                    ,kv("station", StationResponse.of(station))
+                    ,kv("stationId", stationId)
                 )
         );
     }
