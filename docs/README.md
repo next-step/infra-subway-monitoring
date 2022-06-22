@@ -84,3 +84,41 @@
     - VUser = (100 * 0.4) / 2 = 20
   
   - 일반적으로 부하 테스트는 30~ 2시간 정도를 권장 
+
+-----------
+-----------
+
+## 3단계 - 로깅, 모니터링 
+
+#### 요구 사항
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [ ] 로그 설정하기
+- [ ] Cloudwatch 로 모니터링
+
+
+- 요구사항 설명
+  - 로그 설정하기
+    - [ ] Application Log 파일로 저장하기
+      - 회원 가입, 로그인 등의 이벤트에 로깅을 설정
+      - 경로 찾기 등의 이벤트 로그를 JSON 으로 수집
+    - [ ] Nginx Access Log 설정하기
+  
+  - Cloudwatch 로 모니터링
+    - [ ] Cloudwatch 로 로그 수집하기
+    - [ ] Cloudwatch 로 메트릭 수집하기
+    - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성 
+  
+  - 로깅
+    - Avoid side effects
+    - Be concise and descriptive
+      - logging 에는 데이터와 설명이 모두 포함되어야 한다.
+    - Log method arguments and return values
+      - 메소드의 input 과 output 을 로그로 남긴다.
+    - Delete personal information
+      - 개인정보를 남기지 않는다.
+    
+    - level
+      - ERROR : 예상하지 못한 심각한 문제가 발생하여 즉시 조사해야 함
+      - WARN : 로직상 유효성 확인, 예상 가능한 문제로 인한 예외처리 등을 남김, 서비스는 운영될수 있지만, 주의해야 함
+      - INFO : 운영에 참고할만한 사항으로, 중요한 비지니스 프로세스가 완료됨
+      - DEBUG / TRACE : 개발 단계에서만 사용하고 운영 단계에서는 사용하지 않음 
