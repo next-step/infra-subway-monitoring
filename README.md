@@ -99,8 +99,57 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+* 대상 시스템 범위
+    * reverse proxy, was, db
+* 목표값 설정
+    * throughput
+        * 1일 평균 접속자 100만명 (서울시 하루 평균 지하철 이용자 600만명)
+        * 1명당 1일 평균 접속 수 : 2번
+        * 1일 총 접속 수 : 200만 (100만 * 2)
+        * 피크 시간대 집중률 : 오전 (7 ~ 9), 오후 (6 ~ 8) 평소 트래픽에 6배 예상
+        * 1일 평균 rps : 23.1 (200만 / 86400)
+        * 1일 최대 rps : 138.6 (23.1 * 6)
+    * latency
+      * 목표 응답 시간 = 0.5s
+      * VUser = 69 (138.6 * 0.5 / 1)
+    * 부하 유지 기간
+      * smoke test : 1분
+      * load test : 30분
+      * stress test : 7분
+* 저장될 데이터 건수
+  * 지하철 역 : 616개
+  * 지하철 노선 : 23개
+  * 구간 : 340개
+* 스크립트 시나리오
+  * 로그인 하기 (접속 빈도가 높은 페이지)
+  * 나의 정보 수정하기 (데이터를 갱신하는 페이지)
+  * 경로 검색하기 (데이터를 조회하는데 여러 데이터를 참조하는 페이지)
 
+    
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* loadtest
+   * grafana
+        * smoke_grafana.png
+        * load_grafana.png
+        * stress_grafana.png
+  * k6
+      * smoke_k6.png
+      * load_k6.png
+      * stress_k6.png
+  * scenario
+    * smoke.js
+    * load.js
+    * stress.js
+    
+* smoke 테스트에서는 목표 latency인 0.5s를 만족
+* load 테스트에서는 평균 rps와 최대 rps를 이용해 VUser(10 ~ 70)로 구성 
+  * latency 4s
+* stress 테스트에서는 실패지점인 VUser(260)까지 올리고 서서히 낮춰서 정상 동작되는지 확인 
+  * latency 14s
+    
+* 서버 로그를 확인해 병목지점을 찾아 성능 개선이 필요
+    * 경로 검색 쿼리 개선
+    * 자주 사용되는 데이터 캐시 처리
 
 ---
 
