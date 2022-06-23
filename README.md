@@ -109,14 +109,14 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - smoke
-![smoke_k6.png](Documents/GitHub/infra-subway-monitoring/k6/smoke_k6.png)
-![smoke_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/smoke_grafana.png)
+![smoke_k6.png](k6/smoke_k6.png)
+![smoke_grafana.png](k6/smoke_grafana.png)
 - load
-![load_k6.png](Documents/GitHub/infra-subway-monitoring/k6/load_k6.png)
-![load_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/load_grafana.png)
+![load_k6.png](k6/load_k6.png)
+![load_grafana.png](k6/load_grafana.png)
 - stress
-![stress_k6.png](Documents/GitHub/infra-subway-monitoring/k6/stress_k6.png)
-![stress_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/stress_grafana.png)
+![stress_k6.png](k6/stress_k6.png)
+![stress_grafana.png](k6/stress_grafana.png)
 
 ---
 
