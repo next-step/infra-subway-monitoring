@@ -189,8 +189,35 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 테스트 전제조건 정리
+  - 대상 시스템 범위
+    - reverse proxy, was, db
+  - 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - latency : 200ms 이하
+    - throughput :
+      - 1일 총 접속 수 = 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1,200,000 (21년 4월 수도권 지하철 일일 이용 인원) x 2 (출근/퇴근) = 2,400,000
+      - 1일 평균 rps = 1일 총 접속 수 / 86,400 (초/일) = 2,400,000 / 86,400 = 27.77
+      - 1일 최대 rps = 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 27.77 x (1,200,000 / 200,000) = 166.62
+      - 평소 트래픽은 최대 트래픽의 6분의 1이라고 가정
+      - 참고 : https://www.bigdata-map.kr/datastory/traffic/seoul
+    - T = (R * http_req_duration) + 1 = (2 * 0.2) + 1 = 1.4
+    - 평균 VUser = (1일 평균 rps * T) / R = (27.77 * 1.4) / 2 = 19.44
+    - 최대 VUser = (1일 최대 rps * T) / R = (166.62 * 1.4) / 2 = 116.63
+    - 부하 유지기간 : 1시간
+  - 부하 테스트 시 저장될 데이터 건수 및 크기
+    - 즐겨찾기 데이터 크기 = 즐겨찾기 id byte 수 + 회원 id byte 수 + (지하철역 id byte 수 * 2) = 36 + 36 + (36 * 2) = 144 bytes
+    - id는 uuid라고 가정하고, uuid는 36개의 문자로 이루어져 있다. (https://ko.wikipedia.org/wiki/%EB%B2%94%EC%9A%A9_%EA%B3%A0%EC%9C%A0_%EC%8B%9D%EB%B3%84%EC%9E%90)
+    - 부하 테스트 동안 저장될 데이터 총 크기 = 1일 평균 rps의 4분의 1 (crud 중 c) * (3,600초) * 즐겨찾기 데이터 크기 = (19.44 / 4) * 3,600 * 144 = 2,519,424 bytes = 2,460 kilo bytes = 2 mega bytes
+    - #### 실제 부하테스트는 login 및 회원정보 조회 api 테스트를 진행할 예정.
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- Grafana 
+  - url : http://3.34.200.8:3000/login
+  - id/pwd : admin/admin (default)
+- /monitor/script에 각 테스트별 스크립트가 존재
+- /monitor/results/{테스트종류}에 각 테스트별 결과 이미지 존재
+- #### load test에서 VUser가 30이 넘어가는 순간부터 http_req_duration이 threshold를 넘어가는 현상이 포착됨
+- #### stress test에서도 비슷하게 VUser가 35이상일 때부터 threshold가 넘어감
 
 ---
 
