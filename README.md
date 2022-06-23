@@ -208,8 +208,14 @@ npm run dev
     - 즐겨찾기 데이터 크기 = 즐겨찾기 id byte 수 + 회원 id byte 수 + (지하철역 id byte 수 * 2) = 36 + 36 + (36 * 2) = 144 bytes
     - id는 uuid라고 가정하고, uuid는 36개의 문자로 이루어져 있다. (https://ko.wikipedia.org/wiki/%EB%B2%94%EC%9A%A9_%EA%B3%A0%EC%9C%A0_%EC%8B%9D%EB%B3%84%EC%9E%90)
     - 부하 테스트 동안 저장될 데이터 총 크기 = 1일 평균 rps의 4분의 1 (crud 중 c) * (3,600초) * 즐겨찾기 데이터 크기 = (19.44 / 4) * 3,600 * 144 = 2,519,424 bytes = 2,460 kilo bytes = 2 mega bytes
+    - 실제 부하테스트는 login 및 회원정보 조회 api 테스트를 진행할 예정.
 
 3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- Grafana 
+  - url : http://3.34.200.8:3000/login
+  - id/pwd : admin/admin (default)
+- /monitor/script에 각 테스트별 스크립트가 존재
+- /monitor/results/{테스트종류}에 각 테스트별 결과 이미지 존재
 
 ---
 
