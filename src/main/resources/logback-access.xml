@@ -1,9 +1,39 @@
-<configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%fullRequest%n%n%fullResponse</pattern>
-        </encoder>
-    </appender>
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <appender-ref ref="STDOUT" />
+<configuration>
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="./appender/console-appender.xml" />
+    <include resource="./appender/file-appender.xml" />
+    <include resource="./appender/json-appender.xml" />
+
+    <!--logger name이 file일 때 적용할 appender를 등록한다.-->
+    <logger name="file" level="TRACE">
+        <appender-ref ref="file" />
+    </logger>
+
+    <logger name="json" level="TRACE">
+        <appender-ref ref="json" />
+    </logger>
+
+    <springProfile name="local">
+        <root level="debug">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="debug">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
 </configuration>

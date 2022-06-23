@@ -4,3 +4,9 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+  config:
+    activate:
+      on-profile: test
+
+logging:
+  level: debug
