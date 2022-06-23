@@ -165,6 +165,27 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
+#### 작업목록
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - 2단계에서 진행
+- [X] 애플리케이션 로그 설정하기
+  - boot에서 제공하는 로그 기본설정 최대한 재사용(console log appender, file log appender)
+  - local, test, prod profile 활성화시 로깅 용도의 profile도 같이 활성화(spring.profiles.group을 이용)
+  - JSON 로그만 모아서 저장(Marker, Filter API 사용)  
+- [X] 애플리케이션 이벤트 발생시 로그 기록
+- [X] AOP를 이용해서 Controller 메서드 Input/Output 남기기
+- [X] 서버에 nginx log 남기도록 처리
+- [X] 서버에 aws cloudwatch agent 설치
+- [X] actuator 적용하기
+- [X] 사용자 정의 대시보드 구성
 
+1. 각 서버내 로깅 경로를 알려주세요 (EC2 인스턴스 명 : mmtos-pub1-web)
+- /var/log/syslog
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log
+  - subway_app.log
+  - subway_app.log.json
+  
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=mmtos-dashboard

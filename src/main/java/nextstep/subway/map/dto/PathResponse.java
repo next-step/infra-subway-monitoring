@@ -1,8 +1,7 @@
 package nextstep.subway.map.dto;
 
-import nextstep.subway.station.dto.StationResponse;
-
 import java.util.List;
+import nextstep.subway.station.dto.StationResponse;
 
 public class PathResponse {
     private List<StationResponse> stations;
@@ -22,5 +21,13 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return "PathResponse{" +
+                "stations=" + stations +
+                ", distance=" + distance +
+                '}';
     }
 }

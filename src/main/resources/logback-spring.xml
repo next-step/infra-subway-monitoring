@@ -1,0 +1,21 @@
+<configuration>
+    <include resource="appender/base.xml" />
+    <include resource="appender/json-appenders.xml" />
+    <springProfile name="local,test">
+        <logger name="json" level="DEBUG" >
+            <appender-ref ref="JSON_CONSOLE" />
+        </logger>
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE" />
+        </root>
+    </springProfile>
+    <springProfile name="prod">
+        <logger name="json" level="INFO" >
+            <appender-ref ref="JSON_FILE" />
+        </logger>
+
+        <root level="WARN">
+            <appender-ref ref="FILE" />
+        </root>
+    </springProfile>
+</configuration>
