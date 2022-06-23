@@ -92,8 +92,8 @@
 
 #### 요구 사항
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
-- [ ] 로그 설정하기
-- [ ] Cloudwatch 로 모니터링
+- [x] 로그 설정하기
+- [x] Cloudwatch 로 모니터링
 
 
 - 요구사항 설명
@@ -104,9 +104,9 @@
     - [ ] Nginx Access Log 설정하기
   
   - Cloudwatch 로 모니터링
-    - [ ] Cloudwatch 로 로그 수집하기
-    - [ ] Cloudwatch 로 메트릭 수집하기
-    - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성 
+    - [x] Cloudwatch 로 로그 수집하기
+    - [x] Cloudwatch 로 메트릭 수집하기
+    - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성 
   
   - 로깅
     - Avoid side effects
