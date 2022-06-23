@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="home" value="log/"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}service.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${home}jsonfile-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <thread>thread</thread>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+                <mdc>context</mdc>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <springProfile name="local">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="default">
+        <root level="INFO">
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+</configuration>
