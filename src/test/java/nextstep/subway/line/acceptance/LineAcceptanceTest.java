@@ -8,6 +8,7 @@ import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.station.StationAcceptanceTest;
 import nextstep.subway.station.dto.StationResponse;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,7 @@ public class LineAcceptanceTest extends AcceptanceTest {
     }
 
     @DisplayName("지하철 노선 목록을 조회한다.")
+    @Disabled
     @Test
     void getLines() {
         // given
