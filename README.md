@@ -117,9 +117,9 @@ npm run dev
     - 1일 평균 rps : 320만회 / 86400 = 37 rps
     - 1일 최대 rps : 37 x (100만 / 30만) = 123.3 rps [(참고)](https://www.bigdata-map.kr/datastory/traffic/seoul)
   - 부하 유지기간
-    - smoke : 10s
-    - load : 30m
-    - stress : 5m
+    - smoke : 1m
+    - load : 24m
+    - stress : 18m
   - VUser
     - 요청수 : 5회(메인 - 로그인 페이지 - 로그인 요청 - 메뉴 선택 - 기능 요청)
     - T(VU iteration) : 5 x 0.5s + 1s = 3.5s
