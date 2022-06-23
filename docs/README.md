@@ -98,7 +98,7 @@
 
 - 요구사항 설명
   - 로그 설정하기
-    - [ ] Application Log 파일로 저장하기
+    - [x] Application Log 파일로 저장하기
       - 회원 가입, 로그인 등의 이벤트에 로깅을 설정
       - 경로 찾기 등의 이벤트 로그를 JSON 으로 수집
     - [ ] Nginx Access Log 설정하기
