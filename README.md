@@ -217,6 +217,7 @@ npm run dev
 - /monitor/script에 각 테스트별 스크립트가 존재
 - /monitor/results/{테스트종류}에 각 테스트별 결과 이미지 존재
 - #### load test에서 VUser가 30이 넘어가는 순간부터 http_req_duration이 threshold를 넘어가는 현상이 포착됨
+- #### stress test에서도 비슷하게 VUser가 35이상일 때부터 threshold가 넘어감
 
 ---
 
