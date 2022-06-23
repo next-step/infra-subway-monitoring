@@ -19,7 +19,7 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Service
 @Transactional
 public class MapService {
-    private static final Logger log = LoggerFactory.getLogger(MapService.class);
+    private static final Logger log = LoggerFactory.getLogger("json");
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;

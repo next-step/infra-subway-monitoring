@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration debug="false">
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <property name="home" value="log/"/>
-    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="file-appender.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${home}service.log</file>
+    <appender name="JSONFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}service-json.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${home}jsonfile-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${home}json-file-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
             <maxFileSize>100MB</maxFileSize>
@@ -28,13 +28,33 @@
         </encoder>
     </appender>
 
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}service.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="json" level="INFO" >
+        <appender-ref ref="JSONFILE" />
+    </logger>
+
     <springProfile name="local">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
-    <springProfile name="default">
+    <springProfile name="prod">
         <root level="INFO">
             <appender-ref ref="FILE"/>
         </root>
