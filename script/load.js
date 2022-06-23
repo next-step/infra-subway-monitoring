@@ -3,12 +3,11 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '2m', target: 10 },
+        { duration: '2m', target: 25 },
+        { duration: '5m', target: 90 },
+        { duration: '10m', target: 90 },
         { duration: '5m', target: 25 },
-        { duration: '8m', target: 85 },
-        { duration: '8m', target: 85 },
-        { duration: '5m', target: 25 },
-        { duration: '2m', target: 10 }
+        { duration: '2m', target: 0 }
     ],
 
     thresholds: {
@@ -26,11 +25,19 @@ export default function ()  {
 
     moveToLoginPage();
 
-    login();
+    var accessToken = login();
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    findFavorite(authHeaders);
 
     moveToPathPage();
 
-    findPath();
+    findPath(authHeaders);
 
     sleep(1);
 };
@@ -62,6 +69,14 @@ function login() {
     let response = http.post(`${BASE_URL}/login/token`, payload, params);
 
     check(response, { "login successfully ": (resp) => resp.json('accessToken') !== ''});
+
+    return response.json('accessToken');
+}
+
+function findFavorite(accessToken) {
+    let response = http.get(`${BASE_URL}/favorites`, accessToken);
+
+    check(response, { "find favorite successfully ": (resp) => resp.status === 200 });
 }
 
 function moveToPathPage() {
@@ -70,8 +85,8 @@ function moveToPathPage() {
     check(response, { "load path successfully ": (resp) => resp.status === 200 });
 }
 
-function findPath() {
-    let response = http.get(`${BASE_URL}/path?source=2&target=6`);
+function findPath(accessToken) {
+    let response = http.get(`${BASE_URL}/path?source=2&target=6`, accessToken);
 
     check(response, { "find path successfully ": (resp) => resp.status === 200 });
 }

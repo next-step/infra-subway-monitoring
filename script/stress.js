@@ -3,13 +3,17 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '20s', target: 300 },
-        { duration: '40s', target: 300 },
-        { duration: '20s', target: 600 },
-        { duration: '40s', target: 600 },
-        { duration: '20s', target: 900 },
-        { duration: '40s', target: 900 },
-        { duration: '2m', target: 0 }
+        { duration: '1m', target: 200 },
+        { duration: '2m', target: 200 },
+        { duration: '1m', target: 400 },
+        { duration: '2m', target: 400 },
+        { duration: '1m', target: 600 },
+        { duration: '2m', target: 600 },
+        { duration: '1m', target: 800 },
+        { duration: '2m', target: 800 },
+        { duration: '1m', target: 1000 },
+        { duration: '2m', target: 1000 },
+        { duration: '3m', target: 0 }
     ],
 
     thresholds: {
@@ -27,11 +31,19 @@ export default function ()  {
 
     moveToLoginPage();
 
-    login();
+    var accessToken = login();
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    findFavorite(authHeaders);
 
     moveToPathPage();
 
-    findPath();
+    findPath(authHeaders);
 
     sleep(1);
 };
@@ -63,6 +75,14 @@ function login() {
     let response = http.post(`${BASE_URL}/login/token`, payload, params);
 
     check(response, { "login successfully ": (resp) => resp.json('accessToken') !== ''});
+
+    return response.json('accessToken');
+}
+
+function findFavorite(accessToken) {
+    let response = http.get(`${BASE_URL}/favorites`, accessToken);
+
+    check(response, { "find favorite successfully ": (resp) => resp.status === 200 });
 }
 
 function moveToPathPage() {
@@ -71,8 +91,8 @@ function moveToPathPage() {
     check(response, { "load path successfully ": (resp) => resp.status === 200 });
 }
 
-function findPath() {
-    let response = http.get(`${BASE_URL}/path?source=2&target=6`);
+function findPath(accessToken) {
+    let response = http.get(`${BASE_URL}/path?source=2&target=6`, accessToken);
 
     check(response, { "find path successfully ": (resp) => resp.status === 200 });
 }
