@@ -19,7 +19,8 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Service
 @Transactional
 public class MapService {
-    private static final Logger log = LoggerFactory.getLogger("json");
+    private final Logger jsonLogger = LoggerFactory.getLogger("json");
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -34,9 +35,10 @@ public class MapService {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
-        log.info("{}, {}", kv("출발지", sourceStation.getName()), kv("도착지", targetStation.getName()));
+        jsonLogger.info("{}, {}", kv("출발지", sourceStation.getName()), kv("도착지", targetStation.getName()));
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
+        logger.info("find path detected.");
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
