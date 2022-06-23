@@ -48,14 +48,22 @@
         <appender-ref ref="JSONFILE" />
     </logger>
 
+    <logger name="file" level="INFO" >
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="console" level="INFO" >
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
     <springProfile name="local">
-        <root level="INFO">
+        <root>
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
     <springProfile name="prod">
-        <root level="INFO">
+        <root>
             <appender-ref ref="FILE"/>
         </root>
     </springProfile>
