@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+  <property name="home" value="log/" />
+
+  <!--  appender이름이 file인 consoleAppender를 선언  -->
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--로깅이 기록될 위치 log/file.log-->
+    <file>${home}file.log</file>
+
+    <!--<append>  default(true)-->
+
+    <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+    <!--rollover 발생시 RollingFileAppender 행동 정의-->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+      <maxHistory>10</maxHistory>
+      <!--
+      timeBaseRollingPolicy
+       - 시간에 기반하여 rollover 정책을 정의 가능하며, 주로 일/월단위로 rollover진행
+       - trigger에 대한 책임도 지기때문에, RollingPolicy와 TriggeringPolicy 를 모두 implement
+         -> event에 대한 "what"과 "when"을 모두 정의 가능
+       -Properties
+        - fileNamePattern : 아카이브 될 로그 파일의 패턴 정의. <file> Property에 정의된 위치로 활성 로그파일이 저장된다
+          - %d{rollover_triger_time}
+            - log/file-%d{yyyyMMdd}-%i.log : 매일 자정에 새로운 로그파일로 rollover
+            - log/file-%d{yyyyMM}.log : 매월 새로운 로그파일 생성
+            - log/file-%d{yyyyMMddHHmm}.log : 매분 새로운 로그파일 생성
+            - log/file-%d.gz : 매일(default)자정에 새로운 로그파일로 rollover후 이전 로그파일은 gzip으로 압축
+        - maxHistory : 아카이브에 저장 유지할 로그 파일의 갯수. (ex : 3 일때 아카이브 로그파일은 3개. 순차적 삭제)
+        - totalSizeCap : 로그파일 아카이브 저장소 최대 크기. 크기 초과시 가장 오래된 파일 삭제. (maxHistory 처리 후 totalSizeCap 처리)
+        - cleanHistoryOnStart : Application시작될때 로그파일 모두 삭제 (default : false)
+      -->
+      <!--rollover 발생 시점-->
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>15MB</maxFileSize>    <!--  분할 할 용량 -->
+        <!-- maxHistory 30   <~ 30일 지난 로그는 오래된 순서로 지운다.-->
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+
+    <!--로그 이벤트가 OutputStreamAppender에게 기록되는 방식-->
+    <encoder>
+      <charset>utf8</charset>
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+      </Pattern>
+    </encoder>
+  </appender>
+</included>

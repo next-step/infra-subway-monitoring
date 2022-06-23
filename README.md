@@ -211,5 +211,16 @@ PC와 Mobile의 속도 차이는, 네트워크 속도 차이 일것 같다.
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+ - nginx access log  
+   - 서버 ip : 192.168.168.23
+   - 서버 내 access log 위치 : /home/ubuntu/service/log/nginx/jhsong2580/log/access.log
+     - docker run 명령어 : docker run -d -v /home/ubuntu/service/log/nginx/jhsong2580/log:/var/log/nginx/jhsong2580 -p 443:443 --name proxy nginx:custom_nginx
+ - subway file log 
+   - 서버 ip : 192.168.168.23
+   - 서버 내 file log 위치 : /home/ubuntu/service/infra-subway-monitoring/log/file.log
+   - subway json log
+     - 서버 ip : 192.168.168.23
+     - 서버 내 json log 위치 : /home/ubuntu/service/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-JHSONG2580
