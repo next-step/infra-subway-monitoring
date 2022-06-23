@@ -3,14 +3,18 @@ import {check, sleep} from 'k6';
 
 export let options = {
 	stages: [
-		{duration: '5s', target: 10},
+		{duration: '5s', target: 5},
+		{duration: '10s', target: 10},
 		{duration: '10s', target: 50},
+		{duration: '20s', target: 100},
+		{duration: '20s', target: 200},
+		{duration: '20s', target: 250},
+		{duration: '20s', target: 250},
+		{duration: '20s', target: 250},
+		{duration: '20s', target: 200},
 		{duration: '10s', target: 100},
-		{duration: '50s', target: 200},
-		{duration: '50s', target: 250},
-		{duration: '50s', target: 250},
-		{duration: '10s', target: 200},
 		{duration: '10s', target: 50},
+		{duration: '10s', target: 20},
 		{duration: '5s', target: 10},
 	],
 	thresholds: {
