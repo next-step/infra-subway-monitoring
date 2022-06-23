@@ -26,10 +26,10 @@ insert into section(id, line_id, up_station_id, down_station_id, distance) value
 insert into section(id, line_id, up_station_id, down_station_id, distance) values (7, 1, 7, 8, 10);
 insert into section(id, line_id, up_station_id, down_station_id, distance) values (8, 1, 8, 9, 10);
 insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 3, 10, 10);
-insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 10, 11, 10);
-insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 11, 12, 10);
-insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 12, 13, 10);
-insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 13, 14, 10);
-insert into section(id, line_id, up_station_id, down_station_id, distance) values (9, 2, 14, 15, 10);
+insert into section(id, line_id, up_station_id, down_station_id, distance) values (10, 2, 10, 11, 10);
+insert into section(id, line_id, up_station_id, down_station_id, distance) values (11, 2, 11, 12, 10);
+insert into section(id, line_id, up_station_id, down_station_id, distance) values (12, 2, 12, 13, 10);
+insert into section(id, line_id, up_station_id, down_station_id, distance) values (13, 2, 13, 14, 10);
+insert into section(id, line_id, up_station_id, down_station_id, distance) values (14, 2, 14, 15, 10);
 
 insert into member(id, email, password, age) values (1, 'tasklet1579@next.co.kr', 'test1234', 30);
