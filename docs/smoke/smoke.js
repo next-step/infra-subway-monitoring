@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import {check, sleep} from 'k6';
+import {check} from 'k6';
 
 export let options = {
     vus: 1,
@@ -29,8 +29,6 @@ export default function () {
 
     //즐겨찾기 조회
     getFavorites(token);
-
-    sleep(1);
 }
 
 function accessMainPage() {
@@ -65,7 +63,6 @@ function getMemberInfo(token) {
     };
     let response = http.get(`${BASE_URL}/members/me`, params).json();
     check(response, {'get member info successfully': (obj) => obj.id != 0});
-    sleep(1);
 }
 
 function updateMemberInfo(token) {
