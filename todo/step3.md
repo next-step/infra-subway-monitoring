@@ -273,7 +273,21 @@ management.endpoints.web.exposure.include=*
 ```
 
 ### 📚 Todo List 📚
-- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+```shell
+# thread/thread.dump 106번째줄
+	at com.mysql.cj.protocol.ReadAheadInputStream.read(ReadAheadInputStream.java:180)
+	- locked <0x000000079f347348> (a com.mysql.cj.protocol.ReadAheadInputStream)
+	...
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:930)
+	- locked <0x000000079f342fe8> (a com.mysql.cj.jdbc.ConnectionImpl)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003)
+	- locked <0x000000079f342fe8> (a com.mysql.cj.jdbc.ConnectionImpl)
+	...
+	at com.sun.proxy.$Proxy108.findAll(Unknown Source)
+	at nextstep.subway.line.application.LineService.findLineResponses(LineService.java:35)
+	at nextstep.subway.line.application.LineService$$FastClassBySpringCGLIB$$c48cb19.invoke(<generated>)
+```
 - [ ] 로그 설정하기
   - [ ] Application Log 파일로 저장하기
   - [ ] Nginx Access Log 설정하기
