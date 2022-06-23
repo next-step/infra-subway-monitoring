@@ -138,17 +138,17 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 
-- [ ] 부하 테스트
+- [X] 부하 테스트
   - [X] 테스트 전제조건 정리
     - [X] 대상 시스템 범위
     - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
     - [X] 부하 테스트 시 저장될 데이터 건수 및 크기
-  - [ ] 각 시나리오에 맞춰 스크립트 작성
-    - [ ] 접속 빈도가 높은 페이지 (메인 로그인)
-    - [ ] 데이터를 갱신하는 페이지 (즐겨찾기 추가)
-    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (경로조회)
+  - [X] 각 시나리오에 맞춰 스크립트 작성
+    - [X] 접속 빈도가 높은 페이지 (메인 로그인)
+    - [X] 데이터를 갱신하는 페이지 (즐겨찾기 추가)
+    - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (경로조회)
       - 경로 검색 
-  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+  - [X] Smoke, Load, Stress 테스트 후 결과를 기록
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
    > 경쟁사 기준 (카카오 맵) 참조 하여 목표값을 설정 하였습니다.
@@ -165,14 +165,28 @@ npm run dev
           - 피크타임 : 5
           - 1일 최대 rps : 115 (1일평균 rps * (최대 트래픽 / 평소 트래픽))
       * 목표 rps : 115
-      * VUser : 51
+      * VUser : 10 ~ 51
         T = (4 * 0.2) + 1 = 1.8
         VUser : 51  (1.8 * 115) / 4 
     
       
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+    * Smoke
+      * K6
+        ![smoke](loadTest/smoke-test-k6.png)
+      * grafana
+        ![smoke](loadTest/smoke-test-grafana.png)
+    * Stress (MAX VUser : 392)
+      * K6
+        ![stress](loadTest/stress-test-k6.png)
+      * grafana
+        ![stress](loadTest/stress-test-grafana.png)
+    * load (VUser 10 ~ 51)
+      * K6
+        ![laod](loadTest/load-test-k6.png)
+      * grafana
+        ![load](loadTest/load-test-grafana.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
