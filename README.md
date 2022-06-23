@@ -109,18 +109,21 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - smoke
-![smoke_k6.png](smoke_k6.png)
-![smoke_grafana.png](smoke_grafana.png)
+![smoke_k6.png](Documents/GitHub/infra-subway-monitoring/k6/smoke_k6.png)
+![smoke_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/smoke_grafana.png)
 - load
-![load_k6.png](load_k6.png)
-![load_grafana.png](load_grafana.png)
+![load_k6.png](Documents/GitHub/infra-subway-monitoring/k6/load_k6.png)
+![load_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/load_grafana.png)
 - stress
-![stress_k6.png](stress_k6.png)
-![stress_grafana.png](stress_grafana.png)
+![stress_k6.png](Documents/GitHub/infra-subway-monitoring/k6/stress_k6.png)
+![stress_grafana.png](Documents/GitHub/infra-subway-monitoring/k6/stress_grafana.png)
 
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+웹서버 로그 - `/var/log/nginx`
+application 로그 - `~/nextstep/infra-subway-monitoring/log`
 2. Cloudwatch 대시보드 URL을 알려주세요
+`https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=chj1768-dashboard
+`
