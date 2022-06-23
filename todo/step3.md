@@ -288,7 +288,7 @@ management.endpoints.web.exposure.include=*
 	at nextstep.subway.line.application.LineService.findLineResponses(LineService.java:35)
 	at nextstep.subway.line.application.LineService$$FastClassBySpringCGLIB$$c48cb19.invoke(<generated>)
 ```
-- [ ] 로그 설정하기
+- [x] 로그 설정하기
   - [x] Application Log 파일로 저장하기
     - 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - 경로찾기 등의 이벤트 로그를 JSON으로 수집

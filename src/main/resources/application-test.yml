@@ -9,4 +9,5 @@ spring:
       on-profile: test
 
 logging:
-  level: debug
+  level:
+    nextstep.subway: debug

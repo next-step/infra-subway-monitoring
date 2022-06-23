@@ -19,4 +19,5 @@ spring:
       on-profile: local
 
 logging:
-  level: debug
+  level:
+    nextstep.subway: debug
