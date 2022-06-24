@@ -2,9 +2,17 @@ import http from 'k6/http';
 import {check, sleep} from 'k6';
 
 export let options = {
-    vus: 2, // 2 user looping for 1minute
-    duration: '1m',
-
+    stages: [
+        { duration: '1m', target: 10 },
+        { duration: '1m', target: 20 },
+        { duration: '1m', target: 100 },
+        { duration: '1m', target: 200 },
+        { duration: '1m', target: 1000 },
+        { duration: '1m', target: 2000 },
+        { duration: '1m', target: 10000 },
+        { duration: '1m', target: 10 },
+        { duration: '1m', target: 0 },
+    ],
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
     },
@@ -34,6 +42,7 @@ export default function () {
     let authHeaders = getAuthHeaders(loginRes);
 
     findMyInfo(authHeaders);
+    findStation();
     findPath();
 
     sleep(1);
@@ -111,6 +120,14 @@ function findMyInfo(authHeaders) {
     });
 }
 
+function findStation() {
+    const res = http.get(`${BASE_URL}/stations`);
+
+    check(res, {
+        'findStation() status is 200': (resp) => resp.status === 200,
+    });
+}
+
 function findPath() {
     const res = http.get(`${BASE_URL}/paths?source=167&target=392`);
 
@@ -118,35 +135,3 @@ function findPath() {
         'findPath() status is 200': (resp) => resp.status === 200,
     });
 }
-
-
-// export default function ()  {
-//
-//     var payload = JSON.stringify({
-//         email: USERNAME,
-//         password: PASSWORD,
-//     });
-//
-//     var params = {
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     };
-//
-//
-//     let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-//
-//     check(loginRes, {
-//         'logged in successfully': (resp) => resp.json('accessToken') !== '',
-//     });
-//
-//
-//     let authHeaders = {
-//         headers: {
-//             Authorization: `Bearer ${loginRes.json('accessToken')}`,
-//         },
-//     };
-//     let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-//     check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
-//     sleep(1);
-// };
