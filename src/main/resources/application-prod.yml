@@ -21,3 +21,14 @@ spring:
 logging:
   level:
     nextstep.subway: info
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: mond-page  # 해당 namespace로 Cloudwatch 메트릭을 조회 가능
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: *
