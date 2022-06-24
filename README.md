@@ -40,95 +40,36 @@ npm run dev
 
 ### 1단계 - 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-   ![image](https://user-images.githubusercontent.com/6476469/161757733-21475074-65df-4d02-94d9-b802c5c50ab5.png)
-   <br>
-   (네이버 지하철 녹양 -> 신도림 길찾기)
-   <br><br>
-   ![image](https://user-images.githubusercontent.com/6476469/161765988-543783d8-a5a5-43a7-b13c-da06b6074dea.png)
-   <br>
-   (Running map 경로검색 페이지)
-```
-FCP: 0.5초 이하
-네이버 수준을 목표
-```
+
+- 성능예산 목표
+    - 카카맵 수준인 FCP 0.6초
+    - 페이지로드 2초 미만
+    - TTI 3초 미만
+- 측정결과
+    - kakao map 메인
+    <img width="990" alt="image" src="https://user-images.githubusercontent.com/6476469/174578361-2c350920-7821-4935-98bf-db07c15de529.png">
+
+    - 실습 경로 페이지
+    <img width="973" alt="image" src="https://user-images.githubusercontent.com/6476469/174578576-a62ae2ed-5afe-49bd-a36a-dfef47183f95.png">
+
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-```
-불필요한 파일 다운로드 제거, 캐싱 설정, gzip 압축
-```
+- gzip 압축 
+    <img width="960" alt="image" src="https://user-images.githubusercontent.com/6476469/174582018-fc047481-3f56-4c72-9086-945d1b7d0113.png">
+    - 성능에 가장 많이 영향을 미치는 것으로 예측됨
+- 캐시설정, 불필요한 파일 제거
 
-3. 부하테스트 전제조건은 어느정도로 설정하셨나요
-```
-DAU: 3,000,000 (1,000,000 * 3)
-평균 rps: 34.6
-최대 rps: 346
-```
-
-- 접속 빈도가 높은 페이지(https://pleasesubway.p-e.kr)
-    - T: 0.1 (1 * 0.1)
-    - 평균 VU: 3.45 (34.6 * 0.1 / 1)
-    - 최대 VU: 34.5 (346 * 0.1 / 1)
-
-- 데이터를 갱신하는 페이지(https://pleasesubway.p-e.kr/lines)
-    - T: 0.6 (3 * 0.2)
-    - 평균 VU: 6.92 (34.6 * 0.6 / 3)
-    - 최대 VU: 69.2 (346 * 0.6 / 3)
-
-- 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (https://pleasesubway.p-e.kr/path)
-    - T: 0.4 (2 * 0.2)
-    - 평균 VU: 6.92 (34.6 * 0.4 / 2)
-    - 최대 VU: 69.2 (346 * 0.4 / 2)
-
-4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-  - 접속 빈도가 높은 페이지(https://pleasesubway.p-e.kr)
-    - [Smoke](./k6/main/smoke.js)
-      ![img_1.png](k6/main/img_1.png)
-    - [Load](./k6/main/load.js)
-      ![img_2.png](k6/main/img_2.png)
-    - [Stress](./k6/main/stress.js)
-      ![img_1.png](k6/main/img_3.png)
-  - 데이터를 갱신하는 페이지(https://pleasesubway.p-e.kr/lines)
-    - [Smoke](./k6/lines/smoke.js)
-      ![img_1.png](k6/lines/img_1.png)
-    - [Load](./k6/lines/load.js)
-      ![img_2.png](k6/lines/img_2.png)
-    - [Stress](./k6/lines/stress.js)
-      ![img_3.png](k6/lines/img_3.png)
-  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 (https://pleasesubway.p-e.kr/path)
-    - [Smoke](./k6/path/smoke.js)
-      ![img_1.png](k6/path/img_1.png)
-    - [Load](./k6/path/load.js)
-      ![img.png](k6/path/img.png)
-    - [Stress](./k6/path/stress.js)
-      ![img_2.png](k6/path/img_2.png)
 
 ---
 
-### 2단계 - 화면 응답 개선하기
-1. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
-- 시간이 얼마 안 남아서 길찾기만 테스트 했습니다. 괜찮을까요?
-    - Smoke
-      ![img_1.png](img_1.png)
-    - Load (avg 4.16s -> 91.5ms)
-      ![img_5.png](img_5.png)
-    - Stress (avg 5.16s -< 961.98ms)
-      ![img_6.png](img_6.png)
-      - 이전보단 낫지만 현재 설정으로는 300 VUs 부근부터 서버가 버티질 못하네요.
-      - 다른 미션 진행 후 다시 설정들을 만져보며 진행해 보려합니다. 
-  
-2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
-![img_2.png](img_2.png)
-- 목표로 하던 FCP 0.5초 이하는 달성 못 했습니다.
-- 하지만 FCP 줄이는데 가장 결정적이었던 것은 js defer 및 css preload & onload 꼼수 실행처리(진단 사이트 권장사항)
-- 캐싱 적용
-- TLS, http/2 병렬 처리
-- gzip 으로 용량 압축
-- redis 설정으로 일부 DB 부하 줄임
-- 로그제거
-- Scale Out
+### 2단계 - 부하 테스트 
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
 ---
 
-### [추가] 로깅, 모니터링
+### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
