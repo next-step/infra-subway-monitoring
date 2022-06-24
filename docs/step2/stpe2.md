@@ -39,3 +39,22 @@
 - T = (R * http_req_duration) + 1 = (8 * 0.1) + 1 = 1.8
 - 평균 VUser = (1일 평균 rps * T) / R = (40 * 1.8) / 8 = 9
 - 최대 VUser = (1일 최대 rps * T) / R = (80 * 1.8) / 8 = 18
+
+## smoke
+[smoke test 보러가기](smoke/smoke.js)
+![smoke_k6](./smoke/smoke_k6_img.png)  
+![smoke_grafana](./smoke/smoke_k6_img.png)
+
+## load 
+[load test 보러가기](load/load.js)
+![load_k6](./load/load_k6_img.png)  
+![load_grafana](./load/load_k6_img.png)
+
+## stress 
+[stress test 보러가기](stress/stress.js)
+![stress_k6](./stress/stress_k6_img.png)  
+![stress_grafana](./stress/stress_k6_img.png)
+
+stress 테스트의 경우 VUser가 1000명까지 수용하는 것을 확인했습니다.
+
+
