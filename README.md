@@ -195,18 +195,26 @@ npm run dev
     - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
-- EC2: handh0413-public-application01-EC2
+
+- EC2(Web Server): handh0413-public-webserver-EC2
     - 퍼블릭 IPv4: 15.164.66.164
     - 프라이빗 IPv4: 192.168.30.40
     - 인스턴스 ID: i-0284e29fad9741042
+    
+- EC2(Application): handh0413-public-application-EC2
+    - 퍼블릭 IPv4: 3.38.100.50
+    - 프라이빗 IPv4: 192.168.30.58
+    - 인스턴스 ID: i-0e356c24316fa80b1
 
-- 실습 관련 로그 경로 (andh0413-public-application01-EC2)
-    - application.log(springboot): /home/ubuntu/nextstep/application.log
-    - file.log(springboot): /home/ubuntu/nextstep/log/file.log
-    - json.log(springboot): /home/ubuntu/nextstep/log/json.log
+- 실습 관련 로그 경로 (handh0413-public-webserver-EC2)
     - access.log(nginx): /var/log/nginx/access.log
     - error.log(nginx): /var/log/nginx/error.log
     - syslog(system): /var/log/syslog
+    
+- 실습 관련 로그 경로 (handh0413-public-application-EC2)
+    - application.log(springboot): /home/ubuntu/nextstep/application.log
+    - file.log(springboot): /home/ubuntu/nextstep/log/file.log
+    - json.log(springboot): /home/ubuntu/nextstep/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 - [CloudWatch 링크](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=handh0413-dashboard)
