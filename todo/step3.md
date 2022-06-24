@@ -293,7 +293,21 @@ management.endpoints.web.exposure.include=*
     - 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - 경로찾기 등의 이벤트 로그를 JSON으로 수집
   - [x] Nginx Access Log 설정하기
-- [ ] Cloudwatch로 모니터링
+- [x] Cloudwatch로 모니터링
   - [x] Cloudwatch로 로그 수집하기
   - [x] Cloudwatch로 메트릭 수집하기
-  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+  - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
+
+- log path
+```shell
+# Application log Path
+/home/nextstep/infra-subway-monitoring/log/application_json.log
+/home/nextstep/infra-subway-monitoring/log/application_file.log
+
+# nginx log path
+/home/nginx/log/access.log
+/home/nginx/log/error.log
+```
+
+- cloudwatch url
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=mond-page-dashboard
