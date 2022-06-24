@@ -24,12 +24,13 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
+        logger.info("login request. email : {}", request.getEmail());
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
         member.checkPassword(request.getPassword());
 
 
         String token = jwtTokenProvider.createToken(request.getEmail());
-        logger.info("login success. id : {}", member.getId());
+        logger.info("login success. email : {}, id : {}", member.getEmail(), member.getId());
         return new TokenResponse(token);
     }
 
