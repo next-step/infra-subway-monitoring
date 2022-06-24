@@ -111,5 +111,12 @@ gzip 압축이 되어있지 않은것을 확인하였습니다.
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- 서버 IP: 192.168.123.36
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/nohup.out
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+3. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yangseungin-dashboard
