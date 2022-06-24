@@ -5,8 +5,4 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface LineRepository extends JpaRepository<Line, Long> {
-
-    @Query(value = "SELECT * FROM line WHERE SLEEP(3)", nativeQuery = true)
-    List<Line> findAll();
-}
+public interface LineRepository extends JpaRepository<Line, Long> {}

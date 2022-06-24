@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+    <property name="home" value="log/"/>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="file-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="JSONFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}service-json.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${home}json-file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <thread>thread</thread>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+                <mdc>context</mdc>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}service.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="json" level="INFO" >
+        <appender-ref ref="JSONFILE" />
+    </logger>
+
+    <logger name="file" level="INFO" >
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="console" level="INFO" >
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <springProfile name="local">
+        <root>
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root>
+            <appender-ref ref="FILE"/>
+        </root>
+    </springProfile>
+</configuration>
