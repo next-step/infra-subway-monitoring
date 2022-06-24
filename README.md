@@ -126,15 +126,18 @@ Running Map
 - 노선 관리
 - 구간 관리
 - 구간 검색
+
+구성
+- Nginx Proxy ↔ Tomcat ↔ MySQL 
 ```
 
 테스트 데이터
 ```
 신분당선
-- 강남역 불광역 판교역 용인역 용산역 광교역
+- 강남역 양재역 판교역 정자역 미금역 수지구청역 성복역 상현역 광교중앙역
 
-신림선
-- 용인역 불광역 신림역
+경강선
+- 판교역 성남역 이매역 광주역 곤지암역 이천역 여주역
 ```
 
 설정값 계산
@@ -191,6 +194,7 @@ Q. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - 아이디와 패스워드를 사용하여 로그인
 - 지하철역 조회
 - 시작역부터 출발역까지의 최단거리 경로 검색
+- 즐겨찾기 등록
 
 Smoke
 - k6 run --out influxdb=http://localhost:8086/k6 smoke.js
@@ -212,33 +216,41 @@ const USERNAME = 'tasklet1579@next.co.kr';
 const PASSWORD = 'test1234';
 
 export default () => {
-   // lending page
    let homeUrl = `${BASE_URL}`;
    let lendingPageResponse = http.get(homeUrl);
+   check_lending_page(lendingPageResponse);
+
+   let loginResponse = login();
+   check_login_access_token(loginResponse);
    
-   check(lendingPageResponse, {
-      'lending page running': (response) => response.status === 200
-   });
-   
-   var payload = JSON.stringify({
+   sleep(1);
+};
+
+function login() {
+   var body = JSON.stringify({
       email: USERNAME,
       password: PASSWORD,
    });
-   
-   var params = {
+   var headers = {
       headers: {
          'Content-Type': 'application/json',
       },
    };
-   
-   let loginResponse = http.post(`${BASE_URL}/login/token`, payload, params);
-   
+
+   return http.post(`${BASE_URL}/login/token`, body, headers);
+}
+
+function check_lending_page(lendingPageResponse) {
+   check(lendingPageResponse, {
+      'lending page running': (response) => response.status === 200
+   });
+}
+
+function check_login_access_token(loginResponse) {
    check(loginResponse, {
       'logged in successfully': (response) => response.json('accessToken') !== '',
    });
-   
-   sleep(1);
-};
+}
 ```
 
 Load
@@ -250,13 +262,14 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 
 export let options = {
    stages: [
-      { duration: '2m', target: 1 },
-      { duration: '3m', target: 3 }, 
-      { duration: '5m', target: 5 }, 
-      { duration: '5m', target: 7 }, 
-      { duration: '5m', target: 11 },
-      { duration: '5m', target: 7 }, 
-      { duration: '5m', target: 0 }, 
+      { duration: '1m', target: 1 },
+      { duration: '2m', target: 5 }, 
+      { duration: '3m', target: 7 }, 
+      { duration: '6m', target: 11 }, 
+      { duration: '8m', target: 11 },
+      { duration: '6m', target: 8 },
+      { duration: '4m', target: 4 }, 
+      { duration: '2m', target: 0 }, 
    ],
    thresholds: {		
       http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -268,53 +281,90 @@ const USERNAME = 'tasklet1579@next.co.kr';
 const PASSWORD = 'test1234';
 
 export default () => {
-   // lending page
    let homeUrl = `${BASE_URL}`;
    let lendingPageResponse = http.get(homeUrl);
+   check_lending_page(lendingPageResponse);
+
+   let loginResponse = login();
+   check_login_access_token(loginResponse);
    
-   check(lendingPageResponse, {
-      'lending page running': (response) => response.status === 200
-   });
+   let stationsUrl = `${BASE_URL}/stations`;
+   let stationsResponse = http.get(stationsUrl);
+   check_stations_size(stationsResponse);
    
-   var payload = JSON.stringify({
+   let findPathUrl = new URL(`${BASE_URL}/paths`);
+   findPathUrl.searchParams.append('source', 1);
+   findPathUrl.searchParams.append('target', 15);
+   
+   let findPathResponse = http.get(findPathUrl.toString());
+   check_find_path(findPathResponse);
+
+   let favoriteResponse = add_favorite(loginResponse.json('accessToken'));
+   check_favorite(favoriteResponse);
+
+   sleep(1);
+};
+
+function login() {
+   var body = JSON.stringify({
       email: USERNAME,
       password: PASSWORD,
    });
-   
-   var params = {
+   var headers = {
       headers: {
          'Content-Type': 'application/json',
       },
    };
-   
-   let loginResponse = http.post(`${BASE_URL}/login/token`, payload, params);
-   
+
+   return http.post(`${BASE_URL}/login/token`, body, headers);
+}
+
+function add_favorite(accessToken) {
+   var body = JSON.stringify({
+      source: 1,
+      target: 15,
+   });
+   let headers = {
+      headers: {
+         Authorization: `Bearer ${accessToken}`,
+         'Content-Type': 'application/json',
+      },
+   };
+
+   return http.post(`${BASE_URL}/favorites`, body, headers);
+}
+
+function check_lending_page(lendingPageResponse) {
+   check(lendingPageResponse, {
+      'lending page running': (response) => response.status === 200
+   });
+}
+
+function check_login_access_token(loginResponse) {
    check(loginResponse, {
       'logged in successfully': (response) => response.json('accessToken') !== '',
    });
-   
-   let stationsUrl = `${BASE_URL}/stations`;
-   
-   let stationsResponse = http.get(stationsUrl);
-   
+}
+
+function check_stations_size(stationsResponse) {
    check(stationsResponse, {
       'selected Stations successfully': (response) => response.body.length > 1,
    });
    
    // console.log(stationsResponse.json());
-   
-   let findPathUrl = new URL(`${BASE_URL}/paths`);
-   findPathUrl.searchParams.append('source', 9);
-   findPathUrl.searchParams.append('target', 6);
-   
-   let findPathResponse = http.get(findPathUrl.toString());
-   
+}
+
+function check_find_path(findPathResponse) {
    check(findPathResponse, {
       'found Path successfully': (response) => response.json('stations').length > 1,
    });
-   
-   sleep(1);
-};
+}
+
+function check_favorite(favoriteResponse) {
+	check(favoriteResponse, {
+      'lending page running': (response) => response.status === 201
+   });
+}
 ```
 
 Stress
@@ -322,22 +372,20 @@ Stress
 ```
 export let options = {
    stages: [
-      { duration: '1m', target: 28 },
-      { duration: '1m', target: 35 },
-      { duration: '1m', target: 70 },
-      { duration: '1m', target: 140 },
-      { duration: '1m', target: 281 },
-      { duration: '1m', target: 563 },
-      { duration: '1m', target: 281 },
-      { duration: '1m', target: 140 },      
-      { duration: '1m', target: 112 },
-      { duration: '1m', target: 0 },
+      { duration: '30s', target: 2 },
+      { duration: '30s', target: 4 },
+      { duration: '30s', target: 6 },
+      { duration: '30s', target: 8 },
+      { duration: '30s', target: 10 },
+      { duration: '30s', target: 12 },
+      { duration: '30s', target: 8 },
+      { duration: '30s', target: 6 },  
+      { duration: '30s', target: 0 },
    ],
    thresholds: {
       http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
    },
 };
-
 ```
 
 테스트 결과
