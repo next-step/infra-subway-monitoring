@@ -104,10 +104,37 @@ npm run dev
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
++ 대상 시스템 범위
+  - proxy(nginx) > was(tomcat) > db(mysql)
++ 목푯값 설정 (latency, throughput, 부하 유지기간)
+  - latency : 80ms 이하
+  - throughput 
+    - 1일 사용자 수(DAU) : 160만 [(참고)](https://www.sedaily.com/NewsView/22RH3PUBN6)
+    - 1명당 1일 평균 접속 수 : 출/퇴근 2회로 가정
+    - 1일 총 접속 수 : 160만 x 2회 = 320만회
+    - 1일 평균 rps : 320만회 / 86400 = 37 rps
+    - 1일 최대 rps : 37 x (100만 / 30만) = 123.3 rps [(참고)](https://www.bigdata-map.kr/datastory/traffic/seoul)
+  - 부하 유지기간
+    - smoke : 1m
+    - load : 24m
+    - stress : 18m
+  - VUser
+    - 요청수 : 5회(메인 - 로그인 페이지 - 로그인 요청 - 메뉴 선택 - 기능 요청)
+    - T(VU iteration) : 5 x 0.5s + 1s = 3.5s
+    - 최대 VUser : 123.3 x 3.5 / 5 = 86
+    - 최소 VUser : 37 x 3.5 / 5 = 26
++ 부하 테스트 시 저장될 데이터 건수 및 크기
+  + 이번 부하 테스트는 조회를 대상으로 하므로 추가로 저장되는 데이터는 없음
+  + 조회 데이터
+    + 노선 : 23개
+    + 구간 : 340개
+    + 역 : 616개
+    + 사용자 : 4개
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- script 디렉토리를 참고해주세요
 
 ---
 
