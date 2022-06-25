@@ -5,8 +5,6 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +13,6 @@ import java.net.URI;
 @RestController
 public class MemberController {
     private MemberService memberService;
-    private static final Logger log = LoggerFactory.getLogger(MemberController.class);
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
@@ -24,7 +21,6 @@ public class MemberController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
-        log.info("created member id : {}", member.getId());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
