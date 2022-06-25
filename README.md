@@ -112,8 +112,9 @@ npm run dev
 ### 2단계 - 부하 테스트
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-2.
-3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요   
+
+[2단계 보러가기](docs/step2/stpe2.md)
 
 ---
 
