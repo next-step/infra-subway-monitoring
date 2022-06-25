@@ -7,16 +7,20 @@ export let options = {
         { duration: '1m', target: 200 },
         { duration: '1m', target: 300 },
         { duration: '1m', target: 400 },
-        { duration: '1m', target: 400 },
-        { duration: '1m', target: 300 },
-        { duration: '1m', target: 200 },
+        { duration: '1m', target: 500 },
+        { duration: '1m', target: 600 },
+        { duration: '1m', target: 700 },
+        { duration: '1m', target: 800 },
+        { duration: '1m', target: 900 },
+        { duration: '5m', target: 1000 },
+        { duration: '1m', target: 500 },
         { duration: '1m', target: 100 },
-        { duration: '1m', target: 40 },
-        { duration: '1m', target: 10 }
+        { duration: '1m', target: 50 },
+        { duration: '1m', target: 0 }
     ],
 
     thresholds: {
-        http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
     },
 };
 
