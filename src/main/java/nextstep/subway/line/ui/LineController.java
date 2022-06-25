@@ -98,12 +98,10 @@ public class LineController {
     public String generateStreams() {
         double value = 0;
         IntStream.of(100).parallel().map(extracted(value));
-        extracted(value);
         return "ok";
     }
 
     private IntUnaryOperator extracted(double value) {
-        value = Math.tan(value);
-        return null;
+        return operand -> (int) Math.tan(value);
     }
 }
