@@ -155,5 +155,9 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+   * nginx [minzzang-ec2-public] [192.168.117.166]
+        * /var/log/nginx
+   * application [minzzang-ec2-public2] [192.168.117.105]
+       * /var/log/app
 2. Cloudwatch 대시보드 URL을 알려주세요
+   * https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=minzzang-dashboard
