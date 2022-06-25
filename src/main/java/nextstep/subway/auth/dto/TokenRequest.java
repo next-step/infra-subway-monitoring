@@ -19,4 +19,11 @@ public class TokenRequest {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        return "로그인 요청 [" +
+                "email='" + email + '\'' +
+                ']';
+    }
 }

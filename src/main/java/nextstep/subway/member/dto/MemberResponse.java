@@ -31,4 +31,13 @@ public class MemberResponse {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        return "멤버 정보 [" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ']';
+    }
 }
