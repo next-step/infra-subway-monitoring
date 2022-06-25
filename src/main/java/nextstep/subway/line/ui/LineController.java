@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/lines")
 public class LineController {
+    private static final Logger logger = LoggerFactory.getLogger(LineController.class);
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -100,11 +103,7 @@ public class LineController {
     }
 
     private IntUnaryOperator extracted(double value) {
-        while (value >= 0) {
-            value = Math.tan(value);
-        }
+        value = Math.tan(value);
         return null;
     }
-
-
 }
