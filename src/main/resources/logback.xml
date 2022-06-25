@@ -8,19 +8,15 @@
     <include resource="file-appender.xml"/>
     <include resource="json-appender.xml"/>
 
-    <!-- logger name이 console일 때 적용할 appender를 등록한다. -->
-    <logger name="console" level="TRACE">
-        <appender-ref ref="console"/>
-    </logger>
-
-    <!-- logger name이 file일 때 적용할 appender를 등록한다. -->
-    <logger name="file" level="INFO">
-        <appender-ref ref="file"/>
-    </logger>
-
-    <!-- logger name이 file일 때 적용할 appender를 등록한다. -->
+    <!-- logger name이 json일 때 적용할 appender를 등록한다. -->
     <logger name="json" level="INFO">
         <appender-ref ref="json"/>
     </logger>
+
+    <!-- 디폴트로 사용할 appender를 등록한다. -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
 
 </configuration>
