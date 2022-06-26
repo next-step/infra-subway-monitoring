@@ -128,7 +128,9 @@ Running Map
 - 구간 검색
 
 구성
-- Nginx Proxy ↔ Tomcat ↔ MySQL 
+- 프록시 (Nginx) ↔ 웹 (Tomcat) ↔ 데이터베이스 (MySQL)
+
+* 성능 부하 테스트는 웹이 아닌 베스천 서버에서 진행함  
 ```
 
 테스트 데이터
@@ -265,11 +267,11 @@ export let options = {
       { duration: '1m', target: 1 },
       { duration: '2m', target: 5 }, 
       { duration: '3m', target: 7 }, 
-      { duration: '6m', target: 11 }, 
-      { duration: '8m', target: 11 },
-      { duration: '6m', target: 8 },
-      { duration: '4m', target: 4 }, 
-      { duration: '2m', target: 0 }, 
+      { duration: '5m', target: 9 }, 
+      { duration: '5m', target: 11 },
+      { duration: '5m', target: 11 },
+      { duration: '5m', target: 6 }, 
+      { duration: '4m', target: 0 }, 
    ],
    thresholds: {		
       http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -336,19 +338,19 @@ function add_favorite(accessToken) {
 
 function check_lending_page(lendingPageResponse) {
    check(lendingPageResponse, {
-      'lending page running': (response) => response.status === 200
+      '랜딩 페이지 점검': (response) => response.status === 200
    });
 }
 
 function check_login_access_token(loginResponse) {
    check(loginResponse, {
-      'logged in successfully': (response) => response.json('accessToken') !== '',
+      '로그인 후 토큰 획득': (response) => response.json('accessToken') !== '',
    });
 }
 
 function check_stations_size(stationsResponse) {
    check(stationsResponse, {
-      'selected Stations successfully': (response) => response.body.length > 1,
+      '모든 지하철역 개수 조회': (response) => response.body.length > 1,
    });
    
    // console.log(stationsResponse.json());
@@ -356,13 +358,13 @@ function check_stations_size(stationsResponse) {
 
 function check_find_path(findPathResponse) {
    check(findPathResponse, {
-      'found Path successfully': (response) => response.json('stations').length > 1,
+      '지하철 최단거리 경로 조회': (response) => response.json('stations').length > 1,
    });
 }
 
 function check_favorite(favoriteResponse) {
 	check(favoriteResponse, {
-      'lending page running': (response) => response.status === 201
+      '지하철 경로 즐겨찾기': (response) => response.status === 201
    });
 }
 ```
@@ -372,15 +374,8 @@ Stress
 ```
 export let options = {
    stages: [
-      { duration: '30s', target: 2 },
-      { duration: '30s', target: 4 },
-      { duration: '30s', target: 6 },
-      { duration: '30s', target: 8 },
-      { duration: '30s', target: 10 },
-      { duration: '30s', target: 12 },
-      { duration: '30s', target: 8 },
-      { duration: '30s', target: 6 },  
-      { duration: '30s', target: 0 },
+      { duration: '1m', target: 1024 },
+      { duration: '1m', target: 1024 },
    ],
    thresholds: {
       http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
