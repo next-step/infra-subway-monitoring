@@ -17,6 +17,8 @@ import java.util.List;
 @Service
 @Transactional
 public class MapService {
+    private final Logger logger = LoggerFactory.getLogger("json");
+
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -31,7 +33,9 @@ public class MapService {
         List<Line> lines = lineService.findLines();
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
+
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
+        logger.info("find : {} to {}", sourceStation, targetStation);
         return PathResponseAssembler.assemble(subwayPath);
     }
 }

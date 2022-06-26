@@ -1,5 +1,6 @@
 package nextstep.subway.member.application;
 
+import nextstep.subway.aop.FileLog;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    @FileLog
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
