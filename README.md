@@ -48,8 +48,15 @@ npm run dev
     + 압축된 리소스 최대 크기 200KB 미만
     + TTI: 3s 이하
     + FCP: 2s 이하
+    + TTI: pc 2s 이하, 모바일 10s 이하 (현재 pc 2.7s, 모바일 15.5s 소요)
+    + FCP: pc 2s 이하, 모바일 10s 이하 (현재 pc 2.7s, 모바일 15s 소요)
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - `vendors.js`, `main.js` 의 크기를 줄여본다. (vendors.js의 경우 200KB 이하로)
+- `vendors.js`, `main.js` 의 크기를 줄여본다.
+    ```
+    vendors.js : 2,127kb -> 200kb 이하로
+    main.js : 172kb -> 100kb 이하로
+    ```
     + 압축
     + 소스 스플릿
     + lazy-loading
