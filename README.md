@@ -125,8 +125,52 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+- 목푯값 설정 (latency, throughput, 부하 유지기간)
+    + (a) 예상 1일 사용자 수(DAU): 10만
+    + (b) 피크 시간대의 집중률: 4.0
+    + (c) 1명당 1일 평균 접속 혹은 요청수: 8회
+    + (d) Throughput: 1일 평균 rps ~ 1일 최대 rps
+      ```
+      1일 총 접속 수 = 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수
+                   = 100,000 x 8
+                   = 800,000
+      ```
+      ```
+      1일 평균 rps = 1일 총 접속 수 / 86,400 (초/일)
+                  = 800,000 / 86,400
+                  = 9.3
+      ```
+      ```
+      1일 최대 rps = 1일 평균 rps x (최대 트래픽 / 평소 트래픽)
+                  = 9.3 x 4
+                  = 37.2
+      ```
+- VUser 구하기
+    + 평균 VUser = (9.3 * 2) / 6 = 3.1
+    + 최대 VUser = (37.2 * 2) / 6 = 12.4
+    ```
+    T = (R * http_req_duration) (+ 1s) ; 내부망에서 테스트할 경우 예상 latency를 추가한다
+      = (6 * 0.1) + 1
+      = 2s
+    ```
+    ```
+    VUser = (목표 rps * T) / R
+          = (9.3 * 2) / 6 = 3.1
+          = (37.2 * 2) / 6 = 12.4
+    ```
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- Smoke
+    + [smoke.js](/k6/script/smoke.js)
+    + [k6](/k6/result/smoke_k6.png)
+    + [grafana](/k6/result/smoke_grafana.png)
+- Load
+    + [load.js](/k6/script/load.js)
+    + [k6](/k6/result/load_k6.png)
+    + [grafana](/k6/result/load_grafana.png)
+- Stress
+    + [stress.js](/k6/script/stress.js)
+    + [k6](/k6/result/stress_k6.png)
+    + [grafana](/k6/result/stress_grafana.png)
 
 ---
 
