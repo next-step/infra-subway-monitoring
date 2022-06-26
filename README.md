@@ -199,13 +199,26 @@ npm run dev
   - [X] Application Log 파일로 저장하기
   - [X] 회원가입, 로그인 등의 이벤트에 로깅을 설정
   - [X] 경로찾기 등의 이벤트 로그를 JSON으로 수집
-  Nginx Access Log 설정하기
-- [ ] Cloudwatch로 모니터링
-  - [ ] Cloudwatch로 로그 수집하기
-  - [ ] Cloudwatch로 메트릭 수집하기
-  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [X] Nginx Access Log 설정하기
+- [X] Cloudwatch로 모니터링
+  - [X] Cloudwatch로 로그 수집하기
+  - [X] Cloudwatch로 메트릭 수집하기
+  - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
+    
 
 
 1. 각 서버내 로깅 경로를 알려주세요
+   * Application-log 
+     * EC2 : kbh0581-ec2-was (192.168.101.152)
+     * /home/ubuntu/log/file.log
+     * /home/ubuntu/log/json.log
+   * Nginx log
+     * EC2 : kbh0581-ec2-webservice (192.168.101.34) 
+     * /var/log/nginx/access.log
+     * /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - [대시보드](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dashboard-kbh0581)
+     - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dashboard-kbh0581
+   ![대시보드.png](대시보드.png)
+
