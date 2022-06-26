@@ -2,7 +2,7 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 1, // 1 user looping for 1 minute
+    vus: 1,
     duration: '10s',
 
     thresholds: {
@@ -19,11 +19,11 @@ export default function ()  {
 
     loginPage();
 
-    let accessToken = login();
+    const accessToken = login();
 
     myPage(accessToken);
 
-    findPath(1, 2);
+    findPath(accessToken,1, 2);
 
     sleep(1);
 };
@@ -65,7 +65,7 @@ function login() {
 
 // 마이페이지
 function myPage(accessToken) {
-    let authHeaders = {
+    const authHeaders = {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
@@ -77,9 +77,13 @@ function myPage(accessToken) {
 }
 
 // 최단경로 검색
-function findPath(sourceId, targetId) {
-    let response = http.get(`${BASE_URL}/paths?source=${sourceId}&target=${targetId}`);
-    check(response, {
-        'find path': (resp) => resp.status === 200
-    });
+function findPath(token, source, target) {
+    const authHeaders = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    };
+    let response = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`, authHeaders);
+    check(response, {'find path': (res) => res.status === 200})
 }
