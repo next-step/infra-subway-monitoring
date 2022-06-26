@@ -40,10 +40,36 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-
+* [STEP1_README.md](./docs/STEP1_README.md)
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+* 텍스트 압축
+    *  텍스트 기반 리소스를 압축(gzip, deflate, brotli)하여 제공
+```
+/js/vendors.js
+/js/main.js
+/stations
+```
 
+* 사용하지 않는 자바스크립트 줄이기
+    * 사용하지 않는 자바스크립트를 줄이고 스크립트가 필요할 때까지 로딩을 지연시켜 네트워크 활동에 소비되는 바이트를 줄임
+```
+/js/vendors.js
+/js/main.js
+```
 
+* 렌더링 차단 리소스 제거
+    * /css?family=Roboto:100,300,400,500,700,900
+    * …css/materialdesignicons.min.css
+
+* 효율적인 캐시 정책을 사용하여 정적인 애셋 제공하기
+```
+/js/vendors.js
+/js/main.js
+/images/logo_small.png
+```
+
+* 이미지 요소에 width 및 height가 명시
+    * 이미지 요소에 명시적인 너비 및 높이를 설정하여 레이아웃 변경 횟수를 줄이고 누적 레이아웃 변경을 개선
 
 ---
 
