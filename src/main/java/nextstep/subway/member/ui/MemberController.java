@@ -5,6 +5,8 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,9 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
+    private static final Logger fileEventLogger = LoggerFactory.getLogger("file");
     private MemberService memberService;
+
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
@@ -21,6 +25,7 @@ public class MemberController {
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody MemberRequest request) {
         MemberResponse member = memberService.createMember(request);
+        fileEventLogger.info("[회원가입 완료] id: {} ",member.getId());
         return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
     }
 
@@ -33,6 +38,7 @@ public class MemberController {
     @PutMapping("/members/{id}")
     public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody MemberRequest param) {
         memberService.updateMember(id, param);
+        fileEventLogger.info("[사용자 업데이트 완료] id: {} ", id);
         return ResponseEntity.ok().build();
     }
 
