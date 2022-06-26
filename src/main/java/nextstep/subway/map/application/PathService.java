@@ -29,7 +29,7 @@ public class PathService {
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
-        logger.info("find path: {} {}", kv("source", source), kv("target", target));
+        logger.debug("find path: {} {}", kv("source", source), kv("target", target));
 
         return convertSubwayPath(path);
     }
