@@ -228,11 +228,17 @@ npm run dev
     - [x] 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
   - [x] Nginx Access Log 설정하기
-- [] Cloudwatch로 모니터링
-  - [] Cloudwatch로 로그 수집하기
-  - [] Cloudwatch로 메트릭 수집하기
-  - [] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] Cloudwatch로 모니터링
+  - [x] Cloudwatch로 로그 수집하기
+  - [x] Cloudwatch로 메트릭 수집하기
+  - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
+- Server : 192.168.112.41 (kmmin78-ec2-public-a)
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=kmmin78-dashboard
