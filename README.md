@@ -92,7 +92,7 @@ npm run dev
 - `Throughput`: 17.4 ~ 55
 - `Latency`: 100ms 이하
 
-3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
 
