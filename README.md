@@ -190,6 +190,35 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
+* 요구사항
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+    - findLockLeft -> 쓰레드 대기 구문 제거
+    - findLockRight -> 쓰레드 대기 구문 제거
+    - generateStreams -> 무한루프 구문 제거
+- [X] 로그 설정하기
+  - [X] Application Log 파일로 저장하기
+  - [X] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+  - [X] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+- [X] Nginx Access Log 설정하기
+- [X] Cloudwatch로 모니터링
+  - [X] Cloudwatch로 로그 수집하기
+  - [X] Cloudwatch로 메트릭 수집하기
+  - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
+    
+
+
 1. 각 서버내 로깅 경로를 알려주세요
+   * Application-log 
+     * EC2 : kbh0581-ec2-was (192.168.101.152)
+     * /home/ubuntu/log/file.log
+     * /home/ubuntu/log/json.log
+   * Nginx log
+     * EC2 : kbh0581-ec2-webservice (192.168.101.34) 
+     * /var/log/nginx/access.log
+     * /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - [대시보드](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dashboard-kbh0581)
+     - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dashboard-kbh0581
+   ![대시보드.png](대시보드.png)
+
