@@ -1,0 +1,13 @@
+2022-06-28 04:08:58.652 http-nio-auto-1-exec-1 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:13:07.194 http-nio-auto-1-exec-1 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:13:07.556 http-nio-auto-1-exec-2 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:13:08.447 http-nio-auto-1-exec-10 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:13:10.719 http-nio-auto-1-exec-6 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:16:08.639 http-nio-auto-1-exec-1 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:16:09.070 http-nio-auto-1-exec-3 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:16:09.899 http-nio-auto-1-exec-4 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:16:12.298 http-nio-auto-1-exec-2 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:25:01.236 http-nio-auto-1-exec-1 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:25:01.583 http-nio-auto-1-exec-4 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:25:02.357 http-nio-auto-1-exec-5 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
+2022-06-28 04:25:04.438 http-nio-auto-1-exec-3 INFO  file - Sign Up Member: Member{id=1, email='email@email.com', age=20}
