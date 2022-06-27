@@ -1,9 +1,9 @@
 ## 요구사항
 - [ ] 부하 테스트
-  - [ ] 테스트 전제조건 정리
+  - [x] 테스트 전제조건 정리
     - [x] 대상 시스템 범위
-    - [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
-    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [x] 부하 테스트 시 저장될 데이터 건수 및 크기
   - [ ] 각 시나리오에 맞춰 스크립트 작성
     - [ ] 접속 빈도가 높은 페이지
     - [ ] 데이터를 갱신하는 페이지
@@ -15,5 +15,35 @@
 Proxy(nginx) -> WAS(tomcat) -> DB(mysql)
 
 #### 목푯값 설정
+- Throughput : 23 rps ~ 92 rps
+  - 예상 1일 사용자 수(DAU) : 100만명
+  - 피크 시간대의 집중률 예상 : 출퇴근 시간대
+  - 1명당 1일 평균 접속 혹은 요청수 예상 : 접속 2회, 요청수 6회
+- Latency : 100ms
+```text
+Throughput : 1일 평균 rps ~ 1일 최대 rps
+  1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+  1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+  1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+Latency : 일반적으로 50~100ms이하로 잡는 것이 좋습니다.
+```
+- 부하 유지기간
+  - smoke : 1m
+  - load : 24m
+  - stress : 18m
+
+```text
+Request Rate: measured by the number of requests per second (RPS)
+VU: the number of virtual users
+R: the number of requests per VU iteration
+T: a value larger than the time needed to complete a VU iteration
+
+T = (R * http_req_duration) (+ 1s) ; 내부망에서 테스트할 경우 예상 latency를 추가한다
+VUser = (목표 rps * T) / R
+```
+- VUser
+  - T = (6 x 0.5s) (+ 1s) = 4s
+  - Min VUser : 23 x 4 / 6 = 14
+  - Max VUser : 92 x 4 / 6 = 61
 
 ### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
