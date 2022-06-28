@@ -9,7 +9,7 @@
     <include resource="json-appender.xml" />
 
     <!--    logger name이 console일때 적용할 appender를 등록한다.-->
-    <logger name="console" level="TRACE" >
+    <logger name="console" level="TRACE" additivity="false">
         <appender-ref ref="console" />
     </logger>
 
