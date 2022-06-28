@@ -2,8 +2,8 @@
 
 DOCKER_PATH=$(dirname "$0")
 
-docker stop subway-monitoring
-docker rm subway-monitoring
+docker stop subway-monitoring nginx-proxy letsencrypt-nginx-proxy
+docker rm subway-monitoring nginx-proxy letsencrypt-nginx-proxy
 
 if [ "$(docker images 'subway-monitoring' -a -q)" ]; then
     docker rmi $(docker images 'subway-monitoring' -a -q)
@@ -15,4 +15,4 @@ cp build/libs/*.jar docker/application.jar
 
 cd docker
 docker build -t subway-monitoring .
-docker run -d --name subway-monitoring -p 80:8080 subway-monitoring
+docker-compose up -d
