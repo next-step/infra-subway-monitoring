@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
 

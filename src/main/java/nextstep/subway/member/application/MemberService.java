@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MemberService {
     private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {

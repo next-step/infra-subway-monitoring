@@ -20,6 +20,7 @@ import java.util.List;
 @Transactional
 public class MapService {
     private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
