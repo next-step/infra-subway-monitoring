@@ -29,7 +29,7 @@ Latency : 일반적으로 50~100ms이하로 잡는 것이 좋습니다.
 ```
 - 부하 유지기간
   - smoke : 1m
-  - load : 24m
+  - load : 20m
   - stress : 18m
 
 ```text
@@ -50,3 +50,7 @@ VUser = (목표 rps * T) / R
 #### smoke
 ![smoke-k6](./images/smoke-k6.png)
 ![smoke-grafana](./images/smoke-grafana.png)
+
+#### load
+![load-k6](./images/load-k6.png)
+![load-grafana](./images/load-grafana.png)
