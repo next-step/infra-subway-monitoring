@@ -37,6 +37,10 @@ npm run dev
 ```
 <br>
 
+### 지하철 노선도 사이트
+
+- [https://sonypark.shop](https://sonypark.shop)
+
 ### 성능 측정 용어 정리
 
 - FCP (First Contentful Paint) : 페이지가 로드되기 시작한 시점부터 페이지 콘텐츠의 일부가 화면에 렌더링 될 때까지의 시간을 측정
