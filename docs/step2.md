@@ -30,7 +30,7 @@ Latency : 일반적으로 50~100ms이하로 잡는 것이 좋습니다.
 - 부하 유지기간
   - smoke : 1m
   - load : 20m
-  - stress : 18m
+  - stress : 20m
 
 ```text
 Request Rate: measured by the number of requests per second (RPS)
@@ -54,3 +54,7 @@ VUser = (목표 rps * T) / R
 #### load
 ![load-k6](./images/load-k6.png)
 ![load-grafana](./images/load-grafana.png)
+
+#### stress
+![stress-k6](./images/stress-k6.png)
+![stress-grafana](./images/stress-grafana.png)
