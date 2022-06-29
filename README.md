@@ -133,7 +133,7 @@ npm run dev
 - min VUser = (16.89 * 1.5) / 5 = 5.06
 - max VUser = (84.45 * 1.5) / 5 = 25.3
 
-7. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
 
