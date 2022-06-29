@@ -75,13 +75,11 @@ public class LineController {
 
     @GetMapping("/lock-left")
     public String findLockLeft() {
-        System.out.println("left");
         return "ok";
     }
 
     @GetMapping("/lock-right")
     public String findLockRight() {
-        System.out.println("right");
         return "ok";
     }
 

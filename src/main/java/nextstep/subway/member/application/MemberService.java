@@ -23,7 +23,7 @@ public class MemberService {
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
 
-        log.info("Sign Up Member: {}", member);
+        log.debug("Sign Up Member: {}", member);
         return MemberResponse.of(member);
     }
 
