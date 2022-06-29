@@ -75,8 +75,9 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+   * [STEP2_README.md](./docs/STEP2_README.md)
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   * k6 폴더에 script 및 테스트 결과 추가
 
 ---
 
