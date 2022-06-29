@@ -221,7 +221,7 @@ npm run dev
     * [x] Application Log 파일로 저장
         * 회원가입/로그인 등의 이벤트에 로깅 설정
         * 경로찾기 등의 이벤트 로그를 JSON 으로 수집
-    * [ ] Nginx Access log 설정
+    * [x] Nginx Access log 설정
 * CloudWatch 모니터링
     * [ ] Cloudwatch 로 로그 수집
     * [ ] Cloudwatch 로 메트릭 수집

@@ -8,11 +8,27 @@ services:
     restart: always
     environment:
       - VIRTUAL_HOST=sung-jin.o-r.kr
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=8081
       - LETSENCRYPT_HOST=sung-jin.o-r.kr
       - LETSENCRYPT_EMAIL=osj4872@naver.com
     networks:
       - nginx-proxy
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: always
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    environment:
+      - VIRTUAL_HOST=cadvisor.sung-jin.o-r.kr
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=cadvisor.sung-jin.o-r.kr
+      - LETSENCRYPT_EMAIL=osj4872@naver.com
 
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -26,6 +42,7 @@ services:
       - /nginx/vhost.d:/etc/nginx/vhost.d
       - /nginx/html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/log/nginx:/var/log/nginx
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
