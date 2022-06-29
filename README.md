@@ -218,7 +218,7 @@ npm run dev
 
 * [x] 어플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드 수정
 * 로그 설정
-    * [ ] Application Log 파일로 저장
+    * [x] Application Log 파일로 저장
         * 회원가입/로그인 등의 이벤트에 로깅 설정
         * 경로찾기 등의 이벤트 로그를 JSON 으로 수집
     * [ ] Nginx Access log 설정
