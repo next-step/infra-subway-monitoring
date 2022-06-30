@@ -113,7 +113,29 @@ Latency가 75ms라는 가정하에,
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
----
+#### 접속 빈도가 높은 페이지: landing page
+
+![smoke test landing page](images/landing/smoke.png)
+
+![load test landing page](images/landing/load.png)
+
+![stress test landing page](images/landing/stress.png)
+
+#### 데이터를 갱신하는 페이지: mypage
+
+![smoke test mypage](images/mypage/smoke.png)
+
+![load test mypage](images/mypage/load.png)
+
+![stress test mypage](images/mypage/stress.png)
+
+#### 데이터를 조회하는데 여러 데이터를 참조하는 페이지: paths
+
+![smoke test paths](images/paths/smoke.png)
+
+![load test paths](images/paths/load.png)
+
+![stress test paths](images/paths/stress.png)
 
 ### 3단계 - 로깅, 모니터링
 
