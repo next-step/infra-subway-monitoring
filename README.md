@@ -114,7 +114,7 @@ npm run dev
     * 예상 1일 사용자 수 (DAU): **353,500**
 
   | 경쟁사    |    MAU     |   DAU   |
-      |:----------:|:-------:|:-------:|
+            |:----------:|:-------:|:-------:|
   | 네이버지도 | 13,920,000 | 464,000 |
   | 카카오맵  | 7,290,000  | 243,000 |
   | 평균     | 10,605,000 | 353,500 |
@@ -169,10 +169,13 @@ npm run dev
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+- /home/ubuntu/app/infra-subway-monitoring/log
+- /var/log/nginx/
+
 * [X] Application Log 파일로 저장하기
     * 회원가입, 로그인 등의 이벤트에 로깅을 설정
     * 경로찾기 등의 이벤트 로그를 JSON으로 수집
-* [ ] Nginx Access Log 설정하기
+* [X] Nginx Access Log 설정하기
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
