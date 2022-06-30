@@ -179,6 +179,8 @@ npm run dev
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
-* [ ] Cloudwatch로 로그 수집하기
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sangik-kim-dashboard
+
+* [X] Cloudwatch로 로그 수집하기
 * [ ] Cloudwatch로 메트릭 수집하기
 * [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
