@@ -150,6 +150,8 @@ npm run dev
        vus............................: 1       min=1      max=1
        vus_max........................: 1       min=1      max=1
   ```
+- smoke 테스트 그라파나
+  ![img_7.png](img_7.png)
 - smoke 테스트 스크립트
   ```
   import http from 'k6/http';
@@ -219,8 +221,6 @@ npm run dev
       sleep(1);
   }
   ```
-- smoke 테스트 그라파나
-![img_7.png](img_7.png)
 
 ## Stress 테스트  
 - Stress 테스트 결과
@@ -258,6 +258,8 @@ npm run dev
        vus............................: 13      min=1         max=500
        vus_max........................: 500     min=500       max=500
   ```
+- Stress 테스트 그라파나
+  ![img_8.png](img_8.png)
 - Stress 테스트 스크립트
   ```
   import http from 'k6/http';
@@ -335,8 +337,6 @@ npm run dev
       sleep(1);
   }
   ```
-- Stress 테스트 그라파나
-![img_8.png](img_8.png)
 
 ## Load 테스트
 - Load 테스트 결과
@@ -382,6 +382,8 @@ npm run dev
        vus............................: 1       min=1      max=12
        vus_max........................: 12      min=12     max=12
   ```
+- Load 테스트 그라파나
+  ![img_9.png](img_9.png)
 - Load 테스트 스크립트
   ```
   import http from 'k6/http';
@@ -459,8 +461,6 @@ npm run dev
       sleep(1);
   }
   ```
-- Load 테스트 그라파나
-![img_9.png](img_9.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
