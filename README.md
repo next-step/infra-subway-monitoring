@@ -115,7 +115,6 @@ Running Map   14.6s     15.2s    14.6s     550ms     15.2s     0.042
 1. 각 서버내 로깅 경로를 알려주세요
    /var/log/nginx/access.log
    /var/log/nginx/error.log
-   /var/log/syslog
    /home/ubuntu/nextstep/infra-subway-monitoring/log/
 
 2. Cloudwatch 대시보드 URL을 알려주세요
