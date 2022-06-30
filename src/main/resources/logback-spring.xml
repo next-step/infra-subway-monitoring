@@ -8,12 +8,12 @@
     <springProfile name="local, test">
         <logger name="nextstep.subway" level="debug" additivity="false">
             <appender-ref ref="console" />
-            <appender-ref ref="file" />
         </logger>
     </springProfile>
     <springProfile name="prod">
         <logger name="nextstep.subway" level="info" additivity="false">
             <appender-ref ref="file" />
+            <appender-ref ref="json" />
         </logger>
     </springProfile>
 </configuration>
