@@ -99,7 +99,6 @@ public class Section implements Serializable {
     public String toString() {
         return "Section{" +
                 "id=" + id +
-                ", line=" + line +
                 ", upStation=" + upStation +
                 ", downStation=" + downStation +
                 ", distance=" + distance +
