@@ -102,6 +102,20 @@ npm run dev
 + 사용하지 않는 javascript, css 줄이기 - LCP, FCP 개선
 + javascript 파싱, 컴파일, 실행에 소요되는 시간 단축 - TBT 개선
 
+#### 속도 개선 결과
+1. [메인 페이지](https://mins99-subway.kro.kr/)
+
+|  | FCP  |     TTI     |     SI      |      TBT      |     LCP     |  CLS  |   성능    |
+|:---:|:----:|:-----------:|:-----------:|:-------------:|:-----------:|:-----:|:-------:|
+|Desktop| 0.7s(-1.9s) | 1.3s(-1.4s) | 1.5s(-1.2s) | 170ms(+120ms) | 1.3s(-1.4s) | 0.004(-) | 91(+23) |
+|Mobile| 2.5s(-12s)  | 6.0s(-9.1s) | 5.4s(-9.1s) | 860ms(+200ms) | 6.0s(9.1s)  |  0.042(-)   | 47(+15) |
+
+2. [경로 탐색 페이지](https://mins99-subway.kro.kr/path)
+
+|  |     FCP      |     TTI     |     SI      |      TBT       |     LCP     |      CLS      |   성능    |
+|:---:|:------------:|:-----------:|:-----------:|:--------------:|:-----------:|:-------------:|:-------:|
+|Desktop| 0.9s(-2.1s)  | 1.4s(-1.7s) | 1.5s(-1.5s) | 120ms(+110ms)  | 1.5s(-1.5s) | 0.000(-) | 92(+27) |
+|Mobile| 3.8s(-12.6s) | 7.2s(-7.9s) | 6.5s(-9.9s) | 1130ms(+950ms) | 6.9s(-9.5s) | 0.004(-) | 35(-8)  |
 ---
 
 ### 2단계 - 부하 테스트
@@ -140,5 +154,25 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
++ 192.168.99.52(public - webserver1)
+  - application : /home/ubuntu/nextstep/infra-subway-monitoring/log
+  - nginx : /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- [Dashboard URL](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=mins99-dashboard;start=PT1H)
+
+### 요구사항
+- [v] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [v] 로그 설정하기
+- [v] Cloudwatch로 모니터링
+
+### 요구사항 설명
+#### 로그 설정하기
+- [v] Application Log 파일로 저장하기
+  + 회원가입, 로그인 등의 이벤트에 로깅을 설정
+  + 경로찾기 등의 이벤트 로그를 JSON으로 수집
+- [v] Nginx Access Log 설정하기 
+#### Cloudwatch로 모니터링
+- [v] Cloudwatch로 로그 수집하기
+- [v] Cloudwatch로 메트릭 수집하기
+- [v] USE 방법론을 활용하기 용이하도록 대시보드 구성

@@ -22,4 +22,13 @@ public class LoginMember {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        return "LoginMember{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
