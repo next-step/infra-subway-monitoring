@@ -95,21 +95,73 @@ npm run dev
     * (No max-age or expires) - https://www.sangik-kim.kro.kr/images/logo_small.png
 
 * CDN 적용
-  * https://www.sangik-kim.kro.kr/js/vendors.js
-  * https://www.sangik-kim.kro.kr/js/main.js
-  * https://www.sangik-kim.kro.kr/images/logo_small.png
-  * https://www.sangik-kim.kro.kr/stations
+    * https://www.sangik-kim.kro.kr/js/vendors.js
+    * https://www.sangik-kim.kro.kr/js/main.js
+    * https://www.sangik-kim.kro.kr/images/logo_small.png
+    * https://www.sangik-kim.kro.kr/stations
 
 * 지연로드를 통해 네트워크 전송 데이터량 줄이기
-  * /js/vendors.js(www.sangik-kim.kro.kr) (현재: 2,125.0 KiB)
-  * /js/main.js(www.sangik-kim.kro.kr) (현재: 172.0 KiB)
+    * /js/vendors.js(www.sangik-kim.kro.kr) (현재: 2,125.0 KiB)
+    * /js/main.js(www.sangik-kim.kro.kr) (현재: 172.0 KiB)
+
 ---
 
 ### 2단계 - 부하 테스트
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+* 목표 RPS
+    * 예상 1일 사용자 수 (DAU): **353,500**
+
+  | 경쟁사    |    MAU     |   DAU   |
+    |:----------:|:-------:|:-------:|
+  | 네이버지도 | 13,920,000 | 464,000 |
+  | 카카오맵  | 7,290,000  | 243,000 |
+  | 평균     | 10,605,000 | 353,500 |
+
+    * 피크 시간대 집중률: **5.36** (1,000,000 / 186,394)
+        * 최대 예상 트래픽: 1,000,000 (출퇴근시간 지하철 이용자)
+        * 평소 예상 트래픽: 186,394 (하루 평균 지하철 승차 인원 / 24 h = 4,473,454 / 24)
+    * 1명당 1일 평균 접속 수: **2** (출근 / 퇴근)
+    * Throughput: **8.18 ~ 43.9** (1일 평균 rps ~ 1일 최대 rps)
+        * 1일 총 접속 수: 707,000 (DAU x 1명당 1일 평균 접속 수 = 353,500 x 2)
+        * 1일 평균 rps: 8.18 (1일 총 접속수 / 86,400 = 707,000 / 86,400)
+        * 1일 최대 rps: 43.9 (1일 평균 rps x 피크 시간대 집중률 = 8.18 x 5.36)
+* VUser
+    * T: 1.5 = (3 * 0.5) + 0
+        * R (요청수): 3 (메인 / 경로찾기 / 검색)
+        * 왕복시간: 0.5
+        * 지연시간: 0
+    * 평균 VUser: **4.1** = (8.18 x 1.5) / 3
+    * 최대 VUser: **22** = (43.9 x 1.5) / 3
+
+* 테스트 기간: **30분**
+
+* 사용자가 검색하는 데이터 양
+    * line: 23 rows
+    * section: 340 rows
+    * station: 616 rows
+* 시나리오
+    * 접속 빈도가 높은 페이지
+        * 랜딩페이지, 경로검색 페이지
+    * 데이터를 갱신하는 페이지
+    * 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+        * 경로검색 페이지
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+* Smoke
+    * [Smoke Test Script](./loadtest/smoke.js)
+      ![Smoke Test Console Result](./loadtest/result/smoke_console.png)
+      ![Smoke Test Grafana Result](./loadtest/result/smoke_grafana.png)
+* Load
+    * [Load Test Script](./loadtest/load.js)
+      ![Load Test Console Result](./loadtest/result/load_console.png)
+      ![Load Test Grafana Result](./loadtest/result/load_grafana.png)
+* Stress
+    * [Stress Test Script](./loadtest/stress.js)
+      ![Stress Test Console Result](./loadtest/result/stress_console.png)
+      ![Stress Test Grafana Result](./loadtest/result/stress_grafana.png)
 
 ---
 
