@@ -223,10 +223,17 @@ npm run dev
         * 경로찾기 등의 이벤트 로그를 JSON 으로 수집
     * [x] Nginx Access log 설정
 * CloudWatch 모니터링
-    * [ ] Cloudwatch 로 로그 수집
-    * [ ] Cloudwatch 로 메트릭 수집
-    * [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+    * [x] Cloudwatch 로 로그 수집
+    * [x] Cloudwatch 로 메트릭 수집
+    * [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
  
 1. 각 서버내 로깅 경로를 알려주세요
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+* 다음과 같은 정보로 접속하시면 됩니다.
+    * ssh -i [pem] bastion@3.38.112.79 -> ssh ubuntu@app
+* Application Log 경로: /home/ubuntu/nextstep/infra-subway-monitoring
+* Nginx Access Log 경로: /var/log/nginx
+
+3. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sung-jin-dashboard
