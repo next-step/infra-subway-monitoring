@@ -105,7 +105,8 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+#### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 참고) 경쟁사 카카오맵 MAU 729만 (https://www.sedaily.com/NewsView/22RH3PUBN6)
 
@@ -133,7 +134,16 @@ npm run dev
 - min VUser = (16.89 * 1.5) / 5 = 5.06
 - max VUser = (84.45 * 1.5) / 5 = 25.3
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+#### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- smoke
+![smoke-k6](./k6/smoke/k6_smoke_test.png)
+
+- load
+![load-k6](./k6/load/k6_load_test.png)
+
+- stress
+![stress-k6](./k6/stress/k6_stress_test.png)
 
 ---
 
