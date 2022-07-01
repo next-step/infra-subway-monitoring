@@ -1,3 +1,5 @@
+<property name="home" value="/home/ubuntu/nextstep/log/subway/" />
+
 <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${home}json.log</file>
 
