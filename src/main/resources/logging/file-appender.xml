@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
+    <property name="home" value="/home/ubuntu/nextstep/log/subway/"/>
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <property name="home" value="/home/ubuntu/nextstep/log/subway/"/>
         <file>${home}file.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
