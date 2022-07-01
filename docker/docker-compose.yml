@@ -1,16 +1,66 @@
-version: '3'
+version: '3.6'
 services:
-  local-db:
-    image: library/mysql:5.7
-    container_name: local-db
+  subway:
+    build:
+      context: .
+    image: subway-monitoring
+    container_name: subway-monitoring
     restart: always
-    ports:
-      - 13306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: masterpw
-      MYSQL_DATABASE: subway
-      TZ: Asia/Seoul
+      - VIRTUAL_HOST=sung-jin.o-r.kr
+      - VIRTUAL_PORT=8081
+      - LETSENCRYPT_HOST=sung-jin.o-r.kr
+      - LETSENCRYPT_EMAIL=osj4872@naver.com
+    networks:
+      - nginx-proxy
+
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: always
     volumes:
-      - ./db/mysql/data:/var/lib/mysql
-      - ./db/mysql/config:/etc/mysql/conf.d
-      - ./db/mysql/init:/docker-entrypoint-initdb.d
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    environment:
+      - VIRTUAL_HOST=cadvisor.sung-jin.o-r.kr
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=cadvisor.sung-jin.o-r.kr
+      - LETSENCRYPT_EMAIL=osj4872@naver.com
+    privileged: true
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - /nginx/certs:/etc/nginx/certs
+      - /nginx/vhost.d:/etc/nginx/vhost.d
+      - /nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/log/nginx:/var/log/nginx
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    networks:
+      - nginx-proxy
+
+  letsencrypt-nginx-proxy:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy
+    restart: always
+    volumes:
+      - /nginx/certs:/etc/nginx/certs
+      - /nginx/vhost.d:/etc/nginx/vhost.d
+      - /nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    name: nginx-proxy
