@@ -90,8 +90,15 @@ npm run dev
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 - gzip 압축을 통해 각 리소스의 전송 인코딩을 최적화
+
+  <img width="920" alt="스크린샷 2022-07-01 오전 9 26 42" src="https://user-images.githubusercontent.com/49121847/176803588-82ed36f6-bd56-4cbe-a9ef-2a1a5e474665.png">
+
 - 효율적인 캐시 정책으로 정적 자산 제공
+
+  <img width="775" alt="스크린샷 2022-07-01 오전 9 28 25" src="https://user-images.githubusercontent.com/49121847/176803641-c03a7880-c2d4-4440-becc-d7a10c3df700.png">
 - JS 축소 및 실행 시간 단축 (JS파일의 크기를 보면 다른 경쟁사에 비해 큰 것을 알 수 있습니다.)
+
+  <img width="1064" alt="스크린샷 2022-07-01 오전 10 19 14" src="https://user-images.githubusercontent.com/49121847/176803753-e3213ef0-7d55-4a97-bffd-451448c5422a.png">
 - 요청 수를 낮게 유지하고 전송 크기를 작게 유지 (스크립트 병합)
 - CDN 사용하기
 
