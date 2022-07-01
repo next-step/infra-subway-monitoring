@@ -5,7 +5,7 @@ export let options = {
     vus: 1,
     duration: '1m',
     thresholds: {
-        http_req_duration: ['p(99)<1500']
+        http_req_duration: ['p(99)<100']
     },
 };
 
@@ -29,12 +29,10 @@ export default function ()  {
     findStations();
 
     // 경로 검색 조회
-    findPath();
+    findPath(113, 100);
 
     // 즐겨찾기 목록 조회
     findFavorites(accessToken);
-
-    sleep(1);
 };
 
 function staticPage(path, desc) {
@@ -73,8 +71,8 @@ function findStations() {
     });
 }
 
-function findPath() {
-    let loginRes = http.get(`${BASE_URL}/paths?source=113&target=100`);
+function findPath(source, target) {
+    let loginRes = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
 
     check(loginRes, {
         'retrieved path': (resp) => resp.status === 200,
