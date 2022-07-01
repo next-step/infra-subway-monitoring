@@ -41,13 +41,75 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+* 네이버 지도
+
+|                          | 모바일(50점) | 데스크탑(88점) |
+|--------------------------|----------|-----------|
+| First Contentful Paint   | 2.2s     | 0.5s      |
+| Time to Interactive      | 6.7s     | 0.5s      |
+| Speed Index              | 5.1s     | 2.4s      |
+| Total Blocking Time      | 610ms    | 0s        |
+| Largest Contentful Paint | 8.4s     | 1.6s      |
+| Cumulative Layout Shift  | 0.03     | 0.006     |
+
+* 카카오 맵
+
+|                          | 모바일(73점) | 데스크탑(91점) |
+|--------------------------|----------|-----------|
+| First Contentful Paint   | 1.7s     | 0.5s      |
+| Time to Interactive      | 4.2s     | 0.7s      |
+| Speed Index              | 6.6s     | 2.4s      |
+| Total Blocking Time      | 60ms     | 0s        |
+| Largest Contentful Paint | 5.0s     | 1.3s      |
+| Cumulative Layout Shift  | 0.005    | 0.039     |
+
+* 서울교통공사
+
+|                          | 모바일(49점) | 데스크탑(67점) |
+|--------------------------|----------|-----------|
+| First Contentful Paint   | 6.6s     | 1.5s      |
+| Time to Interactive      | 8.7s     | 2.0s      |
+| Speed Index              | 11.3s    | 2.4s      |
+| Total Blocking Time      | 900ms    | 150ms     |
+| Largest Contentful Paint | 7.1s     | 3.7s      |
+| Cumulative Layout Shift  | 0        | 0         |
+
+* RunningMap
+
+|                          | 모바일(33점) | 데스크탑(69점) |
+|--------------------------|----------|-----------|
+| First Contentful Paint   | 14.6s    | 2.6s      |
+| Time to Interactive      | 15.2s    | 2.7s      |
+| Speed Index              | 14.6s    | 2.6s      |
+| Total Blocking Time      | 490ms    | 40ms      |
+| Largest Contentful Paint | 15.1s    | 2.7s      |
+| Cumulative Layout Shift  | 0.042    | 0.004     |
+
+RunningMap의 핵심 기능은 경로 검색과 즐겨찾기라고 생각합니다. 사용자 입장에서는 원하는 역을 입력하고 결과를
+조회하는 것이 주요 관심사기 때문에 Time to Interactive, First Contentful Paint,
+Largest Contentful Paint 세 가지 지표가 중요하다고 판단했습니다. 
+
+RunningMap이 경쟁사 대비 핵심 기능만 제공하는 라이트한 앱이면서 성능 개선을 진행한 이력이 없기 때문에
+성능 개선의 폭이 클거라고 예상하고 경로 검색과 즐겨찾기 페이지의 웹 성능예산을 다음과 같이 설정했습니다.
+경쟁사 기준으로 20% 성능 차이를 유지해야한다는 경험 법칙도 고려했습니다.
+
+* 모바일 점수: 80점
+* 데스크탑 점수: 80점
+* Time to Interactive: 5s(모바일), 0.5s(데스크탑)
+* First Contentful Paint: 2s(모바일), 0.5s(데스크탑)
+* Largest Contentful Paint: 6s(모바일), 1.5s(데스크탑)
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
-
+* 텍스트 압축을 사용해서 네트워크로 전송되는 바이트를 줄입니다. ex) gzip
+* HTML/CSS/JS와 같은 정적파일은 압축해서 네트워크로 전송되는 바이트를 줄입니다.
+* 시간에 민감하지 않은 데이터는 브라우저 캐시를 이용해서 클라이언트 측에서 요청 빈도를 줄입니다. ex) 이미지 파일
+* 요청이 잦은 경로 정보는 redis 등을 이용해 서버에 캐시해서 DB 쿼리수를 줄입니다. ex) 강남 <-> 이태원
+* DB 인덱스를 통해 쿼리 수행시간을 줄일 수 있을지 살펴봅니다.
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
