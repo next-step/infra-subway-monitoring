@@ -1,5 +1,7 @@
 package nextstep.subway.map.ui;
 
+import static  net.logstash.logback.argument.StructuredArguments.kv;
+
 import nextstep.subway.map.application.MapService;
 import nextstep.subway.map.dto.PathResponse;
 import org.slf4j.Logger;
@@ -21,10 +23,10 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        jsonLogger.info("[Find Path Try] Source & Target ID: {}, {}", source, target);
+        jsonLogger.info("[Find Path Try] Source & Target ID: {}, {}", kv("출발지", source), kv("도착지", target));
         PathResponse pathResponse = mapService.findPath(source, target);
-        jsonLogger.info("[Find Path] Source & Target ID: {}, {}", source, target);
-        jsonLogger.info("[Find Path] Stations: {}, Distance: {}", pathResponse.getStations(), pathResponse.getDistance());
+        jsonLogger.info("[Find Path] Source & Target ID: {}, {}", kv("출발지", source), kv("도착지", target));
+        jsonLogger.info("[Find Path] Stations: {}, Distance: {}", kv("역들", pathResponse.getStations()), kv("거리", pathResponse.getDistance()));
 
         return ResponseEntity.ok(pathResponse);
     }
