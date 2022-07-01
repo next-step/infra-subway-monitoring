@@ -89,9 +89,53 @@ npm run dev
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- DAU: 864만 (8,640,000)
+- 피크 시간 집중률: 10x
+- 1일 총 접속 수: 2번
+
+이를 기반으로 계산된 Throughput은:
+
+- 864만 x 2번 = 1,728만 1일 총 접속 수
+- 1,728만 / 86,400 (초/일) = 200 평균 RPS
+- 200 RPS x (최대 트래픽 / 평소 트래픽) = 2000 최대 RPS
+
+Latency가 75ms라는 가정하에,
+
+- $T_1 = 1 * 0.15 + 1초 = 1.15초$
+- $T_2 = 2 * 0.15 + 1초 = 1.3초$
+
+그래서
+
+- $VU_1^{avg} = (200 * 1.15) / 1 = 230$
+- $VU_1^{max} = (2000 * 1.15) / 1 = 2300$
+- $VU_2^{avg} = (200 * 1.3) / 2 = 260$
+- $VU_2^{max} = (2000 * 1.3) / 2 = 2600$
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
----
+#### 접속 빈도가 높은 페이지: landing page
+
+![smoke test landing page](images/landing/smoke.png)
+
+![load test landing page](images/landing/load.png)
+
+![stress test landing page](images/landing/stress.png)
+
+#### 데이터를 갱신하는 페이지: mypage
+
+![smoke test mypage](images/mypage/smoke.png)
+
+![load test mypage](images/mypage/load.png)
+
+![stress test mypage](images/mypage/stress.png)
+
+#### 데이터를 조회하는데 여러 데이터를 참조하는 페이지: paths
+
+![smoke test paths](images/paths/smoke.png)
+
+![load test paths](images/paths/load.png)
+
+![stress test paths](images/paths/stress.png)
 
 ### 3단계 - 로깅, 모니터링
 
