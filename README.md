@@ -114,7 +114,50 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+### 목푯 값 설정
+
+**DAU 구하기**
+
+- 카카오 지하철
+    - [자료](https://ko.lab.appa.pe/2016-09/kakao-korea.html)
+    - 500,000
+- 지하철 종결자
+    - [자료](https://platum.kr/archives/61943)
+    - 1,200,000
+
+**지하철 종결자 이용 기반 목푯값 설정**
+
+- DAU = 1,200,000
+- 1명당 1일 평균 접속 수 = 2 (출근, 퇴근)
+- 1일 평균 rps = 27.77
+- 피크시간대 집중율 = 2
+    
+    ![img](./img/p1.png)
+    
+- 1일 최대 rps = 55.55
+- 요청수 : 3 (접속, 검색, 조회)
+- Latency = 100 ms
+- T = (3 * 0.1) + 1 = 1.3
+- VUser
+    - 평균 = (27.77 * 1.3) / 3 = 12
+    - 최대 = (55.55 * 1.3) / 3 = 24
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+## Smoke Test
+
+![smoke-k6](./k6/result/smoke-k6.png)
+![smoke-grafana](./k6/result/smoke-grafana.png)
+
+## Load Test
+
+![load-k6](./k6/result/load-k6.png)
+![load-grafana](./k6/result/load-grafana.png)
+
+## Stress Test
+
+![stress-k6](./k6/result/stress-k6.png)
+![stress-grafana](./k6/result/stress-grafana.png)
 
 ---
 
