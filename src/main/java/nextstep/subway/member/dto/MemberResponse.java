@@ -2,6 +2,8 @@ package nextstep.subway.member.dto;
 
 import nextstep.subway.member.domain.Member;
 
+import java.util.Objects;
+
 public class MemberResponse {
     private Long id;
     private String email;
@@ -30,5 +32,27 @@ public class MemberResponse {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemberResponse that = (MemberResponse) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getAge(), that.getAge());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getAge());
+    }
+
+    @Override
+    public String toString() {
+        return "MemberResponse{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
