@@ -7,16 +7,22 @@
     <include resource="file-appender.xml" />
     <include resource="json-appender.xml" />
 
-    <logger name="console" level="TRACE" >
-        <appender-ref ref="console" />
-    </logger>
-
-    <logger name="file" level="INFO" >
-        <appender-ref ref="file" />
-    </logger>
-
     <logger name="json" level="INFO" >
         <appender-ref ref="json" />
     </logger>
+
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="file" />
+        </root>
+    </springProfile>
+
+    <springProfile name="local">
+        <logger name="nextstep.subway">
+            <level value="DEBUG"/>
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+    </springProfile>
 
 </configuration>
