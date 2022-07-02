@@ -112,6 +112,43 @@ RunningMap이 경쟁사 대비 핵심 기능만 제공하는 라이트한 앱이
 ### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+#### 테스트 대상
+1. 홈 페이지
+2. 경로찾기 페이지
+3. 즐겨찾기 페이지
+
+#### 전제 조건
+* DAU(Daily Active User): 1,000,000명
+* 1명당 1일 평균 접속 수: 2회
+* 피크 시간 집중율(최대 트래픽 / 평소 트래픽): 10
+
+#### 목표값 설정
+* 1일 총 접속수
+  * DAU * 1명당 1일 평균 접속 수 
+  * 1,000,000회 * 2 = 2,000,000회
+* 1일 평균 rps 
+  * 1일 총 접속수 / 86400s
+  * 2,000,000회 / 86,400s := 23rps
+* 1일 최대 rps 
+  * 1일 평균 rps * 피크시간 집중율
+  * 23rps * 10 = 230rps
+* Latency
+  * 100ms
+
+#### VUser 계산
+* 목표 rps(= 1일 최대 rps)
+  * 230rps
+* R(Requests per iteration)
+  * 시나리오: 홈 페이지 -> 로그인 -> 홈 페이지 리디렉션 -> 경로 조회 페이지 -> 결과 조회 -> 즐겨 찾기
+  * R = 6requests
+* T(Value larger than the time needed to complete a VU iteration)
+  * T > (R * http_req_duration) + 1s(compensation for network latency)
+  * T > (6 * 0.1s) + 1s = 1.6s
+  * T := 2s
+* VU(Virtual users)
+  * VU = (목표 rps * T) / R
+  * VU = 230rps * 2s / 6requests := 77
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
