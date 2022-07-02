@@ -32,10 +32,9 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	// actuator
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.7.0'
-	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
-	implementation group: 'io.micrometer', name: 'micrometer-registry-cloudwatch', version: '1.9.0'
-
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.4.0'
+	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.0'
+	implementation 'io.micrometer:micrometer-registry-cloudwatch:1.9.0'
 
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
