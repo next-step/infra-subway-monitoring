@@ -119,6 +119,8 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-- Application Log: /home/ubuntu/infra-subway-monitoring/log
+- Application Log: /home/ubuntu/workspace/infra-subway-monitoring/log
 - Nginx Access Log: /var/log/nginx
+- /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yulmucha-dashboard
