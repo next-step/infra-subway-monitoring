@@ -395,7 +395,12 @@ export let options = {
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+nginx
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
 
+app
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
