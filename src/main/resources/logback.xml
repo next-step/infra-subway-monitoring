@@ -1,11 +1,6 @@
 <configuration debug="false">
 
-    <springProfile name="prod">
-        <property name="home" value="/var/log/subway/"/>
-    </springProfile>
-    <springProfile name="!prod">
-        <property name="home" value="./logs/"/>
-    </springProfile>
+    <property name="home" value="./logs/"/>
 
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
