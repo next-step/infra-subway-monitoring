@@ -141,4 +141,12 @@ Latency가 75ms라는 가정하에,
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+WAS인 EC2-giwankim-public에 로깅되고 있습니다.
+
+- application 로그
+
+- nginx 로그
+  - /var/log/nginx/access.log
+  - /var/log/nginx/error.log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
