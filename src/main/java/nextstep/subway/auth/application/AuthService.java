@@ -36,7 +36,7 @@ public class AuthService {
 
     public LoginMember findMemberByToken(String credentials) {
         if (!jwtTokenProvider.validateToken(credentials)) {
-            logger.info("token invalid | token : {}", credentials);
+            logger.warn("token invalid | token : {}", credentials);
             throw new AuthorizationException();
         }
 
