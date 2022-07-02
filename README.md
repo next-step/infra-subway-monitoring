@@ -121,35 +121,45 @@ RunningMap이 경쟁사 대비 핵심 기능만 제공하는 라이트한 앱이
 * DAU(Daily Active User): 1,000,000명
 * 1명당 1일 평균 접속 수: 2회
 * 피크 시간 집중율(최대 트래픽 / 평소 트래픽): 10
+* Network latency(일반적으로 50~100ms)
+  * 100ms(0.1s) 가정
 
 #### 목표값 설정
 * 1일 총 접속수
   * DAU * 1명당 1일 평균 접속 수 
   * 1,000,000회 * 2 = 2,000,000회
 * 1일 평균 rps 
-  * 1일 총 접속수 / 86400s
+  * 1일 총 접속수 / 86,400s
   * 2,000,000회 / 86,400s := 23rps
 * 1일 최대 rps 
   * 1일 평균 rps * 피크시간 집중율
   * 23rps * 10 = 230rps
-* Latency
-  * 100ms
-
+* Throughput
+  * 1일 평균 rps ~ 1일 최대 rps
+  * 23rps ~ 230rps
+  
 #### VUser 계산
 * 목표 rps(= 1일 최대 rps)
   * 230rps
-* R(Requests per iteration)
-  * 시나리오: 홈 페이지 -> 로그인 -> 홈 페이지 리디렉션 -> 경로 조회 페이지 -> 결과 조회 -> 즐겨 찾기
+* R(Number of requests per VU iteration)
+  * 시나리오: 홈 페이지 -> 로그인 -> 경로 조회 페이지 -> 경로 검색 결과 조회 -> 즐겨찾기 추가 -> 즐겨찾기 페이지
   * R = 6requests
-* T(Value larger than the time needed to complete a VU iteration)
-  * T > (R * http_req_duration) + 1s(compensation for network latency)
-  * T > (6 * 0.1s) + 1s = 1.6s
-  * T := 2s
-* VU(Virtual users)
+* T(Value larger than the time needed to complete one VU iteration)
+  * http_req_duration(Total time per request): 0.5s 가정
+  * T > (R * http_req_duration) + (additional compensation for network latency if tested on same vpc)
+  * T > (6 * 0.5s) + (6 * 0.1s) = 3.6s
+  * T := 4s
+* VU(Number of virtual users)
   * VU = (목표 rps * T) / R
-  * VU = 230rps * 2s / 6requests := 77
+  * VU = 230rps * 4s / 6requests := 154
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+#### Smoke test
+
+* Script: k6/smoke/smoke.js
+* Console Result
+* UI Result
 
 ---
 
