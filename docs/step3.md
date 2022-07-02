@@ -11,6 +11,6 @@
 
 ## 1. 각 서버내 로깅 경로를 알려주세요
 - application : /home/ubuntu/infra-subway-monitoring/logs
-- 
+- nginx : /var/log/nginx
 
 ## 2. Cloudwatch 대시보드 URL을 알려주세요
