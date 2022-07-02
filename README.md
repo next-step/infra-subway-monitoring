@@ -66,8 +66,41 @@ TTI는 대부분의 페이지 속도 테스트를 기반하므로 FCP와 FMP를 
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 대상 시스템 범위
+  - 메인 페이지, 로그인 페이지, 경로 검색 페이지
+
+- 목푯값 설정
+  - latency : 500ms
+  - throughput
+    - DAU : 7,300,000(명) (2020년 하루 평균 대중교통 이용자 수)
+      - 관련 기사 https://www.ajunews.com/view/20200423094948121 
+    - 평균 접속 수 : 3회 (출근, 퇴근, 환승 등)
+    - 1일 총 접속 수 : 21,900,000회
+    - 1일 평균 rps : 353회 (1일 총 접속 수 / 86,400)
+    - 1일 최대 rps :  3530회 (출, 퇴근 시간 - 10배 예상)
+- VUser
+  - T = (3 * 0.13) + 0.5 = 0.44
+  - VUser = (3530 * 0.44) / 3 = 517명 (최대), 52명 (평균)
+
+
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+**Smoke TEST**
+
+<img width="688" alt="image" src="https://user-images.githubusercontent.com/81945553/177001077-158ef695-55d4-4904-bb5b-92163e45fbc1.png">
+
+**Load Test**
+
+<img width="943" alt="image" src="https://user-images.githubusercontent.com/81945553/177002834-bc73136f-cdb6-43d2-b1a0-aefd6655d5a5.png">
+
+<img width="1657" alt="image" src="https://user-images.githubusercontent.com/81945553/177002797-e0f390c8-42b6-4059-a6d7-358d27a1cec8.png">
+
+**Stress Test**
+
+<img width="951" alt="image" src="https://user-images.githubusercontent.com/81945553/177003287-96a385e4-415b-4357-a1b6-184b397da72d.png">
+
+<img width="1658" alt="image" src="https://user-images.githubusercontent.com/81945553/177003272-0ee9530b-e67f-4428-82e5-354577be2887.png">
 
 ---
 
