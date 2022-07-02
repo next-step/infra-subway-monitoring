@@ -186,3 +186,4 @@ npm run dev
      * /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/systems-manager/resource-groups/cloudwatch?region=ap-northeast-2&dashboard=su-hub9-dashboard
