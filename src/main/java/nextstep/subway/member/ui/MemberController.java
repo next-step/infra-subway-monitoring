@@ -5,6 +5,8 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.member.application.MemberService;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,51 +14,60 @@ import java.net.URI;
 
 @RestController
 public class MemberController {
-    private MemberService memberService;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+  private static final Logger fileLogger = LoggerFactory.getLogger("file");
+  private MemberService memberService;
 
-    @PostMapping("/members")
-    public ResponseEntity createMember(@RequestBody MemberRequest request) {
-        MemberResponse member = memberService.createMember(request);
-        return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
-    }
+  public MemberController(MemberService memberService) {
+    this.memberService = memberService;
+  }
 
-    @GetMapping("/members/{id}")
-    public ResponseEntity<MemberResponse> findMember(@PathVariable Long id) {
-        MemberResponse member = memberService.findMember(id);
-        return ResponseEntity.ok().body(member);
-    }
+  @PostMapping("/members")
+  public ResponseEntity createMember(@RequestBody MemberRequest request) {
+    fileLogger.info("[회원가입 요청] 이메일 : {}, 나이 : {}", request.getEmail(), request.getAge());
+    MemberResponse member = memberService.createMember(request);
+    fileLogger.info("[회원가입 성공] ID : {}, 이메일 : {}, 나이 : {}", member.getId(), member.getEmail(),
+        member.getAge());
+    return ResponseEntity.created(URI.create("/members/" + member.getId())).build();
+  }
 
-    @PutMapping("/members/{id}")
-    public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody MemberRequest param) {
-        memberService.updateMember(id, param);
-        return ResponseEntity.ok().build();
-    }
+  @GetMapping("/members/{id}")
+  public ResponseEntity<MemberResponse> findMember(@PathVariable Long id) {
+    MemberResponse member = memberService.findMember(id);
+    return ResponseEntity.ok().body(member);
+  }
 
-    @DeleteMapping("/members/{id}")
-    public ResponseEntity<MemberResponse> deleteMember(@PathVariable Long id) {
-        memberService.deleteMember(id);
-        return ResponseEntity.noContent().build();
-    }
+  @PutMapping("/members/{id}")
+  public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id,
+      @RequestBody MemberRequest param) {
+    memberService.updateMember(id, param);
+    return ResponseEntity.ok().build();
+  }
 
-    @GetMapping("/members/me")
-    public ResponseEntity<MemberResponse> findMemberOfMine(@AuthenticationPrincipal LoginMember loginMember) {
-        MemberResponse member = memberService.findMember(loginMember.getId());
-        return ResponseEntity.ok().body(member);
-    }
+  @DeleteMapping("/members/{id}")
+  public ResponseEntity<MemberResponse> deleteMember(@PathVariable Long id) {
+    memberService.deleteMember(id);
+    return ResponseEntity.noContent().build();
+  }
 
-    @PutMapping("/members/me")
-    public ResponseEntity<MemberResponse> updateMemberOfMine(@AuthenticationPrincipal LoginMember loginMember, @RequestBody MemberRequest param) {
-        memberService.updateMember(loginMember.getId(), param);
-        return ResponseEntity.ok().build();
-    }
+  @GetMapping("/members/me")
+  public ResponseEntity<MemberResponse> findMemberOfMine(
+      @AuthenticationPrincipal LoginMember loginMember) {
+    MemberResponse member = memberService.findMember(loginMember.getId());
+    return ResponseEntity.ok().body(member);
+  }
 
-    @DeleteMapping("/members/me")
-    public ResponseEntity<MemberResponse> deleteMemberOfMine(@AuthenticationPrincipal LoginMember loginMember) {
-        memberService.deleteMember(loginMember.getId());
-        return ResponseEntity.noContent().build();
-    }
+  @PutMapping("/members/me")
+  public ResponseEntity<MemberResponse> updateMemberOfMine(
+      @AuthenticationPrincipal LoginMember loginMember, @RequestBody MemberRequest param) {
+    memberService.updateMember(loginMember.getId(), param);
+    return ResponseEntity.ok().build();
+  }
+
+  @DeleteMapping("/members/me")
+  public ResponseEntity<MemberResponse> deleteMemberOfMine(
+      @AuthenticationPrincipal LoginMember loginMember) {
+    memberService.deleteMember(loginMember.getId());
+    return ResponseEntity.noContent().build();
+  }
 }
