@@ -3,7 +3,7 @@
 <included>
     <property name="home" value="log/json-logs/" />
 
-    <!--  appender이름이 file인 consoleAppender를 선언  -->
+    <!--  appender이름이 json인 consoleAppender를 선언  -->
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--로깅이 기록될 위치-->
         <file>${home}json.log</file>
