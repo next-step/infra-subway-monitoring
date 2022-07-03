@@ -2,17 +2,20 @@ package nextstep.subway.member.application;
 
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
-import nextstep.subway.common.LoggerProvider;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class MemberService {
+    public static Logger logger = LoggerFactory.getLogger("json");
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -22,7 +25,7 @@ public class MemberService {
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
 
-        LoggerProvider.JSON_LOGGER.info(
+        logger.info(
                 "회원가입: {}, {}, {}",
                 kv("id", member.getId()),
                 kv("email", member.getEmail()),
