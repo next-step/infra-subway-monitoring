@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}json.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <thread>thread</thread>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+                <mdc>context</mdc>
+            </fieldNames>
+        </encoder>
+    </appender>
+</included>

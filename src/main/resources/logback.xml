@@ -1,0 +1,28 @@
+<configuration debug="false">
+
+    <property name="home" value="./logs/"/>
+
+    <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="logback/file-appender.xml"/>
+    <include resource="logback/json-appender.xml"/>
+    <include resource="logback/console-appender.xml"/>
+
+    <!-- logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="file" level="INFO">
+        <appender-ref ref="file"/>
+    </logger>
+
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
+    </logger>
+
+    <logger name="console" level="TRACE">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

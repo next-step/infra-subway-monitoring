@@ -34,7 +34,9 @@ export default function ()  {
     findStations();
 
     // 경로 검색 조회
-    findPath(113, 100);
+    var source = Math.floor((Math.random() * (308)) + 1);
+    var target = Math.floor((Math.random() * (616-310)) + 309);
+    findPath(source, target);
 
     // 즐겨찾기 목록 조회
     findFavorites(accessToken);
