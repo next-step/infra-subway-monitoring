@@ -3,18 +3,19 @@ import { check, sleep } from 'k6';
 
 export let options = {
     stages: [
-		{ duration: '1m', target: 12 },
-		{ duration: '2m', target: 12 },
-        { duration: '1m', target: 24 },
-		{ duration: '2m', target: 24 },
-        { duration: '1m', target: 48 },
-		{ duration: '2m', target: 48 },
-        { duration: '1m', target: 96 },
-		{ duration: '2m', target: 96 },
-        { duration: '1m', target: 192 },
-		{ duration: '2m', target: 192 },
-        { duration: '1m', target: 384 },
-		{ duration: '2m', target: 384 },
+		{ duration: '1m', target: 9 },
+		{ duration: '2m', target: 9 },
+        { duration: '1m', target: 19 },
+		{ duration: '2m', target: 19 },
+        { duration: '1m', target: 38 },
+		{ duration: '2m', target: 38 },
+        { duration: '1m', target: 76 },
+		{ duration: '2m', target: 76 },
+        { duration: '1m', target: 152 },
+		{ duration: '2m', target: 152 },
+        { duration: '1m', target: 304 },
+		{ duration: '2m', target: 304 },
+        { duration: '6m', target: 0 },
 	],
   
     thresholds: {
