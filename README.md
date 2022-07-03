@@ -93,6 +93,17 @@ npm run dev
 - `Latency`: 100ms 이하
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+#### Smoke
+- 경로: monitoring\smoke\smoke.js
+![](monitoring/smoke/smoke.png)
+
+#### Load
+- 경로: monitoring\smoke\load.js
+![](monitoring/load/load.png)
+
+#### Stress
+- 경로: monitoring\smoke\stress2.js
+![](monitoring/stress/stress2.png)
 
 ---
 
