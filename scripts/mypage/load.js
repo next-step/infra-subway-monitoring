@@ -1,17 +1,17 @@
 import http from "k6/http";
 import { check, group, sleep, fail } from "k6";
 
-const avgVu = 260;
-const maxVu = 2600;
+const avgVu = 40;
+const maxVu = 400;
 
 export let options = {
   stages: [
-    { duration: "30s", target: avgVu }, // simulate ramp-up of traffic from 1 to 100 users over 1 minute.
-    { duration: "1m", target: maxVu }, // ramp-down to 0 users
-    { duration: "30s", target: avgVu }, // stay at 100 users for 2 minutes
+    { duration: "2m", target: avgVu }, // simulate ramp-up of traffic from 1 to 100 users over 1 minute.
+    { duration: "4m", target: maxVu }, // ramp-down to 0 users
+    { duration: "2m", target: avgVu }, // stay at 100 users for 2 minutes
   ],
   thresholds: {
-    http_req_duration: ["p(99)<150"], // 99% of requests must complete below 0.15s
+    http_req_duration: ["p(99)<400"], // 99% of requests must complete below 0.15s
   },
 };
 

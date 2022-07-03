@@ -1,8 +1,8 @@
 import http from "k6/http";
 import { check, group, sleep, fail } from "k6";
 
-const avgVu = 260;
-const maxVu = 2600;
+const avgVu = 40;
+const maxVu = 400;
 
 export let options = {
   stages: [
@@ -11,7 +11,7 @@ export let options = {
     { duration: "1m", target: avgVu }, // stay at 100 users for 2 minutes
   ],
   thresholds: {
-    http_req_duration: ["p(99)<150"], // 99% of requests must complete below 0.15s
+    http_req_duration: ["p(99)<400"], // 99% of requests must complete below 0.15s
   },
 };
 

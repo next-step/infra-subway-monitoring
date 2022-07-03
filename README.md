@@ -101,15 +101,15 @@ npm run dev
 
 Latency가 75ms라는 가정하에,
 
-- $T_1 = 1 * 0.15 + 1초 = 1.15초$
-- $T_2 = 2 * 0.15 + 1초 = 1.3초$
+- $T_1 = 1 * 0.15 + 0.1초 = 0.25초$
+- $T_2 = 2 * 0.15 + 0.1초 = 0.4초$
 
 그래서
 
-- $VU_1^{avg} = (200 * 1.15) / 1 = 230$
-- $VU_1^{max} = (2000 * 1.15) / 1 = 2300$
-- $VU_2^{avg} = (200 * 1.3) / 2 = 260$
-- $VU_2^{max} = (2000 * 1.3) / 2 = 2600$
+- $VU_1^{avg} = (200 * 0.25) / 1 = 50$
+- $VU_1^{max} = (2000 * 0.25) / 1 = 500$
+- $VU_2^{avg} = (200 * 0.4) / 2 = 40$
+- $VU_2^{max} = (2000 * 0.4) / 2 = 400$
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -144,6 +144,9 @@ Latency가 75ms라는 가정하에,
 WAS인 EC2-giwankim-public에 로깅되고 있습니다.
 
 - application 로그
+
+  - /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+  - /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 - nginx 로그
   - /var/log/nginx/access.log
