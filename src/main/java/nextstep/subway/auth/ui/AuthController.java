@@ -22,9 +22,15 @@ public class AuthController {
 
     @PostMapping("/login/token")
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
-        fileLogger.info("Member login requested email: " + request.getEmail());
-        TokenResponse token = authService.login(request);
-        fileLogger.info("Member login success email: " + request.getEmail());
-        return ResponseEntity.ok().body(token);
+
+        fileLogger.info("Member login requested. email: " + request.getEmail());
+        try {
+            TokenResponse token = authService.login(request);
+            fileLogger.info("Member login succeeded. email: " + request.getEmail());
+            return ResponseEntity.ok().body(token);
+        } catch (Exception e) {
+            fileLogger.info("Member login failed. email: " + request.getEmail());
+            throw e;
+        }
     }
 }
