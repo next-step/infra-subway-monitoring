@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
@@ -24,11 +26,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DisplayName("지하철 경로 조회")
 public class PathAcceptanceTest extends AcceptanceTest {
+    private static final Logger json = LoggerFactory.getLogger("json");
+
     private LineResponse 신분당선;
     private LineResponse 이호선;
     private LineResponse 삼호선;
@@ -67,6 +72,11 @@ public class PathAcceptanceTest extends AcceptanceTest {
         //when
         ExtractableResponse<Response> response = 거리_경로_조회_요청(3L, 2L);
 
+        json.info("출발역 : {},  도착역 : {}",
+                kv("source", 3L),
+                kv("target", 2L)
+        );
+
         //then
         적절한_경로를_응답(response, Lists.newArrayList(교대역, 남부터미널역, 양재역));
         총_거리와_소요_시간을_함께_응답함(response, 5);
@@ -99,6 +109,10 @@ public class PathAcceptanceTest extends AcceptanceTest {
 
     public static void 적절한_경로를_응답(ExtractableResponse<Response> response, ArrayList<StationResponse> expectedPath) {
         PathResponse pathResponse = response.as(PathResponse.class);
+
+        json.info("지하철역 : {}",
+                kv("stations", pathResponse.getStations())
+        );
 
         List<Long> stationIds = pathResponse.getStations().stream()
                 .map(StationResponse::getId)
