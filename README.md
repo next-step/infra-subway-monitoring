@@ -82,7 +82,14 @@ npm run dev
 * 1일 최대 rps : 58 * (4,000,000 / 1,000,000) = 232 rps
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-* load-test 폴더 참고
+* smoke test
+![](load-test/smoke/k6-smoke.png)
+
+* load test
+![](load-test/load/k6-load.png)
+
+* stress test
+![](load-test/stress/k6-stress.png)
 
 ---
 
