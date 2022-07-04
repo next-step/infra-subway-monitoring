@@ -135,6 +135,9 @@ npm run dev
   * VUser = (115 * 2) / 2 = 115
 
 4. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+ * Smoke 테스트 : `/docs/smoke/`
+ * Load 테스트 : `/docs/load/`
+ * Stress 테스트 : `/docs/stress/`
 
 ---
 
