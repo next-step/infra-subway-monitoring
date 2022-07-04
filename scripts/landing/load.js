@@ -1,17 +1,17 @@
 import http from "k6/http";
 import { check, group, sleep, fail } from "k6";
 
-const avgVu = 230;
-const maxVu = 2300;
+const avgVu = 50;
+const maxVu = 500;
 
 export let options = {
   stages: [
-    { duration: "1m", target: avgVu },
-    { duration: "2m", target: maxVu },
-    { duration: "1m", target: avgVu },
+    { duration: "2m", target: avgVu },
+    { duration: "4m", target: maxVu },
+    { duration: "2m", target: avgVu },
   ],
   thresholds: {
-    http_req_duration: ["p(99)<150"], // 99% of requests must complete below 0.15s
+    http_req_duration: ["p(99)<250"], // 99% of requests must complete below 0.15s
   },
 };
 
