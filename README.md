@@ -80,7 +80,191 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+#### 목표 RPS 구하기
+* 예상 1일 사용자 수(DAU): **470만(4,700,000)**
+  * [관련기사](https://www.donga.com/news/Society/article/all/20220511/113346548/1)
+* 피크 시간대의 집중률:
+  * 최대 트래픽: **110만(1,100,000)**
+  * 평소 트래픽: **40만(400,000)**
+  * [관련기사](https://www.bigdata-map.kr/datastory/traffic/seoul)
+* 1명당 1일 평균 접속 혹은 요청 수: **3번**(출근, 퇴근, 환승)
+* 1번 접속시 요청: 로그인 정보 조회(1회) + 경로 검색 페이지(1회) + 경로 검색 결과(1회)
+* **Throughput 계산**
+  * **1일 총 접속 수:** 4,700,000 x 3 = **14,100,000**
+  * **1일 평균 RPS:** 14,100,000 / 86,400 = **163.19rps**
+  * **1일 최대 RPS:** 163.19rps x (1,100,000 / 400,000) = **448.78rps**
+
+* VUser 구하기
+* Latency = 200ms, R = 3, Delay time = 1로 가정
+* T = (3 * 0.2) + 1 = **1.6**
+* VU(최대) = (163.19 * 1.6) / 3 = 87명
+* VU(최대) = (448.78 * 1.6) / 3 = 239명
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* 테스트 경로는 3가지 테스트 모두 가장 접속을 많이 할 것이라고 예상되는 `/path` 경로로 테스트하였습니다.
+  #### smoke.js
+  ```shell
+  import http from 'k6/http';
+  import { check, group, sleep, fail } from 'k6';
+  
+  export let options = {
+    vus: 1, // 1 user looping for 1 minute
+    duration: '10s',
+  
+    thresholds: {
+      http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+  };
+  
+  const BASE_URL = 'https://devdog.p-e.kr/path';
+  const USERNAME = 'jeongjae.eom@gmail.com';
+  const PASSWORD = '1234';
+  
+  export default function ()  {
+  
+    var payload = JSON.stringify({
+      email: USERNAME,
+      password: PASSWORD,
+    });
+  
+    var params = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  
+  
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+  
+    check(loginRes, {
+      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
+  
+  
+    let authHeaders = {
+      headers: {
+        Authorization: `Bearer ${loginRes.json('accessToken')}`,
+      },
+    };
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    sleep(1);
+  };
+  ```
+  #### Smoke 테스트 결과
+  ![Smoke 테스트 결과](docs/images/smoke-test-result.png)
+
+  #### load.js
+  ```shell
+  import http from 'k6/http';
+  import { check, group, sleep, fail } from 'k6';
+  
+  export let options = {
+  stages: [
+  { duration: '5m', target: 87 },
+  { duration: '30m', target: 87 },
+  { duration: '5m', target: 0 },
+  ],
+  thresholds: {
+  http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+  };
+  
+  const BASE_URL = 'https://devdog.p-e.kr/path';
+  const USERNAME = 'jeongjae.eom@gmail.com';
+  const PASSWORD = '1234';
+  
+  export default function ()  {
+  
+  var payload = JSON.stringify({
+  email: USERNAME,
+  password: PASSWORD,
+  });
+  
+  var params = {
+  headers: {
+  'Content-Type': 'application/json',
+  },
+  };
+  
+  
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+  
+  check(loginRes, {
+  'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+  
+  
+  let authHeaders = {
+  headers: {
+  Authorization: `Bearer ${loginRes.json('accessToken')}`,
+  },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+  };
+  ```
+  #### Load 테스트 결과
+  ![load-test-result.png](docs/images/load-test-result.png)
+
+  #### stress.js
+  ```shell
+  import http from 'k6/http';
+  import { check, group, sleep, fail } from 'k6';
+  
+  export let options = {
+  stages: [
+  { duration: '1m', target: 10 },
+  { duration: '1m', target: 50 },
+  { duration: '1m', target: 100 },
+  { duration: '1m', target: 200 },
+  { duration: '5m', target: 300 },
+  { duration: '5m', target: 0 },
+  ],
+  thresholds: {
+  http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+  };
+  
+  const BASE_URL = 'https://devdog.p-e.kr/path';
+  const USERNAME = 'jeongjae.eom@gmail.com';
+  const PASSWORD = '1234';
+  
+  export default function ()  {
+  
+  var payload = JSON.stringify({
+  email: USERNAME,
+  password: PASSWORD,
+  });
+  
+  var params = {
+  headers: {
+  'Content-Type': 'application/json',
+  },
+  };
+  
+  
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+  
+  check(loginRes, {
+  'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+  
+  
+  let authHeaders = {
+  headers: {
+  Authorization: `Bearer ${loginRes.json('accessToken')}`,
+  },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+  };
+  ```
+  #### Stress 테스트 결과
+  ![stress-test-result.png](docs/images/stress-test-result.png)
+  
 
 ---
 
