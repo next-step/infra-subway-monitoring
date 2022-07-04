@@ -15,6 +15,7 @@
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>15</maxHistory>
         </rollingPolicy>
 
         <!--   해당 로깅의 패턴을 설정   -->
