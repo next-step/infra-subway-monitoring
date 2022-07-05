@@ -103,7 +103,7 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 * 테스트 경로는 3가지 테스트 모두 가장 접속을 많이 할 것이라고 예상되는 `/path` 경로로 테스트하였습니다.
   #### smoke.js
-  ```shell
+  ```js
   import http from 'k6/http';
   import { check, group, sleep, fail } from 'k6';
   
@@ -112,7 +112,7 @@ npm run dev
     duration: '10s',
   
     thresholds: {
-      http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+      http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.2s
     },
   };
   
@@ -121,7 +121,6 @@ npm run dev
   const PASSWORD = '1234';
   
   export default function ()  {
-  
     var payload = JSON.stringify({
       email: USERNAME,
       password: PASSWORD,
@@ -132,20 +131,19 @@ npm run dev
         'Content-Type': 'application/json',
       },
     };
-  
-  
+    
     let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
   
     check(loginRes, {
       'logged in successfully': (resp) => resp.json('accessToken') !== '',
     });
   
-  
     let authHeaders = {
       headers: {
         Authorization: `Bearer ${loginRes.json('accessToken')}`,
       },
     };
+  
     let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
     check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
     sleep(1);
@@ -155,19 +153,20 @@ npm run dev
   ![Smoke 테스트 결과](docs/images/smoke-test-result.png)
 
   #### load.js
-  ```shell
+  ```js
   import http from 'k6/http';
   import { check, group, sleep, fail } from 'k6';
   
   export let options = {
-  stages: [
-  { duration: '5m', target: 87 },
-  { duration: '30m', target: 87 },
-  { duration: '5m', target: 0 },
-  ],
-  thresholds: {
-  http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-  },
+    stages: [
+      { duration: '5m', target: 87 },
+      { duration: '10m', target: 100 },
+      { duration: '15m', target: 240 }, // 피크시간대 최대 rps 추가
+      { duration: '5m', target: 0 },
+    ],
+    thresholds: {
+      http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.2s
+    },
   };
   
   const BASE_URL = 'https://devdog.p-e.kr/path';
@@ -175,56 +174,54 @@ npm run dev
   const PASSWORD = '1234';
   
   export default function ()  {
+    var payload = JSON.stringify({
+      email: USERNAME,
+      password: PASSWORD,
+    });
   
-  var payload = JSON.stringify({
-  email: USERNAME,
-  password: PASSWORD,
-  });
+    var params = {
+      headers: {
+      'Content-Type': 'application/json',
+      },
+    };
   
-  var params = {
-  headers: {
-  'Content-Type': 'application/json',
-  },
-  };
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
   
+    check(loginRes, {
+      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
   
-  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+    let authHeaders = {
+      headers: {
+        Authorization: `Bearer ${loginRes.json('accessToken')}`,
+      },
+    };
   
-  check(loginRes, {
-  'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-  
-  
-  let authHeaders = {
-  headers: {
-  Authorization: `Bearer ${loginRes.json('accessToken')}`,
-  },
-  };
-  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
-  sleep(1);
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    sleep(1);
   };
   ```
   #### Load 테스트 결과
   ![load-test-result.png](docs/images/load-test-result.png)
 
   #### stress.js
-  ```shell
+  ```js
   import http from 'k6/http';
   import { check, group, sleep, fail } from 'k6';
   
   export let options = {
-  stages: [
-  { duration: '1m', target: 10 },
-  { duration: '1m', target: 50 },
-  { duration: '1m', target: 100 },
-  { duration: '1m', target: 200 },
-  { duration: '5m', target: 300 },
-  { duration: '5m', target: 0 },
-  ],
-  thresholds: {
-  http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
-  },
+    stages: [
+      { duration: '1m', target: 10 },
+      { duration: '1m', target: 50 },
+      { duration: '1m', target: 100 },
+      { duration: '1m', target: 200 },
+      { duration: '5m', target: 300 },
+      { duration: '5m', target: 0 },
+    ],
+    thresholds: {
+      http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.2s
+    },
   };
   
   const BASE_URL = 'https://devdog.p-e.kr/path';
@@ -232,43 +229,42 @@ npm run dev
   const PASSWORD = '1234';
   
   export default function ()  {
+    var payload = JSON.stringify({
+      email: USERNAME,
+      password: PASSWORD,
+    });
   
-  var payload = JSON.stringify({
-  email: USERNAME,
-  password: PASSWORD,
-  });
+    var params = {
+      headers: {
+      'Content-Type': 'application/json',
+      },
+    };
   
-  var params = {
-  headers: {
-  'Content-Type': 'application/json',
-  },
-  };
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
   
+    check(loginRes, {
+      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+    });
   
-  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+    let authHeaders = {
+      headers: {
+        Authorization: `Bearer ${loginRes.json('accessToken')}`,
+      },
+    };
   
-  check(loginRes, {
-  'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-  
-  
-  let authHeaders = {
-  headers: {
-  Authorization: `Bearer ${loginRes.json('accessToken')}`,
-  },
-  };
-  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
-  sleep(1);
+    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    sleep(1);
   };
   ```
   #### Stress 테스트 결과
   ![stress-test-result.png](docs/images/stress-test-result.png)
-  
 
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요
