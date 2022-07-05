@@ -1,7 +1,5 @@
 package nextstep.subway.map.application;
 
-
-
 import nextstep.subway.line.domain.Line;
 import nextstep.subway.map.domain.SectionEdge;
 import nextstep.subway.map.domain.SubwayGraph;
