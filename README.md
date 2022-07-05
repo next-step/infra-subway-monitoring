@@ -138,29 +138,75 @@ RunningMap이 경쟁사 대비 핵심 기능만 제공하는 라이트한 앱이
   * 1일 평균 rps ~ 1일 최대 rps
   * 23rps ~ 230rps
   
-#### VUser 계산
+#### VUser 계산1 - 홈 페이지
+* http_req_duration(Total time per request): 0.5s
 * 목표 rps(= 1일 최대 rps)
   * 230rps
 * R(Number of requests per VU iteration)
-  * 시나리오: 홈 페이지 -> 로그인 -> 경로 조회 페이지 -> 경로 검색 결과 조회 -> 즐겨찾기 추가 -> 즐겨찾기 페이지
-  * R = 6requests
+  * 시나리오: 홈 페이지 
+  * R = 1request
 * T(Value larger than the time needed to complete one VU iteration)
-  * http_req_duration(Total time per request): 0.5s 가정
   * T > (R * http_req_duration) + (additional compensation for network latency if tested on same vpc)
-  * T > (6 * 0.5s) + (6 * 0.1s) = 3.6s
-  * T := 4s
+  * T > (1 * 0.5s) + (1 * 0.1s) = 0.6s
 * VU(Number of virtual users)
   * VU = (목표 rps * T) / R
-  * VU = 230rps * 4s / 6requests := 154
+  * VU = 230rps * 0.6s / 1request := 138
+
+#### VUser 계산2 - 경로 조회 
+* http_req_duration(Total time per request): 1s 
+* 목표 rps(= 1일 최대 rps)
+  * 230rps
+* R(Number of requests per VU iteration)
+  * 시나리오: 경로 조회 페이지 -> 경로 검색 결과 조회 
+  * R = 2requests
+* T(Value larger than the time needed to complete one VU iteration)
+  * T > (R * http_req_duration) + (additional compensation for network latency if tested on same vpc)
+  * T > (2 * 1s) + (2 * 0.1s) = 2.2s
+* VU(Number of virtual users)
+  * VU = (목표 rps * T) / R
+  * VU = 230rps * 2.2s / 2requests := 253
+
+#### VUser 계산3 - 즐겨 찾기
+* http_req_duration(Total time per request): 1.5s
+* 목표 rps(= 1일 최대 rps)
+  * 230rps
+* R(Number of requests per VU iteration)
+  * 시나리오: 로그인 -> 내 정보 확인 -> 즐겨찾기 페이지
+  * R = 3requests
+* T(Value larger than the time needed to complete one VU iteration)
+  * T > (R * http_req_duration) + (additional compensation for network latency if tested on same vpc)
+  * T > (3 * 1.5s) + (3 * 0.1s) = 4.8s
+* VU(Number of virtual users)
+  * VU = (목표 rps * T) / R
+  * VU = 230rps * 4.8s / 3requests := 368
+
+
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
-#### Smoke test
+#### 홈 페이지
+* Smoke
+![](k6/home/smoke.png)
+* Load
+![](k6/home/load.png)
+* Stress
+![](k6/home/stress.png)
 
-* Script: k6/smoke/smoke.js
-* Console Result
-* UI Result
+#### 즐겨 찾기
+* Smoke
+![](k6/favorites/smoke.png)
+* Load
+![](k6/favorites/load.png)
+* Stress
+![](k6/favorites/stress.png)
 
+#### 경로 조회
+* Smoke
+![](k6/path/smoke.png)
+* Load
+![](k6/path/load.png)
+* Stress
+![](k6/path/stress.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
