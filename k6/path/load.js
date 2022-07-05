@@ -4,26 +4,13 @@ import { check, sleep } from 'k6';
 const BASE_URL = 'http://localhost:8080';
 
 export const options = {
-    vus: 154,
     stages: [
-        { duration: '2m', target: 0 },
-        { duration: '2m', target: 30 },
-        { duration: '2m', target: 60 },
-        { duration: '2m', target: 90 },
-        { duration: '2m', target: 120 },
-        { duration: '2m', target: 154 },
-        { duration: '2m', target: 154 },
-        { duration: '2m', target: 154 },
-        { duration: '2m', target: 154 },
-        { duration: '2m', target: 154 },
-        { duration: '2m', target: 120 },
-        { duration: '2m', target: 90 },
-        { duration: '2m', target: 60 },
-        { duration: '2m', target: 30 },
-        { duration: '2m', target: 0 },
+        { duration: '5m', target: 253 },
+        { duration: '10m', target: 253 },
+        { duration: '5m', target: 0 },
     ],
     thresholds: {
-        http_req_duration: ['p(99)<500']
+        http_req_duration: ['p(99)<1000']
     }
 };
 
