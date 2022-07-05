@@ -36,7 +36,6 @@ public class MemberRequest {
     public String toString() {
         return "MemberRequest{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", age=" + age +
                 '}';
     }
