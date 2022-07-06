@@ -7,6 +7,8 @@ import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class LineService {
+
+    private static final Logger logger = LoggerFactory.getLogger("json");
+
     private LineRepository lineRepository;
     private StationService stationService;
 
@@ -58,10 +63,14 @@ public class LineService {
     }
 
     public void deleteLineById(Long id) {
+        logger.info("deleteLineById Parameters: {} {}", id);
+
         lineRepository.deleteById(id);
     }
 
     public void addLineStation(Long lineId, SectionRequest request) {
+        logger.info("addLineStation Parameters: {} {}", lineId, request);
+
         Line line = findLineById(lineId);
         Station upStation = stationService.findStationById(request.getUpStationId());
         Station downStation = stationService.findStationById(request.getDownStationId());
@@ -69,6 +78,8 @@ public class LineService {
     }
 
     public void removeLineStation(Long lineId, Long stationId) {
+        logger.info("removeLineStation Parameters: {} {}", lineId, stationId);
+
         Line line = findLineById(lineId);
         line.removeStation(stationId);
     }
