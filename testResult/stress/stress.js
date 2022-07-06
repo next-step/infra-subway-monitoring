@@ -3,15 +3,15 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-      { duration: '5m', target: 100 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes
-      { duration: '2m', target: 850 }, // ramp-up to 850 users over 2 minutes (peak hour starts)
-      { duration: '1m', target: 850 }, // stay at 850 users for 1 minutes
-      { duration: '2m', target: 100 }, // ramp-down to 100 users over 2 minutes (peak hour ends)
-      { duration: '2m', target: 100 }, // stay at 100 users for  2minutes
+      { duration: '5m', target: 230 }, // simulate ramp-up of traffic from 1 to 230 users over 5 minutes
+      { duration: '2m', target: 600 }, // ramp-up to 600 users over 2 minutes (peak hour starts)
+      { duration: '1m', target: 800 }, // stay at 800 users for 1 minutes
+      { duration: '2m', target: 700 }, // ramp-down to 700 users over 2 minutes (peak hour ends)
+      { duration: '2m', target: 500 }, // stay at 500 users for  2minutes
       { duration: '1m', target: 0 }, // ramp-down to 0 users
     ],
     thresholds: {
-      http_req_duration: ['p(99)<2000'], // 99% of requests must complete below 1.5s
+\      http_req_duration: ['p(99)<2000'], // 99% of requests must complete below 1.5s
     },
 };
 
