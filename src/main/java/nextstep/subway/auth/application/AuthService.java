@@ -40,6 +40,7 @@ public class AuthService {
 
         String email = jwtTokenProvider.getPayload(credentials);
         Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+        FILE_LOGGER.info("로그인 유저 정보 조회 - userId: {}, email: {}", member.getId(), member.getEmail());
         return new LoginMember(member.getId(), member.getEmail(), member.getAge());
     }
 }

@@ -15,10 +15,14 @@ import nextstep.subway.favorite.dto.FavoriteResponse;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FavoriteService {
+
+  private static final Logger FILE_LOGGER = LoggerFactory.getLogger("file");
 
   private FavoriteRepository favoriteRepository;
   private StationRepository stationRepository;
@@ -31,8 +35,8 @@ public class FavoriteService {
 
   public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
     Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
-
     favoriteRepository.save(favorite);
+    FILE_LOGGER.info("즐겨찾기 등록 완료 - userId: {}, sourceStationId: {}, targetStationId: {}", loginMember.getId(), favorite.getSourceStationId(), favorite.getTargetStationId());
   }
 
   public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
@@ -53,6 +57,7 @@ public class FavoriteService {
       throw new HasNotPermissionException(loginMember.getId() + "는 삭제할 권한이 없습니다.");
     }
     favoriteRepository.deleteById(id);
+    FILE_LOGGER.info("즐겨찾기 삭제 완료 - userId: {}, sourceStationId: {}, targetStationId: {}", loginMember.getId(), favorite.getSourceStationId(), favorite.getTargetStationId());
   }
 
   private Map<Long, Station> extractStations(List<Favorite> favorites) {
