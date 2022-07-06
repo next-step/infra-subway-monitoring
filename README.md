@@ -82,9 +82,279 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+#### 대상 시스템 범위
+- nginx, application, db
+
+#### 목표값 설정 (latency, throughput, 부하 유지기간)
+- 예상 수치 설정
+    - 예상 1일 사용자수(DAU) : 200 만  
+        - 20220703 데이터 승/하차객 수 중 50% 사용한다고 가정
+        (참고자료 : [서울시 지하철호선별 역별 승하차 인원 정보](https://data.seoul.go.kr/dataList/OA-12914/S/1/datasetView.do))
+    - 피크 시간대의 집중률  : 4.0
+        - 피크 시간대(오전 6 ~ 9시, 오후 5 ~ 8시) 이용률 40%
+        (참고자료 : [서울시 지하철 호선별 역별 시간대별 승하차 인원 정보](https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do))
+    - 1명당 1일 평균 접속 혹은 요청수
+        - 출, 퇴근시 각각 1번씩 사용한다고 가정
+        - 사용 시, 로그인, 내 정보 수정, 경로 검색 3회 요청한다고 가정
+- throughput
+    - 1일 총 접속 수 = 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 =  200만 x 2 = 400만
+    - 1일 평균 rps = 1일 총 접속 수 / 86,400 (초/일) = 400만 / 86,400 = 46.29
+    - 1일 최대 rps = 1일 평균 rps x (최대 트래픽 / 평소 트래픽) =  185.16
+    - VUser = (46.29 x 1.5s) x 3 = 23
+    - VUser = (185.16 x 1.5s) x 3 = 92
+- latency
+    - 100ms 이하
+- 부하유지시간
+    - smoke test : 1 m
+    - stress test : 7 m
+    - load test : 30 m
+    
+#### 부하 테스트 시 저장될 데이터 건수 및 크기
+- 지하철 노선 : 23
+- 지하철 구간 : 340
+- 지하철 역 : 616
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 접속 빈도가 높은 페이지 : 로그인
+- 데이터를 갱신하는 페이지 : 내 정보 수정
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색
 
+#### Smoke test
+![smoke test k6](./loadtest/smoke_result_k6.PNG)
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    vus: 1, // 1 user looping for 1 minute
+    duration: '1m',
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://subway-iamjunsulee.p-e.kr/';
+const USERNAME = 'test@naver.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+    let token = login();
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ` + token,
+            'Content-Type': 'application/json'
+        },
+    };
+
+    update(authHeaders);
+
+    findPath(1, 4);
+
+    sleep(1);
+};
+
+function login() {
+    let loginUrl = `${BASE_URL}/login/token`;
+
+    let loginPayload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginParams = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+
+    let loginResponse = http.post(loginUrl, loginPayload, loginParams);
+
+    check(loginResponse, {
+        'logged in successfully': (response) => response.json('accessToken') !== '',
+    });
+    return loginResponse.json('accessToken');
+}
+
+function update(authHeaders) {
+    let updateRequest = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+        age: 33,
+    });
+
+    let updateResponse = http.put(`${BASE_URL}/members/me`, updateRequest, authHeaders);
+    check(updateResponse, { 'updated successfully': (response) => response.status === 200});
+}
+
+function findPath(source, target) {
+    let pathResponse = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(pathResponse, { 'finding path successful': (response) => response.status === 200});
+}
+```
+#### Load test
+![load test k6](./loadtest/load_result_k6.PNG)
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '5m', target: 25 },
+        { duration: '5m', target: 25 },
+        { duration: '3m', target: 100 },
+        { duration: '2m', target: 100 },
+        { duration: '3m', target: 25 },
+        { duration: '10m', target: 25 },
+        { duration: '2m', target: 0 },
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://subway-iamjunsulee.p-e.kr/';
+const USERNAME = 'test@naver.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+    let token = login();
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ` + token,
+            'Content-Type': 'application/json'
+        },
+    };
+
+    update(authHeaders);
+
+    findPath(1, 4);
+
+    sleep(1);
+};
+
+function login() {
+    let loginUrl = `${BASE_URL}/login/token`;
+
+    let loginPayload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginParams = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+
+    let loginResponse = http.post(loginUrl, loginPayload, loginParams);
+
+    check(loginResponse, {
+        'logged in successfully': (response) => response.json('accessToken') !== '',
+    });
+    return loginResponse.json('accessToken');
+}
+
+function update(authHeaders) {
+    let updateRequest = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+        age: 33,
+    });
+
+    let updateResponse = http.put(`${BASE_URL}/members/me`, updateRequest, authHeaders);
+    check(updateResponse, { 'updated successfully': (response) => response.status === 200});
+}
+
+function findPath(source, target) {
+    let pathResponse = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(pathResponse, { 'finding path successful': (response) => response.status === 200});
+}
+```
+#### Stress test
+![stress test k6](./loadtest/stress_result_k6.PNG)
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '1m', target: 25 },
+        { duration: '1m', target: 100 },
+        { duration: '1m', target: 200 },
+        { duration: '1m', target: 500 },
+        { duration: '1m', target: 200 },
+        { duration: '1m', target: 100 },
+        { duration: '1m', target: 25 },
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://subway-iamjunsulee.p-e.kr/';
+const USERNAME = 'test@naver.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+    let token = login();
+
+    let authHeaders = {
+        headers: {
+            Authorization: `Bearer ` + token,
+            'Content-Type': 'application/json'
+        },
+    };
+
+    update(authHeaders);
+
+    findPath(1, 4);
+
+    sleep(1);
+};
+
+function login() {
+    let loginUrl = `${BASE_URL}/login/token`;
+
+    let loginPayload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginParams = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+
+    let loginResponse = http.post(loginUrl, loginPayload, loginParams);
+
+    check(loginResponse, {
+        'logged in successfully': (response) => response.json('accessToken') !== '',
+    });
+    return loginResponse.json('accessToken');
+}
+
+function update(authHeaders) {
+    let updateRequest = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+        age: 33,
+    });
+
+    let updateResponse = http.put(`${BASE_URL}/members/me`, updateRequest, authHeaders);
+    check(updateResponse, { 'updated successfully': (response) => response.status === 200});
+}
+
+function findPath(source, target) {
+    let pathResponse = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(pathResponse, { 'finding path successful': (response) => response.status === 200});
+}
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
