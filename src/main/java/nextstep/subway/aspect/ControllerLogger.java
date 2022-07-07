@@ -41,10 +41,11 @@ public class ControllerLogger {
     public void afterLogging(JoinPoint joinPoint, Object returnObj) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-        ResponseEntity response = (ResponseEntity) returnObj;
+        if (returnObj instanceof ResponseEntity) {
+            ResponseEntity response = (ResponseEntity) returnObj;
 
-        logger.info("Request: {} {} - Response Http Status Code: {}", request.getMethod(),
-                request.getRequestURI(), response.getStatusCodeValue());
-
+            logger.info("Request: {} {} - Response Http Status Code: {}", request.getMethod(),
+                    request.getRequestURI(), response.getStatusCodeValue());
+        }
     }
 }
