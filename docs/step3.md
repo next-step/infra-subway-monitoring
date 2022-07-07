@@ -7,6 +7,6 @@
 - [x] Nginx Access Log 설정하기
 
 #### Cloudwatch 로 모니터링
-- [ ] Cloudwatch 로 로그 수집하기
-- [ ] Cloudwatch 로 메트릭 수집하기
-- [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] Cloudwatch 로 로그 수집하기
+- [x] Cloudwatch 로 메트릭 수집하기
+- [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
