@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class ControllerLogger {
 
-    private static final Logger logger = LoggerFactory.getLogger(ControllerLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger("ControllerLogger");
 
     @Pointcut("execution(* nextstep.subway..ui.*.*(..))")
     public void controllerPointcut() {

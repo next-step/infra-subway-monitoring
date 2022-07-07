@@ -8,16 +8,9 @@
     <include resource="appender/file-appender.xml" />
     <include resource="appender/json-appender.xml" />
 
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
-        <appender-ref ref="console"/>
+    <logger name="ControllerLogger" additivity="false">
+        <level value = "INFO" />
+        <appender-ref ref="file" />
+        <appender-ref ref="json" />
     </logger>
-
-    <!--    logger name이 console일때 적용할 appender를 등록한다.-->
-    <root level="INFO">
-        <springProfile name="prod">
-            <appender-ref ref="file" />
-            <appender-ref ref="json" />
-        </springProfile>
-    </root>
-
 </configuration>
