@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="home" value="log/" />
+    <property name="home" value="log/"/>
 
     <!--  appender이름이 file인 consoleAppender를 선언  -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -13,6 +13,8 @@
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 10건의 파일만 남기고 지난 로그파일은 삭제 된다. -->
+            <maxHistory>10</maxHistory>
         </rollingPolicy>
         <encoder>
             <charset>utf8</charset>
