@@ -7,6 +7,8 @@ import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class LineService {
+
+    private static final Logger FILE_LOGGER = LoggerFactory.getLogger("file");
+
     private LineRepository lineRepository;
     private StationService stationService;
 
@@ -28,6 +33,11 @@ public class LineService {
         Station upStation = stationService.findById(request.getUpStationId());
         Station downStation = stationService.findById(request.getDownStationId());
         Line persistLine = lineRepository.save(new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
+
+        FILE_LOGGER.info("노선 생성 완료");
+        FILE_LOGGER.info("노선 이름: {}", persistLine.getName());
+        FILE_LOGGER.info("상행 종점: {}", upStation.getName());
+        FILE_LOGGER.info("하행 종점: {}", downStation.getName());
         return LineResponse.of(persistLine);
     }
 
