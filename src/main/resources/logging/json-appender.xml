@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="home" value="log/" />
+    <property name="home" value="logs/" />
 
     <!--  appender이름이 file인 consoleAppender를 선언  -->
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
