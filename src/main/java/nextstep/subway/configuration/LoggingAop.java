@@ -28,7 +28,6 @@ public class LoggingAop {
     public void beforeParameterLog(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         log.info("[REQUEST] : Controller : {}, Method : {}, Arguments : {} ", joinPoint.getTarget().getClass().getSimpleName(), signature.getName(), Arrays.toString(joinPoint.getArgs()));
-        json.info("[JSON REQUEST] : Controller : {}, Method : {}, Arguments : {} ", joinPoint.getTarget().getClass().getSimpleName(), signature.getName(), Arrays.toString(joinPoint.getArgs()));
 
     }
 
