@@ -93,10 +93,26 @@ npm run dev
 - `Latency`: 100ms 이하
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+#### Smoke
+- 경로: monitoring\smoke\smoke.js
+![](monitoring/smoke/smoke.png)
+
+#### Load
+- 경로: monitoring\smoke\load.js
+![](monitoring/load/load.png)
+
+#### Stress
+- 경로: monitoring\smoke\stress2.js
+![](monitoring/stress/stress2.png)
 
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
+- application log :/home/ubuntu/nextstep/infra-subway-monitoring/log
+- nginx: /var/log/nginx
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=jiyeonghwang
