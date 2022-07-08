@@ -90,7 +90,38 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+테스트 설정값 구하기.
+- 예상 DAU: 3,000,000
+- 피크 시간대 집중률: 5
+- 1명당 평균 접속 수: 2
+
+1일 사용자 수 = 3,000,000 * 2 = **6,000,000**  
+1일 평균 rps = 6,000,000 / 86,400 = **69**  
+1일 최대 rps = 69 * (345 / 69) = **345**
+
+VUser 구하기
+Latency = 100ms, R = 2 가정 
+- T = (2 * 0.1) + 0 = **0.2**
+- VUser
+  - 평균: (69 * 0.2) / 2 = **7**
+  - 최대: (463 * 0.2) / 2 = **35**
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+### Smoke
+```k6/smoke.js```
+![image](https://user-images.githubusercontent.com/61832162/177760052-f547254a-b90d-427b-8c12-6db7c3d1b5b2.png)
+![image](https://user-images.githubusercontent.com/61832162/177760137-43e5a9d9-34c3-463e-9397-b332a1f3fcf1.png)
+
+### Load
+```k6/load.js```
+![image](https://user-images.githubusercontent.com/61832162/177759275-c48f1f2d-2788-4bbb-ad52-4d0135cabdd4.png)
+![image](https://user-images.githubusercontent.com/61832162/177759325-2e331ce0-1ebb-4cf5-b801-1d82009a52a3.png)
+
+### Stree
+```k6/stress.js```
+![image](https://user-images.githubusercontent.com/61832162/177710576-66475b6b-fee5-43bd-8ca9-f7ba4299f557.png)
+![image](https://user-images.githubusercontent.com/61832162/177710074-595d2dfa-ea0c-4ef9-93e9-f9581a18f407.png)
 
 ---
 
