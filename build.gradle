@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.0-SNAPSHOT'
+	id 'org.springframework.boot' version '2.4.0'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
@@ -22,8 +22,15 @@ dependencies {
 	// handlebars
 	implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
 
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
 	// log
 	implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.1'
+
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+	implementation("io.micrometer:micrometer-registry-cloudwatch")
 
 	// jgraph
 	implementation 'org.jgrapht:jgrapht-core:1.0.1'

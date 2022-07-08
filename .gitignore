@@ -44,3 +44,5 @@ fronted/.eslintrc.js
 docker/db/mysql/data
 
 k6/grafana
+
+log
