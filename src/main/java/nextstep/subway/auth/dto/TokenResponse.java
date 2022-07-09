@@ -1,6 +1,9 @@
 package nextstep.subway.auth.dto;
 
+import nextstep.subway.common.MaskingUtil;
+
 public class TokenResponse {
+
     private String accessToken;
 
     public TokenResponse() {
@@ -12,5 +15,12 @@ public class TokenResponse {
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    @Override
+    public String toString() {
+        return "TokenResponse{" +
+            "accessToken='" + MaskingUtil.maskWord(accessToken, 5) + '\'' +
+            '}';
     }
 }
