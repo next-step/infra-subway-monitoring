@@ -21,14 +21,12 @@ public class LoggingAop {
     }
 
     private static final Logger log = LoggerFactory.getLogger("file");
-    private static final Logger json = LoggerFactory.getLogger("json");
 
     // Pointcut에 의해 필터링된 경로로 들어오는 경우 메서드 호출 전에 적용
     @Before("controllerCut()")
     public void beforeParameterLog(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         log.info("[REQUEST] : Controller : {}, Method : {}, Arguments : {} ", joinPoint.getTarget().getClass().getSimpleName(), signature.getName(), Arrays.toString(joinPoint.getArgs()));
-        json.info("[REQUEST] : Controller : {}, Method : {}, Arguments : {} ", joinPoint.getTarget().getClass().getSimpleName(), signature.getName(), Arrays.toString(joinPoint.getArgs()));
 
     }
 
@@ -38,7 +36,6 @@ public class LoggingAop {
         // 메서드 정보 받아오기
         Signature signature = joinPoint.getSignature();
         log.info("[Response] : STATUS[{}] Method : {}, returnBody : {} ", response.getStatusCode(), signature.getName(), response.getBody());
-        json.info("[Response] : STATUS[{}] Method : {}, returnBody : {} ", response.getStatusCode(), signature.getName(), response.getBody());
 
     }
 
