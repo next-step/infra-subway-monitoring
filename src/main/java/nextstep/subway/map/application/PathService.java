@@ -27,7 +27,7 @@ public class PathService {
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
-        json.info("출발지 : {}, 도착지 : {}", "출발지", source.getName(), target.getName());
+        json.info("출발지 : {}, 도착지 : {}", source.getName(), target.getName());
         return convertSubwayPath(path);
     }
 
