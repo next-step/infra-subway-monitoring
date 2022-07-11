@@ -36,8 +36,8 @@ public class FavoriteService {
 
     public void createFavorite(LoginMember loginMember, FavoriteRequest request) {
         Favorite favorite = new Favorite(loginMember.getId(), request.getSource(), request.getTarget());
-        log.info("{}", kv("즐겨찾기 추가", favorite));
         favoriteRepository.save(favorite);
+        log.info("{}", kv("즐겨찾기 추가", favorite));
     }
 
     public List<FavoriteResponse> findFavorites(LoginMember loginMember) {
