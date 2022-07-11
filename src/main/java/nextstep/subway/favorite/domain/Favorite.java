@@ -44,4 +44,14 @@ public class Favorite extends BaseEntity {
     public boolean isCreatedBy(Long memberId) {
         return this.memberId.equals(memberId);
     }
+
+    @Override
+    public String toString() {
+        return "Favorite{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", sourceStationId=" + sourceStationId +
+                ", targetStationId=" + targetStationId +
+                '}';
+    }
 }
