@@ -52,9 +52,153 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   1. RPS 계산 
+      - 1명당 1일 평균 접속 혹은 요청 수 예상
+          - 출근, 퇴근시간에 하루 평균 2회 접속할 것으로 예상.
+      - Throughput: 1일 평균 rps ~ 1일 최대 rps
+          - 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+              - 500만명*2=1000만
+
+          - 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+              - 평균 약 115
+
+          - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+              - 115 * (10) = 1150
+   2. VUser
+      - public 로컬망에서 처리시간 약 150ms
+        - 집 내부망에서 요청시 약 210ms (지연시간 60ms)
+      - webpagetest 테스트 결과
+        - 경쟁사(FBT): 329ms (지연시간 210ms, 가정)
+        - 자사(FBT): 359ms (지연시간 210ms)
+      - 경쟁사의 처리시간은 약 119ms로 유추, 따라서 자사의 목표처리시간은 110ms 정도로 설정.
+      
+      - T = (R * 목표 응답시간) + (네트워크 응답지연)
+        - (2 * 0.11) + 0.06 = 0.28 
+        - VUser = (1150*0.28)/2 = 161
+
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- Smoke Test
+![img_3.png](img_3.png)
+``` shell
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<170'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://dongbin.tk';
+const USERNAME = 'test@naver.com';
+const PASSWORD = 'test1234';
+
+export default function () {
+        mainPage()
+        searchPath()
+        sleep(1)
+};
+
+function mainPage() {
+  const response = http.get(`${BASE_URL}`)
+  check(response, {
+    'mainPage success': (resp) => resp.status === 200
+  })
+}
+
+function searchPath() {
+  const response =  http.get(`${BASE_URL}/paths/?source=1&target=2`)
+  check(response, {
+    'searchPath success': (resp) => resp.status === 200
+  })
+}
+
+```
+
+- Load Test
+![img_4.png](img_4.png)
+```shell
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '30m', target: 161 }, 
+    { duration: '10m', target: 161 }, 
+    { duration: '1m', target: 0 }, 
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<170'],
+  }
+};
+
+const BASE_URL = 'https://dongbin.tk';
+
+export default function () {
+        mainPage()
+        searchPath()
+        sleep(1)
+};
+
+function mainPage() {
+  const response = http.get(`${BASE_URL}`)
+  check(response, {
+    'mainPage success': (resp) => resp.status === 200
+  })
+}
+
+function searchPath() {
+  const response =  http.get(`${BASE_URL}/paths/?source=1&target=2`)
+  check(response, {
+    'searchPath success': (resp) => resp.status === 200
+  })
+}
+```
+
+- Stress Test
+![img_5.png](img_5.png)
+```shell
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '5m', target: 161 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
+    { duration: '5m', target: 161 }, // stay at 100 users for 10 minutes
+    { duration: '1m', target: 0 }, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<170'],
+  }
+};
+
+const BASE_URL = 'https://dongbin.tk';
+
+export default function () {
+        mainPage()
+        searchPath()
+        sleep(1)
+};
+
+function mainPage() {
+  const response = http.get(`${BASE_URL}`)
+  check(response, {
+    'mainPage success': (resp) => resp.status === 200
+  })
+}
+
+function searchPath() {
+  const response =  http.get(`${BASE_URL}/paths/?source=1&target=2`)
+  check(response, {
+    'searchPath success': (resp) => resp.status === 200
+  })
+}
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
