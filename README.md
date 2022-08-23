@@ -41,9 +41,44 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+# 예비 분석
+### 사용자 트래픽이 많거나 중요한 페이지는?
+- 메인 페이지 (`/`)
+- 경로 검색 페이지 (`/path`)
+
+### 메인 페이지 (/) 
+![img.png](doc/img/main-desktop-page-speed.png)
+![img.png](doc/img/main-mobile-page-speed.png)
+
+### 경로 검색 페이지 (/path)
+![img.png](doc/img/path-mobile-page-speed.png)
+![img.png](doc/img/path-desktop-page-speed.png)
+
+### 경쟁사(카카오맵)
+점수가 가장 좋은 카카오맵 을 기준으로 잡았습니다.
+
+![img.png](doc/img/kakao-mobile-page-speed.png)
+![img.png](doc/img/kakao-desktop-page-speed.png)
+
+### 문제점
+
+- 모바일 환경 기준 렌더링 시간(FCP, LCP)이 평균 15초로 너무 높습니다.
+  - 권장하는 FCP: 1.8 초 / 권장하는 LCP: 2.5초
+
+- 경쟁사랑 FCP 기준으로 비교 하였을때 10배이상의 시간이 차이난다.
+
+###  성능 기준 설정하기
+본업에서 같은 결과가 나온다면 Timing based Metric 를 기준으로 성능 최적화를 해야 된다고 생각합니다.
+결론적으로 FCP 를 최소 경쟁사 대비 20% 성능차이 미만인 2.04 초( 1.7 * 1.2 )를 목표로 작업해야 된다고 생각합니다.
+
+---
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
-
+   1. JavaScript 이번트 코드 파일 gzip 압축 방식 제공
+   2. 페이지 별로 사용하는 js 코드만 빌드하게 변경
+   3. css 파일 분리
+   4. img, js, css 정적 파일 CDN 에서 가져오는 방식으로 변경
+   5. 지하철역, 노선 구간등 자주 사용하는 데이터 캐시로 저장
 
 ---
 
