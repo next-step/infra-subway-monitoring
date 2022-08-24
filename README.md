@@ -19,35 +19,85 @@
 ## 🚀 Getting Started
 
 ### Install
+
 #### npm 설치
+
 ```
 cd frontend
 npm install
 ```
+
 > `frontend` 디렉토리에서 수행해야 합니다.
 
 ### Usage
+
 #### webpack server 구동
+
 ```
 npm run dev
 ```
+
 #### application 구동
+
 ```
 ./gradlew clean build
 ```
+
 <br>
 
-
 ### 1단계 - 웹 성능 테스트
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+
+- 측정 :
+
+| mobile       | FCP   | TTI   | LCP   | SCORE |
+| ------------ | ----- | ----- | ----- | ----- |
+| subway       | 15.1s | 15.7s | 15.6s | 30    |
+| 서울도로공사 | 7.2s  | 10.9s | 12.8s | 33    |
+| 네이버지도   | 2.2s  | 6.5s  | 8.2s  | 57    |
+| 카카오맵     | 1.7s  | 4.2s  | 4.7s  | 74    |
+
+| pc           | FCP  | TTI  | LCP  | SCORE |
+| ------------ | ---- | ---- | ---- | ----- |
+| subway       | 2.7s | 2.8s | 2.8s | 67    |
+| 서울도로공사 | 1.7s | 2.2s | 4.0s | 63    |
+| 네이버지도   | 0.5s | 0.7s | 1.7s | 87    |
+| 카카오맵     | 0.5s | 0.7s | 1.1s | 92    |
+
+- 목표 성능 예산 :
+  - `서울교통공사`도 (개인적으로 생각하기에) 성능 예산이 좋지 않다고 판단하여 제외
+  - `카카오맵`과 `네이버지도`가 상대적으로 성능 예산이 좋기때문에 이 두개와 비교하여 `목표 성능 예산`을 결정
+    - `카카오맵`과 `네이버지도`의 성능 예산 범위 사이
+    - `카카오맵`의 성능 예산과 `20%` 이상 차이 나지 않도록 잡음
+
+| mobile | FCP   | TTI   | LCP   | SCORE |
+| ------ | ----- | ----- | ----- | ----- |
+| subway | <= 2s | <= 5s | <= 5s | >= 60 |
+
+| pc     | FCP     | TTI     | LCP     | SCORE |
+| ------ | ------- | ------- | ------- | ----- |
+| subway | <= 0.5s | <= 0.7s | <= 1.4s | >= 90 |
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
-
+- 캐시 사용하기
+  - js, css, png 등에 대해 캐시 사용하기
+- resource (js, css, etc)에 대해 gzip 압축
+- js 크기 줄이기
+  - `/js/vendors.js`의 크기가 많이 크다고 생각됨. analyze 통해 줄일수 있는 부분 파악 필요.
+- css 수정
+  - `<style>` 대신 `<link rel="stylesheet">` 형태로 로드..? (너무 많은 <style> 태그로 나누어져 있는게 아닌지 생각됨)
+- font 최적화
+  - 웹폰트 크기가 너무 큰 경우, 페이지 로딩 속도가 늦어짐
+  - google font (`&display=swap`), @font-face (`font-display: swap;`) 등 추가 (참고 : https://web.dev/font-display/?utm_source=lighthouse&utm_medium=lr)
+- 리소스 lazy load
+  - 첫페이지 로드에 필요하지 않은 리소스는 lazy-load나 parallel-load 로 불러오도록 수정
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
@@ -55,6 +105,7 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
