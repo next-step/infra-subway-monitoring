@@ -107,11 +107,7 @@ npm run dev
     - smoke
     - load
     - stress
-  - 데이터를 갱신하는 페이지(경로 조회)
-    - smoke
-    - load
-    - stress
-  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지(노선도)
+  - 기능을 수행하는 페이지(로그인 성공)
     - smoke
     - load
     - stress
