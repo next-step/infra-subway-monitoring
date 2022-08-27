@@ -108,8 +108,19 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
   - 접속 빈도가 높은 페이지(메인화면)
     - smoke
+      - [script](./src/test/k6/main_page/smoke.js)
+      - ![cli결과](./src/test/k6/main_page/smoke-cli.png)
+      - ![대시보드](./src/test/k6/main_page/smoke-dashboard.png)
     - load
+      - [script](./src/test/k6/main_page/load.js)
+      - ![cli결과](./src/test/k6/main_page/load-cli.png)
+      - ![대시보드](./src/test/k6/main_page/load-dashboard.png)
+      - ![AWS 대시보드](./src/test/k6/main_page/load-aws-dashboard.png)
     - stress
+      - [script](./src/test/k6/main_page/stress.js)
+      - ![cli결과](./src/test/k6/main_page/stress-cli.png)
+      - ![대시보드](./src/test/k6/main_page/stress-dashboard.png)
+      - ![AWS 대시보드](./src/test/k6/main_page/stress-aws-dashboard.png)
   - 기능을 수행하는 페이지(로그인 성공)
     - smoke
     - load
