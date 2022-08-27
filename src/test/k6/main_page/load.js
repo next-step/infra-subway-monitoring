@@ -3,8 +3,8 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '30s', target: 200 }, // ramp up to 200 users over 30 seconds.
-    { duration: '30m', target: 200 }, // stay at 200 for 30 minutes.
+    { duration: '30s', target: 30 }, // ramp up to 30 users over 30 seconds.
+    { duration: '30m', target: 30 }, // stay at 30 for 30 minutes.
     { duration: '1m', target: 0 }, // ramp down to 0 users.
   ],
 
