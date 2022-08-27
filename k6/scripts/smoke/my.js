@@ -4,7 +4,7 @@
 
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../login.js';
+import { login, generateAuthorizationHeaderWith } from '../../login.js';
 
 export let options = {
   vus: 1, // 1 user looping for 1 minute
