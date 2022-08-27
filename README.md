@@ -125,6 +125,16 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- Smoke Test
+  - [my smoke test](./k6/smoke/my.js)
+  - [path smoke test](./k6/smoke/path.js)
+- Load Test
+  - [my smoke test](./k6/load/my.js)
+  - [path smoke test](./k6/load/path.js)
+- Stress Test
+  - [my stress test](./k6/stress/my.js)
+  - [path stress test](./k6/stress/path.js)
+
 ---
 
 ### 3단계 - 로깅, 모니터링
