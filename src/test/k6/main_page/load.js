@@ -1,0 +1,24 @@
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '30s', target: 200 }, // ramp up to 200 users over 30 seconds.
+    { duration: '30m', target: 200 }, // stay at 200 for 30 minutes.
+    { duration: '1m', target: 0 }, // ramp down to 0 users.
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 100ms
+  },
+};
+
+const BASE_URL = 'https://web.idion.kro.kr';
+
+export default function () {
+  let mainPageRes = http.get(BASE_URL);
+
+  check(mainPageRes, {
+    'main page load successfully': (resp) => resp.status === 200,
+  });
+};
