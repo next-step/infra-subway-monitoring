@@ -9,7 +9,7 @@ export let options = {
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 200ms
+    http_req_duration: ['p(99)<400'], // 99% of requests must complete below 400ms
   },
 };
 
