@@ -115,10 +115,14 @@ npm run dev
     - 하루 평균 rps : 1.73 (150,000 / 86,440)
     - 하루 최대 rps : 17.3 (peak시 10배로 가정)
     - average response time (목표) : 500ms
-    - 평균 VUser : 1.73 _ (2 _ 0.5 + 0) / 2 = 0.865 = 1
-    - 최대 VUser : 8.65 = 9
-    - 평균 TPS : 2
-    - 최대 TPS : 4.5
+    - my 페이지 :
+      - requests : login + me + modify = 3개
+      - 평균 VUser : 1.73 * (3 * 0.5 + 0) / 3 = 0.865 = 1
+      - 최대 VUser : 8.65 = 9
+    - 경로 검색 페이지 :
+      - requests : stations + path + favorite = 3개
+      - 평균 VUser : 1.73 * (3 * 0.5 + 0) / 3 = 0.865 = 1
+      - 최대 VUser : 8.65 = 9
   - 부하 테스트 시 저장될 데이터 건수 및 크기
     - 나의 정보 수정시
     - json 데이터 1건 (content-length: 61)
