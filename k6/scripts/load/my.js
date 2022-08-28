@@ -3,8 +3,8 @@
  */
 
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../../login.js';
+import { check, sleep } from 'k6';
+import { login, generateAuthorizationHeaderWith } from '../login.js';
 
 export let options = {
   stages: [

@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import { check } from 'k6';
 
 const USERNAME = 'writer0713@naver.com';
 const PASSWORD = 'aaaa';

@@ -3,18 +3,17 @@
  */
 
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../../login.js';
+import { check, sleep } from 'k6';
+import { login, generateAuthorizationHeaderWith } from '../login.js';
 
 export let options = {
   stages: [
-    { duration: '4m', target: 185 },
-    { duration: '4m', target: 185 },
-    { duration: '4m', target: 500 },
-    { duration: '4m', target: 500 },
-    { duration: '4m', target: 1000 },
-    { duration: '4m', target: 1000 },
-    { duration: '6m', target: 0 },
+    { duration: '5m', target: 100 },
+    { duration: '5m', target: 200 },
+    { duration: '5m', target: 300 },
+    { duration: '5m', target: 400 },
+    { duration: '5m', target: 500 },
+    { duration: '5m', target: 0 },
   ],
   thresholds: {
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
