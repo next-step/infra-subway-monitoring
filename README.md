@@ -117,11 +117,11 @@ npm run dev
     - average response time (목표) : 500ms
     - my 페이지 :
       - requests : login + me + modify = 3개
-      - 평균 VUser : 1.73 * (3 * 0.5 + 0) / 3 = 0.865 = 1
+      - 평균 VUser : 1.73 _ (3 _ 0.5 + 0) / 3 = 0.865 = 1
       - 최대 VUser : 8.65 = 9
     - 경로 검색 페이지 :
-      - requests : stations + path + favorite = 3개
-      - 평균 VUser : 1.73 * (3 * 0.5 + 0) / 3 = 0.865 = 1
+      - requests : stations + path + login + favorite = 4개
+      - 평균 VUser : 1.73 _ (4 _ 0.5 + 0) / 4 = 0.865 = 1
       - 최대 VUser : 8.65 = 9
   - 부하 테스트 시 저장될 데이터 건수 및 크기
     - 나의 정보 수정시
