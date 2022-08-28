@@ -11,13 +11,12 @@ export let errorRate = new Rate('errors');
 
 export let options = {
   stages: [
-    { duration: '4m', target: 185 },
-    { duration: '4m', target: 185 },
-    { duration: '4m', target: 500 },
-    { duration: '4m', target: 500 },
-    { duration: '4m', target: 1000 },
-    { duration: '4m', target: 1000 },
-    { duration: '6m', target: 0 },
+    { duration: '5m', target: 100 },
+    { duration: '5m', target: 200 },
+    { duration: '5m', target: 300 },
+    { duration: '5m', target: 400 },
+    { duration: '5m', target: 500 },
+    { duration: '5m', target: 0 },
   ],
   thresholds: {
     checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
