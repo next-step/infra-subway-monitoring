@@ -5,6 +5,9 @@ import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { login, generateAuthorizationHeaderWith } from '../login.js';
+import { Rate } from 'k6/metrics';
+
+export let errorRate = new Rate('errors');
 
 export let options = {
   stages: [
@@ -17,6 +20,7 @@ export let options = {
     { duration: '6m', target: 0 },
   ],
   thresholds: {
+    checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s,
   },
 };
@@ -41,9 +45,10 @@ function getAllStations() {
 
   let stationsRes = http.get(`${BASE_URL}/stations`, params);
 
-  check(stationsRes, {
+  const success = check(stationsRes, {
     'Successfully Got Stations JSON': (resp) => resp.json().length >= 615,
   });
+  errorRate.add(!success);
   sleep(1);
 }
 
@@ -59,9 +64,10 @@ function getPath() {
 
   const response = http.get(url.toString(), headers);
 
-  check(response, {
+  const success = check(response, {
     'Successfully Got Path': (resp) => resp.json().distance === 27,
   });
+  errorRate.add(!success);
   sleep(1);
 }
 
@@ -76,8 +82,9 @@ function addToFavorite() {
   const url = new URL(`${BASE_URL}/favorites`);
   const response = http.post(url.toString(), payload, auth_header);
 
-  check(response, {
+  const success = check(response, {
     'Successfully Add To Favorites': (res) => res.status === 201,
   });
+  errorRate.add(!success);
   sleep(1);
 }

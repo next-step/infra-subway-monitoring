@@ -5,13 +5,16 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { login, generateAuthorizationHeaderWith } from '../login.js';
+import { Rate } from 'k6/metrics';
+
+export let errorRate = new Rate('errors');
 
 export let options = {
   vus: 1, // 1 user looping for 1 minute
   duration: '5s',
 
   thresholds: {
-    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
+    checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
   },
 };
@@ -28,9 +31,10 @@ export default function () {
 function getPersonalInformation(authToken) {
   const authHeaders = generateAuthorizationHeaderWith(authToken);
   let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, {
+  const success = check(myObjects, {
     'retrieved my personal information': (obj) => obj.id != 0,
   });
+  errorRate.add(!success);
   sleep(1);
 }
 
@@ -43,10 +47,11 @@ function modifyPersonalInformation(authToken) {
   });
 
   const res = http.put(`${BASE_URL}/members/me`, payload, authHeaders);
-  check(res, {
+  const success = check(res, {
     'got 200 status-code after modifying personal information': (res) =>
       res.status === 200,
   });
+  errorRate.add(!success);
   sleep(1);
 }
 
