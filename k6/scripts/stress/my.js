@@ -8,9 +8,13 @@ import { login, generateAuthorizationHeaderWith } from '../../login.js';
 
 export let options = {
   stages: [
-    { duration: '1m', target: 9 }, // simulate ramp-up of traffic from 1 to 9 users over 1 minutes.
-    { duration: '30m', target: 9 }, // stay at 9 users for 10 minutes
-    { duration: '10s', target: 0 }, // ramp-down to 0 users
+    { duration: '4m', target: 185 },
+    { duration: '4m', target: 185 },
+    { duration: '4m', target: 500 },
+    { duration: '4m', target: 500 },
+    { duration: '4m', target: 1000 },
+    { duration: '4m', target: 1000 },
+    { duration: '6m', target: 0 },
   ],
   thresholds: {
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
