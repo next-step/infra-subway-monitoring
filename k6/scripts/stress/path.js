@@ -1,5 +1,5 @@
 /**
- * 경로 검색에 대한 smoke test
+ * 경로 검색에 대한 stress test
  */
 import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
 import http from 'k6/http';

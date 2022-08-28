@@ -1,5 +1,5 @@
 /**
- * 마이페이지에 대한 smoke test
+ * 마이페이지에 대한 stress test
  */
 
 import http from 'k6/http';
