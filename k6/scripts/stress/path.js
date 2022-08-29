@@ -1,22 +1,22 @@
 /**
  * 경로 검색에 대한 stress test
  */
-import { URL } from 'https://jslib.k6.io/url/1.0.0/index.js';
+import {URL} from 'https://jslib.k6.io/url/1.0.0/index.js';
 import http from 'k6/http';
-import { check, sleep } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../login.js';
-import { Rate } from 'k6/metrics';
+import {check, sleep} from 'k6';
+import {login, generateAuthorizationHeaderWith} from '../login.js';
+import {Rate} from 'k6/metrics';
 
 export let errorRate = new Rate('errors');
 
 export let options = {
   stages: [
-    { duration: '5m', target: 100 },
-    { duration: '5m', target: 200 },
-    { duration: '5m', target: 300 },
-    { duration: '5m', target: 400 },
-    { duration: '5m', target: 500 },
-    { duration: '5m', target: 0 },
+    {duration: '5m', target: 9},
+    {duration: '5m', target: 20},
+    {duration: '5m', target: 30},
+    {duration: '5m', target: 40},
+    {duration: '5m', target: 50},
+    {duration: '5m', target: 0},
   ],
   thresholds: {
     checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
