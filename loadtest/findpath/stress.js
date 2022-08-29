@@ -1,5 +1,8 @@
 import http from 'k6/http';
 import {check, group, sleep, fail} from 'k6';
+import { Rate } from 'k6/metrics';
+
+export let errorRate = new Rate('errors');
 
 export let options = {
     stages: [
@@ -21,8 +24,6 @@ export let options = {
 const BASE_URL = 'https://sm9171.r-e.kr/';
 const USERNAME = 'sm9171@nate.com';
 const PASSWORD = '1234';
-const AGE = '32';
-const MEMBER_ID = '1';
 
 export default function () {
     let authToken = login();
@@ -45,11 +46,11 @@ function login() {
     let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
     let authToken = loginRes.json('accessToken');
 
-    check(loginRes, {
+    const success = check(loginRes, {
             'logged in successfully': (resp) => resp.json('accessToken') !== '',
         },
         {myTag: 'login'});
-
+    errorRate.add(!success);
     sleep(1);
     return authToken;
 }
@@ -64,10 +65,10 @@ function findPath(accessToken) {
 
     let response = http.get(`${BASE_URL}/path?source=3&target=8`, params);
 
-    check(response, {
+    const success = check(response, {
             'find path successfully': (res) => res.status === 200
         },
         {myTag: 'findPath'});
-
+    errorRate.add(!success);
     sleep(1);
 }

@@ -1,5 +1,8 @@
 import http from 'k6/http';
 import {check, group, sleep, fail} from 'k6';
+import { Rate } from 'k6/metrics';
+
+export let errorRate = new Rate('errors');
 
 export let options = {
     vus: 1, // 1 user looping for 1 minute
@@ -38,11 +41,11 @@ function login() {
     let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
     let authToken = loginRes.json('accessToken');
 
-    check(loginRes, {
+    const success = check(loginRes, {
             'logged in successfully': (resp) => resp.json('accessToken') !== '',
         },
         {myTag: 'login'});
-
+    errorRate.add(!success);
     sleep(1);
     return authToken;
 }
@@ -63,10 +66,10 @@ function editMyInfo(accessToken) {
 
     let response = http.put(`${BASE_URL}/members/` + MEMBER_ID, payload, params);
 
-    check(response, {
+    const success = check(response, {
             'editMyInfo successfully': (res) => res.status === 200
         },
         {myTag: 'editMyInfo'});
-
+    errorRate.add(!success);
     sleep(1);
 }
