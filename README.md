@@ -105,7 +105,7 @@ npm run dev
   - 데이터를 갱신하는 페이지 : 나의 정보 페이지 (나이 update)
   - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 페이지
 - 목표값 설정
-  - latency : 없음
+  - latency : 500ms
   - throughput :
     - 경쟁사인 카카오 MAU를 기준으로 산정
     - MAU : 150만
@@ -130,16 +130,37 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 - Smoke Test
+  - 예상했던대로 잘 동작하는것 확인
   - [my smoke test](./k6/scripts/smoke/my.js)
   - ![my smoke test](./k6/result/smoke/my.png)
   - [path smoke test](./k6/scripts/smoke/path.js)
   - ![path smoke test](./k6/result/smoke/path.png)
 - Load Test
+  - 목표했던 vuser로 잘 동작하는것 확인
   - [my smoke test](./k6/scripts/load/my.js)
   - ![my load test](./k6/result/load/my.png)
   - [path smoke test](./k6/scripts/load/path.js)
   - ![path load test](./k6/result/load/path.png)
 - Stress Test
+  - 목표했던 두 시나리오 모두 vuser로 잘 동작하는것 확인
+  - 목표 이상으로 부하를 늘려서 테스트
+    - my 페이지 :
+      - vuser `398` 에서부터 에러 발생
+        - `grafana`를 통해 `error` 발생하는 지점을 포착
+        - 서비스 문제보다는 `k6` 서버의 cpu가 부족하여 발생한 에러로 보임
+      - 결과 :
+        - 목표 `vuser`를 한참 초과해도 서비스에 이상 없음
+    - path 페이지 :
+      - vuser `50` 까지 성공적으로 늘어남
+      - vuser `100` 까지 다시 테스트
+        - 짧은 시간에 급격하게 vuser가 늘어나니 vuser `50` 까지 가기도 전에 `http_req_duration` 이 목표를 초과함
+      - 시간을 30 => 40분으로 늘리고 vuser `80` 까지 다시 테스트
+        - 이전 테스트의 영향인지 vuser가 늘어나는 시간은 같지만 vuser `50` 도달 전에 `http_req_duration` 이 목표 초과
+      - 결과 :
+        - 사용자가 급격히 몰리면 서비스 response time이 비례해서 증가함
+        - 서비스에서 에러가 발생하지는 않음
+        - 서비스가 사용 못할 장애가 발생하지는 않음
+        - 느려졌던 서비스가 정상화 되는데는 시간이 필요한것으로 보임
   - [my stress test](./k6/scripts/stress/my.js)
   - ![my stress test](./k6/result/stress/my_cli.png)
   - ![my stress test](./k6/result/stress/my_dashboard.png)
