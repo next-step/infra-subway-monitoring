@@ -117,11 +117,11 @@ npm run dev
     - average response time (목표) : 500ms
     - my 페이지 :
       - requests : login + me + modify = 3개
-      - 평균 VUser : 1.73 _ (3 _ 0.5 + 0) / 3 = 0.865 = 1
+      - 평균 VUser : 1.73 x (3 x 0.5 + 0) / 3 = 0.865 = 1
       - 최대 VUser : 8.65 = 9
     - 경로 검색 페이지 :
       - requests : stations + path + login + favorite = 4개
-      - 평균 VUser : 1.73 _ (4 _ 0.5 + 0) / 4 = 0.865 = 1
+      - 평균 VUser : 1.73 x (4 x 0.5 + 0) / 4 = 0.865 = 1
       - 최대 VUser : 8.65 = 9
   - 부하 테스트 시 저장될 데이터 건수 및 크기
     - 나의 정보 수정시
@@ -131,13 +131,20 @@ npm run dev
 
 - Smoke Test
   - [my smoke test](./k6/scripts/smoke/my.js)
+  - ![my smoke test](./k6/result/smoke/my.png)
   - [path smoke test](./k6/scripts/smoke/path.js)
+  - ![path smoke test](./k6/result/smoke/path.png)
 - Load Test
   - [my smoke test](./k6/scripts/load/my.js)
+  - ![my load test](./k6/result/load/my.png)
   - [path smoke test](./k6/scripts/load/path.js)
+  - ![path load test](./k6/result/load/path.png)
 - Stress Test
   - [my stress test](./k6/scripts/stress/my.js)
+  - ![my stress test](./k6/result/stress/my_cli.png)
+  - ![my stress test](./k6/result/stress/my_dashboard.png)
   - [path stress test](./k6/scripts/stress/path.js)
+  - ![path stress test](./k6/result/stress/path_dashboard.png)
 
 ---
 
