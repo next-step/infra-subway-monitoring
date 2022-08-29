@@ -143,6 +143,7 @@ npm run dev
   - ![path load test](./k6/result/load/path.png)
 - Stress Test
   - 목표했던 두 시나리오 모두 vuser로 잘 동작하는것 확인
+  - java application log로 인해 테스트를 제대로 진행할수 없어서 `scale up` 진행함
   - 목표 이상으로 부하를 늘려서 테스트
     - my 페이지 :
       - vuser `398` 에서부터 에러 발생
