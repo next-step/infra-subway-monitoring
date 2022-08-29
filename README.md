@@ -83,17 +83,66 @@ npm run dev
 > 5. 콘텐츠가 포함된 최대 페인트 이미지 미리 로드
 > 6. 사용하지 않는 CSS 줄이기
 
-
 ---
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+- 테스트 전제조건 정리
+  - 대상 시스템 범위
+    - 즐겨찾기 페이지
+    - 개인정보 변경
+    - 경로 조회
+  - 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - latency (지연시간): 100ms
+    - throughput(처리량) :
+      - 하루 지하철 이용자 수 400만명으로 잡음
+      - 출퇴근 해서 400 * 2 = 800만
+      - 8000000 / 86,400 (초/일) = 92.6 rps(1일 평균rps)
+      - 피크 시간대 집중률 = 10
+      - 1일 최대 rps = 92.6 * 10 = 926 rps
+    - 부하 유지기간 : 30분
+  - 부하 테스트 시 저장될 데이터 건수 및 크기
+    - http_req_duration = 200ms
+    - T(VU iteration) = (2 * 0.2) = 0.4s
+    - 목표 VUSER
+      - 평균 (92.6 * 0.4) / 2 = 18.52
+      - 최대 18.52 * 10 = 185.2
+- 각 시나리오에 맞춰 스크립트 작성
+  - 접속 빈도가 높은 페이지
+    - 즐겨찾기 페이지
+  - 데이터를 갱신하는 페이지
+    - 마이페이지
+  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    - path 페이지- lineService, stationService, pathService 3개의 서비스를 참조한다.
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+- 테스트 스크립트는 loadtest폴더 안에 있음.
+- 접속 빈도가 높은 페이지(즐겨찾기 페이지)
+  - Smoke 테스트 결과
+  ![smoke_result.png](loadtest/getfavorites/smoke_result.png)
+  - Load 테스트 결과
+  ![load_result.png](loadtest/getfavorites/load_result.png)
+  - Stress 테스트 결과
+  ![stress_result.png](loadtest/getfavorites/stress_result.png)
+- 데이터를 갱신하는 페이지(내 정보 수정 페이지)
+  - Smoke 테스트 결과
+    ![smoke_result.png](loadtest/editmyinfo/smoke_result.png)
+  - Load 테스트 결과
+    ![load_result.png](loadtest/editmyinfo/load_result.png)
+  - Stress 테스트 결과
+    ![stress_result.png](loadtest/editmyinfo/stress_result.png)
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지(경로탐색 페이지)
+  - Smoke 테스트 결과
+    ![smoke_result.png](loadtest/findpath/smoke_result.png)
+  - Load 테스트 결과
+    ![load_result.png](loadtest/findpath/load_result.png)
+  - Stress 테스트 결과
+    ![stress_result.png](loadtest/findpath/stress_result.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- /var/log/nginx/access.log
+- /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sm9171-dashboard
