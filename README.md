@@ -89,13 +89,42 @@ npm run dev
   - 캐싱이 가능한 요소 캐싱(PageSpeed 제안)
   - **LCP 개선**(PageSpeed 제안)
 
-
 ---
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+  - Target 시스템의 범위: 클라이언트의 네트워크 커넥션 구간부터, 응답을 받기까지의 구간(서버, DB, 네트워크)
+  - 목푯값
+    - latency: 100ms
+    - throughput: 6480000 DAU(역산) | 5 peak | 1 req(메인화면), 2 req(로그인)
+      - 1일 평균 rps: 6480000 * 2 / 86400 = 150
+      - 1일 최대 rps: 6480000 * 10 / 86400 = 750
+    - 부하 유지기간: 30분
+  - 부하 테스트시 저장될 데이터 건수 및 크기: 없음
+  - VUser: 
+    - 평균: ( 150 * (2 * 0.2) ) / 2 = 30
+    - 최대: ( 750 * (2 * 0.2) ) / 2 = 150
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+  - 접속 빈도가 높은 페이지(메인화면)
+    - smoke
+      - [script](./src/test/k6/main_page/smoke.js)
+      - ![cli결과](./src/test/k6/main_page/smoke-cli.png)
+      - ![대시보드](./src/test/k6/main_page/smoke-dashboard.png)
+    - load
+      - [script](./src/test/k6/main_page/load.js)
+      - ![cli결과](./src/test/k6/main_page/load-cli.png)
+      - ![대시보드](./src/test/k6/main_page/load-dashboard.png)
+      - ![AWS 대시보드](./src/test/k6/main_page/load-aws-dashboard.png)
+    - stress
+      - [script](./src/test/k6/main_page/stress.js)
+      - ![cli결과](./src/test/k6/main_page/stress-cli.png)
+      - ![대시보드](./src/test/k6/main_page/stress-dashboard.png)
+      - ![AWS 대시보드](./src/test/k6/main_page/stress-aws-dashboard.png)
+  - 기능을 수행하는 페이지(로그인 성공)
+    - smoke
+    - load
+    - stress
+3. 테스트 결과
 
 ---
 
