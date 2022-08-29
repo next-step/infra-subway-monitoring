@@ -1,0 +1,74 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 162 max VUs, 30m30s max duration (incl. graceful stop):
+           * default: Up to 162 looping VUs for 30m0s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[1566] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1566] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1566] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1566] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1566] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1567] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1567] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1567] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1568] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1568] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1568] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1569] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1593] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1593] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1593] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1593] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1594] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1594] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1594] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1595] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1595] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1595] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1596] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1596] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1596] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1596] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1597] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1597] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1597] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1598] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1598] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+WARN[1598] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": request timeout"
+
+running (48m08.8s), 000/162 VUs, 11398 complete and 22 interrupted iterations
+default ✓ [======================================] 000/162 VUs  30m0s
+
+     ✓ load main page
+     ✗ find path
+      ↳  88% — ✓ 10140 / ✗ 1260
+
+     checks.........................: 94.47% ✓ 21560    ✗ 1260
+     data_received..................: 52 MB  18 kB/s
+     data_sent......................: 3.0 MB 1.1 kB/s
+     http_req_blocked...............: avg=1.11ms   min=2µs    med=10µs    max=382.12ms p(90)=14µs   p(95)=19µs
+     http_req_connecting............: avg=67.45µs  min=0s     med=0s      max=135.1ms  p(90)=0s     p(95)=0s
+   ✗ http_req_duration..............: avg=15.54s   min=4.97ms med=63.52ms max=19m6s    p(90)=32.28s p(95)=32.5s
+       { expected_response:true }...: avg=13.14s   min=4.97ms med=11.51ms max=15m52s   p(90)=32.29s p(95)=32.51s
+     http_req_failed................: 5.52%  ✓ 1260     ✗ 21560
+     http_req_receiving.............: avg=154.41µs min=0s     med=147µs   max=10.51ms  p(90)=209µs  p(95)=251µs
+     http_req_sending...............: avg=5.46s    min=8µs    med=52µs    max=15m26s   p(90)=70µs   p(95)=86µs
+     http_req_tls_handshaking.......: avg=235.64µs min=0s     med=0s      max=185.8ms  p(90)=0s     p(95)=0s
+     http_req_waiting...............: avg=10.07s   min=4.87ms med=63.05ms max=15m55s   p(90)=32.25s p(95)=32.46s
+     http_reqs......................: 22820  7.899435/s
+     iteration_duration.............: avg=21.41s   min=2.06s  med=32.04s  max=1m2s     p(90)=34.51s p(95)=34.69s
+     iterations.....................: 11398  3.945564/s
+     vus............................: 1      min=1      max=162
+     vus_max........................: 162    min=162    max=162
+
+ERRO[1803] some thresholds have failed
+

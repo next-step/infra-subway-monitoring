@@ -1,0 +1,108 @@
+(서비스중단)
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": read tcp 192.168.35.95:56782->13.209.196.112:443: read: connection reset by peer"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56785->13.209.196.112:443: read: connection reset by peer"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56800->13.209.196.112:443: read: connection reset by peer"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1850] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56824->13.209.196.112:443: read: connection reset by peer"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1851] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56849->13.209.196.112:443: read: connection reset by peer"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56856->13.209.196.112:443: read: connection reset by peer"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56859->13.209.196.112:443: read: connection reset by peer"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": read tcp 192.168.35.95:56860->13.209.196.112:443: read: connection reset by peer"
+WARN[1852] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1853] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1854] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1855] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1856] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1856] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1856] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1857] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1857] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1857] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1857] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1858] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1858] Request Failed                                error="Get \"https://yina-infra.p-e.kr\": EOF"
+WARN[1859] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1860] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1860] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1860] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1860] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+WARN[1860] Request Failed                                error="Get \"https://yina-infra.p-e.kr/paths/?source=7&target=78\": EOF"
+.
+.
+(결과)
+running (32m15.5s), 000/400 VUs, 39390 complete and 57 interrupted iterations
+default ✓ [======================================] 000/400 VUs  32m0s
+
+     ✗ load main page
+      ↳  29% — ✓ 11492 / ✗ 27955
+     ✗ find path
+      ↳  16% — ✓ 6372 / ✗ 33026
+
+     checks.........................: 22.65% ✓ 17864     ✗ 60981
+     data_received..................: 222 MB 115 kB/s
+     data_sent......................: 30 MB  16 kB/s
+     http_req_blocked...............: avg=13.04ms min=0s          med=130µs  max=1.04s    p(90)=27.48ms p(95)=29.88ms
+     http_req_connecting............: avg=6.07ms  min=-90670000ns med=5.68ms max=181.51ms p(90)=7.67ms  p(95)=9.03ms
+   ✗ http_req_duration..............: avg=4.84s   min=-94354000ns med=3.36ms max=39.62s   p(90)=32.35s  p(95)=34.41s
+       { expected_response:true }...: avg=13s     min=5.19ms      med=3.97s  max=39.62s   p(90)=36.6s   p(95)=37.3s
+     http_req_failed................: 77.34% ✓ 60981     ✗ 17864
+     http_req_receiving.............: avg=44.47µs min=0s          med=0s     max=13.1ms   p(90)=141µs   p(95)=173µs
+     http_req_sending...............: avg=48.07µs min=0s          med=37µs   max=196.6ms  p(90)=71µs    p(95)=86µs
+     http_req_tls_handshaking.......: avg=9.8ms   min=-83870000ns med=0s     max=906.99ms p(90)=21ms    p(95)=23.13ms
+     http_req_waiting...............: avg=4.84s   min=-94403000ns med=3.31ms max=39.62s   p(90)=32.35s  p(95)=34.41s
+     http_reqs......................: 78845  40.735589/s
+     iteration_duration.............: avg=11.74s  min=2.01s       med=2.05s  max=46.46s   p(90)=37.65s  p(95)=39.37s
+     iterations.....................: 39390  20.351003/s
+     vus............................: 7      min=1       max=400
+     vus_max........................: 400    min=400     max=400
+
+ERRO[1937] some thresholds have failed
+
