@@ -41,7 +41,11 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 - 성능 대상 URL : https://인쿠26.메인.한국/stations
 - 성능 테스트 사이트 : https://www.webpagetest.org/, https://pagespeed.web.dev/
-
+- 경쟁사
+  서울교통공사 : http://www.seoulmetro.co.kr/kr/cyberStation.do
+  네이버지도 : https://m.map.naver.com/subway/subwayLine.naver?region=1000
+  카카오맵 : https://m.map.kakao.com/
+- 
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 - First Contentful Paint 2.5초 미만
 - Time to Interactive 2초 이하
