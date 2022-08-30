@@ -160,6 +160,8 @@ npm run dev
         - 이전 테스트의 영향인지 vuser가 늘어나는 시간은 같지만 vuser `50` 도달 전에 `http_req_duration` 이 목표 초과
           - 목표 response time을 500ms라고 생각했었는데 1s이었음
           - 더 많은 vuser를 받을수 있을것으로 예상
+            - vuser `55`까지 성능 괜찮은것으로 보임
+            - dashboard에서 보면 vuser `56` 부터 갑자기 그래프에 이상현상 (높낮이 급격히 왔다갔다)이 발생 (= vuser `55`가 최대)
       - 결과 :
         - 사용자가 급격히 몰리면 서비스 response time이 비례해서 증가함
         - 서비스에서 에러가 발생하지는 않음
