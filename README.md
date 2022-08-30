@@ -106,6 +106,7 @@ npm run dev
   - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 경로 검색 페이지
 - 목표값 설정
   - latency : 500ms
+    - http_req_duration : 1s (500ms x 2)
   - throughput :
     - 경쟁사인 카카오 MAU를 기준으로 산정
     - MAU : 150만
@@ -157,6 +158,8 @@ npm run dev
         - 짧은 시간에 급격하게 vuser가 늘어나니 vuser `50` 까지 가기도 전에 `http_req_duration` 이 목표를 초과함
       - 시간을 30 => 40분으로 늘리고 vuser `80` 까지 다시 테스트
         - 이전 테스트의 영향인지 vuser가 늘어나는 시간은 같지만 vuser `50` 도달 전에 `http_req_duration` 이 목표 초과
+          - 목표 response time을 500ms라고 생각했었는데 1s이었음
+          - 더 많은 vuser를 받을수 있을것으로 예상
       - 결과 :
         - 사용자가 급격히 몰리면 서비스 response time이 비례해서 증가함
         - 서비스에서 에러가 발생하지는 않음
