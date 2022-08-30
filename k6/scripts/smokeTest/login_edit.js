@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { Counter } from 'k6/metrics'
+import { login, generateAuthorizationHeaderWith } from '../login.js';
 export const CounterErrors = new Counter('Errors');
 export let options = {
     vus: 1, // 1 user looping for 5 minutes
@@ -13,42 +14,32 @@ export let options = {
     },
 };
 const BASE_URL = 'https://www.find-subway.p-e.kr';
-const USERNAME = 'test@gmail.com';
-const PASSWORD = 'test12!#';
-const AGE = generateRandomAgeBetween(20, 60);
+const RANDOM_AGE = generateRandomAgeBetween(20, 60);
 
 export default function ()  {
-    var payload_login = JSON.stringify({
-        email: USERNAME,
-        password: PASSWORD,
-    });
-    var params = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload_login, params);
-    check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
-    });
-    var payload_edit = JSON.stringify({
-        email: USERNAME,
-        age: AGE,
-        password: PASSWORD,
-    });
-    let authHeaders = {
-        headers: {
-            Authorization: `Bearer ${loginRes.json('accessToken')}`,
-        },
-    };
-    const result_1 = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(result_1, { 'go to my page member in successfully': (obj) => obj.id != 0 });
-    const result_2 = http.put(`${BASE_URL}/members/me`, payload_edit, authHeaders);
-    check(result_2, {
-        'check 200 status-code after Editing personal information': (res) =>
-            res.status === 200,
-    });
-    sleep(1);
+    const authToken = login();
+    getPersonalInformation(authToken);
+    editPersonalInformation(authToken);
+    function getPersonalInformation(authToken) {
+        const authHeaders = generateAuthorizationHeaderWith(authToken);
+        let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+        check(myObjects, {
+            'go to my page member in successfully': (obj) => obj.id != 0,
+        });
+    }
+    function editPersonalInformation(authToken) {
+        const authHeaders = generateAuthorizationHeaderWith(authToken);
+        var payload = JSON.stringify({
+            age: RANDOM_AGE,
+            email: 'test@gmail.com',
+            password: 'test12!#',
+        });
+        const res = http.put(`${BASE_URL}/members/me`, payload, authHeaders);
+        check(res, {
+            'check 200 status-code after Editing personal information': (res) =>
+                res.status === 200,
+        });
+    }
 };
 
 function generateRandomAgeBetween(min, max) {
