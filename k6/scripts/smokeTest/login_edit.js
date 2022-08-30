@@ -4,8 +4,8 @@ import { Counter } from 'k6/metrics'
 import { login, generateAuthorizationHeaderWith } from '../login.js';
 export const CounterErrors = new Counter('Errors');
 export let options = {
-    vus: 1, // 1 user looping for 5 minutes
-    duration: '5m',
+    vus: 1, // 1 user looping for 30 seconds
+    duration: '30s',
 
     thresholds: {
         http_req_failed: ['rate<0.01'], // http errors should be less than 1%
