@@ -1,0 +1,39 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 33s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 3s (gracefulStop: 30s)
+
+
+running (04.3s), 0/1 VUs, 2 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  3s
+
+     ✓ load main page
+     ✓ find path
+
+     checks.........................: 100.00% ✓ 4        ✗ 0  
+     data_received..................: 14 kB   3.3 kB/s
+     data_sent......................: 874 B   206 B/s
+     http_req_blocked...............: avg=7.4ms    min=5µs    med=14µs    max=29.56ms  p(90)=20.7ms  p(95)=25.13ms 
+     http_req_connecting............: avg=1.44ms   min=0s     med=0s      max=5.78ms   p(90)=4.05ms  p(95)=4.91ms  
+   ✓ http_req_duration..............: avg=51.42ms  min=7.2ms  med=45.6ms  max=107.27ms p(90)=100ms   p(95)=103.63ms
+       { expected_response:true }...: avg=51.42ms  min=7.2ms  med=45.6ms  max=107.27ms p(90)=100ms   p(95)=103.63ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 4  
+     http_req_receiving.............: avg=227.75µs min=73µs   med=126µs   max=586µs    p(90)=460.9µs p(95)=523.44µs
+     http_req_sending...............: avg=49.24µs  min=25µs   med=42.5µs  max=87µs     p(90)=78µs    p(95)=82.49µs 
+     http_req_tls_handshaking.......: avg=5.4ms    min=0s     med=0s      max=21.6ms   p(90)=15.12ms p(95)=18.36ms 
+     http_req_waiting...............: avg=51.14ms  min=7.09ms med=45.42ms max=106.62ms p(90)=99.52ms p(95)=103.07ms
+     http_reqs......................: 4       0.941039/s
+     iteration_duration.............: avg=2.12s    min=2.12s  med=2.12s   max=2.12s    p(90)=2.12s   p(95)=2.12s   
+     iterations.....................: 2       0.470519/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
+
