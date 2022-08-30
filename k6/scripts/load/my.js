@@ -3,21 +3,21 @@
  */
 
 import http from 'k6/http';
-import { check, sleep } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../login.js';
-import { Rate } from 'k6/metrics';
+import {check, sleep} from 'k6';
+import {login, generateAuthorizationHeaderWith} from '../login.js';
+import {Rate} from 'k6/metrics';
 
 export let errorRate = new Rate('errors');
 
 export let options = {
   stages: [
-    { duration: '1m', target: 9 }, // simulate ramp-up of traffic from 1 to 9 users over 1 minutes.
-    { duration: '5m', target: 9 }, // stay at 9 users for 10 minutes
-    { duration: '10s', target: 0 }, // ramp-down to 0 users
+    {duration: '1m', target: 9}, // simulate ramp-up of traffic from 1 to 9 users over 1 minutes.
+    {duration: '5m', target: 9}, // stay at 9 users for 10 minutes
+    {duration: '10s', target: 0}, // ramp-down to 0 users
   ],
   thresholds: {
     checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
-    http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
+    http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1s
   },
 };
 

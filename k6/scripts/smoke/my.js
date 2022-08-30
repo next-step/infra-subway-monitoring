@@ -3,9 +3,9 @@
  */
 
 import http from 'k6/http';
-import { check, sleep } from 'k6';
-import { login, generateAuthorizationHeaderWith } from '../login.js';
-import { Rate } from 'k6/metrics';
+import {check, sleep} from 'k6';
+import {login, generateAuthorizationHeaderWith} from '../login.js';
+import {Rate} from 'k6/metrics';
 
 export let errorRate = new Rate('errors');
 
@@ -15,7 +15,7 @@ export let options = {
 
   thresholds: {
     checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
-    http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
+    http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1s
   },
 };
 
