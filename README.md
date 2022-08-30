@@ -39,11 +39,25 @@ npm run dev
 
 
 ### 1단계 - 웹 성능 테스트
+- 성능 대상 URL : https://인쿠26.메인.한국/stations
+- 성능 테스트 사이트 : https://www.webpagetest.org/, https://pagespeed.web.dev/
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- First Contentful Paint 2.5초 미만
+- Time to Interactive 2초 이하
+- Largest Contentful Paint 1.2초 이하
+- Speed Index 2초 이하
+- Total Blocking Time 140 밀리초
+- Cumulative Layout Shift 0.006
+- 성능 70점 이상
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
-
-
+3. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+- 텍스트 압축 사용
+- 사용하지 않는 자바스크립트 줄이기
+- 렌더링 차단 리소스 제거하기
+- 캐시정책 늘리기
+- DOM 크기 관리
+- 이미지에 width, height 명시하기
 
 ---
 
