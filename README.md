@@ -252,13 +252,15 @@ export let options = {
   stages: [
     { duration: '1m', target: 5 },
     { duration: '1m', target: 10 },
+    { duration: '10s', target: 25 },
     { duration: '1m', target: 25 },
+    { duration: '10s', target: 25 },
     { duration: '1m', target: 20 },
     { duration: '1m', target: 15 }
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -353,12 +355,16 @@ export let options = {
     { duration: '1m', target: 10 },
     { duration: '1m', target: 30 },
     { duration: '1m', target: 75 },
-    { duration: '1m', target: 30 },
-    { duration: '1m', target: 10 },
+    { duration: '1m', target: 100 },
+    { duration: '1m', target: 150 },
+    { duration: '1m', target: 250 },
+    { duration: '1m', target: 350 },
+    { duration: '1m', target: 450 },
+    { duration: '1m', target: 0 },
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
   },
 };
 
@@ -438,8 +444,8 @@ function searchPath(source, target){
 }
 ```
 
-![smoke](./k6/img/smoke.png)
-![smoke](./k6/img/smoke_grafana.png)
+![stress](./k6/img/stress.png)
+![stress](./k6/img/stress_grafana.png)
 
 ---
 

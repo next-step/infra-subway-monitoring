@@ -6,13 +6,15 @@ export let options = {
   stages: [
     { duration: '1m', target: 5 },
     { duration: '1m', target: 10 },
+    { duration: '10s', target: 25 },
     { duration: '1m', target: 25 },
+    { duration: '10s', target: 25 },
     { duration: '1m', target: 20 },
     { duration: '1m', target: 15 }
   ],
 
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
   },
 };
 
