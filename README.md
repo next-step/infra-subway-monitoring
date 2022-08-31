@@ -65,7 +65,7 @@ npm run dev
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 대상 시스템 범위 : 메인화면, 로그인화면, 로그인, 경로찾기 화면, 마이페이지 화면
 - Smoke
@@ -90,7 +90,7 @@ npm run dev
       thresholds: {
       http_req_duration: ['p(99)<200'],
       },
-    };
+      };
 - Stress
   - Vuser : 200
     - export let options = {
