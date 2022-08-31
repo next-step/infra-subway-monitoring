@@ -45,7 +45,7 @@ npm run dev
   서울교통공사 : http://www.seoulmetro.co.kr/kr/cyberStation.do
   네이버지도 : https://m.map.naver.com/subway/subwayLine.naver?region=1000
   카카오맵 : https://m.map.kakao.com/
-- 
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 - First Contentful Paint 2.5초 미만
 - Time to Interactive 2초 이하
@@ -67,10 +67,17 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 대상 시스템 범위 : 메인화면, 로그인화면, 로그인, 경로찾기 화면, 마이페이지 화면
+- Smoke : vuser 1
+- Load : vuser 100
+- Stress : vuser 200 
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+- src > main > resources > k6 test > load.png, smke.png, stress.png
+- grafana : http://3.39.53.16:3000
+  - 아이디 : admin , 비밀번호 : 12345678
 ---
+
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
