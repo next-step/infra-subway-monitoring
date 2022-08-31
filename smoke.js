@@ -14,9 +14,9 @@ const USERNAME = 'ingus26@gmail.com';
 const PASSWORD = '1234';
 
 export default function ()  {
-  pageCheck("main status",`${BASE_URL}`);
+  pageCheck('main status',`${BASE_URL}`);
 
-  pageCheck("loginPage status", `${BASE_URL}/login`);
+  pageCheck('loginPage status', `${BASE_URL}/login`);
 
   let token = login();
 
@@ -26,11 +26,11 @@ export default function ()  {
     },
   };
 
-  pageCheck("pathPage status", `${BASE_URL}/path`);
+  pageCheck('pathPage status', `${BASE_URL}/path`);
 
   sleep(1);
 
-  pageCheck("mypage status", `${BASE_URL}/mypage`);
+  pageCheck('mypage status', `${BASE_URL}/mypage`);
 
   sleep(1);
 };
