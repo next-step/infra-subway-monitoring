@@ -29,6 +29,7 @@ export default function ()  {
         check(myObjects, {
             'go to my page member in successfully': (obj) => obj.id != 0,
         });
+        sleep(1);
     }
     function editPersonalInformation(authToken) {
         const authHeaders = generateAuthorizationHeaderWith(authToken);
@@ -42,6 +43,7 @@ export default function ()  {
             'check 200 status-code after Editing personal information': (res) =>
                 res.status === 200,
         });
+        sleep(1);
     }
 };
 

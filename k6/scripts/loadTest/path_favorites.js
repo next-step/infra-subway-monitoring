@@ -33,6 +33,7 @@ export default function ()  {
     check(path_response, {
         'find the best route in successfully': (resp) => resp.json().distance === 9,
     });
+    sleep(1);
     const auth_header = generateAuthorizationHeaderWith(login());
     var payload = JSON.stringify({
         source: 6,
