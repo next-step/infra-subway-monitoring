@@ -5,14 +5,14 @@ import { login, generateAuthorizationHeaderWith } from '../login.js';
 export const CounterErrors = new Counter('Errors');
 export let options = {
     stages: [
-        {duration: '10m', target: 126},
-        {duration: '10m', target: 126},
-        {duration: '10m', target: 0},
+        {duration: '15m', target: 20},
+        {duration: '15m', target: 20},
+        {duration: '15m', target: 0},
     ],
 
     thresholds: {
         http_req_failed: ['rate<0.01'], // http errors should be less than 1%
-        http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.5s
+        http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
         'Errors': ['count<100'], // count of errors must be less than 100
     },
 };
