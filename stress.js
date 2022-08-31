@@ -20,9 +20,9 @@ const USERNAME = 'ingus26@gmail.com';
 const PASSWORD = '1234';
 
 export default function ()  {
-  pageCheck("main status",`${BASE_URL}`);
+  main()
 
-  pageCheck("loginPage status", `${BASE_URL}/login`);
+  loginPage()
 
   let token = login();
 
@@ -32,19 +32,37 @@ export default function ()  {
     },
   };
 
-  pageCheck("pathPage status", `${BASE_URL}/path`);
+  pathPage()
 
   sleep(1);
 
-  pageCheck("mypage status", `${BASE_URL}/mypage`);
+  myPage()
 
   sleep(1);
 };
 
-function pageCheck(pageMessage, url){
-  const res = http.get(url);
+function main(){
+  const res = http.get(`${BASE_URL}`);
 
-  check(res, { pageMessage : (resp) => resp.status === 200 });
+  check(res, { 'main page' : (resp) => resp.status === 200 });
+}
+
+function loginPage(){
+  const res = http.get(`${BASE_URL}/login`);
+
+  check(res, { 'login page' : (resp) => resp.status === 200 });
+}
+
+function pathPage(){
+  const res = http.get(`${BASE_URL}/path`);
+
+  check(res, { 'path page' : (resp) => resp.status === 200 });
+}
+
+function myPage(){
+  const res = http.get(`${BASE_URL}/mypage`);
+
+  check(res, { 'mypage' : (resp) => resp.status === 200 });
 }
 
 function login(){
