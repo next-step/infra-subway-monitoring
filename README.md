@@ -75,8 +75,47 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
+   * 대상 시스템 범위
+   * 접속 빈도가 높은 페이지 및 여러 데이터를 참조하는 페이지 : 경로 검색 페이지
+   * 데이터를 갱신하는 페이지 : 나의 정보 페이지 (나이 update), 즐겨찾기
+   * 목표값 설정
+   * latency : 250ms(214ms + a(36ms))
+   * throughput :
+     * 일일 지하철 이용자 수를 기준으로 산정
+       * 일일 탑승자 : 5,500,000명 (서울 열린데이터_광장2022.08.27 기준_https://data.seoul.go.kr/dataList/OA-12914/S/1/datasetView.do)
+       * 일일 애플리케이션 이용자(탑승자의 1/5로 추산) : 1,100,000명
+       * 하루 평균 접속횟수 : 2번
+       * 일일 평균 rps : 13
+       * 일일 최대 rps : 39(피크타임 3배로 가정)
+       * Latency : 250ms (크롬 관리자 도구에서 페이지 응답시간으로 기준+a)
+       * my 페이지 :
+         * requests : login + me + modify = 3개
+         * 최대 VUser : (13 x 2 x 0.5 ) / 3 = 20
+       * 경로 검색 페이지 :
+         * path + login + favorites = 3개
+         * 최대 VUser : (13 x 2 x 0.5 ) / 3 = 20
+       
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   * Smoke Test : 시나리오가 이상 없이 돌아가는지 확인
+     * 로그인 및 마이 페이지, 회원정보 수정  
+![](k6/scripts/smokeTest/login_edit.png)
+     * 경로 탐색 및 로그인, 즐겨찾기
+![](k6/scripts/smokeTest/path_favorites.png)
+
+   * load test : vuser를 구하고 이를 적용하여 목표 기준(99% request < 0.5s, ...)을 지키며 잘 동작 하는지 확인 
+   * 잦은 테스트로 인해 EC2 서버의 볼륨을 8GB -> 32GB로 상향 조정
+     * 로그인 및 마이 페이지, 회원정보 수정
+![](k6/scripts/loadTest/login_edit.png)
+       * 경로 탐색 및 로그인, 즐겨찾기
+![](k6/scripts/loadTest/path_favorites.png)
+
+   * stress test : 부하를 점진적으로 높여서 에러 발생 시점을 찾고 어떤 문제가 생기는지 확인
+     * 로그인 및 마이 페이지, 회원정보 수정(에러 발생 시점 => vuser : 482)
+![](k6/scripts/stressTest/login_edit.png)
+![](k6/scripts/stressTest/grafana-login_edit.png)
+     * 경로 탐색 및 로그인, 즐겨찾기(에러 발생 시점 => vuser : 206)
+![](k6/scripts/stressTest/path_favorites.png)
+![](k6/scripts/stressTest/grafana-path_favorites.png)
 
 ---
 
