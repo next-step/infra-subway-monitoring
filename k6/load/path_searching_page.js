@@ -15,8 +15,8 @@ export let options = {
     {duration: '10s', target: 0}, // Stage: ramp down
   ],
   thresholds: {
-    checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.5s,
+    checks: ['rate>0.99'],
+    http_req_duration: ['p(99)<200'],
   },
 };
 

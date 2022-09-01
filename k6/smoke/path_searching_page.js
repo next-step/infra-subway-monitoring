@@ -7,12 +7,12 @@ import {headerWithAuthorizationAndToken, login} from '../login.js';
 export let errorRate = new Rate('errors');
 
 export let options = {
-  vus: 1, // 1 user looping for 1 minute
+  vus: 1,
   duration: '1m',
 
   thresholds: {
-    checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.5s,
+    checks: ['rate>0.99'],
+    http_req_duration: ['p(99)<200'],
   },
 };
 

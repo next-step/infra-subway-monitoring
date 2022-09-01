@@ -6,12 +6,12 @@ import {Rate} from 'k6/metrics';
 export let errorRate = new Rate('errors');
 
 export let options = {
-  vus: 1, // 1 user looping for 1 minute
+  vus: 1,
   duration: '1m',
 
   thresholds: {
     checks: ['rate>0.99'],
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.2s
+    http_req_duration: ['p(99)<200'],
   },
 };
 
