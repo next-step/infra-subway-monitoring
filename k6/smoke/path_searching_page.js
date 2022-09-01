@@ -17,8 +17,6 @@ export let options = {
 };
 
 const BASE_URL = 'https://orgojy.ga/';
-const NOGYANG_STATION_NUMBER = 1;
-const SINGIL_STATION_NUMBER = 15;
 
 export default function () {
   getAllStations();
@@ -36,7 +34,7 @@ function getAllStations() {
   let stationsRes = http.get(`${BASE_URL}/stations`, params);
 
   const success = check(stationsRes, {
-    'Get Stations ': (resp) => resp.json().length >= 615,
+    'Get Stations ': (res) => res.json().length >= 615,
   });
   errorRate.add(!success);
   sleep(1);
@@ -49,13 +47,13 @@ function getPath() {
     },
   };
   const url = new URL(`${BASE_URL}/paths`);
-  url.searchParams.append('source', NOGYANG_STATION_NUMBER);
-  url.searchParams.append('target', SINGIL_STATION_NUMBER);
+  url.searchParams.append('source', 1);
+  url.searchParams.append('target', 15);
 
   const response = http.get(url.toString(), headers);
 
   const success = check(response, {
-    'Get a path ': (resp) => resp.json().distance === 27,
+    'Get a path ': (res) => res.json().distance === 27,
   });
   errorRate.add(!success);
   sleep(1);
@@ -65,8 +63,8 @@ function addFavorite() {
   const auth_header = headerWithAuthorizationAndToken(login());
 
   const payload = JSON.stringify({
-    source: NOGYANG_STATION_NUMBER,
-    target: SINGIL_STATION_NUMBER,
+    source: 1,
+    target: 15,
   });
 
   const url = new URL(`${BASE_URL}/favorites`);
