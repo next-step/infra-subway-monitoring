@@ -119,7 +119,333 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- [X] 대상 시스템 범위 : WebServer, WAS, DB
+- [X] 전제조건 및 목표값 정리
+
+  |범주| 값 | 산출 기준 | 출처 |
+    |-------|-------|------|---|
+  |latency 목표|50ms 이하|목표값| |
+  |하루평균 지하철 승차인원|440만|2021년 4월 서울 지하철 이용객수|https://www.bigdata-map.kr/datastory/traffic/seoul|
+  |인당 1일평균 실행횟수|2.5|카카오지하철 기준 1일평균 실행횟수|https://ko.lab.appa.pe/2016-09/kakao-korea.html|
+  |피크시간대 집중률|2.5|100만(피크시간대) / 38만(평균시간대)|https://www.bigdata-map.kr/datastory/traffic/seoul|
+  |DAU|100만|지하철 종결자 기준 DAU|https://platum.kr/archives/61943|
+  |1일 평균 rps|30|DAU * 1일평균 실행횟수 / 86,400|  |
+  |1일 최대 rps|75|1일평균 rps * 피크시간대 집중률|  |
+  |T|1.4|(4 * 0.1) + 1 (시나리오상 4번의 요청, Latency 목표 왕복 0.1sec, 지연시간 1sec)|  |
+  |평균 VUser|10|(1일 평균 rps * T) / 요청 수|  |
+  |최대 VUser|25|평균 VUser * 피크시간대 집중률|  |
+
+- [X] Throughput 계산
+  > Throughput : 1일 평균 rps ~ 1일 최대 rps
+  >- 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+  >- 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+  >-  1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+    - 1일 평균 30 ~ 1일 최대 75
+        - 100만 (DAU) * 2.5 (1명당 1일 평균 접속 수) = 250만 (1일 총 접속 수)
+        - 250만 (1일 총 접속수) / 86,400 = 28.9 (1일 평균 rps)
+        - 28.9 (1일 평균 rps) * (100만 (피크시간대 승객수) / 38만(평균시간대 승객수)) = 76 (1일 최대 rps)
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- smoke
+
+```js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://sss-next-step.o-r.kr/';
+const USERNAME = 'tlstjdtn321@naver.com';
+const PASSWORD = '1234';
+
+export default function() {
+  //메인 페이지
+  mainPage()
+
+  //로그인
+  let token = login();
+
+  //정보수정
+  changeMyInfo(token);
+
+  //경로탐색
+  searchPath(10, 100)
+
+  sleep(1);
+}
+
+function mainPage(){
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'go mainPage successfully': (resp) => resp.status == 200
+  });
+}
+
+function login(){
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  return loginRes.json('accessToken');
+}
+
+function changeMyInfo(accessToken) {
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`,
+    age: 50
+  });
+
+  let params = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let changeInfoRes = http.put(`${BASE_URL}/members/me`, payload, params);
+  check(changeInfoRes , {
+    'changeInfo successfully': (response) => response.status === 200
+  });
+}
+
+function searchPath(source, target){
+  let pathRes = http.get(BASE_URL+'/path?source=' + source + '&target=' + target);
+  check(pathRes, {
+    'getPath successfully': (resp) => resp.status == 200
+  } );
+}
+```
+
+![smoke](./k6/img/smoke.png)
+![smoke_grafana](./k6/img/smoke_grafana.png)
+
+- load
+
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+// 평균 UV - 10 , 최대 UV - 25
+export let options = {
+  stages: [
+    { duration: '1m', target: 5 },
+    { duration: '1m', target: 10 },
+    { duration: '10s', target: 25 },
+    { duration: '1m', target: 25 },
+    { duration: '10s', target: 25 },
+    { duration: '1m', target: 20 },
+    { duration: '1m', target: 15 }
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://sss-next-step.o-r.kr/';
+const USERNAME = 'tlstjdtn321@naver.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+  //메인 페이지
+  mainPage()
+
+  //로그인
+  let token = login();
+
+  //정보수정
+  changeMyInfo(token);
+
+  //경로탐색
+  searchPath(10, 100)
+
+  sleep(1);
+};
+
+function mainPage(){
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'go mainPage successfully': (resp) => resp.status == 200
+  });
+}
+
+function login(){
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  return loginRes.json('accessToken');
+}
+
+function changeMyInfo(accessToken) {
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`,
+    age: 50
+  });
+
+  let params = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let changeInfoRes = http.put(`${BASE_URL}/members/me`, payload, params);
+  check(changeInfoRes , {
+    'changeInfo successfully': (response) => response.status === 200
+  });
+}
+
+function searchPath(source, target){
+  let pathRes = http.get(BASE_URL+'/path?source=' + source + '&target=' + target);
+  check(pathRes, {
+    'getPath successfully': (resp) => resp.status == 200
+  } );
+}
+```
+
+![load](./k6/img/load.png)
+![load](./k6/img/load_grafana.png)
+
+- stress
+
+```js
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+// 평균 rps - 30 , 최대 rps - 75
+export let options = {
+  stages: [
+    { duration: '1m', target: 10 },
+    { duration: '1m', target: 30 },
+    { duration: '1m', target: 75 },
+    { duration: '1m', target: 100 },
+    { duration: '1m', target: 150 },
+    { duration: '1m', target: 250 },
+    { duration: '1m', target: 350 },
+    { duration: '1m', target: 450 },
+    { duration: '1m', target: 0 },
+  ],
+
+  thresholds: {
+    http_req_duration: ['p(99)<100'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://sss-next-step.o-r.kr/';
+const USERNAME = 'tlstjdtn321@naver.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+  //메인 페이지
+  mainPage()
+
+  //로그인
+  let token = login();
+
+  //정보수정
+  changeMyInfo(token);
+
+  //경로탐색
+  searchPath(10, 100)
+
+  sleep(1);
+};
+
+function mainPage(){
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'go mainPage successfully': (resp) => resp.status == 200
+  });
+}
+
+function login(){
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  return loginRes.json('accessToken');
+}
+
+function changeMyInfo(accessToken) {
+  var payload = JSON.stringify({
+    email: `${USERNAME}`,
+    password: `${PASSWORD}`,
+    age: 50
+  });
+
+  let params = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let changeInfoRes = http.put(`${BASE_URL}/members/me`, payload, params);
+  check(changeInfoRes , {
+    'changeInfo successfully': (response) => response.status === 200
+  });
+}
+
+function searchPath(source, target){
+  let pathRes = http.get(BASE_URL+'/path?source=' + source + '&target=' + target);
+  check(pathRes, {
+    'getPath successfully': (resp) => resp.status == 200
+  } );
+}
+```
+
+![stress](./k6/img/stress.png)
+![stress](./k6/img/stress_grafana.png)
 
 ---
 
