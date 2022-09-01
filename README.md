@@ -206,6 +206,13 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/smoke/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/smoke/path_searching_page-smoke_result.png)
 
+**결과에 대한 의견**
+
+```
+- 구성된 애플리케이션 API의 테스트 시나리오에는 문제가 없었다.
+- 최소 부하이기에 원했던 (1) API 정상적인 작동 , (2) Latency 가 만족했다.  
+```
+
 ### Load Test
 
 - [x] 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능이 어떤지 확인합니다. 이 때 기능이 정상 동작하는지도 확인합니다.
@@ -216,6 +223,14 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 !["My Page" 테스트 결과 화면](./k6/load/my_page-load_result.png)
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/load/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/load/path_searching_page-load_result.png)
+
+**결과에 대한 의견**
+
+```
+- 평소와 최대 트래픽에서 서비스가 정상 작동했다.
+- AWS EC2 Instance type 이 충분하기에 API 도 충분히 서비스에 이상이 없었다.
+- 최대 트래픽에서 Latency 가 발생하여, 200ms 에 대한 충족이 못하는 경우가 있었다. 
+```
 
 ### Stress Test
 
@@ -228,6 +243,15 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 !["My Page" 테스트 결과 화면](./k6/stress/my_page-stress_result.png)
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/stress/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/stress/path_searching_page-stress_result.png)
+
+**결과에 대한 의견**
+
+```
+- Stress 를 주기위한 VUser 의 설정이 예상보다 높게 설정되었다.
+- 예상보다 높은 트래픽에 예상보다 빠르게 요청들을 실패하였다.
+- Command(Create, Update, Delete) 가 부하에서 큰 약점이라고 생각했지만, 많은 데이터를 불러오는 API 가 부하에 더욱 취약하였다.
+- 테스트 도중 서비스는 장애를 발생하였고, 테스트 종료 이후 대략 5분 이내에 서비스는 자동 복구되었다.
+```
 
 ---
 
