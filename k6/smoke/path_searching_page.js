@@ -16,13 +16,15 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://orgojy.ga/';
-
 export default function () {
   getAllStations();
   getPath();
   addFavorite();
 }
+
+const BASE_URL = 'https://orgojy.ga/';
+const MY_EMAIL = 'orgojy@gmail.com';
+const MY_PASSWORD = '1234';
 
 function getAllStations() {
   let params = {
@@ -60,7 +62,7 @@ function getPath() {
 }
 
 function addFavorite() {
-  const auth_header = headerWithAuthorizationAndToken(login());
+  const auth_header = headerWithAuthorizationAndToken(login(MY_EMAIL, MY_PASSWORD));
 
   const payload = JSON.stringify({
     source: 1,
