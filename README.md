@@ -206,6 +206,7 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 
 ["My Page" 테스트 시나리오 JS 파일](k6/load/my_page.js) 의 결과 화면
 !["My Page" 테스트 결과 화면](./k6/load/my_page-load_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/load/path_searching_page.js) 의 결과 화면
 
 
 ---
