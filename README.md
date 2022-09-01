@@ -165,6 +165,19 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 
+#### Arthas 실습
+
+![img.png](images/thread_runnable.png)
+
+- 3개의 요청에 대해 높은 CPU, 수행시간.
+
+#### Thread dump 분석
+
+![img.png](images/thread_dump_on_fastThread.png)
+
+- 3개의 요청에 대해 높은 CPU
+
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
