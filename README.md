@@ -178,12 +178,24 @@ VUser
     * load test : 40m
 ```
 
+**테스트 실행 방식**
+
+```
+# 실행
+k6 run smoke/path_searching_page.js
+# 디버깅 실행
+k6 run smoke/path_searching_page.js --http-debug="full"
+```
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 **Smoke Test**
 
 ["My Page" 테스트 시나리오 JS 파일](k6/smoke/my_page.js) 의 결과 화면
 !["My Page" 테스트 결과 화면](./k6/smoke/my_page-smoke_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/smoke/path_searching_page.js) 의 결과 화면
+!["Path Searching Page" 테스트 결과 화면](./k6/smoke/path_searching_page-smoke_result.png)
+
 
 ---
 
