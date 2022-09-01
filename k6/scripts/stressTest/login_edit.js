@@ -5,11 +5,12 @@ import { login, generateAuthorizationHeaderWith } from '../login.js';
 export const CounterErrors = new Counter('Errors');
 export let options = {
     stages: [
-        { duration: '5m', target: 15 },
+        { duration: '5m', target: 20 },
         { duration: '5m', target: 100 },
-        { duration: '5m', target: 150 },
         { duration: '5m', target: 200 },
-        { duration: '5m', target: 250 },
+        { duration: '5m', target: 300 },
+        { duration: '5m', target: 400 },
+        { duration: '5m', target: 500 },
         { duration: '5m', target: 0 },
     ],
 
