@@ -28,7 +28,7 @@ export function login(email, password) {
   const authToken = loginRes.json('accessToken');
 
   check(loginRes, {
-    'SUCCESS: Login and get token': (resp) => resp.json('accessToken') !== '',
+    'Login and get token': (resp) => resp.json('accessToken') !== '',
   });
 
   return authToken;

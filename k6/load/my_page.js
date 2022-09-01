@@ -7,7 +7,7 @@ export let errorRate = new Rate('errors');
 
 export let options = {
   vus: 1, // 1 user looping for 1 minute
-  duration: '5s',
+  duration: '1m',
 
   thresholds: {
     checks: ['rate>0.99'],
@@ -30,7 +30,7 @@ function getMyInformation(authToken) {
   const authHeaders = headerWithAuthorizationAndToken(authToken);
   let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
   const success = check(myObjects, {
-    'SUCCESS: Get my information': (obj) => obj.id !== 0,
+    'Get my information': (obj) => obj.id !== 0,
   });
   errorRate.add(!success);
   sleep(1);
@@ -45,7 +45,7 @@ function updateMyInformation(authToken) {
   });
   const response = http.put(`${BASE_URL}/members/me`, payload, authHeaders);
   const success = check(response, {
-    'SUCCESS: Update my information': (res) =>
+    'Update my information': (res) =>
         res.status === 200,
   });
   errorRate.add(!success);
