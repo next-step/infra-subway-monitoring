@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { check } from 'k6';
+import { check, sleep } from 'k6';
 
 const USERNAME = 'test@gmail.com';
 const PASSWORD = 'test12!#';
@@ -11,6 +11,7 @@ export function generateAuthorizationHeaderWith(accessToken) {
             'Content-Type': 'application/json',
         },
     };
+    sleep(1);
     return authHeaders;
 }
 export function login() {
@@ -29,5 +30,6 @@ export function login() {
     check(loginRes, {
         'logged in successfully': (resp) => resp.json('accessToken') !== '',
     });
+    sleep(1);
     return authToken;
 }
