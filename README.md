@@ -164,18 +164,24 @@ VUser
         * R(requests) = 로그인 + 내 정보 조회 + 내 정보 수정 = 3개
         * http_req_duration = R x latency = 3 x 0.2 = 0.6
         * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (3 * 0.6s) + 0s = 1.8s 
-        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 1.8 / 3 = 3.468
-        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 3.468 x 5 = 17.34
+        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 1.8 / 3 = 3.468 ≒ 3
+        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 3.468 x 5 = 17.34 ≒ 17
     * "Path Searching Page"
         * R(requests) = 역 리스트 조회 + 경로 검색 + 로그인 + 즐겨찾기 = 4개
         * http_req_duration = R x latency = 4 x 0.2 = 0.8 
         * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (4 * 0.8s) + 0s = 3.2s
-        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 3.2 / 4 = 4.624
-        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 4.624 x 5 = 23.12
+        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 3.2 / 4 = 4.624 ≒ 5
+        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 4.624 x 5 = 23.12 ≒ 23
 부하 유지기간
-    * smoke test : 1m
-    * stress test : 25m
-    * load test : 40m
+    * smoke test
+        * "My Page": (1m,1vus)
+        * "Path Searching Page": (1m,1vus)
+    * load test
+        * "My Page": (1m,1vus)->(3m,3vus)->(5m,17vus)->(3m,3vus)->(10s,0vus)
+        * "Path Searching Page": (1m,1vus)->(3m,5vus)->(5m,23vus)->(3m,5vus)->(10s,0vus)
+    * stress test : 10m
+        * "My Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
+        * "Path Searching Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
 ```
 
 **테스트 실행 방식**
@@ -196,6 +202,9 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/smoke/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/smoke/path_searching_page-smoke_result.png)
 
+**Load Test**
+
+["My Page" 테스트 시나리오 JS 파일](k6/load/my_page.js) 의 결과 화면
 
 ---
 
