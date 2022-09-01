@@ -120,7 +120,7 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 **대상 시스템 범위**
 
@@ -193,49 +193,41 @@ k6 run smoke/path_searching_page.js
 k6 run smoke/path_searching_page.js --http-debug="full"
 ```
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
-**Smoke Test**
+### Smoke Test
+
+- [x] 최소한의 부하로 구성된 테스트로, 테스트 시나리오에 오류가 없는지 확인할 수 있어요.
+- [x] 최소 부하 상태에서 시스템에 오류가 발생하지 않는지 확인할 수 있어요.
+- [x] VUser를 1 ~ 2로 구성하여 테스트합니다.
 
 ["My Page" 테스트 시나리오 JS 파일](k6/smoke/my_page.js) 의 결과 화면
 !["My Page" 테스트 결과 화면](./k6/smoke/my_page-smoke_result.png)
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/smoke/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/smoke/path_searching_page-smoke_result.png)
 
-**Load Test**
+### Load Test
+
+- [x] 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능이 어떤지 확인합니다. 이 때 기능이 정상 동작하는지도 확인합니다.
+- [x] 애플리케이션 배포 및 인프라 변경(scale out, DB failover 등)시에 성능 변화를 확인합니다.
+- [x] 외부 요인(결제 등)에 따른 예외 상황을 확인합니다.
 
 ["My Page" 테스트 시나리오 JS 파일](k6/load/my_page.js) 의 결과 화면
 !["My Page" 테스트 결과 화면](./k6/load/my_page-load_result.png)
 ["Path Searching Page" 테스트 시나리오 JS 파일](k6/load/path_searching_page.js) 의 결과 화면
 !["Path Searching Page" 테스트 결과 화면](./k6/load/path_searching_page-load_result.png)
 
-**Stress Test**
+### Stress Test
 
-    - 목표했던 두 시나리오 모두 vuser로 잘 동작하는것 확인
-    - java application log로 인해 테스트를 제대로 진행할수 없어서 `scale up` 진행함
-    - 목표 이상으로 부하를 늘려서 테스트
-        - my 페이지 :
-            - vuser `398` 에서부터 에러 발생
-                - `grafana`를 통해 `error` 발생하는 지점을 포착
-                - 서비스 문제보다는 `k6` 서버의 cpu가 부족하여 발생한 에러로 보임
-            - 결과 :
-                - 목표 `vuser`를 한참 초과해도 서비스에 이상 없음
-        - path 페이지 :
-            - vuser `50` 까지 성공적으로 늘어남
-            - vuser `100` 까지 다시 테스트
-                - 짧은 시간에 급격하게 vuser가 늘어나니 vuser `50` 까지 가기도 전에 `http_req_duration` 이 목표를 초과함
-            - 시간을 30->40분으로 늘리고 vuser `80` 까지 다시 테스트
-                - 이전 테스트의 영향인지 vuser가 늘어나는 시간은 같지만 vuser `50` 도달 전에 `http_req_duration` 이 목표 초과
-            - 결과 :
-                - 사용자가 급격히 몰리면 서비스 response time이 비례해서 증가함
-                - 서비스에서 에러가 발생하지는 않음
-                - 서비스가 사용 못할 장애가 발생하지는 않음
-                - 느려졌던 서비스가 정상화 되는데는 시간이 필요한것으로 보임
-    - [my stress test](k6/load/scripts/stress/my.js)
-    - ![my stress test](./k6/result/stress/my_cli.png)
-    - ![my stress test](./k6/result/stress/my_dashboard.png)
-    - [path stress test](k6/load/scripts/stress/path.js)
-    - ![path stress test](./k6/result/stress/path_dashboard.png)
+- [x] 서비스가 극한의 상황에서 어떻게 동작하는지 확인합니다.
+- [x] 장기간 부하 발생에 대한 한계치를 확인하고 기능이 정상 동작하는지 확인합니다.
+- [x] 최대 사용자 또는 최대 처리량을 확인합니다.
+- [x] 스트레스 테스트 이후 시스템이 수동 개입없이 복구되는지 확인합니다.
+
+["My Page" 테스트 시나리오 JS 파일](k6/stress/my_page.js) 의 결과 화면
+!["My Page" 테스트 결과 화면](./k6/stress/my_page-stress_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/stress/path_searching_page.js) 의 결과 화면
+!["Path Searching Page" 테스트 결과 화면](./k6/stress/path_searching_page-stress_result.png)
 
 ---
 
