@@ -185,8 +185,8 @@ VUser
         * "My Page": (1m,1vus)->(2m,3vus)->(3m,6vus)->(2m,3vus)->(10s,0vus)
         * "Path Searching Page": (1m,1vus)->(2m,5vus)->(3m,8vus)->(2m,5vus)->(10s,0vus)
     * stress test
-        * "My Page": (2m,1vus)->(2m,20vus)->(2m,40vus)->(2m,60vus)->(2m,80vus)->(10s,0vus)
-        * "Path Searching Page": (2m,1vus)->(2m,20vus)->(2m,40vus)->(2m,60vus)->(2m,80vus)->(10s,0vus)
+        * "My Page": (2m,40vus)->(2m,80vus)->(2m,120vus)->(2m,160vus)->(2m,200vus)->(10s,0vus)
+        * "Path Searching Page": (2m,40vus)->(2m,80vus)->(2m,120vus)->(2m,160vus)->(2m,200vus)->(10s,0vus)
 ```
 
 **테스트 실행 방식**
