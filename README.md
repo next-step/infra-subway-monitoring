@@ -107,7 +107,7 @@ npm run dev
 | ASIS    | 2.7s | 2.8s | 2.7s | 2.8s |
 | TOBE    | 약 1s | 약 3s | 약 3s | 약 1s |
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
+#### 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스는 어떤 부분을 개선하면 좋을까요
 
 - 휴대전화에서 최적화될 수 있는 최적화된 사이즈의 리소스 파일로 압축합니다.
 - 모든 웹 페이지의 각 페이지 내 포함된 자바스크립트 크기는 1MB를 넘지 않아야 합니다.
@@ -120,9 +120,138 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+**대상 시스템 범위**
+
+```
+1. "경로 검색"
+    * 역 리스트 조회, 경로 검색, 로그인, 즐겨찾기
+2. "마이 페이지"
+    * 로그인, 내 정보 조회, 내 정보 갱신
+```
+
+**예상 수치 설정**
+
+```
+* 1일 사용자 수(DAU): 1,500,000
+    * 카카오맵 MAU의 20% 수준 예상(카카오맵 MAU: 7,290,000)
+    * 피크 시간대의 집중률(최대 트래픽 / 평소 트래픽): 4.0
+        * 피크 시간대: 오전 8 ~ 9시, 오후 6 ~ 7시
+        * 최대 트래픽(지역별 평균): 1,000,000
+        * 평소 트래픽(지역별 평균): 200,000
+    * 1명당 1일 평균 접속 혹은 요청수
+        * 1일 평균 접속: 총 3회 - 즐겨찾기 확인(출/퇴근), 경로 검색
+        * 1회 접속시 요청: 총 4회 - 메인 페이지, 로그인 페이지, 로그인, 즐겨찾기 조회
+```
+
+**목표값 설정**
+
+```
+throughput
+    * 현재 우리 비즈니스 목표와 개발 여건을 고려하여 설정 
+    * MAU = 150만
+    * DAU = MAU / 30 = 5만
+    * 1일 평균 접속수 = 10회
+    * 1일 총 접속수 = DAU x 1일 평균 접속횟수 = 50만회
+    * 1일 평균 rps = 1일 총 접속수 / 1일 초의 총합 = 500,000 / 86,440 = 5.78
+    * peek 시간대 집중률 = 최대 트래픽 / 평소 트래픽 = 1,000,000 / 200,000 = 5 
+    * 1일 최대 rps = 1일 평균 rps x (peak시 5배로 가정) = 28.9
+latency
+    * 200ms
+VUser
+    * "My Page"
+        * R(requests) = 로그인 + 내 정보 조회 + 내 정보 수정 = 3개
+        * http_req_duration = R x latency = 3 x 0.2 = 0.6
+        * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (3 * 0.6s) + 0s = 1.8s 
+        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 1.8 / 3 = 3.468 ≒ 3
+        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 3.468 x 5 = 17.34 ≒ 17
+    * "Path Searching Page"
+        * R(requests) = 역 리스트 조회 + 경로 검색 + 로그인 + 즐겨찾기 = 4개
+        * http_req_duration = R x latency = 4 x 0.2 = 0.8 
+        * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (4 * 0.8s) + 0s = 3.2s
+        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 3.2 / 4 = 4.624 ≒ 5
+        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 4.624 x 5 = 23.12 ≒ 23
+부하 유지기간
+    * smoke test
+        * "My Page": (1m,1vus)
+        * "Path Searching Page": (1m,1vus)
+    * load test
+        * "My Page": (1m,1vus)->(3m,3vus)->(5m,17vus)->(3m,3vus)->(10s,0vus)
+        * "Path Searching Page": (1m,1vus)->(3m,5vus)->(5m,23vus)->(3m,5vus)->(10s,0vus)
+    * stress test : 10m
+        * "My Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
+        * "Path Searching Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
+```
+
+**테스트 실행 방식**
+
+```
+# 실행
+k6 run smoke/path_searching_page.js
+# 디버깅 실행
+k6 run smoke/path_searching_page.js --http-debug="full"
+```
+
+### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+### Smoke Test
+
+- [x] 최소한의 부하로 구성된 테스트로, 테스트 시나리오에 오류가 없는지 확인할 수 있어요.
+- [x] 최소 부하 상태에서 시스템에 오류가 발생하지 않는지 확인할 수 있어요.
+- [x] VUser를 1 ~ 2로 구성하여 테스트합니다.
+
+["My Page" 테스트 시나리오 JS 파일](k6/smoke/my_page.js) 의 결과 화면
+!["My Page" 테스트 결과 화면](./k6/smoke/my_page-smoke_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/smoke/path_searching_page.js) 의 결과 화면
+!["Path Searching Page" 테스트 결과 화면](./k6/smoke/path_searching_page-smoke_result.png)
+
+**결과에 대한 의견**
+
+```
+- 구성된 애플리케이션 API의 테스트 시나리오에는 문제가 없었다.
+- 최소 부하이기에 원했던 (1) API 정상적인 작동 , (2) Latency 가 만족했다.  
+```
+
+### Load Test
+
+- [x] 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능이 어떤지 확인합니다. 이 때 기능이 정상 동작하는지도 확인합니다.
+- [x] 애플리케이션 배포 및 인프라 변경(scale out, DB failover 등)시에 성능 변화를 확인합니다.
+- [x] 외부 요인(결제 등)에 따른 예외 상황을 확인합니다.
+
+["My Page" 테스트 시나리오 JS 파일](k6/load/my_page.js) 의 결과 화면
+!["My Page" 테스트 결과 화면](./k6/load/my_page-load_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/load/path_searching_page.js) 의 결과 화면
+!["Path Searching Page" 테스트 결과 화면](./k6/load/path_searching_page-load_result.png)
+
+**결과에 대한 의견**
+
+```
+- 평소와 최대 트래픽에서 서비스가 정상 작동했다.
+- AWS EC2 Instance type 이 충분하기에 API 도 충분히 서비스에 이상이 없었다.
+- 최대 트래픽에서 Latency 가 발생하여, 200ms 에 대한 충족이 못하는 경우가 있었다. 
+```
+
+### Stress Test
+
+- [x] 서비스가 극한의 상황에서 어떻게 동작하는지 확인합니다.
+- [x] 장기간 부하 발생에 대한 한계치를 확인하고 기능이 정상 동작하는지 확인합니다.
+- [x] 최대 사용자 또는 최대 처리량을 확인합니다.
+- [x] 스트레스 테스트 이후 시스템이 수동 개입없이 복구되는지 확인합니다.
+
+["My Page" 테스트 시나리오 JS 파일](k6/stress/my_page.js) 의 결과 화면
+!["My Page" 테스트 결과 화면](./k6/stress/my_page-stress_result.png)
+["Path Searching Page" 테스트 시나리오 JS 파일](k6/stress/path_searching_page.js) 의 결과 화면
+!["Path Searching Page" 테스트 결과 화면](./k6/stress/path_searching_page-stress_result.png)
+
+**결과에 대한 의견**
+
+```
+- Stress 를 주기위한 VUser 의 설정이 예상보다 높게 설정되었다.
+- 예상보다 높은 트래픽에 예상보다 빠르게 요청들을 실패하였다.
+- Command(Create, Update, Delete) 가 부하에서 큰 약점이라고 생각했지만, 많은 데이터를 불러오는 API 가 부하에 더욱 취약하였다.
+- 테스트 도중 서비스는 장애를 발생하였고, 테스트 종료 이후 대략 5분 이내에 서비스는 자동 복구되었다.
+```
 
 ---
 
