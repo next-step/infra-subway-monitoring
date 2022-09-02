@@ -6,13 +6,14 @@ import {headerWithAuthorizationAndToken, login} from '../login.js';
 
 export let errorRate = new Rate('errors');
 
+// (2m,1vus)->(2m,20vus)->(2m,40vus)->(2m,60vus)->(2m,80vus)->(10s,0vus)
 export let options = {
   stages: [
-    {duration: '3m', target: 100}, // Stage: ramp up
-    {duration: '3m', target: 200}, // Stage: ramp up
-    {duration: '3m', target: 300}, // Stage: ramp up
-    {duration: '3m', target: 400}, // Stage: ramp up
-    {duration: '3m', target: 500}, // Stage: ramp up
+    {duration: '2m', target: 1}, // Stage: ramp up
+    {duration: '2m', target: 20}, // Stage: ramp up
+    {duration: '2m', target: 40}, // Stage: ramp up
+    {duration: '2m', target: 60}, // Stage: ramp up
+    {duration: '2m', target: 80}, // Stage: ramp up
     {duration: '10s', target: 0}, // Stage: ramp down
   ],
   thresholds: {
