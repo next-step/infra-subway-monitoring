@@ -134,7 +134,7 @@ npm run dev
 **예상 수치 설정**
 
 ```
-* 1일 사용자 수(DAU): 1,500,000
+* 1개월 사용자 수(MAU): 1,500,000
     * 카카오맵 MAU의 20% 수준 예상(카카오맵 MAU: 7,290,000)
     * 피크 시간대의 집중률(최대 트래픽 / 평소 트래픽): 4.0
         * 피크 시간대: 오전 8 ~ 9시, 오후 6 ~ 7시
@@ -147,41 +147,46 @@ npm run dev
 
 **목표값 설정**
 
+: 중요 지표는 (1) Throughput (2) Latency 로 정한다.
+
 ```
-throughput
-    * 현재 우리 비즈니스 목표와 개발 여건을 고려하여 설정 
-    * MAU = 150만
-    * DAU = MAU / 30 = 5만
-    * 1일 평균 접속수 = 10회
-    * 1일 총 접속수 = DAU x 1일 평균 접속횟수 = 50만회
-    * 1일 평균 rps = 1일 총 접속수 / 1일 초의 총합 = 500,000 / 86,440 = 5.78
-    * peek 시간대 집중률 = 최대 트래픽 / 평소 트래픽 = 1,000,000 / 200,000 = 5 
-    * 1일 최대 rps = 1일 평균 rps x (peak시 5배로 가정) = 28.9
-latency
+Latency(시스템이 클라이언트로부터 Request 를 받아서 Response 를 보내주기까지 걸리는 시간)
     * 200ms
+Precondition(현재 우리 비즈니스 목표와 개발 여건을 예상하여 설정) 
+    * MAU = 1,500,000 = 150만
+    * DAU = MAU / 30일 = 1,500,000 / 30 = 50,000 = 5만
+    * 1명당 1일 평균 접속수(요청수) = 10회
+    * peek 시간대 집중률 = 최대 트래픽 / 평소 트래픽 = 1,000,000 / 200,000 = 5배
+Throughput(단위 시간당 처리량) : 1일 평균 rps ~ 1일 최대 rps
+    * RPS(Request Per Second), TPS(Transaction Per Second) 를 Throughput 의 단위로 사용
+    * 1일 총 접속수 = DAU x 1명당 1일 평균 접속수(요청수) = 50,000 x 10 = 500,000 = 50만회
+    * 1일 평균 rps = 1일 총 접속수 / 1일 초의 총합 = 500,000 / 86,400 = 5.79
+    * 1일 최대 rps = 1일 평균 rps x peak 시간대 집중률 = 5.79 x 5 = 28.95
 VUser
     * "My Page"
-        * R(requests) = 로그인 + 내 정보 조회 + 내 정보 수정 = 3개
-        * http_req_duration = R x latency = 3 x 0.2 = 0.6
-        * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (3 * 0.6s) + 0s = 1.8s 
-        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 1.8 / 3 = 3.468 ≒ 3
-        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 3.468 x 5 = 17.34 ≒ 17
+        * R(the number of requests per VU iteration) = 로그인 + 내 정보 조회 + 내 정보 수정 = 3개
+        * http_req_duration = latency = 0.2s
+        * a(망에서 지연되는 초 시간) = 0s
+        * T(VU iteration) = (R x http_req_duration) + a = (3 * 0.2s) + 0s = 0.6s 
+        * 평균 VU(the number of virtual users) = (1일 평균 rps * T) / R = 5.79 x 0.6 / 3 = 1.158 ≒ 1
+        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 1.158 x 5 = 5.79 ≒ 6
     * "Path Searching Page"
-        * R(requests) = 역 리스트 조회 + 경로 검색 + 로그인 + 즐겨찾기 = 4개
-        * http_req_duration = R x latency = 4 x 0.2 = 0.8 
-        * 목표 응답시간 T(VU iteration) = R x http_req_duration + 지연시간 = (4 * 0.8s) + 0s = 3.2s
-        * 평균 VUser = (1일 평균 rps * T) / R = 5.78 x 3.2 / 4 = 4.624 ≒ 5
-        * 최대 VUser = 평균 VUser x peek 시간대 집중률 = 4.624 x 5 = 23.12 ≒ 23
+        * R(the number of requests per VU iteration) = 역 리스트 조회 + 경로 검색 + 로그인 + 즐겨찾기 = 4개
+        * http_req_duration = latency = 0.2s
+        * a(망에서 지연되는 초 시간) = 0s 
+        * T(VU iteration) = (R x http_req_duration) + a = (4 * 0.2s) + 0s = 0.8s 
+        * 평균 VU(the number of virtual users) = (1일 평균 rps * T) / R = 5.79 x 0.8 / 3 = 1.544 ≒ 2
+        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 1.544 x 5 = 7.72 ≒ 8
 부하 유지기간
     * smoke test
         * "My Page": (1m,1vus)
         * "Path Searching Page": (1m,1vus)
     * load test
-        * "My Page": (1m,1vus)->(3m,3vus)->(5m,17vus)->(3m,3vus)->(10s,0vus)
-        * "Path Searching Page": (1m,1vus)->(3m,5vus)->(5m,23vus)->(3m,5vus)->(10s,0vus)
-    * stress test : 10m
-        * "My Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
-        * "Path Searching Page": (3m,100vus)->(3m,200vus)->(3m,300vus)->(3m,400vus)->(3m,400vus)->(3m,500vus)->(10s,0vus)
+        * "My Page": (1m,1vus)->(2m,3vus)->(3m,6vus)->(2m,3vus)->(10s,0vus)
+        * "Path Searching Page": (1m,1vus)->(2m,5vus)->(3m,8vus)->(2m,5vus)->(10s,0vus)
+    * stress test
+        * "My Page": (2m,1vus)->(2m,20vus)->(2m,40vus)->(2m,60vus)->(2m,80vus)->(10s,0vus)
+        * "Path Searching Page": (2m,1vus)->(2m,20vus)->(2m,40vus)->(2m,60vus)->(2m,80vus)->(10s,0vus)
 ```
 
 **테스트 실행 방식**
