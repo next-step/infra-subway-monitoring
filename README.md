@@ -263,5 +263,8 @@ k6 run smoke/path_searching_page.js --http-debug="full"
 ### 3단계 - 로깅, 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
+- /home/ubuntu/nextstep/logs/file.log
+- /home/ubuntu/nextstep/logs/json.log
+- /home/ubuntu/nextstep/logs/application.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
