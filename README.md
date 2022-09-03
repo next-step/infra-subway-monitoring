@@ -165,9 +165,60 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 
+#### Arthas 실습
+
+![img.png](images/thread_runnable.png)
+
+- 3개의 요청에 대해 높은 CPU, 수행시간.
+
+#### Thread dump 분석
+
+![img.png](images/thread_dump_on_fastThread.png)
+
+- 3개의 요청에 대해 높은 CPU
+
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- 네이버지도 DAU 5160만 (2018년 기준) - [뜨거운 여름, 사람들은 네이버 지도앱을 열었다](https://www.econovill.com/news/articleView.html?idxno=344370)
+- 우리 서비스는 네이버지도의 10% 목표 : 516만
+- 집중률 = (최대트래픽) / (평소트래픽) = 1,000,000 / 400,000 = 2.5
+  - 정확한 예상 트래픽을 구하기 어려워 [데이터로 보는 서울시 대중교통 이용](https://www.bigdata-map.kr/datastory/traffic/seoul) 자료에서 '시간대별 평균 지하철, 버스 승/하차 인원'을 참조. 대략적인 비율을 계산.
+- 1명당 1일 평균 접속 수 = 3회
+
+- Throughput = 180 ~ 450 rps
+  - 1일 사용자 수 = 5,160,000
+  - 1일 총 접속 수 = 5,160,000 * 3 = 15,480,000
+  - 1일 평균 rps = 15,480,000 / 86,400 = 약 180 rps
+  - 1일 최대 rps = 180 rps * 2.5 = 450 rps
+
+- VUser = 36 ~ 90
+  - Latency = 0.1s
+  - http_req_duration = 0.1 * 2 = 0.2s
+  - T = (R * http_req_duration) = 3 * 0.2s = 0.6s
+  - Average VUser = 180 * 0.6 / 3 = 36
+  - Max VUser = 450 * 0.6 / 3 = 90
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- 경로 탐색 페이지를 타겟으로
+
+> 스크립트는 `./scripts`에 두었습니다.
+
+- smoke.js
+
+![img.png](images/smoke_result.png)
+
+- load.js
+
+![img.png](images/load_result.png)
+
+- stress.js
+
+![img.png](images/stress_result.png)
+![img.png](images/stress_result2.png)
+
+
 
 ---
 
