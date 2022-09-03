@@ -25,7 +25,7 @@ public class AuthController {
     public ResponseEntity<TokenResponse> login(@RequestBody TokenRequest request) {
         fileLogger.info("email:{}", request.getEmail());
         TokenResponse token = authService.login(request);
-        fileLogger.info("token:{}", token);
+        fileLogger.info("token:{}", token.getAccessToken());
         return ResponseEntity.ok().body(token);
     }
 }
