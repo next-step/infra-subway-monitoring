@@ -147,10 +147,10 @@ npm run dev
 
 **목표값 설정**
 
-: 중요 지표는 (1) Throughput (2) Latency 로 정한다.
+: 중요 지표는 (1) [Throughput](https://nesoy.github.io/articles/2018-08/Testing-Performance) (2) [Latency](https://networkengineering.stackexchange.com/questions/52232/whats-the-difference-between-latency-and-round-trip-time) 로 정한다.
 
 ```
-Latency(시스템이 클라이언트로부터 Request 를 받아서 Response 를 보내주기까지 걸리는 시간)
+Latency(http_req_receiving)
     * 200ms
 Precondition(현재 우리 비즈니스 목표와 개발 여건을 예상하여 설정) 
     * MAU = 1,500,000 = 150만
@@ -165,25 +165,25 @@ Throughput(단위 시간당 처리량) : 1일 평균 rps ~ 1일 최대 rps
 VUser
     * "My Page"
         * R(the number of requests per VU iteration) = 로그인 + 내 정보 조회 + 내 정보 수정 = 3개
-        * http_req_duration = latency = 0.2s
+        * http_req_duration = (가정) 2 x latency = 0.4s
         * a(망에서 지연되는 초 시간) = 0s
-        * T(VU iteration) = (R x http_req_duration) + a = (3 * 0.2s) + 0s = 0.6s 
-        * 평균 VU(the number of virtual users) = (1일 평균 rps * T) / R = 5.79 x 0.6 / 3 = 1.158 ≒ 1
-        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 1.158 x 5 = 5.79 ≒ 6
+        * T(VU iteration) = (R x http_req_duration) + a = (3 x 0.4s) + 0s = 1.2s 
+        * 평균 VU(the number of virtual users) = (1일 평균 rps x T) / R = 5.79 x 1.2 / 3 = 2.316 ≒ 3
+        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 2.316 x 5 = 11.58 ≒ 12
     * "Path Searching Page"
         * R(the number of requests per VU iteration) = 역 리스트 조회 + 경로 검색 + 로그인 + 즐겨찾기 = 4개
-        * http_req_duration = latency = 0.2s
+        * http_req_duration = (가정) 2 x latency = 0.4s
         * a(망에서 지연되는 초 시간) = 0s 
-        * T(VU iteration) = (R x http_req_duration) + a = (4 * 0.2s) + 0s = 0.8s 
-        * 평균 VU(the number of virtual users) = (1일 평균 rps * T) / R = 5.79 x 0.8 / 3 = 1.544 ≒ 2
-        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 1.544 x 5 = 7.72 ≒ 8
+        * T(VU iteration) = (R x http_req_duration) + a = (4 x 0.4s) + 0s = 1.6s 
+        * 평균 VU(the number of virtual users) = (1일 평균 rps x T) / R = 5.79 x 1.6 / 3 = 3.088 ≒ 4
+        * 최대 VU(the number of virtual users) = 평균 VUser x peek 시간대 집중률 = 3.088 x 5 = 15.44 ≒ 16
 부하 유지기간
     * smoke test
         * "My Page": (1m,1vus)
         * "Path Searching Page": (1m,1vus)
     * load test
-        * "My Page": (1m,1vus)->(2m,3vus)->(3m,6vus)->(2m,3vus)->(10s,0vus)
-        * "Path Searching Page": (1m,1vus)->(2m,5vus)->(3m,8vus)->(2m,5vus)->(10s,0vus)
+        * "My Page": (1m,1vus)->(2m,6vus)->(3m,12vus)->(2m,6vus)->(10s,0vus)
+        * "Path Searching Page": (1m,1vus)->(2m,8vus)->(3m,16vus)->(2m,8vus)->(10s,0vus)
     * stress test
         * "My Page": (2m,40vus)->(2m,80vus)->(2m,120vus)->(2m,160vus)->(2m,200vus)->(10s,0vus)
         * "Path Searching Page": (2m,40vus)->(2m,80vus)->(2m,120vus)->(2m,160vus)->(2m,200vus)->(10s,0vus)
