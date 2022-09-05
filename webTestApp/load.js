@@ -1,30 +1,40 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import {getRandomPathsQuery} from "./getRandomPathsQuery.js";
+import {getRandomPathsQuery} from "./getRandomPathsQuery";
 
-export let options = {
+/**
+ * 스트레스 테스트는 극한 조건 에서 시스템의 안정성과 신뢰성을 검증 하기 위함이다.
+ * 트래픽이 많이 생기는 할인 행사, 기념일 같은 특정날이 을때 자신의 서버가 어떻게 트래픽을 처리하는지 시뮬레이션 확인할수 있다.
+ *
+ * 스트레스 테스트 목적
+ * - 극한 조건에서 시스템이 작동하는 방식.
+ * - 사용자 또는 처리량 측면에서 시스템의 최대 용량 확인
+ * - 시스템의 한계점과 실패 환경 확인
+ * - 스트레스 테스트가 끝난 후 시스템의 자동 복구 여부
+ */
+
+/**
+ * @type {Options}
+ */
+export const options = {
   stages: [
-    // 35분 동안 평균 트래픽 이후 5분 안에 최고 트래픽으로 올라간 후 20분 유지
-    { duration: '1s', target: 5 },
-    { duration: '35m', target: 5,  },
-    { duration: '5m', target: 30 },
-    { duration: '20m', target: 30 },
+    {duration: '5m', target: 20},
+    {duration: '5m', target: 30},
+    {duration: '3m', target: 50},
+    {duration: '3m', target: 60},
+    {duration: '3m', target: 70},
+    {duration: '3m', target: 80},
+    {duration: '5m', target: 90},
+    {duration: '3m', target: 60},
+    {duration: '5m', target: 30},
+    {duration: '5m', target: 10},
   ],
-  thresholds: {
-    // 상위 90% 는 0.6 초 미만 / 95% 는 0.7초 미만
-    http_req_duration: ['p(90)< 600', 'p(95) < 700' ],
-  },
-};
+}
 
 const BASE_URL = 'https://xn--119-9j6nx7w.xn--h32bi4v.xn--3e0b707e';
 const USERNAME = 'test@test.com';
 const PASSWORD = 'test1234';
 
-const jsonParams = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
 
 export default function () {
   //1. 메인 페이지 접속
@@ -65,7 +75,7 @@ export default function () {
   check(http.get(`${BASE_URL}/paths?source=${randomPathsQuery.sourceId}&target=${randomPathsQuery.targetId}`), {
     '경로 검색 버튼 클릭': (resp) => resp.status === 200 && resp.json('distance') >= 0,
   });
-
-  // 1초 대기
   sleep(1);
-};
+}
+
+
