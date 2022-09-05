@@ -18,16 +18,14 @@ import {getRandomPathsQuery} from "./getRandomPathsQuery.js";
  */
 export const options = {
   stages: [
-    {duration: '5m', target: 20},
-    {duration: '5m', target: 30},
-    {duration: '3m', target: 50},
-    {duration: '3m', target: 60},
-    {duration: '3m', target: 70},
-    {duration: '3m', target: 80},
-    {duration: '5m', target: 90},
-    {duration: '3m', target: 60},
-    {duration: '5m', target: 30},
-    {duration: '5m', target: 10},
+    {duration: '1m', target: 20},
+    {duration: '3m', target: 30},
+    {duration: '3m', target: 90},
+    {duration: '5m', target: 180},
+    {duration: '3m', target: 90},
+    {duration: '3m', target: 30},
+    {duration: '3m', target: 10},
+    {duration: '3m', target: 0},
   ],
 }
 
