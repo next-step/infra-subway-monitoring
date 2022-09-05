@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import {getRandomPathsQuery} from "./getRandomPathsQuery";
+import {getRandomPathsQuery} from "./getRandomPathsQuery.js";
 
 /**
  * 스트레스 테스트는 극한 조건 에서 시스템의 안정성과 신뢰성을 검증 하기 위함이다.
