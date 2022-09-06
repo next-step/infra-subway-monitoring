@@ -13,14 +13,15 @@ export let options = {
   stages: [
     {duration: '5m', target: 9},
     {duration: '5m', target: 20},
-    {duration: '5m', target: 30},
     {duration: '5m', target: 40},
-    {duration: '5m', target: 50},
+    {duration: '5m', target: 60},
+    {duration: '5m', target: 80},
+    {duration: '5m', target: 100},
     {duration: '5m', target: 0},
   ],
   thresholds: {
     checks: ['rate>0.99'], // the rate of successful checks should be higher than 99%
-    http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s,
+    http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1s,
   },
 };
 
