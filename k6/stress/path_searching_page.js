@@ -8,11 +8,11 @@ export let errorRate = new Rate('errors');
 
 export let options = {
   stages: [
-    {duration: '3m', target: 100}, // Stage: ramp up
-    {duration: '3m', target: 200}, // Stage: ramp up
-    {duration: '3m', target: 300}, // Stage: ramp up
-    {duration: '3m', target: 400}, // Stage: ramp up
-    {duration: '3m', target: 500}, // Stage: ramp up
+    {duration: '2m', target: 40}, // Stage: ramp up
+    {duration: '2m', target: 80}, // Stage: ramp up
+    {duration: '2m', target: 120}, // Stage: ramp up
+    {duration: '2m', target: 160}, // Stage: ramp up
+    {duration: '2m', target: 200}, // Stage: ramp up
     {duration: '10s', target: 0}, // Stage: ramp down
   ],
   thresholds: {
@@ -27,7 +27,7 @@ export default function () {
   addFavorite();
 }
 
-const BASE_URL = 'https://orgojy.ga/';
+const BASE_URL = 'https://orgojy.ga';
 const MY_EMAIL = 'orgojy@gmail.com';
 const MY_PASSWORD = '1234';
 

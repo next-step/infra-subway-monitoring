@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import {check} from 'k6';
 
-const BASE_URL = 'https://orgojy.ga/';
+const BASE_URL = 'https://orgojy.ga';
 
 export function headerWithAuthorizationAndToken(accessToken) {
   return {
