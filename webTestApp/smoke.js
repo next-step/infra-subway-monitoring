@@ -23,6 +23,12 @@ const BASE_URL = 'https://xn--119-9j6nx7w.xn--h32bi4v.xn--3e0b707e';
 const USERNAME = 'test@test.com';
 const PASSWORD = 'test1234';
 
+const jsonParams = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 
 export default function () {
   //1. 메인 페이지 접속
