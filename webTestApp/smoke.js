@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import {check, sleep} from 'k6';
-import {getRandomPathsQuery} from "./getRandomPathsQuery";
+import {getRandomPathsQuery} from "./getRandomPathsQuery.js";
 import {Options} from "k6/options";
 
 /**
