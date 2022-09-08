@@ -11,6 +11,9 @@ import {getRandomPathsQuery} from "./getRandomPathsQuery.js";
  * - 사용자 또는 처리량 측면에서 시스템의 최대 용량 확인
  * - 시스템의 한계점과 실패 환경 확인
  * - 스트레스 테스트가 끝난 후 시스템의 자동 복구 여부
+ *
+ * 테스트 부하
+ * - MaxVUser: 30 * 5 = 150: 최대 트래픽 시간 VUser 에 5배로 테스트 진행
  */
 
 /**
