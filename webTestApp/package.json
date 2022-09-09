@@ -1,0 +1,14 @@
+{
+  "name": "webtestapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "@types/k6": "^0.38.0"
+  }
+}
