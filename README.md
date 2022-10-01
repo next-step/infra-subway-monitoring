@@ -41,9 +41,31 @@ npm run dev
 ### 1단계 - 화면 응답 개선하기
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요. 이 때, 서버 목표 응답시간은 어떻게 되나요?
 
-2. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+2. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
-3. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+Mobile
+
+|구분|original|gzip 적용 후|cache 적용 후|TLS, HTTP/2 적용 후|js async 적용 후|dynamic import 적용 후|
+|---|---|---|---|---|---|---|
+|성능|35|33|35|34|32|31|
+|First Contentful Paint|14,900 ms|14,500 ms|14,400 ms|14,800 ms|2,500 ms|2,500 ms|
+|Time to Interactive|15,400 ms|15,100 ms|15,000 ms|15,300 ms|14,300 ms|14,500 ms|
+|Speed Index|14,900 ms|14,500 ms|14,400 ms|14,800 ms|9,800 ms|8,900 ms|
+|Total Blocking Time|450 ms|490 ms|430 ms|470 ms|920 ms|1,090 ms|
+|Largest Contentful Paint|15,400 ms|15,100 ms|15,000 ms|15,300 ms|15,100 ms|15,200 ms|
+|Cumulative Layout Shift|0.042|0.042|0.042|0.041|0.042|0.041|
+
+Desktop
+
+|구분|original|gzip 적용 후|cache 적용 후|TLS, HTTP/2 적용 후|js async 적용 후|dynamic import 적용 후|
+|---|---|---|---|---|---|---|
+|성능|59|68|68|64|78|77|
+|First Contentful Paint|3,200 ms|2,600 ms|2,700 ms|3,000 ms|700 ms|700 ms|
+|Time to Interactive|3,400 ms|2,700 ms|2,800 ms|3,100 ms|2,600 ms|2,600 ms|
+|Speed Index|4,500 ms|2,600 ms|2,700 ms|3,000 ms|2,400 ms|2,500 ms|
+|Total Blocking Time|110 ms|40 ms|30 ms|80 ms|70 ms|100 ms|
+|Largest Contentful Paint|3,300 ms|2,700 ms|2,800 ms|3,100 ms|2,700 ms|2,700 ms|
+|Cumulative Layout Shift|0.004|0.004|0.004|0.004|0.004|0.004|
 
 
 
