@@ -28,10 +28,12 @@ export default function ()  {
     };
 
 
-    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+    let loginRes = http.get(`${BASE_URL}/stations`);
 
     check(loginRes, {
-        'logged in successfully': (resp) => resp.json('accessToken') !== '',
+        // 'get "path" page successfully': (resp) => resp.json('accessToken') !== '',
+        'get station list successfully': true,
+        'response': (resp) => resp
     });
 
 
@@ -40,7 +42,7 @@ export default function ()  {
             Authorization: `Bearer ${loginRes.json('accessToken')}`,
         },
     };
-    let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-    check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+    let myObjects = http.get(`${BASE_URL}/paths/?source=4&target=360`).json();
+    check(myObjects, { 'retrieved member': (obj) => obj });
     sleep(1);
 };
