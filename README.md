@@ -41,11 +41,25 @@ npm run dev
 ### 1단계 - 화면 응답 개선하기
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요. 이 때, 서버 목표 응답시간은 어떻게 되나요?
 
-2. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+* 응답 개선 url : https://www.infra-subway-deploy.kro.kr/path
+* 비교군 url : https://m.map.kakao.com/ (경쟁사 : 카카오맵)
+* 성능 예산 : 모바일 기기의 Time to Interactive는 5초 미만 (경로 검색이 주요 핵심 도메인이라 판단했기 때문)
+* 목표 응답 시간 : TTI 5초 미만
+
+2. 성능 개선 결과를 공유해주세요
+
+* 성능 개선 전 TTI : 15.2초
+* gzip 적용 후 TTI : 7.2초 (대폭 개선)
+   * <img src="./src/main/resources/static/images/perf/gzip_mobile.png" width="400" height="300" title="image2"/>
+* http 2.0 && cache 적용 후 TTI : 7.0초 (소폭 개선)
+   * <img src="./src/main/resources/static/images/perf/gzip-cache_mobile.png" width="400" height="300" title="image1">
 
 3. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
 
-
+* nginx에 gzip 적용
+* nginx에 정적 리소스 cache 적용
+   * 다만, 캐시 적용 됐는지가 의문 (nginx 캐시 저장 디렉토리가 비어있음)
+* https 2.0 적용
 
 ---
 
