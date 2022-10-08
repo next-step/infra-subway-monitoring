@@ -2,8 +2,11 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 2, // 1 user looping for 1 minute
-    duration: '10s',
+    stages: [
+        { duration: '5m', target: 125 },
+        { duration: '20m', target: 125 },
+        { duration: '5m', target: 0 },
+    ],
 
     thresholds: {
         http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -23,5 +26,5 @@ export default function ()  {
     check(pathRes, {
         'path searched successfully': (resp) => resp.json('stations').length > 0
     });
-    sleep(1);
+    sleep(5);
 };
