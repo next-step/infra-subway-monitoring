@@ -81,6 +81,11 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+* Smoke Test
+  * 스크립트 : ./loadtest/smoke.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/smoke_test.png" width="600" height="400">
+
 ---
 
 ### 3단계 - 스케일 아웃
