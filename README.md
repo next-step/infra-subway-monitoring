@@ -65,12 +65,22 @@ npm run dev
   - 3
 - 이를 바탕으로 Throughput을 계산합니다
   - 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
-    ->  백만 x 3 = 3백만
+    ->  백만 * 3 = 3백만
   - 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
     -> 3백만 / 86400 = 34
+  - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+    - 34 * 3 = 102
+- T = (R * http_req_duration) (+ 1s) = (2 * 1) + 0 = 2
+- VUser = (목표 rps * T) / R = 34 * 2 / 2 = 34
+- Latency: 100 ms
    
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+- smoke test
+<img width="959" alt="스크린샷 2022-10-11 오전 2 25 38" src="https://user-images.githubusercontent.com/29122916/194921811-ae45836b-5ba0-4f44-b1c6-bd038f49ba56.png">
+- load test
+  <img width="921" alt="스크린샷 2022-10-11 오전 2 57 59" src="https://user-images.githubusercontent.com/29122916/194926639-7888725c-b33f-4f90-9805-434f41126877.png">
+- Stress test
+<img width="928" alt="스크린샷 2022-10-11 오전 3 00 58" src="https://user-images.githubusercontent.com/29122916/194927001-cfea419b-e329-4b0a-b32d-fcb2e4a0053e.png">
 ---
 
 ### 3단계 - 스케일 아웃
