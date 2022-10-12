@@ -86,6 +86,16 @@ npm run dev
   * 결과
     * <img src="./src/main/resources/static/images/loadtest/smoke_test.png" width="600" height="400">
 
+* Load Test
+  * 스크립트 : ./loadtest/load.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/load_test.png" width="600" height="400">
+
+* Stress Test
+  * 스크립트 : ./loadtest/stress.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/stress_test.png" width="600" height="400">
+  
 ---
 
 ### 3단계 - 스케일 아웃
