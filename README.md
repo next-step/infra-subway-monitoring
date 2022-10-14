@@ -101,8 +101,26 @@ npm run dev
 ### 3단계 - 스케일 아웃
 
 1. Launch Template 링크를 공유해주세요.
+   * https://ap-northeast-2.console.aws.amazon.com/ec2/home?region=ap-northeast-2#LaunchTemplateDetails:launchTemplateId=lt-0e50360a84a406aa8
 
 2. cpu 부하 실행 후 EC2 추가생성 결과를 공유해주세요. (Cloudwatch 캡쳐)
+   * 인스턴스를 3개로 scale out하여 다시 테스트를 해보았습니다.
+   
+* Smoke Test
+  * 스크립트 : ./loadtest/smoke.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/step3_smoke_test.png" width="600" height="400">
+
+* Load Test
+  * 스크립트 : ./loadtest/load.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/step3_load_test.png" width="600" height="400">
+
+* Stress Test
+  * 스크립트 : ./loadtest/stress.js
+  * 결과
+    * <img src="./src/main/resources/static/images/loadtest/step3_stress_test.png" width="600" height="400">
+    * 
 
 ```sh
 $ stress -c 2
