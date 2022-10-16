@@ -41,11 +41,60 @@ npm run dev
 ### 1단계 - 화면 응답 개선하기
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요. 이 때, 서버 목표 응답시간은 어떻게 되나요?
 
-2. 성능 개선 결과를 공유해주세요 (Smoke, Load, Stress 테스트 결과)
+**가장 중요한 페이지**
 
-3. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+- 휴대폰을 이용한 지하철 경로 검색
+
+**사용자 조사**
+
+[서울시 대중교통 이용](https://www.bigdata-map.kr/datastory/traffic/seoul) 에서 조사한 시간 대 별 지하철 이용
+![img.png](img.png)
+
+- 출퇴근 시간 (8~9, 18~19)에 지도앱에 대한 수요가 많은 것으로 예측
+
+**경쟁(유사) 사이트 비교**
+
+| Web                   | FCP    | TTI   | Speed Index | TBT       | LCP  | CLS     | Score |
+|-----------------------|------|------|-------|------|------|-------|:-----:|
+| [서울 교통 공사](http://www.seoulmetro.co.kr/kr/cyberStation.do) | 6.4s | 8.0s | 11.4s | 640ms | 10.8s |0.001| 34 |
+| [네이버 지도](https://m.map.naver.com/subway/subwayLine.naver?region=1000) | 2.2s | 6.6s | 6.1s | 340ms | 8.1s |.003 | 56 |
+| [MY](https://hongeunbeen-infra.n-e.kr/path) | 16.2s | 17.1s | 16.2s | 180ms | 16.4s | 0.004 | 43 |
+
+**우선 순위가 높은 지표**
+- TTI: 사용자는 노선도를 보는 것 보다는 빠르게 검색 하고 싶어함
+- FCP: 컨텐츠를 빠르게 노출되고 렌더링 하는 것 중요
+
+**성능 예산**
+- LTE 환경에서의 모바일 기기의 TTI는 5초 미만이어야 한다.
+- 검색 페이지에는 2MB 미만의 이미지가 포함되어야합니다.
+
+2. 성능 개선 결과를 공유해주세요
+
+gzip 압축
+
+| FCP    | TTI   | Speed Index | TBT       | LCP  | CLS     |
+|------|------|-------|------|------|-------|
+| 5.4s | 7.3s | 6.9s | 1080ms | 5.4s | 0.004 |
+
+gzip 압축 + cache
+
+| FCP    | TTI   | Speed Index | TBT       | LCP  | CLS     |
+|------|------|-------|------|------|-------|
+| 6.9s | 7.2s | 7.3s | 100ms | 6.9s | 0.004 |
+
+gzip 압축 + cache + HTTP/2 (최종)
+
+| FCP    | TTI   | Speed Index | TBT       | LCP  | CLS     |
+|------|------|-------|------|------|-------|
+| 5.3s | 5.9s | 5.8s | 510ms | 5.9s | 0.042 |
 
 
+4. 어떤 부분을 개선해보셨나요? 과정을 설명해주세요
+
+- nginx에서 http 수준의 gzip 압축 추가 (css, js, font, xml 등 정적 파일)
+- nginx에서 캐시 설정 (css, js, 이미지)
+- nginx에서 protocol HTTP/2로 변경
+- webpack 번들 크기 줄이기, vue-router dynamic import 설정
 
 ---
 
