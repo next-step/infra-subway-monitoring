@@ -1,59 +1,85 @@
-<p align="center">
-    <img width="200px;" src="https://raw.githubusercontent.com/woowacourse/atdd-subway-admin-frontend/master/images/main_logo.png"/>
-</p>
-<p align="center">
-  <img alt="npm" src="https://img.shields.io/badge/npm-%3E%3D%205.5.0-blue">
-  <img alt="node" src="https://img.shields.io/badge/node-%3E%3D%209.3.0-blue">
-  <a href="https://edu.nextstep.camp/c/R89PYi5H" alt="nextstep atdd">
-    <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fedu.nextstep.camp%2Fc%2FR89PYi5H">
-  </a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/next-step/atdd-subway-service">
-</p>
-
-<br>
-
-# 인프라공방 샘플 서비스 - 지하철 노선도
-
-<br>
-
-## 🚀 Getting Started
-
-### Install
-#### npm 설치
+## 1단계 - 웹 성능 테스트
+### 요구사항
 ```
-cd frontend
-npm install
+[X] 웹 성능 예산 작성 후 서버 목표 응답시간 도출
 ```
-> `frontend` 디렉토리에서 수행해야 합니다.
 
-### Usage
-#### webpack server 구동
-```
-npm run dev
-```
-#### application 구동
-```
-./gradlew clean build
-```
-<br>
+<br />
 
+### 경쟁사와 비교분석
+| mobile | 서울교통공사 | 카카오맵 | 네이버지도 | RunningMap |
+|--------|--------------|----------|------------|------------|
+| FCP    | 6.5s         | 1.7s     | 2.4s       | 14.8s      |
+| SI     | 8.1s         | 7.5s     | 4.7s       | 14.8s      |
+| LCP    | 11.2s        | 5.4s     | 7.5s       | 15.4s      |
+| TTI    | 8.4s         | 5s       | 6.7s       | 15.5s      |
+| TBT    | 1220ms       | 80ms     | 560ms      | 580ms      |
+| CLS    | 0            | 0.005    | 0.03       | 0.042      |
 
-### 1단계 - 웹 성능 테스트
+| desktop | 서울교통공사 | 카카오맵 | 네이버지도 | RunningMap |
+|---------|--------------|----------|------------|------------|
+| FCP     | 1.5s         | 0.5s     | 0.6s       | 2.7s       |
+| SI      | 2.5s         | 2.3s     | 2.2s       | 2.7s       |
+| LCP     | 3.7s         | 1.1s     | 1.1s       | 2.8s       |
+| TTI     | 2.2s         | 0.1s     | 0.7s       | 2.8s       |
+| TBT     | 490ms        | 0ms      | 0ms        | 30ms       |
+| CLS     | 0.001        | 0.029    | 0.006      | 0.004      |
+
+[용어 정리]
+> * FCP(First Contentful Paint): 첫 번째 텍스트 또는 이미지가 표시되는 시간을 나타낸다.
+> * SI(Speed Index): 페이지 콘텐츠가 얼마나 빨리 표시되는지를 보여준다.
+> * LCP(Largest Contentful Paint): 최대 텍스트 또는 이미지가 표시되는 시간을 나타낸다.
+> * TTI(Time to Interactive): 완전히 페이지와 상호작용할 수 있게 될 때까지 걸리는 시간이다. 
+> * TBT(Total Blocking Time): FCP와 상호작용 시간 사이의 모든 시간의 합으로 작업 지속 시간이 50ms를 넘으면 밀리초 단위로 표현된다.
+> * CLS(Cumulative Layout Shift): 표시 영역 안에 보이는 요소의 이동을 측정한다.
+
+<br />
+
+### 웹 성능 예산 산정
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+* 1차적으로 경쟁사인 `카카오맵`, `네이버지도`와 비슷한 수준의 성능 예산을 잡아야 한다고 생각합니다. 모바일 환경에서 특히 성능이 차이가 발생하므로 해당 부분에서 개선이 좀 더 필요할 것으로 보입니다.
+* 1차적인 성능 목표를 달성하고 나면 이후에 2차적으로 경쟁사보다 더 빠른 성능 목표를 산정할 수 있습니다.
+
+<br />
+
+| mobile | FCP      | SI       | LCP      | TTI    |
+|--------|----------|----------|----------|--------|
+| 현재   | 14.8s    | 14.8s    | 15.4s    | 15.5s  |
+| 개선   | 1.7-1.8s | 3.4-4.7s | 2.5-5.4s | 3.8-5s |
+
+| desktop | FCP  | SI   | LCP  | TTI  |
+|---------|------|------|------|------|
+| 현재    | 2.7s | 2.7s | 2.8s | 2.8s |
+| 개선    | 0.5s | 2.2s | 1.1s | 0.1s |
+
+* PageSpeed에서 `빠름`으로 판단하는 수치(`Lighthouse 성능 감사` 90-100)와 `카카오맵`, `네이버지도` 중 더 빠른 속도를 목표로 하여 작성하였습니다. 
+
+<br />
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
-
+* 먼저, PageSpeed에서 추천하는 개선사항들을 먼저 시도해볼 것입니다. 
+  * 텍스트 압축 사용: 총 네트워크 바이트를 최소화하려면 텍스트 기반 리소스를 압축(gzip, deflate, brotli)해야 한다.
+  * 사용하지 않는 자바스크립트 줄이기
+  * 렌더링 차단 리소스 제거하기
+  * 콘텐츠가 포함된 최대 페인트 이미지 미리 로드
+  * 사용하지 않는 CSS 줄이기
+* 그래도 개선되지 않는 부분이 있다면 개별적으로 개선점을 찾아서 시도해볼 것입니다. 
+  * [FCP 점수를 향상시키는 방법](https://web.dev/first-contentful-paint/?utm_source=lighthouse&utm_medium=lr)
+  * [SI 점수를 향상시키는 방법](https://web.dev/speed-index/?utm_source=lighthouse&utm_medium=lr)
+  * [LCP 점수를 향상시키는 방법](https://web.dev/lcp/#how-to-improve-largest-contentful-paint-on-your-site)
+  * [TTI 점수를 향상시키는 방법](https://web.dev/interactive/?utm_source=lighthouse&utm_medium=lr)
 
 ---
 
-### 2단계 - 부하 테스트 
+## 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ---
 
-### 3단계 - 로깅, 모니터링
+## 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
