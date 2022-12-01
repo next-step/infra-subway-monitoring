@@ -78,7 +78,8 @@ npm run dev
 - [20% 법칙](https://www.smashingmagazine.com/2015/09/why-performance-matters-the-perception-of-time/#the-need-for-performance-optimization-the-20-rule)
 
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
-경쟁사인 카카오맵과 네이버지와 비슷한 수준의 성능 예산을 목표로 설정
+- 경쟁사인 카카오맵과 네이버지도와 비슷한 수준의 성능 예산을 목표로 설정.
+- TBT, CLS 예산은 현재로서도 양호하다고 판단.
 
 #### 웹 성능예산(MOBILE)
 
