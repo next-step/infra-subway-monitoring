@@ -43,26 +43,38 @@ npm run dev
 
 #### 예비 분석
 
-|                          | PC     | Mobile |
-|--------------------------|--------|--------|
-| First Contentful Paint   | 2.7 s  | 14.8 s |
-| Time to Interactive      | 2.8 s  | 15.3 s |
+|                        | PC      | Mobile |
+|------------------------|---------|--------|
+| First Contentful Paint | 2.7 s   | 14.8 s |
+| Time to Interactive    | 2.8 s   | 15.3 s |
+| Speed Index            | 2.7 s   | 14.8 s |
+| Total Blocking Time    | 50 ms   | 490 ms |
+| Largest Contentful Paint    | 2.8 s   | 15.3 s |
+| Cumulative Layout Shift    | 0.004 s | 0.042 s |
 
 
 #### 경쟁사 분석
 - 네이버 지도
 
-|                          | PC    | Mobile |
-|--------------------------|-------|--------|
-| First Contentful Paint   | 0.3 s | 2.3 s  |
-| Time to Interactive      | 3.4 s | 6.9 s  |
+|                          | PC      | Mobile  |
+|--------------------------|---------|---------|
+| First Contentful Paint   | 0.3 s   | 2.3 s   |
+| Time to Interactive      | 3.4 s   | 6.9 s   |
+| Speed Index            | 3.0 s   | 3.5 s   |
+| Total Blocking Time    | 550 ms  | 10 ms   |
+| Largest Contentful Paint    | 2.7 s   | 3.6 s   |
+| Cumulative Layout Shift    | 0.032 s | 0 s |
 
 - 카카오 지도
 
-|                          | PC    | Mobile |
-|--------------------------|-------|--------|
-| First Contentful Paint   | 0.6 s | 1.7 s  |
-| Time to Interactive      | 3.0 s | 6.2 s  |
+|                          | PC      | Mobile  |
+|--------------------------|---------|---------|
+| First Contentful Paint   | 0.6 s   | 1.7 s   |
+| Time to Interactive      | 3.0 s   | 6.2 s   |
+| Speed Index            | 2.5 s   | 7.0 s   |
+| Total Blocking Time    | 650 ms  | 120 ms  |
+| Largest Contentful Paint    | 0.9 s   | 7.0 s   |
+| Cumulative Layout Shift    | 0.018 s | 0.005 s |
 
 
 #### 성능 기준 설정
