@@ -1,48 +1,62 @@
-<p align="center">
-    <img width="200px;" src="https://raw.githubusercontent.com/woowacourse/atdd-subway-admin-frontend/master/images/main_logo.png"/>
-</p>
-<p align="center">
-  <img alt="npm" src="https://img.shields.io/badge/npm-%3E%3D%205.5.0-blue">
-  <img alt="node" src="https://img.shields.io/badge/node-%3E%3D%209.3.0-blue">
-  <a href="https://edu.nextstep.camp/c/R89PYi5H" alt="nextstep atdd">
-    <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fedu.nextstep.camp%2Fc%2FR89PYi5H">
-  </a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/next-step/atdd-subway-service">
-</p>
-
-<br>
-
-# 인프라공방 샘플 서비스 - 지하철 노선도
-
-<br>
-
-## 🚀 Getting Started
-
-### Install
-#### npm 설치
-```
-cd frontend
-npm install
-```
-> `frontend` 디렉토리에서 수행해야 합니다.
-
-### Usage
-#### webpack server 구동
-```
-npm run dev
-```
-#### application 구동
-```
-./gradlew clean build
-```
-<br>
-
-
 ### 1단계 - 웹 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+#### 경쟁사와의 성능 비교(MOBILE)
+| MOBILE | RUNNINGMAP | 카카오맵  | 네이버지도 |
+|--------|------------|-------|-------|
+| FCP    | 14.7s      | 1.7s  | 2.6s  |
+| TTI    | 15.2s      | 4.8s  | 7.2s  |
+| SI     | 14.7s      | 7.0s  | 6.0s  |
+| TBT    | 480ms      | 80ms  | 960ms |
+| LCP    | 15.2s      | 5.5s  | 7.9s  |
+| CLS    | 0.042      | 0.005 | 0.03  |
+<br/>
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+#### 경쟁사와의 성능 비교(DESKTOP)
+| DESKTOP | RUNNINGMAP | 카카오맵  | 네이버지도 |
+|---------|------------|-------|-------|
+| FCP     | 2.7s       | 0.5s  | 0.6s  |
+| TTI     | 2.8s       | 0.7s  | 1.3s  |
+| SI      | 2.7s       | 2.6s  | 2.2s  |
+| TBT     | 30ms       | 0ms   | 70ms  |
+| LCP     | 2.8s       | 1.2s  | 1.6s  |
+| CLS     | 0.004      | 0.039 | 0.006 |
+<br/>
 
+#### 측정 항목 키워드(용어) 정리
+- FCP(First Contentful Paint): 사용자가 화면에서 첫 번째 콘텐츠(텍스트, 이미지)를 볼 수 시간(지점)
+- TTI(Time To Interactive): 웹 페이지가 완전히 상호작용할 수 있는 상태가 될 때까지 걸리는 시간
+- SI(Speed Index): 웹 페이지를 불러올 때, 콘텐츠가 시각적으로 표시되는데까지 걸리는 시간
+- TBT(Total Blocking Time): 웹 페이지가 사용자 입력에 응답하지 못하도록 차단된 총 시간
+  - 메인 스레드가 오랫동안 점유되어 상호작용하지 못하는 시간
+- LCP(Largest Contentful Paint): 뷰포트의 컨텐츠 중 가장 큰(넓은) 영역을 차지하는 이미지나 텍스트 요소가 처음 로딩되는 시간
+- CLS(Cumulative Layout Shift): 사용자가 예상치 못한 레이아웃 이동을 경험하는 빈도
+
+<br />
+
+1. **웹 성능예산은 어느정도가 적당하다고 생각하시나요**
+
+| *       | FCP  | TTI  | SI   | TBT   | LCP  | CLS  |
+|---------|------|------|------|-------|------|------|
+| MOBILE  | 2.0s | 5.0s | 6.0s | 200ms | 5.0s | 0.03 | 
+| DESKTOP | 0.5s | 0.7s | 2.0s | 30ms  | 1.3s | 0.04 | 
+
+- 경쟁사 중 공기업이 아닌 카카오맵, 네이버지도와 비슷한 수준의 성능 예산이 적당하다고 생각합니다.  
+  - 기존 서비스중인 카카오나 네이버와 비슷한 성능 목표를 잡아 개선하지 않는 한 사용자는 저희 서비스를 사용하지 않을 것이라고 생각했습니다.
+
+2. **웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.**  
+웹 성능 예산의 측정 항목 중 LCP, FCP 등 사용자에게 실제 콘텐츠가 보이는 부분에 대해 줄여보기 위해 노력할 것 같습니다.  
+그 이유는 3초의 법칙처럼 로딩하는 시간이 느리고 길수록 사용자는 서비스를 사용하지 않고 이탈할 것이라고 생각했기 때문입니다.
+따라서 PageSpeed에서 추천하는 아래의 개선방안처럼 점진적으로 개선해 볼 것 같습니다.  
+   - 텍스트 압축(/js/vendors.js, /js/main.js)
+   - 사용하지 않는 자바스크립트 줄이기(/js/vendors.js, /js/main.js)
+   - 정적인 애셋 제공하기(/js/vendors.js, /js/main.js, /images/main_logo.png, /images/logo_small.png)
+   - 최대 크기 이미지 미리 로드하기(/images/main_logo.png)
+   - 렌더링 차단 리소스 제거하기(css)
+   - 이미지 요소에 명시적인 너비 및 높이 설정하기(/images/main_logo.png, /images/logo_small.png)  
+
+추가적으로 현재 경로 검색 API의 요청 응답시간에 대한 퍼포먼스는 아래와 같기에 양호한 상태라고 판단했습니다.
+<img width="624" alt="스크린샷 2022-12-02 오전 1 36 16" src="https://user-images.githubusercontent.com/44702580/205108682-44eac533-c817-4935-9c96-5006908e497e.png">
+
+<br/>
 
 ---
 
