@@ -1,11 +1,11 @@
 ## 2단계 - 부하테스트
-### 시나리오
+### 부하테스트 시나리오
 1. 메인 페이지 접속: GET https://earth-h.tk
 2. 로그인 페이지 접속: GET https://earth-h.tk/login
 3. 로그인 요청: POST https://earth-h.tk/login/token
 4. 로그인 완료: GET https://earth-h.tk/members/me
-5. 경로 검색 페이지 접속: GET https://earth-h.tk/stations
-6. 경로 검색 요청: POST https://earth-h.tk/paths?source={}&target={}
+5. 경로 검색 페이지 접속: GET https://earth-h.tk/path
+6. 경로 검색 요청: GET https://earth-h.tk/paths?source={}&target={}
 
 ### 개념 정리
 [ Smoke Test ]
