@@ -22,8 +22,17 @@
 
 [ Stress Test ]
 - 점진적으로 부하를 증가시켜 한계점 확인 테스트
-    - 무조건 문제가 발생할 수 밖에 없는 테스트
-    - 한계점은 변곡점이라고 생각할 수도 있고, 실제 에러가 발생한 지점이라고 볼 수도 있음
+  - 무조건 문제가 발생할 수 밖에 없는 테스트
+  - 한계점은 변곡점이라고 생각할 수도 있고, 실제 에러가 발생한 지점이라고 볼 수도 있음
+  - 1차 테스트
+    - 최소 VUser: 1
+    - 최대 VUser: 96
+    - 1차의 경우, K6 로그로 Request Failed가 뜨지 않아 제대로된 stress 테스트가 아니라 판단되어 2차 테스트 진행
+  - 2차 테스트
+    - 최소 VUser: 6
+    - 최대 VUser: 298
+    - 2차 테스트 시, 244 VUser 즈음부터 Request Failed 에러가 발생하며 http_req_duration의 min 수치가 바닥을 찍음
+      <br>그러다가, 최대 VUser를 지나 248 VUser 즈음으로 내려왔을 때부터 정상 응답 받기 시작함
 
 [ K6 부하테스트 툴 ]
 - K6 설치
@@ -34,7 +43,7 @@ $ sudo apt-get update
 $ sudo apt-get install k6
 ```
 
-- Smoke Test
+- Smoke Test 예시
 ```bash
 $ k6 run smoke.js
 ```
@@ -89,6 +98,7 @@ export default function ()  {
 };
 ```
 
+- load/stress Test에서 사용할 stages 예시
 ```bash
 export let options = {
   stages: [
@@ -104,15 +114,20 @@ export let options = {
 ```
 
 ### 참고사항
-https://earth-h.tk
+**[ RUNNINGMAP ]**
+- URL
+  - https://earth-h.tk
 - 계정 정보
     - ID: earth.h.183@gmail.com
     - PW: 123456
 
-54.180.107.199:3000
+**[ 그라파나 ]**
+- URL
+  - 54.180.107.199:3000
 - 그라파나 접근
     - 현재 제 IP에 대해서만 3000 포트를 오픈해두었습니다.
-    - BASTION 서버를 통해 Web Server 부하테스트를 하고자 BASTION 서버에 모니터링을 설치했으며, 이에 도메인을 연결하지 못하였습니다.
+    - 그라파나를 보고 싶으시다면, AWS의 보안그룹 설정에 IP 추가 또는 DM으로 IP 정보 주시면 추가해두겠습니다.
+    - BASTION 서버를 통해 Web Server 부하테스트를 하고자 BASTION 서버에 모니터링을 설치했으며, 이에 도메인은 연결하지 않았습니다.
 - 계정 정보
     - ID: admin
     - PW: admin123
