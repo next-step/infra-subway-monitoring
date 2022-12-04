@@ -46,7 +46,7 @@ npm run dev
   TTI: 페이지가 완전히 사용자와 상호 작용할 수 있는 상태가 되는데 걸리는 시간을 의미합니다.  
   TBT: TTI와 비슷한 측정 기준을 갖고 있는데요. 페이지가 클릭, 키보드 입력 같은 사용자와 상호작용하지 못했던 시간의 총 합을 측정  
   CLS: 사용자가 예상하지 못한 레이아웃을 경험하는 빈도를 정량화해서 시각적인 안정성을 판단
-  
+
 
 - 자사  
   First Byte |　Start Render　|　FCP　|　Speed Index　|　　LCP　　|　 CLS　 |　	　TBT　	　|　Total Bytes  
@@ -62,9 +62,9 @@ npm run dev
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요  
    FCL(2s), LCP(2.5s) CLS(0.1s), Speed Index(4.3s)가 각각 괄호에 표시된 시간 안에 들었을 때 가장 성능이 놓다고 평가된다고 합니다.  
    실무에서 최적화를 위해 노력을 지속적인 노력을 하겠지만 항상 가장 좋은 상태를 유지하긴 어려운 것 같습니다.  
-   유저가 느끼기에 불편하다고 느껴 경쟁사로 이탈 되지 않도록 경쟁사의 지표의 20%정도 안밖으로 예산을 내는 것이 좋다고 생각합니다. 
-  
-   
+   유저가 느끼기에 불편하다고 느껴 경쟁사로 이탈 되지 않도록 경쟁사의 지표의 20%정도 안밖으로 예산을 내는 것이 좋다고 생각합니다.
+
+
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
 
 First Byte |　Start Render　|　FCP　|　Speed Index　|　　LCP　　|　 CLS　 |　	　TBT　	　|　Total Bytes  
@@ -72,11 +72,21 @@ First Byte |　Start Render　|　FCP　|　Speed Index　|　　LCP　　|　 C
 
 
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+   부하테스트를 진행해본 것이 처음이라, 샘플코드를 활용해서 첫 번째는 vus = 1, duration '60s' 세팅해서 진행하였고,</p>
+   해당 테스트시 한계치를 확인 할 수 없어서 힌트로 주어주신 stages를 활용해 보았습니다. </p>
+   두 번째 테스트시 vus 300근접하였을 때 부터 Request Failed 나는 것을 확인 할 수 있었습니다.
+```
+ stages: [
+    { duration: '1m', target: 500 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
+    { duration: '2m', target: 500 }, // stay at 100 users for 10 minutes
+    { duration: '10s', target: 0 }, // ramp-down to 0 users
+  ],
+```
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요  
+   결과를 캡쳐하여 보여드리는 것이 좋을듯 하여
+   ./step2 폴더 생성후 캡쳐한 결과 이미지 파일 넣어 두었습니다.
 ---
 
 ### 3단계 - 로깅, 모니터링
