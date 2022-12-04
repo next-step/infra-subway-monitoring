@@ -202,16 +202,16 @@ npm run dev
 
 ## 3단계 - 로깅, 모니터링
 ### 요구사항
-- [ ] 어플리케이션 진단하기 실습을 한 후 문제가 되는 코드 수정
-- [ ] 로그 설정하기
-  - [ ] Application Log
+- [x] 어플리케이션 진단하기 실습을 한 후 문제가 되는 코드 수정
+- [x] 로그 설정하기
+  - [x] Application Log
     - 회원가입, 로그인 등의 이벤트에 로깅 설정
     - 경로찾기 등의 이벤트 로그를 JSON으로 수집
-  - [ ] Nginx Access Log
-- [ ] CloudWatch로 모니터링
-  - [ ] CloudWatch 로그 수집
-  - [ ] CloudWatch 메트릭 수집
-  - [ ] USE 방법론 활용 위한 대시보드 구성
+  - [x] Nginx Access Log
+- [x] CloudWatch로 모니터링
+  - [x] CloudWatch 로그 수집
+  - [x] CloudWatch 메트릭 수집
+  - [x] USE 방법론 활용 위한 대시보드 구성
 
 ### 로깅
 **[ 로깅 주의점 ]**
@@ -240,7 +240,6 @@ npm run dev
     fileLogger.info("파일 로깅 입니다.");
 ```
 
-
 1. 각 서버내 로깅 경로를 알려주세요
 ```bash
 # BASTION 서버 접근 ➝ BASTION 서버에 접근해야 WEBWAS 서버에 접근 가능
@@ -250,17 +249,21 @@ $ ssh -i key-earth-h.pem ubuntu@54.180.107.199
 $ ssh ubuntu@earth-h-web-service
 
 # nginx 로그 경로
-$ tail -f /nextstep/sw/nginx/logs/access.log
-$ tail -f /nextstep/sw/nginx/logs/error.log
+$ tail -f /nextstep/log/nginx/access.log
+$ tail -f /nextstep/log/nginx/error.log
 
 # application 로그 경로(API 호출 input/output 로그)
-$ tail -f /nextstep/project/infra-subway-monitoring/log/access-[날짜]-[로그번호].log
+$ tail -f /nextstep/project/infra-subway-monitoring/log/access.log
 
 # application 로그 경로(로그인, 회원가입 EVENT 로그) 
-$ tail -f /nextstep/project/infra-subway-monitoring/log/file-[날짜]-[로그번호].log
+$ tail -f /nextstep/project/infra-subway-monitoring/log/file.log
 
 # application 로그 경로(경로 조회 json EVENT 로그)
-$ tail -f /nextstep/project/infra-subway-monitoring/log/json-[날짜]-[로그번호].log
+$ tail -f /nextstep/project/infra-subway-monitoring/log/json.log
+
+# application 콘솔 로그 경로(application 실행 로그)
+$ tail -f /nextstep/log/infra-subway-monitoring.log
 ```
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=earth-h-dashboard
