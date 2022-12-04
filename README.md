@@ -73,20 +73,63 @@ First Byte |　Start Render　|　FCP　|　Speed Index　|　　LCP　　|　 C
 
 
 ### 2단계 - 부하 테스트
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-   부하테스트를 진행해본 것이 처음이라, 샘플코드를 활용해서 첫 번째는 vus = 1, duration '60s' 세팅해서 진행하였고,</p>
-   해당 테스트시 한계치를 확인 할 수 없어서 힌트로 주어주신 stages를 활용해 보았습니다. </p>
-   두 번째 테스트시 vus 300근접하였을 때 부터 Request Failed 나는 것을 확인 할 수 있었습니다.
-```
- stages: [
-    { duration: '1m', target: 500 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
-    { duration: '2m', target: 500 }, // stay at 100 users for 10 minutes
-    { duration: '10s', target: 0 }, // ramp-down to 0 users
-  ],
-```
+용어정리 
+-  Smoke 테스트   
+VUser: 1 ~ 2  
+최소의 부하로 시나리오를 검증해봅니다.
+- Load 테스트  
+평소 트래픽과 최대 트래픽일 때 VUser를 계산 후 시나리오를 검증해봅니다.  
+결과에 따라 개선해보면서 테스트를   
+- Stress 테스트  
+최대 사용자 혹은 최대 처리량인 경우의 한계점을 확인하는 테스트입니다.
+점진적으로 부하를 증가시켜봅니다.
+테스트 이후 시스템이 수동 개입 없이 자동 복구되는지 확인해봅니다.  
+
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요  
+   
+    - 예상 1일 사용자 수 (DAU)    
+   카카오맵 DAU 약 600K라고 가정했을 때 자사 DAU 300K 예상
+
+    -   피크시간대 집중률 (최대 트래픽 / 평소 트래픽)  
+    출퇴근 시간에 평소보다  3배정도 트래픽이 몰릴 것 으로 예상
+
+    -  1명당 1일 평균 요청 수  
+   14 (출퇴근 2회 접속 예상, 1회 접속당 7번 요청 예상)
+
+
+DAU * 1명당 1일 평균 접속수 = 1일 총 접속수  
+→ 300,000* 14 = 4,200,000  
+1일 총 접속수 / 86400(초 / 일) = 1일 평균 rps  
+→  = 약 48.6  
+1일 평균 rps * (최대 트래픽 / 평소 트래픽) = 1일 최대 rps  
+→ 48.6 * 3 = 약 145.8  
+
+T = (6 * 0.5) + 1  
+-> 4  
+평균VUser = 48.6 * 4 / 6  
+-> 약 32  
+최대VUser = 145.8 * 4 / 6  
+-> 약 96  
+
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요  
    결과를 캡쳐하여 보여드리는 것이 좋을듯 하여
-   ./step2 폴더 생성후 캡쳐한 결과 이미지 파일 넣어 두었습니다.
+   ./step2 폴더 생성후 캡쳐한 결과 이미지 파일 넣어 두었습니다.  
+### smoke
+- ![img smoke-grafana](./step2/smoke/grafana-smoke.png)
+- ![img smoke-k6](./step2/smoke/k6-smoke.JPG)
+
+
+
+### load
+- ![img load-grafana](./step2/load/grafana-load.png)
+- ![img load-k6](./step2/load/k6-load.JPG)  
+
+
+### stress
+- ![img smoke-grafana](./step2/stress/grafana-stress.png)
+- ![img smoke-k6](./step2/stress/k6-stress.JPG)
+
 ---
 
 ### 3단계 - 로깅, 모니터링
