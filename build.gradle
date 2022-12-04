@@ -19,6 +19,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
 
 	// handlebars
 	implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
@@ -32,6 +34,9 @@ dependencies {
 
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	// monitoring
+	implementation 'io.micrometer:micrometer-registry-cloudwatch'
 
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
