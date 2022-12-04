@@ -113,7 +113,49 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+#### 대상 시스템 범위
+- WEB(nginx)
+- WAS(tomcat)
+- DB(MySQL)
+
+#### 목푯값 설정 (latency, throughput, 부하 유지기간)
+- 예상 1일 사용자 수(DAU): 10만명
+  - 네이버 지도(34만명), 카카오맵(24만명)
+  - 신규 서비스인점을 감안하여 경쟁사 서비스보다는 약간 낮게 설정
+- 피크 시간대 집중률: 2
+  - 평시의 2배로 가정
+- 1명당 1일 평균 요청수: (5 + 5) * 2 = 20
+  - 로그인 제외 기능 페이지: 5개
+  - 로그인 수행 시 수행 request + 알파: 5개
+  - 출퇴근 반복 * 2
+- Throughput
+  - 1일 총 접속 수: 10만 * 20 = 200만
+  - 1일 평균 rps = 200만 / 86,400 = 23.14rps
+  - 1일 최대 rps = 23.14 * 2 = 46.28rps
+- VUser 
+  - R: 5 
+  - http_req_duration: 0.2
+  - T = (R * http_req_duration) (+ 1s) : 2
+  - 평균 VUser = (목표 rps * T) / R : 10
+  - 최대 VUser = (목표 rps * T) / R : 20
+- latency
+  - 200ms
+  
+
+#### 부하 테스트 시 저장될 데이터 건수 및 크기
+- 노선: 23건
+- 역: 616건
+- 구간: 340건
+
+
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- `/k6` 디렉토리 이하에 정리
+- 테스트 결과
+  - load테스트에서 `http_req_duration`가 목표치인 200ms를 초과, 개선 필요
+  - stress테스트에서 VUser 200까지는 latency가 늘어지긴 하지만 request가 fail하지는 않음(stress1.js). VUser 300부터 request failed 발생(stress2.js)
+  
 
 ---
 
