@@ -103,6 +103,7 @@ npm run dev
 ### 2단계 - 부하 테스트
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 #### 대상 시스템 범위
 
@@ -145,8 +146,6 @@ npm run dev
   - 지하철 역 : 616개
   - 지하철 구간 : 340개
 - 부하 테스트 시 메인페이지 및 경로 조회에 대해서 테스트를 진행할 예정이기 때문에 새롭게 저장될 데이터 건수 및 크기는 없음
-
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 #### 시나리오
 
@@ -257,16 +256,16 @@ default ✓ [======================================] 1 VUs  1m0s
 
 ```javascript
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check, group, sleep, fail} from 'k6';
 
 export let options = {
   stages: [
-    { duration: '1m', target: 1 },
-    { duration: '2m', target: 3 },
-    { duration: '4m', target: 6 },
-    { durtaion: '2m', target: 3 },
-    { durtaion: '1m', target: 1 },
-    { duration: '10s', target: 0 }, // ramp-down to 0 users
+    {duration: '1m', target: 1},
+    {duration: '2m', target: 3},
+    {duration: '4m', target: 6},
+    {durtaion: '2m', target: 3},
+    {durtaion: '1m', target: 1},
+    {duration: '10s', target: 0}, // ramp-down to 0 users
   ],
   thresholds: {
     http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -277,20 +276,20 @@ const BASE_URL = 'https://ilmare-cbk-subway.kro.kr';
 
 export function mainPage() {
   let response = http.get(`${BASE_URL}`);
-  check(response, {'[Result] Main Page' : (response) => response.status === 200});
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
 }
 
 export function pathPage() {
   let response = http.get(`${BASE_URL}/path`);
-  check(response, {'[Result] Path Page' : (response) => response.status === 200});
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
 }
 
 export function searchPath() {
   let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
-  check(response, {'[Result] Search Path' : (response) => response.status === 200});
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
 }
 
-export default function() {
+export default function () {
   mainPage();
   pathPage();
   searchPath();
@@ -351,6 +350,124 @@ default ✓ [======================================] 0/6 VUs  7m10s
 <summary>load grafana 결과</summary>
 
 ![load_grafana](./monitoring/load_grafana.png)
+
+</details>
+
+#### Stress 테스트
+
+<details>
+<summary>stress.js</summary>
+
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '1m', target: 6},
+    {duration: '2m', target: 12},
+    {duration: '2m', target: 24},
+    {duration: '2m', target: 48},
+    {duration: '2m', target: 96},
+    {duration: '2m', target: 144},
+    {duration: '2m', target: 288},
+    {duration: '2m', target: 336},
+    {duration: '2m', target: 384},
+    {duration: '2m', target: 288},
+    {duration: '2m', target: 192},
+    {duration: '2m', target: 96},
+    {duration: '2m', target: 48},
+    {duration: '2m', target: 24},
+    {duration: '1m', target: 6},
+    {duration: '10s', target: 0}, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://ilmare-cbk-subway.kro.kr';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
+}
+
+export default function () {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+
+</details>
+
+<details>
+<summary>stress 스크립트 실행 결과</summary>
+
+```text
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 384 max VUs, 28m40s max duration (incl. graceful stop):
+           * default: Up to 384 looping VUs for 28m10s over 16 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (28m10.1s), 000/384 VUs, 44569 complete and 10 interrupted iterations
+default ✓ [======================================] 000/384 VUs  28m10s
+
+     ✓ [Result] Main Page
+     ✓ [Result] Path Page
+     ✗ [Result] Search Path
+      ↳  98% — ✓ 44112 / ✗ 457
+
+     checks.........................: 99.65% ✓ 133270    ✗ 457
+     data_received..................: 244 MB 144 kB/s
+     data_sent......................: 17 MB  10 kB/s
+     http_req_blocked...............: avg=22.54µs min=965ns    med=2.36µs  max=64.56ms p(90)=3.66µs  p(95)=4.26µs
+     http_req_connecting............: avg=3.02µs  min=0s       med=0s      max=15.24ms p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=1.8s    min=756.08µs med=1.75ms  max=35.16s  p(90)=6.14s   p(95)=9.47s
+       { expected_response:true }...: avg=1.7s    min=756.08µs med=1.74ms  max=35.16s  p(90)=5.86s   p(95)=9.24s
+     http_req_failed................: 0.34%  ✓ 457       ✗ 133270
+     http_req_receiving.............: avg=65.39µs min=15.45µs  med=53.33µs max=13.99ms p(90)=93.35µs p(95)=115µs
+     http_req_sending...............: avg=16.32µs min=4.57µs   med=11.57µs max=6.85ms  p(90)=24.29µs p(95)=29.85µs
+     http_req_tls_handshaking.......: avg=15.54µs min=0s       med=0s      max=41.92ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=1.8s    min=706.46µs med=1.67ms  max=35.16s  p(90)=6.14s   p(95)=9.47s
+     http_reqs......................: 133727 79.122152/s
+     iteration_duration.............: avg=5.41s   min=57.2ms   med=2.45s   max=35.16s  p(90)=11.01s  p(95)=28.75s
+     iterations.....................: 44569  26.370106/s
+     vus............................: 1      min=1       max=384
+     vus_max........................: 384    min=384     max=384
+
+```
+
+</details>
+
+<details>
+<summary>stress grafana 결과</summary>
+
+![stress_grafana](./monitoring/stress_grafana.png)
+
+- Active VUser 144 ~ 287에서 http_req_blocked max 값이 떨어지지 않고 있음.
+- 이 부분에서 http request failed 를 추정해볼 수 있음.
 
 </details>
 
