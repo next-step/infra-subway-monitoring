@@ -8,3 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+logging:
+  level:
+    nextstep.subway: INFO
