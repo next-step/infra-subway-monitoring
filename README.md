@@ -250,6 +250,110 @@ default ✓ [======================================] 1 VUs  1m0s
 
 </details>
 
+#### Load 테스트
+
+<details>
+<summary>load.js</summary>
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '1m', target: 1 },
+    { duration: '2m', target: 3 },
+    { duration: '4m', target: 6 },
+    { durtaion: '2m', target: 3 },
+    { durtaion: '1m', target: 1 },
+    { duration: '10s', target: 0 }, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://ilmare-cbk-subway.kro.kr';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page' : (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page' : (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path' : (response) => response.status === 200});
+}
+
+export default function() {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+
+</details>
+
+<details>
+<summary>load 스크립트 실행 결과</summary>
+
+```text
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 6 max VUs, 7m40s max duration (incl. graceful stop):
+           * default: Up to 6 looping VUs for 7m10s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+
+running (7m10.1s), 0/6 VUs, 10079 complete and 0 interrupted iterations
+default ✓ [======================================] 0/6 VUs  7m10s
+
+     ✓ [Result] Main Page
+     ✓ [Result] Path Page
+     ✓ [Result] Search Path
+
+     checks.........................: 100.00% ✓ 30237     ✗ 0
+     data_received..................: 55 MB   128 kB/s
+     data_sent......................: 3.9 MB  9.1 kB/s
+     http_req_blocked...............: avg=11.28µs  min=975ns    med=2.29µs  max=26.6ms   p(90)=3.7µs    p(95)=4.36µs
+     http_req_connecting............: avg=1.19µs   min=0s       med=0s      max=7.33ms   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=40.71ms  min=745.22µs med=1.45ms  max=947.7ms  p(90)=104.51ms p(95)=122.9ms
+       { expected_response:true }...: avg=40.71ms  min=745.22µs med=1.45ms  max=947.7ms  p(90)=104.51ms p(95)=122.9ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 30237
+     http_req_receiving.............: avg=65.23µs  min=15.41µs  med=51.29µs max=16.47ms  p(90)=93.16µs  p(95)=115.95µs
+     http_req_sending...............: avg=16.09µs  min=4.49µs   med=11.32µs max=14.63ms  p(90)=24.71µs  p(95)=29.18µs
+     http_req_tls_handshaking.......: avg=6.03µs   min=0s       med=0s      max=23.69ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=40.63ms  min=699.47µs med=1.38ms  max=947.6ms  p(90)=104.4ms  p(95)=122.79ms
+     http_reqs......................: 30237   70.301251/s
+     iteration_duration.............: avg=122.56ms min=48.72ms  med=91.33ms max=950.72ms p(90)=145.27ms p(95)=434.99ms
+     iterations.....................: 10079   23.43375/s
+     vus............................: 1       min=1       max=6
+     vus_max........................: 6       min=6       max=6
+
+```
+
+</details>
+
+<details>
+<summary>load grafana 결과</summary>
+
+![load_grafana](./monitoring/load_grafana.png)
+
+</details>
+
 ---
 
 ### 3단계 - 로깅, 모니터링
