@@ -1,59 +1,79 @@
-<p align="center">
-    <img width="200px;" src="https://raw.githubusercontent.com/woowacourse/atdd-subway-admin-frontend/master/images/main_logo.png"/>
-</p>
-<p align="center">
-  <img alt="npm" src="https://img.shields.io/badge/npm-%3E%3D%205.5.0-blue">
-  <img alt="node" src="https://img.shields.io/badge/node-%3E%3D%209.3.0-blue">
-  <a href="https://edu.nextstep.camp/c/R89PYi5H" alt="nextstep atdd">
-    <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fedu.nextstep.camp%2Fc%2FR89PYi5H">
-  </a>
-  <img alt="GitHub" src="https://img.shields.io/github/license/next-step/atdd-subway-service">
-</p>
+# 서비스 진단하기
 
-<br>
+## Step1. 웹 성능 테스트
 
-# 인프라공방 샘플 서비스 - 지하철 노선도
+### 요구사항
 
-<br>
+- [x]  성능 예산 작성 후 서버 목표 응답시간 도출
+  - [x] 기준잡기
+    - [x] 경쟁사 자료 비교하기
+  - [x] 현황 파악하기
+    - [x] PageSpeed 결과
+  - [x] 웹성능 예산 작성
 
-## 🚀 Getting Started
+### 경쟁사 성능 분석
+- 항목
+  - FCP(First Contentful Paint) : 첫 텍스트, 이미지 표시되는데 걸린 시간
+  - TTI(Time to Interactive) : 사용자와 상호 작용할 수 있게 된 시간
+  - SI(Speed Index) : 페이지 콘텐츠가 얼마나 빨리 표시되는지
+  - TBT(Total Blocking Time) : FCP와 TTI사이 모든 시간의 합
+  - LCP(Large Contentful Paint) : 가장 큰 텍스트, 이미지 표시 시간
+  - CLS(Cumulative Layout Shift) : 요소들이 얼마나 이동하는지에 대한 정보
+- 대상 페이지
+  - 카카오 맵(모바일) : https://m.map.kakao.com/actions/routeView
+  - 카카오 맵(데스크탑) : https://map.kakao.com/
+  - 네이버 맵(모바일) : https://m.map.naver.com/subway/subwayLine.naver?region=1000
+  - 네이버 맵(데스크탑) : https://map.naver.com/subway/subwayLine.naver?region=1000
+  - 러닝 맵(모바일, 데스크탑 동일) : https://next-bada.n-e.kr
+  - 서울 교통공사 : http://www.seoulmetro.co.kr/kr/cyberStation.do
+- 참고 (라이트하우스 6 성능지표) 
+  - FCP : 0-2 / 2-4 / over 4
+  - SI : 0-4.3 / 4.4-5.8 / over 5.8
+  - LCP : 0-2.5 / 2.5-4.0 / over 4.0
+  - TTI : 0-3.8 / 3.9-7.3 / over 7.3
+  - TBT : 0-300 / 300-600 / over 600
+  - CLS : 0-0.1 / 0.1-0.25 / over 0.25
 
-### Install
-#### npm 설치
-```
-cd frontend
-npm install
-```
-> `frontend` 디렉토리에서 수행해야 합니다.
+#### 모바일
 
-### Usage
-#### webpack server 구동
-```
-npm run dev
-```
-#### application 구동
-```
-./gradlew clean build
-```
-<br>
+| 구분  | 러닝맵   | 네이버지도 | 카카오지도 |
+|-----|-------|-------|-------|
+| FCP | 14.6  | 2.2   | 1.7   |
+| TTI | 15.2  | 6.6   | 4.5   |
+| S I | 14.6  | 5.5   | 4     |
+| TBT | 500   | 390   | 70    |
+| LCP | 15.1  | 7.3   | 5.8   |
+| CLS | 0.042 | 0.03  | 0.005 |
+| 점수  | 33    | 56    | 70    |
 
 
-### 1단계 - 웹 성능 테스트
-1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+#### 데스크탑
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+| 구분  | 러닝맵   | 네이버지도 | 카카오지도 |
+|-----|-------|-------|-------|
+| FCP | 2.7   | 0.5   | 0.6   |
+| TTI | 2.8   | 4     | 2.9   |
+| SI  | 2.7   | 3.7   | 2.3   |
+| TBT | 50    | 1020  | 1090  |
+| LCP | 2.8   | 4.6   | 0.6   |
+| CLS | 0.004 | 0.019 | 0.017 |
+| 점수  | 67    | 57    | 64    |
 
 
----
+#### 목표 예산
+- 주요항목
+  - 러닝맵의 경우, 이미지가 많거나 경로 조회라는 단순한 기능을 제공하는 사이트이므로, 무엇보다 빠르게 화면이 뜨고 / 바로 동작이 가능해야 한다고 생각합니다. 
+  - 따라서 주요 지표로 FCP / TTI 성능을 높여야 합니다. (FCP와 TTI 의 기능개선이 이뤄지면 다른 지표도 좋아질 것) 
+    - FCP : FCP는 3초의 룰의 영향을 받는 가장 중요한 항목이므로 라이트 하우스 성능지표의 Fast 기준인 2초를 목표로, 데스크탑의 경우 경쟁사가 1초 이내에 들어오는 것을 확인했을때 1초 를 목표로 한다. (모바일 2초 / 데스크탑 1초)
+    - TTI : TTI는 라이트 하우스 성능지표의 Fast 기준인 3.8초를 모바일 MAX로 잡는다. 데스크탑은 현재 성능 유지해도 괜찮다고 판단. (모바일 3.8초 / 데스크탑 2.8초)
 
-### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+#### 개선 사항
+- 절감 목표치 : 모바일 12.6 / 데스크톱 1.7
+- 텍스트 압축 사용
+  - 모바일 : 9.1초 절감 가능
+  - 데스크탑 : 1.48초 절감 가능
+- 사용하지 않는 자바스크립트 줄이기( /js/vendors.js, /js/main.js)
+  - 모바일 : 3.45초 절감 가능
+  - 데스크탑 : 0.56초
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
----
-
-### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
-
-2. Cloudwatch 대시보드 URL을 알려주세요
+- 위의 두가지 개선사항만 지켜도 웹 성능예산 달성 가능.
