@@ -142,6 +142,8 @@ npm run dev
 - 최대 Vuser = (105 * 1.5) / 3 = 87
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 스크립트 위치: k6/scripts
+- 테스트 결과 위치: k6/result
 
 ---
 
