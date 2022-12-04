@@ -254,9 +254,13 @@ $ tail -f /nextstep/sw/nginx/logs/access.log
 $ tail -f /nextstep/sw/nginx/logs/error.log
 
 # application 로그 경로(API 호출 input/output 로그)
-$ tail -f /nextstep/log/file-[날짜]-[로그번호].log
+$ tail -f /nextstep/project/infra-subway-monitoring/log/access-[날짜]-[로그번호].log
 
-# application 로그 경로(경로 찾기 
+# application 로그 경로(로그인, 회원가입 EVENT 로그) 
+$ tail -f /nextstep/project/infra-subway-monitoring/log/file-[날짜]-[로그번호].log
+
+# application 로그 경로(경로 조회 json EVENT 로그)
+$ tail -f /nextstep/project/infra-subway-monitoring/log/json-[날짜]-[로그번호].log
 ```
 
 2. Cloudwatch 대시보드 URL을 알려주세요
