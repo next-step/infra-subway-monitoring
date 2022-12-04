@@ -131,7 +131,7 @@ npm run dev
              - /images/logo_small.png
 ---
 
-### 2단계 - 부하 테스트 
+## 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
@@ -200,7 +200,63 @@ npm run dev
         
 ---
 
-### 3단계 - 로깅, 모니터링
+## 3단계 - 로깅, 모니터링
+### 요구사항
+- [ ] 어플리케이션 진단하기 실습을 한 후 문제가 되는 코드 수정
+- [ ] 로그 설정하기
+  - [ ] Application Log
+    - 회원가입, 로그인 등의 이벤트에 로깅 설정
+    - 경로찾기 등의 이벤트 로그를 JSON으로 수집
+  - [ ] Nginx Access Log
+- [ ] CloudWatch로 모니터링
+  - [ ] CloudWatch 로그 수집
+  - [ ] CloudWatch 메트릭 수집
+  - [ ] USE 방법론 활용 위한 대시보드 구성
+
+### 로깅
+**[ 로깅 주의점 ]**
+- Avoid side effects
+  - logging으로 인한 어플리케이션 기능 동작에 영향이 없어야 함(예를 들어, logging으로 인해 NPE가 발생해 프로그램이 정상 동작하지 않으면 안됨)
+- Be concise and descriptive
+  - 각 logging에는 데이터와 설명이 모두 포함되어야 함
+- Log method arguments and return values
+  - 메소드의 input/output을 로그로 남기면 유용함 ➝ AOP를 이용하면 지저분한 중복 코드 줄일 수 있음
+- Delete personal information
+  - 로그에 사용자의 전화번호/계좌번호/패스워드/주소 등 개인정보 남기지 않음
+
+**[ 로깅 레벨 ]**
+- ERROR : 예상하지 못한 심각한 문제가 발생하여 즉시 조사해야 함 
+- WARN : 로직상 유효성 확인, 예상 가능한 문제로 인한 예외처리 등을 남김, 서비스는 운영될 수 있지만, 주의해야 함 
+- INFO : 운영에 참고할만한 사항으로, 중요한 비즈니스 프로세스가 완료됨 
+- DEBUG / TRACE : 개발 단계에서만 사용하고 운영 단계에서는 사용하지 않음
+
+**[ logback 사용 예시 ]**
+```java
+    private static final Logger log = LoggerFactory.getLogger(Controller.class); 
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    
+    ...
+    log.error("An ERROR Message");
+    fileLogger.info("파일 로깅 입니다.");
+```
+
+
 1. 각 서버내 로깅 경로를 알려주세요
+```bash
+# BASTION 서버 접근 ➝ BASTION 서버에 접근해야 WEBWAS 서버에 접근 가능
+$ ssh -i key-earth-h.pem ubuntu@54.180.107.199
+
+# Web Service 서버 접근
+$ ssh ubuntu@earth-h-web-service
+
+# nginx 로그 경로
+$ tail -f /nextstep/sw/nginx/logs/access.log
+$ tail -f /nextstep/sw/nginx/logs/error.log
+
+# application 로그 경로(API 호출 input/output 로그)
+$ tail -f /nextstep/log/file-[날짜]-[로그번호].log
+
+# application 로그 경로(경로 찾기 
+```
 
 2. Cloudwatch 대시보드 URL을 알려주세요
