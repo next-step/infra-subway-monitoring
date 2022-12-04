@@ -92,10 +92,228 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요    
+
+(카카오맵을 기준으로 설정)    
+
+a. 1일 이용자 수(DAU) : 30만    
+b. 피크 시간대 집중률
+  - 최대 : 약 200만명
+  - 평균 : 약 30만
+
+c. 1일 실행 횟수 1700만 회    
+d. Throughput 계산
+  - 1 일 총 접속자 수 : 5100만 회
+  - 1일 평균 rps : 590
+  - 1일 최대 rps : 3900
+
+VU : (600 * 2) / 2 = 600
+
+테스트 시간 : 30분
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+```javascript
+// smoke.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 30, // 1 user looping for 1 minute
+  duration: '60s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://seogineer.o-r.kr';
+const USERNAME = 'dgseo8981@gmail.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+  // login
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  sleep(1);
+
+  // lending page
+  let homeUrl = `${BASE_URL}`;
+  let lendingPageResponse = http.get(homeUrl);
+  check(lendingPageResponse, {
+      'lending page running': (response) => response.status === 200
+  });
+};
+```
+
+```javascript
+// load.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '5s', target: 100 },
+        { duration: '20s', target: 100 },
+        { duration: '5s', target: 0 },
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'],
+    },
+};
+
+const BASE_URL = 'https://seogineer.o-r.kr';
+const USERNAME = 'dgseo8981@gmail.com';
+const PASSWORD = '1234';
+
+export default function () {
+  // login
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  // myinfo
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, {'retrieved member': (obj) => obj.id != 0});
+
+  // create line
+  let createLineUrl = `${BASE_URL}/lines`;
+  let lineRandomNumber = Math.random().toString().split('.')[1];
+  let createLinePayload = JSON.stringify({
+    name: `testLine-${lineRandomNumber}`,
+    color: "grey darken-4",
+    upStationId: 1,
+    downStationId: 2,
+    distance: 10,
+  });
+  let createLineParams = {
+    headers: {
+      'Authorization': `Bearer ${loginRes.json('accessToken')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  let createLinesResponse = http.post(createLineUrl, createLinePayload, createLineParams);
+  check(createLinesResponse, {
+    'created Line successfully': (response) => response.status === 201,
+  });
+}
+```
+
+```javascript
+// stress.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '5s', target: 100 },
+        { duration: '10s', target: 100 },
+        { duration: '5s', target: 200 },
+        { duration: '10s', target: 200 },
+        { duration: '5s', target: 300 },
+        { duration: '10s', target: 300 },
+        { duration: '5s', target: 0 },
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<1500'],
+    },
+};
+
+const BASE_URL = 'https://seogineer.o-r.kr';
+const USERNAME = 'dgseo8981@gmail.com';
+const PASSWORD = '1234';
+
+export default function ()  {
+  // login
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+  // myinfo
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+  
+  // create line
+  let createLineUrl = `${BASE_URL}/lines`;
+  let lineRandomNumber = Math.random().toString().split('.')[1];
+  let createLinePayload = JSON.stringify({
+      name: `testLine-${lineRandomNumber}`,
+      color: "grey darken-4",
+      upStationId: 1,
+      downStationId: 2,
+      distance: 10,
+  });
+  let createLineParams = {
+      headers: {
+          'Authorization': `Bearer ${loginRes.json('accessToken')}`,
+          'Content-Type': 'application/json',
+      },
+  };
+  let createLinesResponse = http.post(createLineUrl, createLinePayload, createLineParams);
+  check(createLinesResponse, {
+      'created Line successfully': (response) => response.status === 201,
+  });
+}
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
