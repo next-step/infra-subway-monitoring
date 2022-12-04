@@ -148,6 +148,108 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+#### 시나리오
+
+- 메인 페이지 접속 -> 경로 검색 페이지 접속 -> 겅로 검색
+
+#### Smoke 테스트
+
+<details>
+<summary>smoke.js</summary>
+
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '60s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://ilmare-cbk-subway.kro.kr';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
+}
+
+export default function () {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+
+</details>
+
+<details>
+<summary>smoke 스크립트 실행 결과</summary>
+
+```text
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 1m30s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (1m00.0s), 0/1 VUs, 1063 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  1m0s
+
+     ✓ [Result] Main Page
+     ✓ [Result] Path Page
+     ✓ [Result] Search Path
+
+     checks.........................: 100.00% ✓ 3189      ✗ 0
+     data_received..................: 5.8 MB  97 kB/s
+     data_sent......................: 413 kB  6.9 kB/s
+     http_req_blocked...............: avg=13.51µs min=1.27µs  med=2.4µs   max=15.61ms  p(90)=3.72µs  p(95)=4.29µs
+     http_req_connecting............: avg=2.48µs  min=0s      med=0s      max=5.37ms   p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=18.67ms min=1.28ms  med=1.65ms  max=321.02ms p(90)=51.36ms p(95)=56.74ms
+       { expected_response:true }...: avg=18.67ms min=1.28ms  med=1.65ms  max=321.02ms p(90)=51.36ms p(95)=56.74ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 3189
+     http_req_receiving.............: avg=64.83µs min=19.9µs  med=56.13µs max=6.03ms   p(90)=89.99µs p(95)=110.94µs
+     http_req_sending...............: avg=15.49µs min=5.67µs  med=11.65µs max=631.06µs p(90)=24.09µs p(95)=26.34µs
+     http_req_tls_handshaking.......: avg=7.82µs  min=0s      med=0s      max=14.09ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=18.59ms min=1.24ms  med=1.56ms  max=320.92ms p(90)=51.2ms  p(95)=56.63ms
+     http_reqs......................: 3189    53.135497/s
+     iteration_duration.............: avg=56.44ms min=50.12ms med=53.29ms max=342.15ms p(90)=65.81ms p(95)=75.51ms
+     iterations.....................: 1063    17.711832/s
+     vus............................: 1       min=1       max=1
+     vus_max........................: 1       min=1       max=1
+```
+
+</details>
+
+<details>
+<summary>smoke grafana 결과</summary>
+
+![smoke_grafana](./monitoring/smoke_grafana.png)
+
+</details>
+
 ---
 
 ### 3단계 - 로깅, 모니터링
