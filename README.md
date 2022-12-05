@@ -172,7 +172,7 @@ npm run dev
 #### 미션 구현 목록
 - [x] README.md 요구사항 작성
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
-- [ ] nginx access log 설정
+- [x] nginx access log 설정
 - [ ] 회원가입, 로그인 로깅을 파일로 저장
 - [ ] 경로찾기 등의 이벤트 로그를 JSON으로 수집
 - [ ] Cloudwatch로 로그 수집하기
