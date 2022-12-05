@@ -104,7 +104,69 @@ _RUNNING MAP의 경우 경로 검색 페이지로 성능 측정_
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+#### 테스트 전제조건 정리
+**대상 시스템 범위**  
+nginx -> application -> db
+
+**목표값 설정**
+- latency: 50ms 이하
+- throughput
+  - MAU: 848만  (네이버지도 1392만 + 카카오맵 729만) / 2 * 0.8
+  - DAU: 28.2만  (MAU / 30)
+  - 1명당 1일 평균 접속 수: 2회 (출/퇴근)
+  - 1일 총 접속 수: 56.4만 (DAU * 1명당 1일 평균 접속 수)
+  - 1일 평균 RPS: 6.52 (1일 총 접속 수 / 86,400 초)
+  - 1일 최대 RPS: 13.04 (6.52 * 2)
+    - 피크 시간대 집중율: 2배 예상 (최대 트래픽 / 평소 트래픽)
+- 부하 유지기간
+  - Smoke: 1m
+  - Load: 30m
+  - Stress: 6m
+- VUser
+  - 용어
+    - RPS: 초당 요청 수
+    - VU: 가상 사용자 수
+    - R: VU 반복당 요청 수
+    - T: VU 반복을 완료하는 데 필요한 시간보다 큰 값
+  - 계산식
+```text
+T = (R * http_req_duration) (+ 1s)
+VUser = (목표 rps * T) / R
+```
+
+- R: 5
+  - main, login, retrieveMember, path, pathFind
+- T: 1.5
+  - (5 * 0.1s) + 1s
+- 평균 VUser: 1.956
+  - (6.52 * 1.5) / 5
+- 최대 VUser: 3.912
+  - (13.04 * 1.5) / 5
+
+
+**부하 테스트 시 저장될 데이터 건수 및 크기**  
+그럴듯한 서비스 만들기의 DB 사용
+- 노선: 23개
+- 지하철역: 616개
+- 구간: 340개
+- 회원: 1개
+
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- monitoring
+  - smoke
+    - smoke.js
+    - smoke_grafana.png
+    - smoke_k6.png
+  - load
+    - load.js
+    - load_grafana.png
+    - load_k6.png
+  - stress
+    - stress.js
+    - stress_grafana.png
+    - stress_k6.png
+
 
 ---
 
