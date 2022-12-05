@@ -104,6 +104,15 @@
       * 1일 평균 rps * (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
     * Latency: 일반적으로 50 ~ 100ms 이하로 잡는 것이 좋다.
     * 사용자가 검색하는 데이터의 양, 갱신하는 데이터의 양 등을 파악한다.
+* VUser 구하기
+  * Request Rate: measured by the number of requests per second (RPS)
+  * VU: the number of virtual users
+  * R: the number of requests per VU iteration
+  * T: a value larger than the time needed to complete a VU iteration
+  ```
+  T = (R * http_req_duration) (+ ls) ; 내부망에서 테스트할 경우 예상 latency를 추가한다.
+  VUser = (목표 rps * T) / R
+  ```
 
 ### 테스트 종류
 * Smoke Test
@@ -148,7 +157,11 @@
   * 부하 유지기간 지정하기
     > 부하 테스트는 30분 ~ 2시간 정도를 권장한다는 가이드를 따라서 1시간 정도로 지정하였습니다. 
 * 부하 테스트 시 저장될 데이터 건수 및 크기
-  * 
+* VUser 구하기
+  > R(메인 페이지 -> 경로 검색 페이지 -> 경로 검색 요청) = 3 \
+  > T = (3 * 0.2) + 1 = 1.6s \
+  > VUser(평균) = (8.72 * 1.6) / 3 = 4.65 \
+  > VUser(최대) = (26.16 * 1.6) / 3 = 13.95
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
