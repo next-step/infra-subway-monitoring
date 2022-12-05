@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.27.152:3306/subway?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: masterpw
+    hikari:
+      max-lifetime: 58000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
