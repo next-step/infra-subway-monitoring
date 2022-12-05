@@ -496,26 +496,69 @@ export let options = {
 };
 
 const BASE_URL = 'https://ilmare-cbk-subway.kro.kr';
+const USERNAME = 'ilmare-cbk@runningmap.com';
+const PASSWORD = '1234';
 
-export function mainPage() {
+function mainPage() {
   let response = http.get(`${BASE_URL}`);
   check(response, {'[Result] Main Page': (response) => response.status === 200});
 }
 
-export function pathPage() {
+function loginPage() {
+  let response = http.get(`${BASE_URL}/login`);
+  check(response, {'[Result] Login Page': (response) => response.status === 200});
+}
+
+function login() {
+  const payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD
+  });
+
+  const params = {
+    headers: {'Content-Type': 'application/json'}
+  };
+
+  let response = http.post(`${BASE_URL}/login/token`, payload, params);
+  check(response, {'[Result] Login': (response) => response.status === 200});
+
+  return response.json('accessToken');
+}
+
+function me(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(response, {'[Result] me': (response) => response.id != 0});
+}
+
+function pathPage() {
   let response = http.get(`${BASE_URL}/path`);
   check(response, {'[Result] Path Page': (response) => response.status === 200});
 }
 
-export function searchPath() {
-  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+function searchPath(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`, authHeaders);
   check(response, {'[Result] Search Path': (response) => response.status === 200});
 }
 
 export default function () {
   mainPage();
+  loginPage();
+  const accessToken = login();
+  me(accessToken);
   pathPage();
-  searchPath();
+  searchPath(accessToken);
 }
 ```
 
@@ -540,32 +583,37 @@ export default function () {
            * default: Up to 384 looping VUs for 28m10s over 16 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (28m10.1s), 000/384 VUs, 44569 complete and 10 interrupted iterations
+running (28m10.1s), 000/384 VUs, 44047 complete and 33 interrupted iterations
 default ✓ [======================================] 000/384 VUs  28m10s
 
      ✓ [Result] Main Page
+     ✓ [Result] Login Page
+     ✗ [Result] Login
+      ↳  99% — ✓ 44074 / ✗ 6
+     ✓ [Result] me
      ✓ [Result] Path Page
      ✗ [Result] Search Path
-      ↳  98% — ✓ 44112 / ✗ 457
+      ↳  99% — ✓ 44038 / ✗ 9
 
-     checks.........................: 99.65% ✓ 133270    ✗ 457
-     data_received..................: 244 MB 144 kB/s
-     data_sent......................: 17 MB  10 kB/s
-     http_req_blocked...............: avg=22.54µs min=965ns    med=2.36µs  max=64.56ms p(90)=3.66µs  p(95)=4.26µs
-     http_req_connecting............: avg=3.02µs  min=0s       med=0s      max=15.24ms p(90)=0s      p(95)=0s
-   ✗ http_req_duration..............: avg=1.8s    min=756.08µs med=1.75ms  max=35.16s  p(90)=6.14s   p(95)=9.47s
-       { expected_response:true }...: avg=1.7s    min=756.08µs med=1.74ms  max=35.16s  p(90)=5.86s   p(95)=9.24s
-     http_req_failed................: 0.34%  ✓ 457       ✗ 133270
-     http_req_receiving.............: avg=65.39µs min=15.45µs  med=53.33µs max=13.99ms p(90)=93.35µs p(95)=115µs
-     http_req_sending...............: avg=16.32µs min=4.57µs   med=11.57µs max=6.85ms  p(90)=24.29µs p(95)=29.85µs
-     http_req_tls_handshaking.......: avg=15.54µs min=0s       med=0s      max=41.92ms p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=1.8s    min=706.46µs med=1.67ms  max=35.16s  p(90)=6.14s   p(95)=9.47s
-     http_reqs......................: 133727 79.122152/s
-     iteration_duration.............: avg=5.41s   min=57.2ms   med=2.45s   max=35.16s  p(90)=11.01s  p(95)=28.75s
-     iterations.....................: 44569  26.370106/s
-     vus............................: 1      min=1       max=384
-     vus_max........................: 384    min=384     max=384
+     checks.........................: 99.99% ✓ 264424     ✗ 15
+     data_received..................: 330 MB 195 kB/s
+     data_sent......................: 55 MB  33 kB/s
+     http_req_blocked...............: avg=14.75µs  min=923ns    med=2.06µs  max=50.38ms p(90)=3.37µs  p(95)=4.02µs
+     http_req_connecting............: avg=1.51µs   min=0s       med=0s      max=14.78ms p(90)=0s      p(95)=0s
+   ✗ http_req_duration..............: avg=912.86ms min=709.84µs med=4.27ms  max=32.18s  p(90)=2.46s   p(95)=3.74s
+       { expected_response:true }...: avg=910.6ms  min=709.84µs med=4.27ms  max=32.18s  p(90)=2.46s   p(95)=3.74s
+     http_req_failed................: 0.00%  ✓ 23         ✗ 264416
+     http_req_receiving.............: avg=58.86µs  min=13.81µs  med=46.47µs max=17.47ms p(90)=87.67µs p(95)=105.56µs
+     http_req_sending...............: avg=17.83µs  min=4.8µs    med=12.37µs max=20.79ms p(90)=25.09µs p(95)=32µs
+     http_req_tls_handshaking.......: avg=9.85µs   min=0s       med=0s      max=28.24ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=912.78ms min=677.02µs med=4.18ms  max=32.18s  p(90)=2.46s   p(95)=3.74s
+     http_reqs......................: 264439 156.464657/s
+     iteration_duration.............: avg=5.45s    min=56.68ms  med=2.27s   max=1m13s   p(90)=10.37s  p(95)=24.86s
+     iterations.....................: 44047  26.06196/s
+     vus............................: 1      min=1        max=384
+     vus_max........................: 384    min=384      max=384
 
+ERRO[1691] some thresholds have failed
 ```
 
 </details>
