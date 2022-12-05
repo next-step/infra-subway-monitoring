@@ -77,3 +77,77 @@
   - 데스크탑 : 0.56초
 
 - 위의 두가지 개선사항만 지켜도 웹 성능예산 달성 가능.
+
+## Step2. 부하테스트
+
+### 요구사항
+
+-[x] 부하 테스트
+  -[x] 테스트 전제조건 정리
+    -[x] 대상 시스템 범위
+    -[x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    -[x] 부하 테스트 시 저장될 데이터 건수 및 크기
+  -[x] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+    -[x] 접속 빈도가 높은 페이지 - 경로조회
+    -[ ] 데이터를 갱신하는 페이지
+    -[ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  -[x] Smoke, Load, Stress 테스트 후 결과를 기록
+
+
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+- 대상 시스템 범위
+  - 메인페이지 이동
+  - 로그인
+  - 내 정보 확인
+  - 경로페이지 이동
+  - 경로 조회
+
+- Throughput
+  - DAU : [50만]
+    - 경쟁사 DAU
+      - 네이버지도 : 2129만(MAU) => 70만
+      - 카카오맵 : 950만(MAU) => 30만
+      - 참고 ) https://www.koit.co.kr/news/articleView.html?idxno=103551
+    - 목표 DAU : 경쟁사 평균인 50만
+  - 1일 평균 접속수 : [20회] 
+    - 경쟁사 일간 접속수
+      - 네이버지도 : 46(월간)
+      - 카카오맵 : 76(월간)
+      - 참고 ) http://www.businesspost.co.kr/BP?command=mobile_view&num=132836
+    - 일 평균 접속수 평균인 4회 * 요청갯수 5회 -> 20
+  - 집중률 : 약 [2배]
+    - 평균 : 122,827
+    - 최대 : 248,008
+    - 참고 ) https://insfiler.com/detail/rt_subway_time-0003
+  - 평균 rps : [115]
+    - 500,000 * 20 / 86400
+  - 최대 rps : [230]
+
+- 목표 latancy : [200ms] 
+  - 참고) smoke test 평균 112ms p(95) / max 178
+- VUSER 구하기
+  - T = 5 * 0.2 + 0.3(a) => 1.3
+  - 평균 VUSER = 115 * 1.3 / 5 -> [29.9]
+  - 최대 VUSER = [60]
+
+
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 총 역 수 : 727
+
+- Smoke 테스트 결과
+
+  - <img src="./k6/smoke/smoke_k6.png">
+  - <img src="./k6/smoke/smoke_grafana.png">
+
+- Load 테스트 결과
+
+  - <img src="./k6/load/load_k6.png">
+  - <img src="./k6/load/load_grafana.png">
+
+- Stress 테스트 결과(1차)
+
+  - <img src="./k6/stress/stress_k6.png">
+  - <img src="./k6/stress/stress_grafana.png">
+
+  - VUSER 280정도부터 문제 생기기 시작. 260으로 줄어들면서 바로 정상화 되었음
