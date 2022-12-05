@@ -37,12 +37,24 @@ npm run dev
 ```
 <br>
 
+## 웹 주소
+- https://cwjonhpark-subway-px.o-r.kr/
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
-2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+- 자바스크립트 소스 파일을 1/4 이하로 압축한다.
+- FCP는 1초 미만이어야 한다.
+- 3G 환경에서 FCP는 10초 미만이어야 한다
+- 웹브라우저 main thread 의 자바스크립트 소스 evaluation 시간은 1초 미만이어야 한다.
+- TBT는 1초 미만이어야 한다.
+- Lighthouse 의 Performance 점수가 90점 이상이어야 한다.
 
+2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+- FCP(First Contentful Paint): 13.8 s -> 2 s 
+- TTI(Time to Interactive): 15.9 s -> 3 s
+- Total Blocking Time: 570 ms -> 200 ms
+- Largest Contentful Paint: 16.1 s -> 3 s
 
 ---
 
