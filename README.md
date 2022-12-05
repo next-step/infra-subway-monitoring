@@ -175,8 +175,8 @@ npm run dev
 - [x] nginx access log 설정
 - [x] 회원가입, 로그인 로깅을 파일로 저장
 - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
-- [ ] Cloudwatch로 로그 수집하기
-- [ ] Cloudwatch로 메트릭 수집하기
+- [x] Cloudwatch로 로그 수집하기
+- [x] Cloudwatch로 메트릭 수집하기
 - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
 - [ ] README.md 답변 작성
 
