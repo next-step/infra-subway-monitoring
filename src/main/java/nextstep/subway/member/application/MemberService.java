@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class MemberService {
-    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+    private static final Logger LOGGER = LoggerFactory.getLogger("file");
 
     private final MemberRepository memberRepository;
 
@@ -23,7 +23,7 @@ public class MemberService {
     @Transactional
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        fileLogger.info("[회원가입 성공] email = {}", request.getEmail());
+        LOGGER.info("[회원가입 성공] email = {}", request.getEmail());
         return MemberResponse.of(member);
     }
 
