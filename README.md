@@ -645,4 +645,16 @@ ERRO[1691] some thresholds have failed
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+- application log
+  - file log : /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+  - json log : /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+  - console log : /home/ubuntu/nextstep/log.app.log
+- nginx log
+  - access log : /home/ubuntu/nextstep/log/nginx/access.log
+  - error log : /home/ubuntu/nextstep/log/nginx/error.log
+
+```shell
+docker run -d -p 80:80 -p 443:443 --name proxy -v /home/ubuntu/nextstep/log/nginx:/var/log/nginx nextstep/reverse-proxy
+```
+
 2. Cloudwatch 대시보드 URL을 알려주세요
