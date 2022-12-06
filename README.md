@@ -658,3 +658,5 @@ docker run -d -p 80:80 -p 443:443 --name proxy -v /home/ubuntu/nextstep/log/ngin
 ```
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=ilmare-cbk-dashboard
