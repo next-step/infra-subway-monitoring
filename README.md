@@ -115,14 +115,14 @@ VU : (600 * 2) / 2 = 600
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+#### smoke.js
 ```javascript
-// smoke.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-  vus: 30, // 1 user looping for 1 minute
-  duration: '60s',
+  vus: 300, // 1 user looping for 1 minute
+  duration: '1800s',
 
   thresholds: {
     http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -169,9 +169,11 @@ export default function ()  {
   });
 };
 ```
+#### smoke 테스트 결과
+![](./image/smoke_test.png)
 
+#### load.js
 ```javascript
-// load.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
@@ -241,21 +243,22 @@ export default function () {
   });
 }
 ```
+#### load.js 테스트 결과
+![](./image/load_test.png)
 
+#### stress.js
 ```javascript
-// stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '5s', target: 100 },
-        { duration: '10s', target: 100 },
-        { duration: '5s', target: 200 },
-        { duration: '10s', target: 200 },
-        { duration: '5s', target: 300 },
-        { duration: '10s', target: 300 },
-        { duration: '5s', target: 0 },
+      { duration: '200s', target: 10 },
+      { duration: '200s', target: 10 },
+      { duration: '300s', target: 60 },
+      { duration: '300s', target: 60 },
+      { duration: '600s', target: 100 },
+      { duration: '600s', target: 100 },
     ],
     thresholds: {
         http_req_duration: ['p(99)<1500'],
@@ -316,6 +319,9 @@ export default function ()  {
   });
 }
 ```
+#### stress.js 테스트 결과
+![](./image/stress_test.png)
+
 ---
 
 ### 3단계 - 로깅, 모니터링
