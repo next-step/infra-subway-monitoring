@@ -178,6 +178,7 @@ npm run dev
 - [x] Cloudwatch로 로그 수집하기
 - [x] Cloudwatch로 메트릭 수집하기
 - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] 로깅 AOP로 전환
 - [ ] README.md 답변 작성
 
 1. 각 서버내 로깅 경로를 알려주세요
