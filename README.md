@@ -41,7 +41,55 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
 
+#### 경쟁사와의 비교를 통한 선능예산 측정 
+> - 측정 사이트: PageSpeed Insights
+> - 사용 이유: WebPageTest사이트의 경우 외국에서 국내사이트를 측정하기 때문에 속도적으로 정확성을 기대하기 현실적으로 힘들 수 있음
+#### 데스크탑
+
+|      | [RUNNINGMAP](https://tech-pro.jimbae.com/) | [서울메트로](http://www.seoulmetro.co.kr/kr/cyberStation.do) | [네이버 지도](https://m.map.naver.com/subway/subwayLine.naver?region=1000) | [카카오 지도](https://m.map.kakao.com/) |
+| ---- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------- |
+| FCP  | 2.6초                                      | 1.6초                                                        | 0.5초                                                        | 0.5초                                   |
+| TTI  | 2.7초                                      | 2.0초                                                        | 1.1초                                                        | 0.7초                                   |
+| SI   | 2.6초                                      | 2.3초                                                        | 2.1초                                                        | 2.2초                                   |
+| TBT  | 50밀리초                                   | 60밀리초                                                     | 10밀리초                                                     | 0                                       |
+| LCP  | 2.7초                                      | 1.9초                                                        | 1.5초                                                        | 1.2초                                   |
+| CLS  | 0.004                                      | 0.001                                                        | 0.006                                                        | 0.039                                   |  
+
+#### 모바일
+|      | [RUNNINGMAP](https://tech-pro.jimbae.com/) | [서울메트로](http://www.seoulmetro.co.kr/kr/cyberStation.do) | [네이버 지도](https://m.map.naver.com/subway/subwayLine.naver?region=1000) | [카카오 지도](https://m.map.kakao.com/) |
+| ---- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------------- |
+| FCP  | 14.8초                                     | 6.8초                                                        | 2.3초                                                        | 1.7초                                   |
+| TTI  | 15.4초                                     | 9.9초                                                        | 6.7초                                                        | 4.5초                                   |
+| SI   | 14.8초                                     | 9.2초                                                        | 6.1초                                                        | 6.3초                                   |
+| TBT  | 560밀리초                                  | 2,270밀리초                                                  | 440밀리초                                                    | 60밀리초                                |
+| LCP  | 15.3초                                     | 7.1초                                                        | 7.7초                                                        | 6.8초                                   |
+| CLS  | 0.042                                      | 0                                                            | 0.03                                                         | 0.005                                   |
+
+  
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+> 데스크탑의 경우 Google LightHouse 에서 권장하는 좋은속도 기준을 따라가는것이 좋아 보입니다.
+> * FCP(First Contentful Paint): 1.8초 이하
+> * TTI(Time to Interactive): 3.8초 이하
+> * SI(Speed Index): 3.4초 이하
+> * TBT(Total Blocking Time): 200밀리초 이하
+> * LCP(Largest Contentful Paint): 2.5초 이하
+> * LCS(Cumulative Layout Shift): 0.1초 이하
+
+> 모바일의 경우 현실적으로 경쟁사중 네이버와 비슷한 속도를 목표로 하는것이 좋아보입니다
+> * FCP(First Contentful Paint): 2.3초 이하
+> * TTI(Time to Interactive): 6.7초 이하
+> * SI(Speed Index): 6.1초 이하
+> * TBT(Total Blocking Time): 400밀리초 이하
+> * LCP(Largest Contentful Paint): 7.7초 이하
+> * LCS(Cumulative Layout Shift): 0.03초 이하
+
+- 우선 개선 대상
+  - PageSpeed Insight에서 제공되는 기본적이 개선
+    - 사용하지 않는 자바스크립트 줄이기
+      - /js/vendors.js
+      - /js/main.js
+    - gzip 등을 활용한 텍스트 압축
+    - 웹폰트가 로드되는 동안 텍스트 계속 표시되는지 확인
 
 
 ---
