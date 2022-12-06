@@ -164,6 +164,10 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- Smoke Test - `/k6/smoke/smoke.js`, `/k6/smoke/smoke-k6.png`, `/k6/smoke/smoke-grafana.png`
+    - 최소한의 부하로 구성된 테스트, 테스트 시나리오에 오류가 없는지 확인
+    - VU : 1
+
 
 ---
 
