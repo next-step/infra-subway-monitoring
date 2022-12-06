@@ -631,6 +631,18 @@ ERRO[1691] some thresholds have failed
 ---
 
 ### 3단계 - 로깅, 모니터링
+
+<details>
+<summary>애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정</summary>
+
+![step3_before](./monitoring/step3_before.png)
+![step3_after](./monitoring/step3_after.png)
+
+- ec2 애플리케이션 서버에서 arthas 실행
+  - `trace nextstep.subway.line.application.LineService findLineResponses` 통해 응답이 느린 부분 찾기
+
+</details>
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
