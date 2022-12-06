@@ -167,6 +167,10 @@ npm run dev
 - Smoke Test - `/k6/smoke/smoke.js`, `/k6/smoke/smoke-k6.png`, `/k6/smoke/smoke-grafana.png`
     - 최소한의 부하로 구성된 테스트, 테스트 시나리오에 오류가 없는지 확인
     - VU : 1
+- Load Test - `/k6/load/load.js`, `/k6/load/load-k6.png`, `/k6/load/load-grafana.png`
+    - 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능을 확인
+        - 평균 Virtual User : 4
+        - 최대 Virtual User : 9
 
 
 ---
