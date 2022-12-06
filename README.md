@@ -179,8 +179,21 @@ npm run dev
 - [x] Cloudwatch로 메트릭 수집하기
 - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 - [x] 로깅 AOP로 전환
-- [ ] README.md 답변 작성
+- [x] README.md 답변 작성
 
 1. 각 서버내 로깅 경로를 알려주세요
+- **syslog**
+  - /var/log/syslog 
+- **nginx access log**
+  - /var/log/nginx/programmer-sjk.o-r.kr/access.log 
+- **nginx error log**
+  - /var/log/nginx/programmer-sjk.o-r.kr/error.log
+- **applicatoin log (로그인, 회원가입)**
+  - /home/ubuntu/nextstep/infra-subway-monitoring/log/file*.log
+- **applicatoin log (경로검색)**
+  - /home/ubuntu/nextstep/infra-subway-monitoring/log/json*.log
+- **applicatoin log (전체 controller 로깅)**
+  - /home/ubuntu/nextstep/infra-subway-monitoring/log/spring*.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=programmer-sjk-dashboard
