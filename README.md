@@ -171,7 +171,21 @@ npm run dev
     - 서비스의 평소 트래픽과 최대 트래픽 상황에서 성능을 확인
         - 평균 Virtual User : 4
         - 최대 Virtual User : 9
+- Stress Test - `/k6/stress/stress.js`, `/k6/stress/stress-k6.png`, `/k6/stress/stress-grafana.png`,
+  `/k6/stress/stress-error-1-k6.png`, `/k6/stress/stress-error-1-grafana.png`,
+  `/k6/stress/stress-error-2-k6.png`, `/k6/stress/stress-error-2-grafana.png`
+    - 서비스가 극한의 상황에서 어떻게 동작하는지 확인
 
+- 테스트 결과
+  - 피크 시간대 요청 집중될 경우 응답 시간 저하 발생
+  - `http_req_duration` 개선 필요
+    - Smoke Test
+      - 평균 응답시간 `24.62ms`, 최대 응답시간 `238.68ms` 소요
+    - Load Test
+      - 평균 응답시간 `23.42ms`, 최대 응답시간 `706.71ms` 소요
+    - Stress Test
+      - Virtual User 260명까지 응답 가능
+      - 평균 응답시간 `700ms`, 최대 응답시간 `2.78s` 소요
 
 ---
 
