@@ -1,13 +1,13 @@
 // # smoke.js
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check} from 'k6';
 
 export let options = {
-  vus: 10, // 1 user looping for 1 minute
+  vus: 19,
   duration: '60s',
 
   thresholds: {
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<300'],
   },
 };
 
@@ -16,7 +16,7 @@ const BASE_URL = 'https://sawooook-webservice.p-e.kr';
 const USERNAME = 'test@naver.com';
 const PASSWORD = 'test1234';
 
-export default function ()  {
+export default function () {
 
   const payload = JSON.stringify({
     email: USERNAME,
@@ -28,7 +28,6 @@ export default function ()  {
       'Content-Type': 'application/json',
     },
   };
-
 
   // 로그인
   const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
@@ -52,6 +51,7 @@ export default function ()  {
       Authorization: `Bearer ${loginRes.json('accessToken')}`,
     },
   };
+
 
   let findPathResponse = http.get(`${BASE_URL}/paths?source=5&target=8`, authHeaders);
 

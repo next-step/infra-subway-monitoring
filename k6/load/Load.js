@@ -1,17 +1,17 @@
-// # stress.js
+// # Stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '1m', target: 3 },
-    { duration: '1m', target: 5 },
-    { duration: '1m', target: 10 },
-    { duration: '1m', target: 5 },
-    { duration: '1m', target: 3 },
+    { duration: '30s', target: 6 },
+    { duration: '1m', target: 13 },
+    { duration: '3m', target: 19 },
+    { duration: '1m', target: 13 },
+    { duration: '10s', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<300'],
   },
 };
 

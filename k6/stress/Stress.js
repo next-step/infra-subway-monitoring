@@ -1,21 +1,21 @@
-// # stress.js
+// # Stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
     { duration: '30s', target: 5 },
-    { duration: '1m', target: 10 },
+    { duration: '1m', target: 30 },
+    { duration: '1m', target: 60 },
+    { duration: '1m', target: 120 },
+    { duration: '2m', target: 240 },
+    { duration: '1m', target: 120 },
     { duration: '1m', target: 40 },
-    { duration: '2m', target: 70 },
-    { duration: '2m', target: 100 },
-    { duration: '2m', target: 70 },
-    { duration: '1m', target: 40 },
     { duration: '1m', target: 10 },
-    { duration: '30s', target: 5 },
+    { duration: '10s', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<300'],
   },
 };
 
@@ -23,7 +23,7 @@ const BASE_URL = 'https://sawooook-webservice.p-e.kr';
 const USERNAME = 'test@naver.com';
 const PASSWORD = 'test1234';
 
-export default function ()  {
+export default function () {
 
   const payload = JSON.stringify({
     email: USERNAME,
@@ -35,7 +35,6 @@ export default function ()  {
       'Content-Type': 'application/json',
     },
   };
-
 
   // 로그인
   const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
@@ -59,6 +58,7 @@ export default function ()  {
       Authorization: `Bearer ${loginRes.json('accessToken')}`,
     },
   };
+
 
   let findPathResponse = http.get(`${BASE_URL}/paths?source=5&target=8`, authHeaders);
 
