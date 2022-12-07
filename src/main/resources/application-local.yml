@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    username: root
+    password: masterpw
+    url: jdbc:mysql://127.0.0.1:13306/subway?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&serverTimezone=UTC
+    hikari:
+      max-lifetime: 58000
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

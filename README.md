@@ -121,5 +121,10 @@ k6 폴더에 정리 해두었습니다.
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- nginx log: /home/ubuntu/nextstep/nginx-log
+- application log: /home/ubuntu/nextstep/infra-subway-monitoring/subway.log
+- 회원가입, 로그인 event log: /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+- 경로 찾기 event log: /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=giraffelim-dashboard
