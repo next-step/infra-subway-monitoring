@@ -22,4 +22,11 @@ public class LoginMember {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        return "LoginMember{" +
+                "email='" + email + '\'' +
+                '}';
+    }
 }
