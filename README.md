@@ -235,8 +235,8 @@ npm run dev
     - T: 시나리오 완료 시간보다 큰 값(VUser 반복을 완료하는데 필요한 시간보다 큰 값)
         - T = (R * 왕복시간(http_req_duration)) + 지연시간(내부망일 경우 추가(보통1초))
 - http_req_sending: 원격 호스트에 데이터를 보내는데 소요된 시간
-  http_req_waiting: 원격 호스트로부터의 응답을 대기하는 데 소요된 시간
-  http_req_receiving: 원격 호스트로부터 응답 데이터를 수신하는 데 소요된 시간
+- http_req_waiting: 원격 호스트로부터의 응답을 대기하는 데 소요된 시간
+- http_req_receiving: 원격 호스트로부터 응답 데이터를 수신하는 데 소요된 시간
 - http_req_duration: 요청의 총 시간 (http_req_sending + http_req_waiting + http_req_receiving)
 
 </details>
@@ -256,3 +256,14 @@ npm run dev
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+#### 요구사항
+
+- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [ ] 로그 설정하기
+    - [ ] Application Log 파일로 저장하기 
+        - [ ] 회원가입, 로그인 등의 이벤트레 로깅을 설정
+        - [ ] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    - [ ] Nginx Access Log 설정하기
+- [ ] Cloudwatch로 모니터링
+
