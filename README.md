@@ -40,6 +40,7 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 대상 시스템 범워 : WEB(nginx), WAS(tomcat), DB(mysql)
 - 측정 사이트 : https://pagespeed.web.dev
 - 측정 대상 페이지 : https://hyeongjukim.o-r.kr/path
 - 측정 항목
@@ -82,7 +83,8 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-- 목표 rps 구하기
+- 대상 시스템 범워 : WEB(nginx), WAS(tomcat), DB(mysql)
+- 목표 rps
   - DAU : 20만
   - 평소 트래픽 : 5만
   - 최대 트래픽 : 10만
@@ -92,25 +94,32 @@ npm run dev
     - 1일 총 접속 수 = 60만
     - 1일 평소 rps = 6.94
     - 1일 최대 rps = 13.89
-- VUser 구하기
+- VUser
   - RPS :6.94 
   - 평균 VU : 2.08
   - 최대 VU : 4.17
   - R : 5
   - T : 1.5
-- 테스트 시간 : 30분
-
-
-접속 빈도가 높은 페이지
--> 
-
+- 시나리오 : 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+- 부하 테스트 시 저장될 데이터 건수 및 크기
+  - 노선 : 
+  - 지하철역 :
+  - 구간 : 
+  - 회원 : 1개
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-- Smoke
 
-- Load
+- Smoke : `k6/smoke/smoke_k6.png`
+![Smoke](k6/smoke/smoke_k6.png)
+![Smoke](k6/smoke/smoke_k6.png)
 
-- Stress
+- Load : `k6/load/load_k6.png`
+![Smoke](k6/load/load_k6.png)
+![Smoke](k6/load/load_k6.png)
+
+- Stress : `k6/stress/stress_k6.png`
+![Smoke](k6/stress/stress_k6.png)
+![Smoke](k6/stress/stress_k6.png)
 
 ---
 
