@@ -41,6 +41,7 @@ npm run dev
 ### 1단계 - 웹 성능 테스트
 
 * 측정사이트 : PageSpeed
+러닝맵 url : https://chunhodong.p-e.kr
 #### 경쟁사 비교분석(MOBILE)
 
 |     | RUNNINGMAP | 서울교통공사  | 네이버지도 | 카카오맵  |
