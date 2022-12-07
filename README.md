@@ -267,3 +267,8 @@ npm run dev
     - [ ] Nginx Access Log 설정하기
 - [ ] Cloudwatch로 모니터링
 
+#### 용어정리
+
+- USE 방법론
+    - 모든 resource (자원)에 대하여 utilization (점유율), saturation (포화율), errors (오류)를 확인
+
