@@ -93,20 +93,77 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- [X] 대상 시스템 범위 
+  - WEB → WAS → DB
+- [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
+  - latency : 100ms
+  - throughput
+    - 집중률 = 최대트래픽 / 평소트래픽 = 5.00 (5배 가정)   
+    - 예상 1일 사용자 수(DAU): 100,000명 가정 
+    - 1명당 1일 평균 접속 수 = 5
+      - 메인 페이지 ➝ 로그인 -> 내 정보 요청 -> 경로 검색 페이지 -> 경로 검색
+    - 1일 총 접속 수 = DAU(100,000) * 1명당 1일 평균 접속 수(5) = 500,000
+    - 1일 평균 rps = 1일 총 접속 수(500,000) / 1일 초단위 시간(86400) = 5.78 rps
+    - 1일 최대 rps = 5.78 * 피크 시간대의 집중률(5.00) = 28.9 rps
+  - 부하 유지기간
+    - Smoke: 1m
+    - Load: 30m
+    - Stress: 30m 
+- [X] 부하 테스트 시 저장될 데이터 건수 및 크기
+    - 데이터 조회 테스트이기 때문에 저장될 데이터 없음   
+
+### VUser 구하는 공식 이해하기
+- Request Rate: measured by the number of requests per second (RPS)
+  - 요청 속도: 초당 요청 수로 측정됨
+- VU: the number of virtual users
+  - 가상 사용자 수
+- R: the number of requests per VU iteration
+  - VU 반복당 요청 수
+- T: a value larger than the time needed to complete a VU iteration
+  - VU 반복을 완료하는 데 필요한 시간
+  
+```
+T = (R * http_req_duration) (+ 1s) ; 내부망에서 테스트할 경우 예상 latency를 추가한다
+VUser = (목표 rps * T) / R
+```
+- VU 반복을 완료하는 데 필요한 시간 = (VU 반복당 요청 수 x http 요청지속시간) + Latency
+- 가상 사용자 수 = (목표 RPS * VU 반복을 완료하는 데 필요한 시간) / 요청 개수
+- 목표 RPS = (가상 사용자 수 * 요청 개수) / VU 반복을 완료하는 데 필요한 시간
+
+
+### 목표 / 평균 VUser 값 구하기
+- R = 5
+- T = (5 * 0.1s) + 1s = 1.5s
+- 평균 VUser = (5.78 * 1.5s) / 5 = 1.734 (2명)
+- 목표 VUser = (28.9 * 1.5s) / 5 = 8.67 (9명)
+
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+- smoke
+  - smoke.js
+  - smoke_grafana.png
+  - smoke_k6.png
+- load
+  - load.js
+  - load_grafana.png
+  - load_k6.png
+- stress
+  - stress.js
+  - stress_grafana.png
+  - stress_k6.png
 
 #### 요구사항 체크리스트
-- [ ] 부하 테스트
-  - [ ] 테스트 전제조건 정리
-    - [ ] 대상 시스템 범위
-    - [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
-    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
-  - [ ] 아래 시나리오 중 하나를 선택하여 스크립트 작성
-    - [ ] 접속 빈도가 높은 페이지
+- [X] 부하 테스트
+  - [X] 테스트 전제조건 정리
+    - [X] 대상 시스템 범위
+    - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [X] 부하 테스트 시 저장될 데이터 건수 및 크기
+  - [X] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+    - [X] 접속 빈도가 높은 페이지
     - [ ] 데이터를 갱신하는 페이지
     - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+  - [X] Smoke, Load, Stress 테스트 후 결과를 기록
 
 ---
 
