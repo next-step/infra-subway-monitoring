@@ -203,10 +203,10 @@ npm run dev
     - [x] 회원가입, 로그인 등의 이벤트에 로깅을 설정 
     - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
   - [x] Nginx Access Log 설정하기
-- [ ] CloudWatch로 모니터링
-  - [ ] CloudWatch로 로그 수집하기
-  - [ ] CloudWatch로 메트릭 수집하기
-  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] CloudWatch로 모니터링
+  - [x] CloudWatch로 로그 수집하기
+  - [x] CloudWatch로 메트릭 수집하기
+  - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
 * Application File Log 경로 : /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
@@ -215,3 +215,4 @@ npm run dev
 * Nginx Error Log 경로 : /home/ubuntu/nextstep/log/nginx/error.log
 
 2. CloudWatch 대시보드 URL을 알려주세요
+* https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=crongcm-dashboard
