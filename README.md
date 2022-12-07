@@ -209,5 +209,9 @@ npm run dev
   - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
+* Application File Log 경로 : /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+* Application Json Log 경로 : /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+* Nginx Access Log 경로 : /home/ubuntu/nextstep/log/nginx/access.log
+* Nginx Error Log 경로 : /home/ubuntu/nextstep/log/nginx/error.log
 
 2. CloudWatch 대시보드 URL을 알려주세요
