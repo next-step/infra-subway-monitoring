@@ -12,3 +12,10 @@ spring:
   logging:
     level:
       org.hibernate.SQL: debug
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
