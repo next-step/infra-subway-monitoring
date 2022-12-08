@@ -2,11 +2,17 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-  vus: 1, // 1 user looping for 1 minute
-  duration: '60s',
-  thresholds: {
-    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 0.1s
-  },
+    stages: [
+        {duration: '1m', target: 10},
+        {duration: '1m', target: 20},
+        {duration: '1m', target: 30},
+        {durtaion: '1m', target: 20},
+        {durtaion: '1m', target: 10},
+        {duration: '10s', target: 0},
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<1000'],
+    },
 };
 
 const BASE_URL = 'https://chunhodong.p-e.kr/';
