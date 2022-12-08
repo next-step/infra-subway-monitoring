@@ -5,6 +5,10 @@
         <property name="home" value="logs/"/>
     </springProfile>
 
+    <springProfile name="prod">
+        <property name="home" value="home/ubuntu/infra-subway-monitoring/logs/"/>
+    </springProfile>
+
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <include resource="log-console-appender.xml"/>
     <include resource="log-file-appender.xml"/>
