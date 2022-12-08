@@ -124,6 +124,54 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 
+#### 요구사항
+- [ ] 부하 테스트
+  - [ ] 테스트 전제조건 정리
+    - [ ] 대상 시스템 범위
+    - [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
+  - [ ] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+    - [ ] 접속 빈도가 높은 페이지
+    - [ ] 데이터를 갱신하는 페이지
+    - [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+
+#### 테스트 설정값 구하기
+- 목표 RPS 구하기
+  - 예상 1일 사용자 수(DAU) 도출
+  - 피크 시단대의 집중률 예상 (최대 트래픽 / 평소 트래픽)
+  - 1명당 1일 평균 접속 횟수 예상
+  - 이를 바탕으로 Throughput(1일 평균 rps ~ 1일 최대 rps) 계산
+    - 1일 사용자 수(DAU) * 1명당 1일 평균 접속 수 = 1일 총 접속 수
+    - 1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps
+    - 1일 평균 rps * 피크 시간대 집중률(최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+
+- VUser 구하기
+  - Request Rate: measured by the number of requests per second (RPS)
+  - VU: the number of virtual users
+  - R: the number of requests per VU iteration
+  - T: a value larger than the time needed to complete a VU iteration
+  ```shell
+  T = (R * http_req_duration) (+ ls) ; 내부망에서 테스트할 경우 예상 latency를 추가한다.
+  VUser = (목표 rps * T) / R
+  ```
+
+
+### 테스트 종류
+* Smoke Test
+  * 최소한의 부하로 구성된 테스트. 테스트 시나리오에 오류가 없는지 확인 가능
+  * 최소 부하 상태에서 시스템에 오류가 발생하지 않는지 확인 가능
+  * VUser 를 1 ~ 2로 구성하여 테스트
+* Load Test
+  * 서비스의 평소 트래픽과 최대 트래픽의 상황에서 성능 확인. 이 때 기능이 정상 동작하는지도 확인
+  * 애플리케이션 배포 및 인프라 변경(scale out, DB failover 등)시에 성능 변화 확인
+  * 외부 요인(결제 등)에 따른 예외 상황을 확인
+* Stress Test
+  * 서비스가 극한의 상황에서 어떻게 동작하는지 확인
+  * 장기간 부하 발생에 대한 한계치를 확인하고 기능이 정상 동작하는지 확인
+  * 최대 사용자 또는 최대 처리량을 확인
+  * 스트레스 테스트 이후 시스템이 수동 개입없이 복구되는지 확인
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
