@@ -4,6 +4,7 @@
   <include resource="org/springframework/boot/logging/logback/base.xml" />
   <include resource="file-appender.xml" />
   <include resource="json-appender.xml" />
+  <include resource="console-appender.xml" />
 
   <!-- logger name이 file일때 적용할 appender를 등록한다. -->
   <logger name="file" level="INFO">
@@ -12,6 +13,10 @@
   <!-- logger name이 json일때 적용할 appender를 등록한다. -->
   <logger name="json" level="INFO">
     <appender-ref ref="json"/>
+  </logger>
+  <!-- logger name이 json일때 적용할 appender를 등록한다. -->
+  <logger name="console" level="INFO" >
+    <appender-ref ref="console" />
   </logger>
 
 </configuration>
