@@ -6,7 +6,7 @@
     </springProfile>
 
     <springProfile name="prod">
-        <property name="home" value="home/ubuntu/infra-subway-monitoring/logs/"/>
+        <property name="home" value="/home/ubuntu/infra-subway-monitoring/logs/"/>
     </springProfile>
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
