@@ -39,9 +39,9 @@ dependencies {
     implementation("mysql:mysql-connector-java")
 
     // Spring Actuator Metric 수집
-//    implementation("org.springframework.boot:spring-boot-starter-actuator")
-//    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
-//    implementation("io.micrometer:micrometer-registry-cloudwatch")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE")
+    implementation("io.micrometer:micrometer-registry-cloudwatch")
 }
 
 test {
