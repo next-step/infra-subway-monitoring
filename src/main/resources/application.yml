@@ -15,10 +15,4 @@ handlebars:
   suffix: .html
   enabled: true
 
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+
