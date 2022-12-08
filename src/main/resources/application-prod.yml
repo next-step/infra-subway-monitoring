@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: none
 logging:
