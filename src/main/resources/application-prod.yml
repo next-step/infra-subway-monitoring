@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.38.150:3306/subway?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: masterpw
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+    hibernate:
+      ddl-auto: validate
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: crongcm
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: "*"
