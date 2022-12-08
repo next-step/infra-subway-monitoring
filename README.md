@@ -92,9 +92,7 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요    
-
-(카카오맵을 기준으로 설정)    
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 a. 1일 이용자 수(DAU) : 30만    
 b. 피크 시간대 집중률
@@ -111,16 +109,20 @@ VU : (600 * 2) / 2 = 600
 
 테스트 시간 : 30분
 
+최대 사용자 수 : https://economist.co.kr/2022/11/08/it/general/20221108181600888.html   
+평균 사용자 수 : https://mobile.newsis.com/view.html?ar_id=NISX20220927_0002028167   
+일일 앱 실행 수 : https://m.segye.com/view/20221031511705 
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+#### smoke.js
 ```javascript
-// smoke.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-  vus: 30, // 1 user looping for 1 minute
-  duration: '60s',
+  vus: 300, // 1 user looping for 1 minute
+  duration: '1800s',
 
   thresholds: {
     http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
@@ -167,17 +169,19 @@ export default function ()  {
   });
 };
 ```
+#### smoke 테스트 결과
+![](./image/smoke_test.png)
 
+#### load.js
 ```javascript
-// load.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '5s', target: 100 },
-        { duration: '20s', target: 100 },
-        { duration: '5s', target: 0 },
+      { duration: '600s', target: 100 },
+      { duration: '600s', target: 300 },
+      { duration: '600s', target: 600 },
     ],
 
     thresholds: {
@@ -239,21 +243,22 @@ export default function () {
   });
 }
 ```
+#### load.js 테스트 결과
+![](./image/load_test.png)
 
+#### stress.js
 ```javascript
-// stress.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '5s', target: 100 },
-        { duration: '10s', target: 100 },
-        { duration: '5s', target: 200 },
-        { duration: '10s', target: 200 },
-        { duration: '5s', target: 300 },
-        { duration: '10s', target: 300 },
-        { duration: '5s', target: 0 },
+      { duration: '200s', target: 10 },
+      { duration: '200s', target: 10 },
+      { duration: '300s', target: 60 },
+      { duration: '300s', target: 60 },
+      { duration: '600s', target: 100 },
+      { duration: '600s', target: 100 },
     ],
     thresholds: {
         http_req_duration: ['p(99)<1500'],
@@ -314,9 +319,15 @@ export default function ()  {
   });
 }
 ```
+#### stress.js 테스트 결과
+![](./image/stress_test.png)
+
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+   - Nginx : /var/log/nginx
+   - Application : /home/ubuntu/app/log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+  - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=seogineer
