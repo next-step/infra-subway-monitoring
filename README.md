@@ -111,7 +111,7 @@ npm run dev
 
 - Smoke : `k6/smoke/smoke_k6.png`
 ![Smoke](k6/smoke/smoke_k6.png)
-![Smoke](k6/smoke/smoke_k6.png)
+![Smoke](k6/smoke/smoke_grafana.png)
 
 - Load : `k6/load/load_k6.png`
 ![Smoke](k6/load/load_k6.png)
