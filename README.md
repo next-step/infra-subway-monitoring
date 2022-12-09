@@ -66,10 +66,42 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
+#### 목표 rps
+##### 예상 1일 사용자 수 (DAU)
+- 2022년 11월 지하철 승객 수 : 204268648
+- 월 승객 수 / 출퇴근(2) / 1개월 = 204268648 / 2 / 30 = 3404477
+- 이 중 10%의 사용자만 Running Map을 쓴다고 가정
+- **예상 DAU** : 340447
+##### 피크 시간대의 집중률
+- 최대 트래픽(18-19시) : 1019132 / 10 = 101913명
+- 평소 트래픽(13-14시) : 482047 / 10 = 48204명
+##### 1명 당 1일 평균 접속 수
+- 출근 + 퇴근 = 총 2회
+##### throughput : 1일 평균 rps ~ 1일 최대 Rps
+> - 1일 사용자 수 x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+> - 1일 총 접속 수 / 86400 = 1일 평균 rps
+> - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps
+- 1일 총 접속 수 : 340447 * 2 = 680894
+- 1일 평균 rps : 680894 / 86400 = 약 7rps
+- 1일 최대 rps : 7 * (101913 / 48204) = 약 14rps
+#### VUser
+> - Request Rate: measured by the number of requests per second (RPS)
+> - VU: the number of virtual users
+> - R: the number of requests per VU iteration
+> - T: a value larger than the time needed to complete a VU iteration
+- R : 3(메인-로그인-검색)
+- T : 3 * 0.3 + 1 = 1.9
+- 평균 VUser = (7 * 1.9) / 3 = 약 4
+- 최대 VUser = (14 * 1.9) / 3 = 약 9
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 1일 총 접속 수 : 680894
+- 1일 평균 / 최대 rps : 7 / 14
+- 평균 VUser = 4
+- 최대 VUser = 9
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+/src/resources/static/loadTest 내에 포함하였습니다.
 ---
 
 ### 3단계 - 로깅, 모니터링
