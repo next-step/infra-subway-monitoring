@@ -10,7 +10,17 @@ spring:
     properties:
       hibernate:
         dialect:
+          show_sql: true
           nodeValue: org.hibernate.dialect.MySQL57Dialect
           storage_engine: innodb
     hibernate:
       ddl-auto: create
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

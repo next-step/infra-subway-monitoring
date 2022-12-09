@@ -3,7 +3,7 @@ spring:
     properties:
       hibernate:
         format_sql: false
-        show_sql: true
+
 
 security:
   jwt:
@@ -15,10 +15,4 @@ handlebars:
   suffix: .html
   enabled: true
 
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+
