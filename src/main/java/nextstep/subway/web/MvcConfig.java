@@ -15,8 +15,8 @@ public class MvcConfig implements WebMvcConfigurer {
         CacheControl cacheControl = CacheControl.maxAge(7, TimeUnit.DAYS)
                 .mustRevalidate();
 
-        registry.addResourceHandler("/resources/**")
-                .addResourceLocations("classpath:/static")
+        registry.addResourceHandler("**/**")
+                .addResourceLocations("classpath:/static/")
                 .setCacheControl(cacheControl);
     }
 }
