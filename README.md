@@ -90,10 +90,10 @@ npm run dev
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 ### 목표 rps
 - 예상 1일 사용자 수 
-   - a. 1일 사용자 수(DAU): 1000만 명 
+   - a. 1일 사용자 수(DAU): 100만 명 
    - b. 피크 시간대의 집중률(최대 트래픽 / 평소 트래픽): 5
    - c. 1명당 1일 평균 요청수: 2건
-   - d. Throughput: 230 RPS(1일 평균) ~ 1000 RPS(1일 최대)
+   - d. Throughput: 23 RPS(1일 평균) ~ 100 RPS(1일 최대)
 ### VUser
 ```markdown
 Glossary
@@ -114,125 +114,130 @@ Glossary
 ### Smoke
 - VUser: 1
 - Duration: 10m
-- 99퍼센트 이상의 요청은 1500ms 이내에 완료돼야 한다.
+- 99퍼센트 이상의 요청은 50ms 이내에 완료돼야 한다.
 ```json
 {
   "vus": 1,
   "duration": "10m",
 
  "thresholds": {
-    "http_req_duration": ["p(99)<1500"]
+    "http_req_duration": ["p(99)<50"]
  }
 }
 ```
 ### 결과
 ```markdown
-  scenarios: (100.00%) 1 scenario, 1 max VUs, 10m30s max duration (incl. graceful stop):
-           * default: 1 looping VUs for 10m0s (gracefulStop: 30s)
+    ✓ logged in successfully
+    ✓ retrieved member
 
-running (10m00.4s), 0/1 VUs, 593 complete and 0 interrupted iterations
-default ✓ [======================================] 1 VUs  10m0s
-
-     ✓ logged in successfully
-     ✓ retrieved member
-
-     checks.........................: 100.00% ✓ 1186     ✗ 0
-     data_received..................: 421 kB  702 B/s
-     data_sent......................: 317 kB  528 B/s
-     http_req_blocked...............: avg=39.08µs min=1.62µs  med=3.89µs  max=27.49ms p(90)=5.18µs  p(95)=5.53µs
-     http_req_connecting............: avg=488ns   min=0s      med=0s      max=302.4µs p(90)=0s      p(95)=0s
-   ✓ http_req_duration..............: avg=5.77ms  min=3.21ms  med=4.82ms  max=52.72ms p(90)=8.75ms  p(95)=11.05ms
-       { expected_response:true }...: avg=5.77ms  min=3.21ms  med=4.82ms  max=52.72ms p(90)=8.75ms  p(95)=11.05ms
-     http_req_failed................: 0.00%   ✓ 0        ✗ 1186
-     http_req_receiving.............: avg=62.65µs min=32.75µs med=57.76µs max=2.37ms  p(90)=75.24µs p(95)=85.52µs
-     http_req_sending...............: avg=20.01µs min=7.92µs  med=20.93µs max=99.46µs p(90)=30.41µs p(95)=32.49µs
-     http_req_tls_handshaking.......: avg=14.7µs  min=0s      med=0s      max=14.93ms p(90)=0s      p(95)=0s
-     http_req_waiting...............: avg=5.69ms  min=3.16ms  med=4.73ms  max=52.64ms p(90)=8.66ms  p(95)=10.96ms
-     http_reqs......................: 1186    1.975288/s
-     iteration_duration.............: avg=1.01s   min=1s      med=1.01s   max=1.05s   p(90)=1.01s   p(95)=1.02s
-     iterations.....................: 593     0.987644/s
-     vus............................: 1       min=1      max=1
-     vus_max........................: 1       min=1      max=1
+    checks.........................: 100.00% ✓ 1126     ✗ 0
+    data_received..................: 2.4 MB  3.9 kB/s
+    data_sent......................: 481 kB  801 B/s
+    http_req_blocked...............: avg=17.19ms  min=1.15µs  med=2.72µs  max=369.96ms p(90)=54.09ms  p(95)=100.78ms
+    http_req_connecting............: avg=185.01µs min=0s      med=0s      max=15.05ms  p(90)=196.89µs p(95)=319.58µs
+    ✗ http_req_duration..............: avg=15.9ms   min=2.29ms  med=9.65ms  max=1.38s    p(90)=28.66ms  p(95)=41.71ms
+    { expected_response:true }...: avg=15.9ms   min=2.29ms  med=9.65ms  max=1.38s    p(90)=28.66ms  p(95)=41.71ms
+    http_req_failed................: 0.00%   ✓ 0        ✗ 1126
+    http_req_receiving.............: avg=47.39µs  min=26.41µs med=42.99µs max=631.06µs p(90)=58.19µs  p(95)=70.06µs
+    http_req_sending...............: avg=21.35µs  min=6.68µs  med=14.89µs max=216.81µs p(90)=38.55µs  p(95)=44.39µs
+    http_req_tls_handshaking.......: avg=16.98ms  min=0s      med=0s      max=369.73ms p(90)=53.31ms  p(95)=100.25ms
+    http_req_waiting...............: avg=15.83ms  min=2.24ms  med=9.6ms   max=1.38s    p(90)=28.57ms  p(95)=41.65ms
+    http_reqs......................: 1126    1.874138/s
+    iteration_duration.............: avg=1.06s    min=1s      med=1.03s   max=2.89s    p(90)=1.15s    p(95)=1.21s
+    iterations.....................: 563     0.937069/s
+    vus............................: 1       min=1      max=1
+    vus_max........................: 1       min=1      max=1
 ```
+
+![](img/smoke-test.png)
+
 ### Load
-- VUser: 230
+- VUser: 23
 - Duration: 30m
-- 99퍼센트 이상의 요청은 1500ms 이내에 완료돼야 한다.
+- 99퍼센트 이상의 요청은 100ms 이내에 완료돼야 한다.
+
 ```json
 {
   "stages": [
-      { "duration": "15m", "target": 2400 }, 
-      { "duration": "15m", "target": 240 }
+      { "duration": "30m", "target": 23 }
   ],
   "thresholds": {
-    "http_req_duration": ["p(99)<1500"]
+    "http_req_duration": ["p(99)<100"]
   }
 }
 ```
+
 ```markdown
-     ✗ logged in successfully
-      ↳  43% — ✓ 806398 / ✗ 1028576
+     ✓ logged in successfully
      ✓ retrieved member
 
-     checks.........................: 60.98%  ✓ 1607979     ✗ 1028576
-     data_received..................: 4.5 GB  2.5 MB/s
-     data_sent......................: 1.1 GB  590 kB/s
-     http_req_blocked...............: avg=269.16ms min=0s       med=1.59µs  max=57.55s   p(90)=770.1ms  p(95)=1.26s
-     http_req_connecting............: avg=262.09ms min=0s       med=2.34ms  max=17.03s   p(90)=673.33ms p(95)=1s
-   ✓ http_req_duration..............: avg=60.4ms   min=0s       med=12.44ms max=1m0s     p(90)=173.16ms p(95)=257.76ms
-       { expected_response:true }...: avg=95.44ms  min=2.19ms   med=40.97ms max=28.72s   p(90)=213.04ms p(95)=314.07ms
-     http_req_failed................: 39.12%  ✓ 1033392     ✗ 1607979
-     http_req_receiving.............: avg=250.64µs min=0s       med=21.81µs max=691.37ms p(90)=39.93µs  p(95)=53.28µs
-     http_req_sending...............: avg=4.44ms   min=0s       med=8.45µs  max=28.62s   p(90)=1.32ms   p(95)=10.24ms
-     http_req_tls_handshaking.......: avg=186.94ms min=0s       med=0s      max=56.31s   p(90)=706.2ms  p(95)=864.06ms
-     http_req_waiting...............: avg=55.7ms   min=0s       med=11.25ms max=1m0s     p(90)=168.77ms p(95)=238.36ms
-     http_reqs......................: 2641371 1466.604104/s
-     iteration_duration.............: avg=1.23s    min=306.79µs med=1s      max=1m2s     p(90)=2.15s    p(95)=2.88s
-     iterations.....................: 1834973 1018.856849/s
-     vus............................: 43      min=0         max=2400
-     vus_max........................: 2400    min=2199      max=2400
+     checks.........................: 100.00% ✓ 41098     ✗ 0
+     data_received..................: 15 MB   8.1 kB/s
+     data_sent......................: 11 MB   6.1 kB/s
+     http_req_blocked...............: avg=9.61µs  min=944ns   med=2.77µs  max=44.41ms  p(90)=4.9µs   p(95)=5.23µs
+     http_req_connecting............: avg=367ns   min=0s      med=0s      max=400.52µs p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=3.52ms  min=2.26ms  med=3.32ms  max=45.22ms  p(90)=4.36ms  p(95)=5.19ms
+       { expected_response:true }...: avg=3.52ms  min=2.26ms  med=3.32ms  max=45.22ms  p(90)=4.36ms  p(95)=5.19ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 41098
+     http_req_receiving.............: avg=48.73µs min=12.84µs med=44.98µs max=7.16ms   p(90)=65.11µs p(95)=73.34µs
+     http_req_sending...............: avg=19.87µs min=5.31µs  med=17.74µs max=7.02ms   p(90)=30.79µs p(95)=38.31µs
+     http_req_tls_handshaking.......: avg=3.93µs  min=0s      med=0s      max=31.98ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=3.45ms  min=2.22ms  med=3.24ms  max=45.12ms  p(90)=4.28ms  p(95)=5.11ms
+     http_reqs......................: 41098   22.819538/s
+     iteration_duration.............: avg=1s      min=1s      med=1s      max=1.06s    p(90)=1s      p(95)=1.01s
+     iterations.....................: 20549   11.409769/s
+     vus............................: 2       min=1       max=22
+     vus_max........................: 23      min=23      max=23
 ```
+
+![](img/load-test.png)
+
 ### Stress
-- VUser: 1000
-- Duration: 10m
-- 99퍼센트 이상의 요청은 3000ms 이내에 완료돼야 한다.
+- VUser: 100~1000
+- 99퍼센트 이상의 요청은 100ms 이내에 완료돼야 한다.
 
 ```json
 {
-  "vus": 24000,
-  "duration": "10m",
+  "stages": [
+    { "duration": "2m", "target": 100 },
+    { "duration": "1m", "target": 500 },
+    { "duration": "30s", "target": 1000 },
+    { "duration": "1m", "target": 500 },
+    { "duration": "2m", "target": 100 }
+  ],
   "thresholds": {
-    "http_req_duration": ["p(99)<3000"]
+    "http_req_duration": ["p(99)<100"]
   }
 }
 ```
 
 ```markdown
-running (05m02.6s), 0000/1000 VUs, 207983 complete and 1000 interrupted iterations
-default ✗ [==================>-------------------] 1000 VUs  05m02.5s/10m0s
-
      ✗ logged in successfully
-      ↳  97% — ✓ 203029 / ✗ 5628
+      ↳  97% — ✓ 110977 / ✗ 3115
      ✓ retrieved member
 
-     checks.........................: 98.63% ✓ 405812      ✗ 5628
-     data_received..................: 1.1 GB 3.6 MB/s
-     data_sent......................: 195 MB 645 kB/s
-     http_req_blocked...............: avg=217.14ms min=0s       med=32.05µs  max=2.02s    p(90)=545.1ms  p(95)=614.39ms
-     http_req_connecting............: avg=7.52ms   min=0s       med=134.15µs max=1.57s    p(90)=5.61ms   p(95)=31.29ms
-   ✓ http_req_duration..............: avg=20.64ms  min=0s       med=10.22ms  max=1.4s     p(90)=44.2ms   p(95)=69.95ms
-       { expected_response:true }...: avg=20.7ms   min=2.02ms   med=10.25ms  max=1.27s    p(90)=44.03ms  p(95)=69.79ms
-     http_req_failed................: 1.42%  ✓ 5869        ✗ 405812
-     http_req_receiving.............: avg=114.41µs min=0s       med=25.15µs  max=179.87ms p(90)=39.82µs  p(95)=54.74µs
-     http_req_sending...............: avg=1.29ms   min=0s       med=19.63µs  max=1.25s    p(90)=1.22ms   p(95)=5.13ms
-     http_req_tls_handshaking.......: avg=211.51ms min=0s       med=0s       max=1.11s    p(90)=535.27ms p(95)=606.92ms
-     http_req_waiting...............: avg=19.23ms  min=0s       med=9.98ms   max=1.4s     p(90)=40.7ms   p(95)=62.14ms
-     http_reqs......................: 411681 1360.680818/s
-     iteration_duration.............: avg=1.45s    min=844.21µs med=1.46s    max=3.7s     p(90)=1.66s    p(95)=1.75s
-     iterations.....................: 207983 687.421762/s
-     vus............................: 1000   min=1000      max=1000
-     vus_max........................: 1000   min=1000      max=1000
+     checks.........................: 98.61% ✓ 221738     ✗ 3115
+     data_received..................: 358 MB 916 kB/s
+     data_sent......................: 86 MB  219 kB/s
+     http_req_blocked...............: avg=42.88ms min=0s       med=2.37µs  max=1.26s    p(90)=167.12ms p(95)=275.15ms
+     http_req_connecting............: avg=3.98ms  min=0s       med=0s      max=1.08s    p(90)=1.53ms   p(95)=14.14ms
+   ✗ http_req_duration..............: avg=32.24ms min=0s       med=8.96ms  max=1.62s    p(90)=94.15ms  p(95)=155.86ms
+       { expected_response:true }...: avg=32.44ms min=2.19ms   med=9.1ms   max=1.62s    p(90)=94.9ms   p(95)=156.25ms
+     http_req_failed................: 1.47%  ✓ 3331       ✗ 221738
+     http_req_receiving.............: avg=98.62µs min=0s       med=29µs    max=102.11ms p(90)=52.38µs  p(95)=92.46µs
+     http_req_sending...............: avg=1.05ms  min=0s       med=12.46µs max=718.49ms p(90)=314.86µs p(95)=1.87ms
+     http_req_tls_handshaking.......: avg=39.26ms min=0s       med=0s      max=943.05ms p(90)=143.12ms p(95)=254.3ms
+     http_req_waiting...............: avg=31.09ms min=0s       med=8.76ms  max=1.62s    p(90)=90.73ms  p(95)=151.86ms
+     http_reqs......................: 225069 575.673045/s
+     iteration_duration.............: avg=1.12s   min=458.93µs med=1.02s   max=3.46s    p(90)=1.44s    p(95)=1.62s
+     iterations.....................: 114092 291.820237/s
+     vus............................: 92     min=1        max=1000
+     vus_max........................: 1000   min=1000     max=1000
+
+time="2022-12-09T11:07:23Z" level=error msg="some thresholds have failed"
 ```
+
+![](img/stress-test.png)
 
 ---
 

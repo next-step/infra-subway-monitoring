@@ -1,0 +1,8 @@
+{
+  "vus": 1,
+  "duration": "10m",
+
+  "thresholds": {
+    "http_req_duration": ["p(99)<50"]
+  }
+}
