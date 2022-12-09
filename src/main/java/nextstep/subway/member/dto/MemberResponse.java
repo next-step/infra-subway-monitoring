@@ -31,4 +31,12 @@ public class MemberResponse {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public String toString() {
+        return "MemberResponse{" +
+                "id=" + id +
+                ", age=" + age +
+                '}';
+    }
 }
