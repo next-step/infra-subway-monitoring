@@ -17,7 +17,7 @@ export let options = {
     loginTest: {
       executor: 'ramping-arrival-rate',
       exec: 'loginTest',
-      preAllocatedVUs: 19,
+      preAllocatedVUs: 5,
       stages: [
         { duration: '30s', target: 5 },
         { duration: '1m', target: 30 },
@@ -34,7 +34,7 @@ export let options = {
     noLoginTest: {
       executor: 'ramping-arrival-rate',
       exec: 'noLoginTest',
-      preAllocatedVUs: 19,
+      preAllocatedVUs: 12,
       stages: [
         { duration: '30s', target: 5 },
         { duration: '1m', target: 30 },
