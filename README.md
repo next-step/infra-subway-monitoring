@@ -116,7 +116,7 @@ npm run dev
 
 - Stress : `k6/stress/stress_k6.png`
 ![Smoke](k6/stress/stress_k6.png)
-![Smoke](k6/stress/stress_k6.png)
+![Smoke](k6/stress/stress_grafana.png)
 
 ---
 
