@@ -1,0 +1,30 @@
+<included>
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${home}json.log</file>
+        <!-- 날짜 기준에 따라 로그파일 롤링 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 롤링될 로그 파일 패턴 지정 -->
+            <fileNamePattern>${home}json-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 30일 이후의 로그파일 삭제  -->
+            <maxHistory>30</maxHistory>
+            <!-- 로그파일의 크기가 너무 커지는 것을 방지 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 로그파일들의 총 용량 제한 -->
+                <maxFileSize>30MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <thread>thread</thread>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+                <mdc>context</mdc>
+            </fieldNames>
+        </encoder>
+    </appender>
+</included>

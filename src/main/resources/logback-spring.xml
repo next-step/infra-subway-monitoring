@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <springProfile name="!prod">
+        <property name="home" value="logs/"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <property name="home" value="/home/ubuntu/infra-subway-monitoring/logs/"/>
+    </springProfile>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="log-console-appender.xml"/>
+    <include resource="log-file-appender.xml"/>
+    <include resource="log-json-appender.xml"/>
+
+    <logger name="file" level="INFO">
+        <appender-ref ref="file"/>
+    </logger>
+
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
+    </logger>
+
+    <logger name="console" level="TRACE">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>
+
+
+
+
+
+
+
+
+
+
