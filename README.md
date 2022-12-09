@@ -175,6 +175,7 @@ npm run dev
 - Stress 테스트 결과
   - <img src="./docs/result/stress_k6_1.png">
   - <img src="./docs/result/stress_k6_2.png">
+  - <img src="./docs/result/stress_k6_3.png">
   - <img src="./docs/result/stress_grafana.png">
 
   - VUSER 260 정도부터 에러 나기 시작하다가 다시 260 쯤 떨어졌을 때 정상처리
