@@ -102,10 +102,7 @@ npm run dev
   - T : 1.5
 - 시나리오 : 데이터를 조회하는데 여러 데이터를 참조하는 페이지
 - 부하 테스트 시 저장될 데이터 건수 및 크기
-  - 노선 : 
-  - 지하철역 :
-  - 구간 : 
-  - 회원 : 1개
+  - 조회 테스트이므로 저장될 데이터 없음
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -115,7 +112,7 @@ npm run dev
 
 - Load : `k6/load/load_k6.png`
 ![Smoke](k6/load/load_k6.png)
-![Smoke](k6/load/load_k6.png)
+![Smoke](k6/load/load_grafana.png)
 
 - Stress : `k6/stress/stress_k6.png`
 ![Smoke](k6/stress/stress_k6.png)
