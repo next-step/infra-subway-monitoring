@@ -120,9 +120,47 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+1. 부하테스트 전제조건은 어느정도로 설정하셨나요 
+* Throughput 계산
+> 예상 DAU 산출<br>
+  : 카카오 맵 - 7,290,000(MAU) / 30 = 243,000(DAU) <br>
+  : 네이버 지도 - 13,920,000(MAU) / 30 = 464,000(DAU) <br>
+  : 위 두 경쟁사의 예상 DAU 에 따라 이번 부하테스트는 DAU 를 **500,000** 으로 설정하기로 함.<br>
+> ---
+> 피크 시간대  <br>
+  : 통합 데이터지도 통계 자료에 따라 지하철 탑승량이 가장 밀집된 시간대를 피크시간대로 설정 <br>
+  : 시간대 - **07~10시(출근)** / **17~20시(퇴근)** <br>
+> ---
+> 1명당 1일 평균 접속 및 요청수 예측 <br>
+  : 등/하교 및 출/퇴근 을 고려할 때 **1인당 2회** 접속을 평균으로 가정<br>
+  : 각 접속 마다 길찾기를 한다고 예상할 경우, 최대 요청수는 평균의 2배로 가정됨. **최대 1인당 4회**<br>
+> ---
+> 위 3가지 예측을 통해 throughput 계산 <br>
+  : 1일 총 접속수 = DAU * 1인 1일 평균 접속 수 = 500,000 * 2 = 1,000,000 <br>
+  : 1일 평균 rps = 1일 총 접속수 / 86,400 = 1,000,000 / 86,400 = 11.574 => **12** <br>
+  : 1일 최대 rps = 1일 평균 rps * 2 = **24**<br>
+* 목표 latency 는 **100ms** 로 설정
+* 데이터 양 점검
+> 지하철 역 : 616 건 <br>
+> 노선 : 23 건 <br>
+> 구간 : 340 건 <br>
+* VUser 구하기
+> T = 3회 요청 * 0.1 (+ 1s) = 1.3 <br>
+> 평균 VUser = 12 * 1.3 / 3 = 4.8 => 5 <br>
+> 최대 VUser = 24 * 1.3 / 3 = 9.6 => 10
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
+* smoke
+  - script : /k6/smoke/smoke.js
+  - k6 : /k6/smoke/smoke_k6.png
+  - grafana : /k6/smoke/smoke_dashboard.png
+* load
+   - script : /k6/load/load.js
+   - k6 : /k6/load/load_k6.png
+   - grafana : /k6/load/load_dashboard.png
+* stress
+   - script : /k6/stress/stress.js
+   - k6 : /k6/stress/stress_k6.png
+   - grafana : /k6/stress/stress_dashboard.png
 
 ---
 
