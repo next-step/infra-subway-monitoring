@@ -6,14 +6,14 @@ export let options = {
     vus: 2,
     duration: '2m',
     thresholds: {
-        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+        http_req_duration: ['p(99)<100'], // 99% of requests must complete below 0.1s
     },
 };
 
 
 const BASE_URL = 'https://subway.sixthou.kro.kr';
-const USERNAME = 'test@';
-const PASSWORD = 'test password';
+const USERNAME = 'test@test.com';
+const PASSWORD = '1q2w3e!@';
 
 export default function () {
     accessMainPage();
@@ -40,12 +40,12 @@ function accessLoginPage() {
 
 function requestLogin() {
 
-    var payload = JSON.stringify({
+    let payload = JSON.stringify({
         email: USERNAME,
         password: PASSWORD,
     });
 
-    var params = {
+    let params = {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -64,7 +64,7 @@ function requestLogin() {
 function accessPathPage() {
     let pathPage = http.get(`${BASE_URL}/path`);
     check(pathPage, {
-        'access login page': (res) => res.status === 200
+        'access path page': (res) => res.status === 200
     });
 };
 

@@ -125,19 +125,19 @@ pagespeed의 추천사항을 적용하면 FCP와 LCP에 대한 성능 개선이 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
     - Smoke
       - [smoke.js](src/main/resources/docs/smoke/smoke.js)
-      - ![smoke-k6](src/main/resources/docs/smoke/smoke-k6.png)
-      - ![smoke-grafana](src/main/resources/docs/smoke/smoke-grafana.png)
+      - ![smoke-k6](src/main/resources/docs/smoke/smoke-100-k6.png)
+      - ![smoke-grafana](src/main/resources/docs/smoke/smoke-100-grafana.png)
     - Load
       - [load-avg.js](src/main/resources/docs/load/load-avg.js)
-      - ![load-avg-k6](src/main/resources/docs/load/load-avg-k6.png)
-      - ![load-avg-grafana](src/main/resources/docs/load/load-avg-grafana.png)
+      - ![load-avg-k6](src/main/resources/docs/load/load-avg-100-k6.png)
+      - ![load-avg-grafana](src/main/resources/docs/load/load-avg-100-grafana.png)
       - [load-peak.js](src/main/resources/docs/load/load-peak.js)
-      - ![load-peak-k6](src/main/resources/docs/load/load-peak-k6.png)
-      - ![load-peak-grafana](src/main/resources/docs/load/load-peak-grafana.png)
+      - ![load-peak-k6](src/main/resources/docs/load/load-peak-100-k6.png)
+      - ![load-peak-grafana](src/main/resources/docs/load/load-peak-100-grafana.png)
     - Stress
       - [stress.js](src/main/resources/docs/stress/stress.js)
-      - ![stress-k6](src/main/resources/docs/stress/stress-k6.png)
-      - ![stress-grafana](src/main/resources/docs/stress/stress-grafana.png)
+      - ![stress-k6](src/main/resources/docs/stress/stress-100-k6.png)
+      - ![stress-grafana](src/main/resources/docs/stress/stress-100-grafana.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
