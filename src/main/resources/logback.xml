@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="false">
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="console-appender.xml"/>
+    <include resource="file-appender.xml"/>
+    <include resource="json-appender.xml"/>
+
+    <springProfile name="default">
+        <root level="debug">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="local">
+        <root level="debug">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </root>
+    </springProfile>
+
+</configuration>

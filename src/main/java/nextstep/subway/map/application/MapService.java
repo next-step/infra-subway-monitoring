@@ -30,7 +30,6 @@ public class MapService {
         Station sourceStation = stationService.findById(source);
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
-
         return PathResponseAssembler.assemble(subwayPath);
     }
 }
