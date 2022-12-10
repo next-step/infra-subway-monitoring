@@ -103,7 +103,7 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 #### 요구사항 정리
-- [ ] 부하 테스트
+- [X] 부하 테스트
   - [X] 테스트 전제조건 정리
     - [X] 대상 시스템 범위
     - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
@@ -112,7 +112,7 @@ npm run dev
     - [X] 접속 빈도가 높은 페이지
     - [X] 데이터를 갱신하는 페이지
     - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  - [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+  - [X] Smoke, Load, Stress 테스트 후 결과를 기록
 
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
@@ -145,7 +145,26 @@ npm run dev
   - 최대 VUser: 12 (1일 최대 rps * T) / R
 
 3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+ - smoke script
+   - [script](./monitoring/smoke/smoke.js)
+ - smoke k6
+   ![smoke](./monitoring/smoke/smoke_k6.png)
+ - smoke grapana
+   ![smoke](./monitoring/smoke/smoke_grapana.png)
 
+ - load script
+   - [script](./monitoring/load/load.js)
+ - load k6
+   ![smoke](./monitoring/load/load_k6.png)
+ - load grapana
+   ![smoke](./monitoring/load/load_grapana.png)
+
+ - stress script
+   - [script](./monitoring/stress/stress.js)
+ - stress k6
+   ![smoke](./monitoring/stress/stress_k6.png)
+ - stress grapana
+   ![smoke](./monitoring/stress/stress_grapana.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
