@@ -41,7 +41,7 @@ export default function ()  {
 function loadMainPage() {
   const response = http.get(BASE_URL);
   check(response, {
-    'loaded main page in successfully': (resp) => resp.json('accessToken') !== '',
+    'loaded main page in successfully': (res) => res.status === 200,
   });
 }
 
