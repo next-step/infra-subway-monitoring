@@ -10,7 +10,7 @@ export let options = {
 };
 
 const BASE_URL = 'https://shshon-infra.o-r.kr';
-const USERNAME = 'test@tesh.com';
+const USERNAME = 'test@test.com';
 const PASSWORD = 'test';
 
 export default function ()  {
