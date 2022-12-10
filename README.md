@@ -179,7 +179,7 @@ VUser = (목표 rps * T) / R
     - [X] 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - [X] 경로찾기 등의 이벤트 로그를 JSON으로 수집
   - [X] Nginx Access Log 설정하기
-- [ ] Cloudwatch로 모니터링
-  - [ ] Cloudwatch로 로그 수집하기
-  - [ ] Cloudwatch로 메트릭 수집하기
-  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [X] Cloudwatch로 모니터링
+  - [X] Cloudwatch로 로그 수집하기
+  - [X] Cloudwatch로 메트릭 수집하기
+  - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
