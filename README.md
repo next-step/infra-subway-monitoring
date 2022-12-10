@@ -19,15 +19,20 @@
 ## 🚀 Getting Started
 
 ### Install
+
 #### npm 설치
+
 ```
 cd frontend
 npm install
 ```
+
 > `frontend` 디렉토리에서 수행해야 합니다.
 
 ### Usage
+
 #### webpack server 구동
+
 ```
 npm run dev
 ```
@@ -112,76 +117,91 @@ npm run dev
 
 #### 요구사항
 
--[ ] 부하 테스트
-  -[x] 테스트 전제조건 정리
-    -[x] 대상 시스템 범위
-    -[x] 목푯값 설정 (latency, throughput, 부하 유지기간)
-    -[x] 부하 테스트 시 저장될 데이터 건수 및 크기
-  -[x] 아래 시나리오 중 하나를 선택하여 스크립트 작성
-    -[x] 접속 빈도가 높은 페이지
-    -[ ] 데이터를 갱신하는 페이지
-    -[ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  -[ ] Smoke, Load, Stress 테스트 후 결과를 기록
+-[x] 부하 테스트
+    -[x] 테스트 전제조건 정리
+        -[x] 대상 시스템 범위
+        -[x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+        -[x] 부하 테스트 시 저장될 데이터 건수 및 크기
+    -[x] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+        -[x] 접속 빈도가 높은 페이지
+        -[ ] 데이터를 갱신하는 페이지
+        -[ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+    -[x] Smoke, Load, Stress 테스트 후 결과를 기록
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 - 대상 시스템 범위
-  - web(nginx) -> was(tomcat) -> db(mysql)
+    - web(nginx) -> was(tomcat) -> db(mysql)
 - 목푯값 설정
-  - throughput: 115 ~ 345rps
-    - DAU: 50만
-      - 경쟁사 DAU
-        - 네이버지도: 70만 (2,130만(MAU)/30)
-        - 카카오맵: 30만 (950만(MAU)/30)
-        - 참고: https://mobile.newsis.com/view.html?ar_id=NISX20220927_0002028167
-      - 목표 DAU
-        - 경쟁사 평균인 50만
-    - 집중률: 3
-      - 집중률 = 최대 트래픽 / 평소 트래픽
-      - 3배로 가정
-    - 1명당 1일 평균 접속 수: 20
-      - 1싸이클: 6회
-        - 메인페이지 -> 로그인 -> 나의정보요청 -> 경로검색화면 -> 역목록조회 -> 경로검색
-      - 1싸이클 3번정도 반복: 18번 => 약 20번
-    - 1일총접속수: 1000만
-      - 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 50만 X 20
-    - 1일 평균 rps: 115
-      - 1일 총 접속 수 / 86,400 (초/일) = 1000만 / 86400
-    - 1일 최대 rps: 345
-      - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 115 * 3
+    - throughput: 115 ~ 345rps
+        - DAU: 50만
+            - 경쟁사 DAU
+                - 네이버지도: 70만 (2,130만(MAU)/30)
+                - 카카오맵: 30만 (950만(MAU)/30)
+                - 참고: https://mobile.newsis.com/view.html?ar_id=NISX20220927_0002028167
+            - 목표 DAU
+                - 경쟁사 평균인 50만
+        - 집중률: 3
+            - 집중률 = 최대 트래픽 / 평소 트래픽
+            - 3배로 가정
+        - 1명당 1일 평균 접속 수: 20
+            - 1싸이클: 6회
+                - 메인페이지 -> 로그인 -> 나의정보요청 -> 경로검색화면 -> 역목록조회 -> 경로검색
+            - 1싸이클 3번정도 반복: 18번 => 약 20번
+        - 1일총접속수: 1000만
+            - 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 50만 X 20
+        - 1일 평균 rps: 115
+            - 1일 총 접속 수 / 86,400 (초/일) = 1000만 / 86400
+        - 1일 최대 rps: 345
+            - 1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 115 * 3
 - 부하 테스트 시 저장될 데이터 건수 및 크기
-  - 경로 검색 테스트이므로 저장되는 데이터 없음
+    - 경로 검색 테스트이므로 저장되는 데이터 없음
 
 - VUSER 구하기
-  - VUSER
-    - R: the number of requests per VU iteration => 6
-    - T: a value larger than the time needed to complete a VU iteration
-      - T = (R * http_req_duration) (+ 1s) = 6 * 0.1 + 1 = 1.6s
-      - latency: 100ms
-    - (목표 rps * T) / R
-      - 평균 VUSER = 115 * 1.6 / 6 = 30.6 => 31
-      - 최대 VUSER = 345 * 1.6 / 5 = 110.4 => 110
+    - VUSER
+        - R: the number of requests per VU iteration => 6
+        - T: a value larger than the time needed to complete a VU iteration
+            - T = (R * http_req_duration) (+ 1s) = 6 * 0.1 + 1 = 1.6s
+            - latency: 100ms
+        - (목표 rps * T) / R
+            - 평균 VUSER = 115 * 1.6 / 6 = 30.6 => 31
+            - 최대 VUSER = 345 * 1.6 / 5 = 110.4 => 110
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 - 스크립트 파일
-  - docs/js
+    - docs/js
 - Smoke 테스트 결과
-  - <img src="./docs/result/smoke_k6.png">
-  - <img src="./docs/result/smoke_grafana.png">
+    - <img src="./docs/result/smoke_k6.png">
+    - <img src="./docs/result/smoke_grafana.png">
 - Load 테스트 결과
-  - <img src="./docs/result/load_k6.png">
-  - <img src="./docs/result/load_grafana.png">
+    - <img src="./docs/result/load_k6.png">
+    - <img src="./docs/result/load_grafana.png">
 - Stress 테스트 결과
-  - <img src="./docs/result/stress_k6_1.png">
-  - <img src="./docs/result/stress_k6_2.png">
-  - <img src="./docs/result/stress_k6_3.png">
-  - <img src="./docs/result/stress_grafana.png">
+    - <img src="./docs/result/stress_k6_1.png">
+    - <img src="./docs/result/stress_k6_2.png">
+    - <img src="./docs/result/stress_k6_3.png">
+    - <img src="./docs/result/stress_grafana.png">
 
-  - VUSER 260 정도부터 에러 나기 시작하다가 다시 260 쯤 떨어졌을 때 정상처리
+    - VUSER 260 정도부터 에러 나기 시작하다가 다시 260 쯤 떨어졌을 때 정상처리
+
 ---
 
 ### 3단계 - 로깅, 모니터링
+
+#### 요구사항
+
+-[ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+-[ ] 로그 설정하기
+    -[ ] Application Log 파일로 저장하기
+        -[ ] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+        -[ ] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    -[ ] Nginx Access Log 설정하기
+-[ ] Cloudwatch로 모니터링
+    -[ ] 로그 수집하기
+    -[ ] 메트릭 수집하기
+    -[ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
