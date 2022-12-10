@@ -24,7 +24,7 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://shshon-infra.o-r.kr/';
+const BASE_URL = 'https://shshon-infra.o-r.kr';
 const USERNAME = 'test@tesh.com';
 const PASSWORD = 'test';
 
