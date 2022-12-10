@@ -2,16 +2,21 @@ import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
+  // 총 37분
   stages: [
-    { duration: '1m', target: 6 },
-    { duration: '5m', target: 7 },
-    { duration: '4m', target: 8 },
-    { duration: '3m', target: 11 },
-    { duration: '5m', target: 12 },
-    { duration: '2m', target: 11 },
-    { duration: '5m', target: 7 },
-    { duration: '4m', target: 3 },
-    { duration: '1m', target: 0 },
+    { duration: '1m', target: 8 }, // 06 ~ 07시
+    { duration: '5m', target: 25 }, // 07 ~ 08시 (피크)
+    { duration: '5m', target: 50 }, // 08 ~ 09시 (피크)
+    { duration: '3m', target: 10 }, // 10 ~ 11시
+    { duration: '2m', target: 7 }, // 11 ~ 12시
+    { duration: '2m', target: 5 }, // 12 ~ 13시
+    { duration: '2m', target: 3 }, // 13 ~ 14시
+    { duration: '2m', target: 4 }, // 14 ~ 15시
+    { duration: '5m', target: 5 }, // 15 ~ 16시
+    { duration: '4m', target: 10 }, // 16 ~ 17시
+    { duration: '5m', target: 25 }, // 17 ~ 18시 (피크)
+    { duration: '5m', target: 50 }, // 18 ~ 19시 (피크)
+    { duration: '1m', target: 7 }, // 19 ~ 20시
   ],
   thresholds: {
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
