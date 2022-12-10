@@ -1,9 +1,22 @@
-<configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%fullRequest%n%n%fullResponse</pattern>
-        </encoder>
-    </appender>
+<configuration debug="false">
 
-    <appender-ref ref="STDOUT" />
+    <springProfile name="!prod">
+        <property name="home" value="log/"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <property name="home" value="/home/ubuntu/infra-subway-monitoring/log/"/>
+    </springProfile>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="file-appender.xml"/>
+    <include resource="json-appender.xml"/>
+
+    <logger name="file" level="INFO">
+        <appender-ref ref="file"/>
+    </logger>
+
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
+    </logger>
 </configuration>
