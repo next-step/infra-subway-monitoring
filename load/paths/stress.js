@@ -3,10 +3,13 @@ import {check} from 'k6';
 
 export let options = {
     stages: [
-        {duration: '1m', target: 30},
-        {duration: '1m', target: 55},
-        {duration: '1m', target: 80},
-        {duration: '1m', target: 100}
+        {duration: '10s', target: 50},
+        {duration: '10s', target: 100},
+        {duration: '10s', target: 150},
+        {duration: '10s', target: 200},
+        {duration: '10s', target: 250},
+        {duration: '10s', target: 300},
+        {duration: '10s', target: 0},
     ],
 
     thresholds: {
@@ -14,11 +17,10 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://hey-mando.p-e.kr/';
+const BASE_URL = 'https://hey-mando.p-e.kr';
 
 export default function () {
-
-    var params = {
+    const params = {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -29,8 +31,8 @@ export default function () {
         "index page check": (resp) => resp.status === 200
     });
 
-    let stations = http.get(`${BASE_URL}/stations`, params)
-    check(stations, {
+    let paths = http.get(`${BASE_URL}/path`, params)
+    check(paths, {
         "get stations check": (resp) => resp.status === 200
     });
 
@@ -40,4 +42,4 @@ export default function () {
     check(findPath, {
         "find path check": (resp) => resp.status === 200
     });
-};
+}

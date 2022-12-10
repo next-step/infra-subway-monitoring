@@ -109,18 +109,18 @@ npm run dev
 
 ```
 R = 3
-http_req_duration = 0.5
+http_req_duration = 2.2
 T = (R * http_req_duration)
-T = 1.5
+T = 6.6
 VUser = (목표 rps * T) / R
 
 # 평균
 # 12 rps
-vu = 6
+vu = 26
 
 # 최번시
 # 60 rps
-vu = 30
+vu = 132
 ```
 
 3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요.
