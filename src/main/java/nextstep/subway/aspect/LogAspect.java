@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @Aspect
 @Component
 public class LogAspect {
-
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     // nextstep.subway 하위 모든 패키지의 ui 내부 클래스의 메서드 대상
     @Pointcut("within(nextstep.subway.*.ui..*)")
@@ -31,15 +31,13 @@ public class LogAspect {
 
     @Around("onRequest()")
     public Object logging(ProceedingJoinPoint joinPoint) throws Throwable {
-        Class clazz = joinPoint.getTarget().getClass();
-        Logger cLogger = LoggerFactory.getLogger(clazz);
 
         Object result = joinPoint.proceed(joinPoint.getArgs());
 
         String url = getRequestUrl(joinPoint);
         Map<String, Object> params = params(joinPoint);
 
-        cLogger.info("request: {}, params: {}, result: {}", url, params, result);
+        fileLogger.info("request: {}, params: {}", url, params);
         return result;
     }
 
