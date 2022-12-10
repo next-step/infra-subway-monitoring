@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LogAdvice {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("json");
+    private static final Logger LOGGER = LoggerFactory.getLogger("file");
 
     @Pointcut("execution(* nextstep.subway..ui.*.*(..))")
     private void advicePoint() {}
@@ -41,9 +41,12 @@ public class LogAdvice {
         if (obj instanceof ResponseEntity) {
             ResponseEntity response = (ResponseEntity) obj;
             Object responseBody = response.getBody();
-            System.out.println(responseBody.getClass());
-            LOGGER.info("Controller out -> status={}, res={}", response.getStatusCodeValue(),
-                    responseBody.getClass().cast(responseBody).toString());
+            if(responseBody != null) {
+                LOGGER.info("Controller out -> status={}, res={}", response.getStatusCodeValue(),
+                        responseBody.getClass().cast(responseBody).toString());
+            }
+            LOGGER.info("Controller out -> status={}", response.getStatusCodeValue());
+
         }
     }
 
