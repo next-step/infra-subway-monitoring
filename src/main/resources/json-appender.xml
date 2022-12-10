@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
-    <property name="home" value="/Users/nhn/"/>
-
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${home}json.log</file>
-        <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+        <file>${home}/json.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${home}/json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
