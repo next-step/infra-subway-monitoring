@@ -26,7 +26,7 @@ function path() {
 }
 
 function findPath(authHeaders) {
-    let findPathRes = http.get(`${BASE_URL}/paths?source=1&target=50`, authHeaders);
+    let findPathRes = http.get(`${BASE_URL}/path?source=1&target=50`, authHeaders);
     check(findPathRes, {
         'Found path': (res) => res.status === 200,
     });
