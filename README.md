@@ -86,7 +86,9 @@ API 성능 테스트 결과
 ---
 
 ### 2단계 - 부하 테스트 
-1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
+#### 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+
 #### DAU
 - 하루 지하철 사용자 수는 최대 600만명입니다. [자료](https://blog.hyundai-rotem.co.kr/691?category=663745)
 - 서비스 초기 단계이므로 이중 10%만 running map을 사용하는 것으로 가정하면, 60만명입니다.
@@ -99,7 +101,7 @@ API 성능 테스트 결과
 #### 집중률
 - 최대 트래픽 : 사용자중 80%가 사용하는 것으로 가정하면 480,000입니다.
 - 평소 트래픽 : 사용자중 40%만 사용하는 것으로 가정하면 240,000입니다.
-- 따라서, 집중률은 2이다.
+- 따라서, 집중률은 2입니다.
 #### 1일 최대 rps
 - 13 * 2 수식을 통해서 26을 도출할 수 있습니다.
 
@@ -109,7 +111,123 @@ API 성능 테스트 결과
 - 평균 VUser : 13 * 2.5 / 3 = 10
 - 최대 VUser : 26 * 2.5 / 3 = 21
 
-1. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+#### 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 접속률이 가장 높을 것으로 예상되는 노선조회, 경로 탐색을 포함하여 테스트를 진행했습니다.
+
+#### Smoke 테스트
+![./images/smoke.png](./images/smoke.png)
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+  vus: 2, // 1 user looping for 1 minute
+  duration: '1m',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://92soojong.o-r.kr/';
+
+export default function ()  {
+  
+    let main = http.get(`${BASE_URL}`);
+    check(main, {'200 : main page': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : stations': (res) => res.status === 200});
+
+    let lines = http.get(`${BASE_URL}/lines`);
+    check(lines, {'200 : lines': (res) => res.status === 200});
+
+    let sections = http.get(`${BASE_URL}/sections`);
+    check(sections, {'200 : sections': (res) => res.status === 200});
+
+    sleep(1);
+  
+};
+```
+
+#### Load 테스트
+![./images/load.png](./images/load.png)
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '5m', target: 5 },
+        { duration: '5m', target: 10 },
+        { duration: '15m', target: 21 },
+        { duration: '5m', target: 10 },
+        { duration: '5m', target: 5 }
+        { duration: '10s', target: 0 }
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<2500'], // 99% of requests must complete below 2.5s
+    }
+};
+
+const BASE_URL = 'https://92soojong.o-r.kr/';
+
+export default function ()  {
+
+    let path = http.get(`${BASE_URL}/path`);
+    check(path, {'200 : path': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : lines': (res) => res.status === 200});
+
+    let sections = http.get(`${BASE_URL}/source=3&target=5`);
+    check(sections, {'200 : sections': (res) => res.status === 200});
+
+    sleep(1);
+  
+};
+```
+
+
+#### Stress 테스트
+![./images/stress.png](./images/stress.png)
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '5m', target: 5 },
+        { duration: '5m', target: 21 },
+        { duration: '5m', target: 50 },
+        { duration: '5m', target: 70 },
+        { duration: '5m', target: 100 },
+        { duration: '5m', target: 200 },
+        { duration: '10s', target: 0 },
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<2500'], // 99% of requests must complete below 2.5s
+    }
+};
+
+const BASE_URL = 'https://92soojong.o-r.kr/';
+
+export default function ()  {
+
+    let path = http.get(`${BASE_URL}/path`);
+    check(path, {'200 : path': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : lines': (res) => res.status === 200});
+
+    let sections = http.get(`${BASE_URL}/source=3&target=5`);
+    check(sections, {'200 : sections': (res) => res.status === 200});
+
+    sleep(1);
+  
+};
+```
 
 ---
 
