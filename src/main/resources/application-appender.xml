@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+  <property name="home" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/"/>
+
+  <appender name="application" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--   로깅이 기록될 위치   -->
+    <file>${home}application.log</file>
+    <!--   로그파일 나누는 기준을 설정 : SIZE 15MB   -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${home}application-%d{yyyyMMdd}-%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>15MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <!--   로깅 패턴을 설정   -->
+    <encoder>
+      <charset>utf8</charset>
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+      </Pattern>
+    </encoder>
+  </appender>
+</included>
