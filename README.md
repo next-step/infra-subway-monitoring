@@ -159,15 +159,16 @@ import { check, sleep } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '5m', target: 5 },
+        { duration: '10s', target: 10 },
         { duration: '5m', target: 10 },
+        { duration: '10s', target: 21 },
         { duration: '15m', target: 21 },
+        { duration: '10s', target: 10 },
         { duration: '5m', target: 10 },
-        { duration: '5m', target: 5 }
         { duration: '10s', target: 0 }
     ],
     thresholds: {
-        http_req_duration: ['p(99)<2500'], // 99% of requests must complete below 2.5s
+        http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1.0s
     }
 };
 
@@ -207,7 +208,7 @@ export let options = {
         { duration: '10s', target: 0 },
     ],
     thresholds: {
-        http_req_duration: ['p(99)<2500'], // 99% of requests must complete below 2.5s
+        http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 2.5s
     }
 };
 
