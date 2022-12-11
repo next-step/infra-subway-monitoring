@@ -167,6 +167,9 @@
     - [x] 최단경로조회
   - [x] AOP 적용
   - [x] Nginx Access Log 설정하기
+  - [x] cadvisor 적용
+    - ip :http://52.79.159.211:9090/
+    - <img src="./img/cadvisor.png">
 -[x] Cloudwatch로 모니터링
   - [x] Cloudwatch로 로그 수집하기
   - [x] Cloudwatch로 메트릭 수집하기
