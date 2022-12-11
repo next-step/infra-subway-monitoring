@@ -4,7 +4,7 @@ import router from '@/router'
 import store from '@/store'
 import App from './App.vue'
 import '@/api'
-import '@/styles/index.scss'
+import '@/styles/stations.scss'
 
 new Vue({
   el: '#app',
