@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="home" value="log/" />
+    <property name="home" value="/home/ubuntu/infra-subway-monitoring/log/" />
     <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${home}json.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <!-- 10일 후 삭제 하도록 설정  -->
+            <maxHistory>10</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>15MB</maxFileSize>
+                <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
