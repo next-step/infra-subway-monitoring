@@ -13,6 +13,7 @@ spring:
         show_sql: false
 logging:
   level:
+    nextstep.subway: info
     org:
       hibernate:
         type:
