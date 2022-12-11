@@ -32,6 +32,7 @@ public class MemberController {
         return ResponseEntity.ok().body(member);
     }
 
+    @NoneLogging
     @PutMapping("/members/{id}")
     public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id, @RequestBody MemberRequest param) {
         memberService.updateMember(id, param);

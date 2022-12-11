@@ -17,8 +17,8 @@ public class AuthService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("file");
 
-    private MemberRepository memberRepository;
-    private JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public AuthService(MemberRepository memberRepository, JwtTokenProvider jwtTokenProvider) {
         this.memberRepository = memberRepository;
@@ -30,7 +30,7 @@ public class AuthService {
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
-        LOGGER.info("로그인 성공 - id : {}", request.getEmail());
+        LOGGER.info("[EVENT] 로그인 성공 - id : {}", request.getEmail());
         return new TokenResponse(token);
     }
 

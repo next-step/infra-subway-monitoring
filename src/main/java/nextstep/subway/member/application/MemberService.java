@@ -15,7 +15,7 @@ public class MemberService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("file");
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -23,7 +23,7 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        LOGGER.info("회원가입 : email - {}, age - {}", request.getEmail(), request.getAge());
+        LOGGER.info("[EVENT] 회원가입 : email - {}, age - {}", request.getEmail(), request.getAge());
         return MemberResponse.of(member);
     }
 
@@ -35,6 +35,7 @@ public class MemberService {
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
+        LOGGER.info("[EVENT] 회원정보수정 : id - {}, email = {}, age = {}", id, param.getEmail(), param.getAge());
     }
 
     public void deleteMember(Long id) {

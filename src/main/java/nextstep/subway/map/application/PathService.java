@@ -31,10 +31,10 @@ public class PathService {
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
         SubwayPath subwayPath = convertSubwayPath(path);
 
-        LOGGER.info("최단경로조회 : {} {} {}"
+        LOGGER.info("[EVENT] 최단경로조회 : {}, {}, {}"
                 , kv("출발지", source.getName())
                 , kv("도착지", target.getName())
-                , kv("경로", subwayPath)
+                , kv("경로", subwayPath.toString())
         );
 
         return convertSubwayPath(path);
