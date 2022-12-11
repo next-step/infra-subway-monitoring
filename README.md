@@ -151,3 +151,23 @@
   - <img src="./k6/stress/stress_grafana.png">
 
   - VUSER 280정도부터 문제 생기기 시작. 260으로 줄어들면서 바로 정상화 되었음
+
+## Step3. 로깅 모니터링
+
+### 요구사항
+
+-[x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+  - [x] gzip 적용
+  - <img src="./img/gzip-applied.png">
+-[x] 로그 설정하기
+  - [x] 로그백 설정
+  - [x] 주요 서비스에 로그 적용
+    - [x] 회원가입
+    - [x] 로그인
+    - [x] 최단경로조회
+  - [x] AOP 적용
+  - [x] Nginx Access Log 설정하기
+-[x] Cloudwatch로 모니터링
+  - [x] Cloudwatch로 로그 수집하기
+  - [x] Cloudwatch로 메트릭 수집하기
+  - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
