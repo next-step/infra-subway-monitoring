@@ -16,7 +16,7 @@ public class LogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger("file");
 
 
-    @Around("execution(* nextstep.subway.*.ui.*Controller.*(..)) && !target(nextstep.subway.common.NoneLogging)")
+    @Around("execution(* nextstep.subway.*.ui.*Controller.*(..)) && !@target(nextstep.subway.common.NoneLogging)")
     public Object fileLog(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
