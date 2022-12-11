@@ -166,14 +166,13 @@ npm run dev
     - 회원가입, 로그인 등의 이벤트에 로깅을 설정
     - 경로찾기 등의 이벤트 로그를 JSON으로 수집
   - [X] Nginx Access Log 설정하기
-- [ ] Cloudwatch로 모니터링
-  - [ ] Cloudwatch로 로그 수집하기
-  - [ ] Cloudwatch로 메트릭 수집하기
-  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [X] Cloudwatch로 모니터링
+  - [X] Cloudwatch로 로그 수집하기
+  - [X] Cloudwatch로 메트릭 수집하기
+  - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
   - 회원가입, 로그인 이벤트: `/home/ubuntu/infra-subway-monitoring/log/file.log`
   - 경로찾기 이벤트: `/home/ubuntu/infra-subway-monitoring/log/json.log`
-  - nginx access log: `/home/ubuntu/nginx/log`
 
 2. Cloudwatch 대시보드 URL을 알려주세요
