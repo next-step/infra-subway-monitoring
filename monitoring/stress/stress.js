@@ -3,21 +3,21 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '1m', target: 0 },
-    { duration: '2m', target: 5 },
-    { duration: '2m', target: 10 },
-    { duration: '2m', target: 20 },
+    { duration: '10s', target: 20 }, // ramping up
+    { duration: '1m', target: 20 },
+    { duration: '10s', target: 40 }, // ramping up
     { duration: '2m', target: 40 },
-    { duration: '2m', target: 80 },
-    { duration: '2m', target: 160 },
-    { duration: '2m', target: 320 },
-    { duration: '2m', target: 160 },
-    { duration: '2m', target: 80 },
+    { duration: '10s', target: 80 }, // ramping up
+    { duration: '5m', target: 80 },
+    { duration: '10s', target: 160 }, // ramping up
+    { duration: '5m', target: 160 },
+    { duration: '10s', target: 80 }, // ramping down
+    { duration: '5m', target: 80 },
+    { duration: '10s', target: 40 }, // ramping down
     { duration: '2m', target: 40 },
-    { duration: '2m', target: 20 },
-    { duration: '2m', target: 10 },
-    { duration: '2m', target: 5 },
-    { duration: '1m', target: 0 }, // ramp-down to 0 users
+    { duration: '10s', target: 20 }, // ramping down
+    { duration: '1m', target: 20 },
+    { duration: '10s', target: 0 }, // ramping down
   ],
   thresholds: {
     http_req_duration: ['p(99)<500'], // 99% of requests must complete below 0.5s
