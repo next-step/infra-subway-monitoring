@@ -25,14 +25,10 @@ export let options = {
 };
 
 const BASE_URL = 'https://shshon-infra.o-r.kr';
-const USERNAME = 'test@test.com';
-const PASSWORD = 'test';
 
 export default function ()  {
-  // 메인 페이지 -> 로그인 -> 경로 탐색
+  // 메인 페이지 -> 경로 탐색 페이지 -> 경로 탐색 요청
   loadMainPage();
-  const authHeaders = login();
-  retrieveMember(authHeaders);
   loadPathPage();
   findPath();
   sleep(1);
@@ -45,36 +41,6 @@ function loadMainPage() {
   });
 }
 
-function login() {
-  const payload = JSON.stringify({
-    email: USERNAME,
-    password: PASSWORD,
-  });
-
-  const params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
-
-  check(loginRes, {
-    'logged in successfully': (resp) => resp.json('accessToken') !== '',
-  });
-
-  return {
-    headers: {
-      Authorization: `Bearer ${loginRes.json('accessToken')}`,
-    },
-  };
-}
-
-function retrieveMember(authHeaders) {
-  const myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
-  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
-}
-
 function loadPathPage() {
   const response = http.get(`${BASE_URL}/path`);
   check(response, {
@@ -82,8 +48,10 @@ function loadPathPage() {
   });
 }
 
-function findPath(authHeaders) {
-  const response = http.get(`${BASE_URL}/paths?source=3&target=4`, authHeaders);
+function findPath() {
+  let source = Math.floor(Math.random() * 10 + 1);
+  let target = Math.floor(Math.random() * 10 + 1);
+  const response = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
   check(response, {
     'get path info in successfully': (res) => res.status === 200,
   });
