@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class PathService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("file");
+    private static final Logger LOGGER = LoggerFactory.getLogger("json");
 
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
