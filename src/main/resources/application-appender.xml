@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-  <property name="home" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/"/>
+  <property name="home" value="log/"/>
 
   <appender name="application" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <!--   로깅이 기록될 위치   -->

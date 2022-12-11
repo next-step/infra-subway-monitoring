@@ -19,4 +19,6 @@ public class PathResponseAssembler {
 
     private PathResponseAssembler() {
     }
+
+
 }

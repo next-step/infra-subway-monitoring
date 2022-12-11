@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-  <property name="home" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/" />
+  <property name="home" value="log/" />
 
   <!--  appender 이름 & 클래스 선언  -->
   <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
