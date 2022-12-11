@@ -194,6 +194,14 @@ pagespeed의 추천사항을 적용하면 FCP와 LCP에 대한 성능 개선이 
 - http_req_blocked
   - 총 request 시간 `http_req_sending + http_req_waiting + http_req_receiving`와 같다.
 ---
-
-
-
+# 🚀 3단계 - 로깅, 모니터링
+## 요구사항
+- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [ ] 로그 설정하기
+  - [ ] Application Log 파일로 저장하기
+    - [ ] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+    - [ ] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+- [ ] Cloudwatch로 모니터링
+  - [ ] Cloudwatch로 로그 수집하기
+  - [ ] Cloudwatch로 메트릭 수집하기
+  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
