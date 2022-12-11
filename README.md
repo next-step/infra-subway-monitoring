@@ -254,6 +254,13 @@ time="2022-12-09T11:07:23Z" level=error msg="some thresholds have failed"
   - Cloudwatch로 메트릭 수집하기
   - USE 방법론을 활용하기 용이하도록 대시보드 구성
 
-1. 각 서버내 로깅 경로를 알려주세요.
+#### CAdvisor 적용
+![](img/cadvisor.png)
 
+#### 과제
+1. 각 서버내 로깅 경로를 알려주세요.
+- nginx 로그 경로: `/var/log`
+- application 로그 경로: `/home/ubuntu/nextstep/infra-subway-monitoring/log`
 2. Cloudwatch 대시보드 URL을 알려주세요.
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=cwjohnpark-dashboard
+![](img/cloudwatch-dashboard.png)

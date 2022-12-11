@@ -43,3 +43,4 @@ fronted/.eslintrc.js
 
 docker/db/mysql/data
 *.log
+*.cer
