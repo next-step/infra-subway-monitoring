@@ -13,7 +13,7 @@
         <appender-ref ref="file" />
     </logger>
 
-    <logger name="json" level="INFO" >
+    <logger name="json" level="DEBUG" >
         <appender-ref ref="json" />
     </logger>
 </configuration>
