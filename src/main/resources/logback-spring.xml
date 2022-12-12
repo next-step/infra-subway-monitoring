@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <property name="home" value="/home/ubuntu/logs/subway"/>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <include resource="file-appender.xml"/>
+    <include resource="console-appender.xml"/>
+    <include resource="json-appender.xml"/>
+    <include resource="error-appender.xml"/>
+
+    <springProfile name="console-logging">
+        <logger name="console" level="INFO">
+            <appender-ref ref="console"/>
+        </logger>
+    </springProfile>
+
+    <springProfile name="file-logging">
+        <logger name="file" level="INFO">
+            <appender-ref ref="file"/>
+        </logger>
+        <logger name="json" level="INFO">
+            <appender-ref ref="json"/>
+        </logger>
+        <logger name="error" level="INFO">
+            <appender-ref ref="error"/>
+        </logger>
+    </springProfile>
+</configuration>
