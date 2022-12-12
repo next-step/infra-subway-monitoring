@@ -114,7 +114,6 @@ npm run dev
     - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
   - [X] Smoke, Load, Stress 테스트 후 결과를 기록
 
-
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 대상 시스템 범위
   - nginx(proxy) -> Spring Boot(was) -> mysql(db)
@@ -175,6 +174,17 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
+#### 요구사항 정리
+- [ ] 로그 설정하기
+  - [ ] Application Log 파일로 저장하기
+    - 회원가입, 로그인 등의 이벤트에 로깅을 설정
+    - 경로찾기 등의 이벤트 로그를 JSON으로 수집
+  - [ ] Nginx Access Log 설정하기
+- [ ] Cloudwatch로 모니터링
+  - [ ] Cloudwatch로 로그 수집하기
+  - [ ] Cloudwatch로 메트릭 수집하기
+  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+    
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
