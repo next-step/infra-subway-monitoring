@@ -1,5 +1,6 @@
 package nextstep.subway.line.ui;
 
+import nextstep.subway.common.logging.Logging;
 import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
@@ -23,40 +24,47 @@ public class LineController {
     }
 
     @PostMapping
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity createLine(@RequestBody LineRequest lineRequest) {
         LineResponse line = lineService.saveLine(lineRequest);
         return ResponseEntity.created(URI.create("/lines/" + line.getId())).body(line);
     }
 
     @GetMapping
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity<List<LineResponse>> findAllLines() {
         return ResponseEntity.ok(lineService.findLineResponses());
     }
 
     @GetMapping("/{id}")
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
     @PutMapping("/{id}")
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity updateLine(@PathVariable Long id, @RequestBody LineRequest lineUpdateRequest) {
         lineService.updateLine(id, lineUpdateRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity deleteLine(@PathVariable Long id) {
         lineService.deleteLineById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{lineId}/sections")
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity addLineStation(@PathVariable Long lineId, @RequestBody SectionRequest sectionRequest) {
         lineService.addLineStation(lineId, sectionRequest);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{lineId}/sections")
+    @Logging(type = Logging.LoggingType.JSON)
     public ResponseEntity removeLineStation(@PathVariable Long lineId, @RequestParam Long stationId) {
         lineService.removeLineStation(lineId, stationId);
         return ResponseEntity.ok().build();
@@ -70,6 +78,7 @@ public class LineController {
     static final Object left = new Object();
     static final Object right = new Object();
     @GetMapping("/lock-left")
+    @Logging(type = Logging.LoggingType.JSON)
     public String findLockLeft() throws InterruptedException {
 
         synchronized (left) {
@@ -82,6 +91,7 @@ public class LineController {
     }
 
     @GetMapping("/lock-right")
+    @Logging(type = Logging.LoggingType.JSON)
     public String findLockRight() throws InterruptedException {
         synchronized (right) {
             Thread.sleep(5000);
@@ -93,6 +103,7 @@ public class LineController {
     }
 
     @GetMapping("/tan")
+    @Logging(type = Logging.LoggingType.JSON)
     public String generateStreams() {
         double value = 0;
         IntStream.of(100).parallel().map(extracted(value));
