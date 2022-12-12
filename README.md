@@ -234,14 +234,14 @@ npm run dev
 - Cloudwatch 로 모니터링
 
 #### 로그 설정
-- [ ] Application Log 파일로 저장
-  - [ ] 회원가입, 로그인 등의 이벤트에 로깅 설정
-  - [ ] 경로 찾기 등의 이벤트 로그를 JSON 으로 수집
-- [ ] Ngnix Access Log 설정
+- [x] Application Log 파일로 저장
+  - [x] 회원가입, 로그인 등의 이벤트에 로깅 설정
+  - [x] 경로 찾기 등의 이벤트 로그를 JSON 으로 수집
+- [x] Ngnix Access Log 설정
 
 #### Cloudwatch 로 모니터링
-- [ ] Cloudwatch 를 통한 로그 수집
-- [ ] Cloudwatch 를 통한 메트릭 수집
+- [x] Cloudwatch 를 통한 로그 수집
+- [x] Cloudwatch 를 통한 메트릭 수집
 - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 #### USE 방법론
