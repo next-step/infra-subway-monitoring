@@ -40,5 +40,6 @@ out/
 frontend/node_modules
 fronted/.prttierrc.js
 fronted/.eslintrc.js
+frontend/*pid*
 
 docker/db/mysql/data

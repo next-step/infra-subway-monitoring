@@ -2,6 +2,7 @@ version: '3'
 services:
   local-db:
     image: library/mysql:5.7
+    platform: linux/x86_64
     container_name: local-db
     restart: always
     ports:
