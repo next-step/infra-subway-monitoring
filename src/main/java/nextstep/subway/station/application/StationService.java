@@ -4,6 +4,8 @@ import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
+
+    private Logger log = LoggerFactory.getLogger(StationService.class);
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -20,24 +24,29 @@ public class StationService {
     }
 
     public StationResponse saveStation(StationRequest stationRequest) {
+        log.info("Save stations, station information : {}", stationRequest.toStation());
         Station persistStation = stationRepository.save(stationRequest.toStation());
         return StationResponse.of(persistStation);
     }
 
     @Transactional(readOnly = true)
     public List<StationResponse> findAllStations() {
+        log.info("Find stations");
         List<Station> stations = stationRepository.findAll();
 
+        log.info("Find stations, Stations information : {}", stations);
         return stations.stream()
                 .map(StationResponse::of)
                 .collect(Collectors.toList());
     }
 
     public void deleteStationById(Long id) {
+        log.info("Delete station, Station Id is, {}", id);
         stationRepository.deleteById(id);
     }
 
     public Station findStationById(Long id) {
+        log.info("Find station, Station Id is, {}", id);
         return stationRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
