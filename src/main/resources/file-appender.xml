@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+    <property name="LOGS_ABSOLUTE_PATH" value="log" />
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--로깅이 기록될 위치-->
+        <file>${LOGS_ABSOLUTE_PATH}/file.log</file>
+        <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_ABSOLUTE_PATH}/file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+            </Pattern>
+        </encoder>
+    </appender>
+</included>

@@ -1,8 +1,9 @@
 package nextstep.subway.map.dto;
 
-import nextstep.subway.station.dto.StationResponse;
-
 import java.util.List;
+import java.util.stream.Collectors;
+
+import nextstep.subway.station.dto.StationResponse;
 
 public class PathResponse {
     private List<StationResponse> stations;
@@ -22,5 +23,9 @@ public class PathResponse {
 
     public int getDistance() {
         return distance;
+    }
+
+    public List<String> toStationsName() {
+        return getStations().stream().map(StationResponse::getName).collect(Collectors.toList());
     }
 }
