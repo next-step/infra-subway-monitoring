@@ -11,6 +11,8 @@
             </timeBasedFileNamingAndTriggeringPolicy>
             <!-- 10일 후 삭제 하도록 설정  -->
             <maxHistory>10</maxHistory>
+            <!-- 로그 파일 저장소 최대 크기 -->
+            <totalSizeCap>100MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <charset>UTF-8</charset>
