@@ -58,6 +58,7 @@ npm run dev
 |  | Web | 2.7s | 2.8s | 2.8s | 30ms | 0.004 | 2.7s |
 
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+
 경쟁 서비스 결과 기반 RUNNINGMAP 웹 성능예산 설정
 
 |  | Mobile | Web |
@@ -71,6 +72,18 @@ npm run dev
 | Lighthouse | 80점 이상 | 80점 이상 |
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+
+**지하철 노선도 서비스의 목표 응답 시간**
+- TTI(Web 기준) 3s 이내로 응답
+- FCP / 페이지 별 응답 시간은 3s 이내로 응답
+    - 경쟁 서비스의 응답 시간이 1~6s로 응답
+    - 3초의 법칙
+- 경로 검색 기능의 경우 0.5s 이내로 응답
+    - 경로 검색(춘천 → 신창)
+        - 네이버지도 : 403.67ms
+        - 카카오맵 : 267.35ms
+
+**개선사항**
 - 불필요 js 제거 및 축소
     - 예상 절감치: 0.56s
     - 대상 리소스(리소스 크기: 2.3MB)
@@ -96,7 +109,138 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- **시스템의 테스트 범위**: "경로 검색 기능"과 같은 접근 빈도가 높은 페이지 및 기능
+- **사용 시간**: 출근, 퇴근 시간과 같은 서비스 이용이 집중되는 시간
+- **DAU**: 4,320,000명
+- **Throughput(rps)**: 100 ~ 1000
+    - **1일 총 접속 수**: 8,640,000명
+        - 4,320,000명 x 2(1일 2회 접속한다고 가정)
+    - **1일 평균 rps**: 100
+        - 8,640,000 / 864,000 = 100
+    - **1일 최대 rps**: 1000
+        - 100 x 10(최대 트래픽 / 평소 트래픽) = 1000
+- **Latency**: 100ms
+- **T**: (2 x 0.1) + 0 = 0.2s
+  - 2번의 요청(경로 탐색 페이지 접속, 경로 탐색) 
+- **VUser**: (100 x 0.2) / 2 = 10 ~ 100
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+#### Smoke
+
+![smoke_k6](/images/smoke_k6.png)
+
+![smoke_grafana1](/images/smoke_grafana.png)
+
+![smoke_grafana2](/images/smoke_grafana_1.png)
+
+```javascript
+// smoke.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  'vus': 1, // 1 user looping for 1 minute
+  'duration': '10m',
+  'thresholds': {
+    'http_req_duration': ['p(99)<500'], // 99% of requests must complete below 0.5s
+  },
+};
+
+const BASE_URL = 'https://doorisopen.kro.kr';
+
+export default function() {
+  let loadPageStatus = http.get(`${BASE_URL}/path`).status;
+  check(loadPageStatus, { 'move find path page': (obj) => obj === 200 });
+
+  let source = Math.floor(Math.random() * 10 + 1);
+  let target = Math.floor(Math.random() * 10 + 1);
+  let findPath = http.get(`${BASE_URL}/paths/?source=${source}&target=${target}`);
+
+  check(findPath, { 'find path successfully': (obj) => obj.status === 200 });
+  sleep(1);
+};
+```
+
+#### Load
+
+![load_k6](/images/load_k6.png)
+
+![load_grafana1](/images/load_grafana.png)
+
+![load_grafana2](/images/load_grafana_1.png)
+
+```javascript
+// load.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  'stages': [
+    { 'duration': '3m', 'target': 100 },
+    { 'duration': '7m', 'target': 100 },
+    { 'duration': '10m', 'target': 0 },
+  ],
+  'thresholds': {
+    'http_req_duration': ['p(99)<500'], // 99% of requests must complete below 0.5s
+  },
+};
+
+const BASE_URL = 'https://doorisopen.kro.kr';
+
+export default function() {
+  let loadPageStatus = http.get(`${BASE_URL}/path`).status;
+  check(loadPageStatus, { 'move find path page': (obj) => obj === 200 });
+
+  let source = Math.floor(Math.random() * 10 + 1);
+  let target = Math.floor(Math.random() * 10 + 1);
+  let findPath = http.get(`${BASE_URL}/paths/?source=${source}&target=${target}`);
+
+  check(findPath, { 'find path successfully': (obj) => obj.status === 200 });
+  sleep(1);
+};
+```
+
+#### Stress
+
+![stress_k6](/images/stress_k6.png)
+
+![stress_grafana1](/images/stress_grafana.png)
+
+![stress_grafana2](/images/stress_grafana_1.png)
+
+```javascript
+// stress.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  'stages': [
+    { 'duration': '2m', 'target': 50 },
+    { 'duration': '3m', 'target': 50 },
+    { 'duration': '5m', 'target': 300 },
+    { 'duration': '5m', 'target': 500 },
+    { 'duration': '5m', 'target': 1000 },
+  ],
+  'thresholds': {
+    'http_req_duration': ['p(99)<500'], // 99% of requests must complete below 0.5s
+  },
+};
+
+const BASE_URL = 'https://doorisopen.kro.kr';
+
+export default function() {
+  let loadPageStatus = http.get(`${BASE_URL}/path`).status;
+  check(loadPageStatus, { 'move find path page': (obj) => obj === 200 });
+
+  let source = Math.floor(Math.random() * 10 + 1);
+  let target = Math.floor(Math.random() * 10 + 1);
+  let findPath = http.get(`${BASE_URL}/paths/?source=${source}&target=${target}`);
+
+  check(findPath, { 'find path successfully': (obj) => obj.status === 200 });
+  sleep(1);
+};
+```
 
 ---
 
