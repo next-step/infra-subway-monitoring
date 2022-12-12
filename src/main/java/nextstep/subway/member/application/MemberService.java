@@ -4,13 +4,18 @@ import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class MemberService {
-    private MemberRepository memberRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger("file");
+
+    private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -18,6 +23,7 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
+        LOGGER.info("[EVENT] 회원가입 : email - {}, age - {}", request.getEmail(), request.getAge());
         return MemberResponse.of(member);
     }
 
@@ -29,6 +35,7 @@ public class MemberService {
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
+        LOGGER.info("[EVENT] 회원정보수정 : id - {}, email = {}, age = {}", id, param.getEmail(), param.getAge());
     }
 
     public void deleteMember(Long id) {

@@ -13,8 +13,21 @@ spring:
         show_sql: false
 logging:
   level:
+    nextstep.subway: info
     org:
       hibernate:
         type:
           descriptor:
             sql: info
+
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: sixthou
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -15,4 +15,9 @@ handlebars:
   suffix: .html
   enabled: true
 
-
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
