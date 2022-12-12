@@ -162,6 +162,13 @@ Throughput 게산 공식
 ---
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
+#### 접속하실 아이디 (Web)
++ ssh -i sawooook-key.pem ubuntu@13.124.4.105
+
+#### 로깅 경로
++ nginx : /var/log/nginx/
++ applicationLog : /home/ubuntu/infra-subway-monitoring/log/
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sawooook-dashboard
