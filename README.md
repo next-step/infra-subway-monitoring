@@ -102,10 +102,76 @@ npm run dev
 ---
 
 ### 2단계 - 부하 테스트 
+#### 요구사항 정리
+- [X] 부하 테스트
+  - [X] 테스트 전제조건 정리
+    - [X] 대상 시스템 범위
+    - [X] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - [X] 부하 테스트 시 저장될 데이터 건수 및 크기
+  - [X] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+    - [X] 접속 빈도가 높은 페이지
+    - [X] 데이터를 갱신하는 페이지
+    - [X] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  - [X] Smoke, Load, Stress 테스트 후 결과를 기록
+
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 대상 시스템 범위
+  - nginx(proxy) -> Spring Boot(was) -> mysql(db)
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 예상 1일 사용자 수(DAU) 예상
+  - 30만 예상
+    - 신규 서비스인점을 감안하고 카카오맵을 벤치마킹하여 해당 경쟁사의 DAU로 목표를 잡음
+  - 네이버지도 DAU : (2129만 MAU / 30) 70만  
+  - 카카오맵 DAU : (950만 MAU / 30) 31만  
+  - [참고자료](https://mobile.newsis.com/view.html?ar_id=NISX20220927_0002028167)
 
+- 피크 시간대의 집중률 (최대 트래픽 / 평소 트래픽)
+  - 최대 트래픽 : 60만
+  - 평소 트래픽 : 30만
+  - 피크 시간 집중률 : 60만 / 30만 = 2
+
+- 1명당 1일 평균 요청수를 예상
+  - 1일 평균 요청수 : 접속수 * 요청수 = 2 * 3 = 6
+  - 접속수 : 2 (출근 / 퇴근)
+  - 요청수 : 3 (메인 페이지 -> 경로 탐색 페이지 -> 경로 탐색 요청)
+
+- Throughput 계산
+  - 1일 총 접속 수 : 1일 사용자 수(DAU) * 1명당 1일 평균 요청수 = 300,000 * 6 = 1,800,000
+  - 1일 평균 rps : 1일 총 접속 수 / (초/지하철 운행 시간) = 1,800,000 / 64,800 = 27.77rps
+    - 지하철 운행 시간 : 총 18시간, 오전 5시 ~ 오후 11시
+  - 1일 최대 rps : 1일 평균 rps x 피크 시간대의 집중률 = 27.77rps * 2 = 55.54rps
+
+- VUser
+  - R: 3 (메인 페이지 -> 경로 탐색 페이지 -> 경로 탐색 요청)
+  - http_req_duration : 0.5s
+  - 예상 latency : 1s
+  - T: (R * http_req_duration) + 예상 latency = (3 * 0.5) + 1 = 2.6
+  - 평균 VUser: (1일 평균 rps * T) / R = (27.77 * 2.6) / 3 = 24.06 = 26
+  - 최대 VUser: (1일 최대 rps * T) / R = (55.54 * 2.6) / 3 = 48.13 = 48
+    - 소수점은 미포함
+
+3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+ - smoke script
+   - [script](./monitoring/smoke/smoke.js)
+ - smoke k6
+   ![smoke](./monitoring/smoke/smoke_k6.png)
+ - smoke grapana
+   ![smoke](./monitoring/smoke/smoke_grapana.png)
+
+ - load script
+   - [script](./monitoring/load/load.js)
+ - load k6
+   ![smoke](./monitoring/load/load_k6.png)
+ - load grapana
+   ![smoke](./monitoring/load/load_grapana.png)
+
+ - stress script
+   - [script](./monitoring/stress/stress.js)
+ - stress k6
+   ![smoke](./monitoring/stress/stress_k6.png)
+ - stress grapana
+   ![smoke](./monitoring/stress/stress_grapana.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
