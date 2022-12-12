@@ -250,6 +250,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -282,6 +283,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -322,6 +324,7 @@ export default function() {
     'is failed': (r) => r.status !== 200,
   });
 } 
+
 ```
 
 </details>
@@ -357,6 +360,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -392,6 +396,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -437,6 +442,7 @@ export default function() {
     'is failed': (r) => r.status !== 200,
   });
 }
+
 ```
 
 </details>
