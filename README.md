@@ -74,7 +74,216 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- 대상 시스템 범위
+    - 접속 빈도가 높은 기능
+        - 메인 페이지
+        - 로그인 및 마이 페이지
+- 목푯값 설정 (latency, throughput, 부하 유지기간)
+    - latency : http_req_duration 기준 3초 미만
+    - throughput : 10.5/105 (평균/최대 rps)
+    - 부하 유지 기간 : 30분
+- 부하 테스트 시 저장될 데이터 건수 및 크기
+    - X
+
+참고 데이터
+- 하루 평균 지하철 이용 인원 : 450만 (https://www.bigdata-map.kr/datastory/traffic/seoul)
+- 네이버 지도 MAU : 1,400만(DAU 기준 약 45만) (https://blog.naver.com/rkwkrhspm/222515422896)
+- 카카오 지하철 MAU : 150만 (https://ko.lab.appa.pe/2016-09/kakao-korea.html)
+- 카카오 지하철 일 평균 실행 수 : 2회 (https://ko.lab.appa.pe/2016-09/kakao-korea.html)
+- 목표 1일 총 접속 수 : 90만 = 1일 사용자 수 (DAU) : 45만 * 1명당 1일 평균 접속 수 : 2회
+- 목표 1일 평균 rps : 10.5 = 1일 총 접속 수 : 90만 / 86400(초/일)
+- 목표 1일 최대 rps : 105 = 1일 평균 rps : 10.5 * (최대 트래픽 / 평소 트래픽) : 10
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- Smoke 테스트
+```
+# smoke.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+        stages: [
+                { duration: '10s', target: 1 },
+        ],
+        thresholds: {
+                http_req_duration: ['p(99)<3000'],
+        },
+};
+
+const BASE_URL = 'https://seungcheol.p-e.kr';
+const USERNAME = 'sc.oh131@gmail.com';
+const PASSWORD = '12345';
+
+export default function ()  {
+          let mainRes = http.get(`${BASE_URL}/`).status;
+          check(mainRes, {
+                'success to get main page': (status) => status === 200,
+          });
+
+          var payload = JSON.stringify({
+                      email: USERNAME,
+                      password: PASSWORD,
+                    });
+
+          var params = {
+                      headers: {
+                                'Content-Type': 'application/json',
+                      },
+          };
+
+
+          let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+          check(loginRes, {
+                      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+                    });
+
+
+          let authHeaders = {
+                      headers: {
+                                    Authorization: `Bearer ${loginRes.json('accessToken')}`,
+                                  },
+                    };
+          let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+          check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+          sleep(1);
+};
+```
+![img.png](img.png)
+![img_1.png](img_1.png)
+
+
+- load 테스트
+```
+# load.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+        stages: [
+                { duration: '5m', target: 10 },
+                { duration: '5m', target: 10 },
+                { duration: '5m', target: 10 },
+                { duration: '5m', target: 10 },
+                { duration: '5m', target: 10 },
+                { duration: '5m', target: 10 },
+        ],
+        thresholds: {
+                http_req_duration: ['p(99)<3000'],
+        },
+};
+
+const BASE_URL = 'https://seungcheol.p-e.kr';
+const USERNAME = 'sc.oh131@gmail.com';
+const PASSWORD = '12345';
+
+export default function ()  {
+
+          let mainRes = http.get(`${BASE_URL}/`).status;
+          check(mainRes, {
+                'success to get main page': (status) => status === 200,
+          });
+
+          var payload = JSON.stringify({
+                                email: USERNAME,
+                      password: PASSWORD,
+                    });
+
+          var params = {
+                      headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                    };
+
+
+          let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+          check(loginRes, {
+                      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+                    });
+
+
+          let authHeaders = {
+                      headers: {
+                                    Authorization: `Bearer ${loginRes.json('accessToken')}`,
+                                  },
+                    };
+          let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+          check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+          sleep(1);
+};
+```
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+
+
+- stress 테스트
+```
+# stress.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+        stages: [
+                { duration: '5m', target: 100 },
+                { duration: '5m', target: 200 },
+                { duration: '5m', target: 200 },
+                { duration: '5m', target: 200 },
+                { duration: '5m', target: 200 },
+                { duration: '5m', target: 100 },
+        ],
+        thresholds: {
+                http_req_duration: ['p(99)<3000'],
+        },
+};
+
+const BASE_URL = 'https://seungcheol.p-e.kr';
+const USERNAME = 'sc.oh131@gmail.com';
+const PASSWORD = '12345';
+
+export default function ()  {
+
+          let mainRes = http.get(`${BASE_URL}/`).status;
+          check(mainRes, {
+                'success to get main page': (status) => status === 200,
+          });
+
+          var payload = JSON.stringify({
+                                email: USERNAME,
+                      password: PASSWORD,
+                    });
+
+          var params = {
+                      headers: {
+                                    'Content-Type': 'application/json',
+                                  },
+                    };
+
+
+          let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+          check(loginRes, {
+                      'logged in successfully': (resp) => resp.json('accessToken') !== '',
+                    });
+
+
+          let authHeaders = {
+                      headers: {
+                                    Authorization: `Bearer ${loginRes.json('accessToken')}`,
+                                  },
+                    };
+          let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+          check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+          sleep(1);
+};
+```
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+---
+
+
+
 
 ---
 
