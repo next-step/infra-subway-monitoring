@@ -19,3 +19,21 @@ logging:
         type:
           descriptor:
             sql: info
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: sixthou
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: "*"
