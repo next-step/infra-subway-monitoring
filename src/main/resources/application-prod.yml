@@ -20,12 +20,6 @@ logging:
           descriptor:
             sql: info
 
-cloud:
-  aws:
-    stack:
-      auto: false
-    region:
-      static: ap-northeast-2
 
 management:
   metrics:
