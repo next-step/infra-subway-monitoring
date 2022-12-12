@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class PathResponseAssembler {
 
-    private static final Logger log = LoggerFactory.getLogger(PathResponseAssembler.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
 
     public static PathResponse assemble(SubwayPath subwayPath) {
         List<StationResponse> stationResponses = subwayPath.getStations().stream()
