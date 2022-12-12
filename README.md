@@ -135,7 +135,7 @@ npm run dev
 - syslog : /var/log/syslog
 - nginx access log : /var/log/nginx/access.log
 - nginx error log : /var/log/nginx/error.log
-- applicatoin log :  
+- applicatoin log : /home/ubuntu/nextstep/infra-subway-monitoring/log/*.log 
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=hyeongjukim-dashboard
