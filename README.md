@@ -165,12 +165,9 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
         stages: [
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
+                { duration: '20s', target: 310 },
+                { duration: '30m', target: 310 },
+                { duration: '20s', target: 0 },
         ],
         thresholds: {
                 http_req_duration: ['p(99)<3000'],
@@ -229,12 +226,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
         stages: [
-                { duration: '5m', target: 100 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 100 },
+                { duration: '20s', target: 100 },
+                { duration: '1m', target: 100 },
+                { duration: '20s', target: 200 },
+                { duration: '1m', target: 200 },
+                { duration: '20s', target: 300 },
+                { duration: '1m', target: 300 },
+                { duration: '20s', target: 400 },
+                { duration: '1m', target: 400 },
+                { duration: '20s', target: 500 },
+                { duration: '1m', target: 500 },
         ],
         thresholds: {
                 http_req_duration: ['p(99)<3000'],
