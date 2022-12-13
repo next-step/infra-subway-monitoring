@@ -271,4 +271,11 @@ default ✓ [======================================] 000/120 VUs  23m0s
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+- 회원가입, 로그인 이벤트: `/home/ubuntu/nextstep/infra-subway-monitoring/log/file.log`
+- 경로찾기 이벤트: `/home/ubuntu/nextstep/infra-subway-monitoring/log/json.log`
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+URL : https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=thisisspear-dashboard
+
+<img width="736" alt="스크린샷 2022-12-13 오후 3 40 18" src="https://user-images.githubusercontent.com/92219795/207244745-5e791e53-5a52-4775-be72-47dc9dc05691.png">

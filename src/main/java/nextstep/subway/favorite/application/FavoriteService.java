@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FavoriteService {
 
-    private static final Logger log = LoggerFactory.getLogger(FavoriteService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
     private FavoriteRepository favoriteRepository;
     private StationRepository stationRepository;
 

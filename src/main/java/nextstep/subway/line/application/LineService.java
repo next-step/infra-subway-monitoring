@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LineService {
 
-    private static final Logger log = LoggerFactory.getLogger(LineService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
     private LineRepository lineRepository;
     private StationService stationService;
 

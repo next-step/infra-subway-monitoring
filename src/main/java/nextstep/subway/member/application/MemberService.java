@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MemberService {
 
-    private static final Logger log = LoggerFactory.getLogger(MemberService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {

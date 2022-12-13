@@ -19,7 +19,7 @@ import sun.jvm.hotspot.types.JShortField;
 @Service
 public class PathService {
 
-    private static final Logger log = LoggerFactory.getLogger(PathService.class);
+    private static final Logger log = LoggerFactory.getLogger("file");
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         log.info("{} {}", StructuredArguments.kv("출발지", source.getName()), StructuredArguments.kv("도착지", target.getName()));
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);

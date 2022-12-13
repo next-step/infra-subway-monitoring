@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class StationService {
 
-    private Logger log = LoggerFactory.getLogger(StationService.class);
+    private Logger log = LoggerFactory.getLogger("file");
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
