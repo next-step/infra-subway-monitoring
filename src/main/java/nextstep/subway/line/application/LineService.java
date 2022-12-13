@@ -7,6 +7,8 @@ import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
 import nextstep.subway.station.application.StationService;
 import nextstep.subway.station.domain.Station;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class LineService {
+
+    private static final Logger log = LoggerFactory.getLogger(LineService.class);
     private LineRepository lineRepository;
     private StationService stationService;
 
@@ -27,15 +31,17 @@ public class LineService {
     public LineResponse saveLine(LineRequest request) {
         Station upStation = stationService.findById(request.getUpStationId());
         Station downStation = stationService.findById(request.getDownStationId());
-        Line persistLine = lineRepository.save(new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
+        Line persistLine = lineRepository.save(
+                new Line(request.getName(), request.getColor(), upStation, downStation, request.getDistance()));
+        log.info("new line: {}", persistLine.getName());
         return LineResponse.of(persistLine);
     }
 
     public List<LineResponse> findLineResponses() {
         List<Line> persistLines = lineRepository.findAll();
         return persistLines.stream()
-            .map(LineResponse::of)
-            .collect(Collectors.toList());
+                .map(LineResponse::of)
+                .collect(Collectors.toList());
     }
 
     public List<Line> findLines() {
@@ -46,7 +52,6 @@ public class LineService {
         return lineRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-
     public LineResponse findLineResponseById(Long id) {
         Line persistLine = findLineById(id);
         return LineResponse.of(persistLine);
@@ -55,10 +60,13 @@ public class LineService {
     public void updateLine(Long id, LineRequest lineUpdateRequest) {
         Line persistLine = lineRepository.findById(id).orElseThrow(RuntimeException::new);
         persistLine.update(new Line(lineUpdateRequest.getName(), lineUpdateRequest.getColor()));
+        log.info("lineId:{} changed to name:{}, color:{}",
+                persistLine.getId(), persistLine.getName(), persistLine.getColor());
     }
 
     public void deleteLineById(Long id) {
         lineRepository.deleteById(id);
+        log.info("line was deleted. lineId:{}", id);
     }
 
     public void addLineStation(Long lineId, SectionRequest request) {
@@ -66,10 +74,13 @@ public class LineService {
         Station upStation = stationService.findStationById(request.getUpStationId());
         Station downStation = stationService.findStationById(request.getDownStationId());
         line.addLineSection(upStation, downStation, request.getDistance());
+        log.info("upStation: {} downStation: {}, added to line: {}",
+                upStation.getName(), downStation.getName(), line.getName());
     }
 
     public void removeLineStation(Long lineId, Long stationId) {
         Line line = findLineById(lineId);
         line.removeStation(stationId);
+        log.info("stationID:{}, was deleted by line:{}", stationId, line.getName());
     }
 }

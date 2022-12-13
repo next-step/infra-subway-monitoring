@@ -4,6 +4,8 @@ import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
+
+    private static final Logger log = LoggerFactory.getLogger("file");
+
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -21,6 +26,7 @@ public class StationService {
 
     public StationResponse saveStation(StationRequest stationRequest) {
         Station persistStation = stationRepository.save(stationRequest.toStation());
+        log.info("station created. id:{}, name:{}", persistStation.getId(), persistStation.getName());
         return StationResponse.of(persistStation);
     }
 
@@ -35,6 +41,7 @@ public class StationService {
 
     public void deleteStationById(Long id) {
         stationRepository.deleteById(id);
+        log.info("station deleted. id:{}", id);
     }
 
     public Station findStationById(Long id) {

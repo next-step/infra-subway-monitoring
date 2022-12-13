@@ -250,6 +250,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -282,6 +283,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -322,6 +324,7 @@ export default function() {
     'is failed': (r) => r.status !== 200,
   });
 } 
+
 ```
 
 </details>
@@ -357,6 +360,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -392,6 +396,7 @@ export default function() {
     'is success': (r) => r.status === 200,
   });
 }
+
 ```
 
 </details>
@@ -437,6 +442,7 @@ export default function() {
     'is failed': (r) => r.status !== 200,
   });
 }
+
 ```
 
 </details>
@@ -477,5 +483,42 @@ export default function() {
 # 3단계 - 로깅, 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
-
+* WEB
+  * **system**
+    * /var/log/syslog
+  * **access**
+    * /var/log/nginx/access.log
+  * **error**
+    * /var/log/nginx/error.log
+* WAS
+  * file
+    * /home/ubuntu/infra-subway-monitoring/log/file.log
+  * json
+    * /home/ubuntu/infra-subway-monitoring/log/json.log
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=DASHBOARD-meeingjae
+
+## 요구사항
+
+* 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드 수정
+  * LineRepository의 findAll 메서드에서 현재 상황에서 불필요하게 호출하는 sleep 쿼리를 발견하여 제거하였습니다.
+* 로그 설정하기
+  * WAS (Application) 의 이벤트 로깅 정보를 파일로 저장하기
+  * WEB (Nginx) 의 Access 로그 및 Error 로그를 설정 및 기록하기
+* Cloudwatch로 모니터링
+  * 로그 수집
+  * 매트릭 수집
+  * USE 방범론을 활용하기 용이하도록 대시보드 구성
+    * WAS
+      * cpu
+      * memory
+      * network in
+      * network out
+    * WEB
+      * cpu
+      * memory
+      * network in
+      * network out
+      * thread
+      * db connection
+      * event logs
