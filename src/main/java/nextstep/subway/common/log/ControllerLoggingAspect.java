@@ -20,10 +20,10 @@ public class ControllerLoggingAspect {
     @Pointcut("execution(public * nextstep.subway..ui.*.*(..)) " +
             "&& !@within(nextstep.subway.common.log.DisableControllerLogging)" +
             "&& !@annotation(nextstep.subway.common.log.DisableControllerLogging)")
-    private void enableControllerLogging() {}
+    private void controllerLogging() {}
 
-    @Before(value = "enableControllerLogging()")
-    public void beforeEnableControllerLogging(JoinPoint joinPoint) {
+    @Before(value = "controllerLogging()")
+    public void writeRequestLog(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         LOGGER.info("{} : {} - {}",
                 LOG_REQUEST_PREFIX,
@@ -31,14 +31,14 @@ public class ControllerLoggingAspect {
                 getParameterNameAndValues(signature, joinPoint));
     }
 
-    @AfterReturning(value = "enableControllerLogging()", returning = "returnValue")
-    public void afterEnableControllerLogging(JoinPoint joinPoint, Object returnValue) {
+    @AfterReturning(value = "controllerLogging()", returning = "returnValue")
+    public void writeResponseLog(JoinPoint joinPoint, Object returnValue) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         LOGGER.info("{} : {} - {}", LOG_RESPONSE_PREFIX, getControllerName(signature), returnValue);
     }
 
-    @AfterThrowing(value = "enableControllerLogging()", throwing = "exception")
-    public void throwEnableControllerLogging(JoinPoint joinPoint, Exception exception) {
+    @AfterThrowing(value = "controllerLogging()", throwing = "exception")
+    public void writeExceptionLog(JoinPoint joinPoint, Exception exception) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         LOGGER.error("{} : {} - {}", LOG_RESPONSE_PREFIX, getControllerName(signature), exception.getMessage());
     }
