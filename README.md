@@ -118,14 +118,14 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
-#### Smoke.js
+#### [smoke.js]
 ```javascript
 // smoke.js
 import http from 'k6/http';
 import { check, group, sleep, fail } from 'k6';
 
 export let options = {
-    vus: 1,
+    vus: 2,
     duration: '1m',
 
     thresholds: {
@@ -141,8 +141,8 @@ export default function ()  {
 };
 
 function checkFindPath() {
-    let source = getRandomNumber(1, 15);
-    let target = getRandomNumber(1, 15);
+    let source = getRandomNumber(1, 10);
+    let target = getRandomNumber(1, 10);
     let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
     check(findPath, {
         'find path successfully' : (resp) => resp.status === 200
@@ -154,7 +154,119 @@ function getRandomNumber(min, max) {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/52458039/207342663-a8a560a5-258b-484c-bd50-35307ed6b937.png)
+![image](https://user-images.githubusercontent.com/52458039/207430174-d44d83c8-e421-4bf6-b4f1-7a618f7e0ca7.png)
+![image](https://user-images.githubusercontent.com/52458039/207430115-5408870c-1356-4031-ac7b-ae95a45d5fe2.png)
+
+
+#### [Smoke Test 결과 해석]
+- VUser 2로 설정하였고, 1분간 테스트 진행하면서 목표 latency 를 잘 유지함
+- grafana 상으로 max latency 값이 500ms 관측되나, 그래프의 트렌드를 보아 최초 요청에서의 지연 이후 평균적으로 300ms 이하에서 요청을 처리하고 있음.
+
+#### [load.js]
+```javascript
+// load.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '10s', target: 8},
+        { duration: '30s', target: 8},
+        { duration: '10s', target: 20},
+        { duration: '1m', target: 20},
+        { duration: '10s', target: 8},
+        { duration: '30s', target: 8},
+        { duration: '10s', target: 0}
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<300'], // 99% of requests must complete below 0.3s
+    },
+};
+
+const BASE_URL = 'https://wu22e-subway.kro.kr/';
+
+export default function ()  {
+    // 경로 탐색 API
+    checkFindPath()
+};
+
+function checkFindPath() {
+    let source = getRandomNumber(1, 10);
+    let target = getRandomNumber(1, 10);
+    let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(findPath, {
+        'find path successfully' : (resp) => resp.status === 200
+    });
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+
+![image](https://user-images.githubusercontent.com/52458039/207433854-b1bade83-8419-4ea1-a6d9-9799b423a1a9.png)
+![image](https://user-images.githubusercontent.com/52458039/207431018-ea9e8daa-9245-4ce7-9103-87d7ada054db.png)
+
+#### [Load Test 결과 해석]
+- VUser 8 (평소 트래픽) 로 30초간 2번 유지, VUser 20 (최대 트래픽) 으로 1분간 유지함.
+- 평균 약 600ms 정도로 목표 latency 인 300ms 를 달성하지 못하고 있음.
+- 실패하는 요청은 없지만, 요청이 몰리면서 경로 탐색 데이터 조회 처리에서 지연이 되는 것으로 추정됨.
+
+
+#### [stress.js]
+```javascript
+// stress.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '10s', target: 8},
+        { duration: '30s', target: 8},
+        { duration: '10s', target: 20},
+        { duration: '1m', target: 20},
+        { duration: '10s', target: 100},
+        { duration: '1m', target: 100},
+        { duration: '10s', target: 200},
+        { duration: '1ms', target: 200},
+        { duration: '10s', target: 300},
+        { duration: '1m', target: 300},
+        { duration: '10s', target: 0},
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<300'], // 99% of requests must complete below 0.3s
+    },
+};
+
+const BASE_URL = 'https://wu22e-subway.kro.kr/';
+
+export default function ()  {
+    // 경로 탐색 API
+    checkFindPath()
+};
+
+function checkFindPath() {
+    let source = getRandomNumber(1, 10);
+    let target = getRandomNumber(1, 10);
+    let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(findPath, {
+        'find path successfully' : (resp) => resp.status === 200
+    });
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+
+![image](https://user-images.githubusercontent.com/52458039/207382223-9af9aa24-20ee-492a-82d7-d6551ababf14.png)
+![image](https://user-images.githubusercontent.com/52458039/207432576-95a7884c-91dd-4344-bb6a-0015dcebc265.png)
+
+- VUser 20 (최대 트래픽) 으로 1분간 유지후, 갑작 스러운 요청이 몰리며 VUser 100으로 1분, 200으로 1분, 30으로 1분간 요청이 들어오는 상황.
+- 평균 latency 만 보면 약 200ms 로 목표 latency 를 달성한 것처럼 보임.
+- 하지만 그라파나의 latency 추이를 보면 초반에는 load 테스트처럼 지연이 발생하다가 테스트의 후반부에 갑자기 latency 가 급격히 낮아짐.
+- k6 상에서 요청이 fail 함. -> `connection reset by peer` 라는 로그가 발생함.
+- 너무 많은 요청으로인해 connection 이 제대로 유지 되지 않는 것으로 추정.
 
 ---
 
