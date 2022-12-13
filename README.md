@@ -242,7 +242,7 @@ npm run dev
 #### Cloudwatch 로 모니터링
 - [x] Cloudwatch 를 통한 로그 수집
 - [x] Cloudwatch 를 통한 메트릭 수집
-- [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+- [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 #### USE 방법론
 - U: Utilization - 얼만큼 자원을 썼는지
@@ -251,5 +251,7 @@ npm run dev
 - 에러가 존재하는가? -> 자원을 많이 사용하고 있는가? -> 부하가 몰리고 있는가? 의 순서로 체크
 
 1. 각 서버내 로깅 경로를 알려주세요
+- /var/infra-subway-monitoring/log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=hahoho87-dashboard
