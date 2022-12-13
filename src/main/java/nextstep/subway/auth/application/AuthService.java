@@ -4,14 +4,17 @@ import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
+import nextstep.subway.common.log.Loggers;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class AuthService {
+    private static final Logger LOGGER = Loggers.FILE.logger();
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
 
@@ -25,6 +28,7 @@ public class AuthService {
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
+        LOGGER.info("[EVENT] 로그인 성공 id - {}", request.getEmail());
         return new TokenResponse(token);
     }
 

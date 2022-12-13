@@ -1,19 +1,25 @@
 package nextstep.subway.map.application;
 
 import nextstep.subway.line.domain.Line;
+import nextstep.subway.common.log.Loggers;
 import nextstep.subway.map.domain.SectionEdge;
 import nextstep.subway.map.domain.SubwayGraph;
 import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @Service
 public class PathService {
+    private static final Logger LOGGER = Loggers.JSON.logger();
+
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
@@ -23,7 +29,14 @@ public class PathService {
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
-        return convertSubwayPath(path);
+        SubwayPath subwayPath = convertSubwayPath(path);
+        LOGGER.info("[EVENT] 최단경로조회 - {}, {}, {}",
+                kv("출발역", source.getName()),
+                kv("도착역", target.getName()),
+                kv("경로", path.toString())
+        );
+
+        return subwayPath;
     }
 
     private SubwayPath convertSubwayPath(GraphPath graphPath) {
