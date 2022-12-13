@@ -174,6 +174,45 @@
 ---
 
 ## 3단계 - 로깅, 모니터링
+### 요구사항
+```
+[X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+[X] 로그 설정하기
+    [X] Application Log 파일로 저장하기
+        * 회원가입, 로그인 등의 이벤트에 로깅을 설정
+        * 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    [X] Nginx Access Log 설정하기
+[X] CloundWatch로 모니터링
+    [X] Cloudwatch로 로그 수집하기
+    [X] Cloudwatch로 메트릭 수집하기
+    [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
+```
+
+### 로깅
+#### 주의점
+* Avoid side effects
+  * logging으로 인해 애플리케이션 기능의 동작에 영향을 미치지 않아야 한다.
+* Be concise and descriptive
+  * 각 Logging에는 데이터와 설명이 모두 포함되어야 한다.
+* Log method arguments and return values
+  * 메소드의 input과 output을 로그로 남기면 debugger를 사용해 디버깅하지 않아도 된다. 특히 debugger를 사용할 수 없는 상황에서는 
+    상당히 유용하게 사용할 수 있다.
+  * 중복 코드의 발생은 AOP를 통해 해결할 수 있다.
+* Delete personal information
+  * 로그에 개인정보를 남기지 않는다.
+#### Logging level
+* `ERROR`: 예상하지 못한 심각한 문제가 발생하여 즉시 조사해야 함.
+  * ERROR 레벨로 설정하면 ERROR 레벨의 로그만 출력된다.
+* `WARN`: 로직상 유효성 확인, 예상 가능한 문제로 인한 예외처리 등을 남김, 서비스는 운영될 수 있지만, 주의해야 함.
+* `INFO`: 운영에 참고할만한 사항으로, 중요한 비즈니스 프로세스가 완료됨.
+* `DEBUG`/`TRACE`: 개발 단계에서만 사용하고 운영 단계에서는 사용하지 않음.
+  * DEBUG 레벨로 설정하면 DEBUG 레벨보다 높은 로그의 메시지가 모두(DEBUG, INFO, WARN, ERROR) 출력된다.
+
+<br />
+
 1. 각 서버내 로깅 경로를 알려주세요
+* nginx: `/var/log/nginx/access.log`
+* application: `/home/ubuntu/nextstep/infra-subway-deploy/log`
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+* [CloudWatch Dashboard 경로](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=jisu1211-dashboard)
