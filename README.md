@@ -118,7 +118,43 @@ npm run dev
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+#### Smoke.js
+```javascript
+// smoke.js
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
 
+export let options = {
+    vus: 1,
+    duration: '1m',
+
+    thresholds: {
+        http_req_duration: ['p(99)<300'], // 99% of requests must complete below 0.3s
+    },
+};
+
+const BASE_URL = 'https://wu22e-subway.kro.kr/';
+
+export default function ()  {
+    // 경로 탐색 API
+    checkFindPath()
+};
+
+function checkFindPath() {
+    let source = getRandomNumber(1, 15);
+    let target = getRandomNumber(1, 15);
+    let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+    check(findPath, {
+        'find path successfully' : (resp) => resp.status === 200
+    });
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+
+![image](https://user-images.githubusercontent.com/52458039/207342663-a8a560a5-258b-484c-bd50-35307ed6b937.png)
 
 ---
 
