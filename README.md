@@ -191,3 +191,11 @@ npm run dev
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=sanghoonson-dashboard
+
+3. 기타 정보
+- App : 
+  - URL : https://shshon-infra.o-r.kr/
+  - 경로 : ~/nextstep/infra-subway-monitoring
+- EC2 : 
+  - bastion : sanghoonson-admin-1
+  - app : sanghoonson-public-1
