@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active:
+      - test
+    group:
+      local:
+        - mysql
+        - security
+        - aws
+      test:
+        - h2
+        - security
+        - aws
+      prod:
+        - mysql
+        - security
+        - aws
