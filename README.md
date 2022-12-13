@@ -293,5 +293,9 @@ export default function ()  {
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+- 192.168.1.30
+    - application file log : /home/ubuntu/infra-subway-monitoring/build/libs/log/file.log
+    - nginx access logg : /var/log/nginx/access.log
+    
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=ohseungcheol-dashboard
