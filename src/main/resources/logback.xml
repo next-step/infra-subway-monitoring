@@ -1,3 +1,4 @@
+
 <configuration debug="false">
 
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
@@ -19,11 +20,17 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <!--   해당 로깅의 패턴을 설정   -->
-        <encoder>
-            <charset>utf8</charset>
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
-            </Pattern>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <thread>thread</thread>
+                <message>message</message>
+                <stackTrace>exception</stackTrace>
+                <mdc>context</mdc>
+            </fieldNames>
         </encoder>
     </appender>
 

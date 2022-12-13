@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import static net.logstash.logback.argument.StructuredArguments.*;
 
 @Aspect
 @Component
@@ -25,7 +26,7 @@ public class LogAspect {
             email = ((TokenRequest) args[0]).getEmail();
             fileLogger.info("access to login. userId : ["+ email +"]");
         } catch (Exception e){
-            fileLogger.error("[before] Fail to log");
+            fileLogger.error("[before] Fail to loginLogging");
         }
 
         Object result = pjp.proceed();
@@ -34,7 +35,7 @@ public class LogAspect {
             String accessToken = ((TokenResponse) ((ResponseEntity<?>) result).getBody()).getAccessToken();
             fileLogger.info("Success to login. userId : [" + email + "], accessToken : ["+ accessToken +"]");
         } catch (Exception e){
-            fileLogger.error("[after] Fail to log");
+            fileLogger.error("[after] Fail to loginLogging");
         }
 
         return result;
@@ -49,7 +50,7 @@ public class LogAspect {
             email = ((MemberRequest) args[0]).getEmail();
             fileLogger.info("access to signup. userId : ["+ email +"]");
         } catch (Exception e){
-            fileLogger.error("[before] Fail to log");
+            fileLogger.error("[before] Fail to signupLogging");
         }
 
         Object result = pjp.proceed();
@@ -57,10 +58,23 @@ public class LogAspect {
         try {
             fileLogger.info("Success to signup. userId : [" + email + "]");
         } catch (Exception e){
-            fileLogger.error("[after] Fail to log");
+            fileLogger.error("[after] Fail to signupLogging");
         }
 
         return result;
     }
 
+    @Around("execution(* nextstep.subway.map.ui.MapController.findPath(..))")
+    public Object findPathLogging(ProceedingJoinPoint pjp) throws Throwable {
+        Object[] args = pjp.getArgs();
+        try {
+            fileLogger.info("{} {}",
+                    kv("출발지", args[0].toString()),
+                    kv("도착지", args[1].toString())
+            );
+        } catch (Exception e){
+            fileLogger.error("[before] Fail to findPathLogging");
+        }
+        return pjp.proceed();
+    }
 }
