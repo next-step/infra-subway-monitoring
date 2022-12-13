@@ -271,8 +271,8 @@ default ✓ [======================================] 000/120 VUs  23m0s
 
 1. 각 서버내 로깅 경로를 알려주세요
 
-- 회원가입, 로그인 이벤트: `/home/ubuntu/nextstep/infra-subway-monitoring/log/file.log`
-- 경로찾기 이벤트: `/home/ubuntu/nextstep/infra-subway-monitoring/log/json.log`
+- 경로 찾기 이외 이벤트 : `/var/log/app/file.log`
+- 경로찾기 이벤트 : `/var/log/app/json.log`
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
