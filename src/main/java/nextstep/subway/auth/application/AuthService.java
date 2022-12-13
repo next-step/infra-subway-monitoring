@@ -28,12 +28,13 @@ public class AuthService {
         member.checkPassword(request.getPassword());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
-        LOGGER.info("[EVENT] 로그인 성공 id - {}", request.getEmail());
+        LOGGER.info("로그인 성공 - id : {}", member.getId());
         return new TokenResponse(token);
     }
 
     public LoginMember findMemberByToken(String credentials) {
         if (!jwtTokenProvider.validateToken(credentials)) {
+            LOGGER.warn("회원 인증 실패 - credentials : {}", credentials);
             throw new AuthorizationException();
         }
 

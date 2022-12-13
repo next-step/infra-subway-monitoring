@@ -21,8 +21,8 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        LOGGER.info("[EVENT] 회원가입 - email : {}, age = {}",
-                request.getEmail(),
+        LOGGER.info("회원가입 - id : {}, age = {}",
+                member.getId(),
                 request.getAge());
         return MemberResponse.of(member);
     }
@@ -35,10 +35,7 @@ public class MemberService {
     public void updateMember(Long id, MemberRequest param) {
         Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
         member.update(param.toMember());
-        LOGGER.info("[EVENT] 회원 정보 수정 - id: {}, email : {}, age = {}",
-                id,
-                param.getEmail(),
-                param.getAge());
+        LOGGER.info("회원 정보 수정 - id: {}, age = {}", id, param.getAge());
     }
 
     public void deleteMember(Long id) {
