@@ -394,7 +394,52 @@ export default function () {
 
 ```
 
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: stress.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 384 max VUs, 28m40s max duration (incl. graceful stop):
+           * default: Up to 384 looping VUs for 28m10s over 16 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+           
+running (28m10.5s), 000/384 VUs, 76781 complete and 35 interrupted iterations
+default ✓ [======================================] 000/384 VUs  28m10s
+
+     ✗ [Result] Main Page
+      ↳  13% — ✓ 10324 / ✗ 66492
+     ✗ [Result] Path Page
+      ↳  13% — ✓ 10474 / ✗ 66342
+     ✗ [Result] Search Path
+      ↳  9% — ✓ 7028 / ✗ 69753
+
+     checks.........................: 12.07% ✓ 27826      ✗ 202587
+     data_received..................: 145 MB 86 kB/s
+     data_sent......................: 66 MB  39 kB/s
+     http_req_blocked...............: avg=17.88ms  min=0s       med=0s      max=1.56s    p(90)=3.17ms   p(95)=142.56ms
+     http_req_connecting............: avg=54.14ms  min=0s       med=41.8ms  max=668.93ms p(90)=123.42ms p(95)=154.62ms
+   ✗ http_req_duration..............: avg=874.62ms min=0s       med=0s      max=43.86s   p(90)=13.35ms  p(95)=1.21s
+       { expected_response:true }...: avg=3.24s    min=589.52µs med=15.81ms max=43.86s   p(90)=5.68s    p(95)=32.62s
+     http_req_failed................: 87.92% ✓ 202587     ✗ 27826
+     http_req_receiving.............: avg=632.49µs min=0s       med=0s      max=477.36ms p(90)=54.15µs  p(95)=79.76µs
+     http_req_sending...............: avg=1.12ms   min=0s       med=0s      max=825.78ms p(90)=16.83µs  p(95)=235.65µs
+     http_req_tls_handshaking.......: avg=13.19ms  min=0s       med=0s      max=1.43s    p(90)=0s       p(95)=101.03ms
+     http_req_waiting...............: avg=872.87ms min=0s       med=0s      max=43.86s   p(90)=1.76ms   p(95)=1.19s
+     http_reqs......................: 230413 136.296296/s
+     iteration_duration.............: avg=3.14s    min=2.7ms    med=575.8ms max=48.04s   p(90)=3.14s    p(95)=32.16s
+     iterations.....................: 76781  45.418296/s
+     vus............................: 1      min=1        max=384
+     vus_max........................: 384    min=384      max=384
 ```
+
+[img.png](image/stress.png)
+
+- Active VUser 144 ~ 287(6번째)에서 http_req_blocked max 값이 떨어지지 않고 있음.
+- 이 부분에서 http request failed 를 추정해볼 수 있음.
 </details>
 
 
