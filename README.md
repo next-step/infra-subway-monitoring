@@ -284,9 +284,48 @@ export default function () {
 <summary> load 테스트 결과 </summary>
 
 ```
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: load.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 6 max VUs, 7m40s max duration (incl. graceful stop):
+           * default: Up to 6 looping VUs for 7m10s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+running (7m10.2s), 0/6 VUs, 1402 complete and 0 interrupted iterations
+default ✓ [======================================] 0/6 VUs  7m10s
+
+     ✓ [Result] Main Page
+     ✓ [Result] Path Page
+     ✓ [Result] Search Path
+
+     checks.........................: 100.00% ✓ 4206     ✗ 0
+     data_received..................: 7.7 MB  18 kB/s
+     data_sent......................: 536 kB  1.2 kB/s
+     http_req_blocked...............: avg=19.31µs  min=1.64µs   med=3.2µs    max=27.17ms p(90)=4.52µs   p(95)=5.12µs
+     http_req_connecting............: avg=1.15µs   min=0s       med=0s       max=2.73ms  p(90)=0s       p(95)=0s
+   ✗ http_req_duration..............: avg=293.95ms min=618.81µs med=1.33ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
+       { expected_response:true }...: avg=293.95ms min=618.81µs med=1.33ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
+     http_req_failed................: 0.00%   ✓ 0        ✗ 4206
+     http_req_receiving.............: avg=96.04µs  min=32.5µs   med=73.52µs  max=7.17ms  p(90)=135.75µs p(95)=214.49µs
+     http_req_sending...............: avg=19.08µs  min=7.01µs   med=14.29µs  max=6.14ms  p(90)=21.48µs  p(95)=27.35µs
+     http_req_tls_handshaking.......: avg=10.28µs  min=0s       med=0s       max=23.71ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=293.84ms min=542.2µs  med=1.24ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
+     http_reqs......................: 4206    9.776913/s
+     iteration_duration.............: avg=882.44ms min=278.81ms med=859.64ms max=2.01s   p(90)=1.45s    p(95)=1.54s
+     iterations.....................: 1402    3.258971/s
+     vus............................: 1       min=1      max=6
+     vus_max........................: 6       min=6      max=6
 
 ```
 </details>
+
+![img.png](image/load.png)
 
 
 
