@@ -90,9 +90,12 @@ npm run dev
 - 네이버 지도 MAU : 1,400만(DAU 기준 약 45만) (https://blog.naver.com/rkwkrhspm/222515422896)
 - 카카오 지하철 MAU : 150만 (https://ko.lab.appa.pe/2016-09/kakao-korea.html)
 - 카카오 지하철 일 평균 실행 수 : 2회 (https://ko.lab.appa.pe/2016-09/kakao-korea.html)
-- 목표 1일 총 접속 수 : 90만 = 1일 사용자 수 (DAU) : 45만 * 1명당 1일 평균 접속 수 : 2회
-- 목표 1일 평균 rps : 10.5 = 1일 총 접속 수 : 90만 / 86400(초/일)
-- 목표 1일 최대 rps : 105 = 1일 평균 rps : 10.5 * (최대 트래픽 / 평소 트래픽) : 10
+- 목표 1일 총 접속 수 = 1일 사용자 수 (DAU) * 1명당 1일 평균 접속 수
+    - 90만 = 45만 * 2회
+- 목표 1일 평균 rps = 1일 총 접속 수 / 86400(초/일)
+    - 10.5 = 90만 / 86400
+- 목표 1일 최대 rps = 1일 평균 rps * (최대 트래픽 / 평소 트래픽)
+    - 105 = 10.5 * 10
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
@@ -162,12 +165,9 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
         stages: [
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
-                { duration: '5m', target: 10 },
+                { duration: '20s', target: 310 },
+                { duration: '30m', target: 310 },
+                { duration: '20s', target: 0 },
         ],
         thresholds: {
                 http_req_duration: ['p(99)<3000'],
@@ -226,12 +226,16 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
         stages: [
-                { duration: '5m', target: 100 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 200 },
-                { duration: '5m', target: 100 },
+                { duration: '20s', target: 100 },
+                { duration: '1m', target: 100 },
+                { duration: '20s', target: 200 },
+                { duration: '1m', target: 200 },
+                { duration: '20s', target: 300 },
+                { duration: '1m', target: 300 },
+                { duration: '20s', target: 400 },
+                { duration: '1m', target: 400 },
+                { duration: '20s', target: 500 },
+                { duration: '1m', target: 500 },
         ],
         thresholds: {
                 http_req_duration: ['p(99)<3000'],
@@ -289,5 +293,9 @@ export default function ()  {
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+- 192.168.1.30
+    - application file log : /home/ubuntu/infra-subway-monitoring/build/libs/log/file.log
+    - nginx access logg : /var/log/nginx/access.log
+    
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=ohseungcheol-dashboard
