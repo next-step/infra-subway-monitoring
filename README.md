@@ -86,7 +86,7 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ```
-grafana url: http://43.201.105.251:3000/ (자신의 공인 IP에 대해서만 3000 포트가 오픈된 상태)
+grafana url: http://3.39.233.62:3000/ (자신의 공인 IP에 대해서만 3000 포트가 오픈된 상태)
 계정 : 
 - id : admin
 - pw : admin1234
@@ -228,9 +228,11 @@ default ✓ [======================================] 1 VUs  1m0s
      vus............................: 1       min=1      max=1
      vus_max........................: 1       min=1      max=1
 ```
-</details>
 
 ![img.png](image/smoke.png)
+</details>
+
+
 
 #### Load Test
 <details>
@@ -323,10 +325,9 @@ default ✓ [======================================] 0/6 VUs  7m10s
      vus_max........................: 6       min=6      max=6
 
 ```
-</details>
 
 ![img.png](image/load.png)
-
+</details>
 
 
 
@@ -467,16 +468,16 @@ export default function () {
 <summary> </summary>
 
 #### 요구사항
-* [ ] 부하 테스트
-  * [ ] 테스트 전제조건 정리
-    * [ ] 대상 시스템 범위
-    * [ ] 목푯값 설정 (latency, throughput, 부하 유지기간)
-    * [ ] 부하 테스트 시 저장될 데이터 건수 및 크기
-  * [ ] 아래 시나리오 중 하나를 선택하여 스크립트 작성
-    * [ ] 접속 빈도가 높은 페이지
-    * [ ] 데이터를 갱신하는 페이지
-    * [ ] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
-  * [ ] Smoke, Load, Stress 테스트 후 결과를 기록
+* [x] 부하 테스트
+  * [x] 테스트 전제조건 정리
+    * [x] 대상 시스템 범위
+    * [x] 목푯값 설정 (latency, throughput, 부하 유지기간)
+    * [x] 부하 테스트 시 저장될 데이터 건수 및 크기
+  * [x] 아래 시나리오 중 하나를 선택하여 스크립트 작성
+    * [x] 접속 빈도가 높은 페이지
+    * [x] 데이터를 갱신하는 페이지
+    * [x] 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+  * [x] Smoke, Load, Stress 테스트 후 결과를 기록
 
 #### 힌트
 부하테스트 소개
@@ -629,4 +630,31 @@ $ k6 run --out influxdb=http://localhost:8086/myk6db smoke.js
 
 ![img.png](image/img5.png)
 
+
+5. 명령어
+- /var, /usr 부분에 로그가 대부분 남아지우는 것 추천
+- 부하테스트 이후 로그가 용량을 전부 차지해 `write error in swap file` 등이 발생
+```
+sudo -s du -sh /var
+sudo -s du -sh /usr
+```
+
+- /var 경로 정리
+```
+sudo -s du -h --max-depth=1
+```
+
+- 로그 위치로 가서 /home 위치에 백업
+```
+ex) 
+mv debug.log /home/ubuntu/logBackup
+```
+
+- 백업 후 하나로 묶인 backup로그들을 나눠주기
+```
+split -l 300 jenkins.log part_jenkins
+```
+-> 바로 영역이 비워지지 않고, 실행되고 있는 부분을 종료하고 재시작해야 영역이 제대로 비워짐
+
+참고: https://ipex.tistory.com/entry/CenetOS-cannot-create-temp-file-for-here-document-%EC%9E%A5%EC%B9%98%EC%97%90-%EB%82%A8%EC%9D%80-%EA%B3%B5%EA%B0%84%EC%9D%B4-%EC%97%86%EC%9D%8C-%EC%98%A4%EB%A5%98-%ED%98%84%EC%83%81
 </details>
