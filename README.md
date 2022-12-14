@@ -83,8 +83,14 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
-
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+```
+grafana url: http://43.201.105.251:3000/ (자신의 공인 IP에 대해서만 3000 포트가 오픈된 상태)
+계정 : 
+- id : admin
+- pw : admin1234
+```
 
 #### 대상 시스템 범위
 - web server(nginx)
@@ -183,7 +189,6 @@ export default function () {
 <summary> smoke 테스트 결과 </summary>
 
 ```
-$ k6 run smoke.js
 
           /\      |‾‾| /‾‾/   /‾‾/
      /\  /  \     |  |/  /   /  /
@@ -193,39 +198,164 @@ $ k6 run smoke.js
 
   execution: local
      script: smoke.js
-     output: -
+     output: InfluxDBv1 (http://localhost:8086)
 
   scenarios: (100.00%) 1 scenario, 1 max VUs, 1m30s max duration (incl. graceful stop):
            * default: 1 looping VUs for 1m0s (gracefulStop: 30s)
 
-
-running (1m00.0s), 0/1 VUs, 634 complete and 0 interrupted iterations
+running (1m00.0s), 0/1 VUs, 200 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  1m0s
 
      ✓ [Result] Main Page
      ✓ [Result] Path Page
      ✓ [Result] Search Path
 
-     checks.........................: 100.00% ✓ 1902      ✗ 0
-     data_received..................: 3.5 MB  58 kB/s
-     data_sent......................: 242 kB  4.0 kB/s
-     http_req_blocked...............: avg=26.74µs min=1.7µs    med=2.92µs  max=42.48ms  p(90)=3.99µs   p(95)=4.37µs
-     http_req_connecting............: avg=284ns   min=0s       med=0s      max=284.62µs p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=31.4ms  min=738.31µs med=1.28ms  max=642.32ms p(90)=90.69ms  p(95)=104.53ms
-       { expected_response:true }...: avg=31.4ms  min=738.31µs med=1.28ms  max=642.32ms p(90)=90.69ms  p(95)=104.53ms
-     http_req_failed................: 0.00%   ✓ 0         ✗ 1902
-     http_req_receiving.............: avg=85.89µs min=29.13µs  med=76.96µs max=8.01ms   p(90)=120.37µs p(95)=140.8µs
-     http_req_sending...............: avg=16.25µs min=7.3µs    med=14.13µs max=1.12ms   p(90)=22.68µs  p(95)=24.09µs
-     http_req_tls_handshaking.......: avg=15.27µs min=0s       med=0s      max=27.16ms  p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=31.3ms  min=667.42µs med=1.19ms  max=642.19ms p(90)=90.57ms  p(95)=104.42ms
-     http_reqs......................: 1902    31.674521/s
-     iteration_duration.............: avg=94.69ms min=77.15ms  med=84.68ms max=690.32ms p(90)=115.88ms p(95)=134.91ms
-     iterations.....................: 634     10.558174/s
-     vus............................: 1       min=1       max=1
-     vus_max........................: 1       min=1       max=1
+     checks.........................: 100.00% ✓ 600      ✗ 0
+     data_received..................: 1.1 MB  18 kB/s
+     data_sent......................: 76 kB   1.3 kB/s
+     http_req_blocked...............: avg=60.15µs  min=1.7µs    med=3.24µs   max=33.66ms  p(90)=4.61µs   p(95)=5.61µs
+     http_req_connecting............: avg=493ns    min=0s       med=0s       max=296.22µs p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=99.83ms  min=652.55µs med=1.22ms   max=416.95ms p(90)=294.02ms p(95)=303.91ms
+       { expected_response:true }...: avg=99.83ms  min=652.55µs med=1.22ms   max=416.95ms p(90)=294.02ms p(95)=303.91ms
+     http_req_failed................: 0.00%   ✓ 0        ✗ 600
+     http_req_receiving.............: avg=85.87µs  min=33.57µs  med=67.6µs   max=444.46µs p(90)=130.36µs p(95)=190.82µs
+     http_req_sending...............: avg=16.57µs  min=7.53µs   med=14.11µs  max=362µs    p(90)=22.83µs  p(95)=25.17µs
+     http_req_tls_handshaking.......: avg=27.63µs  min=0s       med=0s       max=16.58ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=99.73ms  min=596.97µs med=1.11ms   max=416.84ms p(90)=293.91ms p(95)=303.77ms
+     http_reqs......................: 600     9.993114/s
+     iteration_duration.............: avg=300.17ms min=278.93ms med=290.35ms max=419.51ms p(90)=350.12ms p(95)=366.13ms
+     iterations.....................: 200     3.331038/s
+     vus............................: 1       min=1      max=1
+     vus_max........................: 1       min=1      max=1
 ```
 </details>
 
+![img.png](image/smoke.png)
+
+#### Load Test
+<details>
+<summary> load.js </summary>
+
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '1m', target: 1},
+    {duration: '2m', target: 3},
+    {duration: '4m', target: 6},
+    {durtaion: '2m', target: 3},
+    {durtaion: '1m', target: 1},
+    {duration: '10s', target: 0}, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
+}
+
+export default function () {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+</details>
+
+
+<details>
+<summary> load 테스트 결과 </summary>
+
+```
+
+```
+</details>
+
+
+
+
+#### Stress Test
+<details>
+<summary> stress.js </summary>
+
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '1m', target: 6},
+    {duration: '2m', target: 12},
+    {duration: '2m', target: 24},
+    {duration: '2m', target: 48},
+    {duration: '2m', target: 96},
+    {duration: '2m', target: 144},
+    {duration: '2m', target: 288},
+    {duration: '2m', target: 336},
+    {duration: '2m', target: 384},
+    {duration: '2m', target: 288},
+    {duration: '2m', target: 192},
+    {duration: '2m', target: 96},
+    {duration: '2m', target: 48},
+    {duration: '2m', target: 24},
+    {duration: '1m', target: 6},
+    {duration: '10s', target: 0}, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
+}
+
+export default function () {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+</details>
+
+
+<details>
+<summary> stress 테스트 결과 </summary>
+
+```
+
+```
+</details>
 
 
 ---
