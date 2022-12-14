@@ -26,8 +26,8 @@ const PASSWORD = '1234';
 export default function ()  {
   mainPage();
   login();
-  pathSearch();
   clickPathSearch();
+  pathSearch();
 
   sleep(1);
 };
@@ -63,15 +63,10 @@ function login() {
 }
 
 function clickPathSearch() {
-	let authHeaders = {
-		headers: {
-			Authorization: `Bearer ${accessToken}`,
-		},
-	};
+	const response = http.get(`${BASE_URL}/path`);
 
-	let myObjects = http.get(`${BASE_URL}/path`, authHeaders);
-	check(myObjects, {
-		'click path page authorized user success': (obj) => obj.status === 200
+	check(response, {
+		'entered in path page successfully': (res) => res.status === 200
 	});
 }
 
