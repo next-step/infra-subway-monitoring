@@ -79,36 +79,50 @@ npm run dev
   - /js/main.js (전송크기: 172kb -> 가능한 절감효과: 143.6kb)
 * 따라서 gzip 압축, 사용하지 않는 자바스크립트를 줄여 개선할 수 있을 것 같습니다.
 
-
-#### 힌트
-<details>
-<summary> </summary>
-
-* 정량 기반(Quantity Based Metric) 예시
-  * 메인 페이지의 모든 오브젝트 파일 크기는 10mb 미만으로 제한한다
-  * 모든 웹 페이지의 각 페이지 내 포함된 자바스크립트 크기는 1mb 미만 이어야 한다.
-  * 검색 페이지에는 2mb 미만의 이미지가 포함되어야 합니다.
-* 시간 기반(Timing Based Metric) 예시
-  * LTE 환경에서의 모바일 기기의 TTI:Time To Interactive는 5초 미만이어야 한다
-  * DCL:Dom Content Loaded는 10초, FMP: First Meaningful Paint는 15초 미만이어야 한다
-* 규칙 기반(Rule Based Metric) 예시
-  * Lighthouse 성능 검사에서 80점 이상이어야 한다.
-
-
-* FCP(First Contentful Paint) : 가장 첫번째 유의미한 콘텐츠(텍스트 or 이미지)가 표시되는 시간
-* LCP(Large Contentful Paint) : 유의미한 콘텐츠(텍스트 or 이미지) 중 가장 큰 콘텐츠가 표시되는 시간
-* TTI(Time To Interactive) : 사용자가 사이트와 완전히 상호작용 할 수 있을 때까지 걸리는 시간
-* TBT(Total Blocking Time) : 상호작용이 불가능 했을 때의 시간
-* CLS(Cumulative Layout Shift) : 표시 영역 안에 보이는 요소의 이동을 측정
-* Speed Index : 페이지의 보이는 부분이 표시되는 평균 시간
-
-</details>
 ---
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+#### 대상 시스템 범위
+- web server(nginx)
+- web application server (tomcat)
+- db (mysql)
+
+#### 목표값 설정
+- **예상 DAU: 10만명** -> 경쟁사 평균의 1/3 수준으로 설정
+- DAU(예상 1일 사용자 수: MAU/30일)
+  - 경쟁사 분석
+    - 네이버지도 
+      - MAU : 1,392만
+      - DAU: 약 46.4만 
+    - 카카오맵 
+      - MAU : 729만 
+      - DAU:  약 24.3만
+      
+- 사용률이 많은 시간의 예상 집중률
+  - 사용률이 많은 시간대 : 07:00 ~ 9:00, 18:00 ~ 20:00
+  - 피크 시간대 집중률: `2로 가정` (최대 트래픽 / 평소 트래픽)
+
+- 1명당 1일 평균 접속 혹은 요청수를 예상
+  - 1명당 1일 평균 요청수 : `6번`
+    - 메인 페이지 접속 -> 경로검색 페이지 접속 -> 경로검색 기능
+    - (메인 페이지 접속 횟수(1번) + 경로검색 페이지 접속 횟수(1번) + 경로검색(1번)) * 사용률이 많은 시간대(2번) = `6번`
+
+- Throughput : 1일 평균 rps ~ 1일 최대 rps
+  - 1일 총 접속 수 = 100,000 * 6 = `600,000` (1일 사용자 수(DAU) x 1명당 1일 평균 접속 수)
+  - 1일 평균 rps = 600,000 / 86,400 = `6.94` (1일 총 접속 수 / 86,400 (초/일))
+  - 1일 최대 rps = 6.94 * 2 = `13.88` (1일 평균 rps x (최대 트래픽 / 평소 트래픽))
+
+- VUser 구하기
+  - T = (3 * 0.1(s)) + 1(s) = `1.3(s)` = (R * http_req_duration) (+ 1s)
+    - T : a value larger than the time needed to complete a VU iteration
+    - R : the number of requests per VU iteration
+    - 사용자가 한 번 접속했을 때의 요청수를 3으로 설정 (1일 평균 요청수 = 6)
+    - 내부망에서 테스트할 경우 예상 latency를 추가한다 (1s)
+  - VUser(1일 평균 rps 기준) = (6.94 * 1.3) / 3 = `3(명)` = (목표 rps * T) / R
 
 ---
 
@@ -150,7 +164,27 @@ npm run dev
 ![img.png](image/img.png)
 * 크롬 브라우저 도구를 활용하면, 퍼포먼스 탭에서 각 api별 요청 응답시간을 확인할 수 있어요. 웹 성능 예산에 영향을 주는 api 를 확인해보고, 가설을 세워보세요.
 
+* 정량 기반(Quantity Based Metric) 예시
+  * 메인 페이지의 모든 오브젝트 파일 크기는 10mb 미만으로 제한한다
+  * 모든 웹 페이지의 각 페이지 내 포함된 자바스크립트 크기는 1mb 미만 이어야 한다.
+  * 검색 페이지에는 2mb 미만의 이미지가 포함되어야 합니다.
+* 시간 기반(Timing Based Metric) 예시
+  * LTE 환경에서의 모바일 기기의 TTI:Time To Interactive는 5초 미만이어야 한다
+  * DCL:Dom Content Loaded는 10초, FMP: First Meaningful Paint는 15초 미만이어야 한다
+* 규칙 기반(Rule Based Metric) 예시
+  * Lighthouse 성능 검사에서 80점 이상이어야 한다.
+
+
+* FCP(First Contentful Paint) : 가장 첫번째 유의미한 콘텐츠(텍스트 or 이미지)가 표시되는 시간
+* LCP(Large Contentful Paint) : 유의미한 콘텐츠(텍스트 or 이미지) 중 가장 큰 콘텐츠가 표시되는 시간
+* TTI(Time To Interactive) : 사용자가 사이트와 완전히 상호작용 할 수 있을 때까지 걸리는 시간
+* TBT(Total Blocking Time) : 상호작용이 불가능 했을 때의 시간
+* CLS(Cumulative Layout Shift) : 표시 영역 안에 보이는 요소의 이동을 측정
+* Speed Index : 페이지의 보이는 부분이 표시되는 평균 시간
+
 </details>
+
+
 
 ---
 
