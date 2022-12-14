@@ -134,6 +134,100 @@ npm run dev
 
 #### 시나리오
 - 메인 페이지 접속 -> 경로 검색 페이지 접속 -> 겅로 검색 
+
+#### Smoke Test
+<details>
+<summary> smoke.js </summary>
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, // 1 user looping for 1 minute
+  duration: '60s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+
+const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+
+export function mainPage() {
+  let response = http.get(`${BASE_URL}`);
+  check(response, {'[Result] Main Page': (response) => response.status === 200});
+}
+
+export function pathPage() {
+  let response = http.get(`${BASE_URL}/path`);
+  check(response, {'[Result] Path Page': (response) => response.status === 200});
+}
+
+export function searchPath() {
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+  check(response, {'[Result] Search Path': (response) => response.status === 200});
+}
+
+export default function () {
+  mainPage();
+  pathPage();
+  searchPath();
+}
+```
+
+</details>
+
+
+<details>
+<summary> smoke 테스트 결과 </summary>
+
+```
+$ k6 run smoke.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: smoke.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 1m30s max duration (incl. graceful stop):
+           * default: 1 looping VUs for 1m0s (gracefulStop: 30s)
+
+
+running (1m00.0s), 0/1 VUs, 634 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  1m0s
+
+     ✓ [Result] Main Page
+     ✓ [Result] Path Page
+     ✓ [Result] Search Path
+
+     checks.........................: 100.00% ✓ 1902      ✗ 0
+     data_received..................: 3.5 MB  58 kB/s
+     data_sent......................: 242 kB  4.0 kB/s
+     http_req_blocked...............: avg=26.74µs min=1.7µs    med=2.92µs  max=42.48ms  p(90)=3.99µs   p(95)=4.37µs
+     http_req_connecting............: avg=284ns   min=0s       med=0s      max=284.62µs p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=31.4ms  min=738.31µs med=1.28ms  max=642.32ms p(90)=90.69ms  p(95)=104.53ms
+       { expected_response:true }...: avg=31.4ms  min=738.31µs med=1.28ms  max=642.32ms p(90)=90.69ms  p(95)=104.53ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 1902
+     http_req_receiving.............: avg=85.89µs min=29.13µs  med=76.96µs max=8.01ms   p(90)=120.37µs p(95)=140.8µs
+     http_req_sending...............: avg=16.25µs min=7.3µs    med=14.13µs max=1.12ms   p(90)=22.68µs  p(95)=24.09µs
+     http_req_tls_handshaking.......: avg=15.27µs min=0s       med=0s      max=27.16ms  p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=31.3ms  min=667.42µs med=1.19ms  max=642.19ms p(90)=90.57ms  p(95)=104.42ms
+     http_reqs......................: 1902    31.674521/s
+     iteration_duration.............: avg=94.69ms min=77.15ms  med=84.68ms max=690.32ms p(90)=115.88ms p(95)=134.91ms
+     iterations.....................: 634     10.558174/s
+     vus............................: 1       min=1       max=1
+     vus_max........................: 1       min=1       max=1
+```
+</details>
+
+
+
 ---
 
 ### 3단계 - 로깅, 모니터링
