@@ -8,10 +8,10 @@ import { check, group, sleep, fail } from 'k6';
 export let options = {
 	stages: [
     { duration: '5m', target: 2 },
-    { duration: '5m', target: 5 },
-    { duration: '5m', target: 10 },
-    { duration: '5m', target: 10 },
-    { duration: '5m', target: 5 },
+    { duration: '5m', target: 7 },
+    { duration: '5m', target: 14 },
+    { duration: '5m', target: 14 },
+    { duration: '5m', target: 7 },
     { duration: '5m', target: 2 }
   ],
   thresholds: {
@@ -26,6 +26,7 @@ const PASSWORD = '1234';
 export default function ()  {
   mainPage();
   login();
+  clickPathSearch();
   pathSearch();
 
   sleep(1);
@@ -61,6 +62,14 @@ function login() {
 	  return loginRes.json('accessToken');
 }
 
+function clickPathSearch() {
+	const response = http.get(`${BASE_URL}/path`);
+
+	check(response, {
+		'entered in path page successfully': (res) => res.status === 200
+	});
+}
+
 function pathSearch(accessToken){
 	let authHeaders = {
 	  headers: {
@@ -73,4 +82,3 @@ function pathSearch(accessToken){
 	  'search path authorized user success': (obj) => obj.status === 200
 	});
 }
-  
