@@ -228,6 +228,30 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 
+#### 요구사항
+- 애플리케이션 진단하기 실습을 진행하고 문제가 되는 코드 수정
+- 로그 설정
+- Cloudwatch 로 모니터링
+
+#### 로그 설정
+- [x] Application Log 파일로 저장
+  - [x] 회원가입, 로그인 등의 이벤트에 로깅 설정
+  - [x] 경로 찾기 등의 이벤트 로그를 JSON 으로 수집
+- [x] Ngnix Access Log 설정
+
+#### Cloudwatch 로 모니터링
+- [x] Cloudwatch 를 통한 로그 수집
+- [x] Cloudwatch 를 통한 메트릭 수집
+- [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
+
+#### USE 방법론
+- U: Utilization - 얼만큼 자원을 썼는지
+- S: Saturation - 얼마나 많은 부하가 몰리는지
+- E: Error - 에러가 발생했는지
+- 에러가 존재하는가? -> 자원을 많이 사용하고 있는가? -> 부하가 몰리고 있는가? 의 순서로 체크
+
 1. 각 서버내 로깅 경로를 알려주세요
+- /var/infra-subway-monitoring/log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=hahoho87-dashboard
