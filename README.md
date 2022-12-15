@@ -45,7 +45,7 @@ npm run dev
     - 서울교통공사 : http://www.seoulmetro.co.kr/kr/cyberStation.do
     - 네이버지도 : https://m.map.naver.com/subway/subwayLine.naver?region=1000
     - 카카오맵 : https://m.map.kakao.com/
-    - Running Map : https://shshon-infra.o-r.kr/
+    - Running Map : https://snh15978.p-e.kr/
 
 | 모바일 | 서울교통공사 | 네이버지도 | 카카오맵  | Running Map |
 |-----|--------|-------|-------|-------------|
