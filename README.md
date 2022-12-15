@@ -561,15 +561,86 @@ default ✓ [======================================] 000/180 VUs  20s
 따라서, 현재 시스템 상에서 **예상되는 수요량을 모두 만족할만한 수준인 것으로 확인**된다.
 
 #### 추가 grafana 구축 
-![grafana.png](images%2Fstep2%2Fgrafana.png)
+- smoke test  
+![grafana-smoke.png](images/step2/grafana-smoke.png)
 
+- load test  
+  ![grafana-load-1.png](images/step2/grafana-load-1.png)    
+  ![grafana-load-2.png](images/step2/grafana-load-2.png)
+
+- stress test  
+  ![grafana-stress-1.png](images/step2/grafana-stress-1.png)    
+  ![grafana-stress-2.png](images/step2/grafana-stress-2.png)
 ### 2단계 피드백
 - [x] 경로깨진 파일 확인
 - [x] 스크립트 한개 내에서 유저 플로우대로 정의
   - [x] 경로 검색 접근 페이지도 확인
 - [x] Load Test 의 테스트 시간을 30분 ~ 2시간 사이로
 - [x] Load, Stress 테스트의 Latency 를 낮춰도 좋을 듯
+- [x] stress 테스트 진행 시 duration 을 조금 더 길게 가져가도 좋을 듯 함..
+  - 현재 설정한 duration 기준으로 stress test 지표가 어떤지?
+  - 대략 VUser 300 정도부터 오류가 발생했습니다.
+  - 현재 목표로 설정한 Target 대비 duration : p(99) 100, target : 180 으로도  
+    별다른 이슈가 없었습니다!   
 
+- stress test (VUser : 300 버전)
+```javascript
+...
+
+export let options = {
+  threshold: {
+    http_req_duration: ['p(99)<100'],
+  },
+  stages: [
+    {duration: '5s', target: 23},
+    {duration: '10s', target: 300},
+    {duration: '5s', target: 0},
+  ],
+};
+
+...
+```
+
+```shell
+  execution: local
+     script: stress_end.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 300 max VUs, 50s max duration (incl. graceful stop):
+           * default: Up to 300 looping VUs for 20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0018] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+...
+
+running (20.5s), 000/300 VUs, 2608 complete and 0 interrupted iterations
+default ✓ [======================================] 000/300 VUs  20s
+
+     ✗ is success
+      ↳  70% — ✓ 5487 / ✗ 2337
+
+     checks.........................: 70.13% ✓ 5487       ✗ 2337
+     data_received..................: 19 MB  923 kB/s
+     data_sent......................: 1.8 MB 88 kB/s
+     http_req_blocked...............: avg=17.48ms  min=0s     med=2.61µs   max=346.44ms p(90)=81.77ms  p(95)=114.26ms
+     http_req_connecting............: avg=9.35ms   min=0s     med=0s       max=121.68ms p(90)=33.34ms  p(95)=46.28ms
+     http_req_duration..............: avg=323.87ms min=0s     med=5.5ms    max=4.32s    p(90)=1.84s    p(95)=2.11s
+       { expected_response:true }...: avg=459.03ms min=2.59ms med=53.77ms  max=4.32s    p(90)=2.06s    p(95)=2.17s
+     http_req_failed................: 29.86% ✓ 2337       ✗ 5487
+     http_req_receiving.............: avg=716.76µs min=0s     med=44.11µs  max=78.42ms  p(90)=102.72µs p(95)=670.01µs
+     http_req_sending...............: avg=1.51ms   min=0s     med=11.26µs  max=225.61ms p(90)=1.98ms   p(95)=7.98ms
+     http_req_tls_handshaking.......: avg=12.57ms  min=0s     med=0s       max=262.03ms p(90)=58.53ms  p(95)=84.28ms
+     http_req_waiting...............: avg=321.64ms min=0s     med=3.99ms   max=4.32s    p(90)=1.84s    p(95)=2.11s
+     http_reqs......................: 7824   382.474588/s
+     iteration_duration.............: avg=1.04s    min=8.91ms med=571.15ms max=4.38s    p(90)=2.42s    p(95)=2.52s
+     iterations.....................: 2608   127.491529/s
+     vus............................: 69     min=4        max=294
+     vus_max........................: 300    min=300      max=300
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
