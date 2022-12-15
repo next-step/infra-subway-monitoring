@@ -66,7 +66,7 @@ function kill_process(){
 function start_app(){
   echo -e "${txtylw}=======================================${txtrst}"
   echo -e "${txtgrn}>> Start New Application 🍀🍀🍀${txtrst}"
-  nohup java -jar -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=prod $(find $WEB_ROOT_PATH/build -name "*jar") 1> $HOME/application.log 2>&1  &
+  nohup java -jar -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=local $(find $WEB_ROOT_PATH/build -name "*jar") 1> $HOME/application.log 2>&1  &
   echo -e "${txtgrn}>> Start New Application Successfully!!!  ✅️ ${txtrst}"
   echo -e "${txtylw}=======================================${txtrst}"
 }
