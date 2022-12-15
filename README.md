@@ -136,7 +136,7 @@ npm run dev
     - 100ms
   - 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
+   - monitoring 디렉토리에 각 테스트별 스크립트, 결과 추가
 ---
 
 ### 3단계 - 로깅, 모니터링
