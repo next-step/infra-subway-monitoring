@@ -121,7 +121,7 @@ A) 정답은 없다 ; 서비스 특성마다 다른 기준을 가지고 개선
 >   - TPS 는 `Scale Out : 분산처리` 혹은 `Scale up : 리소스 스펙업`을 통해 증가 가능
 >   - 단순히 응답시간을 기준으로 종료시키지 말고, TPS 나 DB Connection, CPU 등을 종합적으로 확인하고 중단해야 함
 > - Performance vs Scalability  
-> ![scaling.png](images%2Fstep2%2Fscaling.png)
+>   ![scaling.png](images/step2/scaling.png)
 >   - 성능에 문제가 있는 경우엔, 단일 사용자에 대한 응답 속도가 느려진다
 >   - 확장성에 문제가 있는 경우엔, 당장은 단일 사용자에게는 빠르지만 부하가 많아질 경우 속도가 느려질 수 있다
 > - 시간
@@ -311,76 +311,94 @@ A) 정답은 없다 ; 서비스 특성마다 다른 기준을 가지고 개선
 
 | 부하테스트 종류 | VUser(명) | ramp-up(s) | 부하 유지 시간(s) | ramp-down(s) | threshold(ms) |
 |----------|----------|------------|-------------|--------------|---------------|
-| smoke    | 2        | 1          | 5           | 1            | 1500          |
-| load     | 64       | 10         | 300         | 10           | 1000          |
-| stress   | 180      | 5          | 10          | 5            | 1000          |
+| smoke    | 2        | 1          | 5           | 1            | 1000          |
+| load     | 64       | 10         | 3600        | 10           | 100           |
+| stress   | 180      | 5          | 10          | 5            | 100           |
 
 -----
 #### Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 > 시나리오는 다음과 같이 설정하였습니다
 > - 접속 빈도가 높은 페이지 : 홈페이지
-> - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 노선 조회
+> - 접속 빈도가 높은 페이지 : 노선조회 페이지
+> - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 : 노선 조회 요청
 
-##### 홈페이지 부하테스트
+##### 부하테스트 스크립트
 - Smoke Test
 ```javascript
 import http from 'k6/http';
 import {check} from 'k6';
 
 export let options = {
-threshold: {
-  http_req_duration: ['p(99)<1500'],
-},
-stages: [
-    {duration: '1s', target: 2},
-    {duration: '5s', target: 2},
-    {duration: '1s', target: 0},
-  ],
+    threshold: {
+        http_req_duration: ['p(99)<1000'],
+    },
+    stages: [
+        {duration: '1s', target: 2},
+        {duration: '5s', target: 2},
+        {duration: '1s', target: 0},
+    ],
 };
 
 const BASE_URL = 'https://yomni-subway.kro.kr/';
+const SOURCE_STATION_ID = 1;
+const TARGET_STATION_ID = 6;
 
 export default function () {
 
+    // 메인 페이지
     const mainRes = http.get(`${BASE_URL}`);
 
     check(mainRes, {
-      'is success': (r) => r.status === 200,
+        'is success': (r) => r.status === 200,
+    });
+
+    // 노선조회 페이지 접근
+    const pathRes = http.get(`${BASE_URL}/path`)
+
+    check(pathRes, {
+        'is success': (r) => r.status === 200,
+    });
+
+    // 노선조회 기능 실행
+    const pathsRes = http.get(
+        `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
+
+    check(pathsRes, {
+        'is success': (r) => r.status === 200,
     });
 }
 ```
 ```shell
-# result
-execution: local
- script: smoke_main.js
- output: InfluxDBv1 (http://localhost:8086)
+  execution: local
+     script: smoke.js
+     output: InfluxDBv1 (http://localhost:8086)
 
-scenarios: (100.00%) 1 scenario, 2 max VUs, 37s max duration (incl. graceful stop):
-         * default: Up to 2 looping VUs for 7s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 2 max VUs, 37s max duration (incl. graceful stop):
+           * default: Up to 2 looping VUs for 7s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (07.0s), 0/2 VUs, 4071 complete and 0 interrupted iterations
+running (07.0s), 0/2 VUs, 181 complete and 0 interrupted iterations
 default ✓ [======================================] 0/2 VUs  7s
 
-   ✓ is success
+     ✓ is success
 
-   checks.........................: 100.00% ✓ 4071       ✗ 0
-   data_received..................: 5.1 MB  734 kB/s
-   data_sent......................: 466 kB  67 kB/s
-   http_req_blocked...............: avg=12.64µs min=1.04µs  med=1.91µs  max=24.25ms  p(90)=2.91µs  p(95)=3.53µs
-   http_req_connecting............: avg=847ns   min=0s      med=0s      max=776.45µs p(90)=0s      p(95)=0s
-   http_req_duration..............: avg=2.96ms  min=2.53ms  med=2.75ms  max=31.57ms  p(90)=3.02ms  p(95)=3.71ms
-     { expected_response:true }...: avg=2.96ms  min=2.53ms  med=2.75ms  max=31.57ms  p(90)=3.02ms  p(95)=3.71ms
-   http_req_failed................: 0.00%   ✓ 0          ✗ 4071
-   http_req_receiving.............: avg=56.15µs min=16.27µs med=39.09µs max=28.76ms  p(90)=65.66µs p(95)=77.8µs
-   http_req_sending...............: avg=13.05µs min=5.08µs  med=8.12µs  max=3.44ms   p(90)=16.48µs p(95)=24.81µs
-   http_req_tls_handshaking.......: avg=6.72µs  min=0s      med=0s      max=14.77ms  p(90)=0s      p(95)=0s
-   http_req_waiting...............: avg=2.89ms  min=2.49ms  med=2.7ms   max=22.77ms  p(90)=2.96ms  p(95)=3.58ms
-   http_reqs......................: 4071    581.379094/s
-   iteration_duration.............: avg=3.06ms  min=2.6ms   med=2.83ms  max=31.72ms  p(90)=3.14ms  p(95)=3.88ms
-   iterations.....................: 4071    581.379094/s
-   vus............................: 1       min=1        max=2
-   vus_max........................: 2       min=2        max=2
+     checks.........................: 100.00% ✓ 543       ✗ 0
+     data_received..................: 1.1 MB  159 kB/s
+     data_sent......................: 68 kB   9.6 kB/s
+     http_req_blocked...............: avg=48.6µs  min=1.27µs  med=2.65µs  max=19.94ms  p(90)=3.88µs  p(95)=4.5µs
+     http_req_connecting............: avg=2.45µs  min=0s      med=0s      max=667.31µs p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=23.01ms min=2.61ms  med=3.01ms  max=76.35ms  p(90)=63.96ms p(95)=66.07ms
+       { expected_response:true }...: avg=23.01ms min=2.61ms  med=3.01ms  max=76.35ms  p(90)=63.96ms p(95)=66.07ms
+     http_req_failed................: 0.00%   ✓ 0         ✗ 543
+     http_req_receiving.............: avg=59.3µs  min=22.06µs med=54.58µs max=319.72µs p(90)=83.92µs p(95)=101.64µs
+     http_req_sending...............: avg=14.92µs min=6.04µs  med=11.26µs max=107.86µs p(90)=23.08µs p(95)=37.18µs
+     http_req_tls_handshaking.......: avg=31.5µs  min=0s      med=0s      max=13.23ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=22.93ms min=2.57ms  med=2.93ms  max=76.31ms  p(90)=63.86ms p(95)=65.98ms
+     http_reqs......................: 543     77.137344/s
+     iteration_duration.............: avg=69.57ms min=64.17ms med=68.46ms max=90.7ms   p(90)=76.56ms p(95)=79.2ms
+     iterations.....................: 181     25.712448/s
+     vus............................: 1       min=1       max=2
+     vus_max........................: 2       min=2       max=2
 ```
 
 - Load Test
@@ -390,241 +408,73 @@ import {check} from 'k6';
 
 export let options = {
   threshold: {
-    http_req_duration: ['p(99)<1000'],
+    http_req_duration: ['p(99)<100'],
   },
   stages: [
-      {duration: '10s', target: 23},
-      {duration: '300s', target: 64},
-      {duration: '10s', target: 0},
-    ],
-  };
-
-const BASE_URL = 'https://yomni-subway.kro.kr/';
-
-export default function () {
-
-    const mainRes = http.get(`${BASE_URL}`);
-
-    check(mainRes, {
-        'is success': (r) => r.status === 200,
-    });
-}
-```
-```shell
-execution: local
- script: load_main.js
- output: InfluxDBv1 (http://localhost:8086)
-
-scenarios: (100.00%) 1 scenario, 64 max VUs, 5m50s max duration (incl. graceful stop):
-         * default: Up to 64 looping VUs for 5m20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
-
-running (5m20.0s), 00/64 VUs, 387737 complete and 0 interrupted iterations
-default ✓ [======================================] 00/64 VUs  5m20s
-
-   ✓ is success
-
-   checks.........................: 100.00% ✓ 387737      ✗ 0
-   data_received..................: 489 MB  1.5 MB/s
-   data_sent......................: 44 MB   139 kB/s
-   http_req_blocked...............: avg=63.49µs  min=967ns   med=2.4µs   max=170.02ms p(90)=4.04µs   p(95)=9.01µs
-   http_req_connecting............: avg=8.03µs   min=0s      med=0s      max=59.32ms  p(90)=0s       p(95)=0s
-   http_req_duration..............: avg=34.08ms  min=2.58ms  med=21.05ms max=507.75ms p(90)=79.73ms  p(95)=98.82ms
-     { expected_response:true }...: avg=34.08ms  min=2.58ms  med=21.05ms max=507.75ms p(90)=79.73ms  p(95)=98.82ms
-   http_req_failed................: 0.00%   ✓ 0           ✗ 387737
-   http_req_receiving.............: avg=167.64µs min=15.54µs med=39.99µs max=71.28ms  p(90)=155.72µs p(95)=381.75µs
-   http_req_sending...............: avg=65.85µs  min=4.83µs  med=11.26µs max=60.38ms  p(90)=36.35µs  p(95)=108.68µs
-   http_req_tls_handshaking.......: avg=48.28µs  min=0s      med=0s      max=169.15ms p(90)=0s       p(95)=0s
-   http_req_waiting...............: avg=33.84ms  min=2.54ms  med=20.77ms max=507.71ms p(90)=79.58ms  p(95)=98.68ms
-   http_reqs......................: 387737  1211.666982/s
-   iteration_duration.............: avg=34.38ms  min=2.67ms  med=21.35ms max=538.88ms p(90)=80.05ms  p(95)=99.2ms
-   iterations.....................: 387737  1211.666982/s
-   vus............................: 1       min=1         max=63
-   vus_max........................: 64      min=64        max=64
-```
-- Stress Test
-```javascript
-import http from 'k6/http';
-import {check} from 'k6';
-
-export let options = {
-    threshold: {
-        http_req_duration: ['p(99)<1000'],
-    },
-    stages: [
-        {duration: '5s', target: 23},
-        {duration: '10s', target: 180},
-        {duration: '5s', target: 0},
-    ],
+    {duration: '10s', target: 23},
+    {duration: '3600s', target: 64},
+    {duration: '10s', target: 0},
+  ],
 };
 
 const BASE_URL = 'https://yomni-subway.kro.kr/';
-
-export default function () {
-
-    const mainRes = http.get(`${BASE_URL}`);
-
-    check(mainRes, {
-        'is success': (r) => r.status === 200,
-    });
-}
-```
-```shell
-execution: local
-   script: stress_main.js
-   output: InfluxDBv1 (http://localhost:8086)
-
-scenarios: (100.00%) 1 scenario, 180 max VUs, 50s max duration (incl. graceful stop):
-         * default: Up to 180 looping VUs for 20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
-
-running (20.0s), 000/180 VUs, 37120 complete and 0 interrupted iterations
-default ✓ [======================================] 000/180 VUs  20s
-
-     ✓ is success
-
-     checks.........................: 100.00% ✓ 37120       ✗ 0
-     data_received..................: 47 MB   2.4 MB/s
-     data_sent......................: 4.3 MB  215 kB/s
-     http_req_blocked...............: avg=531.86µs min=1.02µs  med=2.57µs  max=305.71ms p(90)=4.51µs   p(95)=10.23µs
-     http_req_connecting............: avg=169.93µs min=0s      med=0s      max=119.78ms p(90)=0s       p(95)=0s
-     http_req_duration..............: avg=40.65ms  min=2.59ms  med=28.58ms max=677.79ms p(90)=80.6ms   p(95)=106.4ms
-       { expected_response:true }...: avg=40.65ms  min=2.59ms  med=28.58ms max=677.79ms p(90)=80.6ms   p(95)=106.4ms
-     http_req_failed................: 0.00%   ✓ 0           ✗ 37120
-     http_req_receiving.............: avg=367.15µs min=14.94µs med=40.37µs max=112.9ms  p(90)=189.79µs p(95)=456.49µs
-     http_req_sending...............: avg=189.11µs min=4.73µs  med=11.58µs max=139.53ms p(90)=43.97µs  p(95)=155.71µs
-     http_req_tls_handshaking.......: avg=352.15µs min=0s      med=0s      max=214.7ms  p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=40.09ms  min=2.54ms  med=28.21ms max=677.67ms p(90)=79.33ms  p(95)=104.06ms
-     http_reqs......................: 37120   1855.634676/s
-     iteration_duration.............: avg=41.44ms  min=2.66ms  med=28.95ms max=677.9ms  p(90)=81.66ms  p(95)=110.42ms
-     iterations.....................: 37120   1855.634676/s
-     vus............................: 5       min=4         max=178
-     vus_max........................: 180     min=180       max=180
-```
-
-----------------------------
-##### 노선조회 부하테스트
-- Smoke Test
-```javascript
-import http from 'k6/http';
-import {check} from 'k6';
-
-export let options = {
-    threshold: {
-        http_req_duration: ['p(99)<1500'],
-    },
-    stages: [
-        {duration: '1s', target: 2},
-        {duration: '5s', target: 2},
-        {duration: '1s', target: 0},
-    ],
-};
-
-const BASE_URL = 'https://yomni-subway.kro.kr';
 const SOURCE_STATION_ID = 1;
 const TARGET_STATION_ID = 6;
-// 27개역 통과 경로 조회
 
 export default function () {
 
-    const pathRes = http.get(
-        `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
+  // 메인 페이지
+  const mainRes = http.get(`${BASE_URL}`);
 
-    check(pathRes, {
-        'is success': (r) => r.status === 200,
-    });
+  check(mainRes, {
+    'is success': (r) => r.status === 200,
+  });
+
+  // 노선조회 페이지 접근
+  const pathRes = http.get(`${BASE_URL}/path`)
+
+  check(pathRes, {
+    'is success': (r) => r.status === 200,
+  });
+
+  // 노선조회 기능 실행
+  const pathsRes = http.get(
+          `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
+
+  check(pathsRes, {
+    'is success': (r) => r.status === 200,
+  });
 }
 ```
 ```shell
   execution: local
-     script: smoke_path.js
+     script: load.js
      output: InfluxDBv1 (http://localhost:8086)
 
-  scenarios: (100.00%) 1 scenario, 2 max VUs, 37s max duration (incl. graceful stop):
-           * default: Up to 2 looping VUs for 7s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 64 max VUs, 1h0m50s max duration (incl. graceful stop):
+           * default: Up to 64 looping VUs for 1h0m20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (07.0s), 0/2 VUs, 210 complete and 0 interrupted iterations
-default ✓ [======================================] 0/2 VUs  7s
+running (1h00m20.1s), 00/64 VUs, 436745 complete and 0 interrupted iterations
+default ✓ [======================================] 00/64 VUs  1h0m20s
 
      ✓ is success
 
-     checks.........................: 100.00% ✓ 210       ✗ 0
-     data_received..................: 767 kB  109 kB/s
-     data_sent......................: 30 kB   4.2 kB/s
-     http_req_blocked...............: avg=102.55µs min=1.5µs   med=3.24µs  max=14.35ms p(90)=4.68µs   p(95)=17.71µs
-     http_req_connecting............: avg=11.94µs  min=0s      med=0s      max=1.84ms  p(90)=0s       p(95)=0s
-     http_req_duration..............: avg=59.32ms  min=55.13ms med=58.52ms max=76.76ms p(90)=62.77ms  p(95)=65.54ms
-       { expected_response:true }...: avg=59.32ms  min=55.13ms med=58.52ms max=76.76ms p(90)=62.77ms  p(95)=65.54ms
-     http_req_failed................: 0.00%   ✓ 0         ✗ 210
-     http_req_receiving.............: avg=86.22µs  min=28.28µs med=76.12µs max=1.09ms  p(90)=110.42µs p(95)=136.34µs
-     http_req_sending...............: avg=21.88µs  min=8.3µs   med=21.23µs max=81.54µs p(90)=35.12µs  p(95)=43.47µs
-     http_req_tls_handshaking.......: avg=83.45µs  min=0s      med=0s      max=13.14ms p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=59.21ms  min=54.99ms med=58.42ms max=76.66ms p(90)=62.67ms  p(95)=65.44ms
-     http_reqs......................: 210     29.955813/s
-     iteration_duration.............: avg=59.61ms  min=55.26ms med=58.73ms max=76.89ms p(90)=62.94ms  p(95)=66.07ms
-     iterations.....................: 210     29.955813/s
-     vus............................: 1       min=1       max=2
-     vus_max........................: 2       min=2       max=2       
-```
-- Load Test
-```javascript
-import http from 'k6/http';
-import {check} from 'k6';
-
-export let options = {
-    threshold: {
-        http_req_duration: ['p(99)<1000'],
-    },
-    stages: [
-        {duration: '10s', target: 23},
-        {duration: '300s', target: 64},
-        {duration: '10s', target: 0},
-    ],
-};
-
-const BASE_URL = 'https://yomni-subway.kro.kr';
-const SOURCE_STATION_ID = 1;
-const TARGET_STATION_ID = 6;
-// 27개역 통과 경로 조회
-
-export default function () {
-
-    const pathRes = http.get(
-        `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
-
-    check(pathRes, {
-        'is success': (r) => r.status === 200,
-    });
-}
-```
-```shell
-  execution: local
-     script: load_path.js
-     output: InfluxDBv1 (http://localhost:8086)
-
-  scenarios: (100.00%) 1 scenario, 64 max VUs, 5m50s max duration (incl. graceful stop):
-           * default: Up to 64 looping VUs for 5m20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
-
-
-running (5m20.1s), 00/64 VUs, 43560 complete and 0 interrupted iterations
-default ✓ [======================================] 00/64 VUs  5m20s
-
-     ✓ is success
-
-     checks.........................: 100.00% ✓ 43560      ✗ 0
-     data_received..................: 158 MB  493 kB/s
-     data_sent......................: 6.0 MB  19 kB/s
-     http_req_blocked...............: avg=15.8µs   min=987ns   med=2.76µs   max=46.65ms  p(90)=4.3µs    p(95)=6.22µs
-     http_req_connecting............: avg=1.72µs   min=0s      med=0s       max=7.33ms   p(90)=0s       p(95)=0s
-     http_req_duration..............: avg=306.21ms min=55.48ms med=315.77ms max=944.99ms p(90)=440.08ms p(95)=465.32ms
-       { expected_response:true }...: avg=306.21ms min=55.48ms med=315.77ms max=944.99ms p(90)=440.08ms p(95)=465.32ms
-     http_req_failed................: 0.00%   ✓ 0          ✗ 43560
-     http_req_receiving.............: avg=90.26µs  min=20.25µs med=71.68µs  max=15.13ms  p(90)=114.84µs p(95)=163.37µs
-     http_req_sending...............: avg=23.93µs  min=5.53µs  med=15.47µs  max=11.96ms  p(90)=36.16µs  p(95)=47.84µs
-     http_req_tls_handshaking.......: avg=9µs      min=0s      med=0s       max=43ms     p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=306.1ms  min=55.39ms med=315.65ms max=944.76ms p(90)=439.98ms p(95)=465.22ms
-     http_reqs......................: 43560   136.102547/s
-     iteration_duration.............: avg=306.41ms min=55.68ms med=315.92ms max=945.11ms p(90)=440.26ms p(95)=465.55ms
-     iterations.....................: 43560   136.102547/s
+     checks.........................: 100.00% ✓ 1310235    ✗ 0
+     data_received..................: 2.7 GB  741 kB/s
+     data_sent......................: 163 MB  45 kB/s
+     http_req_blocked...............: avg=8.46µs   min=825ns   med=2.3µs    max=111.91ms p(90)=3.61µs   p(95)=4.43µs
+     http_req_connecting............: avg=816ns    min=0s      med=0s       max=37.41ms  p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=118.34ms min=2.54ms  med=3.83ms   max=1.56s    p(90)=426.05ms p(95)=487.7ms
+       { expected_response:true }...: avg=118.34ms min=2.54ms  med=3.83ms   max=1.56s    p(90)=426.05ms p(95)=487.7ms
+     http_req_failed................: 0.00%   ✓ 0          ✗ 1310235
+     http_req_receiving.............: avg=67.37µs  min=15.64µs med=50.45µs  max=51ms     p(90)=90.4µs   p(95)=119.67µs
+     http_req_sending...............: avg=18.4µs   min=4.72µs  med=11.16µs  max=36.05ms  p(90)=26.44µs  p(95)=36.21µs
+     http_req_tls_handshaking.......: avg=3.85µs   min=0s      med=0s       max=111.07ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=118.25ms min=2.49ms  med=3.75ms   max=1.55s    p(90)=425.95ms p(95)=487.61ms
+     http_reqs......................: 1310235 361.937548/s
+     iteration_duration.............: avg=355.45ms min=61.02ms med=363.27ms max=1.56s    p(90)=515.65ms p(95)=549.21ms
+     iterations.....................: 436745  120.645849/s
      vus............................: 1       min=1        max=63
      vus_max........................: 64      min=64       max=64
 ```
@@ -635,7 +485,7 @@ import {check} from 'k6';
 
 export let options = {
     threshold: {
-        http_req_duration: ['p(99)<1000'],
+        http_req_duration: ['p(99)<100'],
     },
     stages: [
         {duration: '5s', target: 23},
@@ -644,51 +494,65 @@ export let options = {
     ],
 };
 
-const BASE_URL = 'https://yomni-subway.kro.kr';
+const BASE_URL = 'https://yomni-subway.kro.kr/';
 const SOURCE_STATION_ID = 1;
 const TARGET_STATION_ID = 6;
-// 27개역 통과 경로 조회
 
 export default function () {
 
-    const pathRes = http.get(
-        `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
+  // 메인 페이지
+  const mainRes = http.get(`${BASE_URL}`);
 
-    check(pathRes, {
-        'is success': (r) => r.status === 200,
-    });
+  check(mainRes, {
+    'is success': (r) => r.status === 200,
+  });
+
+  // 노선조회 페이지 접근
+  const pathRes = http.get(`${BASE_URL}/path`)
+
+  check(pathRes, {
+    'is success': (r) => r.status === 200,
+  });
+
+  // 노선조회 기능 실행
+  const pathsRes = http.get(
+          `${BASE_URL}/paths?source=${SOURCE_STATION_ID}&target=${TARGET_STATION_ID}`);
+
+  check(pathsRes, {
+    'is success': (r) => r.status === 200,
+  });
 }
 ```
 ```shell
   execution: local
-     script: stress_path.js
+     script: stress.js
      output: InfluxDBv1 (http://localhost:8086)
 
   scenarios: (100.00%) 1 scenario, 180 max VUs, 50s max duration (incl. graceful stop):
            * default: Up to 180 looping VUs for 20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
 
-running (20.0s), 000/180 VUs, 2387 complete and 0 interrupted iterations
+running (20.0s), 000/180 VUs, 1887 complete and 0 interrupted iterations
 default ✓ [======================================] 000/180 VUs  20s
 
      ✓ is success
 
-     checks.........................: 100.00% ✓ 2387       ✗ 0
-     data_received..................: 9.4 MB  468 kB/s
-     data_sent......................: 395 kB  20 kB/s
-     http_req_blocked...............: avg=326.34µs min=1.09µs  med=2.9µs    max=19.5ms  p(90)=18.8µs   p(95)=3.66ms
-     http_req_connecting............: avg=57.16µs  min=0s      med=0s       max=7.96ms  p(90)=0s       p(95)=663.38µs
-     http_req_duration..............: avg=669.49ms min=54.79ms med=618.7ms  max=2.26s   p(90)=1.29s    p(95)=1.41s
-       { expected_response:true }...: avg=669.49ms min=54.79ms med=618.7ms  max=2.26s   p(90)=1.29s    p(95)=1.41s
-     http_req_failed................: 0.00%   ✓ 0          ✗ 2387
-     http_req_receiving.............: avg=94.69µs  min=21.55µs med=72.83µs  max=13.76ms p(90)=114.59µs p(95)=159.19µs
-     http_req_sending...............: avg=23.02µs  min=5.99µs  med=15.88µs  max=1.62ms  p(90)=38.27µs  p(95)=53.25µs
-     http_req_tls_handshaking.......: avg=255.26µs min=0s      med=0s       max=15.19ms p(90)=0s       p(95)=2.89ms
-     http_req_waiting...............: avg=669.37ms min=54.66ms med=618.57ms max=2.26s   p(90)=1.29s    p(95)=1.41s
-     http_reqs......................: 2387    119.191979/s
-     iteration_duration.............: avg=670ms    min=54.97ms med=619.71ms max=2.26s   p(90)=1.29s    p(95)=1.41s
-     iterations.....................: 2387    119.191979/s
-     vus............................: 6       min=4        max=178
+     checks.........................: 100.00% ✓ 5661       ✗ 0
+     data_received..................: 12 MB   615 kB/s
+     data_sent......................: 768 kB  38 kB/s
+     http_req_blocked...............: avg=158.68µs min=1.06µs  med=2.39µs   max=38.23ms p(90)=4.04µs  p(95)=16.42µs
+     http_req_connecting............: avg=24.75µs  min=0s      med=0s       max=5.15ms  p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=287.96ms min=2.61ms  med=3.35ms   max=2.3s    p(90)=1.31s   p(95)=1.61s
+       { expected_response:true }...: avg=287.96ms min=2.61ms  med=3.35ms   max=2.3s    p(90)=1.31s   p(95)=1.61s
+     http_req_failed................: 0.00%   ✓ 0          ✗ 5661
+     http_req_receiving.............: avg=70.31µs  min=18.33µs med=50.39µs  max=15.87ms p(90)=89.74µs p(95)=119.77µs
+     http_req_sending...............: avg=17.96µs  min=5.27µs  med=11.12µs  max=3.84ms  p(90)=28.28µs p(95)=37.53µs
+     http_req_tls_handshaking.......: avg=125.12µs min=0s      med=0s       max=25.98ms p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=287.87ms min=2.55ms  med=3.27ms   max=2.3s    p(90)=1.31s   p(95)=1.61s
+     http_reqs......................: 5661    282.753057/s
+     iteration_duration.............: avg=864.79ms min=65.84ms med=829.91ms max=2.31s   p(90)=1.73s   p(95)=1.81s
+     iterations.....................: 1887    94.251019/s
+     vus............................: 7       min=4        max=178
      vus_max........................: 180     min=180      max=180
 ```
 ---
@@ -699,6 +563,13 @@ default ✓ [======================================] 000/180 VUs  20s
 #### 추가 grafana 구축 
 ![grafana.png](images%2Fstep2%2Fgrafana.png)
 
+### 2단계 피드백
+- [x] 경로깨진 파일 확인
+- [x] 스크립트 한개 내에서 유저 플로우대로 정의
+  - [x] 경로 검색 접근 페이지도 확인
+- [x] Load Test 의 테스트 시간을 30분 ~ 2시간 사이로
+- [x] Load, Stress 테스트의 Latency 를 낮춰도 좋을 듯
+
 ---
 
 ### 3단계 - 로깅, 모니터링
@@ -707,5 +578,5 @@ default ✓ [======================================] 000/180 VUs  20s
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 ---
-<a name="footnote_1">[1] Smoke Test</a> : 하드웨어 테스트 단계로부터 나온 단어.   
+<a name="footnote_1">1</a> smoke test : 하드웨어 테스트 단계로부터 나온 단어.   
 하드웨어는 조립 / 납땜 / 배선 과정이 올바르게 되었는 지 확인하기 위해, 최종적으로 전원에 연결하고 전원을 켜는(smoke ; 불을 붙이다) 테스트를 의미한다. 
