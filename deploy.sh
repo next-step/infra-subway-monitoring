@@ -9,7 +9,7 @@ PROFILE=$2
 GIT_PULL_SCRIPT="git pull origin $BRANCH"
 BUILD_SCRIPT="./gradlew clean build"
 FIND_PID_SCRIPT="java -jar -Dspring.profiles.active=$PROFILE build/libs/subway.jar"
-RUN_SCRIPT_PATH=$EXECUTION_PATH"/run_$PROFILE.sh"
+RUN_SCRIPT_PATH=$EXECUTION_PATH"/deploy/run_$PROFILE.sh"
 
 txtrst='\033[1;37m' # White
 txtred='\033[1;31m' # Red

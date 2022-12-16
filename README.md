@@ -676,6 +676,12 @@ default ✓ [======================================] 000/300 VUs  20s
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+```shell
+sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name proxy nextstep/reverse-proxy
+```
+- proxy
+  - /var/log/nginx/access.log
+  - /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 
