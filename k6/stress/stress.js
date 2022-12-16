@@ -18,7 +18,7 @@ export let options = {
     },
 };
 
-const BASE_URL = 'https://hahoho87-subway.kro.kr';
+const BASE_URL = 'https://seong.wootecam.o-r.kr';
 
 function main() {
     let mainPageRes = http.get(`${BASE_URL}/`);
