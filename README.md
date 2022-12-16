@@ -89,9 +89,35 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   1) 목표 rps 구하기(http://www.bigdata-map.kr/datastory/traffic/seoul 데이터를 바탕으로함)
+      a. 우선 예상 1일 사용자 수(DAU)를 정해봅니다.
+       - 약 1000만
+      b. 피크 시간대의 집중률을 예상해봅니다. (최대 트개픽 / 평소 트래픽)
+       - 2.5 (08~09, 18~19시 평소보다 약 2.5배 정도 증가)
+      c. 1명당 1일 평균 접속 혹은 요청수를 예상해봅니다.
+       - 약 50만명(이용객의 약 50% 정도는 앱을 미사용할것으로  예상되고 경쟁사의 앱사용  및 초기 서비스임을 고려)
+
+    2) Throughput : 1일 평균 rps ~ 1일 최대 rps
+      a. 1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수
+       - 50만 * 2 = 100만
+      b. 1일 평균 rps (1일 총 접속 수 / 86,400 (초/일))
+       - 100만 / 86,400 = 12
+      d. 1일 최대 rps (1일 평균 rps x (최대 트래픽 / 평소 트래픽))
+       - 12 * 2.5 = 30
+
+   3) VUser
+      Request Rate: measured by the number of requests per second (RPS)
+      VU: the number of virtual users
+      R: the number of requests per VU iteration
+      T: a value larger than the time needed to complete a VU iteration (R * http_req_duration) (+ 1s)
+
+      - R : 2
+      - http_req_duration: 0.1
+      - T = 1.1( 2*0.1 + 1)
+      - 평균 VUser = (12 * 1.1) / 2 = 7
+      - 최대 VUser = (30 * 1.1) / 2 = 16
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
 ---
 
 ### 3단계 - 로깅, 모니터링
