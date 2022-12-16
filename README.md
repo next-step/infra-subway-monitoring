@@ -174,5 +174,11 @@ npm run dev
 > 6. 대시보드 구성
 
 1. 각 서버내 로깅 경로를 알려주세요
+* application log
+> 1. application.log : /home/ubuntu/nextstep/log/application/
+> 2. data.log : /hone/ubuntu/nextstep/log/data/
+* nginx access log
+> 1. access.log : /var/log/nginx
+> 2. error.log : /var/log/nginx
 
-2. Cloudwatch 대시보드 URL을 알려주세요
+3. Cloudwatch 대시보드 URL을 알려주세요
