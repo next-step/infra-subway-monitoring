@@ -41,11 +41,11 @@ export default function () {
   let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
   check(myObjects, {'retrieved member': (obj) => obj.id != 0});
 
-  let path = http.get(`${BASE_URL}/members/path`, authHeaders).json();
-  check(path, {'retrieved member': (obj) => obj});
+  let path = http.get(`${BASE_URL}/paths/?source=1&target=16`, authHeaders);
+  check(path, {'find path': (path) => path.status === 200});
 
   let main = http.get(`${BASE_URL}`);
-  check(main, {'retrieved member': (obj) => obj});
+  check(main, {'retrieved main': (main) => main.status === 200});
 
   sleep(1);
 };
