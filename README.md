@@ -688,11 +688,14 @@ sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name p
 - system load
   - /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
+[yomni-dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yomni-dashboard)
+
+![dashboard.png](images/step3/dashboard.png)
 
 #### 3단계 기능 목록 작성
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 - [x] 로그 설정하기
-- [ ] Cloudwatch로 모니터링
+- [x] Cloudwatch로 모니터링
 
 ---
 <a name="footnote_1">1</a> smoke test : 하드웨어 테스트 단계로부터 나온 단어.   
