@@ -1,6 +1,9 @@
 package nextstep.subway.member.dto;
 
+import static nextstep.subway.utils.MaskingUtil.*;
+
 import nextstep.subway.member.domain.Member;
+import nextstep.subway.utils.MaskingUtil;
 
 public class MemberRequest {
     private String email;
@@ -30,5 +33,13 @@ public class MemberRequest {
 
     public Member toMember() {
         return new Member(email, password, age);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "email='" + maskingEmail(email) + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
