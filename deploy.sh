@@ -34,7 +34,7 @@ function check_current_branch() {
   echo -e ""
   echo -e ">> Check Current Branch 🏃♂️ "
   current_branch=$(git rev-parse --abbrev-ref HEAD)
-  if [ "$current_branch" != "$BRANCH" ]; then # 여기서 비교를 못하는 듯;; (crontab 할 때)
+  if [ "$current_branch" != "$BRANCH" ]; then
     echo -e "please check current branch and checkout deploy target branch. Current branch -> ${current_branch}"
     exit 1
   fi
