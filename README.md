@@ -682,7 +682,11 @@ sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name p
 - proxy
   - /var/log/nginx/access.log
   - /var/log/nginx/error.log
-
+- web
+  - /home/ubuntu/subway/log/file.log
+  - /home/ubuntu/subway/log/json.log
+- system load
+  - /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 #### 3단계 기능 목록 작성
