@@ -66,7 +66,7 @@ function pull_branch() {
 function build_application() {
   echo -e ""
   echo -e ">> Gradle build 🏃♂️ "
-  ./gradle clean build
+  ./gradlew clean build
 }
 
 ## 작동중인 어플리케이션 프로세스 pid를 찾는 명령어
@@ -96,7 +96,7 @@ valid_parameter;
 check_current_branch
 
 ## branch 변경 유무 확인
-check_branch_df;
+#check_branch_df;
 
 ## remote branch 로컬 반영
 pull_branch;
