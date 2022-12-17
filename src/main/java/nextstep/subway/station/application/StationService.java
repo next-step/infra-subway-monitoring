@@ -1,5 +1,6 @@
 package nextstep.subway.station.application;
 
+import nextstep.subway.aop.LoggingTarget;
 import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
@@ -19,6 +20,7 @@ public class StationService {
         this.stationRepository = stationRepository;
     }
 
+    @LoggingTarget
     public StationResponse saveStation(StationRequest stationRequest) {
         Station persistStation = stationRepository.save(stationRequest.toStation());
         return StationResponse.of(persistStation);
@@ -33,6 +35,7 @@ public class StationService {
                 .collect(Collectors.toList());
     }
 
+    @LoggingTarget
     public void deleteStationById(Long id) {
         stationRepository.deleteById(id);
     }
