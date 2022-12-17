@@ -255,7 +255,8 @@ default ✓ [======================================] 1 VUs  1m0s
      ✓ [Result] Login
      ✓ [Result] me
      ✓ [Result] Path Page
-     ✓ [Result] Search Path
+     ✗ [Result] Search Path
+      ↳  0% — ✓ 0 / ✗ 3900
 
      checks.........................: 83.33% ✓ 19500      ✗ 3900
      data_received..................: 19 MB  316 kB/s
@@ -406,10 +407,12 @@ default ✓ [======================================] 00/14 VUs  29m10s
 
      ✓ [Result] Main Page
      ✓ [Result] Login Page
-     ✓ [Result] Login
+     ✗ [Result] Login
+      ↳  0% — ✓ 0 / ✗ 197495
      ✓ [Result] me
      ✓ [Result] Path Page
-     ✓ [Result] Search Path
+     ✗ [Result] Search Path
+      ↳  0% — ✓ 0 / ✗ 197495
 
      checks.........................: 66.66%  ✓ 789980     ✗ 394990
      data_received..................: 965 MB  551 kB/s
@@ -556,36 +559,42 @@ export default function () {
   scenarios: (100.00%) 1 scenario, 384 max VUs, 28m40s max duration (incl. graceful stop):
            * default: Up to 384 looping VUs for 28m10s over 16 stages (gracefulRampDown: 30s, gracefulStop: 30s)
            
-running (28m10.5s), 000/384 VUs, 76781 complete and 35 interrupted iterations
+running (28m10.0s), 000/384 VUs, 73674 complete and 167 interrupted iterations
 default ✓ [======================================] 000/384 VUs  28m10s
 
      ✗ [Result] Main Page
-      ↳  13% — ✓ 10324 / ✗ 66492
+      ↳  99% — ✓ 73731 / ✗ 75
+     ✗ [Result] Login Page
+      ↳  99% — ✓ 73738 / ✗ 42
+     ✗ [Result] Login
+      ↳  99% — ✓ 73641 / ✗ 96
+     ✓ [Result] me
      ✗ [Result] Path Page
-      ↳  13% — ✓ 10474 / ✗ 66342
+      ↳  99% — ✓ 73502 / ✗ 44
      ✗ [Result] Search Path
-      ↳  9% — ✓ 7028 / ✗ 69753
+      ↳  0% — ✓ 0 / ✗ 73516
 
-     checks.........................: 12.07% ✓ 27826      ✗ 202587
-     data_received..................: 145 MB 86 kB/s
-     data_sent......................: 66 MB  39 kB/s
-     http_req_blocked...............: avg=17.88ms  min=0s       med=0s      max=1.56s    p(90)=3.17ms   p(95)=142.56ms
-     http_req_connecting............: avg=54.14ms  min=0s       med=41.8ms  max=668.93ms p(90)=123.42ms p(95)=154.62ms
-   ✗ http_req_duration..............: avg=874.62ms min=0s       med=0s      max=43.86s   p(90)=13.35ms  p(95)=1.21s
-       { expected_response:true }...: avg=3.24s    min=589.52µs med=15.81ms max=43.86s   p(90)=5.68s    p(95)=32.62s
-     http_req_failed................: 87.92% ✓ 202587     ✗ 27826
-     http_req_receiving.............: avg=632.49µs min=0s       med=0s      max=477.36ms p(90)=54.15µs  p(95)=79.76µs
-     http_req_sending...............: avg=1.12ms   min=0s       med=0s      max=825.78ms p(90)=16.83µs  p(95)=235.65µs
-     http_req_tls_handshaking.......: avg=13.19ms  min=0s       med=0s      max=1.43s    p(90)=0s       p(95)=101.03ms
-     http_req_waiting...............: avg=872.87ms min=0s       med=0s      max=43.86s   p(90)=1.76ms   p(95)=1.19s
-     http_reqs......................: 230413 136.296296/s
-     iteration_duration.............: avg=3.14s    min=2.7ms    med=575.8ms max=48.04s   p(90)=3.14s    p(95)=32.16s
-     iterations.....................: 76781  45.418296/s
-     vus............................: 1      min=1        max=384
+     checks.........................: 83.30% ✓ 368179     ✗ 73773
+     data_received..................: 362 MB 214 kB/s
+     data_sent......................: 89 MB  53 kB/s
+     http_req_blocked...............: avg=9.54ms   min=0s       med=2.69µs   max=49.35s p(90)=4.34µs   p(95)=5.7µs
+     http_req_connecting............: avg=1.71ms   min=0s       med=0s       max=1m2s   p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=411.95ms min=0s       med=32.1ms   max=4m58s  p(90)=262.85ms p(95)=420.4ms
+       { expected_response:true }...: avg=146.29ms min=513.73µs med=29.07ms  max=4m58s  p(90)=248.94ms p(95)=396.03ms
+     http_req_failed................: 16.71% ✓ 73906      ✗ 368190
+     http_req_receiving.............: avg=43.9ms   min=0s       med=45.59µs  max=4m58s  p(90)=478.32µs p(95)=1.31ms
+     http_req_sending...............: avg=2.06ms   min=0s       med=13.52µs  max=30.22s p(90)=27.14µs  p(95)=55.4µs
+     http_req_tls_handshaking.......: avg=6.37ms   min=0s       med=0s       max=46.59s p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=365.98ms min=0s       med=31.55ms  max=4m58s  p(90)=258.94ms p(95)=413.19ms
+     http_reqs......................: 442096 261.593439/s
+     iteration_duration.............: avg=2.63s    min=7.22ms   med=224.14ms max=7m6s   p(90)=1.59s    p(95)=2.84s
+     iterations.....................: 73674  43.593778/s
+     vus............................: 1      min=1        max=331
      vus_max........................: 384    min=384      max=384
+
 ```
 
-[img.png](image/stress.png)
+![img.png](image/stress.png)
 
 - Active VUser 144 ~ 287(6번째)에서 http_req_blocked max 값이 떨어지지 않고 있음.
 - 이 부분에서 http request failed 를 추정해볼 수 있음.
