@@ -255,8 +255,7 @@ default ✓ [======================================] 1 VUs  1m0s
      ✓ [Result] Login
      ✓ [Result] me
      ✓ [Result] Path Page
-     ✗ [Result] Search Path
-      ↳  0% — ✓ 0 / ✗ 3900
+     ✓ [Result] Search Path
 
      checks.........................: 83.33% ✓ 19500      ✗ 3900
      data_received..................: 19 MB  316 kB/s
@@ -407,12 +406,10 @@ default ✓ [======================================] 00/14 VUs  29m10s
 
      ✓ [Result] Main Page
      ✓ [Result] Login Page
-     ✗ [Result] Login
-      ↳  0% — ✓ 0 / ✗ 197495
+     ✓ [Result] Login
      ✓ [Result] me
      ✓ [Result] Path Page
-     ✗ [Result] Search Path
-      ↳  0% — ✓ 0 / ✗ 197495
+     ✓ [Result] Search Path
 
      checks.........................: 66.66%  ✓ 789980     ✗ 394990
      data_received..................: 965 MB  551 kB/s
@@ -435,6 +432,7 @@ default ✓ [======================================] 00/14 VUs  29m10s
 ```
 
 ![img.png](image/load.png)
+
 </details>
 
 
@@ -472,26 +470,69 @@ export let options = {
 };
 
 const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+const USERNAME = 'jylim@nextstep.com';
+const PASSWORD = '1234';
 
-export function mainPage() {
+function mainPage() {
   let response = http.get(`${BASE_URL}`);
   check(response, {'[Result] Main Page': (response) => response.status === 200});
 }
 
-export function pathPage() {
+function loginPage() {
+  let response = http.get(`${BASE_URL}/login`);
+  check(response, {'[Result] Login Page': (response) => response.status === 200});
+}
+
+function login() {
+  const payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD
+  });
+
+  const params = {
+    headers: {'Content-Type': 'application/json'}
+  };
+
+  let response = http.post(`${BASE_URL}/login/token`, payload, params);
+  check(response, {'[Result] Login': (response) => response.status === 200});
+
+  return response.json('accessToken');
+}
+
+function me(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(response, {'[Result] me': (response) => response.id != 0});
+}
+
+function pathPage() {
   let response = http.get(`${BASE_URL}/path`);
   check(response, {'[Result] Path Page': (response) => response.status === 200});
 }
 
-export function searchPath() {
-  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+function searchPath(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`, authHeaders);
   check(response, {'[Result] Search Path': (response) => response.status === 200});
 }
 
 export default function () {
   mainPage();
+  loginPage();
+  const accessToken = login();
+  me(accessToken);
   pathPage();
-  searchPath();
+  searchPath(accessToken);
 }
 ```
 </details>
