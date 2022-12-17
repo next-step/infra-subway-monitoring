@@ -116,7 +116,163 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
 최대 VUser = 99  
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* smoke.js
+~~~
 
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+          vus: 1,
+          duration: '10s',
+
+          thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+~~~
+
+* load.js
+~~~
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+
+        stages: [
+
+                { duration: '1m' , target: 66 },
+                { duration: '1m' , target: 66 },
+                { duration: '1m' , target: 0  }
+        ],
+
+        thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+
+~~~
+
+* stress.js
+~~~
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+
+        stages: [
+
+                { duration: '1m' , target: 99 },
+                { duration: '5m' , target: 99 },
+                { duration: '10m', target: 0 }
+        ],
+
+        thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+
+~~~
+
+* 테스트 결과 test_result 에 첨부함
 ---
 
 ### 3단계 - 로깅, 모니터링
