@@ -107,15 +107,13 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
    60.18 * (6,240,000 / 4,160,000) = 90.27  
 
 5. vUser 산정  
-T = (R * http_req_duration) (+ 1s)  
+* T = (R * http_req_duration) (+ 1s)  
 (2 * 0.6s) + 1 = 2.2s  
-
-
-VUser = (목표 rps * T) / R  
+* VUser = (목표 rps * T) / R  
 (60 * 2.2) / 2 = 66.19  
-* 평균 VUser = 66  
+평균 VUser = 66  
 (90 * 2.2) / 2 = 99.3  
-* 최대 VUser = 99  
+최대 VUser = 99  
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
