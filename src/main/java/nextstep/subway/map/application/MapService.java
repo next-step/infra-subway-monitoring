@@ -19,7 +19,6 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Service
 @Transactional
 public class MapService {
-    private final static Logger LOGGER = LoggerFactory.getLogger("json");
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -36,10 +35,6 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
-        LOGGER.info("Found path results : {}, {}, {}",
-                kv("sourceStation", source),
-                kv("targetStation", target),
-                kv("path", subwayPath.getStations().toString()));
 
         return PathResponseAssembler.assemble(subwayPath);
     }

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MemberService {
-    private static final Logger LOGGER = LoggerFactory.getLogger("file");
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -21,7 +20,6 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
-        LOGGER.info("Member successfully created : member email = {}", member.getEmail());
         return MemberResponse.of(member);
     }
 

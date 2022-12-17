@@ -24,4 +24,13 @@ public class SubwayPath {
     public int calculateDistance() {
         return sectionEdges.stream().mapToInt(it -> it.getSection().getDistance()).sum();
     }
+
+    @Override
+    public String
+    toString() {
+        return "SubwayPath{" +
+                "sectionEdges=" + sectionEdges +
+                ", stations=" + stations +
+                '}';
+    }
 }
