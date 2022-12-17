@@ -1,0 +1,20 @@
+<configuration>
+<!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%fullRequest%n%n%fullResponse</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <appender-ref ref="STDOUT" />-->
+
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="application-appender.xml" />
+    <include resource="data-appender.xml" />
+
+    <logger name="application" level="INFO">
+        <appender-ref ref="application"/>
+    </logger>
+    <logger name="data" level="INFO">
+        <appender-ref ref="data"/>
+    </logger>
+</configuration>

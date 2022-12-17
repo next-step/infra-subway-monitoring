@@ -165,6 +165,21 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
+* 요구사항 정리
+> 1. 데이터 추가 관련 기능에 일반 log 수집 - 개인정보 노출 주의 : application.log
+> 2. 경로찾기 기능엔 json log 수집 : data.log
+> 3. nginx access log 설정
+> 4. Cloudwatch 로 로그 수집
+> 5. Cloudwatch 로 메트릭 수집
+> 6. 대시보드 구성
+
 1. 각 서버내 로깅 경로를 알려주세요
+* application log
+> 1. application.log : /home/ubuntu/nextstep/log/application/
+> 2. data.log : /hone/ubuntu/nextstep/log/data/
+* nginx access log
+> 1. access.log : /var/log/nginx
+> 2. error.log : /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+> https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=dongha-byun-board
