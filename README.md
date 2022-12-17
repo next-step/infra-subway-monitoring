@@ -604,6 +604,11 @@ default ✓ [======================================] 000/384 VUs  28m10s
 ---
 
 ### 3단계 - 로깅, 모니터링
+
+* 문제가 되는 코드 수정 
+  - ec2 애플리케이션 서버에서 arthas 실행
+    - `trace nextstep.subway.line.application.LineService findLineResponses` 통해 응답이 느린 부분 찾기
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
