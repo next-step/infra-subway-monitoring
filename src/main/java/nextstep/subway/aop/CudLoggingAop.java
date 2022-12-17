@@ -25,7 +25,7 @@ public class CudLoggingAop {
 
     @Around("cudCut()")
     public Object logging(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        Object result = null;
+        Object result;
         try {
             String methodName = proceedingJoinPoint.getSignature().toShortString();
             Object[] args = proceedingJoinPoint.getArgs();
@@ -41,7 +41,7 @@ public class CudLoggingAop {
     }
 
     private void errorLogging(Exception exception) {
-        log.error("error Logging : " + exception.getMessage());
+        log.error("exception Logging : {}", exception.getMessage());
     }
 
     private void afterLogging(String methodName, Object result) {
