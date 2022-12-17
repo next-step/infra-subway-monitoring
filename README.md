@@ -80,8 +80,199 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+#### 산정 배경
+1. 예상 1일 사용자 수(DAU)  
+   실제 한국 스마트폰 보급률은 95% 이상이기 때문에 한국 인구 전체가 스마트폰을 가졌다고 가정  
+   이 중 지하철 이용을 위해 스마트폰 어플리케이션을 사용하는 인구 연령을 15 ~ 54세로 추정  
+   2016년 기중 해당 연령 대한민국 총 인구수는 약 2600만  
+   초창기 서비스인 Running Map의 경우 해당 인구 수의 10% 시장 점유를 가졌다고 가정할 때 예상 사용 인구는 총 260만  
+* DAU = 2,600,000  
 
+2. 최대 트래픽/평소 트래픽  
+   출퇴근 시간 (오전 8:00 - 9:00 / 오후 6:00 - 7:00) 하루 2시간을 피크 시간으로 지정  
+   전체 이용자의 80% 가 해당 시간대에 서비스를 이용한다고 가정  
+* 평소 트래픽 = 2,600,000 * 0.8 * 2 = 4,160,000  
+* 최대 트래픽 = 2,600,000 * 0.8 * 3 = 6,240,000  
+
+3. 1명당 1일 평균 요청 수  
+   전체 이용자의 80%가 하루 평균 2회의 요청을 한다고 가정  
+* 1명당 1일 평균 요청 수 = 2  
+
+4. Throughput 산정  
+   1일 사용자 수(DAU) x 1명당 1일 평균 접속 수 = 1일 총 접속 수  
+   2,600,000 * 2 = 5,200,000  
+   1일 총 접속 수 / 86,400 (초/일) = 1일 평균 rps  
+   5,200,000 / 86,400 = 60.18  
+   1일 평균 rps x (최대 트래픽 / 평소 트래픽) = 1일 최대 rps  
+   60.18 * (6,240,000 / 4,160,000) = 90.27  
+
+5. vUser 산정  
+* T = (R * http_req_duration) (+ 1s)  
+(2 * 0.6s) + 1 = 2.2s  
+* VUser = (목표 rps * T) / R  
+(60 * 2.2) / 2 = 66.19  
+평균 VUser = 66  
+(90 * 2.2) / 2 = 99.3  
+최대 VUser = 99  
+
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* smoke.js
+~~~
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+          vus: 1,
+          duration: '10s',
+
+          thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+~~~
+
+* load.js
+~~~
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+
+        stages: [
+
+                { duration: '1m' , target: 66 },
+                { duration: '1m' , target: 66 },
+                { duration: '1m' , target: 0  }
+        ],
+
+        thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+
+~~~
+
+* stress.js
+~~~
+
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+
+        stages: [
+
+                { duration: '1m' , target: 99 },
+                { duration: '5m' , target: 99 },
+                { duration: '10m', target: 0 }
+        ],
+
+        thresholds: {
+                      http_req_duration: ['p(99)<300'],
+                    },
+};
+
+
+const BASE_URL = 'https://cylee9409-subway.o-r.kr/';
+
+export default function run() {
+            goMainPage();
+            goFindPathPage();
+            findPath();
+}
+
+function goMainPage() {
+            const response = http.get(BASE_URL);
+            check(response, {'Successfully Loaded Main Page' : (res) => res.status === 200});
+}
+
+function goFindPathPage() {
+            const response = http.get(`${BASE_URL}/path`);
+            check(response, {'Successfully Loaded FindPath Page' : (res) => res.status === 200});
+}
+
+function findPath() {
+            const headerParams = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                    },
+            };
+
+            check(http.get(`${BASE_URL}/path?source=1&target=8`, headerParams), {
+                            'Successfully find best path': (res) => res.status === 200
+                        });
+}
+
+
+~~~
+
+* 테스트 결과 test_result 에 첨부함
 ---
 
 ### 3단계 - 로깅, 모니터링
