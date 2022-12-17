@@ -109,10 +109,10 @@ npm run dev
   - 100 * 집중률(2.5) = 25
 
 - VUser 계산
-  - 시나리오 상 2번의 요청이 있고, 총 latency 목표 값 0.3s, 지연시간 1초로 가정할 때
-  - T = (2 * 0.3) = 1.6s
-  - VUser = (10 * 1.6) / 2 = 8 (목표, 평균 VUser)
-  - VUser = (25 * 1.6) / 2 = 20 (피크타임 VUser)
+  - 시나리오 상 1번의 요청이 있고, 총 latency 목표 값 0.3s, 지연시간 1초로 가정할 때
+  - T = (1 * 0.3) + 1 = 1.3s
+  - VUser = (10 * 1.3) / 2 ≒ 7 (목표, 평균 VUser)
+  - VUser = (25 * 1.3) / 2 ≒ 16 (피크타임 VUser)
 
 목표 VUser 뿐만 아니라 피크타임 VUser 일 때도 문제가 없으면 좋겠다.
 
@@ -170,12 +170,12 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '10s', target: 8},
-        { duration: '30s', target: 8},
-        { duration: '10s', target: 20},
-        { duration: '1m', target: 20},
-        { duration: '10s', target: 8},
-        { duration: '30s', target: 8},
+        { duration: '10s', target: 7},
+        { duration: '30s', target: 7},
+        { duration: '10s', target: 16},
+        { duration: '1m', target: 16},
+        { duration: '10s', target: 7},
+        { duration: '30s', target: 7},
         { duration: '10s', target: 0}
     ],
     thresholds: {
@@ -204,12 +204,13 @@ function getRandomNumber(min, max) {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/52458039/207433854-b1bade83-8419-4ea1-a6d9-9799b423a1a9.png)
-![image](https://user-images.githubusercontent.com/52458039/207431018-ea9e8daa-9245-4ce7-9103-87d7ada054db.png)
+![image](https://user-images.githubusercontent.com/52458039/207991305-0051cb46-ac28-4778-ba52-0c3e3ccf0e9a.png)
+![image](https://user-images.githubusercontent.com/52458039/207991206-8702b407-bf08-4922-9191-b8440132fcb1.png)
+
 
 #### [Load Test 결과 해석]
-- VUser 8 (평소 트래픽) 로 30초간 2번 유지, VUser 20 (최대 트래픽) 으로 1분간 유지함.
-- 평균 약 600ms 정도로 목표 latency 인 300ms 를 달성하지 못하고 있음.
+- VUser 7 (평소 트래픽) 로 30초간 2번 유지, VUser 16 (최대 트래픽) 으로 1분간 유지함.
+- 평균 약 500ms 정도로 목표 latency 인 300ms 를 달성하지 못하고 있음.
 - 실패하는 요청은 없지만, 요청이 몰리면서 경로 탐색 데이터 조회 처리에서 지연이 되는 것으로 추정됨.
 
 
@@ -221,10 +222,10 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '10s', target: 8},
-        { duration: '30s', target: 8},
-        { duration: '10s', target: 20},
-        { duration: '1m', target: 20},
+        { duration: '10s', target: 7},
+        { duration: '30s', target: 7},
+        { duration: '10s', target: 16},
+        { duration: '1m', target: 16},
         { duration: '10s', target: 100},
         { duration: '1m', target: 100},
         { duration: '10s', target: 200},
@@ -259,10 +260,10 @@ function getRandomNumber(min, max) {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/52458039/207382223-9af9aa24-20ee-492a-82d7-d6551ababf14.png)
-![image](https://user-images.githubusercontent.com/52458039/207432576-95a7884c-91dd-4344-bb6a-0015dcebc265.png)
+![image](https://user-images.githubusercontent.com/52458039/207992290-828a5eef-1d0b-4b6b-bec0-7487f2354663.png)
+![image](https://user-images.githubusercontent.com/52458039/207992189-0f6aed45-a322-4103-b7d1-c920c1a55f90.png)
 
-- VUser 20 (최대 트래픽) 으로 1분간 유지후, 갑작 스러운 요청이 몰리며 VUser 100으로 1분, 200으로 1분, 30으로 1분간 요청이 들어오는 상황.
+- VUser 17 (최대 트래픽) 으로 1분간 유지후, 갑작 스러운 요청이 몰리며 VUser 100으로 1분, 200으로 1분, 30으로 1분간 요청이 들어오는 상황.
 - 평균 latency 만 보면 약 200ms 로 목표 latency 를 달성한 것처럼 보임.
 - 하지만 그라파나의 latency 추이를 보면 초반에는 load 테스트처럼 지연이 발생하다가 테스트의 후반부에 갑자기 latency 가 급격히 낮아짐.
 - k6 상에서 요청이 fail 함. -> `connection reset by peer` 라는 로그가 발생함.
@@ -272,5 +273,11 @@ function getRandomNumber(min, max) {
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+/home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+/home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+/var/log/nginx/access.log
+/var/log/nginx/error.log
+
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=wu22e-dashboard

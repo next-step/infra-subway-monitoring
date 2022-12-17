@@ -4,12 +4,18 @@ import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
 public class MemberService {
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -18,6 +24,7 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
+        fileLogger.info("회원 가입 시점 : {}, 회원 가입 요청 ID : {}", LocalDateTime.now(), member.getId());
         return MemberResponse.of(member);
     }
 
