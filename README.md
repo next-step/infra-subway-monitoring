@@ -708,9 +708,9 @@ sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name p
       - [x] Service layer 의 메서드에 file 로깅 처리
       - [x] LoggingTarget Custom Annotation 정의
         - `StationService`, `MapService.findPath` 대상
-    - [ ] request / response : json log (단, 개인정보는 toString을 활용하여 마스킹 처리)
-      - [ ] 로깅 대상 : HttpRequest / HttpResponse
-      - [ ] Controller Layer 의 메서드에 json 로깅 처리
+    - [x] request / response : json log (단, 개인정보는 toString을 활용하여 마스킹 처리)
+      - [x] 로깅 대상 : HttpRequest / HttpResponse
+      - [x] Controller Layer 의 메서드에 json 로깅 처리
 
 ---
 <a name="footnote_1">1</a> smoke test : 하드웨어 테스트 단계로부터 나온 단어.   
