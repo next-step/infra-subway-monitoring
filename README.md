@@ -294,9 +294,17 @@ import {check, group, sleep, fail} from 'k6';
 export let options = {
   stages: [
     {duration: '1m', target: 1},
-    {duration: '2m', target: 3},
-    {duration: '4m', target: 6},
-    {durtaion: '2m', target: 3},
+    {duration: '2m', target: 2},
+    {duration: '2m', target: 4},
+    {duration: '2m', target: 7},
+    {duration: '2m', target: 9},
+    {duration: '4m', target: 11},
+    {duration: '6m', target: 14},
+    {duration: '4m', target: 11},
+    {duration: '2m', target: 9},
+    {duration: '2m', target: 7},
+    {durtaion: '2m', target: 4},
+    {duration: '2m', target: 2},
     {durtaion: '1m', target: 1},
     {duration: '10s', target: 0}, // ramp-down to 0 users
   ],
@@ -306,26 +314,69 @@ export let options = {
 };
 
 const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+const USERNAME = 'jylim@nexstep.com';
+const PASSWORD = '1234';
 
-export function mainPage() {
+function mainPage() {
   let response = http.get(`${BASE_URL}`);
   check(response, {'[Result] Main Page': (response) => response.status === 200});
 }
 
-export function pathPage() {
+function loginPage() {
+  let response = http.get(`${BASE_URL}/login`);
+  check(response, {'[Result] Login Page': (response) => response.status === 200});
+}
+
+function login() {
+  const payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD
+  });
+
+  const params = {
+    headers: {'Content-Type': 'application/json'}
+  };
+
+  let response = http.post(`${BASE_URL}/login/token`, payload, params);
+  check(response, {'[Result] Login': (response) => response.status === 200});
+
+  return response.json('accessToken');
+}
+
+function me(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(response, {'[Result] me': (response) => response.id != 0});
+}
+
+function pathPage() {
   let response = http.get(`${BASE_URL}/path`);
   check(response, {'[Result] Path Page': (response) => response.status === 200});
 }
 
-export function searchPath() {
-  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+function searchPath(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`, authHeaders);
   check(response, {'[Result] Search Path': (response) => response.status === 200});
 }
 
 export default function () {
   mainPage();
+  loginPage();
+  const accessToken = login();
+  me(accessToken);
   pathPage();
-  searchPath();
+  searchPath(accessToken);
 }
 ```
 </details>
@@ -335,6 +386,7 @@ export default function () {
 <summary> load 테스트 결과 </summary>
 
 ```
+
           /\      |‾‾| /‾‾/   /‾‾/
      /\  /  \     |  |/  /   /  /
     /  \/    \    |     (   /   ‾‾\
@@ -345,33 +397,40 @@ export default function () {
      script: load.js
      output: InfluxDBv1 (http://localhost:8086)
 
-  scenarios: (100.00%) 1 scenario, 6 max VUs, 7m40s max duration (incl. graceful stop):
-           * default: Up to 6 looping VUs for 7m10s over 4 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  scenarios: (100.00%) 1 scenario, 14 max VUs, 29m40s max duration (incl. graceful stop):
+           * default: Up to 14 looping VUs for 29m10s over 12 stages (gracefulRampDown: 30s, gracefulStop: 30s)
 
-running (7m10.2s), 0/6 VUs, 1402 complete and 0 interrupted iterations
-default ✓ [======================================] 0/6 VUs  7m10s
+WARN[0003] The flush operation took higher than the expected set push interval. If you see this message multiple times then the setup or configuration need to be adjusted to achieve a sustainable rate.  output=InfluxDBv1 t=1.016491883s
+
+running (29m10.0s), 00/14 VUs, 197495 complete and 0 interrupted iterations
+default ✓ [======================================] 00/14 VUs  29m10s
 
      ✓ [Result] Main Page
+     ✓ [Result] Login Page
+     ✗ [Result] Login
+      ↳  0% — ✓ 0 / ✗ 197495
+     ✓ [Result] me
      ✓ [Result] Path Page
-     ✓ [Result] Search Path
+     ✗ [Result] Search Path
+      ↳  0% — ✓ 0 / ✗ 197495
 
-     checks.........................: 100.00% ✓ 4206     ✗ 0
-     data_received..................: 7.7 MB  18 kB/s
-     data_sent......................: 536 kB  1.2 kB/s
-     http_req_blocked...............: avg=19.31µs  min=1.64µs   med=3.2µs    max=27.17ms p(90)=4.52µs   p(95)=5.12µs
-     http_req_connecting............: avg=1.15µs   min=0s       med=0s       max=2.73ms  p(90)=0s       p(95)=0s
-   ✗ http_req_duration..............: avg=293.95ms min=618.81µs med=1.33ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
-       { expected_response:true }...: avg=293.95ms min=618.81µs med=1.33ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
-     http_req_failed................: 0.00%   ✓ 0        ✗ 4206
-     http_req_receiving.............: avg=96.04µs  min=32.5µs   med=73.52µs  max=7.17ms  p(90)=135.75µs p(95)=214.49µs
-     http_req_sending...............: avg=19.08µs  min=7.01µs   med=14.29µs  max=6.14ms  p(90)=21.48µs  p(95)=27.35µs
-     http_req_tls_handshaking.......: avg=10.28µs  min=0s       med=0s       max=23.71ms p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=293.84ms min=542.2µs  med=1.24ms   max=1.99s   p(90)=1.23s    p(95)=1.39s
-     http_reqs......................: 4206    9.776913/s
-     iteration_duration.............: avg=882.44ms min=278.81ms med=859.64ms max=2.01s   p(90)=1.45s    p(95)=1.54s
-     iterations.....................: 1402    3.258971/s
-     vus............................: 1       min=1      max=6
-     vus_max........................: 6       min=6      max=6
+     checks.........................: 66.66%  ✓ 789980     ✗ 394990
+     data_received..................: 965 MB  551 kB/s
+     data_sent......................: 183 MB  104 kB/s
+     http_req_blocked...............: avg=22.27µs  min=856ns    med=2.57µs  max=139.47ms p(90)=3.79µs   p(95)=4.66µs
+     http_req_connecting............: avg=1.62µs   min=0s       med=0s      max=24.12ms  p(90)=0s       p(95)=0s
+   ✓ http_req_duration..............: avg=11.99ms  min=482.8µs  med=7.38ms  max=204.49ms p(90)=28.3ms   p(95)=35.68ms
+       { expected_response:true }...: avg=9.9ms    min=482.8µs  med=5.16ms  max=196.47ms p(90)=25.43ms  p(95)=32.32ms
+     http_req_failed................: 50.00%  ✓ 592485     ✗ 592485
+     http_req_receiving.............: avg=170.92µs min=13.13µs  med=41.63µs max=72.02ms  p(90)=233.25µs p(95)=534.94µs
+     http_req_sending...............: avg=41.38µs  min=4.43µs   med=12.81µs max=62.47ms  p(90)=25.99µs  p(95)=42.32µs
+     http_req_tls_handshaking.......: avg=13.71µs  min=0s       med=0s      max=132.29ms p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=11.78ms  min=445.86µs med=7.13ms  max=204.45ms p(90)=28.07ms  p(95)=35.45ms
+     http_reqs......................: 1184970 677.118897/s
+     iteration_duration.............: avg=73.88ms  min=6.15ms   med=53.64ms max=583.96ms p(90)=161.72ms p(95)=199.18ms
+     iterations.....................: 197495  112.853149/s
+     vus............................: 1       min=1        max=14
+     vus_max........................: 14      min=14       max=14
 
 ```
 
