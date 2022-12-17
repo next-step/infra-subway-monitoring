@@ -45,7 +45,7 @@ npm run dev
     - 서울교통공사 : http://www.seoulmetro.co.kr/kr/cyberStation.do
     - 네이버지도 : https://m.map.naver.com/subway/subwayLine.naver?region=1000
     - 카카오맵 : https://m.map.kakao.com/
-    - Running Map : https://shshon-infra.o-r.kr/
+    - Running Map : https://snh15978.p-e.kr/
 
 | 모바일 | 서울교통공사 | 네이버지도 | 카카오맵  | Running Map |
 |-----|--------|-------|-------|-------------|
@@ -140,6 +140,20 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
 
+#### 요구사항
+- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [ ] 로그 설정하기
+  - [ ] Application Log 파일로 저장하기
+    - 회원가입, 로그인 등의 이벤트에 로깅을 설정
+    - 경로찾기 등의 이벤트 로그를 JSON으로 수집
+  - [ ] Nginx Access Log 설정하기
+- [ ] Cloudwatch로 모니터링
+  - [ ] Cloudwatch로 로그 수집하기
+  - [ ] Cloudwatch로 메트릭 수집하기
+  - [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+  
+1. 각 서버내 로깅 경로를 알려주세요
+- 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- 
