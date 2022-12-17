@@ -86,7 +86,7 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 ```
-grafana url: http://3.39.233.62:3000/ (자신의 공인 IP에 대해서만 3000 포트가 오픈된 상태)
+grafana url: http://43.201.137.143:3000/ (자신의 공인 IP에 대해서만 3000 포트가 오픈된 상태)
 계정 : 
 - id : admin
 - pw : admin1234
@@ -610,8 +610,16 @@ default ✓ [======================================] 000/384 VUs  28m10s
     - `trace nextstep.subway.line.application.LineService findLineResponses` 통해 응답이 느린 부분 찾기
 
 1. 각 서버내 로깅 경로를 알려주세요
+- application log
+  - file log : /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+  - json log : /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+  - console log : /home/ubuntu/nextstep/log.app.log
+- nginx log
+  - access log : /home/ubuntu/nextstep/log/nginx/access.log
+  - error log : /home/ubuntu/nextstep/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yeojiin
 
 
 ---
@@ -885,9 +893,9 @@ split -l 300 jenkins.log part_jenkins
 * [ ] Nginx Access Log 설정하기
 
 **Cloudwatch로 모니터링**
-* [ ] Cloudwatch로 로그 수집하기
-* [ ] Cloudwatch로 메트릭 수집하기
-* [ ] USE 방법론을 활용하기 용이하도록 대시보드 구성
+* [x] Cloudwatch로 로그 수집하기
+* [x] Cloudwatch로 메트릭 수집하기
+* [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
 #### 힌트
 #### A. 로깅
