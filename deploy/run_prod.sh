@@ -1,1 +1,0 @@
-nohup java -jar -Dspring.profiles.active=prod ../build/libs/subway.jar 1> ../prod_exec.log 2>&1  &
