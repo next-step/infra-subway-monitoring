@@ -124,9 +124,9 @@ npm run dev
 
 - [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 - [ ] 로그 설정하기
-    - [ ] Application Log 파일로 저장하기
-        - [ ] 회원가입, 로그인 등의 이벤트에 로깅을 설정
-        - [ ] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    - [x] Application Log 파일로 저장하기
+        - [x] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+        - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
     - [ ] Nginx Access Log 설정하기
 - [ ] Cloudwatch로 모니터링
     - [ ] Cloudwatch로 로그 수집하기
