@@ -24,6 +24,16 @@ public class StationResponse {
         this.modifiedDate = modifiedDate;
     }
 
+    @Override
+    public String toString() {
+        return "StationResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createdDate=" + createdDate +
+                ", modifiedDate=" + modifiedDate +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
