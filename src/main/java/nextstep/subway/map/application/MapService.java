@@ -20,10 +20,10 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Service
 @Transactional
 public class MapService {
+    private static final Logger log = LoggerFactory.getLogger("console");
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
-    private static final Logger log = LoggerFactory.getLogger("file");
 
     public MapService(LineService lineService, StationService stationService, PathService pathService) {
         this.lineService = lineService;
@@ -38,7 +38,7 @@ public class MapService {
         Station targetStation = stationService.findById(target);
         SubwayPath subwayPath = pathService.findPath(lines, sourceStation, targetStation);
 
-        log.info("{}, {}",
+        log.trace("{}, {}",
                 kv("출발지", sourceStation.getName()),
                 kv("도착지", targetStation.getName())
         );
