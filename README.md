@@ -699,7 +699,7 @@ sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name p
 
 #### 3단계 피드백
 - [ ] prod_exec.log (애플리케이션 로깅 파일 경로 확인)
-- [ ] 주석 지우기
+- [x] 주석 지우기
 - [ ] application 로깅 처리 확인(web2 에서의 file, json 로그가 안찍히고 있음)
 - [ ] 로깅처리를 `제대로` 적용해보자!
   - AOP + 커스텀 어노테이션으로 로깅처리
