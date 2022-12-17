@@ -80,7 +80,7 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-# 산정 배경
+#### 산정 배경
 1. 예상 1일 사용자 수(DAU)  
    실제 한국 스마트폰 보급률은 95% 이상이기 때문에 한국 인구 전체가 스마트폰을 가졌다고 가정  
    이 중 지하철 이용을 위해 스마트폰 어플리케이션을 사용하는 인구 연령을 15 ~ 54세로 추정  
@@ -89,7 +89,7 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
 * DAU = 2,600,000  
 
 2. 최대 트래픽/평소 트래픽  
-   출퇴근 시간 (오전 8:00~9:00 / 오후 6:00~7:00) 하루 2시간을 피크 시간으로 지정  
+   출퇴근 시간 (오전 8:00 - 9:00 / 오후 6:00 - 7:00) 하루 2시간을 피크 시간으로 지정  
    전체 이용자의 80% 가 해당 시간대에 서비스를 이용한다고 가정  
 * 평소 트래픽 = 2,600,000 * 0.8 * 2 = 4,160,000  
 * 최대 트래픽 = 2,600,000 * 0.8 * 3 = 6,240,000  
@@ -109,11 +109,12 @@ performed by. [PageSpeed](https://pagespeed.web.dev/?utm_source=psi&utm_medium=r
 5. vUser 산정  
 T = (R * http_req_duration) (+ 1s)  
 (2 * 0.6s) + 1 = 2.2s  
-  
+
+
 VUser = (목표 rps * T) / R  
 (60 * 2.2) / 2 = 66.19  
 * 평균 VUser = 66  
-  (90 * 2.2) / 2 = 99.3  
+(90 * 2.2) / 2 = 99.3  
 * 최대 VUser = 99  
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
