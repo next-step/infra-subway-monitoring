@@ -697,6 +697,15 @@ sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name p
 - [x] 로그 설정하기
 - [x] Cloudwatch로 모니터링
 
+#### 3단계 피드백
+- [ ] prod_exec.log (애플리케이션 로깅 파일 경로 확인)
+- [ ] 주석 지우기
+- [ ] application 로깅 처리 확인(web2 에서의 file, json 로그가 안찍히고 있음)
+- [ ] 로깅처리를 `제대로` 적용해보자!
+  - AOP + 커스텀 어노테이션으로 로깅처리
+    - CUD : file log
+    - request / response : json log (단, 개인정보는 toString을 활용하여 마스킹 처리)
+
 ---
 <a name="footnote_1">1</a> smoke test : 하드웨어 테스트 단계로부터 나온 단어.   
 하드웨어는 조립 / 납땜 / 배선 과정이 올바르게 되었는 지 확인하기 위해, 최종적으로 전원에 연결하고 전원을 켜는(smoke ; 불을 붙이다) 테스트를 의미한다. 
