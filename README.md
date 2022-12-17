@@ -147,7 +147,7 @@ grafana url: http://3.39.233.62:3000/ (자신의 공인 IP에 대해서만 3000 
 
 ```javascript
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check, group, sleep, fail} from 'k6';
 
 export let options = {
   vus: 1, // 1 user looping for 1 minute
@@ -159,26 +159,69 @@ export let options = {
 };
 
 const BASE_URL = 'https://yeojiin-subway.o-r.kr/';
+const USERNAME = 'jylim@nextstep.com';
+const PASSWORD = '1234';
 
-export function mainPage() {
+function mainPage() {
   let response = http.get(`${BASE_URL}`);
   check(response, {'[Result] Main Page': (response) => response.status === 200});
 }
 
-export function pathPage() {
+function loginPage() {
+  let response = http.get(`${BASE_URL}/login`);
+  check(response, {'[Result] Login Page': (response) => response.status === 200});
+}
+
+function login() {
+  const payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD
+  });
+
+  const params = {
+    headers: {'Content-Type': 'application/json'}
+  };
+
+  let response = http.post(`${BASE_URL}/login/token`, payload, params);
+  check(response, {'[Result] Login': (response) => response.status === 200});
+
+  return response.json('accessToken');
+}
+
+function me(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(response, {'[Result] me': (response) => response.id != 0});
+}
+
+function pathPage() {
   let response = http.get(`${BASE_URL}/path`);
   check(response, {'[Result] Path Page': (response) => response.status === 200});
 }
 
-export function searchPath() {
-  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`);
+function searchPath(accessToken) {
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+
+  let response = http.get(`${BASE_URL}/paths/?source=1&target=178`, authHeaders);
   check(response, {'[Result] Search Path': (response) => response.status === 200});
 }
 
 export default function () {
   mainPage();
+  loginPage();
+  const accessToken = login();
+  me(accessToken);
   pathPage();
-  searchPath();
+  searchPath(accessToken);
 }
 ```
 
@@ -203,30 +246,36 @@ export default function () {
   scenarios: (100.00%) 1 scenario, 1 max VUs, 1m30s max duration (incl. graceful stop):
            * default: 1 looping VUs for 1m0s (gracefulStop: 30s)
 
-running (1m00.0s), 0/1 VUs, 200 complete and 0 interrupted iterations
+
+running (1m00.0s), 0/1 VUs, 3900 complete and 0 interrupted iterations
 default ✓ [======================================] 1 VUs  1m0s
 
      ✓ [Result] Main Page
+     ✓ [Result] Login Page
+     ✓ [Result] Login
+     ✓ [Result] me
      ✓ [Result] Path Page
-     ✓ [Result] Search Path
+     ✗ [Result] Search Path
+      ↳  0% — ✓ 0 / ✗ 3900
 
-     checks.........................: 100.00% ✓ 600      ✗ 0
-     data_received..................: 1.1 MB  18 kB/s
-     data_sent......................: 76 kB   1.3 kB/s
-     http_req_blocked...............: avg=60.15µs  min=1.7µs    med=3.24µs   max=33.66ms  p(90)=4.61µs   p(95)=5.61µs
-     http_req_connecting............: avg=493ns    min=0s       med=0s       max=296.22µs p(90)=0s       p(95)=0s
-   ✓ http_req_duration..............: avg=99.83ms  min=652.55µs med=1.22ms   max=416.95ms p(90)=294.02ms p(95)=303.91ms
-       { expected_response:true }...: avg=99.83ms  min=652.55µs med=1.22ms   max=416.95ms p(90)=294.02ms p(95)=303.91ms
-     http_req_failed................: 0.00%   ✓ 0        ✗ 600
-     http_req_receiving.............: avg=85.87µs  min=33.57µs  med=67.6µs   max=444.46µs p(90)=130.36µs p(95)=190.82µs
-     http_req_sending...............: avg=16.57µs  min=7.53µs   med=14.11µs  max=362µs    p(90)=22.83µs  p(95)=25.17µs
-     http_req_tls_handshaking.......: avg=27.63µs  min=0s       med=0s       max=16.58ms  p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=99.73ms  min=596.97µs med=1.11ms   max=416.84ms p(90)=293.91ms p(95)=303.77ms
-     http_reqs......................: 600     9.993114/s
-     iteration_duration.............: avg=300.17ms min=278.93ms med=290.35ms max=419.51ms p(90)=350.12ms p(95)=366.13ms
-     iterations.....................: 200     3.331038/s
-     vus............................: 1       min=1      max=1
-     vus_max........................: 1       min=1      max=1
+     checks.........................: 83.33% ✓ 19500      ✗ 3900
+     data_received..................: 19 MB  316 kB/s
+     data_sent......................: 4.7 MB 78 kB/s
+     http_req_blocked...............: avg=6.89µs  min=1.5µs    med=2.61µs  max=29.22ms  p(90)=3.57µs  p(95)=4.18µs
+     http_req_connecting............: avg=231ns   min=0s       med=0s      max=330.12µs p(90)=0s      p(95)=0s
+   ✓ http_req_duration..............: avg=2.42ms  min=529µs    med=1.88ms  max=55.54ms  p(90)=4.5ms   p(95)=6.23ms
+       { expected_response:true }...: avg=2ms     min=529µs    med=1.1ms   max=47.52ms  p(90)=3.45ms  p(95)=5.25ms
+     http_req_failed................: 16.66% ✓ 3900       ✗ 19500
+     http_req_receiving.............: avg=55.7µs  min=25.28µs  med=47.37µs max=29.33ms  p(90)=69.81µs p(95)=77.51µs
+     http_req_sending...............: avg=15.11µs min=6.39µs   med=12.42µs max=8.27ms   p(90)=18.61µs p(95)=23.01µs
+     http_req_tls_handshaking.......: avg=3µs     min=0s       med=0s      max=12.62ms  p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=2.35ms  min=486.83µs med=1.82ms  max=55.45ms  p(90)=4.41ms  p(95)=6.13ms
+     http_reqs......................: 23400  389.846775/s
+     iteration_duration.............: avg=15.37ms min=8.26ms   med=12.43ms max=109.12ms p(90)=23.9ms  p(95)=30.79ms
+     iterations.....................: 3900   64.974463/s
+     vus............................: 1      min=1        max=1
+     vus_max........................: 1      min=1        max=1
+
 ```
 
 ![img.png](image/smoke.png)
