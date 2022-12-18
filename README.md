@@ -17,7 +17,7 @@
 <br>
 
 ## 🚀 Getting Started
-
+   
 ### Install
 #### npm 설치
 ```
@@ -174,8 +174,9 @@ export let options = {
 
         stages: [
 
-                { duration: '1m' , target: 66 },
-                { duration: '1m' , target: 66 },
+                { duration: '1m' , target: 30 },
+                { duration: '5m' , target: 66 },
+                { duration: '10m', target: 66 },
                 { duration: '1m' , target: 0  }
         ],
 
@@ -228,9 +229,10 @@ export let options = {
 
         stages: [
 
-                { duration: '1m' , target: 99 },
-                { duration: '5m' , target: 99 },
-                { duration: '10m', target: 0 }
+                { duration: '1m' , target: 75 },
+                { duration: '5m' , target: 75 },
+                { duration: '10m', target: 75 },
+                { duration: '1m', target: 0 }
         ],
 
         thresholds: {
