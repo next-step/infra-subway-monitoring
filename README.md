@@ -181,3 +181,5 @@ $ tail -f /home/ubuntu/nextstep/infra-subway-monitoring/log/infra-subway-log.log
 2. Cloudwatch 대시보드 URL을 알려주세요
 
 https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=seonghyeoklee-dashboard
+
+![seonghyeoklee-cloudwatch](src/main/resources/static/images/seonghyeoklee-cloudwatch.png)
