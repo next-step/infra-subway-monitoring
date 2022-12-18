@@ -148,7 +148,38 @@ A) 정답은 없다 ; 서비스 특성마다 다른 기준을 가지고 개선
   - 스트레스 테스트 이후 시스템이 수동 개입 없이 복구되는 지 확인
 
 ### 서버 진단하기
+부하테스트까지 진행을 했으면, 이런 의문이 생긴다.  
+**_부하 임계점에서 문제가 되는 부분을 어떻게 파악하지?_**  
+
+![server_doctor.png](images/step3/server_doctor.png)
+
+비단 부하 테스트를 떠나서 운영을 하다 보면 많은 문제에 봉착하게 된다.  
+이럴 때, 모든 경우에 대해 **전후 상황을 파악하고 원인을 분석해야 대처가 가능**하다.
+
+#### 어떻게?
+- USE 방법론
+
+![USE.png](images/step3/USE.png)
+
+- USE 방법론으로 진단/모니터링 하기 위한 도구로 stat 등이 있다.
+
 ### 애플리케이션 진단하기
+Thread는 Process와는 다르게 메모리 공간을 공유하기 때문에, Lock이 걸릴 확률이 높다.  
+따라서, 
+- BLOCKED 상태인 Thread가 있는지
+- 한 Task가 특정 Thread를 점유하고 있지 않은지
+- CPU 사용률이 너무 높지 않은지
+파악해야 함
+
+#### 어떻게?
+- Thread 덤프 분석
+  - Thread 덤프는 Thread 가 무슨 일을 하는 지 알 수 있다.
+- Arthas 활용하기(자바 Thread 덤프 분석기(?))
+
+```shell
+curl -O https://arthas.aliyun.com/arthas-boot.jar
+java -jar arthas-boot.jar
+```
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요  
@@ -561,21 +592,125 @@ default ✓ [======================================] 000/180 VUs  20s
 따라서, 현재 시스템 상에서 **예상되는 수요량을 모두 만족할만한 수준인 것으로 확인**된다.
 
 #### 추가 grafana 구축 
-![grafana.png](images%2Fstep2%2Fgrafana.png)
+- smoke test  
+![grafana-smoke.png](images/step2/grafana-smoke.png)
 
+- load test  
+  ![grafana-load-1.png](images/step2/grafana-load-1.png)    
+  ![grafana-load-2.png](images/step2/grafana-load-2.png)
+
+- stress test  
+  ![grafana-stress-1.png](images/step2/grafana-stress-1.png)    
+  ![grafana-stress-2.png](images/step2/grafana-stress-2.png)
 ### 2단계 피드백
 - [x] 경로깨진 파일 확인
 - [x] 스크립트 한개 내에서 유저 플로우대로 정의
   - [x] 경로 검색 접근 페이지도 확인
 - [x] Load Test 의 테스트 시간을 30분 ~ 2시간 사이로
 - [x] Load, Stress 테스트의 Latency 를 낮춰도 좋을 듯
+- [x] stress 테스트 진행 시 duration 을 조금 더 길게 가져가도 좋을 듯 함..
+  - 현재 설정한 duration 기준으로 stress test 지표가 어떤지?
+  - 대략 VUser 300 정도부터 오류가 발생했습니다.
+  - 현재 목표로 설정한 Target 대비 duration : p(99) 100, target : 180 으로도  
+    별다른 이슈가 없었습니다!   
 
+- stress test (VUser : 300 버전)
+```javascript
+...
+
+export let options = {
+  threshold: {
+    http_req_duration: ['p(99)<100'],
+  },
+  stages: [
+    {duration: '5s', target: 23},
+    {duration: '10s', target: 300},
+    {duration: '5s', target: 0},
+  ],
+};
+
+...
+```
+
+```shell
+  execution: local
+     script: stress_end.js
+     output: InfluxDBv1 (http://localhost:8086)
+
+  scenarios: (100.00%) 1 scenario, 300 max VUs, 50s max duration (incl. graceful stop):
+           * default: Up to 300 looping VUs for 20s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0017] Request Failed                                error="Get \"https://yomni-subway.kro.kr//path\": EOF"
+WARN[0018] Request Failed                                error="Get \"https://yomni-subway.kro.kr//paths?source=1&target=6\": EOF"
+...
+
+running (20.5s), 000/300 VUs, 2608 complete and 0 interrupted iterations
+default ✓ [======================================] 000/300 VUs  20s
+
+     ✗ is success
+      ↳  70% — ✓ 5487 / ✗ 2337
+
+     checks.........................: 70.13% ✓ 5487       ✗ 2337
+     data_received..................: 19 MB  923 kB/s
+     data_sent......................: 1.8 MB 88 kB/s
+     http_req_blocked...............: avg=17.48ms  min=0s     med=2.61µs   max=346.44ms p(90)=81.77ms  p(95)=114.26ms
+     http_req_connecting............: avg=9.35ms   min=0s     med=0s       max=121.68ms p(90)=33.34ms  p(95)=46.28ms
+     http_req_duration..............: avg=323.87ms min=0s     med=5.5ms    max=4.32s    p(90)=1.84s    p(95)=2.11s
+       { expected_response:true }...: avg=459.03ms min=2.59ms med=53.77ms  max=4.32s    p(90)=2.06s    p(95)=2.17s
+     http_req_failed................: 29.86% ✓ 2337       ✗ 5487
+     http_req_receiving.............: avg=716.76µs min=0s     med=44.11µs  max=78.42ms  p(90)=102.72µs p(95)=670.01µs
+     http_req_sending...............: avg=1.51ms   min=0s     med=11.26µs  max=225.61ms p(90)=1.98ms   p(95)=7.98ms
+     http_req_tls_handshaking.......: avg=12.57ms  min=0s     med=0s       max=262.03ms p(90)=58.53ms  p(95)=84.28ms
+     http_req_waiting...............: avg=321.64ms min=0s     med=3.99ms   max=4.32s    p(90)=1.84s    p(95)=2.11s
+     http_reqs......................: 7824   382.474588/s
+     iteration_duration.............: avg=1.04s    min=8.91ms med=571.15ms max=4.38s    p(90)=2.42s    p(95)=2.52s
+     iterations.....................: 2608   127.491529/s
+     vus............................: 69     min=4        max=294
+     vus_max........................: 300    min=300      max=300
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+```shell
+sudo docker run -d -p 80:80 -p 443:443 -v /var/log/nginx:/var/log/nginx --name proxy nextstep/reverse-proxy
+```
+- proxy
+  - /var/log/nginx/access.log
+  - /var/log/nginx/error.log
+- web
+  - /home/ubuntu/subway/log/file.log
+  - /home/ubuntu/subway/log/json.log
+- system load
+  - /var/log/syslog
 2. Cloudwatch 대시보드 URL을 알려주세요
+[yomni-dashboard](https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=yomni-dashboard)
+
+![dashboard.png](images/step3/dashboard.png)
+
+#### 3단계 기능 목록 작성
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 로그 설정하기
+- [x] Cloudwatch로 모니터링
+
+#### 3단계 피드백
+- [x] prod_exec.log (애플리케이션 로깅 파일 경로 확인)
+- [x] 주석 지우기
+- [x] application 로깅 처리 확인(web2 에서의 file, json 로그가 안찍히고 있음)
+- [x] 로깅처리를 `제대로` 적용해보자!
+  - AOP + 커스텀 어노테이션으로 로깅처리
+    - [x] CUD : file log
+      - [x] 로깅 대상 : 메서드명, 아규먼트들, 리턴값
+      - [x] Service layer 의 메서드에 file 로깅 처리
+      - [x] LoggingTarget Custom Annotation 정의
+        - `StationService`, `MapService.findPath` 대상
+    - [x] request / response : json log (단, 개인정보는 toString을 활용하여 마스킹 처리)
+      - [x] 로깅 대상 : HttpRequest / HttpResponse
+      - [x] Controller Layer 의 메서드에 json 로깅 처리
 
 ---
 <a name="footnote_1">1</a> smoke test : 하드웨어 테스트 단계로부터 나온 단어.   
