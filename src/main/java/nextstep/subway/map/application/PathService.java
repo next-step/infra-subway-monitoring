@@ -7,14 +7,27 @@ import nextstep.subway.map.domain.SubwayPath;
 import nextstep.subway.station.domain.Station;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @Service
 public class PathService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger("json");
+
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
+
+        LOGGER.info("{}, {}",
+                kv("출발역", source.getName()),
+                kv("도착역", target.getName())
+        );
+
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
         graph.addEdge(lines);
