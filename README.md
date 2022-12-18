@@ -148,18 +148,36 @@ npm run dev
 
 - [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
 - [X] 로그 설정하기
-- [ ] Cloudwatch로 모니터링
+- [X] Cloudwatch로 모니터링
 
 
 - accessLog
+
 ![accessLog](src/main/resources/static/images/accessLog.png)
 
 - fileLog
+
 ![fileLog](src/main/resources/static/images/fileLog.png)
 
 - jsonLog
+
 ![jsonLog](src/main/resources/static/images/jsonLog.png)
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+```bash
+# BASTION 서버 접근
+$ ssh -i KEY-seonghyoeklee.pem ubuntu@13.125.54.51
+
+# Monitoring Service 서버 접근
+$ ssh public2
+
+$ tail -f /home/ubuntu/nextstep/infra-subway-monitoring/log/access.log
+$ tail -f /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+$ tail -f /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+$ tail -f /home/ubuntu/nextstep/infra-subway-monitoring/log/infra-subway-log.log
+```
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=seonghyeoklee-dashboard
