@@ -279,5 +279,10 @@ function findPath() {
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- service server 
+경로 : /home/ubuntu/nextstep/infra-subway-monitoring/log
+- proxy server
+경로 : /var/log/nginx
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+https://ap-northeast-1.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-1#dashboards:name=cylee9409-dashboard
