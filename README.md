@@ -150,6 +150,16 @@ npm run dev
 - [X] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 
+
+- accessLog
+![accessLog](src/main/resources/static/images/accessLog.png)
+
+- fileLog
+![fileLog](src/main/resources/static/images/fileLog.png)
+
+- jsonLog
+![jsonLog](src/main/resources/static/images/jsonLog.png)
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
