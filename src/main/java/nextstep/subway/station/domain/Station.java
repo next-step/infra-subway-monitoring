@@ -42,4 +42,12 @@ public class Station extends BaseEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
 }
