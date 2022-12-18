@@ -87,8 +87,147 @@ npm run dev
 
 ### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- a.예상 DAU :  
+  1) 일평균 네이버지도는 DAU 516만명, 카카오맵은 219만명이다.
+  2) 해당 서비스는 신규 서비스라고 가정하여 카카오맵의 10%인 20만으로 선정한다.
+- b.집중률 : 
+  1) 최대 트래픽을 80%로 가정하면, 16만이다. ( 임의로 잡은 트래픽 비율 )
+  2) 평균 트래픽을 40%로 가정하면, 8만이다. ( 임의로 잡은 트래픽 비율 )
+  3) 그러므로, ( 최대 트래픽 / 평균 트래픽 ) = 2 이므로, 집중률은 2이다. 
+- c.1명당 1일 평균 접속 혹은 요청수 
+  1) 출/퇴근길에 사용한다 가정하여 1일 평균접속수는 2로 가정한다. 
+  2) 그러므로 하루 총 접속수는 20만 * 2 인 40만으로 가정합니다.
+- e.1일 평균 RPS 
+  1) 40만 / 86400 = 4.62 소수점 첫째 자리에서 반올림하여 5로 가정한다.
+- f.1일 최대 RPS 
+  1) 누군가는 퇴근할때 누군가는 출근할수 있으므로 2로 가정. 즉 5 * 2 = 10 으로 가정한다.
+- g.Throughput ( 종합 )
+  1) 1일 총 접속 수 = 40만
+  2) 1일 평균 rps = 5
+  3) 1일 최대 rps = 10
+- h.VUser
+  1) R : 4(접속 -> 경로 검색 페이지 -> 노선 목록 조회 - 경로 검색)
+  2) T : ( 4 * 0.5 ) + 1 = 3초
+  3) 평균 VUser : 5 * 3 / 3 = 5
+  4) 최대 VUser : 10 * 3 / 3 = 10
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- Smoke Test Script
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '1m', target: 1},
+        { duration: '1m', target: 2},
+    ],
+
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    },
+};
+
+const BASE_URL = 'https://subwayrun.kro.kr';
+const params = {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+};
+
+export default function ()  {
+    let main = http.get(`${BASE_URL}`);
+    check(main, {'200 : main page': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : stations': (res) => res.status === 200});
+
+    let lines = http.get(`${BASE_URL}/lines`);
+    check(lines, {'200 : lines': (res) => res.status === 200});
+
+    let path = http.get(`${BASE_URL}/path`);
+    check(path, {'200 : path': (res) => res.status === 200});
+};
+```
+- Smoke Test Result
+![smoke_dashboard.png](k6%2Fsmoke%2Fsmoke_dashboard.png)
+
+- Load Test Script
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '10s', target: 5 },
+        { duration: '1m', target: 5 },
+        { duration: '10s', target: 10 },
+        { duration: '1m', target: 10 },
+        { duration: '10s', target: 5 },
+        { duration: '1m', target: 5 },
+        { duration: '10s', target: 0 }
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.0s
+    }
+};
+
+const BASE_URL = 'https://subwayrun.kro.kr';
+
+export default function ()  {
+    let main = http.get(`${BASE_URL}`);
+    check(main, {'200 : main page': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : stations': (res) => res.status === 200});
+
+    let lines = http.get(`${BASE_URL}/lines`);
+    check(lines, {'200 : lines': (res) => res.status === 200});
+
+    let path = http.get(`${BASE_URL}/path`);
+    check(path, {'200 : path': (res) => res.status === 200});
+};
+```
+- Load Test Result
+![load_dashboard.png](k6%2Fload%2Fload_dashboard.png)
+- Stress Test Script
+```javascript
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    stages: [
+        { duration: '2m', target: 5 },
+        { duration: '2m', target: 10 },
+        { duration: '2m', target: 20 },
+        { duration: '2m', target: 40 },
+        { duration: '2m', target: 80 },
+        { duration: '2m', target: 150 },
+        { duration: '10s', target: 0 },
+    ],
+    thresholds: {
+        http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    }
+};
+
+const BASE_URL = 'https://subwayrun.kro.kr';
+
+export default function ()  {
+    let main = http.get(`${BASE_URL}`);
+    check(main, {'200 : main page': (res) => res.status === 200});
+
+    let stations = http.get(`${BASE_URL}/stations`);
+    check(stations, {'200 : stations': (res) => res.status === 200});
+
+    let lines = http.get(`${BASE_URL}/lines`);
+    check(lines, {'200 : lines': (res) => res.status === 200});
+
+    let path = http.get(`${BASE_URL}/path`);
+    check(path, {'200 : path': (res) => res.status === 200});
+};
+```
+- Stress Test Result
+![stress_dashboard.png](k6%2Fstress%2Fstress_dashboard.png)
 
 ---
 
