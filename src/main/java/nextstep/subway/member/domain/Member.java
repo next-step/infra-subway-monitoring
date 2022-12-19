@@ -2,6 +2,7 @@ package nextstep.subway.member.domain;
 
 import nextstep.subway.common.BaseEntity;
 import nextstep.subway.auth.application.AuthorizationException;
+import nextstep.subway.common.MaskingUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Entity;
@@ -53,5 +54,15 @@ public class Member extends BaseEntity {
         if (!StringUtils.equals(this.password, password)) {
             throw new AuthorizationException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", email='" + MaskingUtils.getMaskedEmail(email) + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

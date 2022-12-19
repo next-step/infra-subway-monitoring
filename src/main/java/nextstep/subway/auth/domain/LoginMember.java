@@ -1,5 +1,7 @@
 package nextstep.subway.auth.domain;
 
+import nextstep.subway.common.MaskingUtils;
+
 public class LoginMember {
     private Long id;
     private String email;
@@ -21,5 +23,14 @@ public class LoginMember {
 
     public Integer getAge() {
         return age;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginMember{" +
+                "id=" + id +
+                ", email='" + MaskingUtils.getMaskedEmail(email) + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
