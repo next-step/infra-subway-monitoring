@@ -99,20 +99,20 @@ npm run dev
     - 최대 VU : 4.17
     - R : 5
     - T : 1.5
-- 테스트 시간 : 30분
-
-
-접속 빈도가 높은 페이지
-->
-
+- 시나리오 : 여러 데이터를 참조하는 페이지
+- 부하 테스트 시 저장될 데이터 건수 및 크기
+    - 조회 테스트이므로 저장될 데이터 없음
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 - Smoke
-
+  ![Smoke](k6/smoke/smoke.jpg)
+  ![Smoke](k6/smoke/smoke_grafana.jpg)
 - Load
-
+  ![Load](k6/load/load.jpg)
+  ![Load](k6/load/load_grafana.jpg)
 - Stress
-
+  ![Stress](k6/stress/stress.jpg)
+  ![Stress](k6/stress/stress_grafana.jpg)
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
