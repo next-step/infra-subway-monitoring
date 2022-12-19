@@ -17,44 +17,21 @@ import java.util.List;
 @Aspect
 public class LogAop {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("file");
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
-    @Pointcut("execution(* nextstep.subway.*.ui.*Controller.*(..))")
-    public void controllerPointcut() {
-    }
-
-    @Pointcut("execution(* nextstep.subway.*.application.*Servce.*(..))")
-    public void servicePointcut() {
-    }
-
-    @Around("controllerPointcut() || servicePointcut()")
-    public Object fileLogging(ProceedingJoinPoint pjp) throws Throwable {
-        Signature signature = pjp.getSignature();
+    @Around("execution(* nextstep.subway.*.ui.*Controller.*(..))")
+    public Object fileLog(ProceedingJoinPoint joinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
         String className = signature.getDeclaringTypeName();
         String methodName = signature.getName();
-        String parameter = getParameterInfo(pjp, (MethodSignature) signature);
-        long start = System.currentTimeMillis();
 
-        LOGGER.info("[Request] {} {}, params = {}", className, methodName, parameter);
+        Object result = joinPoint.proceed();
 
-        Object result = pjp.proceed();
-
-        LOGGER.info("[Response] {} {}, params = {}, result = {}, time = {}ms",
-                className, methodName, parameter, result, System.currentTimeMillis() - start);
+        fileLogger.info("Request {}.{}", className, methodName);
+        fileLogger.info("Response {}.{} - result : {}", className, methodName, joinPoint.proceed());
 
         return result;
     }
 
-    private String getParameterInfo(ProceedingJoinPoint pjp, MethodSignature signature) {
-        Object[] args = pjp.getArgs();
-        String[] parameterNames = signature.getParameterNames();
-
-        List<String> params = new ArrayList<>();
-        for (int i = 0; i < parameterNames.length; i++) {
-            params.add(String.format("%s => %s", parameterNames[i], args[i]));
-        }
-
-        return String.join(", ", params);
-    }
 }
