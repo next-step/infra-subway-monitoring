@@ -83,7 +83,11 @@ npm run dev
          - 1일 총 접속 수: 672만
          - 1일 평균 rps: 77
          - 1일 최대 rps: 144(최대 트래픽을 평소의 2배로 잡음)
-      3. 부하 유지기간: 1분
+      3. VUser: 40 ~ 74
+         - T: 3*(0.5)+0.05
+         - 평소 트래픽 VUser: (77 * 1.55) / 3 = 약 40
+         - 최대 트래픽 VUSer: (144 * 1.55) / 3 = 약 74
+      4. 부하 유지기간: 1분
    3. 부하 테스트 시 저장될 데이터 건수 및 크기: 저장될 데이터 없음
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
@@ -98,5 +102,9 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
-
+* ganjinajae-pub-a-EC2 서버 
+   - /var/log/nginx/syslog
+   - /var/log/nginx/access.log
+   - /var/log/nginx/error.log
 2. Cloudwatch 대시보드 URL을 알려주세요
+   - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=Dashboard-ganjinajae
