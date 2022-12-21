@@ -77,13 +77,177 @@ LCP 의 경우는 위의 lighthouse performance 의 빠름을 기준을 초과�
 - 카카오맵 https://map.kakao.com/?REGION=01&target=subway
 - Running Map https://enfunha.kro.kr/
 
+목표 응답시간 : 700ms => (202ms + 406ms) * 1.2 = 729.6ms  
+네이버 기준: (메인페이지 요청 + 지하철 경로 검색 요청) * 20% (성능차이 못 느낌)
+
 ---
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+```text
+하루 평균 지하철 이용 고객 약 450 만명 (https://www.bigdata-map.kr/datastory/traffic/seoul)
+피크 시간대 이용 고객 (8-9시) 약 100 만명
+평소 시간대 이용 고객 40 만명
+최대 트래픽 : 300 만 (출퇴근 시간 열차 시간 확인을 위해 3번은 요청할 것으로 예상. 100만 * 3번)
+평소 트래픽 : 80 만 (환승 고려. 40만 * 2번)
 
+이 중 30 % 의 고객들이 우리 서비스를 이용한다고 가정한다.
+
+피크 고객 33만
+평소 고객 13만
+최대 트래픽 100만
+평소 트래픽 26만
+
+DAU 450만 / 3 = 150만
+1 일 총 접속 수 = 150만 * 2번(출퇴근) = 300만
+1 일 평균 rps = 300만 / 86400 = 34.722
+1 일 최대 rps = 34.722 * 100만 / 26만 = 133.54
+
+T = 0.7s
+
+VUser = 32 => 133.54 * 0.7s / 3 = 31.159
+(0.7s 은 총 목표 시간)
+(Running Map 에서는 메인페이지, 경로 검색페이지, 경로 검색 총 3번의 요청)
+
+```
+
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+---
+smoke test
+![smoke-text](./image/smoke-text.PNG)
+![smoke](./image/smoke.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1,
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+
+```
+---
+load test
+![load](./image/load.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '1m', target: 32 },
+    { duration: '2m', target: 32 },
+    { duration: '10s', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+```
+---
+stress test
+![stress-text](./image/stress-text.PNG)
+![stress](./image/stress.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '30s', target: 200 },
+    { duration: '40s', target: 200 },
+    { duration: '10s', target: 230 },
+    { duration: '40s', target: 230 },
+    { duration: '10s', target: 260 },
+    { duration: '40s', target: 260 },
+    { duration: '10s', target: 290 },
+    { duration: '40s', target: 290 },
+    { duration: '10s', target: 320 },
+    { duration: '40s', target: 320 },
+    { duration: '45s', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
