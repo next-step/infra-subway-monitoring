@@ -111,8 +111,143 @@ VUser = 32 => 133.54 * 0.7s / 3 = 31.159
 (Running Map 에서는 메인페이지, 경로 검색페이지, 경로 검색 총 3번의 요청)
 
 ```
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+---
+smoke test
+![smoke-text](./image/smoke-text.PNG)
+![smoke](./image/smoke.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1,
+  duration: '10s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+
+```
+---
+load test
+![load](./image/load.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '1m', target: 32 },
+    { duration: '2m', target: 32 },
+    { duration: '10s', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+```
+---
+stress test
+![stress-text](./image/stress-text.PNG)
+![stress](./image/stress.PNG)
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '30s', target: 200 },
+    { duration: '40s', target: 200 },
+    { duration: '10s', target: 230 },
+    { duration: '40s', target: 230 },
+    { duration: '10s', target: 260 },
+    { duration: '40s', target: 260 },
+    { duration: '10s', target: 290 },
+    { duration: '40s', target: 290 },
+    { duration: '10s', target: 320 },
+    { duration: '40s', target: 320 },
+    { duration: '45s', target: 0 },
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<700'],
+  },
+};
+
+const BASE_URL = 'https://enfunha.kro.kr/';
+
+export default function ()  {
+
+  let main = http.get(BASE_URL);
+  check(main, {
+    'move to main page success': (res) => res.status === 200,
+  });
+
+  let path = http.get(`${BASE_URL}/path`);
+  check(path, {
+    'move to path page success': (res) => res.status === 200,
+  });
+
+  const source = 1;
+  const target = 6;
+  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
+  check(findPath, {
+    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
+  });
+
+  sleep(1);
+};
+```
 ---
 
 ### 3단계 - 로깅, 모니터링
