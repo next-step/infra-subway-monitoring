@@ -103,8 +103,64 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+* 대상 시스템 범위
+  - reverse proxy server (nginx)
+  - spring boot 내장 tomcat
+  - docker image db (brainbackdoor/data-subway:0.0.1)
 
+
+* 목푯값 설정
+
+  1. 목표 rps 구하기
+     - 예상 1일 사용자 수(DAU)
+       + 네이버지도 DAU : 46만 4천 (MAU 1,392만) ([교통 어플 MAU](https://www.sedaily.com/NewsView/22RH3PUBN6))
+  
+     - 피크 시간대의 집중률 (최대 트래픽 / 평소 트래픽)
+       + [서울시 지하철 시간대별 승하차 인원 정보](https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do)
+       + 22년 7월 2호선 합정역 18-19시 116,308 / 12시-13시 53,157 = 2.2
+  
+     - 1명당 1일 평균 접속 / 예상요청 수
+       + 카카오 지하철 1일 평균 접속 수 : 2 ([카카오 모빌리티 앱 통계](https://ko.lab.appa.pe/2016-09/kakao-korea.html))
+  
+     - Throughput
+       + 1일 총 접속 수 `1일 사용자 수(DAU) x 1명당 1일 평균 접속 수`
+         + 464,000 * 2 = 928,000
+  
+       + 1일 평균 rps `1일 총 접속 수 / 86,400 (초/일)`
+         + 928,000 / 86400 = 10.74
+  
+       + 1일 최대 rps `1일 평균 rps x (최대 트래픽 / 평소 트래픽)`
+         + 10.74 * 2.2 = 23.63
+  2. VUser 구하기
+     + 1명 사용자 요청 수 : 2
+     + Latency : 0.1
+     + T (a value larger than the time needed to complete a VU iteration)
+       + (2 * 0.1) + 1 = 1.2
+  
+     > 최대 VUser = ( 23.63 * 1.2 ) / 2 = 14.178
+       <br>평균 VUser = ( 10.74 * 1.2 ) / 2 = 6.444
+
+* 부하 테스트 시 저장될 데이터 건수 및 크기
+  - 저장될 데이터 없음
+  - 조회 데이터 범위 데이터 건수 (table별 데이터 건수)
+    + line : 23
+    + section : 340
+    + station : 616
+    + favorite, member : 0
+
+
+* 시나리오 선택
+  - 데이터를 조회하는데 여러 데이터를 참조하는 페이지 선택
+    - 경로조회 페이지 : 보통의 사용자의 경우 가장 많이 사용할 것으로 예상
+  - 시나리오
+    1. 경로조회 페이지 접속
+    1. 경로조회 (출발지: 소요산(1호선) / 도착지: 방화(5호선) )
+      <br>(많은 노선(3개)을 참조하면서 많은 수의 역을 조회하도록 출발지, 도착지 선정)
+
+<br>
+
+2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   - /docs/K6_test_result 디렉토리 아래의 스크립트 파일과 결과 캡쳐화면 참고 부탁드립니다!
 ---
 
 ### 3단계 - 로깅, 모니터링
