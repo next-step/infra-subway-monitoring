@@ -3,14 +3,19 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
     stages: [
-        {duration: '30s', target: 10}, // ${duration} 동안 현재 사용자를 ${target}명으로 유지한다.
-        {duration: '1m', target: 24},
-        {duration: '1m', target: 26},
-        {duration: '2m', target: 40},
+        {duration: '30s', target: 20}, // ${duration} 동안 현재 사용자를 ${target}명으로 유지한다.
+        {duration: '1m', target: 30},
+        {duration: '1m', target: 30},
+        {duration: '2m', target: 80},
+        {duration: '2m', target: 120},
+        {duration: '2m', target: 120},
+        {duration: '2m', target: 140},
+        {duration: '2m', target: 50},
+        {duration: '2m', target: 30},
         {duration: '1m', target: 0},
     ],
     thresholds: {
-        http_req_duration: ['p(95)<1000'], // 99% of requests must complete below 1.0s
+        http_req_duration: ['p(95)<100'], // 99% of requests must complete below 1.0s
     },
 };
 
