@@ -40,9 +40,40 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 경쟁사 비교를 통한 웹 성능예산 측정
+#### WebPageTest
+|                               | 서울메트로  | 네이버 지도  | 카카오 지도  |
+|-------------------------------|--------|---------|---------|
+| First Byte                    | 2.588s | 1.331s  | 1.804s  |
+| Start Render                  | 6.300s | 4.000s  | 3.100s  |
+| FCP(First Contentful Paint)   | 6.229s | 4.245s  | 3.056s  |
+| Speed Index                   | 9.567s | 7.249s  | 6.996s  |
+| LCP(Largest Contentful Paint) | 6.229s | 11.085s | 9.152s  |
+| TBT(Total Blocking Time)      | 7.633s | 0.494s  | 0.467s  |  
+| Total Bytes                   | 1067kb | 942kb   | 1453kb  |
+
+#### PageSpeed (데스크탑)
+|                                | 서울메트로     | 네이버 지도   | 카카오 지도 |
+|--------------------------------|-----------|----------|--------|
+| TTFB(Time to First Byte)       | 1.5s      | 0.4s     | 0.7s   |
+| FID(First Input Delay)         | 0.067s    | 0.015s   | 0.03s  |
+| CLS(Cumulative Layout Shift)   | 0         | 0.03     | 0.05   |
+| FCP(First Contentful Paint)    | 2.9s      | 0.9s     | 1.1s   |
+| INP(Interaction to Next Paint) | 0.388s    | 0.337s   | 0.4s   |
+| LCP(Largest Contentful Paint)  | 2.9s      | 2.7s     | 2.8s   |
+
+- 같은 지표라도 WebPageTest와 PageSpeed 간의 결과 값 차이가 있음.
+
+---
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
-
+- 목표 응답시간 기준 : PageSpeed 결과로 나온 경쟁사의 지표 중 가장 빠른 지표 기준으로 20%가 차이나지 않아야 함.
+  - TTFB : 0.48s 미만
+  - FID : 0.018 미만
+  - CLS : 0.02 미만
+  - FCP : 1.1s 미만
+  - INP : 0.40s 미만
+  - LCP : 3.24s 미만
 
 ---
 
