@@ -73,15 +73,15 @@ npm run dev
         - TTI: 최소 4.5  목표치 4.1 미만
 - 전략
     - 텍스트 압축 사용
-      - js/vendors.js
-      - /js/main.js
+        - js/vendors.js
+        - /js/main.js
     - 사용하지 않는 JS 정리
-      - js/vendors.js
-      - /js/main.js
+        - js/vendors.js
+        - /js/main.js
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 목표 rps 구하기
     - DAU : 20만
