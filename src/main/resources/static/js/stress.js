@@ -50,7 +50,7 @@ export let options = {
   }
 };
 
-const BASE_URL = 'http://3.39.154.48:8080/';
+const BASE_URL = 'https://web.iamsojung-webservice.o-r.kr/';
 const USERNAME = '123@email.com';
 const PASSWORD = '123';
 
