@@ -118,8 +118,7 @@ smoke test
 ![smoke-text](./image/smoke-text.PNG)
 ![smoke](./image/smoke.PNG)
 ```javascript
-import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import scenario from './scenario.js';
 
 export let options = {
   vus: 1,
@@ -130,28 +129,8 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://enfunha.kro.kr/';
-
 export default function ()  {
-
-  let main = http.get(BASE_URL);
-  check(main, {
-    'move to main page success': (res) => res.status === 200,
-  });
-
-  let path = http.get(`${BASE_URL}/path`);
-  check(path, {
-    'move to path page success': (res) => res.status === 200,
-  });
-
-  const source = 1;
-  const target = 6;
-  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
-  check(findPath, {
-    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
-  });
-
-  sleep(1);
+  scenario();
 };
 
 ```
@@ -159,8 +138,7 @@ export default function ()  {
 load test
 ![load](./image/load.PNG)
 ```javascript
-import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import scenario from './scenario.js';
 
 export let options = {
   stages: [
@@ -173,37 +151,17 @@ export let options = {
   },
 };
 
-const BASE_URL = 'https://enfunha.kro.kr/';
-
 export default function ()  {
-
-  let main = http.get(BASE_URL);
-  check(main, {
-    'move to main page success': (res) => res.status === 200,
-  });
-
-  let path = http.get(`${BASE_URL}/path`);
-  check(path, {
-    'move to path page success': (res) => res.status === 200,
-  });
-
-  const source = 1;
-  const target = 6;
-  let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
-  check(findPath, {
-    'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
-  });
-
-  sleep(1);
+  scenario();
 };
+
 ```
 ---
 stress test
 ![stress-text](./image/stress-text.PNG)
 ![stress](./image/stress.PNG)
 ```javascript
-import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import scenario from './scenario.js';
 
 export let options = {
   stages: [
@@ -224,10 +182,20 @@ export let options = {
   },
 };
 
+export default function ()  {
+  scenario();
+};
+
+```
+---
+scenario.js
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
 const BASE_URL = 'https://enfunha.kro.kr/';
 
 export default function ()  {
-
   let main = http.get(BASE_URL);
   check(main, {
     'move to main page success': (res) => res.status === 200,
@@ -238,8 +206,14 @@ export default function ()  {
     'move to path page success': (res) => res.status === 200,
   });
 
-  const source = 1;
-  const target = 6;
+  let findStations = http.get(`${BASE_URL}/stations`);
+  check(findStations, {
+    'find stations success': (res) => res.status === 200 && res.json().length !== 0,
+  });
+  const stations = findStations.json();
+
+  const source = getRandomStationId(stations);
+  const target = getRandomStationId(stations);
   let findPath = http.get(`${BASE_URL}/paths?source=${source}&target=${target}`);
   check(findPath, {
     'find path from source to target success': (res) => res.status === 200 && res.json().stations.size !== 0,
@@ -247,6 +221,16 @@ export default function ()  {
 
   sleep(1);
 };
+
+function getRandomStationId(stations) {
+  return stations[getRandomIntExclusive(16)].id;
+  //return stations[getRandomIntExclusive(stations.length)].id;
+}
+
+function getRandomIntExclusive(maxNumber) {
+  return Math.floor(Math.random() * maxNumber);
+}
+
 ```
 ---
 
@@ -260,3 +244,4 @@ export default function ()  {
 
 2. Cloudwatch 대시보드 URL을 알려주세요
 - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=soosue-dashboard
+
