@@ -4,8 +4,6 @@ import nextstep.subway.station.domain.Station;
 import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +14,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class StationService {
 
-    private Logger log = LoggerFactory.getLogger("file");
-
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -25,7 +21,6 @@ public class StationService {
     }
 
     public StationResponse saveStation(StationRequest stationRequest) {
-        log.info("StationRequest : {}", stationRequest);
         Station persistStation = stationRepository.save(stationRequest.toStation());
         return StationResponse.of(persistStation);
     }
@@ -34,15 +29,12 @@ public class StationService {
     public List<StationResponse> findAllStations() {
         List<Station> stations = stationRepository.findAll();
 
-        log.info("stations : {}", stations);
-
         return stations.stream()
                 .map(StationResponse::of)
                 .collect(Collectors.toList());
     }
 
     public void deleteStationById(Long id) {
-        log.info("delete stationId, {}", id);
         stationRepository.deleteById(id);
     }
 
@@ -51,7 +43,6 @@ public class StationService {
     }
 
     public Station findById(Long id) {
-        log.info("find stationId, {}", id);
         return stationRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 

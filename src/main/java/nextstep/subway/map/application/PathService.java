@@ -23,8 +23,6 @@ public class PathService {
 
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
 
-        log.info("{} {}", kv("출발지", source.getName()), kv("도착지", target.getName()));
-
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
         graph.addEdge(lines);
@@ -32,7 +30,7 @@ public class PathService {
         // 다익스트라 최단 경로 찾기
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
-        log.debug("Get Vertex List, List : {}", path.getVertexList());
+        log.info("vertexList : {}", path.getVertexList());
 
         return convertSubwayPath(path);
     }
