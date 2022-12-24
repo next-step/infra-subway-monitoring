@@ -73,15 +73,15 @@ npm run dev
         - TTI: 최소 4.5  목표치 4.1 미만
 - 전략
     - 텍스트 압축 사용
-      - js/vendors.js
-      - /js/main.js
+        - js/vendors.js
+        - /js/main.js
     - 사용하지 않는 JS 정리
-      - js/vendors.js
-      - /js/main.js
+        - js/vendors.js
+        - /js/main.js
 
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 - 목표 rps 구하기
     - DAU : 20만
@@ -112,9 +112,26 @@ npm run dev
   ![Load](k6/load/load_grafana.jpg)
 - Stress
   ![Stress](k6/stress/stress.jpg)
+  ![Stress](k6/stress/stress_second.jpg)
   ![Stress](k6/stress/stress_grafana.jpg)
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
+#### 요구사항
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [X] 로그 설정하기
+    -  [X] Application Log 파일로 저장하기
+        - [X] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+        - [X] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    - [X] Nginx Access Log 설정하기
+- [X] Cloudwatch로 모니터링
+    - [X] Cloudwatch로 로그 수집하기
+    - [X] Cloudwatch로 메트릭 수집하기
+    - [X] USE 방법론을 활용하기 용이하도록 대시보드 구성
 
+1. 각 서버내 로깅 경로를 알려주세요
+    - /home/ubuntu/nextstep/infra-subway-monitoring/log
+    - /var/log/nginx
+      ![service.png](step3/service_logs.png)
+      ![nginx.png](step3/nginx_logs.png)
 2. Cloudwatch 대시보드 URL을 알려주세요
+    - https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=eunveloper-dashboard

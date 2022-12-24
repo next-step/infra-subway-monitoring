@@ -6,16 +6,11 @@ export let options = {
         http_req_duration: ['p(99)<1000'], // 99% of requests must complete below 1s
     },
     stages: [
-        {duration: '3m', target: 10},
-        {duration: '3m', target: 20},
-        {duration: '3m', target: 50},
-        {duration: '3m', target: 100},
-        {duration: '3m', target: 180},
-        {duration: '3m', target: 320},
-        {duration: '3m', target: 180},
-        {duration: '3m', target: 100},
-        {duration: '3m', target: 50},
-        {duration: '3m', target: 20},
+        {duration: '1m', target: 100},
+        {duration: '2m', target: 150},
+        {duration: '4m', target: 200},
+        {durtaion: '2m', target: 150},
+        {durtaion: '1m', target: 100},
         {duration: '10s', target: 0},
     ],
 };
