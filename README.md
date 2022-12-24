@@ -165,5 +165,9 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+- 서버 인스턴스 : `tlaqk229-public-EC2` (i-0a12cc79249a4f445) 
+- 로깅 경로 : 
+`/home/ubuntu/nextstep/infra-subway-monitoring/log/json.log`
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=tlaqk229-dashboard-logging_monitoring
