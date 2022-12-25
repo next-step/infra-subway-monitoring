@@ -1,5 +1,8 @@
 package nextstep.subway.auth.dto;
 
+import static nextstep.subway.common.MaskingUtil.maskingAll;
+import static nextstep.subway.common.MaskingUtil.maskingExceptFirst3;
+
 public class TokenRequest {
     private String email;
     private String password;
@@ -18,5 +21,13 @@ public class TokenRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberRequest{" +
+                "email='" + maskingExceptFirst3(email) + '\'' +
+                ", password='" + maskingAll(password) + '\'' +
+                '}';
     }
 }
