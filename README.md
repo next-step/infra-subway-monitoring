@@ -118,11 +118,26 @@ npm run dev
 
 ### 3단계 - 로깅, 모니터링
 
-- [ ] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
-- [ ] 로그 설정하기
+- [X] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [X] 로그 설정하기
 - [ ] Cloudwatch로 모니터링
 
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+```bash
+# BASTION 서버 접근
+$ ssh -i key-kangjunjun.pem ubuntu@3.35.17.193
+
+# Public 서버 접근
+$ ssh WEB
+$ tail -f /home/ubuntu/infra-subway-monitoring/log/access.log
+$ tail -f /home/ubuntu/infra-subway-monitoring/log/file.log
+$ tail -f /home/ubuntu/infra-subway-monitoring/log/json.log
+```
+
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=kangjunjun-dashboard
+
