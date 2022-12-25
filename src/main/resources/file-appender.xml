@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-  <property name="home" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/" />
+  <property name="home" value="log/"/>
 
-  <!--  appender이름이 file인 consoleAppender를 선언  -->
-  <appender name="application" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--로깅이 기록될 위치-->
-    <file>${home}application.log</file>
-    <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--logging directory-->
+    <file>${home}file.log</file>
+    <!--logging file create rule-->
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${home}application-%d{yyyyMMdd}-%i.log</fileNamePattern>
+      <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>15MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
+
     <encoder>
       <charset>utf8</charset>
       <Pattern>
