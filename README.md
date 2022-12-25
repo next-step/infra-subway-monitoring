@@ -122,5 +122,10 @@ T : (2.5 * 0.3) + 1s = 1.75 VUser = (30 * 1.75) / 3 = 약 17 (목표 RPS는 1일
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
+* /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+* /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
+* /var/log/nginx/access.log
+* /var/log/nginx/error.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+   https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=iamsojung-dashboard
