@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MemberService {
+
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {

@@ -50,7 +50,7 @@ npm run dev
 - CLS : 표시 영역 안에 보이는 요소들이 얼마나 이동하는지에 대한 정보
 
 #### 경쟁사 분석 (PageSpeed Insights)
-| mobile | 서울교통공사 | 네이버지도 | 카카오맵   | Running Map(https://yohan-subway.o-r.kr/) |
+| mobile | 서울교통공사 | 네이버지도 | 카카오맵   | Running Map(https://yohan-subway.kro.kr/) |
 |--------|--------|-------|--------|-------------------------------------------|
 | FCP    | 6.3s   | 2.2s  | 1.7s   | 14.9s                                     |
 | TTI    | 8.3s   | 6.7s  | 4.5s   | 15.4s                                     |
@@ -121,6 +121,20 @@ npm run dev
 ---
 
 ### 3단계 - 로깅, 모니터링
-1. 각 서버내 로깅 경로를 알려주세요
 
+- [x] 애플리케이션 진단하기 실습을 진행해보고 문제가 되는 코드를 수정
+- [x] 로그 설정하기
+    - [x] Application Log 파일로 저장하기
+        - [x] 회원가입, 로그인 등의 이벤트에 로깅을 설정
+        - [x] 경로찾기 등의 이벤트 로그를 JSON으로 수집
+    - [x] Nginx Access Log 설정하기
+- [x] Cloudwatch로 모니터링
+    - [x] Cloudwatch로 로그 수집하기
+    - [x] Cloudwatch로 메트릭 수집하기
+    - [x] USE 방법론을 활용하기 용이하도록 대시보드 구성
+
+1. 각 서버내 로깅 경로를 알려주세요
+- `/home/ubuntu/infra-subway-monitoring/log`
+- `/var/log/nginx/`
 2. Cloudwatch 대시보드 URL을 알려주세요
+- `https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=CHOSUNDEVELOPER-MONITORING`

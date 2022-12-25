@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
+
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -44,4 +45,5 @@ public class StationService {
     public Station findById(Long id) {
         return stationRepository.findById(id).orElseThrow(RuntimeException::new);
     }
+
 }
