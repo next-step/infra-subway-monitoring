@@ -5,6 +5,8 @@ import nextstep.subway.station.domain.StationRepository;
 import nextstep.subway.station.dto.StationRequest;
 import nextstep.subway.station.dto.StationResponse;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class StationService {
+    private static final Logger log = LoggerFactory.getLogger(StationService.class);
     private StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
