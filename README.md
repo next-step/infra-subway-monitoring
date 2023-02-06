@@ -19,30 +19,73 @@
 ## 🚀 Getting Started
 
 ### Install
+
 #### npm 설치
+
 ```
 cd frontend
 npm install
 ```
+
 > `frontend` 디렉토리에서 수행해야 합니다.
 
 ### Usage
+
 #### webpack server 구동
+
 ```
 npm run dev
 ```
+
 #### application 구동
+
 ```
 ./gradlew clean build
 ```
+
 <br>
 
-
 ### 1단계 - 웹 성능 테스트
+
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+
+경쟁사 웹 성능 비교([https://pagespeed.web.dev/](https://pagespeed.web.dev/))
+
+진단대상 URL : https://waterfog-subway.store/
+
+| 측정 지표       | RUNNINGMAP | 서울 교통 공사 | 네이버 지도 | 카카오 맵 |
+|-------------|------------|----------|--------|-------|
+| FCP         | 14.7       | 6.3      | 2.1    | 1.7   |
+| Speed Index | 14.7       | 10.2     | 2.1    | 7.2   |
+| LCP         | 15.3       | 6.5      | 2.1    | 5.6   |
+| TTI         | 15.3       | 8.2      | 2.4    | 4.8   |
+| TBT         | 0.55       | 0.28     | 0.02   | 0.16  |
+| CLS         | 0.04       | 0        | 0.064  | 0.005 |
+
+| 측정 지표       | 목표    |
+|-------------|-------|
+| FCP         | 1.8   |
+| Speed Index | 2.3   |
+| LCP         | 2.3   |
+| TTI         | 2.6   |
+| TBT         | 0.017 |
+| CLS         | 0     |
+
+```
+3초의법칙 : 구글 리서치 조사결과에 따르면 웹페이지가 3초이내로 로딩되지 않으면 사용자의 53%가 떠난다.
+```
+
+이러한 3초의 법칙을 근거로 TTI를 3초이내로 단축시키는것을 최우선으로 하고,
+각 성능지표에서 가장 성능이 좋은 경쟁사와 성능차이를 20%이내로 줄이는것을 목표로 한다.
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
 
+- 텍스트 기반 리소스를 압축(gzip, deflate, brotli)하여 제공(예상 절감치 9.51s)
+- 효율적인 캐시 정책을 사용하여 정적인 애셋 제공
+    - /js/vendors.js
+    - /js/main.js
+    - /images/main_logo.png
+    - /images/logo_small.png
 
 ---
 
