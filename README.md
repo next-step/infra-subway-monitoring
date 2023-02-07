@@ -57,14 +57,8 @@ npm run dev
 
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
-- 텍스트 압축 사용하기 및 사용하지 않는 자바스크립트 줄이기
-  - /js/vendor.js 
-  - /js/main.js
-- 렌더링 차단 리소스 제거하기
-  - /css?family=Roboto:100,300,400,500,700,900
-  - https://cdn.jsdelivr.net/npm/@mdi/font@5.0.45/css/materialdesignicons.min.css
-- 효율적인 캐시 정책 설정하기
-- 이미지 요소에 width 및 height 를 명시해서 레이아웃 변경 횟수를 줄인다.
+- lines api 가 다른 api 에 비해 느려서 이 부분을 개선해보면 좋을것 같습니다.
+- ![](./image/api-response.png)
 
 ---
 
