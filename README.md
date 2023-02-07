@@ -91,6 +91,7 @@ npm run dev
   - latency: 0.3s
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- k6 폴더에 정리했습니다.
 
 ---
 
