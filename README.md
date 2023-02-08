@@ -87,16 +87,295 @@ npm run dev
     - /images/main_logo.png
     - /images/logo_small.png
 
+- 크롬 성능탭을 통한 각 페이지별 응답시간 측정
+    - 역관리 : 207.55
+    - 노선 관리 : 225.60
+    - 구간 관리 : 229.98
+    - 경로 검색 : 198.44
+- 캐시 적용을 통한 DB접근 횟수 줄이기 : 동일한 조회 API를 반복요청하였을때 동일한 DB조회를 반복하여 응답시간이 개선되지 않는다. 캐시적용을 통해 반복요청에 대한 개선이
+  가능할 것으로 보임.
+
 ---
 
-### 2단계 - 부하 테스트 
+### 2단계 - 부하 테스트
+
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+**대상 시스템 범위**
+
+- 시스템
+    - Webserver(Nginx)
+    - WAS(Tomcat)
+    - DB(MySQL)
+
+**시나리오 대상**
+
+- 메인페이지, 로그인, 경로검색
+    - 경로검색은 RUNNINGMAP의 주요서비스이다. 
+    - 메인페이지 -> 로그인페이지 -> 로그인 버튼 클릭 -> 경로페이지 -> 경로 검색 버튼 클릭  
+    - 경로검색은 노선뿐만아니라 노선이 참조하고 있는 역까지 조회하게 되므로 DB를 많이 사용하는 기능이다.
+
+**목표값 설정**
+
+- DAU : 200만
+    - 경쟁사 네이버지도의 경우 516만명, 카카오맵의 경우 약 219만명.
+    - 경쟁사만큼의 높은 성능을 확보하기 위해 200만으로 설정
+- 피크 시간대 집중률
+    - 1명당 1일 평균 접속수 : 2회(출퇴근 2회)
+    - 1일 총 접속수 : 400만 (200만 * 2회)
+    - 1일 평균 rps : 46 (=1일 총 접속 수 / 86,400)
+    - 1일 최대 rps : 92 (=1일 평균 rps * 피크시간대 집중률(2배))
+
+**VUser**
+
+- R : 5
+- http_req_duration : 0.2
+- T : 2 (=5 * 0.2 + 1)
+- 평균 VUser : 18.4 (46 * 2 / 5)
+- 최대 VUser : 36.8 (92 * 2 / 5)
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+**Smoke Test Script**
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    vus: 1,
+    duration: '1m',
+
+    thresholds: {
+        http_req_duration: ['p(99)<200'],
+    },
+};
+
+const BASE_URL = 'https://waterfog-subway.store';
+const USERNAME = 'loadTest@test.com';
+const PASSWORD = '1234';
+
+export default function () {
+    accessMainPage()
+    accessLoginPage()
+    const authHeaders = login()
+    accessPathPage(authHeaders)
+    findPath(authHeaders)
+};
+
+function accessMainPage() {
+    check(http.get(`${BASE_URL}`), {
+        'accessed to main page successfully': (res) => res.status === 200,
+    });
+}
+
+function accessLoginPage() {
+    check(http.get(`${BASE_URL}/login`), {
+        'accessed to login page successfully': (res) => res.status === 200,
+    });
+}
+
+function login() {
+    const params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+    check(loginRes, {'logged in successfully': (resp) => resp.json('accessToken') !== '',});
+
+    return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
+}
+function accessPathPage(authHeaders) {
+    check(http.get(`${BASE_URL}/path`, authHeaders), {
+        'accessed to path page successfully': (res) => res.status === 200,
+    });
+}
+
+
+function findPath(authHeaders) {
+    check(http.get(`${BASE_URL}/paths/?source=1&target=10`, authHeaders), {
+        'find path successfully': (res) => res.status === 200,
+    });
+}
+
+```
+
+**Smoke Test Result**
+
+![smoke-test](./smoke%20test.JPG)
+
+
+**Load Test Script**
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        {duration: '1m', target: 4},
+        {duration: '2m', target: 9},
+        {duration: '3m', target: 18},
+        {duration: '5m', target: 36},
+        {duration: '3m', target: 18},
+        {duration: '2m', target: 9},
+        {duration: '1m', target: 4},
+    ], thresholds: {
+        http_req_duration: ['p(99)<200'],
+    },
+};
+
+const BASE_URL = 'https://waterfog-subway.store';
+const USERNAME = 'loadTest@test.com';
+const PASSWORD = '1234';
+
+export default function () {
+    accessMainPage()
+    accessLoginPage()
+    const authHeaders = login()
+    accessPathPage(authHeaders)
+    findPath(authHeaders)
+};
+
+function accessMainPage() {
+    check(http.get(`${BASE_URL}`), {
+        'accessed to main page successfully': (res) => res.status === 200,
+    });
+}
+
+function accessLoginPage() {
+    check(http.get(`${BASE_URL}/login`), {
+        'accessed to login page successfully': (res) => res.status === 200,
+    });
+}
+
+function login() {
+    const params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+    check(loginRes, {'logged in successfully': (resp) => resp.json('accessToken') !== '',});
+
+    return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
+}
+function accessPathPage(authHeaders) {
+    check(http.get(`${BASE_URL}/path`, authHeaders), {
+        'accessed to path page successfully': (res) => res.status === 200,
+    });
+}
+
+
+function findPath(authHeaders) {
+    check(http.get(`${BASE_URL}/paths/?source=1&target=10`, authHeaders), {
+        'find path successfully': (res) => res.status === 200,
+    });
+}
+
+```
+
+**Load Test Result**
+
+![load test](./load%20test.JPG)
+
+**Stress Test Script**
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+    stages: [
+        {duration: '1m', target: 10},
+        {duration: '2m', target: 50},
+        {duration: '3m', target: 100},
+        {duration: '5m', target: 250},
+    ], thresholds: {
+        http_req_duration: ['p(99)<200'],
+    },
+};
+
+const BASE_URL = 'https://waterfog-subway.store';
+const USERNAME = 'loadTest@test.com';
+const PASSWORD = '1234';
+
+export default function () {
+    accessMainPage()
+    accessLoginPage()
+    const authHeaders = login()
+    accessPathPage(authHeaders)
+    findPath(authHeaders)
+};
+
+function accessMainPage() {
+    check(http.get(`${BASE_URL}`), {
+        'accessed to main page successfully': (res) => res.status === 200,
+    });
+}
+
+function accessLoginPage() {
+    check(http.get(`${BASE_URL}/login`), {
+        'accessed to login page successfully': (res) => res.status === 200,
+    });
+}
+
+function login() {
+    const params = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const payload = JSON.stringify({
+        email: USERNAME,
+        password: PASSWORD,
+    });
+
+    let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+    check(loginRes, {'logged in successfully': (resp) => resp.json('accessToken') !== '',});
+
+    return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
+}
+function accessPathPage(authHeaders) {
+    check(http.get(`${BASE_URL}/path`, authHeaders), {
+        'accessed to path page successfully': (res) => res.status === 200,
+    });
+}
+
+
+function findPath(authHeaders) {
+    check(http.get(`${BASE_URL}/paths/?source=1&target=10`, authHeaders), {
+        'find path successfully': (res) => res.status === 200,
+    });
+}
+
+```
+
+**Stress Test Result**
+
+![stress test](./stress%20test.JPG)
 
 ---
 
 ### 3단계 - 로깅, 모니터링
+
 1. 각 서버내 로깅 경로를 알려주세요
 
 2. Cloudwatch 대시보드 URL을 알려주세요
