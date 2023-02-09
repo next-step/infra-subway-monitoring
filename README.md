@@ -40,9 +40,22 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 네이버 지도
+![image](https://user-images.githubusercontent.com/24540286/217856611-eee1157f-21a1-4a53-9e94-5f70afb3663d.png)
+- 카카오맵
+![image](https://user-images.githubusercontent.com/24540286/217857171-464b4e1b-4368-4c59-bd85-a5fd69580496.png)
+- 서울 교통공사
+![image](https://user-images.githubusercontent.com/24540286/217857505-2e3dc4f9-97c6-4b46-a651-5293e5d11f49.png)
+
+- 예산
+  - 예산은 3개 경쟁사의 중간수준
+    - fcp 4초이내
+    - speed index 6초
+    - lcp 4.5초
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
-
+- 데이터 압축
+- 정적 리소스 캐싱
 
 ---
 
