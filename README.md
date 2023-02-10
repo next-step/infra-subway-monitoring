@@ -61,8 +61,199 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- 시스템
+  - Webserver
+  - WAS
+  - DB
+
+- 전제 조건
+  - 목표 rps 구하기
+    -  우선 예상 1일 사용자 수(DAU)를 정해봅니다.
+      - 100만
+    - 피크 시간대 집중률
+      - 1명당 1일 평균 접속수 : 2회(출퇴근 2회)
+      - 1일 총 접속수 : 200만 (100만 * 2회)
+      - 1일 평균 rps : 20 (=1일 총 접속 수 / 86,400)
+      - 1일 최대 rps : 40 (=1일 평균 rps * 피크시간대 집중률(2배))
+  - vuser
+    - R : 5
+    - http_req_duration : 0.2
+    - T : 2 (=5 * 0.2 + 1)
+    - 평균 VUser : 8 (20 * 2 / 5)
+    - 최대 VUser : 16 (40 * 2 / 5)
+
+  - 시나리오
+    - 로그인
+    - 경로 검색
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- smoke
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '1m', target: 500 }, // simulate ramp-up of traffic from 1 to 100 users over 5 minutes.
+    { duration: '2m', target: 500 }, // stay at 100 users for 10 minutes
+    { duration: '10s', target: 0 }, // ramp-down to 0 users
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  },
+};
+const BASE_URL = 'https://tndyd5390.kro.kr';
+const USERNAME = 'tndyd5390@naver.com';
+const PASSWORD = '1541';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  let obj = http.get(`${BASE_URL}/paths/?source=1&target=7`, authHeaders).json();
+  check(obj, {'path search': (obj) => obj.stations != null});
+  sleep(1);
+};
+```
+ ![image](https://user-images.githubusercontent.com/24540286/218134482-d1a1924f-8268-429f-bdcf-ac63a16b84f4.png)
+- load
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '1m', target: 1},
+    {duration: '1m', target: 4},
+    {duration: '1m', target: 8},
+    {duration: '1m', target: 16},
+    {duration: '1m', target: 8},
+    {duration: '1m', target: 4},
+    {duration: '1m', target: 1}
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  }
+};
+const BASE_URL = 'https://tndyd5390.kro.kr';
+const USERNAME = 'tndyd5390@naver.com';
+const PASSWORD = '1541';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  let obj = http.get(`${BASE_URL}/paths/?source=1&target=7`, authHeaders).json();
+  check(obj, {'path search': (obj) => obj.stations != null});
+  sleep(1);
+};
+```
+ ![image](https://user-images.githubusercontent.com/24540286/218146466-88054ad4-0bf9-42a9-9ab5-8118b0a24833.png)
+- stress
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '10s', target: 50},
+    {duration: '2m', target: 50},
+    {duration: '10s', target: 100},
+    {duration: '2m', target: 100}
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+  }
+};
+const BASE_URL = 'https://tndyd5390.kro.kr';
+const USERNAME = 'tndyd5390@naver.com';
+const PASSWORD = '1541';
+
+export default function ()  {
+
+  var payload = JSON.stringify({
+    email: USERNAME,
+    password: PASSWORD,
+  });
+
+  var params = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+
+  let loginRes = http.post(`${BASE_URL}/login/token`, payload, params);
+
+  check(loginRes, {
+    'logged in successfully': (resp) => resp.json('accessToken') !== '',
+  });
+
+
+  let authHeaders = {
+    headers: {
+      Authorization: `Bearer ${loginRes.json('accessToken')}`,
+    },
+  };
+  let myObjects = http.get(`${BASE_URL}/members/me`, authHeaders).json();
+  check(myObjects, { 'retrieved member': (obj) => obj.id != 0 });
+
+  let obj = http.get(`${BASE_URL}/paths/?source=1&target=7`, authHeaders).json();
+  check(obj, {'path search': (obj) => obj.stations != null});
+  sleep(1);
+};
+```
+![image](https://user-images.githubusercontent.com/24540286/218147797-8283ade3-7979-4660-916d-2b0b912170cd.png)
 
 ---
 
