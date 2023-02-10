@@ -71,8 +71,196 @@ FCP, TTI 지표가 타 경쟁사 서비스에 비해 높습니다. 지하철 노
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+###  대상 시스템 범위, 시나리오
+- WebServer
+- WAS
+- DB 
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+- 데이터를 조회하는데 여러 데이터를 참조하는 페이지
+- 홈페이지 접속 -> 경로 검색
+
+### 목표값 설정
+- 예상 DAU
+  - 하루 평균 지하철 이용자수 약 500만, 이 중 10%가 서비스를 이용한다고 가정
+  - DAU : 50만
+- 피크시간대 집중률
+  - 1명당 1일 평균 접속수 = 2 (출근, 퇴근)
+  - 1일 총 접속수 : 50만 * 2 = 100만
+  - 1일 평균 rps = 100만 / 86400 = 12
+  - 1일 최대 rps = 11.5 * 2.5 = 29(피크타임 집중률 2.5배로 가정)
+
+### VUser
+- R : 4 (홈페이지 접속 -> 경로 검색 * 2)
+- http_req_duration : 200ms
+- T = (4 * 0.2 + 1) -> 1.8
+- 평균 VUser = 12(rps) * 1.8(T) / 4(R) = 5
+- 최대 VUser = 29(rps) * 1.8(T) / 4(R) = 13
+
+
+3. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+### smoke
+```javascript
+"smoke.js" 42L, 879B                                                                                                                                                                                                                                          6,15          All
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  vus: 1, 
+  duration: '60s',
+
+  thresholds: {
+    http_req_duration: ['p(99)<200'],
+  },
+};
+
+const BASE_URL = 'https://uj-subway-infra.n-e.kr';
+
+function main() {
+  let mainPageRes = http.get(`${BASE_URL}`);
+  check(mainPageRes, {
+    'Enter to Main Page' : (res) => res.status === 200,
+  });
+}
+
+function path() {
+  let pathPageRes = http.get(`${BASE_URL}/path`);
+  check(pathPageRes, {
+    'Move to path Page' : (res) => res.status === 200,
+  });
+}
+
+function search() {
+  let pathSearchRes = http.get(`${BASE_URL}/paths?source=1&target=2`);
+  check(pathSearchRes, {
+    'Search path' : (res) => res.status === 200,
+  });
+}
+
+export default function ()  {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+![smoke.png](img.png)
+![smokeboard.png](img_1.png)
+
+### load
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+        {duration: '20s', target: 5},
+        {duration: '3m', target: 5},
+        {duration: '20s', target: 13},
+        {duration: '5m', target: 13},
+        {duration: '20s', target: 0}
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<200'],
+  },
+};
+
+const BASE_URL = 'https://uj-subway-infra.n-e.kr';
+
+function main() {
+  let mainPageRes = http.get(`${BASE_URL}`);
+  check(mainPageRes, {
+    'Enter to Main Page' : (res) => res.status === 200,
+  });
+}
+
+function path() {
+  let pathPageRes = http.get(`${BASE_URL}/path`);
+  check(pathPageRes, {
+    'Move to path Page' : (res) => res.status === 200,
+  });
+}
+
+function search() {
+  let pathSearchRes = http.get(`${BASE_URL}/paths?source=1&target=2`);
+  check(pathSearchRes, {
+    'Search path' : (res) => res.status === 200,
+  });
+}
+
+export default function ()  {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+
+![load.png](img_2.png)
+![loadboard.png](img_3.png)
+
+### stress
+
+```javascript
+import http from 'k6/http';
+import { check, group, sleep, fail } from 'k6';
+
+export let options = {
+  stages: [
+        {duration: '10s', target: 20},
+        {duration: '2m', target: 20},
+        {duration: '10s', target: 40},
+        {duration: '2m', target: 40},
+        {duration: '10s', target: 80},
+        {duration: '2m', target: 80},
+        {duration: '10s', target: 160},
+        {duration: '2m', target: 160},
+        {duration: '10s', target: 320},
+        {duration: '2m', target: 320},
+        {duration: '20s', target: 0}
+  ],
+  thresholds: {
+    http_req_duration: ['p(99)<200'],
+  },
+};
+
+const BASE_URL = 'https://uj-subway-infra.n-e.kr';
+
+function main() {
+  let mainPageRes = http.get(`${BASE_URL}`);
+  check(mainPageRes, {
+    'Enter to Main Page' : (res) => res.status === 200,
+  });
+}
+
+function path() {
+  let pathPageRes = http.get(`${BASE_URL}/path`);
+  check(pathPageRes, {
+    'Move to path Page' : (res) => res.status === 200,
+  });
+}
+
+function search() {
+  let pathSearchRes = http.get(`${BASE_URL}/paths?source=1&target=2`);
+  check(pathSearchRes, {
+    'Search path' : (res) => res.status === 200,
+  });
+}
+
+export default function ()  {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+
+![stress.png](img_4.png)
+![stressboard.png](img_5.png)
 
 ---
 
