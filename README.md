@@ -40,8 +40,47 @@ npm run dev
 
 ### 1단계 - 웹 성능 테스트
 1. 웹 성능예산은 어느정도가 적당하다고 생각하시나요
+- 카카오맵
+  - FCP 0.5s
+  - TTI 0.7s
+  - SI 2.3s
+  - TBT 0ms
+  - LCP 1.2s
+  - CLS 0.006
+
+
+- 네이버 지도
+  - FCP 0.5s
+  - TTI 0.7s
+  - Si 2.1s
+  - TBT 0ms
+  - LCP 1.1s
+  - CLS 0.006
+
+
+- RUNNINGMAP
+  - FCP 2.7s
+  - TTI 2.8s
+  - SI 2.7s
+  - TBT 10ms
+  - LCP 2.8s
+  - CLS 0.004
+
+
+- 목표
+  - FCP 0.5s
+  - TTI 0.7s
+  - SI 2.1s
+  - TBT 10ms
+  - LCP 1.1s
+  - CLS 0.004
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
+
+   1. /path 현재 50ms -> 40ms
+   2. /stations 현재 300ms -> 150ms
+   3. /paths 현재 580ms -> 200ms
+
 
 
 ---
