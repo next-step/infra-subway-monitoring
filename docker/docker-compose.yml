@@ -2,8 +2,8 @@ version: '3'
 services:
   local-db:
     image: library/mysql:5.7
+    platform: linux/amd64
     container_name: local-db
-    restart: always
     ports:
       - 13306:3306
     environment:

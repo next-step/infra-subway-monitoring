@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <property name="logPath" value="../log"/>
+    <property name="fileName" value="application"/>
+    <property name="maxHistory" value="7"/>
+    <property name="maxFileSize" value="15MB"/>
+    <property name="totalSizeCap" value="1GB"/>
+    <property name="consolePattern" value="%-5level %d{yyyy-MM-dd HH:mm:ss}[%thread] %logger[%method:%line] - %msg%n"/>
+    <property name="filePattern" value="%-4relative [%thread] %-5level %logger{35} - %msg%n"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${consolePattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${fileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/LOG_%d{yyyy-MM-dd}_${fileName}.log.%i.zip</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${filePattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${fileName}.json</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/LOG_%d{yyyy-MM-dd}_${fileName}.json.%i.zip</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="local-logging">
+        <logger name="root" level="debug"/>
+        <logger name="org.springframework" level="debug"/>
+        <logger name="nextstep.subway" level="info"/>
+    </springProfile>
+
+    <springProfile name="prod-logging">
+        <logger name="root" level="error"/>
+        <logger name="org.springframework" level="error"/>
+        <logger name="nextstep.subway" level="info"/>
+    </springProfile>
+
+    <root level="info">
+        <springProfile name="local-logging">
+            <appender-ref ref="console"/>
+        </springProfile>
+
+        <springProfile name="prod-logging">
+            <appender-ref ref="file"/>
+            <appender-ref ref="json"/>
+        </springProfile>
+    </root>
+</configuration>
