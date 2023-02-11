@@ -76,24 +76,178 @@ npm run dev
 
 
 2. 웹 성능예산을 바탕으로 현재 지하철 노선도 서비스의 서버 목표 응답시간 가설을 세워보세요.
-> 텍스트를 압축하고 캐시를 사용하면, 응답 시간을 줄일 수 있을 것으로 예상
-- 텍스트 압축을 사용하여 응답 시간을 줄인다.(gzip, deflate, brotli) -> -1.48s
-- 사용하지 않는 자바스크립트를 줄인다.-> - 0.56s
-    - /js/vendors.js, /js/main.js
-- 캐시를 사용한다.
-    - /js/vendors.js(choizz.o-r.kr)
-    - /js/main.js(choizz.o-r.kr)
-    - /images/main_logo.png(choizz.o-r.kr)
-    - /images/logo_small.png(choizz.o-r.kr)
-
+   - 네이버 지도 기준으로 메인 페이지 로드 속도가 6.9ms이고, 경로 탐색 시 응답 속도가 194.41ms 이므로,
+우리 사이트의 메인 페이지는 7ms를 목표로하고, 경로 탐색 페이지는 200ms를 목표로 한다.
 
 ---
 
 ### 2단계 - 부하 테스트
 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+- web server
+- was
+- database
+#### 시나리오
+- 메인페이지 -> 경로탐색페이지 -> 경로 탐색
 
-2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+2.Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+### 1. smoke
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  vus: 1,
+  duration: '60s',
+
+  threshold: {
+    http_req_duration: ['p(99)<200'],
+    'Main Page' : ['p(99)<7'],
+  },
+};
+
+const BASE_URL = 'https://choizz.o-r.kr/'
+
+const main = function () {
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'Main Page': res => res.status === 200,
+  })
+}
+
+const path = function () {
+  let pathRes = http.get(`${BASE_URL}/path`);
+  check(pathRes, {
+    'Path Page': res => res.status === 200,
+  })
+}
+
+const search = function () {
+  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
+  check(searchRes,{
+    'Search Path' : res => res.status === 200,
+  })
+}
+
+export default function () {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+![img_1.png](img_1.png)
+
+### 2. load
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '15s', target: 3},
+    {duration: '1m', target: 3},
+    {duration: '10s', target: 7},
+    {duration: '1m', target: 7},
+    {duration: '20s', target: 0},
+  ],
+
+  threshold: {
+    http_req_duration: ['p(99)<200'],
+    'Main Page' : ['p(99)<7'],
+  },
+};
+
+const BASE_URL = 'https://choizz.o-r.kr/'
+
+const main = function () {
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'Main Page': res => res.status === 200,
+  })
+}
+
+const path = function () {
+  let pathRes = http.get(`${BASE_URL}/path`);
+  check(pathRes, {
+    'Path Page': res => res.status === 200,
+  })
+}
+
+const search = function () {
+  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
+  check(searchRes,{
+    'Search Path' : res => res.status === 200,
+  })
+}
+
+export default function () {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+![img_2.png](img_2.png)
+
+### 3. stress
+```javascript
+import http from 'k6/http';
+import {check, group, sleep, fail} from 'k6';
+
+export let options = {
+  stages: [
+    {duration: '10s', target: 10},
+    {duration: '1m', target: 10},
+    {duration: '10s', target: 20},
+    {duration: '1m', target: 20},
+    {duration: '10s', target: 40},
+    {duration: '1m', target: 40},
+    {duration: '10s', target: 80},
+    {duration: '1m', target: 80},
+    {duration: '20s', target: 0},
+  ],
+
+  threshold: {
+    http_req_duration: ['p(99)<200'],
+    'Main Page' : ['p(99)<7'],
+  },
+};
+
+const BASE_URL = 'https://choizz.o-r.kr/'
+
+const main = function () {
+  let mainRes = http.get(`${BASE_URL}`);
+  check(mainRes, {
+    'Main Page': res => res.status === 200,
+  })
+}
+
+const path = function () {
+  let pathRes = http.get(`${BASE_URL}/path`);
+  check(pathRes, {
+    'Path Page': res => res.status === 200,
+  })
+}
+
+const search = function () {
+  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
+  check(searchRes,{
+    'Search Path' : res => res.status === 200,
+  })
+}
+
+export default function () {
+  main();
+  path();
+  search();
+
+  sleep(1);
+};
+```
+![img_3.png](img_3.png)
 
 ---
 
