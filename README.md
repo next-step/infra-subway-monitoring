@@ -111,8 +111,8 @@ npm run dev
 **시나리오 대상**
 
 - 메인페이지, 로그인, 경로검색
-    - 경로검색은 RUNNINGMAP의 주요서비스이다. 
-    - 메인페이지 -> 로그인페이지 -> 로그인 버튼 클릭 -> 경로페이지 -> 경로 검색 버튼 클릭  
+    - 경로검색은 RUNNINGMAP의 주요서비스이다.
+    - 메인페이지 -> 로그인페이지 -> 로그인 버튼 클릭 -> 경로페이지 -> 경로 검색 버튼 클릭
     - 경로검색은 노선뿐만아니라 노선이 참조하고 있는 역까지 조회하게 되므로 DB를 많이 사용하는 기능이다.
 
 **목표값 설정**
@@ -140,7 +140,7 @@ npm run dev
 
 ```javascript
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check, group, sleep, fail} from 'k6';
 
 export let options = {
     vus: 1,
@@ -193,6 +193,7 @@ function login() {
 
     return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
 }
+
 function accessPathPage(authHeaders) {
     check(http.get(`${BASE_URL}/path`, authHeaders), {
         'accessed to path page successfully': (res) => res.status === 200,
@@ -210,24 +211,22 @@ function findPath(authHeaders) {
 
 **Smoke Test Result**
 
-![smoke-test](./smoke%20test.JPG)
-
+![smoke-test](./smoke.png)
 
 **Load Test Script**
 
 ```javascript
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check, group, sleep, fail} from 'k6';
 
 export let options = {
     stages: [
-        {duration: '1m', target: 4},
-        {duration: '2m', target: 9},
+        {duration: '20s', target: 18},
         {duration: '3m', target: 18},
+        {duration: '20s', target: 36},
         {duration: '5m', target: 36},
+        {duration: '20s', target: 18},
         {duration: '3m', target: 18},
-        {duration: '2m', target: 9},
-        {duration: '1m', target: 4},
     ], thresholds: {
         http_req_duration: ['p(99)<200'],
     },
@@ -275,6 +274,7 @@ function login() {
 
     return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
 }
+
 function accessPathPage(authHeaders) {
     check(http.get(`${BASE_URL}/path`, authHeaders), {
         'accessed to path page successfully': (res) => res.status === 200,
@@ -292,19 +292,23 @@ function findPath(authHeaders) {
 
 **Load Test Result**
 
-![load test](./load%20test.JPG)
+![load test](./load.png)
 
 **Stress Test Script**
 
 ```javascript
 import http from 'k6/http';
-import { check, group, sleep, fail } from 'k6';
+import {check, group, sleep, fail} from 'k6';
 
 export let options = {
     stages: [
+        {duration: '20s', target: 10},
         {duration: '1m', target: 10},
+        {duration: '20s', target: 50},
         {duration: '2m', target: 50},
+        {duration: '20s', target: 100},
         {duration: '3m', target: 100},
+        {duration: '20s', target: 250},
         {duration: '5m', target: 250},
     ], thresholds: {
         http_req_duration: ['p(99)<200'],
@@ -353,6 +357,7 @@ function login() {
 
     return {headers: {Authorization: `Bearer ${loginRes.json('accessToken')}`,},}
 }
+
 function accessPathPage(authHeaders) {
     check(http.get(`${BASE_URL}/path`, authHeaders), {
         'accessed to path page successfully': (res) => res.status === 200,
@@ -370,7 +375,7 @@ function findPath(authHeaders) {
 
 **Stress Test Result**
 
-![stress test](./stress%20test.JPG)
+![stress test](./stress.png)
 
 ---
 
@@ -378,4 +383,11 @@ function findPath(authHeaders) {
 
 1. 각 서버내 로깅 경로를 알려주세요
 
+- NGINX
+  - /var/log/nginx
+- WAS
+  - ~/nextstep/infra-subway-monitoring/log
+
 2. Cloudwatch 대시보드 URL을 알려주세요
+
+https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=waterfogSW
