@@ -51,10 +51,22 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+   - 대상 시스템 범위
+      - 지하철 경로 탐색
+   - 목푯값 설정
+      - latency: 0.3s
+      - throughput: 16 rps ~ 40 rps
+      - 부하 유지기간: 30분
+   - 부하 테스트 시 저장될 데이터 건수 및 크기
+      - 없음
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
----
+    - [smoke](perf/smoke.js)
+    - [smoke-result](perf/smoke-result.pdf)
+    - [load](perf/load.js)
+    - [load-result](perf/load-result.pdf)
+    - [stress](perf/stress.js)
+    - [stress-result](perf/stress-result.pdf)
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요

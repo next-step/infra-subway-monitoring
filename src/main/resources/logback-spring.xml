@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="prod">
+        <property name="LOG_PATH" value="/home/ubuntu/infra-subway-monitoring/"/>
+
+        <appender name="APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}application.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}backup/application-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>50MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder>
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="nextstep.subway" level="INFO"/>
+
+        <root level="INFO">
+            <appender-ref ref="APPLICATION"/>
+        </root>
+    </springProfile>
+</configuration>
