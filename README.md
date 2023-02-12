@@ -55,7 +55,7 @@ npm run dev
       - 지하철 경로 탐색
    - 목푯값 설정
       - latency: 0.3s
-      - througput: 16 rps ~ 40 rps
+      - throughput: 16 rps ~ 40 rps
       - 부하 유지기간: 30분
    - 부하 테스트 시 저장될 데이터 건수 및 크기
       - 없음
