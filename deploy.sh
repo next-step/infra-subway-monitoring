@@ -68,7 +68,7 @@ function launch() {
   echo -e ""
   echo -e ">> Application is launching 🏃♂️ "
 
-  nohup java -jar -Dspring.profiles.active=$PROFILE build/libs/subway-0.0.1-SNAPSHOT.jar 1>> application.log 2>&1 &
+  nohup java -jar -Dspring.profiles.active=$PROFILE build/libs/subway-0.0.1-SNAPSHOT.jar &
 }
 
 function check_df() {
