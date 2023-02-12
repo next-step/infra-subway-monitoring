@@ -4,6 +4,8 @@ import nextstep.subway.line.application.LineService;
 import nextstep.subway.line.dto.LineRequest;
 import nextstep.subway.line.dto.LineResponse;
 import nextstep.subway.line.dto.SectionRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,14 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @RestController
 @RequestMapping("/lines")
 public class LineController {
+
+    private static final Logger log = LoggerFactory.getLogger(LineController.class);
+
     private final LineService lineService;
 
     public LineController(final LineService lineService) {
@@ -35,6 +42,7 @@ public class LineController {
 
     @GetMapping("/{id}")
     public ResponseEntity<LineResponse> findLineById(@PathVariable Long id) {
+        log.info("Find line. {}", kv("id", id));
         return ResponseEntity.ok(lineService.findLineResponseById(id));
     }
 
