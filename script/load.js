@@ -9,7 +9,7 @@ export let options = {
         { duration: '5m', target: 31 }, // 31
         { duration: '5m', target: 14 }, // 31 -> 14
         { duration: '5m', target: 14 }, // 14
-        { duration: '5m,', target: 0 } // 14 -> 0
+        { duration: '5m', target: 0 } // 14 -> 0
     ],
 
     thresholds: {
