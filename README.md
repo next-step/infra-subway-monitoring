@@ -61,8 +61,12 @@ npm run dev
       - 없음
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
-
----
+    - [smoke](perf/smoke.js)
+    - [smoke-result](perf/smoke-result.pdf)
+    - [load](perf/load.js)
+    - [load-result](perf/load-result.pdf)
+    - [stress](perf/stress.js)
+    - [stress-result](perf/stress-result.pdf)
 
 ### 3단계 - 로깅, 모니터링
 1. 각 서버내 로깅 경로를 알려주세요
