@@ -87,8 +87,46 @@ npm run dev
 
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
+    ### 전제 조건 정리
+    역, 노선, 구관 관리와 같은 admin 기능들은 요청 소요가 많지 않다고 생각 했습니다.
+
+    그래서 주로 사용될 경로검색과, 메인페이지를 부하 테스트의 대상으로 삼았습니다.
+
+    > 메인 페이지 → 경로 검색 페이지 → 경로 탐색
+
+    ### 목푯값 설정
+   1. 하루평균 700만명의 이용객들이 서울 지하철을 사용합니다.
+   2. 서울 지하철 시간대별 사용자 수를 기준으로 판단한 결과 가장 많은 승하차 인원이 발생하는 시간대(18-19시)는 평균보다 약 2.2배 가량의 사용자가 많습니다.
+      1. 이에 따라 집중률을 예상해보면 평소 트래픽은 DAU의 6%, 최대 트래픽은 12%정도로 예상 됩니다.
+
+         ![[https://blog.hyundai-rotem.co.kr/691](https://blog.hyundai-rotem.co.kr/691)](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/866f583f-aaa3-4aa2-987e-07917bfbc310/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230212%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230212T120104Z&X-Amz-Expires=86400&X-Amz-Signature=a55ba15dee4aa510833cdf393867e79206b132fa50f7ac8082a5bdaff7a3df4e&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject)
+
+         [https://blog.hyundai-rotem.co.kr/691](https://blog.hyundai-rotem.co.kr/691)
+
+   3. 평균 접속수 : 2회 (출/퇴근)
+   4. Throughput을 계산합니다.
+      - DAU(700만) x 2 x 0.2 = 280만 (1일 총 접속 수)
+      - DAU(700만) 중 타 경쟁사를 고려하여 20% 고객들이 우리 서비스를 이용하는 것을 목표로 합니다.
+      - 280만(1일 총 접속 수) / 86,400 = 32.4074 (1일 평균 rps)
+      - 32.4074(1일 평균 rps) x 2.2(최대 트래픽 / 평소 트래픽) = 71.296 (1일 최대 rps)
+      - Throughput : 32.4074 ~ 71.296
+      - Latency : 100ms
+   5. VUser 구하기
+      - Request Rate: 요청수 3회 (메인 → 경로 검색(페이지) → 검색)
+      - T = (3 * 100ms) (+ 1s)  → 1.3s
+      - 최대 VUser = 71.296 * 1.3 / 3 = 30.8950617284(31)
+      - 평균 VUser =  32.4074 * 1.3 / 3 = 14.043206(14)
 
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+   - smoke : VUser 2, 100ms를 목표
+     ![smoke_k6](img/smoke_k6.png)
+     ![smoke_grafana](img/smoke_grafana.png)
+   - load : VUser 14 ~ VUser 31
+     ![load_k6](img/load_k6.png)
+     ![load_grafana](img/load_grafana.png)
+   - stress : 점진적으로 최대부하를 테스트(10, 40, 80, 160, 320)
+     ![stress_k6](img/stress_k6.png)
+     ![stress_k6](img/stress_k6.png)
 
 ---
 
