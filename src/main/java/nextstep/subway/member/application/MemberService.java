@@ -1,5 +1,7 @@
 package nextstep.subway.member.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import nextstep.subway.member.dto.MemberResponse;
 @Service
 @Transactional
 public class MemberService {
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -23,6 +26,7 @@ public class MemberService {
         Member member = memberRepository.save(request.toMember());
 
         log.info("id : {} created", member.getId());
+        fileLogger.info("회원가입 파일 로깅 : id : {}", member.getId());
 
         return MemberResponse.of(member);
     }

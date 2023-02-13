@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,8 @@ import nextstep.subway.station.domain.Station;
 @Slf4j
 @Service
 public class PathService {
+    private static final Logger jsonLogger = LoggerFactory.getLogger("json");
+
     public SubwayPath findPath(List<Line> lines, Station source, Station target) {
         SubwayGraph graph = new SubwayGraph(SectionEdge.class);
         graph.addVertexWith(lines);
@@ -29,6 +33,10 @@ public class PathService {
         GraphPath<Station, SectionEdge> path = dijkstraShortestPath.getPath(source, target);
 
         log.info("{}, {}",
+            kv("출발지", source.getName()),
+            kv("도착지", target.getName())
+        );
+        jsonLogger.info("{}, {}",
             kv("출발지", source.getName()),
             kv("도착지", target.getName())
         );
