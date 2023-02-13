@@ -209,10 +209,12 @@ export let options = {
     {duration: '10s', target: 50},
     {duration: '2m', target: 50},
     {duration: '10s', target: 100},
+    {duration: '30s', target: 300},
+    {duration: '10s', target: 500},
     {duration: '2m', target: 100}
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
   }
 };
 const BASE_URL = 'https://tndyd5390.kro.kr';
@@ -253,7 +255,8 @@ export default function ()  {
   sleep(1);
 };
 ```
-![image](https://user-images.githubusercontent.com/24540286/218147797-8283ade3-7979-4660-916d-2b0b912170cd.png)
+![image](https://user-images.githubusercontent.com/24540286/218488417-c3f4de42-1752-4798-a9cf-58540bf19770.png)
+
 
 ---
 
