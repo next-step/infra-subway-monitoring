@@ -34,6 +34,7 @@ dependencies {
 
 	//lombok
 	implementation 'org.projectlombok:lombok:1.18.22'
+	testAnnotationProcessor 'org.project.lombok:lombok'
 
 	//test
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
