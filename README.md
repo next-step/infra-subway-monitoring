@@ -284,5 +284,10 @@ export default function () {
 ### 3단계 - 로깅, 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
+ //롬복 사용 콘솔 질문
+> 회원가입과 로그인 로직에 파일 로그를 넣고 경로 탐색에 json 로그를 넣었습니다.
+
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요

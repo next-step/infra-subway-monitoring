@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-
 public class MemberController {
 
-	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger log = LoggerFactory.getLogger(MemberController.class); //logger 객체 사용
 	private static final Logger fileLog = LoggerFactory.getLogger("fileLog");
 
 	private MemberService memberService;

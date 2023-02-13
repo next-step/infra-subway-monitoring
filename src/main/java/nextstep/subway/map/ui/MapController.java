@@ -23,7 +23,7 @@ public class MapController {
 
     @GetMapping("/paths")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target) {
-        log.info("{}, {}", kv("출발지", source), kv("도착지", target));
+        log.info("{}, {}", kv("출발지", source), kv("도착지", target)); //롬복 사용
         jsonLog.info("{}, {}", kv("출발지", source), kv("도착지", target));
         return ResponseEntity.ok(mapService.findPath(source, target));
     }
