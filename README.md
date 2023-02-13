@@ -196,7 +196,7 @@ export default function ()  {
   sleep(1);
 };
 ```
- ![image](https://user-images.githubusercontent.com/24540286/218146466-88054ad4-0bf9-42a9-9ab5-8118b0a24833.png)
+![image](https://user-images.githubusercontent.com/24540286/218490899-c054dea3-edee-4bdc-99ae-52370fd87aac.png)
 - stress
 ```javascript
 import http from 'k6/http';
