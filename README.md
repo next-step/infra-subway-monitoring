@@ -76,11 +76,11 @@ npm run dev
       - 1일 평균 rps : 20 (=1일 총 접속 수 / 86,400)
       - 1일 최대 rps : 40 (=1일 평균 rps * 피크시간대 집중률(2배))
   - vuser
-    - R : 5
+    - R : 3
     - http_req_duration : 0.2
-    - T : 2 (=5 * 0.2 + 1)
-    - 평균 VUser : 8 (20 * 2 / 5)
-    - 최대 VUser : 16 (40 * 2 / 5)
+    - T : 2.5 (=3 * 0.2 + 1)
+    - 평균 VUser : 10 (20 * 2.5 / 5)
+    - 최대 VUser : 20 (40 * 2.5 / 5)
 
   - 시나리오
     - 로그인
@@ -148,11 +148,11 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    {duration: '10s', target: 8},
-    {duration: '1m', target: 8},
-    {duration: '10s', target: 16},
-    {duration: '1m', target: 16},
-    {duration: '10s', target: 16},
+    {duration: '10s', target: 10},
+    {duration: '1m', target: 10},
+    {duration: '10s', target: 20},
+    {duration: '1m', target: 20},
+    {duration: '10s', target: 20},
   ],
   thresholds: {
     http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
@@ -196,7 +196,7 @@ export default function ()  {
   sleep(1);
 };
 ```
-![image](https://user-images.githubusercontent.com/24540286/218490899-c054dea3-edee-4bdc-99ae-52370fd87aac.png)
+![image](https://user-images.githubusercontent.com/24540286/218502038-fc215f36-d85d-468d-b46a-db57441ea79b.png)
 - stress
 ```javascript
 import http from 'k6/http';
