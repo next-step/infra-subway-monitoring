@@ -148,16 +148,14 @@ import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   stages: [
-    {duration: '1m', target: 1},
-    {duration: '1m', target: 4},
+    {duration: '10s', target: 8},
     {duration: '1m', target: 8},
+    {duration: '10s', target: 16},
     {duration: '1m', target: 16},
-    {duration: '1m', target: 8},
-    {duration: '1m', target: 4},
-    {duration: '1m', target: 1}
+    {duration: '10s', target: 16},
   ],
   thresholds: {
-    http_req_duration: ['p(99)<1500'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<200'], // 99% of requests must complete below 1.5s
   }
 };
 const BASE_URL = 'https://tndyd5390.kro.kr';
