@@ -24,6 +24,7 @@ dependencies {
 
 	// log
 	implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.7.1'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.1'
 
 	// jgraph
 	implementation 'org.jgrapht:jgrapht-core:1.0.1'
@@ -31,6 +32,10 @@ dependencies {
 	// jwt
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	//lombok
+	implementation 'org.projectlombok:lombok:1.18.22'
+
+	//test
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
