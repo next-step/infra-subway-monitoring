@@ -35,7 +35,6 @@ dependencies {
 	//lombok
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
-	testAnnotationProcessor 'org.project.lombok:lombok'
 
 	//test
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
