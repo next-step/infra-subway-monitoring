@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
+    <property name="home" value="log/" />
 
     <!--spring boot의 기본 logback base.xml은 그대로 가져간다.-->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
@@ -7,23 +8,10 @@
     <include resource="file-appender.xml"/>
     <include resource="json-appender.xml"/>
 
-    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
-    <logger name="file" level="INFO">
-        <appender-ref ref="FILE"/>
-    </logger>
-
-    <property name="home" value="log/"/>
-
     <!--  appender이름이 file인 consoleAppender를 선언  -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--로깅이 기록될 위치-->
         <file>${home}file.log</file>
-        <!-- 필터 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
         <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
@@ -40,6 +28,11 @@
             </Pattern>
         </encoder>
     </appender>
+
+    <!--    logger name이 file일때 적용할 appender를 등록한다.-->
+    <logger name="file" level="INFO" >
+        <appender-ref ref="FILE_LOG" />
+    </logger>
 
 <!--    <logger name="json" level="INFO">-->
 <!--        <appender-ref ref="json"/>-->
