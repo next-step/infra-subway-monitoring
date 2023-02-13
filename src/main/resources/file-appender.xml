@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+  <property name="PATH" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/"/>
+
+  <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <file>${PATH}file.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${PATH}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <maxFileSize>15MB</maxFileSize>
+    </rollingPolicy>
+
+    <encoder>
+      <charset>utf8</charset>
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level %logger - %m%n
+      </Pattern>
+    </encoder>
+  </appender>
+</included>
