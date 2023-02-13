@@ -34,10 +34,9 @@
         </encoder>
     </appender>
 
-    <logger name="json" level="INFO" >
-        <appender-ref ref="json" />
+    <logger name="json" level="INFO">
+        <appender-ref ref="json"/>
     </logger>
-
 
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <includeContext>true</includeContext>
