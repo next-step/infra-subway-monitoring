@@ -6,7 +6,7 @@
     <include resource="file-appender.xml"/>
     <include resource="json-appender.xml"/>
 
-    <springProfile name="local,test">
+    <springProfile name="test">
         <logger name="CONSOLE_LOG" level="INFO">
             <appender-ref ref="CONSOLE_LOG"/>
         </logger>
@@ -16,7 +16,7 @@
         </logger>
     </springProfile>
 
-    <springProfile name="prod">
+    <springProfile name="local">
         <logger name="FILE_LOG" level="INFO">
             <appender-ref ref="FILE_LOG"/>
         </logger>
