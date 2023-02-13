@@ -12,6 +12,11 @@
     <logger name="console" level="INFO">
       <appender-ref ref="console"/>
     </logger>
+
+    <logger name="fileLog" level="INFO">
+      <appender-ref ref="fileLog"/>
+    </logger>
+
   </springProfile>
 
 

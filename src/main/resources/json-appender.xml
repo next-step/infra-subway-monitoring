@@ -3,11 +3,11 @@
 <included>
   <property name="PATH" value="/home/ubuntu/nextstep/infra-subway-monitoring/log/"/>
 
-
+  <!--  appender이름이 file인 consoleAppender를 선언  -->
   <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
-
+    <!--로깅이 기록될 위치-->
     <file>${PATH}json.log</file>
-
+    <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>${PATH}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
       <maxHistory>30</maxHistory>
