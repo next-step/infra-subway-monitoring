@@ -109,25 +109,22 @@ npm run dev
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
 
 - Smoke testing
-![](2023-02-12_19-36-32.png)
+
+[smoke.js](result/smoke.js)
+![](result/smoke-result.jpeg)
+![](result/smoke-graph.jpeg)
 
 - Load testing
-![](2023-02-12_19-44-35.png)
+
+[load.js](result/load.js)
+![](result/load-result.jpeg)
+![](result/load-graph.jpeg)
 
 - Stress testing
-![](2023-02-12_21-51-43.png)
 
-
-
-질문있습니다!
-
-1. /stations, /paths 응답 시간을 볼 때 해당 페이지 전체 렌더링 시간을 기준으로 해야할까요? 아니면 딱 api만 응답 받는데 걸린 시간을 기준으로 하면 되나요?
-2. BASE_URL을 내부망으로 하는건 localhost로 하는 경우를 말하는건가요? https://로 하면 외부로 나가긴 하는데 서버 자체가 가까운 네트워크에 있어서 내부망으로 치는건지 궁금합니다!
-2. smoke.js에서 1초 sleep을 했는데 VUser 구할때 1초를 더하면 안되는게 맞을까요? 
-3. 이용자들이 한 번 사용할 때 /stations, /paths 한 번씩만 호출한다고 생각해서 R을 구할 때 1 * (0.06 + 0.105)로 구했는데 이렇게 하는게 맞나요? 
-
-
-
+[stress.js](result/stress.js)
+![](result/stress-result.jpeg)
+![](result/stress-graph.jpeg)
 
 ---
 
