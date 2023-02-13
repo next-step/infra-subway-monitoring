@@ -1,12 +1,15 @@
 package nextstep.subway.member.application;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
 import nextstep.subway.member.dto.MemberRequest;
 import nextstep.subway.member.dto.MemberResponse;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
 public class MemberService {
@@ -18,6 +21,9 @@ public class MemberService {
 
     public MemberResponse createMember(MemberRequest request) {
         Member member = memberRepository.save(request.toMember());
+
+        log.info("id : {} created", member.getId());
+
         return MemberResponse.of(member);
     }
 
