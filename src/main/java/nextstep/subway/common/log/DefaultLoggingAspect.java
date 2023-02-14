@@ -31,6 +31,7 @@ public class DefaultLoggingAspect {
         String param = getParams(args);
 
         log.debug("[REQUEST] :: {} :: PARAMS :: {}", getMethodName(joinPoint), param);
+        MDC.clear();
     }
 
     @AfterReturning(value = "loggable()", returning = "returnValue")
