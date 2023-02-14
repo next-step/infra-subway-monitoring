@@ -40,10 +40,6 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.1.RELEASE'
 	implementation 'io.micrometer:micrometer-registry-cloudwatch'
 
-	implementation 'io.rest-assured:rest-assured:4.3.2'
-	implementation 'io.rest-assured:json-path:4.3.2'
-	compile group: 'com.sun.xml.bind', name: 'jaxb-osgi', version: '3.0.0-M5'
-
 	testImplementation 'io.rest-assured:rest-assured:3.3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
