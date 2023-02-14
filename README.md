@@ -100,12 +100,12 @@ DAU 450,000명 (10%가 사용한다고 가정)
 1일 최대 rps : 10 * 2(피크 시간대 집중률 2배로 가정) = 20
 
 #### VUser
-R:6(메인 페이지 -> 경로 검색 페이지 -> 경로 검색, 2번)
-http_req_duration =200ms
-T = (6 * 200ms) + 1000ms = 2200ms
+R:3(메인 페이지 -> 경로 검색 페이지 -> 경로 검색)
+http_req_duration =200ms(100~300ms 사이)
+T = (3 * 200ms) + 1000ms = 1600ms
 
-평균 VUser = (10*2.2)/6 = 3
-최대 VUser = (20*2.2)/6= 7
+평균 VUser = (10*1.6)/3 = 5
+최대 VUser = (20*1.6)/3= 10
 
 
 ### 1. smoke
@@ -119,7 +119,6 @@ export let options = {
 
   threshold: {
     http_req_duration: ['p(99)<200'],
-    'Main Page' : ['p(99)<7'],
   },
 };
 
@@ -140,12 +139,16 @@ const path = function () {
 }
 
 const search = function () {
-  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
-  check(searchRes,{
-    'Search Path' : res => res.status === 200,
-  })
+   const max = 727; //지하철 역 id 최대값
+   const min = 1;//지하철 역 id 최소값
+   const randomNum = function callRandomNum(max, min) {
+      return Math.floor((Math.random() * (max - min) + min));
+   }
+   let searchRes = http.get(`${BASE_URL}/paths?source=${randomNum(max, min)}&target=${randomNum(max, min)}`);
+   check(searchRes, {
+      'Search Path': res => res.status === 200,
+   })
 }
-
 export default function () {
   main();
   path();
@@ -154,7 +157,7 @@ export default function () {
   sleep(1);
 };
 ```
-![smoke](img_1.png)
+![smoke](smoke.png)
 
 ### 2. load
 ```javascript
@@ -163,16 +166,15 @@ import {check, group, sleep, fail} from 'k6';
 
 export let options = {
   stages: [
-    {duration: '15s', target: 3},
-    {duration: '1m', target: 3},
-    {duration: '10s', target: 7},
-    {duration: '1m', target: 7},
+    {duration: '15s', target: 5},
+    {duration: '1m', target: 5},
+    {duration: '10s', target: 10},
+    {duration: '1m', target: 10},
     {duration: '20s', target: 0},
   ],
 
   threshold: {
     http_req_duration: ['p(99)<200'],
-    'Main Page' : ['p(99)<7'],
   },
 };
 
@@ -193,10 +195,15 @@ const path = function () {
 }
 
 const search = function () {
-  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
-  check(searchRes,{
-    'Search Path' : res => res.status === 200,
-  })
+   const max = 727;
+   const min = 1;
+   const randomNum = function callRandomNum(max, min) {
+      return Math.floor((Math.random() * (max - min) + min));
+   }
+   let searchRes = http.get(`${BASE_URL}/paths?source=${randomNum(max, min)}&target=${randomNum(max, min)}`);
+   check(searchRes, {
+      'Search Path': res => res.status === 200,
+   })
 }
 
 export default function () {
@@ -207,7 +214,7 @@ export default function () {
   sleep(1);
 };
 ```
-![load](img_6.png)!
+![load](load.png)!
 
 ### 3. stress
 ```javascript
@@ -215,60 +222,73 @@ import http from 'k6/http';
 import {check, group, sleep, fail} from 'k6';
 
 export let options = {
-  stages: [
-    {duration: '10s', target: 10},
-    {duration: '1m', target: 10},
-    {duration: '10s', target: 20},
-    {duration: '1m', target: 20},
-    {duration: '10s', target: 40},
-    {duration: '1m', target: 40},
-    {duration: '10s', target: 80},
-    {duration: '1m', target: 80},
-    {duration: '20s', target: 0},
-  ],
+   stages: [
+      {duration: '10s', target: 10},
+      {duration: '1m', target: 10},
+      {duration: '10s', target: 20},
+      {duration: '1m', target: 20},
+      {duration: '10s', target: 40},
+      {duration: '1m', target: 40},
+      {duration: '10s', target: 80},
+      {duration: '1m', target: 80},
+      {duration: '20s', target: 0},
+   ],
 
-  threshold: {
-    http_req_duration: ['p(99)<200'],
-    'Main Page' : ['p(99)<7'],
-  },
+   threshold: {
+      http_req_duration: ['p(99)<200'],
+      'Main Page': ['p(99)<7'],
+   },
 };
 
 const BASE_URL = 'https://choizz.o-r.kr/'
 
 const main = function () {
-  let mainRes = http.get(`${BASE_URL}`);
-  check(mainRes, {
-    'Main Page': res => res.status === 200,
-  })
+   let mainRes = http.get(`${BASE_URL}`);
+   check(mainRes, {
+      'Main Page': res => res.status === 200,
+   })
 }
 
 const path = function () {
-  let pathRes = http.get(`${BASE_URL}/path`);
-  check(pathRes, {
-    'Path Page': res => res.status === 200,
-  })
+   let pathRes = http.get(`${BASE_URL}/path`);
+   check(pathRes, {
+      'Path Page': res => res.status === 200,
+   })
 }
 
+
 const search = function () {
-  let searchRes = http.get(`${BASE_URL}/paths?source=114&target=106`);
-  check(searchRes,{
-    'Search Path' : res => res.status === 200,
-  })
+   const max = 727;
+   const min = 1;
+   const randomNum = function callRandomNum(max, min) {
+      return Math.floor((Math.random() * (max - min) + min));
+   }
+   let searchRes = http.get(`${BASE_URL}/paths?source=${randomNum(max, min)}&target=${randomNum(max, min)}`);
+   check(searchRes, {
+      'Search Path': res => res.status === 200,
+   })
 }
 
 export default function () {
-  main();
-  path();
-  search();
+   main();
+   path();
+   search();
 
-  sleep(1);
+   sleep(1);
 };
+
 ```
-![stress](img_5.png)
+![stress](stress.png)
 ---
 
 ### 3단계 - 로깅, 모니터링
 
 1. 각 서버내 로깅 경로를 알려주세요
+ 
+> 회원가입과 로그인 로직에 파일 로그를 넣고 경로 탐색 로직에 json 로그를 넣었습니다.
+
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+- /home/ubuntu/nextstep/infra-subway-monitoring/log/json.log
 
 2. Cloudwatch 대시보드 URL을 알려주세요
+- https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#dashboards:name=choizz
