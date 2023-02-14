@@ -15,3 +15,24 @@ spring:
         dialect: org.hibernate.dialect.MySQL57Dialect
         format_sql: true
     show-sql: true
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: uj15
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: *
+
+
+
