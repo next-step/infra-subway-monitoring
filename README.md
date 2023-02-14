@@ -90,7 +90,41 @@ npm run dev
 ### 2단계 - 부하 테스트 
 1. 부하테스트 전제조건은 어느정도로 설정하셨나요
 
+- 목표 rps 구하기
+  - DAU: 1,000,000
+  - 피크 시간대 집중률: 10
+  - 1명당 1일 평균 접속수: 2
+  - 1일 평균 rps: 1,000,000 * 2 / 86,400 = 23.148
+  - 1일 최대 rps: 231.48
+  - Throughput: 23.148 ~ 231.48
+
+- api 응답 시간
+  - /stations -> 60ms
+  - /paths -> 105ms
+  - 1단계에서 측정했던 것보다 훨씬 적게 나와서 기준을 새로 잡아봐야할 것 같습니다. (스토리지가 부족해서 늘려줬는데 이부분 때문인지 모르겠습니다..)  
+
+- VUser
+  - 2 * (231.48 * (1 + 0.165)) / 2 = 269.9
+
 2. Smoke, Load, Stress 테스트 스크립트와 결과를 공유해주세요
+
+- Smoke testing
+
+[smoke.js](result/smoke.js)
+![](result/smoke-result.jpeg)
+![](result/smoke-graph.jpeg)
+
+- Load testing
+
+[load.js](result/load.js)
+![](result/load-result.jpeg)
+![](result/load-graph.jpeg)
+
+- Stress testing
+
+[stress.js](result/stress.js)
+![](result/stress-result.jpeg)
+![](result/stress-graph.jpeg)
 
 ---
 
