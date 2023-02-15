@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.55.157:3306/subway?serverTimezone=Asia/Seoul
+    username: root
+    password: masterpw
+    hikari:
+      max-lifetime: 58000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        format_sql: true
+    show-sql: true
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: "ap-northeast-2"
+
+management:
+  metrics:
+    export:
+      cloudwatch:
+        namespace: "uj15"
+        batch-size: 20
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
