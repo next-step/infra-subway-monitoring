@@ -215,9 +215,11 @@ Web Server
 - /var/log/syslog
 - /var/log/nginx/access.log
 - /var/log/nginx/error.log
+
 WAS
 - /var/log/syslog
 - /home/ubuntu/nextstep/infra-subway-monitoring/log/file.log
+
 DB
 - /var/log/syslog
 
