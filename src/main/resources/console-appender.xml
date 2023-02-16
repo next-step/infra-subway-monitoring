@@ -1,0 +1,22 @@
+<included>
+  <!--  appender이름이 file인 consoleAppender를 선언  -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <includeContext>true</includeContext>
+      <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+      <fieldNames>
+        <timestamp>timestamp</timestamp>
+        <thread>thread</thread>
+        <message>message</message>
+        <stackTrace>exception</stackTrace>
+        <mdc>context</mdc> <!--MDC.put()으로 넣을 경우 이 필드에 기록된다.-->
+      </fieldNames>
+
+      <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
+        <defaultMask>****</defaultMask>
+        <path>email</path> <!--email 이름의 필드는 마스킹 처리된다-->
+        <path>password</path>
+      </jsonGeneratorDecorator>
+    </encoder>
+  </appender>
+</included>

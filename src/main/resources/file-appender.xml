@@ -1,0 +1,39 @@
+<included>
+  <property name="home" value="log/" />
+
+  <!--  appender이름이 file인 consoleAppender를 선언  -->
+  <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--로깅이 기록될 위치-->
+    <file>${home}file.log</file>
+
+    <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!--매일 자정마다 새 로그 파일을 만든다. file-20230215-0 , file-20230215-1(15MB가 넘을 경우)-->
+      <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+
+      <maxFileSize>15MB</maxFileSize> <!--로그 파일 하나 당 15MB 제한-->
+      <maxHistory>30</maxHistory> <!--최대 30일간 보관-->
+      <totalSizeCap>20GB</totalSizeCap> <!--로깅 파일이 총 20GB를 넘어가면 오래된 것부터 지워진다.-->
+    </rollingPolicy>
+
+    <!--   해당 로깅의 패턴을 설정   -->
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <includeContext>true</includeContext>
+      <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+      <fieldNames>
+        <timestamp>timestamp</timestamp>
+        <thread>thread</thread>
+        <message>message</message>
+        <stackTrace>exception</stackTrace>
+        <mdc>context</mdc>
+      </fieldNames>
+
+      <jsonGeneratorDecorator class="net.logstash.logback.mask.MaskingJsonGeneratorDecorator">
+        <defaultMask>****</defaultMask>
+        <path>email</path> <!--email 이름의 필드는 마스킹 처리된다-->
+        <path>password</path>
+      </jsonGeneratorDecorator>
+    </encoder>
+
+  </appender>
+</included>
