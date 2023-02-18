@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="HOME" value="log/"/>
-    <!--  appender이름이 file인 consoleAppender를 선언  -->
-    <appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <property name="home" value="./log/"/>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--로깅이 기록될 위치-->
-        <file>${HOME}file.log</file>
+        <file>${home}file.log</file>
         <!--로깅 파일이 특정 조건을 넘어가면 다른 파일로 만들어 준다.-->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${HOME}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${home}file-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <maxFileSize>15MB</maxFileSize>
             <maxHistory>180</maxHistory>
         </rollingPolicy>

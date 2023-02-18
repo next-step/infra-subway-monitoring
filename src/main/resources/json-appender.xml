@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <property name="HOME" value="log/"/>
+    <property name="home" value="./log/"/>
 
-    <appender name="JSON_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="json" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-        <file>${HOME}json.log</file>
+        <file>${home}json.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${HOME}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <fileNamePattern>${home}json-%d{yyyyMMdd}-%i.log</fileNamePattern>
             <maxFileSize>15MB</maxFileSize>
             <maxHistory>180</maxHistory>
         </rollingPolicy>
