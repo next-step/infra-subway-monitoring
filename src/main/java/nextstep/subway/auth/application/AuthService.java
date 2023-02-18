@@ -1,17 +1,23 @@
 package nextstep.subway.auth.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
 import nextstep.subway.auth.domain.LoginMember;
 import nextstep.subway.auth.dto.TokenRequest;
 import nextstep.subway.auth.dto.TokenResponse;
 import nextstep.subway.auth.infrastructure.JwtTokenProvider;
 import nextstep.subway.member.domain.Member;
 import nextstep.subway.member.domain.MemberRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional
 public class AuthService {
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
     private MemberRepository memberRepository;
     private JwtTokenProvider jwtTokenProvider;
 
@@ -23,6 +29,9 @@ public class AuthService {
     public TokenResponse login(TokenRequest request) {
         Member member = memberRepository.findByEmail(request.getEmail()).orElseThrow(AuthorizationException::new);
         member.checkPassword(request.getPassword());
+
+        log.info("id : {} login", member.getId());
+        fileLogger.info("로그인 파일 로깅 : id : {}", member.getId());
 
         String token = jwtTokenProvider.createToken(request.getEmail());
         return new TokenResponse(token);
